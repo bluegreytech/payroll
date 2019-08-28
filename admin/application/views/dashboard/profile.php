@@ -893,7 +893,7 @@
 										<div class="col-md-12">
 											<div class="form-group">
 												<label>Address</label>
-												<input type="text" class="form-control" name="Address" value="<?php echo $Address;?>" minlength="5" maxlength="500">
+												<input type="text" class="form-control" Placeholder="Enter your address" name="Address" value="<?php echo $Address;?>" minlength="5" maxlength="500">
 											</div>
 										</div>
 										
@@ -901,7 +901,7 @@
 										<div class="col-md-6">
 											<div class="form-group">
 												<label>Pin Code</label>
-												<input type="text" class="form-control" name="PinCode" value="<?php echo $PinCode;?>" minlength="6" maxlength="6">
+												<input type="text" class="form-control" id="PinCode" Placeholder="Enter your pin-code" name="PinCode" value="<?php echo $PinCode;?>" minlength="6" maxlength="6">
 											</div>
 										</div>
 										<!-- <div class="col-md-6">
@@ -1444,6 +1444,14 @@ $('#profile_info').on('hidden.bs.modal', function () {
 })
 
 $("#PhoneNumber").on("input", function(evt) {
+			var self = $(this);
+			self.val(self.val().replace(/[^\d].+/, ""));
+			if ((evt.which < 48 || evt.which > 57)) 
+			{
+				evt.preventDefault();
+			}
+			});
+			$("#PinCode").on("input", function(evt) {
 			var self = $(this);
 			self.val(self.val().replace(/[^\d].+/, ""));
 			if ((evt.which < 48 || evt.which > 57)) 

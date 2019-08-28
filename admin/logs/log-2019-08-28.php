@@ -409,3 +409,34 @@ ERROR - 2019-08-28 13:29:03 --> Severity: Notice --> Undefined property: stdClas
 ERROR - 2019-08-28 13:29:03 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 107
 ERROR - 2019-08-28 13:29:04 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 99
 ERROR - 2019-08-28 13:29:04 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 107
+ERROR - 2019-08-28 13:41:23 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 99
+ERROR - 2019-08-28 13:41:23 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 107
+ERROR - 2019-08-28 13:41:31 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 99
+ERROR - 2019-08-28 13:41:31 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 107
+ERROR - 2019-08-28 13:41:50 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 99
+ERROR - 2019-08-28 13:41:50 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 107
+ERROR - 2019-08-28 13:41:55 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 99
+ERROR - 2019-08-28 13:42:01 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 99
+ERROR - 2019-08-28 13:42:01 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 107
+ERROR - 2019-08-28 13:43:27 --> 404 Page Not Found: Assets/img
+ERROR - 2019-08-28 13:43:27 --> 404 Page Not Found: Assets/img
+ERROR - 2019-08-28 13:43:27 --> 404 Page Not Found: Assets/img
+ERROR - 2019-08-28 13:43:27 --> 404 Page Not Found: Assets/img
+ERROR - 2019-08-28 13:43:27 --> 404 Page Not Found: Assets/img
+ERROR - 2019-08-28 13:43:27 --> 404 Page Not Found: Assets/img
+ERROR - 2019-08-28 13:44:22 --> 404 Page Not Found: Assets/img
+ERROR - 2019-08-28 13:44:22 --> 404 Page Not Found: Assets/img
+ERROR - 2019-08-28 13:44:22 --> 404 Page Not Found: Assets/img
+ERROR - 2019-08-28 13:44:22 --> 404 Page Not Found: Assets/img
+ERROR - 2019-08-28 13:44:22 --> 404 Page Not Found: Assets/img
+ERROR - 2019-08-28 13:44:22 --> 404 Page Not Found: Assets/img
+ERROR - 2019-08-28 13:44:25 --> 404 Page Not Found: Company/index
+ERROR - 2019-08-28 13:44:32 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 99
+ERROR - 2019-08-28 13:44:32 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 107
+ERROR - 2019-08-28 13:44:44 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 99
+ERROR - 2019-08-28 13:44:44 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 107
+ERROR - 2019-08-28 13:44:47 --> 404 Page Not Found: Default/cdn-cgi
+ERROR - 2019-08-28 13:45:00 --> 404 Page Not Found: Default/cdn-cgi
+ERROR - 2019-08-28 13:50:57 --> 404 Page Not Found: Default/cdn-cgi
+ERROR - 2019-08-28 13:51:44 --> 404 Page Not Found: Default/cdn-cgi
+ERROR - 2019-08-28 13:51:56 --> 404 Page Not Found: Default/cdn-cgi
