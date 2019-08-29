@@ -13,6 +13,8 @@
 								<a href="<?php echo base_url();?>Dashboard"><i class="la la-user"></i> <span>Master Dashboard</span> <span class="menu-arrow"></span></a>
 								<ul style="display: none;">
 									<li><a href="<?php echo base_url();?>adminmaster/adminlist"><span>List of Master Admin</span></a></li>
+									<li><a href="<?php echo base_url();?>company/companytype"><span>Company Type</span></a></li>
+									<li><a href="<?php echo base_url();?>company/compliance"><span>Compliance </span></a></li>
 									<li><a href="<?php echo base_url();?>company"><span>Company</span></a></li>
 									<li><a href="<?php echo base_url();?>client"><span>Clients</span></a></li>
 									<li><a href="<?php echo base_url();?>invoice"> Invoice Report </a></li>

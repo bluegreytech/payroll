@@ -426,19 +426,19 @@ $(document).ready(function() {
 $(function() { 
     setTimeout(function() {
   $('#errorMessage').fadeOut('fast');
-}, 5000);  
+}, 10000);  
 });
 
 $(function() { 
     setTimeout(function() {
   $('#successMessage').fadeOut('fast');
-}, 5000);  
+}, 10000);  
 });
 
 $(function() { 
     setTimeout(function() {
   $('#warningMessage').fadeOut('fast');
-}, 5000);  
+}, 10000);  
 });
 
 $(document).ready(function()

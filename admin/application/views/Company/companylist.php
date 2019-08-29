@@ -11,17 +11,31 @@
 					<!-- Page Title -->
 					<div class="row">
 						<div class="col">
-							<h4 class="page-title">Company</h4>
+							<h4 class="page-title">List of Company</h4>
 						</div>
 						<div class="col-12 text-right m-b-30">
-							<a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_client"><i class="fa fa-plus"></i> Add Company</a>
-							
+							<a href="<?php echo base_url();?>Company/companyadd" class="btn add-btn"><i class="fa fa-plus">
+							</i> Add Company</a>		
 						</div>
 					</div>
 					<!-- /Page Title -->
-					
+					<?php if(($this->session->flashdata('error'))){ ?>
+							<div class="alert alert-danger" id="errorMessage">
+							<strong> <?php echo $this->session->flashdata('error'); ?></strong> 
+							</div>
+							<?php } ?>
+							<?php if(($this->session->flashdata('success'))){ ?>
+									<div class="alert alert-success" id="successMessage">
+									<strong> <?php echo $this->session->flashdata('success'); ?></strong> 
+									</div>
+							<?php } ?>
+							<?php if(($this->session->flashdata('warning'))){ ?>
+							<div class="alert alert-warning" id="warningMessage">
+							<strong> <?php echo $this->session->flashdata('warning'); ?></strong> 
+							</div>
+							<?php } ?>
 					<!-- Search Filter -->
-					<div class="row filter-row">
+					<!-- <div class="row filter-row">
 						<div class="col-sm-6 col-md-3">  
 							<div class="form-group form-focus">
 								<input type="text" class="form-control floating">
@@ -47,613 +61,98 @@
 						<div class="col-sm-6 col-md-3">  
 							<a href="#" class="btn btn-success btn-block"> Search </a>  
 						</div>     
-                    </div>
+                    </div> -->
+					<!-- Search Filter -->
+					<form method="post" action="<?php echo base_url();?>Company">
+						<div class="row filter-row">
+						
+							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+									<div class="form-group form-focus select-focus">
+										<select class="select floating" name="option"> 
+											<option value=""> -- Select -- </option>
+											<option value="companyname">Company Name</option>
+											<option value="comemailaddress">Email Address</option>
+											<option value="comcontactnumber">Contact Number</option>
+										</select>
+										<!-- <label class="focus-label">Role</label> -->
+									</div>
+							</div>
+							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+									<div class="form-group form-focus">
+										<input type="text" name="keyword2" class="form-control floating">
+										<label class="focus-label">Company Search</label>
+									</div>
+							</div>
+							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+								<input type="submit" value="Search" class="btn btn-success btn-block">
+							</div>     
+						</div> 
+					</form>
+					<!-- /Search Filter -->
 					<!-- Search Filter -->
 					
+
 					<div class="row staff-grid-row">
-						<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
-							<div class="profile-widget">
-								<div class="profile-img">
-									<a href="client-profile.php" class="avatar"><img alt="" src="<?php echo base_url(); ?>default/img/profiles/avatar-19.jpg"></a>
+						<?php                           
+							foreach($companyData as $comp)
+							{
+						?>
+						
+							<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
+								<div class="profile-widget">
+									<div class="profile-img">
+										<a href="client-profile.php" class="avatar">
+										<?php
+										if($comp->companylogo!='')
+										{
+											?>
+												<img alt="" src="<?php echo base_url(); ?>default/img/profiles/avatar-19.jpg">
+											<?php
+										}
+										else
+										{
+											?>
+												<img alt="" src="<?php echo base_url(); ?>uploads/default/user_image.png">
+											<?php
+										}
+										?>
+										
+										</a>
+									</div>
+									<div class="dropdown profile-action">
+										<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+									<div class="dropdown-menu dropdown-menu-right">
+									<!-- <?php //echo anchor('Blog/Editblog/'.$program->BlogId,'<i class="ficon icon-pencil2"></i>'); ?> -->
+										<a class="dropdown-item" href="<?php echo base_url();?>Company/editcompany/<?php echo $comp->companyid;?>"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+										<!-- <a class="dropdown-item" onClick="editadmin(<?php //echo $adminlist->UserId;?>)" data-toggle="modal" data-target="#edit_salary" role="button">
+														<i class="fa fa-pencil m-r-5"></i> Edit</a> -->
+										<a class="dropdown-item" onclick="deletedata(<?php echo $comp->companyid; ?>)" data-toggle="modal" data-target="#delete_client"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+									</div>
+									</div>
+									<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="client-profile.php">
+									<?php echo $comp->companyname;?></a></h4>
+									<h5 class="user-name m-t-10 mb-0 text-ellipsis"><a href="client-profile.php">Barry Cuda</a></h5>
+									<div class="small text-muted">CEO</div>
+									<a href="#" class="btn btn-white btn-sm m-t-10">Message</a>
+									<a href="<?php echo base_url();?>Client/clientprofile" class="btn btn-white btn-sm m-t-10">View Profile</a>
 								</div>
-								<div class="dropdown profile-action">
-									<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_client"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_client"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-                                </div>
-								</div>
-								<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="client-profile.php">Global Technologies</a></h4>
-								<h5 class="user-name m-t-10 mb-0 text-ellipsis"><a href="client-profile.php">Barry Cuda</a></h5>
-								<div class="small text-muted">CEO</div>
-								<a href="#" class="btn btn-white btn-sm m-t-10">Message</a>
-								<a href="<?php echo base_url();?>Client/clientprofile" class="btn btn-white btn-sm m-t-10">View Profile</a>
 							</div>
-						</div>
-						<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
-							<div class="profile-widget">
-								<div class="profile-img">
-									<a href="client-profile.php" class="avatar"><img alt="" src="<?php echo base_url(); ?>default/img/profiles/avatar-29.jpg"></a>
-								</div>
-								<div class="dropdown profile-action">
-									<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_client"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_client"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-                                </div>
-								</div>
-								<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="client-profile.php">Delta Infotech</a></h4>
-								<h5 class="user-name m-t-10 mb-0 text-ellipsis"><a href="client-profile.php">Tressa Wexler</a></h5>
-								<div class="small text-muted">Manager</div>
-								<a href="#" class="btn btn-white btn-sm m-t-10">Message</a>
-								<a href="client-profile.php" class="btn btn-white btn-sm m-t-10">View Profile</a>
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
-							<div class="profile-widget">
-								<div class="profile-img">
-									<a href="client-profile.php" class="avatar"><img src="assets\img\profiles\avatar-07.jpg" alt=""></a>
-								</div>
-								<div class="dropdown profile-action">
-									<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_client"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_client"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-                                </div>
-								</div>
-								<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="client-profile.php">Cream Inc</a></h4>
-								<h5 class="user-name m-t-10 mb-0 text-ellipsis"><a href="client-profile.php">Ruby Bartlett</a></h5>
-								<div class="small text-muted">CEO</div>
-								<a href="#" class="btn btn-white btn-sm m-t-10">Message</a>
-								<a href="client-profile.php" class="btn btn-white btn-sm m-t-10">View Profile</a>
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
-							<div class="profile-widget">
-								<div class="profile-img">
-									<a href="client-profile.php" class="avatar"><img src="assets\img\profiles\avatar-06.jpg" alt=""></a>
-								</div>
-								<div class="dropdown profile-action">
-									<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_client"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_client"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-                                </div>
-								</div>
-								<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="client-profile.php">Wellware Company</a></h4>
-								<h5 class="user-name m-t-10 mb-0 text-ellipsis"><a href="client-profile.php">Misty Tison</a></h5>
-								<div class="small text-muted">CEO</div>
-								<a href="#" class="btn btn-white btn-sm m-t-10">Message</a>
-								<a href="client-profile.php" class="btn btn-white btn-sm m-t-10">View Profile</a>
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
-							<div class="profile-widget">
-								<div class="profile-img">
-									<a href="client-profile.php" class="avatar"><img alt="" src="assets\img\profiles\avatar-14.jpg"></a>
-								</div>
-								<div class="dropdown profile-action">
-									<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_client"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_client"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-                                </div>
-								</div>
-								<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="client-profile.php">Mustang Technologies</a></h4>
-								<h5 class="user-name m-t-10 mb-0 text-ellipsis"><a href="client-profile.php">Daniel Deacon</a></h5>
-								<div class="small text-muted">CEO</div>
-								<a href="#" class="btn btn-white btn-sm m-t-10">Message</a>
-								<a href="client-profile.php" class="btn btn-white btn-sm m-t-10">View Profile</a>
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
-							<div class="profile-widget">
-								<div class="profile-img">
-									<a href="client-profile.php" class="avatar"><img alt="" src="assets\img\profiles\avatar-18.jpg"></a>
-								</div>
-								<div class="dropdown profile-action">
-									<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_client"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_client"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-                                </div>
-								</div>
-								<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="client-profile.php">International Software Inc</a></h4>
-								<h5 class="user-name m-t-10 mb-0 text-ellipsis"><a href="client-profile.php">Walter Weaver</a></h5>
-								<div class="small text-muted">CEO</div>
-								<a href="#" class="btn btn-white btn-sm m-t-10">Message</a>
-								<a href="client-profile.php" class="btn btn-white btn-sm m-t-10">View Profile</a>
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
-							<div class="profile-widget">
-								<div class="profile-img">
-									<a href="client-profile.php" class="avatar"><img alt="" src="assets\img\profiles\avatar-28.jpg"></a>
-								</div>
-								<div class="dropdown profile-action">
-									<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_client"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_client"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-                                </div>
-								</div>
-								<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="client-profile.php">Mercury Software Inc</a></h4>
-								<h5 class="user-name m-t-10 mb-0 text-ellipsis"><a href="client-profile.php">Amanda Warren</a></h5>
-								<div class="small text-muted">CEO</div>
-								<a href="#" class="btn btn-white btn-sm m-t-10">Message</a>
-								<a href="client-profile.php" class="btn btn-white btn-sm m-t-10">View Profile</a>
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
-							<div class="profile-widget">
-								<div class="profile-img">
-									<a href="client-profile.php" class="avatar"><img alt="" src="assets\img\profiles\avatar-13.jpg"></a>
-								</div>
-								<div class="dropdown profile-action">
-									<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_client"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_client"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-                                </div>
-								</div>
-								<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="client-profile.php">Carlson Tech</a></h4>
-								<h5 class="user-name m-t-10 mb-0 text-ellipsis"><a href="client-profile.php">Betty Carlson</a></h5>
-								<div class="small text-muted">CEO</div>
-								<a href="#" class="btn btn-white btn-sm m-t-10">Message</a>
-								<a href="client-profile.php" class="btn btn-white btn-sm m-t-10">View Profile</a>
-							</div>
-						</div>
+
+							
+						<?php			
+							}
+						?>    
+
+										
 					</div>
+
+
                 </div>
 				<!-- /Page Content -->
 			
-				<!-- Add Client Modal -->
-				<div id="add_client" class="modal custom-modal fade" role="dialog">
-					<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title">Add Company</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div class="modal-body">
-								<form method="post" id="form_valid">
-									<div class="row">
-										<div class="col-md-6">
-											<div class="form-group">
-												<label class="col-form-label">Company Name <span class="text-danger">*</span></label>
-												<input class="form-control" type="text" name="CompanyName" placeholder="Enter company name">
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label class="col-form-label">Email Address</label><span class="text-danger">*</span></label>
-												<input class="form-control" type="text" name="ComEmailAddress" placeholder="Enter email address">
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label class="col-form-label">Contact Number <span class="text-danger">*</span></label>
-												<input class="form-control" type="text" name="ComContactNumber" id="ComContactNumber" placeholder="Enter email address">
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label class="col-form-label">GST Number <span class="text-danger">*</span></label>
-												<input class="form-control floating" type="text" name="GstNumber" id="GstNumber" placeholder="Enter gst number">
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label class="col-form-label">Password</label><span class="text-danger">*</span></label>
-												<input class="form-control" type="password" name="Password" placeholder="Enter password">
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label class="col-form-label">Confirm Password</label><span class="text-danger">*</span></label>
-												<input class="form-control" type="password" name="Confirm_Password" placeholder="Enter confirm new password">
-											</div>
-										</div>
-										<div class="col-md-12">  
-											<div class="form-group">
-												<label>Company Address <span class="text-danger">*</span></label>
-												<textarea class="form-control" rows="4" name="CompanyAddress"></textarea>
-											</div>
-										</div>
-										<!-- <div class="col-md-6">  
-											<div class="form-group">
-												<label class="col-form-label">Client ID <span class="text-danger">*</span></label>
-												<input class="form-control floating" type="text">
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label class="col-form-label">Phone </label>
-												<input class="form-control" type="text">
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label class="col-form-label">Company Name</label>
-												<input class="form-control" type="text">
-											</div>
-										</div> -->
-									</div>
-									<div class="table-responsive m-t-15">
-										<table class="table table-striped custom-table">
-											<thead>
-												<tr>
-													<th>Module Permission</th>
-													<th class="text-center">Read</th>
-													<th class="text-center">Write</th>
-													<th class="text-center">Create</th>
-													<th class="text-center">Delete</th>
-													<th class="text-center">Import</th>
-													<th class="text-center">Export</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>Projects</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-												</tr>
-												<tr>
-													<td>Tasks</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-												</tr>
-												<tr>
-													<td>Chat</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-												</tr>
-												<tr>
-													<td>Estimates</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-												</tr>
-												<tr>
-													<td>Invoices</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-												</tr>
-												<tr>
-													<td>Timing Sheets</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-									<div class="submit-section">
-										<button class="btn btn-primary submit-btn">Submit</button>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- /Add Client Modal -->
+			
 				
-				<!-- Edit Client Modal -->
-				<div id="edit_client" class="modal custom-modal fade" role="dialog">
-					<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title">Edit Client</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div class="modal-body">
-								<form>
-									<div class="row">
-										<div class="col-md-6">
-											<div class="form-group">
-												<label class="col-form-label">First Name <span class="text-danger">*</span></label>
-												<input class="form-control" value="Barry" type="text">
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label class="col-form-label">Last Name</label>
-												<input class="form-control" value="Cuda" type="text">
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label class="col-form-label">Username <span class="text-danger">*</span></label>
-												<input class="form-control" value="barrycuda" type="text">
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label class="col-form-label">Email <span class="text-danger">*</span></label>
-												<input class="form-control floating" value="barrycuda@example.com" type="email">
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label class="col-form-label">Password</label>
-												<input class="form-control" value="barrycuda" type="password">
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label class="col-form-label">Confirm Password</label>
-												<input class="form-control" value="barrycuda" type="password">
-											</div>
-										</div>
-										<div class="col-md-6">  
-											<div class="form-group">
-												<label class="col-form-label">Client ID <span class="text-danger">*</span></label>
-												<input class="form-control floating" value="CLT-0001" type="text">
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label class="col-form-label">Phone </label>
-												<input class="form-control" value="9876543210" type="text">
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label class="col-form-label">Company Name</label>
-												<input class="form-control" type="text" value="Global Technologies">
-											</div>
-										</div>
-									</div>
-									<div class="table-responsive m-t-15">
-										<table class="table table-striped custom-table">
-											<thead>
-												<tr>
-													<th>Module Permission</th>
-													<th class="text-center">Read</th>
-													<th class="text-center">Write</th>
-													<th class="text-center">Create</th>
-													<th class="text-center">Delete</th>
-													<th class="text-center">Import</th>
-													<th class="text-center">Export</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>Projects</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-												</tr>
-												<tr>
-													<td>Tasks</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-												</tr>
-												<tr>
-													<td>Chat</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-												</tr>
-												<tr>
-													<td>Estimates</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-												</tr>
-												<tr>
-													<td>Invoices</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-												</tr>
-												<tr>
-													<td>Timing Sheets</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-									<div class="submit-section">
-										<button class="btn btn-primary submit-btn">Save</button>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- /Edit Client Modal -->
+				
 				
 				<!-- Delete Client Modal -->
 				<div class="modal custom-modal fade" id="delete_client" role="dialog">
@@ -667,7 +166,8 @@
 								<div class="modal-btn delete-action">
 									<div class="row">
 										<div class="col-6">
-											<a href="javascript:void(0);" class="btn btn-primary continue-btn">Delete</a>
+											<button type="button" class="btn btn-primary continue-btn" id="yes_btn" ><a href="" id="deleteYes" value="Yes">Delete</a></button>
+
 										</div>
 										<div class="col-6">
 											<a href="javascript:void(0);" data-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
@@ -704,78 +204,26 @@
 		
 		<!-- Custom JS -->
 		<script src="<?php echo base_url(); ?>default/js/app.js"></script>
-		
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
     </body>
 </html>
 
 <script>
-			$('#profile_info').on('hidden.bs.modal', function () {
-				$(this).find('form').trigger('reset');
-			})
 
-			$("#PhoneNumber").on("input", function(evt) {
-			var self = $(this);
-			self.val(self.val().replace(/[^\d].+/, ""));
-			if ((evt.which < 48 || evt.which > 57)) 
-			{
-				evt.preventDefault();
-			}
-			});
-			$("#GstNumber").on("input", function(evt) {
-			var self = $(this);
-			self.val(self.val().replace(/[^\d].+/, ""));
-			if ((evt.which < 48 || evt.which > 57)) 
-			{
-				evt.preventDefault();
-			}
-			});
-			
-$(document).ready(function()
-{
-		$("#form_valid").validate(
-		{
-					rules: {
-
-						CompanyName: {
-							required: true,
-								},
-						ComEmailAddress: {
-							required: true,
-								},	
-						ComContactNumber: {
-							required: true,
-								},	
-						GstNumber: {
-							required: true,	
-								},
-						// 'CompanyAddress': {
-						// 	required: true,
-						// 		},						
-					},
-
-				messages:{
-
-					    CompanyName: {
-							required: "Please enter a company name",
-								pattern : "Enter only characters and numbers and \"space , \" -",
-								minlength: "Please enter at least 2 and maximum 50 letters!",
-								},
-						ComEmailAddress: {
-							required: "Please enter your last name",
-								},
-						ComContactNumber: {
-							required: "Please enter your company contact",
-								},
-						GstNumber: {
-							required: "Please enter your company gst gender",
-								},
-						// 'CompanyAddress': {
-						// 	required: "Please enter your company address",
-						// 	minlength: "Please enter at least 5 and maximum 500 letters!",
-						// 		},	
-					
-			}
+function deletedata(companyid){  
+			$('#delete_client').modal('show')
+				$('#yes_btn').click(function(){
 				
-		});
-});					        
+						Url="<?php echo base_url();?>"
+						$.ajax({
+						url: Url+'/Company/delete_company/',
+						type: "post",
+						data: {companyid:companyid} ,
+						success: function (response) {             
+					// document.location.href = url+'adminmaster/adminlist/';          
+					},
+					})
+				});
+		}			
+
 </script>
