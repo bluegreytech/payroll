@@ -7,7 +7,14 @@ class Company extends CI_Controller
         parent::__construct();
 		$this->load->model('Company_model');
 	}
+
+	// public function checkcode($code='')
+	// {	
+	// 	//echo	$code;die;
+	// 	$company_id=$this->Company_model->checkResetCode($code);
+	// 	//print_r($company_id);die;
 	
+	// }
 
 	public function index()
 	{   
@@ -36,15 +43,27 @@ class Company extends CI_Controller
 			$data['comemailaddress']=$this->input->post('comemailaddress');
 			$data['comcontactnumber']=$this->input->post('comcontactnumber');
 			$data['gstnumber']=$this->input->post('gstnumber');
+			$data['digitalsignaturedate']=$this->input->post('digitalsignaturedate');
+			$data['companycity']=$this->input->post('companycity');	
 			$data['isactive']=$this->input->post('isactive');
 			if($_POST){
 				
 				if($this->input->post('companyid')==''){
 							
 					$result=$this->Company_model->add_company();	
-					if($result)
+					if($result==1)
 					{
-						$this->session->set_flashdata('success', 'Record has been Inserted Succesfully!');
+						$this->session->set_flashdata('success', 'Your data has been Inserted Successfully!');
+						redirect('Company');
+					}
+					else if($result==2)
+					{
+						$this->session->set_flashdata('warning', 'Your data has been Inserted Successfully and Your email function was not work!');
+						redirect('Company');
+					}
+					else if($result==3)
+					{
+						$this->session->set_flashdata('error', 'Your data was not Insert!');
 						redirect('Company');
 					}
 				}
@@ -53,15 +72,16 @@ class Company extends CI_Controller
 					$result=$this->Company_model->update_company();
 					if($result)
 					{
-						$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
+						$this->session->set_flashdata('success', 'Record has been Updated Successfully!');
 						redirect('Company');
 					} 
 
 				}
 		} 
-		
+		//$data['stateData']=$this->Company_model->list_state();
+		$data['complianceData']=$this->Company_model->list_compliance();
 		$data['companytypeData']=$this->Company_model->list_companytype();
-		//print_r($data['companytypeData']);die;
+		//print_r($data['stateData']);die;
 		$this->load->view('Company/companyadd',$data);	
 	}
 
@@ -96,6 +116,9 @@ class Company extends CI_Controller
 		$data['comemailaddress']=$result['comemailaddress'];
 		$data['comcontactnumber']=$result['comcontactnumber'];
 		$data['gstnumber']=$result['gstnumber'];
+		$data['digitalsignaturedate']=$result['digitalsignaturedate'];
+		$data['companycity']=$result['companycity'];
+		$data['isactive']=$result['isactive'];
 		$data['companytypeData']=$this->Company_model->list_companytype();
 		$this->load->view('Company/companyadd',$data);	
 	}

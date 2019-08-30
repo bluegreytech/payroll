@@ -50,7 +50,7 @@ class Adminmaster_model extends CI_Model
 			'IsActive'=>1,
 			'CreatedOn'=>date('Y-m-d')
 			);
-			print_r($data);die;
+			//print_r($data);die;
 			$this->db->insert('tbluser',$data);
 			$insert_id = $this->db->insert_id();
 

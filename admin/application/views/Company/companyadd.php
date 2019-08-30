@@ -101,7 +101,7 @@
 										<div class="col-md-6">
 											<div class="form-group">
 												<label class="col-form-label">Contact Number <span class="text-danger">*</span></label>
-												<input class="form-control" minlength="10" maxlength="10" type="text" name="comcontactnumber" id="comcontactnumber" placeholder="Enter email address"  
+												<input class="form-control" minlength="10" maxlength="10" type="text" name="comcontactnumber" id="comcontactnumber" placeholder="Enter contact number"  
 												value="<?php echo $comcontactnumber; ?>">
 											</div>
 										</div>
@@ -113,15 +113,99 @@
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
-											<label class="col-form-label">Isactive<span class="text-danger">*</span></label><br>
-											<label class="radio-inline">
-												<input type="radio" name="isactive" checked value="1">Active
-											</label>
-											<label class="radio-inline">
-												<input type="radio" name="isactive" value="0">Deactive
-											</label>
+												<label class="col-form-label">Digital Signature Expire Date<span class="text-danger">*</span></label>
+												<input class="form-control" minlength="10" maxlength="10" type="date" name="digitalsignaturedate" id="digitalsignaturedate" placeholder="Enter digital signature date"  
+												value="<?php echo $digitalsignaturedate; ?>">
 											</div>
 										</div>
+
+										<!-- <div class="col-md-6">
+											<div class="form-group">
+													<label>Company Type</label>
+													<select class="select" name="stateid"> 
+														<option desabled value="">Please select state</option>
+														<?php
+														//  if($stateData){
+														// 	foreach($stateData as $state)
+														// 	{
+														?>
+															<option value="<?php// echo $state->stateid; ?>" <?php //if($stateid==$state->stateid){echo "selected" ;}?>><?php// echo $state->statename;?></option>
+														<?php
+														//}}
+														?>
+													</select>
+											</div>
+										</div> -->
+
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="col-form-label">City</label><span class="text-danger">*</span></label>
+												<input class="form-control" minlength="2" maxlength="50" type="text" name="companycity" placeholder="Enter city" value="<?php echo $companycity; ?>">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="col-form-label">City</label><span class="text-danger">*</span></label>
+												<input class="form-control" minlength="2" maxlength="50" type="text" name="companycity" placeholder="Enter city" value="<?php echo $companycity; ?>">
+											</div>
+										</div>
+										<?php
+										if($isactive=='')
+										{ 
+											?>
+												<div class="col-md-6">
+													<div class="form-group">
+													<label class="col-form-label">Isactive<span class="text-danger">*</span></label><br>
+													<label class="radio-inline">
+														<input type="radio" name="isactive" checked value="1">Active
+													</label>
+													<label class="radio-inline">
+														<input type="radio" name="isactive" value="0">Deactive
+													</label>
+													</div>
+												</div>
+											<?php
+										}
+										elseif($isactive==1)
+											{ 
+												?>
+													<div class="col-md-6">
+														<div class="form-group">
+														<label class="col-form-label">Isactive<span class="text-danger">*</span></label><br>
+														<label class="radio-inline">
+															<input type="radio" name="isactive" checked  value="1">Active
+														</label>
+														<label class="radio-inline">
+															<input type="radio" name="isactive" value="0">Deactive
+														</label>
+														</div>
+													</div>
+											<?php
+											}
+											elseif($isactive==0)
+											{
+												?>
+													<div class="col-md-6">
+														<div class="form-group">
+														<label class="col-form-label">Isactive<span class="text-danger">*</span></label><br>
+														<label class="radio-inline">
+															<input type="radio" name="isactive"  value="1">Active
+														</label>
+														<label class="radio-inline">
+															<input type="radio" name="isactive" checked value="0">Deactive
+														</label>
+														</div>
+													</div>
+												<?php
+											}
+										
+										
+										?>
+										
+
+
+										
+
 										<!-- <div class="col-md-6">
 											<div class="form-group">
 												<label class="col-form-label">Password</label><span class="text-danger">*</span></label>
@@ -159,149 +243,36 @@
 											</div>
 										</div> -->
 									</div>
-									<!-- <div class="table-responsive m-t-15">
+										
+									<div class="table-responsive m-t-15">
 										<table class="table table-striped custom-table">
 											<thead>
 												<tr>
-													<th>Module Permission</th>
-													<th class="text-center">Read</th>
-													<th class="text-center">Write</th>
-													<th class="text-center">Create</th>
-													<th class="text-center">Delete</th>
-													<th class="text-center">Import</th>
-													<th class="text-center">Export</th>
+													<th>Add Compliance</th>
+													<!-- <th class="text-center">Read</th> -->
+												
 												</tr>
 											</thead>
 											<tbody>
+											<?php                           
+												foreach($complianceData as $compdata)
+												{
+											?>
 												<tr>
-													<td>Projects</td>
+													<td><?php echo $compdata->compliancename;?></td>
 													<td class="text-center">
-														<input checked="" type="checkbox">
+														<input type="checkbox" value="<?php echo $compdata->complianceid; ?>" 
+														name="complianceid[]">
 													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
+													
 												</tr>
-												<tr>
-													<td>Tasks</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-												</tr>
-												<tr>
-													<td>Chat</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-												</tr>
-												<tr>
-													<td>Estimates</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-												</tr>
-												<tr>
-													<td>Invoices</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-												</tr>
-												<tr>
-													<td>Timing Sheets</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-													<td class="text-center">
-														<input checked="" type="checkbox">
-													</td>
-												</tr>
+											<?php
+												}
+											?>
 											</tbody>
 										</table>
-									</div> -->
+									</div>
+									
 									<div class="submit-section">
 									<?php 
 										if($companyid)
@@ -358,6 +329,24 @@
 </html>
 
 <script>
+		$(function() { 
+			setTimeout(function() {
+		$('#errorMessage').fadeOut('fast');
+		}, 10000);  
+		});
+
+		$(function() { 
+			setTimeout(function() {
+		$('#successMessage').fadeOut('fast');
+		}, 10000);  
+		});
+
+		$(function() { 
+			setTimeout(function() {
+		$('#warningMessage').fadeOut('fast');
+		}, 10000);  
+		});
+
 		$("#comcontactnumber").on("input", function(evt) {
 		var self = $(this);
 		self.val(self.val().replace(/[^\d].+/, ""));
@@ -395,6 +384,12 @@ $(document).ready(function()
 							gstnumber: {
 									required: true,
 										},
+							digitalsignaturedate: {
+									required: true,
+										},
+							companycity: {
+									required: true,
+										},
 							},
 						messages:{
 							
@@ -412,6 +407,12 @@ $(document).ready(function()
 										},	
 							gstnumber: {
 									required: "Please enter a company gst number",
+										},
+							digitalsignaturedate: {
+									required: "Please select company signature expire date",
+										},	
+							companycity: {
+									required: "Please enter a city",
 										},	
 					}					
 				});		

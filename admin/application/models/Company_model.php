@@ -30,6 +30,15 @@ class Company_model extends CI_Model
 		return $res;
 
 	}
+
+	// function list_state(){
+	// 	$r=$this->db->select('*')
+	// 				->from('tblstate')
+	// 				->get();
+	// 	$res = $r->result();
+	// 	return $res;
+
+	// }
 	
 
 	function search($option,$keyword)
@@ -72,31 +81,130 @@ class Company_model extends CI_Model
 				    
 		}
 
+		// function checkResetCode($code)
+		// {
+		// 	$query=$this->db->get_where('tblcompany',array('verificationcode'=>$code));
+			
+		// 	if($query->num_rows()>0)
+		// 	{
+		// 		//return $query->row_array();
+		// 		echo $companyid= $query->row()->companyid;
+		// 		 die;
+		// 		$data=array('verificationcode'=>'');
+		// 		$this->db->where(array('companyid'=>$companyid,'emailverifystatus'=>trim("verify")));
+		// 	   // print_r($data);die;
+		// 		$d=$this->db->update('tblcompany',$data);
+		// 		return $d;
+
+		// 	}else{
+		// 		return false;
+		// 	}
+		// }
+
+		// function updateVerification($company_id,$code)
+		// {
+		// 	echo $code;die;
+		// 	$this->input->post('code');
+		// 	$query=$this->db->get_where('tblcompany',array('verificationcode'=>$code));
+		// 	if($query->num_rows()>0)
+		// 	{
+		// 	  $data=array('verificationcode'=>'');
+		// 		$this->db->where(array('companyid'=>$this->input->post('companyid'),'verificationcode'=>trim($this->input->post('code'))));
+		// 	   // print_r($data);die;
+		// 		$d=$this->db->update('tblcompany',$data);
+		// 		return $d;
+			  
+		// 	}else
+		// 	{
+		// 	  return false;
+		// 	}
+		//   }
+
 	function add_company()
 	{	
-		
+			$code=rand(12,123456789);
 			$companytypeid=$this->input->post('companytypeid');
 			$companyname=$this->input->post('companyname');
 			$comemailaddress=$this->input->post('comemailaddress');
 			$comcontactnumber=$this->input->post('comcontactnumber');
 			$gstnumber=$this->input->post('gstnumber');	
 			$companylogo=$this->input->post('companylogo');
+			$digitalsignaturedate=$this->input->post('digitalsignaturedate');	
+			$companycity=$this->input->post('companycity');
 			$isactive=$this->input->post('isactive');
+			$complianceid=implode(',',$this->input->post('complianceid'));
 			$data=array( 
 			'companytypeid'=>$companytypeid,
 			'companyname'=>$companyname,
 			'comemailaddress'=>$comemailaddress,
 			'comcontactnumber'=>$comcontactnumber,
 			'gstnumber'=>$gstnumber, 
+			'digitalsignaturedate'=>$digitalsignaturedate,
 			//'companylogo'=>$companylogo,
-			//'isactive'=>$isactive,
+			'companycity'=>$companycity,
+			'verificationcode'=>$code,
+			'isactive'=>$isactive,
 			'createdby'=>1,
 			'createdon'=>date("Y-m-d h:i:s")
 			);
 			// print_r($data);
 			// die;
-			$res=$this->db->insert('tblcompany',$data);	
-			return $res;
+			$this->db->insert('tblcompany',$data);	
+			$insert_id = $this->db->insert_id();
+			$data2=array( 
+				'companyid'=>$insert_id,
+				'complianceid'=>$complianceid,
+				'isactive'=>$isactive,
+				'createdby'=>1,
+				'createdon'=>date("Y-m-d h:i:s")
+				);
+			$this->db->insert('tblcompanycompliances',$data2);	
+
+			if($insert_id!=''){
+
+			
+				$this->db->select('t1.*,t2.*');
+				$this->db->from('tblcompany as t1');
+				$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
+				$this->db->where('t1.companyid',$insert_id);
+				$smtp2 = $this->db->get('tblcompany');	
+				foreach($smtp2->result() as $rows) {
+					$companyid = $rows->companyid;
+					$companytypeid = $rows->companytypeid;
+					$companytype = $rows->companytype;
+					$companyname = $rows->companyname;
+					$comemailaddress = $rows->comemailaddress;
+					$verificationcode = $rows->verificationcode;	
+				}
+
+					$config['protocol']='smtp';
+					$config['smtp_host']='ssl://smtp.googlemail.com';
+					$config['smtp_port']='465';
+					$config['smtp_user']='bluegreyindia@gmail.com';
+					$config['smtp_pass']='Test@123';
+					$config['charset']='utf-8';
+					$config['newline']="\r\n";
+					$config['mailtype'] = 'html';								
+					$this->email->initialize($config);
+					$verification_link=  '<a href="'.site_url('Company/checkcode/'.$code).'">Click Here</a>';
+					$body ="Hello you are registered <br> $verification_link";	
+					$this->email->from('bluegreyindia@gmail.com');
+					$this->email->to($comemailaddress);		
+					$this->email->subject('Payroll System to your company are register complete');
+					$this->email->message($body);
+					if($this->email->send())
+					{
+						return 1;
+					}else
+					{
+						return 2;
+					}
+			}
+			else
+			{
+				return 2;
+			}	
+			//return $res;
 	}
 
 	function add_companytype()
@@ -184,7 +292,10 @@ class Company_model extends CI_Model
 			'companyname'=>$this->input->post('companyname'),
 			'comemailaddress'=>$this->input->post('comemailaddress'),
 			'comcontactnumber'=>$this->input->post('comcontactnumber'),
-			'gstnumber'=>$this->input->post('gstnumber')
+			'gstnumber'=>$this->input->post('gstnumber'),
+			'digitalsignaturedate'=>$this->input->post('digitalsignaturedate'),
+			'companycity'=>$this->input->post('companycity'),
+			'isactive'=>$this->input->post('isactive'),
 				);
 			//print_r($data);die;
 			$this->db->where("companyid",$companyid);

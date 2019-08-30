@@ -132,7 +132,19 @@
 									<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="client-profile.php">
 									<?php echo $comp->companyname;?></a></h4>
 									<h5 class="user-name m-t-10 mb-0 text-ellipsis"><a href="client-profile.php">Barry Cuda</a></h5>
-									<div class="small text-muted">CEO</div>
+
+									<div class="small text-muted">
+									<?php 
+										if($comp->verificationcode!='')
+										{
+											echo "Verification Pending";
+										}
+										else
+										{
+											echo "Verification complete";
+										}
+									?>
+									</div>
 									<a href="#" class="btn btn-white btn-sm m-t-10">Message</a>
 									<a href="<?php echo base_url();?>Client/clientprofile" class="btn btn-white btn-sm m-t-10">View Profile</a>
 								</div>
