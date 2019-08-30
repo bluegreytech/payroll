@@ -31,6 +31,7 @@ class Company extends CI_Controller
 	{
 		$data=array();
 			$data['companyid']=$this->input->post('companyid');
+			$data['companytypeid']=$this->input->post('companytypeid');
 			$data['companyname']=$this->input->post('companyname');
 			$data['comemailaddress']=$this->input->post('comemailaddress');
 			$data['comcontactnumber']=$this->input->post('comcontactnumber');
@@ -59,8 +60,8 @@ class Company extends CI_Controller
 				}
 		} 
 		
-		///$data['companyData']=$this->Company_model->list_company();
-		//print_r($data['companyData']);die;
+		$data['companytypeData']=$this->Company_model->list_companytype();
+		//print_r($data['companytypeData']);die;
 		$this->load->view('Company/companyadd',$data);	
 	}
 
@@ -85,14 +86,17 @@ class Company extends CI_Controller
 	function editcompany($companyid)
 	{
 		$data=array();
+		
 		$result=$this->Company_model->get_company($companyid);	
 		//echo "<br>";print_r($result);die;
 		$data['companyid']=$result['companyid'];
+		$data['companytypeid']=$result['companytypeid'];
+		$data['companytype']=$result['companytype'];
 		$data['companyname']=$result['companyname'];
 		$data['comemailaddress']=$result['comemailaddress'];
 		$data['comcontactnumber']=$result['comcontactnumber'];
 		$data['gstnumber']=$result['gstnumber'];
-		//echo json_encode($data);
+		$data['companytypeData']=$this->Company_model->list_companytype();
 		$this->load->view('Company/companyadd',$data);	
 	}
 
@@ -133,6 +137,32 @@ class Company extends CI_Controller
 
 	public function compliance()
 	{
+		$data=array();
+			$data['complianceid']=$this->input->post('complianceid');
+			$data['compliancename']=$this->input->post('compliancename');
+			$data['compliancepercentage']=$this->input->post('compliancepercentage');	
+			$data['isactive']=$this->input->post('isactive');
+			if($_POST){
+				if($this->input->post('complianceid')==''){
+							
+					$result=$this->Company_model->add_compliance();	
+					if($result)
+					{
+						$this->session->set_flashdata('success', 'Record has been Inserted Succesfully!');
+						redirect('Company/compliance');
+					}
+				}
+				else
+				{
+					$result=$this->Company_model->update_compliance();
+					if($result)
+					{
+						$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
+						redirect('Company/compliance');
+					} 
+
+				}
+		} 
 		$data['complianceData']=$this->Company_model->list_compliance();
 		$this->load->view('compliance/compliance',$data);	
 	}
@@ -171,16 +201,29 @@ class Company extends CI_Controller
 
 	}
 
-	function editcompanytype($companytypeid)
+	function editcompanytype()
 	{
 		$data=array();
-		$result=$this->Company_model->get_companytype($companytypeid);	
+		$result=$this->Company_model->get_companytype($this->input->post('companytypeid'));	
 		//echo "<br>";print_r($result);die;
 		$data['companytypeid']=$result['companytypeid'];
 		$data['companytype']=$result['companytype'];
 		$data['isactive']=$result['isactive'];
-		//echo json_encode($data);
-		$this->load->view('Company/companytypelist',$data);		
+		echo json_encode($data);
+		//$this->load->view('Company/companytypelist',$data);		
+	}
+
+	function editcompliance()
+	{
+		$data=array();
+		$result=$this->Company_model->get_compliance($this->input->post('complianceid'));	
+		//echo "<br>";print_r($result);die;
+		$data['complianceid']=$result['complianceid'];
+		$data['compliancename']=$result['compliancename'];
+		$data['compliancepercentage']=$result['compliancepercentage'];
+		$data['isactive']=$result['isactive'];
+		echo json_encode($data);
+		//$this->load->view('Company/companytypelist',$data);		
 	}
 
 	

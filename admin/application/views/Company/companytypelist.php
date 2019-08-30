@@ -32,6 +32,8 @@
 							<strong> <?php echo $this->session->flashdata('warning'); ?></strong> 
 							</div>
 							<?php } ?>
+
+
 					<div class="row">
 						<div class="col-md-12">
 							<div class="table-responsive">
@@ -87,6 +89,8 @@
 							</div>
 						</div>
 					</div>
+
+					
                 </div>
 				<!-- /Page Content -->
 				
@@ -288,7 +292,7 @@
 			$.ajax({
 				url: Url+'Company/editcompanytype',
 				type: 'post',
-				data:{id:companytypeid},
+				data:{companytypeid:companytypeid},
 				success:function(response){
 					var response = JSON.parse(response);
 					    console.log(response.companytypeid);

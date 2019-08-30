@@ -12,10 +12,10 @@
 					<!-- Page Title -->
 					<div class="row">
 						<div class="col-sm-5 col-5">
-							<h4 class="page-title">Policies</h4>
+							<h4 class="page-title">List of Compliance</h4>
 						</div>
 						<div class="col-sm-7 col-7 text-right m-b-30">
-							<a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_policy"><i class="fa fa-plus"></i> Add Policy</a>
+							<a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_policy"><i class="fa fa-plus"></i> Add Compliance</a>
 						</div>
 					</div>
 					<!-- /Page Title -->
@@ -34,6 +34,8 @@
 							<strong> <?php echo $this->session->flashdata('warning'); ?></strong> 
 							</div>
 							<?php } ?>
+
+
 					<div class="row">
 						<div class="col-md-12">
 							<div class="table-responsive">
@@ -43,8 +45,7 @@
 											<th style="width: 30px;">#</th>
 											<th>Compliance Name</th>
 											<th>Percentage </th>
-											<th>isactive </th>
-											<th>Created </th>
+											<th>Status </th>
 											<th class="text-right">Action</th>
 										</tr>
 									</thead>
@@ -58,14 +59,24 @@
 											<td><?php echo $i;?></td>
 											<td><?php echo $comp->compliancename;?></td>
 											<td><?php echo $comp->compliancepercentage;?></td>
-											<td><?php echo $comp->isactive;?></td>
-											<td>19 Feb 2019</td>
+											<td>
+												<?php 
+												if($comp->isactive=='1')
+												{
+													echo "Active";
+												}
+												else
+												{
+													echo "Deactive";
+												}
+												?>
+											</td>
 											<td class="text-right">
 												<div class="dropdown dropdown-action">
 													<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
 													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item" href="#"><i class="fa fa-download m-r-5"></i> Download</a>
-														<a class="dropdown-item" href="#" data-toggle="modal" data-target="#edit_policy"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+														<a class="dropdown-item"><i class="fa fa-download m-r-5"></i> Download</a>
+														<a class="dropdown-item" onClick="editcompliance(<?php echo $comp->complianceid;?>)" data-toggle="modal" data-target="#edit_policy"><i class="fa fa-pencil m-r-5"></i> Edit</a>
 														<a class="dropdown-item" onclick="deletedata(<?php echo $comp->complianceid; ?>)" data-toggle="modal" data-target="#delete_policy"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
 													</div>
 												</div>
@@ -81,6 +92,8 @@
 							</div>
 						</div>
 					</div>
+
+					
                 </div>
 				<!-- /Page Content -->
 
@@ -89,7 +102,7 @@
 					<div class="modal-dialog modal-dialog-centered" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
-								<h5 class="modal-title">Add Policy</h5>
+								<h5 class="modal-title">Add Compliance</h5>
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									<span aria-hidden="true">&times;</span>
 								</button>
@@ -97,29 +110,27 @@
 							<div class="modal-body">
 								<form method="post" id="form_valid">
 									<div class="form-group">
-										<label>Policy Name <span class="text-danger">*</span></label>
-										<input class="form-control" type="text" name="compliancename">
+										<label>Compliance Name <span class="text-danger">*</span></label>
+										<input class="form-control" type="text" name="compliancename" placeholder="Enter a compliance" minlength="2" maxlength="30">
 									</div>
+									
 									<div class="form-group">
-										<label>Description <span class="text-danger">*</span></label>
-										<textarea class="form-control" rows="4"></textarea>
+										<label>Compliance Percentage <span class="text-danger">*</span></label>
+										<input class="form-control" type="text" name="compliancepercentage" placeholder="Enter a compliance percentage" minlength="2" maxlength="20">
 									</div>
-									<div class="form-group">
-										<label class="col-form-label">Department</label>
-										<select class="select">
-											<option>All Departments</option>
-											<option>Web Development</option>
-											<option>Marketing</option>
-											<option>IT Management</option>
-										</select>
-									</div>
-									<div class="form-group">
-										<label>Upload Policy <span class="text-danger">*</span></label>
-										<div class="custom-file">
-											<input type="file" class="custom-file-input" id="policy_upload">
-											<label class="custom-file-label" for="policy_upload">Choose file</label>
+
+									<div class="col-md-6">
+											<div class="form-group">
+											<label class="col-form-label">Isactive<span class="text-danger">*</span></label><br>
+											<label class="radio-inline">
+												<input type="radio" name="isactive" checked value="1">Active
+											</label>
+											<label class="radio-inline">
+												<input type="radio" name="isactive" value="0">Deactive
+											</label>
+											</div>
 										</div>
-									</div>
+								
 									<div class="submit-section">
 										<button class="btn btn-primary submit-btn">Submit</button>
 									</div>
@@ -135,37 +146,58 @@
 					<div class="modal-dialog modal-dialog-centered" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
-								<h5 class="modal-title">Edit Policy</h5>
+								<h5 class="modal-title">Edit Compliance</h5>
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</div>
 							<div class="modal-body">
-								<form>
-									<div class="form-group">
-										<label>Policy Name <span class="text-danger">*</span></label>
-										<input class="form-control" type="text" value="Leave Policy">
+								<form method="post" action="<?php echo base_url();?>Company/compliance" id="form_edit">
+								<div class="form-group">
+							<input type="hidden" class="form-control" id="complianceid"  name="complianceid" value="<?php echo $complianceid;?>">
+										<label>Compliance Name <span class="text-danger">*</span></label>
+										<input class="form-control" type="text" name="compliancename" id="compliancename" placeholder="Enter a compliance" minlength="2" maxlength="30">
 									</div>
+									
 									<div class="form-group">
-										<label>Description <span class="text-danger">*</span></label>
-										<textarea class="form-control" rows="4"></textarea>
+										<label>Compliance Percentage <span class="text-danger">*</span></label>
+										<input class="form-control" type="text" name="compliancepercentage" id="compliancepercentage" placeholder="Enter a compliance percentage" minlength="2" maxlength="20">
 									</div>
-									<div class="form-group">
-										<label class="col-form-label">Department</label>
-										<select class="select">
-											<option>All Departments</option>
-											<option>Web Development</option>
-											<option>Marketing</option>
-											<option>IT Management</option>
-										</select>
-									</div>
-									<div class="form-group">
-										<label>Upload Policy <span class="text-danger">*</span></label>
-										<div class="custom-file">
-											<input type="file" class="custom-file-input" id="edit_policy_upload">
-											<label class="custom-file-label" for="edit_policy_upload">Choose file</label>
+
+									<div class="col-md-6">
+											<div class="form-group">
+											<label class="col-form-label">Isactive<span class="text-danger">*</span></label><br>
+											<label class="radio-inline">
+												
+												<?php
+												if($isactive==1)
+												{
+													?>
+													<input type="radio" name="isactive" checked  value="1">Active
+													<input type="radio" name="isactive" value="0">Deactive
+													<?php
+												}
+												?>
+												
+											</label>
+											<label class="radio-inline">
+												
+												<?php
+												if($isactive==0)
+												{
+													?>
+													<input type="radio" name="isactive"  value="1">Active
+													<input type="radio" name="isactive" checked value="0">Deactive
+													<?php
+												}
+												?>
+												 
+											</label>
+											</div>
 										</div>
-									</div>
+									
+									
+									
 									<div class="submit-section">
 										<button class="btn btn-primary submit-btn">Save</button>
 									</div>
@@ -268,11 +300,17 @@
 							compliancename: {
 									required: true,
 										},
+							compliancepercentage: {
+									required: true,
+										},
 							},
 						messages:{
 
 							compliancename: {
-									required: "Please enter a company type",
+									required: "Please enter a compliance name",
+										},	
+							compliancepercentage: {
+									required: "Please enter a compliance percentage",
 										},	
 					}					
 				});	
@@ -281,32 +319,39 @@
 				$("#form_edit").validate(
 				{
 						rules: {
-							companytype: {
+							compliancename: {
+									required: true,
+										},
+							compliancepercentage: {
 									required: true,
 										},
 							},
 						messages:{
 
-							companytype: {
-									required: "Please enter a company type",
+							compliancename: {
+									required: "Please enter a compliance name",
 										},	
+							compliancepercentage: {
+									required: "Please enter a compliance percentage",
+										},		
 					}					
 				});		
 		});
 
-		function editcompanytype(companytypeid)
+		function editcompliance(complianceid)
 		{
 			Url="<?php echo base_url() ?>";
-			//alert(companytypeid);
+			//alert(complianceid);
 			$.ajax({
-				url: Url+'Company/editcompanytype',
+				url: Url+'Company/editcompliance',
 				type: 'post',
-				data:{id:companytypeid},
+				data:{complianceid:complianceid},
 				success:function(response){
 					var response = JSON.parse(response);
-					    console.log(response.companytypeid);
-					$('#companytypeid').val(response.companytypeid);
-					$('#companytype').val(response.companytype);
+					    console.log(response.complianceid);
+					$('#complianceid').val(response.complianceid);
+					$('#compliancename').val(response.compliancename);
+					$('#compliancepercentage').val(response.compliancepercentage);
 					$('#isactive').val(response.isactive);
 				}
 			});	

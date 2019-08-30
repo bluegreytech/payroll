@@ -223,3 +223,5 @@ ERROR - 2019-08-29 14:03:17 --> Severity: Notice --> Undefined variable: complia
 ERROR - 2019-08-29 14:03:18 --> Severity: Notice --> Undefined variable: isactive C:\xampps\htdocs\payroll\admin\application\views\compliance\compliance.php 47
 ERROR - 2019-08-29 14:12:43 --> 404 Page Not Found: Compliance/index
 ERROR - 2019-08-29 14:13:28 --> 404 Page Not Found: Compliance/index
+ERROR - 2019-08-29 14:25:27 --> Severity: Notice --> Undefined variable: companytypeData C:\xampps\htdocs\payroll\admin\application\views\Company\companytypelist.php 50
+ERROR - 2019-08-29 14:25:27 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampps\htdocs\payroll\admin\application\views\Company\companytypelist.php 50

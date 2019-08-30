@@ -66,10 +66,28 @@
 
 							<div class="modal-body">
 								<form method="post" id="form_valid" action="<?php echo base_url();?>Company/companyadd">
+								<input type="hidden" class="form-control" name="companyid" value="<?php echo $companyid;?>">
 									<div class="row">
 										<div class="col-md-6">
 											<div class="form-group">
-											<input type="hidden" class="form-control" name="companyid" value="<?php echo $companyid;?>">
+													<label>Company Type</label>
+													<select class="select" name="companytypeid"> 
+														<option desabled value="">Please select company type</option>
+														<?php
+														 if($companytypeData){
+															foreach($companytypeData as $typecompany)
+															{
+														?>
+															<option value="<?php echo $typecompany->companytypeid; ?>" <?php if($companytypeid==$typecompany->companytypeid){echo "selected" ;}?>><?php echo $typecompany->companytype;?></option>
+														<?php
+														}}
+														?>
+													</select>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+											
 												<label class="col-form-label">Company Name <span class="text-danger">*</span></label>
 												<input class="form-control" type="text" minlength="2" maxlength="100" name="companyname" placeholder="Enter company name" value="<?php echo $companyname; ?>">
 											</div>
@@ -362,6 +380,9 @@ $(document).ready(function()
 				$("#form_valid").validate(
 				{
 						rules: {
+							companytypeid: {
+									required: true,
+										},
 							companyname: {
 									required: true,
 										},
@@ -376,7 +397,10 @@ $(document).ready(function()
 										},
 							},
 						messages:{
-
+							
+							companytypeid: {
+									required: "Please select company type",
+										},
 							companyname: {
 									required: "Please enter a company name",
 										},	
