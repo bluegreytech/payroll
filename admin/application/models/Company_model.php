@@ -12,8 +12,7 @@ class Company_model extends CI_Model
 
 	}
 
-	
-	
+
 	function list_companytype(){
 		$r=$this->db->select('*')
 					->from('tblcompanytype')
@@ -89,17 +88,41 @@ class Company_model extends CI_Model
 				$companyname = $rows->companyname;
 				$comemailaddress = $rows->comemailaddress;	
 				$digitalsignaturedate = $rows->digitalsignaturedate;
-		
-        
-			// $count = 2;
-			//	$today = date('Y-m-d');
-			//  echo	$datetime1 = new DateTime($today);
-			//  echo	$datetime2 = new DateTime($digitalsignaturedate);
-			echo $datetime1=date('Y-m-d',strtotime('-'.'2'.'days'));
-			 		//$interval = $today->diff($digitalsignaturedate);
-			// echo	$diff = $interval->format('%a');
-
-			}die;
+							
+				$today = date('Y-m-d');
+				$datetime1 = date_create($today);
+				$datetime2 = date_create($digitalsignaturedate);
+				$interval = date_diff($datetime1, $datetime2);
+				echo $dd= $interval->format('%R%a');echo "<br>";
+				$dd=$interval->format('%R%a');
+				if($dd=='+15' || $dd=='+10')
+				{
+					$config['protocol']='smtp';
+					$config['smtp_host']='ssl://smtp.googlemail.com';
+					$config['smtp_port']='465';
+					$config['smtp_user']='bluegreyindia@gmail.com';
+					$config['smtp_pass']='Test@123';
+					$config['charset']='utf-8';
+					$config['newline']="\r\n";
+					$config['mailtype'] = 'html';								
+					$this->email->initialize($config);
+					$body ="Hello $companyname,<br> your company Digital signature expired date is : $digitalsignaturedate  <br> so please note that";	
+					$this->email->from('bluegreyindia@gmail.com');
+					$this->email->to('bluegreyindia@gmail.com');		
+					$this->email->subject('Payroll System to your company licence are expired in 2 days');
+					$this->email->message($body);
+					if($this->email->send())
+					{
+						//return true;
+					}else
+					{
+					//	return false;
+					}
+				}
+						
+						
+			}
+			//die;
 			//return $res;
 		}
 

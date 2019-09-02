@@ -37,18 +37,26 @@
 							</li>
 
 							<li class="submenu">
-								<a href="<?php echo base_url();?>Dashboard"><i class="la la-user"></i> <span>Client</span> <span class="menu-arrow"></span></a>
+								<a href="<?php echo base_url();?>Dashboard"><i class="la la-user"></i> <span>Employees</span> <span class="menu-arrow"></span></a>
 								<ul style="display: none;">
-								<li><a href="<?php echo base_url();?>client"><span>List of Clients</span></a></li>
+								<li><a href="<?php echo base_url();?>employee">List of Employees</a></li>
+								<li><a href="<?php echo base_url();?>employeesalary">Employee Salary </a></li>
 								</ul>
 							</li>
 
-							<li class="submenu">
-								<a href="<?php echo base_url();?>Dashboard"><i class="la la-user"></i> <span>Invoice</span> <span class="menu-arrow"></span></a>
+							<!-- <li class="submenu">
+								<a href="<?php// echo base_url();?>Dashboard"><i class="la la-user"></i> <span>Client</span> <span class="menu-arrow"></span></a>
 								<ul style="display: none;">
-								<li><a href="<?php echo base_url();?>invoice"> List of Invoice Report </a></li>
+								<li><a href="<?php// echo base_url();?>client"><span>List of Clients</span></a></li>
 								</ul>
-							</li>
+							</li> -->
+
+							<!-- <li class="submenu">
+								<a href="<?php// echo base_url();?>Dashboard"><i class="la la-user"></i> <span>Invoice</span> <span class="menu-arrow"></span></a>
+								<ul style="display: none;">
+								<li><a href="<?php //echo base_url();?>invoice"> List of Invoice Report </a></li>
+								</ul>
+							</li> -->
 
 							<li class="submenu">
 								<a href="<?php echo base_url();?>Dashboard"><i class="la la-user"></i> <span>Leave</span> <span class="menu-arrow"></span></a>
@@ -66,35 +74,29 @@
 								</ul>
 							</li>
 
-							<li class="submenu">
-								<a href="<?php echo base_url();?>Dashboard"><i class="la la-user"></i> <span>Overtime</span> <span class="menu-arrow"></span></a>
+							<!-- <li class="submenu">
+								<a href="<?php //echo base_url();?>Dashboard"><i class="la la-user"></i> <span>Overtime</span> <span class="menu-arrow"></span></a>
 								<ul style="display: none;">
-								<li><a href="<?php echo base_url();?>overtime">List of Overtime</a></li>
+								<li><a href="<?php// echo base_url();?>overtime">List of Overtime</a></li>
 								</ul>
-							</li>
+							</li> -->
 
-							<li class="submenu">
-								<a href="<?php echo base_url();?>Dashboard"><i class="la la-user"></i> <span>Employees</span> <span class="menu-arrow"></span></a>
-								<ul style="display: none;">
-								<li><a href="<?php echo base_url();?>employee">List of Employees</a></li>
-								<li><a href="<?php echo base_url();?>employeesalary">Employee Salary </a></li>
-								</ul>
-							</li>
+						
 
-							<li class="submenu">
-								<a href="<?php echo base_url();?>Dashboard"><i class="la la-user"></i> <span>HR Policy</span> <span class="menu-arrow"></span></a>
+							<!-- <li class="submenu">
+								<a href="<?php// echo base_url();?>Dashboard"><i class="la la-user"></i> <span>HR Policy</span> <span class="menu-arrow"></span></a>
 								<ul style="display: none;">
-									<li><a href="<?php echo base_url();?>hrpolicy"> HR Policy </a></li>
+									<li><a href="<?php// echo base_url();?>hrpolicy"> HR Policy </a></li>
 									
 								</ul>
-							</li>
+							</li> -->
 
-							<li class="submenu">
-								<a href="<?php echo base_url();?>Dashboard"><i class="la la-user"></i> <span>Salary Setting</span> <span class="menu-arrow"></span></a>
+							<!-- <li class="submenu">
+								<a href="<?php// echo base_url();?>Dashboard"><i class="la la-user"></i> <span>Salary Setting</span> <span class="menu-arrow"></span></a>
 								<ul style="display: none;">
-								<li><a href="<?php echo base_url();?>salarysetting"> Salary Setting </a></li>
+								<li><a href="<?php //echo base_url();?>salarysetting"> Salary Setting </a></li>
 								</ul>
-							</li>
+							</li> -->
 
 						
 							<!-- <li class="submenu">
