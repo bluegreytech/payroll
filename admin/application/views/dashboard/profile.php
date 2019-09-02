@@ -164,7 +164,7 @@
 													<?php// echo $endDate = date('d/m/Y', strtotime($DateofBirth))?>
 														<label>Date of Birth</label>
 														<input class="form-control" id="datepicker1" type="text" name="DateofBirth" Placeholder="Enter your date of birth" 
-														value="<?php echo $DateofBirth?>">
+														value="<?php echo date('d-m-Y',strtotime( $DateofBirth)); ?>" readonly>
 													</div>
 												</div>
 												<div class="col-md-6">
@@ -739,8 +739,8 @@
 			
  				$('#datepicker1').datepicker();
 			
-				
-            		//$("#datepicker1").datepicker({ dateFormat: "d/m/Y" }).val()
+				 dateFormat: 'dd/mm/yy' 
+            	
        		
 		</script>
 
