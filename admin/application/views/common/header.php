@@ -39,7 +39,8 @@
 		
 		<!-- Tagsinput CSS -->
 		<link rel="stylesheet" href="<?php echo base_url(); ?>default/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css">
-
+      
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 		<!-- External -->
 		<!-- <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.5/css/fixedHeader.bootstrap.min.css">
 		<link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.5/css/fixedHeader.bootstrap.min.css">
@@ -317,11 +318,12 @@
 					<li class="nav-item dropdown has-arrow main-drop">
 						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
 							<span class="user-img">
-							<?php 
-							if($ProfileImage!='')
-							{
-							?>
-								<img src="<?php echo base_url(); ?>uploads/UserProfile/<?php echo $this->session->userdata('ProfileImage'); ?>" alt="">
+							
+							  <?php 
+							   if(($ProfileImage!='' && file_exists(base_path().'/upload/admin/'.$ProfileImage))){ ?>
+							
+							
+								<img src="<?php echo base_url(); ?>upload/admin/<?php echo $this->session->userdata('ProfileImage'); ?>" alt="">
 							<?php
 							}
 							else
@@ -336,7 +338,7 @@
 							<span><?php echo $this->session->userdata('FirstName');?> <?php echo $this->session->userdata('LastName');?></span>
 						</a>
 						<div class="dropdown-menu">
-							<a class="dropdown-item" href="<?php echo base_url();?>Adminmaster/admin_master_profile/<?php echo $UserId ;?>">My Profile</a>
+							<a class="dropdown-item" href="<?php echo base_url();?>Adminmaster/admin_master_profile/">My Profile</a>
 							<a class="dropdown-item" href="<?php echo base_url();?>Adminmaster/change_password/<?php echo $UserId ;?>">Change Password</a>
 							<a class="dropdown-item" href="<?php echo base_url();?>Login/logout">Logout</a>
 						</div>

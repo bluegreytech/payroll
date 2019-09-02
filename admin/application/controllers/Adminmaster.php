@@ -104,11 +104,12 @@ class Adminmaster extends CI_Controller
 	}
 
 
-	public function admin_master_profile($UserId)
+	public function admin_master_profile()
 	{
 		$data=array();
-		$result=$this->Adminmaster_model->getdata($UserId);
-		//echo "<pre>";print_r($result);die;
+
+		$result=$this->Adminmaster_model->getdata($this->session->userdata('UserId'));
+		
 		$data['UserId']=$result['UserId'];
 		$data['FirstName']=$result['FirstName'];
 		$data['LastName']=$result['LastName'];	
@@ -119,6 +120,7 @@ class Adminmaster extends CI_Controller
 		$data['PinCode']= $result['PinCode'];	 
 		$data['Gender']= $result['Gender'];
 		$data['ProfileImage']= $result['ProfileImage'];
+		$data['CreatedOn']= $result['CreatedOn'];
 		$this->load->view('dashboard/profile',$data);
 	}
 	
@@ -128,11 +130,10 @@ class Adminmaster extends CI_Controller
 				$data['UserId']=$this->input->post('UserId');
 				$data['FirstName']=$this->input->post('FirstName');
 				$data['LastName']=$this->input->post('LastName');
-			//	$data['EmailAddress']=$this->input->post('EmailAddress');
+			
 				$data['DateofBirth']=$this->input->post('DateofBirth');
 				$data['PhoneNumber']=$this->input->post('PhoneNumber');
 				$data['Gender']=$this->input->post('Gender');
-				//$data['ProfileImage']=$this->input->post('ProfileImage');
 				$data['Address']=$this->input->post('Address');
 				$data['PinCode']=$this->input->post('PinCode');
 				if($_POST){
@@ -147,7 +148,7 @@ class Adminmaster extends CI_Controller
 							);
 							$this->session->set_userdata($session); 
 							$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
-							redirect('Adminmaster/admin_master_profile/'.$UserId);
+							redirect('Adminmaster/admin_master_profile/');
 						}
 					}
 				
