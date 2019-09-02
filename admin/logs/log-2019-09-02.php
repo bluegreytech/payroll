@@ -632,3 +632,21 @@ ERROR - 2019-09-02 11:39:02 --> Severity: Notice --> Undefined property: stdClas
 ERROR - 2019-09-02 11:39:02 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\hr\hrlist.php 113
 ERROR - 2019-09-02 11:39:04 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\hr\hrlist.php 113
 ERROR - 2019-09-02 11:39:06 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\hr\hrlist.php 113
+ERROR - 2019-09-02 11:55:51 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-02 11:56:07 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 24
+ERROR - 2019-09-02 11:56:08 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-02 11:56:08 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-02 11:56:08 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-02 11:56:08 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-02 11:56:08 --> 404 Page Not Found: Default/assets
+ERROR - 2019-09-02 11:56:11 --> 404 Page Not Found: Default/cdn-cgi
+ERROR - 2019-09-02 11:57:03 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 113
+ERROR - 2019-09-02 11:58:17 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-02 11:58:17 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-02 11:58:17 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-02 11:58:17 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-02 11:58:17 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-02 11:58:17 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-02 11:58:17 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-02 11:58:17 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-02 11:58:17 --> 404 Page Not Found: Assets/img
