@@ -10,7 +10,7 @@
 							if($this->session->userdata('RoleId')==1 || $this->session->userdata('RoleId')==2){
 							?>	
 							<li class="submenu">
-								<a href="<?php echo base_url();?>Dashboard"><i class="la la-user"></i> <span>Admin User</span> <span class="menu-arrow"></span></a>
+								<a href="<?php echo base_url();?>Dashboard"><i class="la la-user"></i> <span>Admin</span> <span class="menu-arrow"></span></a>
 								<ul style="display: none;">
 									<li><a href="<?php echo base_url();?>adminmaster/adminlist"><span>List of Admin</span></a></li>			
 								</ul>

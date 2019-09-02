@@ -33,16 +33,16 @@ class Hr extends CI_Controller
 			
 			if($this->input->post('UserId')!='')
 			{	
-				$result=$this->Hr_model->updateadmin();	
+				$result=$this->Hr_model->updatehr();	
 				if($result==1)
 				{
 					$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
-					redirect('adminmaster/adminlist');
+					redirect('Hr');
 				}
 				else
 				{
 					$this->session->set_flashdata('success', 'Record was not Updated!');
-					redirect('adminmaster/adminlist');
+					redirect('Hr');
 				}
 			}
 			else
@@ -84,7 +84,7 @@ class Hr extends CI_Controller
 		}
 	}
 
-	function editadminmaster()
+	function edithr()
 	{
 		$data=array();
 		$result=$this->Hr_model->getdata($this->input->post('id'));	
