@@ -88,7 +88,7 @@ class Hr extends CI_Controller
 	{
 		$data=array();
 		$result=$this->Hr_model->getdata($this->input->post('id'));	
-		//echo "<br>";print_r($result);die;
+		echo "<br>";print_r($result);die;
 		$data['UserId']=$result['UserId'];
 		$data['FirstName']=$result['FirstName'];	
 		$data['LastName']=$result['LastName'];	
@@ -100,7 +100,7 @@ class Hr extends CI_Controller
 		$data['PinCode']=$result['PinCode'];
 		$data['City']=$result['City'];
 		$data['IsActive']=$result['IsActive'];
-		echo json_encode($data);
+		//echo json_encode($data);
 	}
 
 

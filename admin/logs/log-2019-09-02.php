@@ -652,3 +652,28 @@ ERROR - 2019-09-02 11:55:16 --> Severity: Notice --> Undefined property: stdClas
 ERROR - 2019-09-02 11:55:26 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\hr\hrlist.php 113
 ERROR - 2019-09-02 11:55:53 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\hr\hrlist.php 113
 ERROR - 2019-09-02 11:56:02 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\hr\hrlist.php 113
+ERROR - 2019-09-02 12:05:47 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\hr\hrlist.php 113
+ERROR - 2019-09-02 12:05:50 --> Query error: Unknown column 't1.hrid' in 'on clause' - Invalid query: SELECT `t1`.*, `t2`.*
+FROM `tbluser` as `t1`
+LEFT JOIN `tblhr` as `t2` ON `t1`.`hrid` = `t2`.`hrid`
+LEFT JOIN `tblcompany` as `t3` ON `t2`.`companyid` = `t3`.`companyid`
+WHERE `t1`.`UserId` = '32'
+ERROR - 2019-09-02 12:06:31 --> Query error: Unknown column 't1.hrid' in 'on clause' - Invalid query: SELECT `t1`.*, `t2`.*
+FROM `tbluser` as `t1`
+LEFT JOIN `tblhr` as `t2` ON `t1`.`hrid` = `t2`.`hrid`
+LEFT JOIN `tblcompany` as `t3` ON `t2`.`companyid` = `t3`.`companyid`
+WHERE `t1`.`UserId` IS NULL
+ERROR - 2019-09-02 12:06:58 --> Query error: Unknown column 't1.hrid' in 'on clause' - Invalid query: SELECT `t1`.*, `t2`.*, `t3`.*
+FROM `tbluser` as `t1`
+LEFT JOIN `tblhr` as `t2` ON `t1`.`hrid` = `t2`.`hrid`
+LEFT JOIN `tblcompany` as `t3` ON `t2`.`companyid` = `t3`.`companyid`
+WHERE `t1`.`UserId` IS NULL
+ERROR - 2019-09-02 12:08:36 --> Severity: error --> Exception: syntax error, unexpected '->' (T_OBJECT_OPERATOR) C:\xampps\htdocs\payroll\admin\application\models\Hr_model.php 155
+ERROR - 2019-09-02 12:08:47 --> Query error: Column 'UserId' in where clause is ambiguous - Invalid query: SELECT *
+FROM `tbluser` as `t1`
+LEFT JOIN `tblhr` as `t2` ON `t1`.`UserId` = `t2`.`UserId`
+LEFT JOIN `tblcompany` as `t3` ON `t2`.`companyid` = `t3`.`companyid`
+WHERE `UserId` IS NULL
+ERROR - 2019-09-02 12:13:13 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\hr\hrlist.php 113
+ERROR - 2019-09-02 12:14:24 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\hr\hrlist.php 113
+ERROR - 2019-09-02 12:14:52 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\hr\hrlist.php 113

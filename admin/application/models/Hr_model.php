@@ -151,9 +151,19 @@ class Hr_model extends CI_Model
 	function getdata($id){
 		$query=$this->db->select('*')
 			->from('tbluser')
+			//->join('tblhr as t2', 't1.UserId = t2.UserId', 'LEFT')
+			//->join('tblcompany as t3', 't2.companyid = t3.companyid', 'LEFT')
 			->where('UserId',$id)
 			->get();
 			return $query->row_array();
+
+			// $this->db->select('t1.*,t2.*,t3.*');
+			// $this->db->from('tbluser as t1');
+			// $this->db->join('tblhr as t2', 't1.UserId = t2.UserId', 'LEFT');
+			// $this->db->join('tblcompany as t3', 't2.companyid = t3.companyid', 'LEFT');
+			// $this->db->where('t1.UserId',$id);
+			// $query = $this->db->get();	
+			//return $query->row_array();
 	}
 
 	function updatehr()
