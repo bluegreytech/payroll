@@ -10,7 +10,7 @@
 					<!-- Page Title -->
 					<div class="row">
 						<div class="col-sm-5 col-5">
-							<h4 class="page-title">Company Type</h4>
+							<h4 class="page-title">Company Type <?php echo $isactive;?></h4>
 						</div>
 						<div class="col-sm-7 col-7 text-right m-b-30">
 							<a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_holiday"><i class="fa fa-plus"></i> Add Company Type</a>
@@ -93,7 +93,7 @@
 					
                 </div>
 				<!-- /Page Content -->
-				
+			
 				<!-- Add Holiday Modal -->
 				<div class="modal custom-modal fade" id="add_holiday" role="dialog">
 					<div class="modal-dialog modal-dialog-centered" role="document">
@@ -136,7 +136,8 @@
 					<div class="modal-dialog modal-dialog-centered" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
-								<h5 class="modal-title">Edit Company Type</h5>
+							
+								<h5 class="modal-title">Edit Company Type  </h5>
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									<span aria-hidden="true">&times;</span>
 								</button>
@@ -153,10 +154,10 @@
 											<div class="form-group">
 											<label class="col-form-label">Isactive<span class="text-danger">*</span></label><br>
 											<label class="radio-inline">
-												<input type="radio" name="isactive" checked value="1">Active
+												<input type="radio" name="isactive"  value="1">Active
 											</label>
 											<label class="radio-inline">
-												<input type="radio" name="isactive" value="0">Deactive
+												<input type="radio" name="isactive"  value="0">Inactive
 											</label>
 											</div>
 									</div>
@@ -295,10 +296,11 @@
 				data:{companytypeid:companytypeid},
 				success:function(response){
 					var response = JSON.parse(response);
-					    console.log(response.companytypeid);
+					    console.log(response);
 					$('#companytypeid').val(response.companytypeid);
 					$('#companytype').val(response.companytype);
-					$('#isactive').val(response.isactive);
+					$("input[name=isactive][value=" + response.isactive + "]").attr('checked', 'checked');
+			
 				}
 			});	
 		}

@@ -70,6 +70,7 @@
 									<div class="form-group form-focus select-focus">
 										<select class="select floating" name="option"> 
 											<option value=""> -- Select -- </option>
+											<option value="companytype">Company Type</option>
 											<option value="companyname">Company Name</option>
 											<option value="comemailaddress">Email Address</option>
 											<option value="comcontactnumber">Contact Number</option>
@@ -221,6 +222,24 @@
 </html>
 
 <script>
+
+$(function() { 
+    setTimeout(function() {
+  $('#errorMessage').fadeOut('fast');
+}, 10000);  
+});
+
+$(function() { 
+    setTimeout(function() {
+  $('#successMessage').fadeOut('fast');
+}, 10000);  
+});
+
+$(function() { 
+    setTimeout(function() {
+  $('#warningMessage').fadeOut('fast');
+}, 10000);  
+});
 
 function deletedata(companyid){  
 			$('#delete_client').modal('show')

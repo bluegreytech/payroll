@@ -50,7 +50,7 @@ class Adminmaster_model extends CI_Model
 			'IsActive'=>1,
 			'CreatedOn'=>date('Y-m-d')
 			);
-			//print_r($data);die;
+			print_r($data);die;
 			$this->db->insert('tbluser',$data);
 			$insert_id = $this->db->insert_id();
 
@@ -97,6 +97,8 @@ class Adminmaster_model extends CI_Model
 		//$r=$this->db->select('*')
 		$r=$this->db->select('UserId,RoleId,CONCAT(FirstName ,LastName) AS FirstName,EmailAddress,DateofBirth,PhoneNumber,ProfileImage,Gender,Address,PinCode,CountryId,StateId,City,IsActive')
 					->from('tbluser')
+					->where('RoleId',1)
+					->or_where('RoleId',2)
 					->get();
 		$res = $r->result();
 		return $res;
@@ -110,7 +112,8 @@ class Adminmaster_model extends CI_Model
 			$this->db->select('UserId,RoleId,CONCAT(FirstName ,LastName) AS FirstName,EmailAddress,DateofBirth,PhoneNumber,ProfileImage,Gender,Address,PinCode,CountryId,StateId,City,IsActive');
 			$this->db->from('tbluser');
 			//$this->db->select('*');
-	
+			$this->db->where('RoleId', 1);
+			$this->db->or_where('RoleId', 2);
 				if($option == 'FirstName')
 				{
 				// echo $keyword; 
@@ -244,8 +247,8 @@ class Adminmaster_model extends CI_Model
 			'PhoneNumber'=>$this->input->post('PhoneNumber'),
 			'Gender'=>$this->input->post('Gender'),
 		//	'ProfileImage'=>$this->input->post('ProfileImage'),
-			'Address'=>$this->input->post('Address'),
-			'PinCode'=>$this->input->post('PinCode'),
+			'Address'=>$this->input->post('Address')
+			//'PinCode'=>$this->input->post('PinCode')
 				);
 				//print_r($data);die;
 			$this->db->where("UserId",$UserId);

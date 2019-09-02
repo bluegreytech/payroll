@@ -13,6 +13,7 @@ class Company_model extends CI_Model
 	}
 
 	
+	
 	function list_companytype(){
 		$r=$this->db->select('*')
 					->from('tblcompanytype')
@@ -30,98 +31,147 @@ class Company_model extends CI_Model
 		return $res;
 
 	}
-
-	// function list_state(){
-	// 	$r=$this->db->select('*')
-	// 				->from('tblstate')
-	// 				->get();
-	// 	$res = $r->result();
-	// 	return $res;
-
-	// }
 	
+	function list_state(){
+		$r=$this->db->select('*')
+					->from('tblstate')
+					->where('statename','Gujarat')
+					->get();
+		$res = $r->result();
+		return $res;
 
+	}
+	
 	function search($option,$keyword)
 	{
 			$keyword = str_replace('-', ' ', $keyword);
-			$this->db->select('*');
-			$this->db->from('tblcompany');
-	
-				if($option == 'companyname')
-				{
-				// echo $keyword; 
-					$this->db->like('companyname',$keyword);
-				}
-				else if($option == 'comemailaddress')
-				{
-						$this->db->like('comemailaddress',$keyword);
-				}
-				else if($option == 'comcontactnumber')
-				{
-					$this->db->where('comcontactnumber',$keyword);
-				} 
-			   	$this->db->order_by('companyid','desc');
-				// if($type == "result")
-				// {
-				// 	$this->db->limit($limit,$offset);
-				// }
-			    $query = $this->db->get();
-				// echo $this->db->last_query();
-				// echo "<pre>";print_r($query->result());die;
-				if($query->num_rows() > 0)
-				{
-					//    if($type == "count"){
-					//  // echo "hello count";
-					// 	 return $query->num_rows();
-					//  }else{
-					// 	return $query->result();
-					//  } 
-					return $query->result();
-				} 
+			$this->db->select('t1.*,t2.*');
+			$this->db->from('tblcompany as t1');
+			$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
+			if($option == 'companytype')
+			{
+				$this->db->like('companytype',$keyword);
+			}
+			else if($option == 'companyname')
+			{
+				$this->db->like('companyname',$keyword);
+			}
+			else if($option == 'comemailaddress')
+			{
+				$this->db->like('comemailaddress',$keyword);
+			}
+			else if($option == 'comcontactnumber')
+			{
+				$this->db->where('comcontactnumber',$keyword);
+			} 
+			$this->db->order_by('companyid','desc');	
+			$query = $this->db->get();	
+			if($query->num_rows() > 0)
+			{
+				return $query->result();
+			} 
+			// else
+			// {
+			// 	return 2;
+			// }
 				    
 		}
 
-		// function checkResetCode($code)
-		// {
-		// 	$query=$this->db->get_where('tblcompany',array('verificationcode'=>$code));
+		function list_licence_company(){
+			$this->db->select('*');
+			$this->db->from('tblcompany');
+			$query = $this->db->get();
+			//$res = $query->result_array();
+			//echo "<pre>";print_r($res);die;
+			$array=array();
+			foreach($query->result() as $rows) {
+				$companyid = $rows->companyid;
+				$companyname = $rows->companyname;
+				$comemailaddress = $rows->comemailaddress;	
+				$digitalsignaturedate = $rows->digitalsignaturedate;
+		
+        
+			// $count = 2;
+			//	$today = date('Y-m-d');
+			//  echo	$datetime1 = new DateTime($today);
+			//  echo	$datetime2 = new DateTime($digitalsignaturedate);
+			echo $datetime1=date('Y-m-d',strtotime('-'.'2'.'days'));
+			 		//$interval = $today->diff($digitalsignaturedate);
+			// echo	$diff = $interval->format('%a');
+
+			}die;
+			//return $res;
+		}
+
+		function checkResetCode($code)
+		{
+			$query=$this->db->get_where('tblcompany',array('verificationcode'=>$code));
+			if($query->num_rows()>0)
+			{
+				//return $query->row_array();
+				$row = $query->row();
+				$companyid=$row->companyid;
+
+				$data=array('verificationcode'=>'','emailverifystatus'=>'Verify');
+				$this->db->where(array('companyid'=>$companyid,'verificationcode'=>$code));
+				$this->db->update('tblcompany',$data);
 			
-		// 	if($query->num_rows()>0)
-		// 	{
-		// 		//return $query->row_array();
-		// 		echo $companyid= $query->row()->companyid;
-		// 		 die;
-		// 		$data=array('verificationcode'=>'');
-		// 		$this->db->where(array('companyid'=>$companyid,'emailverifystatus'=>trim("verify")));
-		// 	   // print_r($data);die;
-		// 		$d=$this->db->update('tblcompany',$data);
-		// 		return $d;
+				$this->db->select('t1.*,t2.*');
+				$this->db->from('tblcompany as t1');
+				$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
+				$this->db->where('t1.companyid',$companyid);
+				$smtp2 = $this->db->get('tblcompany');	
+				foreach($smtp2->result() as $rows) {
+					$companyid = $rows->companyid;
+					$companytypeid = $rows->companytypeid;
+					$companytype = $rows->companytype;
+					$companyname = $rows->companyname;
+					$comemailaddress = $rows->comemailaddress;	
+				}
 
-		// 	}else{
-		// 		return false;
-		// 	}
-		// }
+				$config['protocol']='smtp';
+				$config['smtp_host']='ssl://smtp.googlemail.com';
+				$config['smtp_port']='465';
+				$config['smtp_user']='bluegreyindia@gmail.com';
+				$config['smtp_pass']='Test@123';
+				$config['charset']='utf-8';
+				$config['newline']="\r\n";
+				$config['mailtype'] = 'html';								
+				$this->email->initialize($config);
+				$body ="Hello you are registered <br>";	
+				$this->email->from('bluegreyindia@gmail.com');
+				$this->email->to($comemailaddress);		
+				$this->email->subject('Payroll System to your company are register complete');
+				$this->email->message($body);
+				if($this->email->send())
+				{
+					return 1;
+				}else
+				{
+					return 2;
+				}
+			}
+			else
+			{
+				return 2;
+			}	
+				
 
-		// function updateVerification($company_id,$code)
-		// {
-		// 	echo $code;die;
-		// 	$this->input->post('code');
-		// 	$query=$this->db->get_where('tblcompany',array('verificationcode'=>$code));
-		// 	if($query->num_rows()>0)
-		// 	{
-		// 	  $data=array('verificationcode'=>'');
-		// 		$this->db->where(array('companyid'=>$this->input->post('companyid'),'verificationcode'=>trim($this->input->post('code'))));
-		// 	   // print_r($data);die;
-		// 		$d=$this->db->update('tblcompany',$data);
-		// 		return $d;
-			  
-		// 	}else
-		// 	{
-		// 	  return false;
-		// 	}
-		//   }
+			
+		}
+
+		
 
 	function add_company()
 	{	
+			$this->db->select('*');
+			$this->db->where('comemailaddress',$this->input->post('comemailaddress'));
+			$query=$this->db->get('tblcompany');
+			if($query->num_rows() > 0)
+			{
+					return 3;
+			}
+
 			$code=rand(12,123456789);
 			$companytypeid=$this->input->post('companytypeid');
 			$companyname=$this->input->post('companyname');
@@ -130,7 +180,10 @@ class Company_model extends CI_Model
 			$gstnumber=$this->input->post('gstnumber');	
 			$companylogo=$this->input->post('companylogo');
 			$digitalsignaturedate=$this->input->post('digitalsignaturedate');	
+			$companyaddress=$this->input->post('companyaddress');
+			$stateid=$this->input->post('stateid');
 			$companycity=$this->input->post('companycity');
+			$pincode=$this->input->post('pincode');	
 			$isactive=$this->input->post('isactive');
 			$complianceid=implode(',',$this->input->post('complianceid'));
 			$data=array( 
@@ -140,8 +193,11 @@ class Company_model extends CI_Model
 			'comcontactnumber'=>$comcontactnumber,
 			'gstnumber'=>$gstnumber, 
 			'digitalsignaturedate'=>$digitalsignaturedate,
+			'companyaddress'=>$companyaddress,
+			'stateid'=>$stateid,
 			//'companylogo'=>$companylogo,
 			'companycity'=>$companycity,
+			'pincode'=>$pincode,
 			'verificationcode'=>$code,
 			'isactive'=>$isactive,
 			'createdby'=>1,
@@ -159,10 +215,7 @@ class Company_model extends CI_Model
 				'createdon'=>date("Y-m-d h:i:s")
 				);
 			$this->db->insert('tblcompanycompliances',$data2);	
-
 			if($insert_id!=''){
-
-			
 				$this->db->select('t1.*,t2.*');
 				$this->db->from('tblcompany as t1');
 				$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
@@ -190,7 +243,7 @@ class Company_model extends CI_Model
 					$body ="Hello you are registered <br> $verification_link";	
 					$this->email->from('bluegreyindia@gmail.com');
 					$this->email->to($comemailaddress);		
-					$this->email->subject('Payroll System to your company are register complete');
+					$this->email->subject('Payroll System to your company are verification purpose');
 					$this->email->message($body);
 					if($this->email->send())
 					{
@@ -228,9 +281,11 @@ class Company_model extends CI_Model
 
 	function get_company($companyid)
 	{
-		$this->db->select('t1.*,t2.*');
+		$this->db->select('t1.*,t2.*,t3.*,t4.*');
 		$this->db->from('tblcompany as t1');
 		$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
+		$this->db->join('tblcompanycompliances as t3', 't1.companyid = t3.companyid', 'LEFT');
+		$this->db->join('tblstate as t4', 't1.stateid = t4.stateid', 'LEFT');
 		$this->db->where('t1.companyid',$companyid);
 		$query=$this->db->get();
 		return $query->row_array();
@@ -286,6 +341,7 @@ class Company_model extends CI_Model
 	{	
 		     
 		$companyid=$this->input->post('companyid');
+		$companycomplianceid=$this->input->post('companycomplianceid');
 		$data=array(
 			'companyid'=>$this->input->post('companyid'),
 			'companytypeid'=>$this->input->post('companytypeid'),
@@ -294,13 +350,33 @@ class Company_model extends CI_Model
 			'comcontactnumber'=>$this->input->post('comcontactnumber'),
 			'gstnumber'=>$this->input->post('gstnumber'),
 			'digitalsignaturedate'=>$this->input->post('digitalsignaturedate'),
+			'companyaddress'=>$this->input->post('companyaddress'),
+			'stateid'=>$this->input->post('stateid'),
 			'companycity'=>$this->input->post('companycity'),
+			'pincode'=>$this->input->post('pincode'),
 			'isactive'=>$this->input->post('isactive'),
 				);
 			//print_r($data);die;
 			$this->db->where("companyid",$companyid);
 			$this->db->update('tblcompany',$data);	
-			return 1;	      
+			//return 1;	
+		if($companycomplianceid!='')
+		{
+			$complianceid=implode(',',$this->input->post('complianceid'));
+			$data2=array( 
+				'companycomplianceid'=>$companycomplianceid,
+				'companyid'=>$companyid,
+				'complianceid'=>$complianceid,
+				'isactive'=>$this->input->post('isactive'),
+				'createdby'=>1,
+				'createdon'=>date("Y-m-d h:i:s")
+				);
+			$this->db->where("companycomplianceid",$companycomplianceid);
+			$this->db->update('tblcompanycompliances',$data2);
+			return 1;	 	
+
+		} 
+			
 	}
 
 	function update_companytype()

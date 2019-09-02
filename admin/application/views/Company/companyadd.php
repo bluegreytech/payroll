@@ -67,6 +67,7 @@
 							<div class="modal-body">
 								<form method="post" id="form_valid" action="<?php echo base_url();?>Company/companyadd">
 								<input type="hidden" class="form-control" name="companyid" value="<?php echo $companyid;?>">
+								<input type="hidden" class="form-control" name="companycomplianceid" value="<?php echo $companycomplianceid;?>">
 									<div class="row">
 										<div class="col-md-6">
 											<div class="form-group">
@@ -118,25 +119,34 @@
 												value="<?php echo $digitalsignaturedate; ?>">
 											</div>
 										</div>
-
-										<!-- <div class="col-md-6">
+										<div class="col-md-6">
 											<div class="form-group">
-													<label>Company Type</label>
+												<label class="col-form-label">Address<span class="text-danger">*</span></label>
+												<input class="form-control"  type="text" name="companyaddress" id="companyaddress" placeholder="Enter company address"  
+												value="<?php echo $companyaddress; ?>">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+													<label>State</label>
 													<select class="select" name="stateid"> 
 														<option desabled value="">Please select state</option>
 														<?php
-														//  if($stateData){
-														// 	foreach($stateData as $state)
-														// 	{
+														 if($stateData){
+															foreach($stateData as $state)
+															{
 														?>
-															<option value="<?php// echo $state->stateid; ?>" <?php //if($stateid==$state->stateid){echo "selected" ;}?>><?php// echo $state->statename;?></option>
+															<option value="<?php echo $state->stateid; ?>" <?php if($stateid==$state->stateid){echo "selected" ;}?>><?php echo $state->statename;?></option>
+
+															<!-- <option value="<?php //echo $state->stateid; ?>">
+															<?php //echo $state->statename;?></option> -->
+
 														<?php
-														//}}
+														}}
 														?>
 													</select>
 											</div>
-										</div> -->
-
+										</div>
 										<div class="col-md-6">
 											<div class="form-group">
 												<label class="col-form-label">City</label><span class="text-danger">*</span></label>
@@ -145,8 +155,8 @@
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
-												<label class="col-form-label">City</label><span class="text-danger">*</span></label>
-												<input class="form-control" minlength="2" maxlength="50" type="text" name="companycity" placeholder="Enter city" value="<?php echo $companycity; ?>">
+												<label class="col-form-label">Pincode</label><span class="text-danger">*</span></label>
+												<input class="form-control" minlength="06" maxlength="06" type="text" name="pincode" id="pincode" placeholder="Enter pincode" value="<?php echo $pincode; ?>">
 											</div>
 										</div>
 										<?php
@@ -201,47 +211,7 @@
 										
 										
 										?>
-										
-
-
-										
-
-										<!-- <div class="col-md-6">
-											<div class="form-group">
-												<label class="col-form-label">Password</label><span class="text-danger">*</span></label>
-												<input class="form-control" type="password" name="password" placeholder="Enter password">
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label class="col-form-label">Confirm Password</label><span class="text-danger">*</span></label>
-												<input class="form-control" type="password" name="confirm_password" placeholder="Enter confirm new password">
-											</div>
-										</div> -->
-										<!-- <div class="col-md-12">  
-											<div class="form-group">
-												<label>Company Address <span class="text-danger">*</span></label>
-												<textarea class="form-control" rows="4" name="companyaddress"></textarea>
-											</div>
-										</div> -->
-										<!-- <div class="col-md-6">  
-											<div class="form-group">
-												<label class="col-form-label">Client ID <span class="text-danger">*</span></label>
-												<input class="form-control floating" type="text">
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label class="col-form-label">Phone </label>
-												<input class="form-control" type="text">
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label class="col-form-label">Company Name</label>
-												<input class="form-control" type="text">
-											</div>
-										</div> -->
+									
 									</div>
 										
 									<div class="table-responsive m-t-15">
@@ -261,7 +231,7 @@
 												<tr>
 													<td><?php echo $compdata->compliancename;?></td>
 													<td class="text-center">
-														<input type="checkbox" value="<?php echo $compdata->complianceid; ?>" 
+														<input type="checkbox"  value="<?php echo $compdata->complianceid; ?>" 
 														name="complianceid[]">
 													</td>
 													
@@ -364,6 +334,15 @@
 		}
 		});
 
+		$("#pincode").on("input", function(evt) {
+		var self = $(this);
+		self.val(self.val().replace(/[^\d].+/, ""));
+		if ((evt.which < 48 || evt.which > 57)) 
+		{
+			evt.preventDefault();
+		}
+		});
+
 $(document).ready(function()
 		{
 				$("#form_valid").validate(
@@ -387,9 +366,18 @@ $(document).ready(function()
 							digitalsignaturedate: {
 									required: true,
 										},
+							companyaddress: {
+									required: true,
+										},
+							stateid: {
+									required: true,
+										},
 							companycity: {
 									required: true,
 										},
+							pincode:{
+									required: true,
+							}
 							},
 						messages:{
 							
@@ -410,9 +398,18 @@ $(document).ready(function()
 										},
 							digitalsignaturedate: {
 									required: "Please select company signature expire date",
+										},
+							companyaddress: {
+									required: "Please enter a company address",
 										},	
+							stateid: {
+									required: "Please select state",
+										},
 							companycity: {
 									required: "Please enter a city",
+										},	
+							pincode: {
+									required: "Please enter a pincode",
 										},	
 					}					
 				});		

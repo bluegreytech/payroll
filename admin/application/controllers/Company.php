@@ -8,13 +8,38 @@ class Company extends CI_Controller
 		$this->load->model('Company_model');
 	}
 
-	// public function checkcode($code='')
-	// {	
-	// 	//echo	$code;die;
-	// 	$company_id=$this->Company_model->checkResetCode($code);
-	// 	//print_r($company_id);die;
+	public function checkcode($code='')
+	{	
+		$result=$this->Company_model->checkResetCode($code);
+		if($result==1)
+		{
+			$this->session->set_flashdata('success', 'Your company verification has been Successfully!');
+			//redirect('Company');
+		}
+		elseif($result==2)
+		{
+			//$this->session->set_flashdata('error', 'Your company verification link has been expired!');
+			echo "link expired";
+		}
 	
-	// }
+	
+	}
+
+	public function company_licence()
+	{	
+		$result=$this->Company_model->list_licence_company();
+		//echo "<pre>";print_r($result);die;
+		if($result)
+		{
+			echo "success";
+		}
+		else
+		{
+			echo "fail";
+		}
+	
+	
+	}
 
 	public function index()
 	{   
@@ -23,13 +48,11 @@ class Company extends CI_Controller
 			$option=$this->input->post('option');
 			$keyword=$this->input->post('keyword2');	
 			$data['companyData'] = $this->Company_model->search($option,$keyword);
-			// echo "<pre>";print_r($data['adminmasterData']);die;
 		}	
 		else
 		{
 			$data['companyData']=$this->Company_model->list_company();
 		}    
-		//print_r($data['companyData']);die;
 		$this->load->view('Company/companylist',$data);			
 	}
 
@@ -44,8 +67,12 @@ class Company extends CI_Controller
 			$data['comcontactnumber']=$this->input->post('comcontactnumber');
 			$data['gstnumber']=$this->input->post('gstnumber');
 			$data['digitalsignaturedate']=$this->input->post('digitalsignaturedate');
+			$data['companyaddress']=$this->input->post('companyaddress');
+			$data['stateid']=$this->input->post('stateid');
 			$data['companycity']=$this->input->post('companycity');	
+			$data['pincode']=$this->input->post('pincode');		
 			$data['isactive']=$this->input->post('isactive');
+			$data['companycomplianceid']=$this->input->post('companycomplianceid');
 			if($_POST){
 				
 				if($this->input->post('companyid')==''){
@@ -63,22 +90,33 @@ class Company extends CI_Controller
 					}
 					else if($result==3)
 					{
-						$this->session->set_flashdata('error', 'Your data was not Insert!');
+						//$this->session->set_flashdata('error', 'Your data was not Insert!');
+						$this->session->set_flashdata('warning', 'This email address already registered!');
 						redirect('Company');
 					}
 				}
 				else
 				{
 					$result=$this->Company_model->update_company();
-					if($result)
+					if($result==1)
 					{
 						$this->session->set_flashdata('success', 'Record has been Updated Successfully!');
 						redirect('Company');
-					} 
+					}
+					else if($result==2)
+					{
+						$this->session->set_flashdata('warning', 'Your data has been Inserted Successfully and Your email function was not work!');
+						redirect('Company');
+					}
+					else if($result==3)
+					{
+						$this->session->set_flashdata('error', 'Your data was not Insert!');
+						redirect('Company');
+					}
 
 				}
 		} 
-		//$data['stateData']=$this->Company_model->list_state();
+		$data['stateData']=$this->Company_model->list_state();
 		$data['complianceData']=$this->Company_model->list_compliance();
 		$data['companytypeData']=$this->Company_model->list_companytype();
 		//print_r($data['stateData']);die;
@@ -117,8 +155,19 @@ class Company extends CI_Controller
 		$data['comcontactnumber']=$result['comcontactnumber'];
 		$data['gstnumber']=$result['gstnumber'];
 		$data['digitalsignaturedate']=$result['digitalsignaturedate'];
+		$data['companyaddress']=$result['companyaddress'];
+		$data['stateid']=$result['stateid'];
+		$data['statename']=$result['statename'];
+
 		$data['companycity']=$result['companycity'];
+		$data['pincode']=$result['pincode'];
 		$data['isactive']=$result['isactive'];
+		$data['companycomplianceid']=$result['companycomplianceid'];
+		$data['complianceid']=$result['complianceid'];
+
+		$data['stateData']=$this->Company_model->list_state();
+		$data['complianceData']=$this->Company_model->list_compliance();
+		//echo "<pre>";print_r($data['complianceData']);die;
 		$data['companytypeData']=$this->Company_model->list_companytype();
 		$this->load->view('Company/companyadd',$data);	
 	}
@@ -233,7 +282,7 @@ class Company extends CI_Controller
 		$data['companytype']=$result['companytype'];
 		$data['isactive']=$result['isactive'];
 		echo json_encode($data);
-		//$this->load->view('Company/companytypelist',$data);		
+	    //$this->load->view('Company/companytypelist',$data);		
 	}
 
 	function editcompliance()

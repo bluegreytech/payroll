@@ -55,10 +55,10 @@
           if($this->session->userdata('EmailAddress'))
           {
 			$UserId=$this->session->userdata('UserId');
-				$this->session->userdata('RoleId');
-				$this->session->userdata('FirstName');
-				$this->session->userdata('LastName');
-				$ProfileImage=$this->session->userdata('ProfileImage');
+			$RoleId=$this->session->userdata('RoleId');
+			$FirstName=$this->session->userdata('FirstName');
+			$LastName=$this->session->userdata('LastName');
+			$ProfileImage=$this->session->userdata('ProfileImage');
   ?>
     <body>
 		<!-- Main Wrapper -->

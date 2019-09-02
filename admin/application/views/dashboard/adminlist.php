@@ -76,7 +76,13 @@
 											<th>Email Address</th>
 											<th>Contact Number</th>
 											<th>Gender</th>
+											<?php
+											if($this->session->userdata('RoleId')==1){
+											?>	
 											<th class="text-right">Action</th>
+											<?php
+											}
+											?>	
 										</tr>
 									</thead>
 									<tbody>
@@ -114,6 +120,9 @@
 											<td><?php echo $adminlist->EmailAddress ;?></td>
 											<td><?php echo $adminlist->PhoneNumber ;?></td>
 											<td><?php echo $adminlist->Gender ;?></td>
+											<?php
+											if($this->session->userdata('RoleId')==1){
+											?>	
 											<td class="text-right">
 												<div class="dropdown dropdown-action">
 													<a href="" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
@@ -124,6 +133,9 @@
 													</div>
 												</div>
 											</td>
+											<?php
+											}
+											?>
 										</tr>
 										<?php
 										$i++;
@@ -200,7 +212,7 @@
 											</div> 
 											<div class="form-group">
 												<label>Contact Number</label>
-												<input class="form-control" type="text" name="PhoneNumber" Placeholder="Enter your contact number" minlength="10" maxlength="10" id="PhoneNumberss">
+												<input class="form-control" type="text" name="PhoneNumber" Placeholder="Enter your contact number" minlength="10" maxlength="10" id="PhoneNumbers">
 											</div>
 											<div class="form-group">
 												<label>Gender</label>
@@ -211,7 +223,7 @@
 											</div>
 											<div class="form-group">
 												<label>Pin-Code</label>
-												<input class="form-control" type="text" name="PinCode" id="PinCode" Placeholder="Enter your pin-code"  minlength="6" maxlength="6">
+												<input class="form-control" type="text" name="PinCode" id="PinCodeadd" Placeholder="Enter your pin-code"  minlength="6" maxlength="6">
 											</div>
 											
 										</div>
@@ -272,20 +284,30 @@
 											</div> 
 											<div class="form-group">
 												<label>Contact Number</label>
-												<input class="form-control" type="text" name="PhoneNumber" Placeholder="Enter your contact number" minlength="10" maxlength="10" id="PhoneNumberss2">
+												<input class="form-control" type="text" name="PhoneNumber" Placeholder="Enter your contact number" minlength="10" maxlength="10" id="PhoneNumber">
 											</div>
 											<div class="form-group">
 												<label>Gender</label>
-												<select class="select"> 
+												<select class="select" name="Gender" id="Gender"> 
 													<option value="Male">Male</option>
 													<option value="Female">Female</option>
 												</select>
 											</div>
 											<div class="form-group">
-												<label>Pin-Code</label>
-												<input class="form-control" type="text" name="PinCode" Placeholder="Enter your pin-code" id="PinCode2" minlength="6" maxlength="6">
+												<label>Pincode Number</label>
+												<input class="form-control" type="text" name="PinCode" Placeholder="Enter your pincode number" minlength="06" maxlength="06" id="PinCode">
 											</div>
 											
+											<div class="form-group">
+											<label class="col-form-label">IsActive<span class="text-danger">*</span></label><br>
+											<label class="radio-inline">
+												<input type="radio" name="IsActive"  value="1">Active
+											</label>
+											<label class="radio-inline">
+												<input type="radio" name="IsActive"  value="0">Inactive
+											</label>
+											
+									</div>
 										</div>
 									</div>
 									<div class="submit-section">
@@ -299,7 +321,7 @@
 				<!-- /Edit Salary Modal -->
 				
 				<!-- Delete Salary Modal -->
-				<!-- <div class="modal custom-modal fade" id="delete_admin" role="dialog">
+				<div class="modal custom-modal fade" id="delete_admin" role="dialog">
 					<div class="modal-dialog modal-dialog-centered">
 						<div class="modal-content">
 							<div class="modal-body">
@@ -307,11 +329,11 @@
 									<h3>Delete Admin</h3>
 									<p>Are you sure want to delete?</p>
 								</div>
-								
 								<div class="modal-btn delete-action">
 									<div class="row">
 										<div class="col-6">
-											<a href="javascript:void(0);" id="yes_btn" ><a href="" id="deleteYes" value="Yes" class="btn btn-primary continue-btn">Delete</a>
+											<button type="button" class="btn btn-primary continue-btn" id="yes_btn" ><a href="" id="deleteYes" value="Yes">Delete</a></button>
+
 										</div>
 										<div class="col-6">
 											<a href="javascript:void(0);" data-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
@@ -321,24 +343,11 @@
 							</div>
 						</div>
 					</div>
-				</div> -->
+				</div>
 				<!-- /Delete Salary Modal -->
 
 				
-			<div class="modal fade bs-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-				<div class="modal-dialog modal-sm" role="document" style="margin:20% auto;">
-					<div class="modal-content">
-						<div class="modal-body" >
-							<p>Are you sure you want to delete this record?</p>
-						</div>
-						<div class="modal-footer text-center">
-							<!--<button type="button" class="next_btn" id="yes_btn" name="update">Yes</button>-->
-							<center><button type="button" class="btn-md btn-icon btn-link p4" id="yes_btn" ><a href="" id="deleteYes" value="Yes"  class="btn btn-success">Yes</a></button>
-							<button type="button" class="btn btn-danger" data-dismiss="modal">No</button></center>
-						</div>
-					</div>
-				</div>
-			</div>
+		
 
 				
             </div>
@@ -423,6 +432,7 @@ $(document).ready(function() {
     } );
 } );
 
+jQuery('#Gender').html(value);
 $(function() { 
     setTimeout(function() {
   $('#errorMessage').fadeOut('fast');
@@ -463,7 +473,7 @@ $(document).ready(function()
     //     ]
     // } );
 	
-			$("#PhoneNumberss2").on("input", function(evt) {
+			$("#PhoneNumbers").on("input", function(evt) {
 			var self = $(this);
 			self.val(self.val().replace(/[^\d].+/, ""));
 			if ((evt.which < 48 || evt.which > 57)) 
@@ -472,7 +482,16 @@ $(document).ready(function()
 			}
 			});
 
-			$("#PhoneNumberss").on("input", function(evt) {
+			$("#PhoneNumber").on("input", function(evt) {
+			var self = $(this);
+			self.val(self.val().replace(/[^\d].+/, ""));
+			if ((evt.which < 48 || evt.which > 57)) 
+			{
+				evt.preventDefault();
+			}
+			});
+
+			$("#PinCodeadd").on("input", function(evt) {
 			var self = $(this);
 			self.val(self.val().replace(/[^\d].+/, ""));
 			if ((evt.which < 48 || evt.which > 57)) 
@@ -482,15 +501,6 @@ $(document).ready(function()
 			});
 
 			$("#PinCode").on("input", function(evt) {
-			var self = $(this);
-			self.val(self.val().replace(/[^\d].+/, ""));
-			if ((evt.which < 48 || evt.which > 57)) 
-			{
-				evt.preventDefault();
-			}
-			});
-
-			$("#PinCode2").on("input", function(evt) {
 			var self = $(this);
 			self.val(self.val().replace(/[^\d].+/, ""));
 			if ((evt.which < 48 || evt.which > 57)) 
@@ -527,7 +537,6 @@ $(document).ready(function()
 								},
 						PinCode: {
 							required: true,
-							pattern: /^[0-9]+$/,
 								},
 						PhoneNumber: {
 							required: true,
@@ -585,72 +594,71 @@ $(document).ready(function()
 		{
 					rules: {
 
-						'FirstName': {
+						FirstName: {
 							required: true,
 								},
-						'LastName': {
+						LastName: {
 							required: true,
 								},
-						'EmailAddress': {
+						EmailAddress: {
 							required: true,
 								},		
-						'DateofBirth': {
+						DateofBirth: {
 							required: true,
 								},
-						'Gender': {
+						Gender: {
 							required: true,
 								},
-						'Address': {
+						Address: {
 							required: true,
 								},
-						'PinCode': {
-							required: true,
-							//pattern: /^[0-9]+$/,
-								},
-						'PhoneNumber': {
+						PhoneNumber: {
 							required: true,
 							digits: true,
 								},
-						'City': {
+						PinCode: {
+							required: true,
+							digits: true,
+								},
+						City: {
 							required: true,
 								},
 					},
 
 				messages:{
 
-						'FirstName': {
+						FirstName: {
 							required: "Please enter a first name",
 								pattern : "Enter only characters and numbers and \"space , \" -",
 								minlength: "Please enter at least 2 and maximum 50 letters!",
 								},
-						'LastName': {
+						LastName: {
 							required: "Please enter a last name",
 								pattern : "Enter only characters and numbers and \"space , \" -",
 								minlength: "Please enter at least 2 and maximum 50 letters!",
 								},
-						'EmailAddress': {
+						EmailAddress: {
 							required: "Please enter a email address",
 								},
-						'DateofBirth': {
+						DateofBirth: {
 							required: "Please enter a date of birth",
 								},
-						'Gender': {
+						Gender: {
 							required: "Please enter a gender",
 								},
 						'Address': {
 							required: "Please enter a address",
 							minlength: "Please enter at least 5 and maximum 500 letters!",
 								},	
-						'PinCode': {
-							required: "Please enter a your area pincode number",
-							pattern : "Enter only numbers",
-							minlength: "Please enter at least 6 and maximum 6 numbers!",
-								},
-						'PhoneNumber': {
+						PhoneNumber: {
 							required: "Please enter a contact number",
 							minlength: "Please enter at least 10 and maximum 13 numbers!",
 								},
-						'City': {
+						PinCode: {
+							required: "Please enter a your area pincode number",
+							minlength: "Please enter at least 6 and maximum 6 numbers!",
+								},
+						City: {
 							required: "Please enter a city",
 							minlength: "Please enter at least 3 and maximum 50 numbers!",
 								},	
@@ -674,25 +682,29 @@ function editadmin(AdminId)
          success:function(response){
 			var response = JSON.parse(response);
             //    console.log(response.UserId);
-			//    console.log(response.DateofBirth);
+			    console.log(response.Gender);
             $('#UserId').val(response.UserId);
 			$('#FirstName').val(response.FirstName);
 			$('#LastName').val(response.LastName);
 			$('#EmailAddress').val(response.EmailAddress);
 			$('#DateofBirth').val(response.DateofBirth);
 			$('#PhoneNumber').val(response.PhoneNumber);
+			//$("#Gender option[id='Female']").attr("selected", "selected");
+			//$("input[id=Gender][value=" + response.Gender + "]").attr('selected');
 			$('#Gender').val(response.Gender);
+			//$("option[name=Gender][value=" + response.Gender + "]").attr('selected', 'selected');
 			$('#Address').val(response.Address);
 			$('#PinCode').val(response.PinCode);
 			$('#City').val(response.City);
-			$('#IsActive').val(response.IsActive);
+			$("input[name=IsActive][value=" + response.IsActive + "]").attr('checked', 'checked');
+			//$('#IsActive').val(response.IsActive);
          }
       });	
 }
 
 
 function deletedata(UserId){  
-    $('#myModal').modal('show')
+    $('#delete_admin').modal('show')
         $('#yes_btn').click(function(){
            
                 Url="<?php echo base_url();?>"

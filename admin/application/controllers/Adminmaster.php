@@ -25,15 +25,6 @@ class Adminmaster extends CI_Controller
 	}
 
 
-	// function search_keyword()
-    // {
-	// 	$option=$this->input->post('option');
-	// 	$keyword=$this->input->post('keyword2');
-	
-	// 	$data['adminmasterData'] = $this->Adminmaster_model->search($option,$keyword);
-	// 	echo "<pre>";print_r($data['adminmasterData']);die;
-    //     $this->load->view('dashboard/adminlist',$data);
-    // }
 
 
 	public function addadmin()
@@ -97,7 +88,7 @@ class Adminmaster extends CI_Controller
 	{
 		$data=array();
 		$result=$this->Adminmaster_model->getdata($this->input->post('id'));	
-	//	echo "<br>";print_r($result);die;
+		//echo "<br>";print_r($result);die;
 		$data['UserId']=$result['UserId'];
 		$data['FirstName']=$result['FirstName'];	
 		$data['LastName']=$result['LastName'];	
@@ -179,7 +170,6 @@ class Adminmaster extends CI_Controller
 				{   
 					 $this->session->set_flashdata('success', 'Your password has been Updated Succesfully!');
 					 redirect('Adminmaster/change_password/'.$UserId);
-					 //redirect('Login/logout');
 				}
 				else
 				{ 
@@ -187,12 +177,6 @@ class Adminmaster extends CI_Controller
 					if($result==2)
 					{
 						$UserId=$data['UserId']; 
-						// $session= array(
-						// 	'FirstName'=> $data['FirstName'],
-						// 	'LastName'=> $data['LastName'],
-						// );
-						// $this->session->set_userdata($session); 
-						//$UserId =$data['UserId']; 
 						$this->session->set_flashdata('error','Your old password was not match please try again!');  
 						redirect('Adminmaster/change_password/'.$UserId);
 					}
