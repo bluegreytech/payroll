@@ -156,7 +156,7 @@ class Hr_model extends CI_Model
 			return $query->row_array();
 	}
 
-	function updateadmin()
+	function updatehr()
 	{	
 		     
 		$UserId=$this->input->post('UserId');

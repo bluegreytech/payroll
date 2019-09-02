@@ -632,3 +632,23 @@ ERROR - 2019-09-02 11:39:02 --> Severity: Notice --> Undefined property: stdClas
 ERROR - 2019-09-02 11:39:02 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\hr\hrlist.php 113
 ERROR - 2019-09-02 11:39:04 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\hr\hrlist.php 113
 ERROR - 2019-09-02 11:39:06 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\hr\hrlist.php 113
+ERROR - 2019-09-02 11:41:55 --> 404 Page Not Found: Hr/editadminmaster
+ERROR - 2019-09-02 11:43:36 --> 404 Page Not Found: Hr/editadminmaster
+ERROR - 2019-09-02 11:45:29 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\hr\hrlist.php 113
+ERROR - 2019-09-02 11:47:18 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\hr\hrlist.php 113
+ERROR - 2019-09-02 11:47:30 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\hr\hrlist.php 113
+ERROR - 2019-09-02 11:48:16 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\hr\hrlist.php 113
+ERROR - 2019-09-02 11:48:31 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\hr\hrlist.php 113
+ERROR - 2019-09-02 11:48:56 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\hr\hrlist.php 113
+ERROR - 2019-09-02 11:49:39 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\hr\hrlist.php 113
+ERROR - 2019-09-02 11:50:23 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\hr\hrlist.php 113
+ERROR - 2019-09-02 11:51:12 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\hr\hrlist.php 113
+ERROR - 2019-09-02 11:51:19 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 105
+ERROR - 2019-09-02 11:51:19 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 113
+ERROR - 2019-09-02 11:53:14 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\hr\hrlist.php 113
+ERROR - 2019-09-02 11:54:58 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\hr\hrlist.php 113
+ERROR - 2019-09-02 11:55:06 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\hr\hrlist.php 113
+ERROR - 2019-09-02 11:55:16 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\hr\hrlist.php 113
+ERROR - 2019-09-02 11:55:26 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\hr\hrlist.php 113
+ERROR - 2019-09-02 11:55:53 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\hr\hrlist.php 113
+ERROR - 2019-09-02 11:56:02 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\hr\hrlist.php 113

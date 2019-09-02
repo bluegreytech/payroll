@@ -127,7 +127,7 @@
 												<div class="dropdown dropdown-action">
 													<a href="" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
 													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item" onClick="editadmin(<?php echo $hr->UserId;?>)" data-toggle="modal" data-target="#edit_salary" role="button">
+														<a class="dropdown-item" onClick="edithrs(<?php echo $hr->UserId;?>)" data-toggle="modal" data-target="#edit_salary" role="button">
 														<i class="fa fa-pencil m-r-5"></i> Edit</a>
 														<a class="dropdown-item" onclick="deletedata(<?php echo $hr->UserId; ?>)"  data-toggle="modal" data-target="#delete_admin"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
 													</div>
@@ -231,7 +231,7 @@
 											</div>
 											<div class="form-group">
 												<label>Pin-Code</label>
-												<input class="form-control" type="text" name="PinCode" id="PinCode" Placeholder="Enter your pin-code"  minlength="6" maxlength="6">
+												<input class="form-control" type="text" name="PinCode" id="PinCodes" Placeholder="Enter your pin-code"  minlength="6" maxlength="6">
 											</div>
 											
 											<div class="form-group">
@@ -271,7 +271,7 @@
 					<div class="modal-dialog modal-dialog-centered modal-md" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
-								<h5 class="modal-title">Edit Master Admin</h5>
+								<h5 class="modal-title">Edit Hr</h5>
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									<span aria-hidden="true">&times;</span>
 								</button>
@@ -316,7 +316,7 @@
 											</div>
 											<div class="form-group">
 												<label>Gender</label>
-												<select class="select"> 
+												<select class="select" name="Gender"> 
 													<option value="Male" id="Male">Male</option>
 													<option value="Female" id="Female">Female</option>
 												</select>
@@ -325,7 +325,15 @@
 												<label>Pincode Number</label>
 												<input class="form-control" type="text" name="PinCode" Placeholder="Enter your pincode number" minlength="06" maxlength="06" id="PinCode">
 											</div>
-											
+											<div class="form-group">
+											<label class="col-form-label">IsActive<span class="text-danger">*</span></label><br>
+											<label class="radio-inline">
+												<input type="radio" name="IsActive"  value="1">Active
+											</label>
+											<label class="radio-inline">
+												<input type="radio" name="IsActive"  value="0">Inactive
+											</label>
+											</div>
 										</div>
 									</div>
 									<div class="submit-section">
@@ -521,7 +529,7 @@ $(document).ready(function()
 			}
 			});
 
-			$("#PinCodessss").on("input", function(evt) {
+			$("#PinCode").on("input", function(evt) {
 			var self = $(this);
 			self.val(self.val().replace(/[^\d].+/, ""));
 			if ((evt.which < 48 || evt.which > 57)) 
@@ -530,7 +538,7 @@ $(document).ready(function()
 			}
 			});
 
-			$("#PinCode").on("input", function(evt) {
+			$("#PinCodes").on("input", function(evt) {
 			var self = $(this);
 			self.val(self.val().replace(/[^\d].+/, ""));
 			if ((evt.which < 48 || evt.which > 57)) 
@@ -707,14 +715,14 @@ $(document).ready(function()
 
 <SCRIPT>
 
-function editadmin(AdminId)
+function edithrs(UserId)
 {
 	Url="<?php echo base_url() ?>";
 //	alert(AdminId);
 	$.ajax({
-         url: Url+'hr/editadminmaster',
+         url: Url+'hr/edithr',
          type: 'post',
-		 data:{id:AdminId},
+		 data:{id:UserId},
          success:function(response){
 			var response = JSON.parse(response);
             //    console.log(response.UserId);
@@ -729,7 +737,7 @@ function editadmin(AdminId)
 			$('#Address').val(response.Address);
 			$('#PinCode').val(response.PinCode);
 			$('#City').val(response.City);
-			$('#IsActive').val(response.IsActive);
+			$("input[name=IsActive][value=" + response.IsActive + "]").attr('checked', 'checked');
          }
       });	
 }
