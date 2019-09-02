@@ -87,8 +87,9 @@ class Hr extends CI_Controller
 	function edithr()
 	{
 		$data=array();
-		$result=$this->Hr_model->getdata($this->input->post('id'));	
-		echo "<br>";print_r($result);die;
+		$data['companyData']=$this->Hr_model->list_company();
+		$result=$this->Hr_model->getdata($this->input->post('UserId'));	
+		//echo "<br>";print_r($result);die;
 		$data['UserId']=$result['UserId'];
 		$data['FirstName']=$result['FirstName'];	
 		$data['LastName']=$result['LastName'];	
@@ -100,28 +101,14 @@ class Hr extends CI_Controller
 		$data['PinCode']=$result['PinCode'];
 		$data['City']=$result['City'];
 		$data['IsActive']=$result['IsActive'];
-		//echo json_encode($data);
+		$data['hrid']=$result['hrid'];
+		$data['companyid']=$result['companyid'];
+		$data['companyname']=$result['companyname'];
+		echo json_encode($data);
 	}
 
 
-	public function admin_master_profile($UserId)
-	{
-		$data=array();
-		$result=$this->Hr_model->getdata($UserId);
-		//echo "<pre>";print_r($result);die;
-		$data['UserId']=$result['UserId'];
-		$data['FirstName']=$result['FirstName'];
-		$data['LastName']=$result['LastName'];	
-		$data['EmailAddress']=$result['EmailAddress'];
-		$data['DateofBirth']= $result['DateofBirth'];	
-		$data['PhoneNumber']= $result['PhoneNumber'];	 
-		$data['Address']= $result['Address'];
-		$data['PinCode']= $result['PinCode'];	 
-		$data['Gender']= $result['Gender'];
-		$data['ProfileImage']= $result['ProfileImage'];
-		$this->load->view('dashboard/profile',$data);
-	}
-	
+
 	public function admin_master_profile_update()     
 	{      	
 				$data=array();
@@ -140,14 +127,8 @@ class Hr extends CI_Controller
 						$result=$this->Hr_model->updatedata();
 						if($result)
 						{   
-							$UserId =$data['UserId']; 
-							$session= array(
-								'FirstName'=> $data['FirstName'],
-								'LastName'=> $data['LastName'],
-							);
-							$this->session->set_userdata($session); 
 							$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
-							redirect('Adminmaster/admin_master_profile/'.$UserId);
+							redirect('Hr');
 						}
 					}
 				
@@ -157,36 +138,7 @@ class Hr extends CI_Controller
 	}
 
 
-	public function change_password($UserId)
-	{	
-		$data=array();
-		$data['UserId']=$this->input->post('UserId');
-		if($_POST){
-			$UserId=$this->input->post('UserId');
-			if($this->input->post('UserId')!='')
-			{
-				$result=$this->Hr_model->changepass($UserId);
-				if($result==1)
-				{   
-					 $this->session->set_flashdata('success', 'Your password has been Updated Succesfully!');
-					 redirect('Adminmaster/change_password/'.$UserId);
-				}
-				else
-				{ 
-					$result=$this->Hr_model->changepass($UserId);
-					if($result==2)
-					{
-						$UserId=$data['UserId']; 
-						$this->session->set_flashdata('error','Your old password was not match please try again!');  
-						redirect('Adminmaster/change_password/'.$UserId);
-					}
-				}
-			}
-		
-		}
-			$this->load->view('common/changepassword');
-	}
-
+	
 	
 
 }

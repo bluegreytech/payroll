@@ -27,8 +27,8 @@
 							<div class="dash-widget clearfix card-box">
 								<span class="dash-widget-icon"><i class="fa fa-cubes"></i></span>
 								<div class="dash-widget-info">
-									<h3>112</h3>
-									<span>Projects</span>
+									<h3><?php echo $companyData;?></h3>
+									<span>Companies</span>
 								</div>
 							</div>
 						</div>
@@ -36,8 +36,8 @@
 							<div class="dash-widget clearfix card-box">
 								<span class="dash-widget-icon"><i class="fa fa-usd"></i></span>
 								<div class="dash-widget-info">
-									<h3>44</h3>
-									<span>Clients</span>
+									<h3><?php echo $hrData;?></h3>
+									<span>HR</span>
 								</div>
 							</div>
 						</div>

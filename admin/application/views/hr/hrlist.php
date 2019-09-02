@@ -237,13 +237,13 @@
 											<div class="form-group">
 													<label>Company</label>
 													<select class="select" name="companyid"> 
-														<option desabled value="">Please select state</option>
+														<option desabled value="">Please select company</option>
 														<?php
 														 if($companyData){
 															foreach($companyData as $comp)
 															{
 														?>
-															<!-- <option value="<?php //echo $state->stateid; ?>" <?php// if($stateid==$state->stateid){echo "selected" ;}?>><?php// echo $state->statename;?></option> -->
+															
 
 															<option value="<?php echo $comp->companyid; ?>">
 															<?php echo $comp->companyname;?></option>
@@ -325,15 +325,18 @@
 												<label>Pincode Number</label>
 												<input class="form-control" type="text" name="PinCode" Placeholder="Enter your pincode number" minlength="06" maxlength="06" id="PinCode">
 											</div>
+
 											<div class="form-group">
-											<label class="col-form-label">IsActive<span class="text-danger">*</span></label><br>
-											<label class="radio-inline">
-												<input type="radio" name="IsActive"  value="1">Active
-											</label>
-											<label class="radio-inline">
-												<input type="radio" name="IsActive"  value="0">Inactive
-											</label>
+												<label class="col-form-label">IsActive<span class="text-danger">*</span></label><br>
+												<label class="radio-inline">
+													<input type="radio" name="IsActive"  value="1">Active
+												</label>
+												<label class="radio-inline">
+													<input type="radio" name="IsActive"  value="0">Inactive
+												</label>
 											</div>
+
+											
 										</div>
 									</div>
 									<div class="submit-section">
@@ -722,7 +725,7 @@ function edithrs(UserId)
 	$.ajax({
          url: Url+'hr/edithr',
          type: 'post',
-		 data:{id:UserId},
+		 data:{UserId:UserId},
          success:function(response){
 			var response = JSON.parse(response);
             //    console.log(response.UserId);
@@ -738,6 +741,8 @@ function edithrs(UserId)
 			$('#PinCode').val(response.PinCode);
 			$('#City').val(response.City);
 			$("input[name=IsActive][value=" + response.IsActive + "]").attr('checked', 'checked');
+			// $('#companyid').val(response.companyid);
+			// $('#companyname').val(response.companyname);
          }
       });	
 }

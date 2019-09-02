@@ -147,23 +147,22 @@ class Hr_model extends CI_Model
 			 }        
 		}
 
-
-	function getdata($id){
-		$query=$this->db->select('*')
-			->from('tbluser')
-			//->join('tblhr as t2', 't1.UserId = t2.UserId', 'LEFT')
-			//->join('tblcompany as t3', 't2.companyid = t3.companyid', 'LEFT')
-			->where('UserId',$id)
-			->get();
+		
+		function list_company(){
+			$this->db->select('*');
+			$this->db->from('tblcompany');
+			$query = $this->db->get();
 			return $query->row_array();
+	}
 
-			// $this->db->select('t1.*,t2.*,t3.*');
-			// $this->db->from('tbluser as t1');
-			// $this->db->join('tblhr as t2', 't1.UserId = t2.UserId', 'LEFT');
-			// $this->db->join('tblcompany as t3', 't2.companyid = t3.companyid', 'LEFT');
-			// $this->db->where('t1.UserId',$id);
-			// $query = $this->db->get();	
-			//return $query->row_array();
+	function getdata($UserId){
+			$this->db->select('t1.*,t2.*,t3.*');
+			$this->db->from('tbluser as t1');
+			$this->db->join('tblhr as t2', 't1.UserId = t2.UserId', 'LEFT');
+			$this->db->join('tblcompany as t3', 't2.companyid = t2.companyid', 'LEFT');
+			$this->db->where('t1.UserId',32);
+			$query = $this->db->get();
+			return $query->row_array();
 	}
 
 	function updatehr()
@@ -181,7 +180,8 @@ class Hr_model extends CI_Model
 			'Gender'=>$this->input->post('Gender'),
 			'Address'=>$this->input->post('Address'),
 			'PinCode'=>$this->input->post('PinCode'),
-			'City'=>$this->input->post('City')
+			'City'=>$this->input->post('City'),
+			'IsActive'=>$this->input->post('IsActive')
 				);
 			// print_r($data);die;
 			$this->db->where("UserId",$UserId);

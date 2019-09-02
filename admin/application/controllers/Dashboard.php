@@ -6,16 +6,15 @@ class Dashboard extends CI_Controller {
 	public function __construct()
 	{
       	parent::__construct();
-		//$this->load->model('Login_model');
-      
+		$this->load->model('Dashboard_model');
     }
 	function index()
     {
-		$this->load->view('dashboard/dashboard');
-			
+		$data['hrData']=$this->Dashboard_model->list_hr();
+		$data['companyData']=$this->Dashboard_model->list_company();
+		//echo "<pre>";print_r($data['companyData']);die;
+		$this->load->view('dashboard/dashboard',$data);		
     }
 	
-	
-
 	
 }
