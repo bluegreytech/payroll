@@ -60,13 +60,13 @@
 							<!-- Account Form -->
 							<form method="post" action="<?php echo base_url();?>Login/resetpassword/<?php echo $ResetPasswordCode;?>" id="form_valid">
 							<div class="form-group">
-									<label>Old password</label>
+									<label>New password</label>
 									<input type="hidden" name="ResetPasswordCode" value="<?php echo $ResetPasswordCode ?>">
 									<input type="hidden" name="UserId" value="<?php echo $UserId ?>">	
-									<input type="text" class="form-control" name="Password"  id="Password"  minlength="8" maxlength="15" placeholder="Enter new password">
+									<input type="password" class="form-control" name="Password"  id="Password"  minlength="8" maxlength="15" placeholder="Enter new password">
 								</div>
 								<div class="form-group">
-									<label>New password</label>
+									<label>Retype password</label>
 									<input type="password" class="form-control" name="ConfirmPassword" minlength="8" maxlength="15" placeholder="Enter confirm new password">
 								</div>
 							
