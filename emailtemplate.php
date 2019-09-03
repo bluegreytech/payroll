@@ -58,7 +58,7 @@ Main
 
 ====================
 
-add admin register
+
 
 <!DOCTYPE html>
    <html>
@@ -75,23 +75,31 @@ add admin register
             </tr>
            
         </table>
-
-      
         <table cellspacing="0" style="border: 2px; width: 500px; height: 400px;background: #eee;">
             <tr>
-               <td><center><p>You forgot password to Payroll System!</p></center></td>
+               <td><center><p>You are registered complete to Payroll System!</p></center></td>
             </tr>
             <tr>
                 <td>Hello {username},</td>
             </tr>
             <tr>
-               <td><p>We were told that you forgot your password on {EmailAddress}.</p>
-                
-                <p>To reset your password,please click this link: <a>{reset_link}</a></p>
-                
+                <td>Email address: {EmailAddress}</td>       
+            </tr>
+            <tr>
+                <td>Your password: {Password}</td>  
+            </tr>
+            <tr>
+                <td>Your regitered for this company {companyname}</td>  
+            </tr>	
+            <tr>
+                <td>Your company  email contact {comemailaddress}</td>  
+            </tr>
+            <tr>
+               <td>
+                    <p>Login with this Email address and Password.</p>
+                    <p>To login with this link,please click this link: {login_link}</p>   
                </td>
             </tr>
-           
             <tr>
                <td><p>Regard</p>
                <p>Payroll System Team,</p></td>
@@ -105,6 +113,7 @@ add admin register
     </body>
 </html>
 
+=============================
 
 
 <!DOCTYPE html>
@@ -122,19 +131,18 @@ add admin register
             </tr>
            
         </table>
-
-      
         <table cellspacing="0" style="border: 2px; width: 500px; height: 400px;background: #eee;">
             <tr>
-               <td><center><p>Your password change success to Payroll System!</p></center></td>
+               <td><center><p>Payroll System notify to your company licence will be expire!</p></center></td>
             </tr>
             <tr>
-                <td>Hello {username},</td>
+                <td>Hello {companyname},</td>
             </tr>
             <tr>
-               <td>Email Address: {EmailAddress}</td>
-            </tr>
-           
+                <td>Your company licence expire within 15 days<br>
+                <p>Your company licence expired date is: {digitalsignaturedate}</p>
+                </td>  
+            </tr>	
             <tr>
                <td><p>Regard</p>
                <p>Payroll System Team,</p></td>
@@ -147,6 +155,3 @@ add admin register
         </table>
     </body>
 </html>
-
-
-

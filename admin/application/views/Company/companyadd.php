@@ -169,14 +169,14 @@
 											</div>
 										</div>
 										<?php
-										if($isactive==1)
+										if($companyid=='')
 										{ 
 											?>
 												<div class="col-md-6">
 													<div class="form-group">
 													<label class="col-form-label">Isactive<span class="text-danger">*</span></label><br>
 													<label class="radio-inline">
-														<input type="radio" name="isactive" checked value="1">Active
+														<input type="radio" name="isactive"  checked value="1">Active
 													</label>
 													<label class="radio-inline">
 														<input type="radio" name="isactive" value="0">Deactive
@@ -187,15 +187,19 @@
 										}
 										else
 										{
+											
 												?>
 													<div class="col-md-6">
 														<div class="form-group">
 														<label class="col-form-label">Isactive<span class="text-danger">*</span></label><br>
 														<label class="radio-inline">
-															<input type="radio" name="isactive"  value="1">Active
+															<input type="radio" name="isactive" <?php if($isactive==1){echo "checked";}?> 
+																 value="1">Active
+															
 														</label>
 														<label class="radio-inline">
-															<input type="radio" name="isactive" checked value="0">Deactive
+															<input type="radio" name="isactive" <?php if($isactive==0){echo "checked";}?>value="0">Deactive
+															
 														</label>
 														</div>
 													</div>
@@ -299,12 +303,14 @@
     </body>
 </html>
 
+		<script type="text/javascript">
+ 				$('#datepicker1').datepicker();
+				 dateFormat: 'dd/mm/yy'   		
+		</script>
+
 <script>
 			
-		$('#datepicker1').datepicker();
-			dateFormat: 'dd/mm/yy'   		
 		
-
 		$(function() { 
 			setTimeout(function() {
 		$('#errorMessage').fadeOut('fast');

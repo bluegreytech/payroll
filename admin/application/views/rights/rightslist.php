@@ -26,10 +26,10 @@
 					<!-- Page Title -->
 					<div class="row">
 						<div class="col-sm-4 col-5">
-							<h4 class="page-title">List of Master Admin</h4>
+							<h4 class="page-title">List of Master Access</h4>
 						</div>
 						<div class="col-sm-8 col-7 text-right m-b-30">
-							<a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_salary"><i class="fa fa-plus"></i> Add Admin
+							<a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_salary"><i class="fa fa-plus"></i> Add Access Menu
 							</a>
 						</div>
 					
@@ -72,10 +72,14 @@
 									<thead>
 										<tr>
 											<th>No</th>
-											<th>User Name</th>
-											<th>Email Address</th>
-											<th>Contact Number</th>
-											<th>Gender</th>
+											<th>User Id</th>
+											<th>Right Name</th>
+											<th>Right Key</th>
+											<th>Add</th>
+											<th>View</th>
+											<th>Update</th>
+											<th>Delete</th>
+											<th>Status</th>
 											<?php
 											if($this->session->userdata('RoleId')==1){
 											?>	
@@ -88,38 +92,20 @@
 									<tbody>
 									<?php
 										$i=1;
-										if($adminmasterData){                             
-										foreach($adminmasterData as $adminlist)
+										if($rightsData){                             
+										foreach($rightsData as $ritdata)
 										{
 									?>
 										<tr>
 										<td><?php echo $i;?></td>
-											<td>
-												<h2 class="table-avatar">
-												<?php 
-												if($adminlist->ProfileImage!='')
-												{
-													?>
-													<a href="" class="avatar"><img src="<?php echo base_url();?>uploads/UserProfile/<?php echo $adminlist->ProfileImage;?>" alt=""></a>
-													<a href="profile.html"><?php echo $adminlist->FirstName;?> 
-													<!-- <?php echo $adminlist->LastName ;?> <span>Android Developer</span></a> -->
-													<?php
-												}
-												else
-												{
-													?>
-													<a href="" class="avatar"><img src="<?php echo base_url();?>uploads/default/avtar.jpg" alt=""></a>
-													<a href="profile.html"><?php echo $adminlist->FirstName;?> 
-													<!-- <?php echo $adminlist->LastName ;?> <span>Android Developer</span></a> -->
-													<?php
-												}
-												?>
-												</h2>
-												
-											</td>
-											<td><?php echo $adminlist->EmailAddress ;?></td>
-											<td><?php echo $adminlist->PhoneNumber ;?></td>
-											<td><?php echo $adminlist->Gender ;?></td>
+											<td><?php echo $ritdata->UserId ;?></td>
+											<td><?php echo $ritdata->rightname ;?></td>
+											<td><?php echo $ritdata->rightkey ;?></td>
+											<td><?php echo $ritdata->add ;?></td>
+											<td><?php echo $ritdata->view ;?></td>
+											<td><?php echo $ritdata->update ;?></td>
+											<td><?php echo $ritdata->delete ;?></td>
+											<td><?php echo $ritdata->isactive ;?></td>
 											<?php
 											if($this->session->userdata('RoleId')==1){
 											?>	
@@ -127,9 +113,9 @@
 												<div class="dropdown dropdown-action">
 													<a href="" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
 													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item" onClick="editadmin(<?php echo $adminlist->UserId;?>)" data-toggle="modal" data-target="#edit_salary" role="button">
+														<a class="dropdown-item" onClick="editadmin(<?php echo $ritdata->UserId;?>)" data-toggle="modal" data-target="#edit_salary" role="button">
 														<i class="fa fa-pencil m-r-5"></i> Edit</a>
-														<a class="dropdown-item" onclick="deletedata(<?php echo $adminlist->UserId; ?>)"  data-toggle="modal" data-target="#delete_admin"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+														<a class="dropdown-item" onclick="deletedata(<?php echo $ritdata->UserId; ?>)"  data-toggle="modal" data-target="#delete_admin"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
 													</div>
 												</div>
 											</td>
@@ -154,7 +140,7 @@
 					<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
-								<h5 class="modal-title">Add Admin</h5>
+								<h5 class="modal-title">Add Access Menu</h5>
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									<span aria-hidden="true">&times;</span>
 								</button>

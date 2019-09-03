@@ -177,7 +177,7 @@ class Login_model extends CI_Model
 							   // $email_to= $EmailAddress;
 					   
 								$base_url=base_url();
-								$forgot_link=$base_url."Login/resetpassword/".$ResetPasswordCode;
+								$forgot_link= '<a href="'.base_url('Login/resetpassword/'.$ResetPasswordCode).'">Click Here</a>';
 								$currentyear=date('Y');
 							
 								$email_message=str_replace('{break}','<br/>',$email_message);
@@ -185,7 +185,7 @@ class Login_model extends CI_Model
 								$email_message=str_replace('{year}',$currentyear,$email_message);
 								$email_message=str_replace('{username}',$username,$email_message);
 								$email_message=str_replace('{EmailAddress}',$EmailAddress,$email_message);
-								$email_message=str_replace('{reset_link}',$forgot_link,$email_message);
+								$email_message=str_replace('{forgot_link}',$forgot_link,$email_message);
 								$str=$email_message; //die;
 
 								$config['protocol']='smtp';

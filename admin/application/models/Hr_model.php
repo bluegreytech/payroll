@@ -58,8 +58,8 @@ class Hr_model extends CI_Model
 				$this->db->from('tbluser as t1');
 				$this->db->join('tblhr as t2', 't1.UserId = t2.UserId', 'LEFT');
 				$this->db->join('tblcompany as t3', 't2.companyid = t3.companyid', 'LEFT');
-				$this->db->where('t1.UserId',28);
-				$smtp2 = $this->db->get('tbluser');	
+				$this->db->where('t1.UserId',$insert_id);
+				$smtp2 = $this->db->get();	
 				foreach($smtp2->result() as $rows) {
 					$UserId = $rows->UserId;
 					$FirstName = $rows->FirstName;
@@ -68,81 +68,117 @@ class Hr_model extends CI_Model
 					$Password = $rows->Password;
 					$companyid = $rows->companyid;
 					$companyname = $rows->companyname;
-				//die;
 				}
 
-				$config['protocol']='smtp';
-				$config['smtp_host']='ssl://smtp.googlemail.com';
-				$config['smtp_port']='465';
-				$config['smtp_user']='bluegreyindia@gmail.com';
-				$config['smtp_pass']='Test@123';
-				$config['charset']='utf-8';
-				$config['newline']="\r\n";
-				$config['mailtype'] = 'html';								
-				$this->email->initialize($config);
-				$body ="Hello $FirstName $LastName, <br> Your email is : $EmailAddress<br> Your password is : $code 
-				<br>Login with this Email Address and Password.";	
-				//$body='reset_password.php?tokencode='.$rnd;
-				$this->email->from('bluegreyindia@gmail.com');
-				$this->email->to($EmailAddress);		
-				$this->email->subject('Payroll system to You are register complete');
-				$this->email->message($body);
-				if($this->email->send())
-				{
-					//return 1;
-					return 1;
-				}else
-				{
-					return 2;
-				}	
+
+					$email_template=$this->db->query("select * from ".$this->db->dbprefix('tblemail_template')." where task='Hr registration complete'");
+					$email_temp=$email_template->row();
+					$email_address_from=$email_temp->from_address;
+					$email_address_reply=$email_temp->reply_address;
+					$email_subject=$email_temp->subject;        
+					$email_message=$email_temp->message;
+					
+					$username =$rows->FirstName.' '.$LastName;
+					$EmailAddress = $rows->EmailAddress;
+					$companyname =$rows->companyname;
+					$comemailaddress = $rows->comemailaddress;
+		
+					$base_url=base_url();
+					$login_link=  '<a href="'.base_url('Login').'">Click Here</a>';
+					$currentyear=date('Y');
+					$email_message=str_replace('{break}','<br/>',$email_message);
+					$email_message=str_replace('{base_url}',$base_url,$email_message);
+					$email_message=str_replace('{year}',$currentyear,$email_message);
+					$email_message=str_replace('{username}',$username,$email_message);
+					$email_message=str_replace('{EmailAddress}',$EmailAddress,$email_message);
+					$email_message=str_replace('{Password}',$code,$email_message);
+					$email_message=str_replace('{companyname}',$companyname,$email_message);
+					$email_message=str_replace('{comemailaddress}',$comemailaddress,$email_message);
+					$email_message=str_replace('{login_link}',$login_link,$email_message);
+					$str=$email_message; //die;
+
+					$config['protocol']='smtp';
+					$config['smtp_host']='ssl://smtp.googlemail.com';
+					$config['smtp_port']='465';
+					$config['smtp_user']='bluegreyindia@gmail.com';
+					$config['smtp_pass']='Test@123';
+					$config['charset']='utf-8';
+					$config['newline']="\r\n";
+					$config['mailtype'] = 'html';								
+					$this->email->initialize($config);
+					$body =$str;
+					$this->email->from('bluegreyindia@gmail.com');
+					$this->email->to($EmailAddress);		
+					$this->email->subject('Hr registration complete To Payroll System');
+					$this->email->message($body);
+					if($this->email->send())
+					{
+						return 1;
+					}else
+					{
+						return 2;
+					}	
 			}
 			
 	}
 
 
-	function hr_list(){
-		$this->db->select('UserId,RoleId,CONCAT(FirstName ,LastName) AS FirstName,EmailAddress,DateofBirth,PhoneNumber,ProfileImage,Gender,Address,PinCode,CountryId,StateId,City,IsActive');
-		$this->db->from('tbluser');
+
+	// function hr_list()
+	// {
+	// 	$this->db->select('UserId,RoleId,CONCAT(FirstName ,LastName) AS FirstName,EmailAddress,DateofBirth,PhoneNumber,ProfileImage,Gender,Address,PinCode,CountryId,StateId,City,IsActive');
+	// 	$this->db->from('tbluser');
+	// 	$this->db->where('RoleId',3);
+	// 	$r=$this->db->get();
+	// 	$res = $r->result();
+	// 	return $res;
+
+	// }
+
+	function hr_list()
+	{
+		$this->db->select('t1.UserId,t1.RoleId,t1.FirstName,t1.LastName,t1.EmailAddress,t1.DateofBirth,t1.PhoneNumber,t1.Gender,t1.ProfileImage,t1.Address,t1.PinCode,t1.CountryId,t1.StateId,t1.City,t1.IsActive,t2.*,t3.*');
+		$this->db->from('tbluser as t1');
+		$this->db->join('tblhr as t2', 't1.UserId = t2.UserId', 'LEFT');
+		$this->db->join('tblcompany as t3', 't2.companyid = t3.companyid', 'LEFT');
 		$this->db->where('RoleId',3);
 		$r=$this->db->get();
 		$res = $r->result();
-		return $res;
-
+		return $res;	
 	}
-
-	
 
 	function search($option,$keyword)
 	{
 			$keyword = str_replace('-', ' ', $keyword);
-			$this->db->select('UserId,RoleId,CONCAT(FirstName ,LastName) AS FirstName,EmailAddress,DateofBirth,PhoneNumber,ProfileImage,Gender,Address,PinCode,CountryId,StateId,City,IsActive');
-			$this->db->from('tbluser');
-			$this->db->where('RoleId',3);
-			//$this->db->select('*');
-	
-				if($option == 'FirstName')
-				{
-				// echo $keyword; 
-					$this->db->like('FirstName',$keyword);
-				}
-				else if($option == 'EmailAddress')
-				{
-						$this->db->like('EmailAddress',$keyword);
-				}
-				else if($option == 'PhoneNumber')
-				{
-					$this->db->where('PhoneNumber',$keyword);
-				} 
-			   	$this->db->order_by('UserId','desc');
+			// $this->db->select('UserId,RoleId,CONCAT(FirstName ,LastName) AS FirstName,EmailAddress,DateofBirth,PhoneNumber,ProfileImage,Gender,Address,PinCode,CountryId,StateId,City,IsActive');
+			// $this->db->from('tbluser');
+			// $this->db->where('RoleId',3);
+			$this->db->select('t1.UserId,t1.RoleId,t1.FirstName,t1.LastName,t1.EmailAddress,t1.DateofBirth,t1.PhoneNumber,t1.Gender,t1.ProfileImage,t1.Address,t1.PinCode,t1.CountryId,t1.StateId,t1.City,t1.IsActive,t2.*,t3.*');
+			$this->db->from('tbluser as t1');
+			$this->db->join('tblhr as t2', 't1.UserId = t2.UserId', 'LEFT');
+			$this->db->join('tblcompany as t3', 't2.companyid = t3.companyid', 'LEFT');
+			$this->db->where('RoleId',3);	
+			if($option == 'FirstName')
+			{
+			// echo $keyword; 
+				$this->db->like('FirstName',$keyword);
+			}
+			else if($option == 'companyname')
+			{
+					$this->db->like('companynamelist_company',$keyword);
+			}
+			else if($option == 'EmailAddress')
+			{
+					$this->db->like('EmailAddress',$keyword);
+			}
+			else if($option == 'PhoneNumber')
+			{
+				$this->db->where('PhoneNumber',$keyword);
+			} 
+			// 	$this->db->order_by('UserId','desc');
 			    $query = $this->db->get();
 			 if($query->num_rows() > 0)
 			 {
-				//    if($type == "count"){
-				//  // echo "hello count";
-				// 	 return $query->num_rows();
-				//  }else{
-				// 	return $query->result();
-				//  } 
 				return $query->result();
 			 }        
 		}
