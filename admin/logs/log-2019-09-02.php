@@ -332,3 +332,13 @@ ERROR - 2019-09-02 14:19:51 --> 404 Page Not Found: Assets/img
 ERROR - 2019-09-02 14:19:51 --> 404 Page Not Found: Assets/img
 ERROR - 2019-09-02 14:19:51 --> 404 Page Not Found: Assets/img
 ERROR - 2019-09-02 14:19:51 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-02 14:24:25 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-02 14:24:25 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-02 14:24:25 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-02 14:24:25 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-02 14:27:06 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-02 14:27:06 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-02 14:27:06 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-02 14:27:06 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-02 14:27:08 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 105
+ERROR - 2019-09-02 14:27:08 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 113
