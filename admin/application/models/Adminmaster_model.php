@@ -196,63 +196,94 @@ class Adminmaster_model extends CI_Model
 
 	function updatedata()
 	{		
-		$UserId=$this->input->post('UserId');
-		
-		// if(isset($_FILES['ProfileImage']) &&  $_FILES['ProfileImage']['name']!='')
-		// {	
-		// 	// echo base_path();
-		// 	// print_r($_FILES['ProfileImage']);die;
-		//   $this->load->library('upload');
-		//   $rand=rand(0,100000); 
-  
-		//   $_FILES['userfile']['name']     =   $_FILES['ProfileImage']['name'];
-		//   $_FILES['userfile']['type']     =   $_FILES['ProfileImage']['type'];
-		//   $_FILES['userfile']['tmp_name'] =   $_FILES['ProfileImage']['tmp_name'];
-		//   $_FILES['userfile']['error']    =   $_FILES['ProfileImage']['error'];
-		//   $_FILES['userfile']['size']     =   $_FILES['ProfileImage']['size'];   
-		//   $config['file_name'] = $rand;      
-		//   $config['upload_path'] = base_path().'upload/UserProfile/';      
-		//   $config['allowed_types'] = 'jpg|jpeg|gif|png|bmp';
-		//   $this->upload->initialize($config);
-  
-		//   if (!$this->upload->do_upload())
-		//   {
-		//   $error =  $this->upload->display_errors();
-		// 	echo "<pre>"; print_r($error);die; 
-		//   }        
-  
-		//   echo $picture = $this->upload->data();       
-		//   $this->load->library('image_lib');       
-		//   $this->image_lib->clear();  
-		// }
-		// $ProfileImage=$this->input->post('ProfileImage');
-		// print_r($ProfileImage);die;
-		// $config['upload_path']=base_path().'uploads/UserProfile/';
-		// $config['allowed_types']='jpg|jpeg|png';
-		// $config['max_size']='10000000';
-		// $this->load->library('upload',$config);
-		// if($this->upload->do_upload('ProfileImage'))
-		// {
-		// 	$s=$this->upload->data();	
-		// 	$filename=$s['file_name'];
-		// }
-		// print_r($filename);die;
+		//echo "<pre>";print_r($_FILES);die;
+		 $user_image='';
+         //$image_settings=image_setting();
+		  if(isset($_FILES['ProfileImage']) &&  $_FILES['ProfileImage']['name']!='')
+         {
+             $this->load->library('upload');
+             $rand=rand(0,100000); 
+			  
+			$_FILES['userfile']['name']     =   $_FILES['ProfileImage']['name'];
+			$_FILES['userfile']['type']     =   $_FILES['ProfileImage']['type'];
+			$_FILES['userfile']['tmp_name'] =   $_FILES['ProfileImage']['tmp_name'];
+			$_FILES['userfile']['error']    =   $_FILES['ProfileImage']['error'];
+			$_FILES['userfile']['size']     =   $_FILES['ProfileImage']['size'];
+   
+			$config['file_name'] = $rand.'Admin';			
+			$config['upload_path'] = base_path().'upload/admin_orig/';		
+			$config['allowed_types'] = 'jpg|jpeg|gif|png|bmp';  
+ 
+             $this->upload->initialize($config);
+ 
+              if (!$this->upload->do_upload())
+			  {
+				$error =  $this->upload->display_errors();
+				echo "<pre>";print_r($error);die;
+			  } 
+           	  $picture = $this->upload->data();	   
+              $this->load->library('image_lib');		   
+              $this->image_lib->clear();
+			  $gd_var='gd2';
 
+              $this->image_lib->initialize(array(
+				'image_library' => $gd_var,
+				'source_image' => base_path().'upload/admin_orig/'.$picture['file_name'],
+				'new_image' => base_path().'upload/admin/'.$picture['file_name'],
+				'maintain_ratio' => FALSE,
+				'quality' => '100%',
+				'width' => 300,
+				'height' => 300
+			 ));
+			
+			
+			if(!$this->image_lib->resize())
+			{
+				$error = $this->image_lib->display_errors();
+			}
+			
+			$user_image=$picture['file_name'];
+		
+			
+		
+			if($this->input->post('pre_profile_image')!='')
+				{
+					if(file_exists(base_path().'upload/admin/'.$this->input->post('pre_profile_image')))
+					{
+						$link=base_path().'upload/admin/'.$this->input->post('pre_profile_image');
+						unlink($link);
+					}
+					
+					if(file_exists(base_path().'upload/admin_orig/'.$this->input->post('pre_profile_image')))
+					{
+						$link2=base_path().'upload/admin_orig/'.$this->input->post('pre_profile_image');
+						unlink($link2);
+					}
+				}
+			} else {
+				if($this->input->post('pre_profile_image')!='')
+				{
+					$user_image=$this->input->post('pre_profile_image');
+				}
+			}
+		//print_r($user_image);die;
+				//	echo $this->session->userdata('UserId');die;
 		$data=array(
-			'UserId'=>$this->input->post('UserId'),
+			
 			'FirstName'=>$this->input->post('FirstName'),
 			'LastName'=>$this->input->post('LastName'),
 			//'EmailAddress'=>$this->input->post('EmailAddress'),
 			'DateofBirth'=>$this->input->post('DateofBirth'),
 			'PhoneNumber'=>$this->input->post('PhoneNumber'),
 			'Gender'=>$this->input->post('Gender'),
-		//	'ProfileImage'=>$this->input->post('ProfileImage'),
+		    'ProfileImage'=>$user_image,
 			'Address'=>$this->input->post('Address')
 			//'PinCode'=>$this->input->post('PinCode')
 				);
-				//print_r($data);die;
-			$this->db->where("UserId",$UserId);
+			//echo "<pre>"; print_r($data);die;
+			$this->db->where("UserId",$this->session->userdata('UserId'));
 			$this->db->update('tbluser',$data);	
+			//echo $this->db->last_query();die;
 			return 1;	      
 	}
 
