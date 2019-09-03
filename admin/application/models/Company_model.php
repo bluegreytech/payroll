@@ -30,6 +30,16 @@ class Company_model extends CI_Model
 		return $res;
 
 	}
+
+	function list2_compliance($companyid){
+		$r=$this->db->select('*')
+					->from('tblcompliances')
+					->where('companyid',$companyid)
+					->get();
+		$res = $r->result();
+		return $res;
+
+	}
 	
 	function list_state(){
 		$r=$this->db->select('*')

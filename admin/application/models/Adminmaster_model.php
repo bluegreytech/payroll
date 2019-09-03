@@ -18,19 +18,6 @@ class Adminmaster_model extends CI_Model
 			$EmailAddress=$this->input->post('EmailAddress');
 			$DateofBirth=$this->input->post('DateofBirth');
 			$PhoneNumber=$this->input->post('PhoneNumber');
-			
-			// $ProfileImage=$this->input->post('ProfileImage');
-			
-			// $config['upload_path']=base_path().'uploads/UserProfile/';
-			// $config['allowed_types']='jpg|jpeg|png';
-			// $config['max_size']='10000000';
-			// $this->load->library('upload',$config);
-			// if($this->upload->do_upload('ProfileImage'))
-			// {
-			// 	$s=$this->upload->data();	
-			// 	$filename=$s['file_name'];
-			// }
-
 			$Gender=$this->input->post('Gender');
 			$Address=$this->input->post('Address');
 			$PinCode=$this->input->post('PinCode');
@@ -50,7 +37,7 @@ class Adminmaster_model extends CI_Model
 			'IsActive'=>1,
 			'CreatedOn'=>date('Y-m-d')
 			);
-			print_r($data);die;
+			//print_r($data);die;
 			$this->db->insert('tbluser',$data);
 			$insert_id = $this->db->insert_id();
 
@@ -65,30 +52,88 @@ class Adminmaster_model extends CI_Model
 					$Password = $rows->Password;
 				}
 
-				$config['protocol']='smtp';
-				$config['smtp_host']='ssl://smtp.googlemail.com';
-				$config['smtp_port']='465';
-				$config['smtp_user']='bluegreyindia@gmail.com';
-				$config['smtp_pass']='Test@123';
-				$config['charset']='utf-8';
-				$config['newline']="\r\n";
-				$config['mailtype'] = 'html';								
-				$this->email->initialize($config);
-				$body ="Hello $FirstName $LastName, <br> Your email is : $EmailAddress<br> Your password is : $code 
-				<br>Login with this Email Address and Password.";	
-				//$body='reset_password.php?tokencode='.$rnd;
-				$this->email->from('bluegreyindia@gmail.com');
-				$this->email->to($EmailAddress);		
-				$this->email->subject('You are register complete');
-				$this->email->message($body);
-				if($this->email->send())
-				{
-					//return 1;
-					return 1;
-				}else
-				{
-					return 2;
-				}	
+				$email_template=$this->db->query("select * from ".$this->db->dbprefix('tblemail_template')." where task='Admin registration'");
+                            $email_temp=$email_template->row();
+                            $email_address_from=$email_temp->from_address;
+                            $email_address_reply=$email_temp->reply_address;
+                            $email_subject=$email_temp->subject;        
+                            $email_message=$email_temp->message;
+                            $username =$row->FullName;
+                            $password = $rpass;
+                            $email = $row->EmailAddress;
+                            $email_to=$email;
+                            $login_link=  '<a href="'.site_url('home/reset_password/'.$rnd).'">Click Here</a>';
+                    /* Common for All Email Template */
+                          //  $site_setting = site_setting();
+                           // $site_name=ucwords($site_setting->site_name);       
+                    // $theme_url = front_base_url().getThemeName();
+                    $base_url=front_base_url();
+                    $currentyear=date('Y');
+                    /* End of Common All Email Template */
+                    /* Common for All Email Template */
+                    $email_message=str_replace('{break}','<br/>',$email_message);
+                 
+                    $email_message=str_replace('{base_url}',$base_url,$email_message);
+                    $email_message=str_replace('{year}',$currentyear,$email_message);
+
+                    $email_message=str_replace('{username}',$username,$email_message);
+                    // $email_message=str_replace('{password}',$password,$email_message);
+                    $email_message=str_replace('{email}',$email,$email_message);
+                    $email_message=str_replace('{reset_link}',$login_link,$email_message);
+                    $str=$email_message; //die;
+                     
+                    $email_config = Array(
+                    'protocol'  => 'smtp',
+                    'smtp_host' => 'ssl://smtp.googlemail.com',
+                    'smtp_port' => '465',
+                    'smtp_user' => 'bluegreyindia@gmail.com',
+                    'smtp_pass' => 'Test@123',
+                    'mailtype'  => 'html',
+                    'starttls'  => true,
+                    'newline'   => "\r\n"
+					);
+					
+                    $this->load->library('email', $email_config);
+					$this->email->from("siya@yopmail.com", "siya");
+					$this->email->to('binny@bluegreytech.co.in');
+					$this->email->subject('Email Test');
+					$this->email->message('testing email message');
+                    $this->email->send();
+                    if($this->email->send()){ 
+                    //echo $this->email->prin
+                   // echo "send"; die;
+                    }else{
+                    echo $this->email->print_debugger();die;
+                    }
+                          echo $str;die;
+                    /** custom_helper email function **/
+                    
+                    email_send($email_address_from,$email_address_reply,$email_to,$email_subject,$str);
+
+				// $config['protocol']='smtp';
+				// $config['smtp_host']='ssl://smtp.googlemail.com';
+				// $config['smtp_port']='465';
+				// $config['smtp_user']='bluegreyindia@gmail.com';
+				// $config['smtp_pass']='Test@123';
+				// $config['charset']='utf-8';
+				// $config['newline']="\r\n";
+				// $config['mailtype'] = 'html';								
+				// $this->email->initialize($config);
+				// $body ="Hello $FirstName $LastName, <br> Your email is : $EmailAddress<br> Your password is : $code 
+				// <br>Login with this Email Address and Password.";	
+				// //$body='reset_password.php?tokencode='.$rnd;
+				// $this->email->from('bluegreyindia@gmail.com');
+				// $this->email->to($EmailAddress);		
+				// $this->email->subject('You are register complete');
+				// $this->email->message($body);
+				// if($this->email->send())
+				// {
+				// 	//return 1;
+				// 	return 1;
+				// }else
+				// {
+				// 	return 2;
+				// }	
 			
 	}
 

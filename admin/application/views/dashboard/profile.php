@@ -736,12 +736,8 @@
 		  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 		
 		<script type="text/javascript">
-			
  				$('#datepicker1').datepicker();
-			
-				 dateFormat: 'dd/mm/yy' 
-            	
-       		
+				 dateFormat: 'dd/mm/yy'   		
 		</script>
 
 <script>
