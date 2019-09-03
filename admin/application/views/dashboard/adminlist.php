@@ -689,15 +689,18 @@ function editadmin(AdminId)
 			$('#EmailAddress').val(response.EmailAddress);
 			$('#DateofBirth').val(response.DateofBirth);
 			$('#PhoneNumber').val(response.PhoneNumber);
-			//$("#Gender option[id='Female']").attr("selected", "selected");
 			//$("input[id=Gender][value=" + response.Gender + "]").attr('selected');
+			//$( "#myselect option:selected" ).text();
+			//$('#Gender').val(response.Gender);
+			//$("#Gender option:selected").val(response.Gender);
+		
 			$('#Gender').val(response.Gender);
+			//$("option[name=Gender][value=" + response.Gender + "]").attr('selected', 'selected');
 			//$("option[name=Gender][value=" + response.Gender + "]").attr('selected', 'selected');
 			$('#Address').val(response.Address);
 			$('#PinCode').val(response.PinCode);
 			$('#City').val(response.City);
 			$("input[name=IsActive][value=" + response.IsActive + "]").attr('checked', 'checked');
-			//$('#IsActive').val(response.IsActive);
          }
       });	
 }

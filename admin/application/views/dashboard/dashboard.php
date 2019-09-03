@@ -28,7 +28,7 @@
 								<span class="dash-widget-icon"><i class="fa fa-cubes"></i></span>
 								<div class="dash-widget-info">
 									<h3><?php echo $companyData;?></h3>
-									<span>Companies</span>
+									<span>Total Companies</span>
 								</div>
 							</div>
 						</div>
@@ -37,7 +37,7 @@
 								<span class="dash-widget-icon"><i class="fa fa-usd"></i></span>
 								<div class="dash-widget-info">
 									<h3><?php echo $hrData;?></h3>
-									<span>HR</span>
+									<span> Total HR</span>
 								</div>
 							</div>
 						</div>
