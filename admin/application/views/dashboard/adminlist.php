@@ -130,6 +130,7 @@
 														<a class="dropdown-item" onClick="editadmin(<?php echo $adminlist->UserId;?>)" data-toggle="modal" data-target="#edit_salary" role="button">
 														<i class="fa fa-pencil m-r-5"></i> Edit</a>
 														<a class="dropdown-item" onclick="deletedata(<?php echo $adminlist->UserId; ?>)"  data-toggle="modal" data-target="#delete_admin"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+														<a class="dropdown-item" href="<?php echo base_url();?>Rights/rightsadd/<?php echo $adminlist->UserId;?>"><i class="fa fa-trash-o m-r-5"></i> Add Rights</a>
 													</div>
 												</div>
 											</td>

@@ -105,8 +105,8 @@ class Adminmaster_model extends CI_Model
 		//$r=$this->db->select('*')
 		$r=$this->db->select('UserId,RoleId,CONCAT(FirstName ,LastName) AS FirstName,EmailAddress,DateofBirth,PhoneNumber,ProfileImage,Gender,Address,PinCode,CountryId,StateId,City,IsActive')
 					->from('tbluser')
-					->where('RoleId',1)
-					->or_where('RoleId',2)
+					->where('RoleId',2)
+					//->or_where('RoleId',2)
 					->get();
 		$res = $r->result();
 		return $res;
@@ -120,8 +120,8 @@ class Adminmaster_model extends CI_Model
 			$this->db->select('UserId,RoleId,CONCAT(FirstName ,LastName) AS FirstName,EmailAddress,DateofBirth,PhoneNumber,ProfileImage,Gender,Address,PinCode,CountryId,StateId,City,IsActive');
 			$this->db->from('tbluser');
 			//$this->db->select('*');
-			$this->db->where('RoleId', 1);
-			$this->db->or_where('RoleId', 2);
+			$this->db->where('RoleId', 2);
+			//$this->db->or_where('RoleId', 2);
 				if($option == 'FirstName')
 				{
 				// echo $keyword; 

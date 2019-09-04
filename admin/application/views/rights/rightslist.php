@@ -29,7 +29,7 @@
 							<h4 class="page-title">List of Master Access</h4>
 						</div>
 						<div class="col-sm-8 col-7 text-right m-b-30">
-							<a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_salary"><i class="fa fa-plus"></i> Add Access Menu
+							<a href="<?php echo base_url();?>rights/rightsadd" class="btn add-btn"><i class="fa fa-plus"></i> Add Access Menu
 							</a>
 						</div>
 					
@@ -72,7 +72,7 @@
 									<thead>
 										<tr>
 											<th>No</th>
-											<th>User Id</th>
+											<th>Role Id</th>
 											<th>Right Name</th>
 											<th>Right Key</th>
 											<th>Add</th>
@@ -80,13 +80,7 @@
 											<th>Update</th>
 											<th>Delete</th>
 											<th>Status</th>
-											<?php
-											if($this->session->userdata('RoleId')==1){
-											?>	
-											<th class="text-right">Action</th>
-											<?php
-											}
-											?>	
+											
 										</tr>
 									</thead>
 									<tbody>
@@ -98,30 +92,15 @@
 									?>
 										<tr>
 										<td><?php echo $i;?></td>
-											<td><?php echo $ritdata->UserId ;?></td>
-											<td><?php echo $ritdata->rightname ;?></td>
+											<td><?php echo $ritdata->RoleId ;?></td>
+											<td><?php echo $ritdata->rightsname ;?></td>
 											<td><?php echo $ritdata->rightkey ;?></td>
 											<td><?php echo $ritdata->add ;?></td>
 											<td><?php echo $ritdata->view ;?></td>
 											<td><?php echo $ritdata->update ;?></td>
 											<td><?php echo $ritdata->delete ;?></td>
 											<td><?php echo $ritdata->isactive ;?></td>
-											<?php
-											if($this->session->userdata('RoleId')==1){
-											?>	
-											<td class="text-right">
-												<div class="dropdown dropdown-action">
-													<a href="" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item" onClick="editadmin(<?php echo $ritdata->UserId;?>)" data-toggle="modal" data-target="#edit_salary" role="button">
-														<i class="fa fa-pencil m-r-5"></i> Edit</a>
-														<a class="dropdown-item" onclick="deletedata(<?php echo $ritdata->UserId; ?>)"  data-toggle="modal" data-target="#delete_admin"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-													</div>
-												</div>
-											</td>
-											<?php
-											}
-											?>
+										
 										</tr>
 										<?php
 										$i++;
