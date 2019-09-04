@@ -71,7 +71,7 @@
 													</li>
 													<li>
 														<div class="title">Birthday:</div>
-														<div class="text"><?php echo  $endDate = date('d/m/Y', strtotime($DateofBirth)); ?></div>
+														<div class="text"><?php   if($DateofBirth!='0000-00-00'){ echo date('d/m/Y', strtotime($DateofBirth));}else{echo "N/A";  } // echo  $endDate = ; ?></div>
 													</li>
 													<li>
 														<div class="title">Address:</div>
@@ -164,7 +164,7 @@
 													<?php// echo $endDate = date('d/m/Y', strtotime($DateofBirth))?>
 														<label>Date of Birth</label>
 														<input class="form-control" id="datepicker1" type="text" name="DateofBirth" Placeholder="Enter your date of birth" 
-														value="<?php echo date('d-m-Y',strtotime($DateofBirth)); ?>" readonly>
+														value="<?php if($DateofBirth!='0000-00-00'){ echo date('d-m-Y', strtotime($DateofBirth));}else{echo "DD-MM-YYYY";  } ?>" readonly>
 													</div>
 												</div>
 												<div class="col-md-6">
@@ -736,8 +736,10 @@
 		  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 		
 		<script type="text/javascript">
- 				$('#datepicker1').datepicker();
-				 dateFormat: 'dd/mm/yy'   		
+ 				$('#datepicker1').datepicker({
+ 					 dateFormat: 'dd-mm-yy',
+ 					 maxDate: '0', 
+ 				});
 		</script>
 
 <script>
