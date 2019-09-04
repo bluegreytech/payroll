@@ -75,17 +75,17 @@ class Login extends CI_Controller {
 							$up=$this->Login_model->updatePassword($UserId);
 							if($up==1)
 							{
-								$this->session->set_flashdata('success','Password change successfully!'); 
+								$this->session->set_flashdata('success','Your password change successfully!'); 
 								redirect('Login');
 							}
 							elseif($up==2)
 							{
-								$this->session->set_flashdata('error','Link expired'); 
+								$this->session->set_flashdata('error','Your link was expired'); 
 							}
 					}
 					else
 					{
-						$this->session->set_flashdata('error','User Login successfully'); 
+						$this->session->set_flashdata('success','User login successfully'); 
 					}
 					
 				}
@@ -100,47 +100,7 @@ class Login extends CI_Controller {
 
 
 
-	// function resetpassword($ResetPasswordCode='')
-	// {
-	// 	//echo $ResetPasswordCode;die;
-	// 		$UserId=$this->Login_model->checkResetCode($ResetPasswordCode);
-	// 		$data = array();
-	// 		$data['UserId']=$UserId;
-	// 		$data['ResetPasswordCode']=$ResetPasswordCode;
-
-	// 		if($UserId)
-	// 		{	
-	// 			if($_POST)
-	// 			{
-				
-	// 				if($this->input->post('UserId')!='')
-	// 				{
-	// 					//echo $UserId;die;
-	// 						$up=$this->Login_model->updatePassword($UserId);
-	// 						if($up==1)
-	// 						{
-	// 							$this->session->set_flashdata('success','Password change successfully'); 
-	// 							redirect('Login');
-	// 						}
-	// 						elseif($up==2)
-	// 						{
-	// 							$this->session->set_flashdata('error','Link expired'); 
-	// 						}
-	// 				}
-	// 				else
-	// 				{
-	// 					$this->session->set_flashdata('error','User Login successfully'); 
-	// 				}
-					
-	// 			}
-	// 			else
-	// 			{
-	// 				//$this->load->view('common/reset_password',$data);
-	// 	    	}
-
-	// 		}
-	// 		$this->load->view('common/reset_password',$data);
-	// }
+	
 
 
 

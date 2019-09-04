@@ -49,6 +49,7 @@ class Login_model extends CI_Model
 			if($query->num_rows()>0)
 			{
 				return $query->row()->UserId; 
+				
 			}else{
 				return 2;
 			}
@@ -78,6 +79,25 @@ class Login_model extends CI_Model
 									$EmailAddress = $rows->EmailAddress;
 								}
 
+								$email_template=$this->db->query("select * from ".$this->db->dbprefix('tblemail_template')." where task='Reset Password to admin'");
+								$email_temp=$email_template->row();
+								$email_address_from=$email_temp->from_address;
+								$email_address_reply=$email_temp->reply_address;
+								$email_subject=$email_temp->subject;        
+								$email_message=$email_temp->message;
+								
+								$username =$rows->FirstName.' '.$LastName;
+								$EmailAddress = $rows->EmailAddress;
+					   
+								$base_url=base_url();
+								$currentyear=date('Y');
+								$email_message=str_replace('{break}','<br/>',$email_message);
+								$email_message=str_replace('{base_url}',$base_url,$email_message);
+								$email_message=str_replace('{year}',$currentyear,$email_message);
+								$email_message=str_replace('{username}',$username,$email_message);
+								$email_message=str_replace('{EmailAddress}',$EmailAddress,$email_message);
+								$str=$email_message; //die;
+
 								$config['protocol']='smtp';
 								$config['smtp_host']='ssl://smtp.googlemail.com';
 								$config['smtp_port']='465';
@@ -87,11 +107,10 @@ class Login_model extends CI_Model
 								$config['newline']="\r\n";
 								$config['mailtype'] = 'html';								
 								$this->email->initialize($config);
-								$body =" Hello $FirstName $LastName, <br>Your password request has been change successfully";	
-								//$body='reset_password.php?tokencode='.$rnd;
+								$body =$str;
 								$this->email->from('bluegreyindia@gmail.com');
 								$this->email->to($EmailAddress);		
-								$this->email->subject('Forgot Password');
+								$this->email->subject('Reset Password Admin To Payroll System');
 								$this->email->message($body);
 								if($this->email->send())
 								{
@@ -146,6 +165,29 @@ class Login_model extends CI_Model
 									$ResetPasswordCode = $rows->ResetPasswordCode;
 								}
 
+								$email_template=$this->db->query("select * from ".$this->db->dbprefix('tblemail_template')." where task='Forgot Password by admin'");
+								$email_temp=$email_template->row();
+								$email_address_from=$email_temp->from_address;
+								$email_address_reply=$email_temp->reply_address;
+								$email_subject=$email_temp->subject;        
+								$email_message=$email_temp->message;
+								
+								$username =$rows->FirstName.' '.$LastName;
+								$EmailAddress = $rows->EmailAddress;
+							   // $email_to= $EmailAddress;
+					   
+								$base_url=base_url();
+								$forgot_link= '<a href="'.base_url('Login/resetpassword/'.$ResetPasswordCode).'">Click Here</a>';
+								$currentyear=date('Y');
+							
+								$email_message=str_replace('{break}','<br/>',$email_message);
+								$email_message=str_replace('{base_url}',$base_url,$email_message);
+								$email_message=str_replace('{year}',$currentyear,$email_message);
+								$email_message=str_replace('{username}',$username,$email_message);
+								$email_message=str_replace('{EmailAddress}',$EmailAddress,$email_message);
+								$email_message=str_replace('{forgot_link}',$forgot_link,$email_message);
+								$str=$email_message; //die;
+
 								$config['protocol']='smtp';
 								$config['smtp_host']='ssl://smtp.googlemail.com';
 								$config['smtp_port']='465';
@@ -155,11 +197,10 @@ class Login_model extends CI_Model
 								$config['newline']="\r\n";
 								$config['mailtype'] = 'html';								
 								$this->email->initialize($config);
-								$body ='<a href="http://localhost/payroll/admin/Login/resetpassword/'.$ResetPasswordCode.'">Click Here</a>';	
-								//$body='reset_password.php?tokencode='.$rnd;
+								$body =$str;
 								$this->email->from('bluegreyindia@gmail.com');
 								$this->email->to($EmailAddress);		
-								$this->email->subject('Forgot Password');
+								$this->email->subject('Forgot Password Admin To Payroll System');
 								$this->email->message($body);
 								if($this->email->send())
 								{
@@ -181,73 +222,7 @@ class Login_model extends CI_Model
 	
 		}
 
-		// function forgotpass_check()
-		// {
-		// 	//echo site_url();die;
-		// 	$email = trim($this->input->post('EmailAddress'));
-		// 	$rnd=randomCode();
-		// 	$query = $this->db->get_where('tbluser',array('EmailAddress'=>$email));
-		// //	echo $this->db->last_query(); die;
-		// 	if($query->num_rows()>0)
-		// 	{
-		// 		$row = $query->row();
-		// 		$admin_status=$row->IsActive;	
-		// 		if($admin_status==0)
-		// 		{
-		// 			return 2; 
-		// 		}
-		// 		else if($admin_status==1)
-		// 		{// echo "hjhgj";die;
-		// 					if(!empty($row) && $row->EmailAddress != "")
-		// 					{
-		// 						$rpass= randomCode();
-		// 						$ud=array(
-		// 							'ResetPasswordCode'=>$rnd,
-		// 						);	
-		// 						$this->db->where('UserId',$row->UserId);
-		// 						$this->db->update('tbluser',$ud);
-							 
-
-		// 						$email_template=$this->db->query("select * from ".$this->db->dbprefix('tblemail_template')." where task='Forgot Password by admin'");
-		// 						//echo $this->db->last_query();die;
-		// 					   //print_r($email_template); die;
-		// 								$email_temp=$email_template->row();
-		// 								$email_address_from=$email_temp->from_address;
-		// 								$email_address_reply=$email_temp->reply_address;
-		// 								$email_subject=$email_temp->subject;        
-		// 								$email_message=$email_temp->message;
-									
-		// 								$username =$row->FirstName.'  '.$row->LastName;
-		// 								$password = $rpass;
-		// 								$email = $row->EmailAddress;
-		// 								$email_to=$email;
-		// 								$login_link='<a href="'.site_url('Login/reset_password/'.$rnd).'">Click Here</a>';
-		// 								$base_url=front_base_url();
-		// 								$currentyear=date('Y');
-		// 								$email_message=str_replace('{break}','<br/>',$email_message);
-		// 								$email_message=str_replace('{base_url}',$base_url,$email_message);
-		// 								$email_message=str_replace('{year}',$currentyear,$email_message);
-		// 								$email_message=str_replace('{username}',$username,$email_message);
-		// 								$email_message=str_replace('{email}',$email,$email_message);
-		// 								$email_message=str_replace('{reset_link}',$login_link,$email_message);
-		// 								$str=$email_message;
-										
-		// 								//echo "<pre>";print_r($str);die;
-		// 								email_send($email_address_from,$email_address_reply,$email_to,$email_subject,$str);
-		// 								return 3;
-		// 					}
-		// 					else
-		// 					{
-		// 						return 4;
-		// 					}
-		// 			}
-		// 	}
-		// 	else
-		// 	{
-		// 		return 1;
-		// 	}
-	
-		// }
+		
 
 	
 

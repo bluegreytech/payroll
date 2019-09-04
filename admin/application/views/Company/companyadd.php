@@ -115,8 +115,17 @@
 										<div class="col-md-6">
 											<div class="form-group">
 												<label class="col-form-label">Digital Signature Expire Date<span class="text-danger">*</span></label>
-												<input class="form-control" minlength="10" maxlength="10" type="date" name="digitalsignaturedate" id="digitalsignaturedate" placeholder="Enter digital signature date"  
-												value="<?php echo $digitalsignaturedate; ?>">
+												<!-- <input class="form-control" minlength="10" maxlength="10" type="date" name="digitalsignaturedate" id="digitalsignaturedate" placeholder="Enter digital signature date"  
+												value="<?php //echo $digitalsignaturedate; ?>"> -->
+
+												<input class="form-control" id="datepicker1" name="digitalsignaturedate"  type="text" 
+														value="<?php
+														 if($companyid!='')
+														 {
+															echo date('d-m-Y',strtotime($digitalsignaturedate));
+														 }
+														
+														 ?>" readonly>
 											</div>
 										</div>
 										<div class="col-md-6">
@@ -160,14 +169,14 @@
 											</div>
 										</div>
 										<?php
-										if($isactive=='')
+										if($companyid=='')
 										{ 
 											?>
 												<div class="col-md-6">
 													<div class="form-group">
 													<label class="col-form-label">Isactive<span class="text-danger">*</span></label><br>
 													<label class="radio-inline">
-														<input type="radio" name="isactive" checked value="1">Active
+														<input type="radio" name="isactive"  checked value="1">Active
 													</label>
 													<label class="radio-inline">
 														<input type="radio" name="isactive" value="0">Deactive
@@ -176,33 +185,21 @@
 												</div>
 											<?php
 										}
-										elseif($isactive==1)
-											{ 
+										else
+										{
+											
 												?>
 													<div class="col-md-6">
 														<div class="form-group">
 														<label class="col-form-label">Isactive<span class="text-danger">*</span></label><br>
 														<label class="radio-inline">
-															<input type="radio" name="isactive" checked  value="1">Active
+															<input type="radio" name="isactive" <?php if($isactive==1){echo "checked";}?> 
+																 value="1">Active
+															
 														</label>
 														<label class="radio-inline">
-															<input type="radio" name="isactive" value="0">Deactive
-														</label>
-														</div>
-													</div>
-											<?php
-											}
-											elseif($isactive==0)
-											{
-												?>
-													<div class="col-md-6">
-														<div class="form-group">
-														<label class="col-form-label">Isactive<span class="text-danger">*</span></label><br>
-														<label class="radio-inline">
-															<input type="radio" name="isactive"  value="1">Active
-														</label>
-														<label class="radio-inline">
-															<input type="radio" name="isactive" checked value="0">Deactive
+															<input type="radio" name="isactive" <?php if($isactive==0){echo "checked";}?>value="0">Deactive
+															
 														</label>
 														</div>
 													</div>
@@ -226,7 +223,11 @@
 											<tbody>
 											<?php                           
 												foreach($complianceData as $compdata)
-												{
+												// foreach($complianceid as $comid)
+												 { 
+													
+													
+												//echo	$dd=explode(',',$comid)
 											?>
 												<tr>
 													<td><?php echo $compdata->compliancename;?></td>
@@ -234,6 +235,9 @@
 														<input type="checkbox"  value="<?php echo $compdata->complianceid; ?>" 
 														name="complianceid[]">
 													</td>
+													<!-- <td class="text-center">
+														<input type="checkbox"  value="<?php //echo $compdata->complianceid; ?>">
+													</td> -->
 													
 												</tr>
 											<?php
@@ -295,10 +299,18 @@
 		<!-- Custom JS -->
 		<script src="<?php echo base_url(); ?>default/js/app.js"></script>
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     </body>
 </html>
 
+		<script type="text/javascript">
+ 				$('#datepicker1').datepicker();
+				 dateFormat: 'dd/mm/yy'   		
+		</script>
+
 <script>
+			
+		
 		$(function() { 
 			setTimeout(function() {
 		$('#errorMessage').fadeOut('fast');

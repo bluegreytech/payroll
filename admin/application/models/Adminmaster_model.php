@@ -4,7 +4,6 @@ class Adminmaster_model extends CI_Model
  {
 	function insertdata()
 	{		
-		    //print_r($_FILES);die;
 			$this->db->select('*');
 			$this->db->where('EmailAddress',$this->input->post('EmailAddress'));
 			$query=$this->db->get('tbluser');
@@ -18,19 +17,6 @@ class Adminmaster_model extends CI_Model
 			$EmailAddress=$this->input->post('EmailAddress');
 			$DateofBirth=$this->input->post('DateofBirth');
 			$PhoneNumber=$this->input->post('PhoneNumber');
-			
-			// $ProfileImage=$this->input->post('ProfileImage');
-			
-			// $config['upload_path']=base_path().'uploads/UserProfile/';
-			// $config['allowed_types']='jpg|jpeg|png';
-			// $config['max_size']='10000000';
-			// $this->load->library('upload',$config);
-			// if($this->upload->do_upload('ProfileImage'))
-			// {
-			// 	$s=$this->upload->data();	
-			// 	$filename=$s['file_name'];
-			// }
-
 			$Gender=$this->input->post('Gender');
 			$Address=$this->input->post('Address');
 			$PinCode=$this->input->post('PinCode');
@@ -50,7 +36,7 @@ class Adminmaster_model extends CI_Model
 			'IsActive'=>1,
 			'CreatedOn'=>date('Y-m-d')
 			);
-			print_r($data);die;
+			//print_r($data);die;
 			$this->db->insert('tbluser',$data);
 			$insert_id = $this->db->insert_id();
 
@@ -65,31 +51,53 @@ class Adminmaster_model extends CI_Model
 					$Password = $rows->Password;
 				}
 
-				$config['protocol']='smtp';
-				$config['smtp_host']='ssl://smtp.googlemail.com';
-				$config['smtp_port']='465';
-				$config['smtp_user']='bluegreyindia@gmail.com';
-				$config['smtp_pass']='Test@123';
-				$config['charset']='utf-8';
-				$config['newline']="\r\n";
-				$config['mailtype'] = 'html';								
-				$this->email->initialize($config);
-				$body ="Hello $FirstName $LastName, <br> Your email is : $EmailAddress<br> Your password is : $code 
-				<br>Login with this Email Address and Password.";	
-				//$body='reset_password.php?tokencode='.$rnd;
-				$this->email->from('bluegreyindia@gmail.com');
-				$this->email->to($EmailAddress);		
-				$this->email->subject('You are register complete');
-				$this->email->message($body);
-				if($this->email->send())
-				{
-					//return 1;
-					return 1;
-				}else
-				{
-					return 2;
-				}	
-			
+
+				$email_template=$this->db->query("select * from ".$this->db->dbprefix('tblemail_template')." where task='Admin registration'");
+                            $email_temp=$email_template->row();
+                            $email_address_from=$email_temp->from_address;
+                            $email_address_reply=$email_temp->reply_address;
+                            $email_subject=$email_temp->subject;        
+							$email_message=$email_temp->message;
+							
+                            $username =$rows->FirstName.''.$LastName;
+                            $Password = $rows->Password;
+                            $EmailAddress = $rows->EmailAddress;
+                           // $email_to= $EmailAddress;
+                   
+                    $base_url=base_url();
+                    $currentyear=date('Y');
+                   
+                    $email_message=str_replace('{break}','<br/>',$email_message);
+                    $email_message=str_replace('{base_url}',$base_url,$email_message);
+                    $email_message=str_replace('{year}',$currentyear,$email_message);
+                    $email_message=str_replace('{username}',$username,$email_message);
+					$email_message=str_replace('{EmailAddress}',$EmailAddress,$email_message);
+					$email_message=str_replace('{Password}',$code,$email_message);
+					$str=$email_message; //die;
+					
+					$config['protocol']='smtp';
+					$config['smtp_host']='ssl://smtp.googlemail.com';
+					$config['smtp_port']='465';
+					$config['smtp_user']='bluegreyindia@gmail.com';
+					$config['smtp_pass']='Test@123';
+					$config['charset']='utf-8';
+					$config['newline']="\r\n";
+					$config['mailtype'] = 'html';								
+					$this->email->initialize($config);
+					$body =$str;	
+					$this->email->from('bluegreyindia@gmail.com');
+					$this->email->to($EmailAddress);		
+					$this->email->subject('You are register complete');
+					$this->email->message($body);
+                    if($this->email->send())
+					{	
+						return 1;
+					}else
+					{
+						return 2;
+					}	
+                  
+            
 	}
 
 
@@ -302,7 +310,57 @@ class Adminmaster_model extends CI_Model
 			//print_r($pass_data);die;
 			$this->db->where('UserId',$UserId);
 			$res = $this->db->update('tbluser',$pass_data);
-			return 1;
+
+			$this->db->select('*');
+					$this->db->where('UserId',$UserId);
+					$smtp2 = $this->db->get('tbluser');	
+					foreach($smtp2->result() as $rows) {
+						$UserId = $rows->UserId;
+						$FirstName = $rows->FirstName;
+						$LastName = $rows->LastName;
+						$EmailAddress = $rows->EmailAddress;
+					}
+
+								$email_template=$this->db->query("select * from ".$this->db->dbprefix('tblemail_template')." where task='Change Password to admin'");
+								$email_temp=$email_template->row();
+								$email_address_from=$email_temp->from_address;
+								$email_address_reply=$email_temp->reply_address;
+								$email_subject=$email_temp->subject;        
+								$email_message=$email_temp->message;
+								
+								$username =$rows->FirstName.' '.$LastName;
+								$EmailAddress = $rows->EmailAddress;
+					   
+								$base_url=base_url();
+								$currentyear=date('Y');
+								$email_message=str_replace('{break}','<br/>',$email_message);
+								$email_message=str_replace('{base_url}',$base_url,$email_message);
+								$email_message=str_replace('{year}',$currentyear,$email_message);
+								$email_message=str_replace('{username}',$username,$email_message);
+								$email_message=str_replace('{EmailAddress}',$EmailAddress,$email_message);
+								$str=$email_message; //die;
+
+								$config['protocol']='smtp';
+								$config['smtp_host']='ssl://smtp.googlemail.com';
+								$config['smtp_port']='465';
+								$config['smtp_user']='bluegreyindia@gmail.com';
+								$config['smtp_pass']='Test@123';
+								$config['charset']='utf-8';
+								$config['newline']="\r\n";
+								$config['mailtype'] = 'html';								
+								$this->email->initialize($config);
+								$body =$str;
+								$this->email->from('bluegreyindia@gmail.com');
+								$this->email->to($EmailAddress);		
+								$this->email->subject('Change Password Admin To Payroll System');
+								$this->email->message($body);
+								if($this->email->send())
+								{
+									return 1;
+								}else
+								{
+									return 2;
+								}
 		}
 		else
 		{

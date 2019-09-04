@@ -45,6 +45,7 @@
 										<select class="select floating" name="option"> 
 											<option value=""> -- Select -- </option>
 											<option value="FirstName">Hr Name</option>
+											<option value="companyname">Company Name</option>
 											<option value="EmailAddress">Email Address</option>
 											<option value="PhoneNumber">Contact Number</option>
 										</select>
@@ -75,7 +76,7 @@
 											<th>User Name</th>
 											<th>Email Address</th>
 											<th>Contact Number</th>
-											<th>Gender</th>
+											<th>From Company</th>
 											<?php
 											if($this->session->userdata('RoleId')==1 || $this->session->userdata('RoleId')==2){
 											?>		
@@ -119,7 +120,7 @@
 											</td>
 											<td><?php echo $hr->EmailAddress ;?></td>
 											<td><?php echo $hr->PhoneNumber ;?></td>
-											<td><?php echo $hr->Gender ;?></td>
+											<td><?php echo $hr->companyname ;?></td>
 											<?php
 											if($this->session->userdata('RoleId')==1 || $this->session->userdata('RoleId')==2){
 											?>
@@ -194,6 +195,7 @@
 											<div class="form-group">
 												<label>Date of Birth</label>
 												<input class="form-control" type="date" name="DateofBirth" Placeholder="Enter your date of birth">
+												<!-- <input class="form-control" id="datepicker1" type="text" name="DateofBirth" Placeholder="Enter your date of birth" readonly> -->
 											</div>
 											<div class="form-group">
 												<label>Address</label>
@@ -450,9 +452,13 @@
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js" type="text/javascript" ></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     </body>
 </html>
 <script>
+
+			$('#datepicker1').datepicker();
+				 dateFormat: 'dd/mm/yy'  
 
 $(document).ready(function() {
     $('#example').DataTable( {

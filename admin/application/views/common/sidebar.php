@@ -1,4 +1,6 @@
 <!-- Sidebar -->
+
+
 <div class="sidebar" id="sidebar">
                 <div class="sidebar-inner slimscroll">
 					<div id="sidebar-menu" class="sidebar-menu">
@@ -73,6 +75,20 @@
 								<li><a href="<?php echo base_url();?>attendance">List of Attendance</a></li>
 								</ul>
 							</li>
+
+							<?php
+							if($this->session->userdata('RoleId')==1){
+							?>	
+							<li class="submenu">
+								<a href="<?php echo base_url();?>Dashboard"><i class="la la-user"></i> <span>Rights Access</span> <span class="menu-arrow"></span></a>
+								<ul style="display: none;">
+								<li><a href="<?php echo base_url();?>rights">List of Rights Access</a></li>
+								</ul>
+							</li>
+
+							<?php
+							}
+							?>
 
 							<!-- <li class="submenu">
 								<a href="<?php //echo base_url();?>Dashboard"><i class="la la-user"></i> <span>Overtime</span> <span class="menu-arrow"></span></a>

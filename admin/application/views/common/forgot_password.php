@@ -54,7 +54,7 @@
 									<strong> <?php echo $this->session->flashdata('success'); ?></strong> 
 									</div>
 							<?php } ?>
-
+							
 							<h3 class="account-title">Forgot Password?</h3>
 							<p class="account-subtitle">Enter your email to get a password reset link</p>
 							

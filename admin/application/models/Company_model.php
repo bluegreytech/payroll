@@ -3,6 +3,15 @@
 class Company_model extends CI_Model
 {
 
+	function list_rights()
+	{
+		$this->db->select('*');
+		$this->db->from('tblrights');
+		$this->db->where('rightsname','company');
+		$r=$this->db->get();
+		$res = $r->result();
+		return $res;
+	}
 	function list_company(){
 		$r=$this->db->select('*')
 					->from('tblcompany')
@@ -25,6 +34,16 @@ class Company_model extends CI_Model
 	function list_compliance(){
 		$r=$this->db->select('*')
 					->from('tblcompliances')
+					->get();
+		$res = $r->result();
+		return $res;
+
+	}
+
+	function list2_compliance($companyid){
+		$r=$this->db->select('*')
+					->from('tblcompliances')
+					->where('companyid',$companyid)
 					->get();
 		$res = $r->result();
 		return $res;
@@ -97,6 +116,28 @@ class Company_model extends CI_Model
 				$dd=$interval->format('%R%a');
 				if($dd=='+15' || $dd=='+10')
 				{
+
+
+					$email_template=$this->db->query("select * from ".$this->db->dbprefix('tblemail_template')." where task='Company licence notification'");
+					$email_temp=$email_template->row();
+					$email_address_from=$email_temp->from_address;
+					$email_address_reply=$email_temp->reply_address;
+					$email_subject=$email_temp->subject;        
+					$email_message=$email_temp->message;
+					
+					$companyname =$rows->companyname;
+					$comemailaddress = $rows->comemailaddress;
+		
+					$base_url=base_url();
+					$currentyear=date('Y');
+					$email_message=str_replace('{break}','<br/>',$email_message);
+					$email_message=str_replace('{base_url}',$base_url,$email_message);
+					$email_message=str_replace('{year}',$currentyear,$email_message);
+					$email_message=str_replace('{companyname}',$companyname,$email_message);
+					$email_message=str_replace('{digitalsignaturedate}',$digitalsignaturedate,$email_message);
+					
+					$str=$email_message; //die;
+	
 					$config['protocol']='smtp';
 					$config['smtp_host']='ssl://smtp.googlemail.com';
 					$config['smtp_port']='465';
@@ -106,10 +147,10 @@ class Company_model extends CI_Model
 					$config['newline']="\r\n";
 					$config['mailtype'] = 'html';								
 					$this->email->initialize($config);
-					$body ="Hello $companyname,<br> your company Digital signature expired date is : $digitalsignaturedate  <br> so please note that";	
+					$body =$str;
 					$this->email->from('bluegreyindia@gmail.com');
-					$this->email->to('bluegreyindia@gmail.com');		
-					$this->email->subject('Payroll System to your company licence are expired in 2 days');
+					$this->email->to($comemailaddress);		
+					$this->email->subject('Your company licence will be expire notification');
 					$this->email->message($body);
 					if($this->email->send())
 					{
@@ -152,6 +193,25 @@ class Company_model extends CI_Model
 					$comemailaddress = $rows->comemailaddress;	
 				}
 
+					$email_template=$this->db->query("select * from ".$this->db->dbprefix('tblemail_template')." where task='Company verification complete'");
+				$email_temp=$email_template->row();
+				$email_address_from=$email_temp->from_address;
+				$email_address_reply=$email_temp->reply_address;
+				$email_subject=$email_temp->subject;        
+				$email_message=$email_temp->message;
+				
+				$companyname =$rows->companyname;
+				$comemailaddress = $rows->comemailaddress;
+	
+				$base_url=base_url();
+				$currentyear=date('Y');
+				$email_message=str_replace('{break}','<br/>',$email_message);
+				$email_message=str_replace('{base_url}',$base_url,$email_message);
+				$email_message=str_replace('{year}',$currentyear,$email_message);
+				$email_message=str_replace('{username}',$companyname,$email_message);
+				//$email_message=str_replace('{comemailaddress}',$comemailaddress,$email_message);
+				$str=$email_message; //die;
+
 				$config['protocol']='smtp';
 				$config['smtp_host']='ssl://smtp.googlemail.com';
 				$config['smtp_port']='465';
@@ -161,10 +221,10 @@ class Company_model extends CI_Model
 				$config['newline']="\r\n";
 				$config['mailtype'] = 'html';								
 				$this->email->initialize($config);
-				$body ="Hello you are registered <br>";	
+				$body =$str;
 				$this->email->from('bluegreyindia@gmail.com');
 				$this->email->to($comemailaddress);		
-				$this->email->subject('Payroll System to your company are register complete');
+				$this->email->subject('Company verification complete to Payroll System');
 				$this->email->message($body);
 				if($this->email->send())
 				{
@@ -253,6 +313,28 @@ class Company_model extends CI_Model
 					$verificationcode = $rows->verificationcode;	
 				}
 
+					$email_template=$this->db->query("select * from ".$this->db->dbprefix('tblemail_template')." where task='Company verification'");
+					$email_temp=$email_template->row();
+					$email_address_from=$email_temp->from_address;
+					$email_address_reply=$email_temp->reply_address;
+					$email_subject=$email_temp->subject;        
+					$email_message=$email_temp->message;
+					
+					$companyname =$rows->companyname;
+					$comemailaddress = $rows->comemailaddress;
+		
+					$base_url=base_url();
+					$verification_link=  '<a href="'.site_url('Company/checkcode/'.$code).'">Click Here</a>';
+					
+					$currentyear=date('Y');
+					$email_message=str_replace('{break}','<br/>',$email_message);
+					$email_message=str_replace('{base_url}',$base_url,$email_message);
+					$email_message=str_replace('{year}',$currentyear,$email_message);
+					$email_message=str_replace('{companyname}',$companyname,$email_message);
+					$email_message=str_replace('{comemailaddress}',$comemailaddress,$email_message);
+					$email_message=str_replace('{verification_link}',$verification_link,$email_message);
+					$str=$email_message; //die;
+
 					$config['protocol']='smtp';
 					$config['smtp_host']='ssl://smtp.googlemail.com';
 					$config['smtp_port']='465';
@@ -262,12 +344,11 @@ class Company_model extends CI_Model
 					$config['newline']="\r\n";
 					$config['mailtype'] = 'html';								
 					$this->email->initialize($config);
-					$verification_link=  '<a href="'.site_url('Company/checkcode/'.$code).'">Click Here</a>';
-					$body ="Hello you are registered <br> $verification_link";	
+					$body =$str;
 					$this->email->from('bluegreyindia@gmail.com');
 					$this->email->to($comemailaddress);		
-					$this->email->subject('Payroll System to your company are verification purpose');
-					$this->email->message($body);
+					$this->email->subject('Forgot Password Admin To Payroll System');
+					$this->email->message($body);	
 					if($this->email->send())
 					{
 						return 1;

@@ -26,7 +26,7 @@
 								<div class="form-group">
 									<label>Old password</label>
 									<input type="hidden" name="UserId" value="<?php echo $UserId ?>">	
-									<input type="text" class="form-control" name="Password"  minlength="8" maxlength="15" placeholder="Enter your old password">
+									<input type="password" class="form-control" name="Password"  minlength="8" maxlength="15" placeholder="Enter your old password">
 								</div>
 								<div class="form-group">
 									<label>New password</label>

@@ -5,7 +5,6 @@ class Hr extends CI_Controller
 	public function __construct() {
         parent::__construct();
 		$this->load->model('Hr_model');
-		$this->load->model('Company_model');
 	}
 	
 	function index()
@@ -21,8 +20,8 @@ class Hr extends CI_Controller
 		{
 			$data['hrData']=$this->Hr_model->hr_list();
 		}
+		$data['companyData']=$this->Hr_model->list_company();
 		//echo "<pre>";print_r($data['hrData']);die;
-		$data['companyData']=$this->Company_model->list_company();
 		$this->load->view('hr/hrlist',$data);
 	}
 
