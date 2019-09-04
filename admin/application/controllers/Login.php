@@ -20,7 +20,8 @@ class Login extends CI_Controller {
 					"Password"=>$Password,
 					"IsActive"=>$IsActive
 					);
-					$log = $this->Login_model->login_where('tbluser',$where);         
+					$log = $this->Login_model->login_where('tbluser',$where);   
+					      
 					$cnt = count($log);
 					if($cnt>0)
 					{
@@ -37,11 +38,7 @@ class Login extends CI_Controller {
 						$this->session->set_flashdata('success','User Login successfully!');
 						redirect('Dashboard');
 					}
-					// else if()
-					// {
-
-					// }
-					// else
+					else
 					{
 						$this->session->set_userdata($session);
 						$this->session->set_flashdata('error', 'Invalid Username or Password!');
