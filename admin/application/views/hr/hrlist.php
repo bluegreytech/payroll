@@ -245,8 +245,7 @@
 															foreach($companyData as $comp)
 															{
 														?>
-															
-
+					
 															<option value="<?php echo $comp->companyid; ?>">
 															<?php echo $comp->companyname;?></option>
 

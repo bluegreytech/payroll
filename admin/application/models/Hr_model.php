@@ -187,8 +187,8 @@ class Hr_model extends CI_Model
 		function list_company(){
 			$this->db->select('*');
 			$this->db->from('tblcompany');
-			$query = $this->db->get();
-			return $query->row_array();
+			$r = $this->db->get();
+			return $query=$r->result();
 	}
 
 	function getdata($UserId){
@@ -291,28 +291,7 @@ class Hr_model extends CI_Model
 			return 1;	      
 	}
 
-	public function changepass($UserId) 
-	{
-		$this->db->select('UserId,Password');				
-		$this->db->where('UserId',$UserId);
-		$this->db->where('Password',md5($this->input->post('Password')));
-		$this->db->from('tbluser');
-		$query = $this->db->get();
-		if ($query->num_rows() == 1) 
-		{
-			$pass_data = array(	
-				'Password'=>md5($this->input->post('NewPassword')),	
-			);
-			//print_r($pass_data);die;
-			$this->db->where('UserId',$UserId);
-			$res = $this->db->update('tbluser',$pass_data);
-			return 1;
-		}
-		else
-		{
-			return 2;
-		}
- 	}
+
 
 
 }

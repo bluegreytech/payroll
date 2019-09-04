@@ -21,7 +21,7 @@ class Hr extends CI_Controller
 			$data['hrData']=$this->Hr_model->hr_list();
 		}
 		$data['companyData']=$this->Hr_model->list_company();
-		//echo "<pre>";print_r($data['hrData']);die;
+		//echo "<pre>";print_r($data['companyData']);die;
 		$this->load->view('hr/hrlist',$data);
 	}
 
@@ -108,33 +108,7 @@ class Hr extends CI_Controller
 
 
 
-	public function admin_master_profile_update()     
-	{      	
-				$data=array();
-				$data['UserId']=$this->input->post('UserId');
-				$data['FirstName']=$this->input->post('FirstName');
-				$data['LastName']=$this->input->post('LastName');
-			//	$data['EmailAddress']=$this->input->post('EmailAddress');
-				$data['DateofBirth']=$this->input->post('DateofBirth');
-				$data['PhoneNumber']=$this->input->post('PhoneNumber');
-				$data['Gender']=$this->input->post('Gender');
-				//$data['ProfileImage']=$this->input->post('ProfileImage');
-				$data['Address']=$this->input->post('Address');
-				$data['PinCode']=$this->input->post('PinCode');
-				if($_POST){
-					if($this->input->post('UserId')!=''){
-						$result=$this->Hr_model->updatedata();
-						if($result)
-						{   
-							$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
-							redirect('Hr');
-						}
-					}
-				
-				}
-				$this->load->view('Adminmaster/admin_master_profile',$data);			
-
-	}
+	
 
 
 	
