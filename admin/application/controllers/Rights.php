@@ -26,9 +26,10 @@ class Rights extends CI_Controller
 		$UserId=$this->Rights_model->checkid($UserId);
 		//print_r($UserId);die;
 		$data=array();
-		$data['UserId']=$UserId;	
-		$data['rightsData']=$this->Rights_model->list_rights();
-		//echo "<pre>";print_r($data['rightsData']);die;
+		$data['UserId']=$UserId;
+		$data['rightsData']=$this->Rights_model->getdata($UserId);	
+		//$data['rightsData']=$this->Rights_model->list_rights();
+		echo "<pre>";print_r($data['rightsData']);die;
 		$this->load->view('rights/rightsadd',$data);
 	}
 
@@ -36,8 +37,9 @@ class Rights extends CI_Controller
 
 	public function addrit()
 	{	
-		 if($_POST){
-			$this->input->post('UserId');
+		 if($_POST)
+		 {
+				$this->input->post('UserId');
 				$result=$this->Rights_model->insertdata($this->input->post('UserId'));
 				if($result)
 				{
@@ -45,8 +47,12 @@ class Rights extends CI_Controller
 					redirect('adminmaster/adminlist');
 				}
 			
+			
 		}
 	}
+
+
+
 	
 
 }

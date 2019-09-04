@@ -30,6 +30,18 @@ class Rights_model extends CI_Model
 			}
 		}
 
+	function getdata($UserId)
+	{
+		$this->db->select('t1.*,t2.*,t3.*');
+		$this->db->from('tbluser as t1');
+		$this->db->join('tblrightsuser as t2', 't1.UserId = t2.UserId', 'LEFT');
+		$this->db->join('tblrights as t3', 't2.rightsid = t3.rightsid', 'LEFT');
+		$this->db->where('t1.UserId',$UserId);
+		$r=$this->db->get();
+		return $query=$r->result();
+	}
+
+
 	
 	function insertdata()
 	{	//echo "<pre>";print_r($_POST);die;	
@@ -48,7 +60,7 @@ class Rights_model extends CI_Model
 			$delete=$this->input->post('delete');
 	
 			$data=array( 
-			'UserId'=>$UserId,
+			'UserId'=>$UserId[$i],
 			'rightsid'=>$rightsid[$i],
 			'views'=>isset($view[$i]) ? $view[$i] : '0',
 			'adds'=>isset($add[$i]) ? $add[$i] : '0',
@@ -60,9 +72,9 @@ class Rights_model extends CI_Model
 			);
 				//echo "<pre>";print_r($data);die;
 			$this->db->insert('tblrightsuser',$data);
-			//return true;	
+			
 		}
-		
+		//return true;	
             
 	}
 
