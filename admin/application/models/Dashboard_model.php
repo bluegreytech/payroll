@@ -26,8 +26,8 @@ class Dashboard_model extends CI_Model
 	function list_hr()
 	{
 		$this->db->select('*');
-		$this->db->from('tbluser');
-		$this->db->where('RoleId',3);
+		$this->db->from('tblhr');
+		//$this->db->where('RoleId',3);
 		$r = $this->db->get();
 		return $query= $r->num_rows();
 	}

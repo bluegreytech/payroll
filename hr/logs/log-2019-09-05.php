@@ -1085,3 +1085,8 @@ ERROR - 2019-09-05 10:31:45 --> 404 Page Not Found: Default/css
 ERROR - 2019-09-05 10:31:45 --> 404 Page Not Found: Default/js
 ERROR - 2019-09-05 10:31:45 --> 404 Page Not Found: Default/js
 ERROR - 2019-09-05 10:31:45 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-09-05 10:40:00 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 10:40:01 --> Query error: Unknown column 'EmailAddress' in 'where clause' - Invalid query: SELECT *
+FROM `tblhr`
+WHERE `EmailAddress` = 'mitnp16@gmail.com'
+AND `password` = '25d55ad283aa400af464c76d713c07ad'

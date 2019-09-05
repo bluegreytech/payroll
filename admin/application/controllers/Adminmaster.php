@@ -8,13 +8,15 @@ class Adminmaster extends CI_Controller
 	}
 	
 	function adminlist()
-	{	
+	{
+		// if(!check_admin_authentication()){ 
+		// 	redirect(base_url('Login'));
+		// }
 		if($_POST!='')
 		{
 			$option=$this->input->post('option');
 			$keyword=$this->input->post('keyword2');	
 			$data['adminmasterData'] = $this->Adminmaster_model->search($option,$keyword);
-			// echo "<pre>";print_r($data['adminmasterData']);die;
 		}	
 		else
 		{
@@ -31,7 +33,7 @@ class Adminmaster extends CI_Controller
 	{	
 		 if($_POST){
 			
-			if($this->input->post('UserId')!='')
+			if($this->input->post('AdminId')!='')
 			{	
 				$result=$this->Adminmaster_model->updateadmin();	
 				if($result==1)
@@ -69,9 +71,9 @@ class Adminmaster extends CI_Controller
 	}
 
 	function deleteadmin(){
-		$UserId=$this->input->post('UserId');
-		$this->db->where("UserId",$UserId);
-		$result=$this->db->delete('tbluser');
+		$AdminId=$this->input->post('AdminId');
+		$this->db->where("AdminId",$AdminId);
+		$result=$this->db->delete('tbladmin');
 		if($result)
 		{
 			$this->session->set_flashdata('success', 'Admin was delete suucessfully!');
@@ -88,8 +90,7 @@ class Adminmaster extends CI_Controller
 	{
 		$data=array();
 		$result=$this->Adminmaster_model->getdata($this->input->post('id'));	
-		//echo "<br>";print_r($result);die;
-		$data['UserId']=$result['UserId'];
+		$data['AdminId']=$result['AdminId'];
 		$data['FirstName']=$result['FirstName'];	
 		$data['LastName']=$result['LastName'];	
 		$data['EmailAddress']=$result['EmailAddress'];
@@ -107,10 +108,9 @@ class Adminmaster extends CI_Controller
 	public function admin_master_profile()
 	{
 		$data=array();
-
-		$result=$this->Adminmaster_model->getdata($this->session->userdata('UserId'));
-		
-		$data['UserId']=$result['UserId'];
+		$result=$this->Adminmaster_model->getdata($this->session->userdata('AdminId'));
+		//echo "<pre>";print_r($result);die;
+		$data['AdminId']=$result['AdminId'];
 		$data['FirstName']=$result['FirstName'];
 		$data['LastName']=$result['LastName'];	
 		$data['EmailAddress']=$result['EmailAddress'];
@@ -127,21 +127,22 @@ class Adminmaster extends CI_Controller
 	public function admin_master_profile_update()     
 	{      	
 				$data=array();
-				$data['UserId']=$this->input->post('UserId');
+				$data['AdminId']=$this->input->post('AdminId');
 				$data['FirstName']=$this->input->post('FirstName');
 				$data['LastName']=$this->input->post('LastName');
-			
 				$data['DateofBirth']=$this->input->post('DateofBirth');
 				$data['PhoneNumber']=$this->input->post('PhoneNumber');
 				$data['Gender']=$this->input->post('Gender');
 				$data['Address']=$this->input->post('Address');
 				$data['PinCode']=$this->input->post('PinCode');
 				if($_POST){
-					if($this->input->post('UserId')!=''){
+					// echo "<pre>";print_r($_POST);die;
+					if($this->input->post('AdminId')!=''){
+						
 						$result=$this->Adminmaster_model->updatedata();
 						if($result)
 						{   
-							$UserId =$data['UserId']; 
+							$AdminId =$data['AdminId']; 
 							$session= array(
 								'FirstName'=> $data['FirstName'],
 								'LastName'=> $data['LastName'],
@@ -158,28 +159,28 @@ class Adminmaster extends CI_Controller
 	}
 
 
-	public function change_password($UserId)
+	public function change_password($AdminId)
 	{	
 		$data=array();
-		$data['UserId']=$this->input->post('UserId');
+		$data['AdminId']=$this->input->post('AdminId');
 		if($_POST){
-			$UserId=$this->input->post('UserId');
-			if($this->input->post('UserId')!='')
+			$AdminId=$this->input->post('AdminId');
+			if($this->input->post('AdminId')!='')
 			{
-				$result=$this->Adminmaster_model->changepass($UserId);
+				$result=$this->Adminmaster_model->changepass($AdminId);
 				if($result==1)
 				{   
 					 $this->session->set_flashdata('success', 'Your password has been Updated Succesfully!');
-					 redirect('Adminmaster/change_password/'.$UserId);
+					 redirect('Adminmaster/change_password/'.$AdminId);
 				}
 				else
 				{ 
-					$result=$this->Adminmaster_model->changepass($UserId);
+					$result=$this->Adminmaster_model->changepass($AdminId);
 					if($result==2)
 					{
-						$UserId=$data['UserId']; 
+						$AdminId=$data['AdminId']; 
 						$this->session->set_flashdata('error','Your old password was not match please try again!');  
-						redirect('Adminmaster/change_password/'.$UserId);
+						redirect('Adminmaster/change_password/'.$AdminId);
 					}
 				}
 			}

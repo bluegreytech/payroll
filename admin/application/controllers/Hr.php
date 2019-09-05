@@ -34,7 +34,7 @@ class Hr extends CI_Controller
 	{	
 		 if($_POST){
 			
-			if($this->input->post('UserId')!='')
+			if($this->input->post('hr_id')!='')
 			{	
 				$result=$this->Hr_model->updatehr();	
 				if($result==1)
@@ -72,32 +72,31 @@ class Hr extends CI_Controller
 	}
 
 	function deletehr(){
-		$UserId=$this->input->post('UserId');
-		$this->db->where("UserId",$UserId);
+		$hr_id=$this->input->post('hr_id');
+		$this->db->where("hr_id",$hr_id);
 		$result=$this->db->delete('tbluser');
 		if($result)
 		{
 			$this->session->set_flashdata('success', 'Hr was delete suucessfully!');
-			redirect('adminmaster/adminlist');
+			redirect('hr');
 		}
 		else
 		{
 			$this->session->set_flashdata('error', 'Hr was not deleted!');
-			redirect('adminmaster/adminlist');
+			redirect('hr');
 		}
 	}
 
 	function edithr()
 	{
 		$data=array();
-		$result=$this->Hr_model->getdata($this->input->post('UserId'));	
+		$result=$this->Hr_model->getdata($this->input->post('hr_id'));	
 		//echo "<br>";print_r($result);die;
-		$data['UserId']=$result['UserId'];
-		$data['FirstName']=$result['FirstName'];	
-		$data['LastName']=$result['LastName'];	
+		$data['hr_id']=$result['hr_id'];
+		$data['FullName']=$result['FullName'];	
 		$data['EmailAddress']=$result['EmailAddress'];
 		$data['DateofBirth']=$result['DateofBirth'];
-		$data['PhoneNumber']=$result['PhoneNumber'];
+		$data['Contact']=$result['Contact'];
 		$data['Gender']=$result['Gender'];
 		$data['Address']=$result['Address'];
 		$data['PinCode']=$result['PinCode'];

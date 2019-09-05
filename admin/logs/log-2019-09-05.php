@@ -915,3 +915,318 @@ ERROR - 2019-09-05 10:32:55 --> Severity: Notice --> Undefined property: stdClas
 ERROR - 2019-09-05 10:32:55 --> Severity: Notice --> Undefined variable: Gender C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 324
 ERROR - 2019-09-05 10:32:55 --> Severity: Notice --> Undefined variable: Gender C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 325
 ERROR - 2019-09-05 10:32:55 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 10:41:47 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 113
+ERROR - 2019-09-05 10:41:47 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 113
+ERROR - 2019-09-05 10:41:47 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 113
+ERROR - 2019-09-05 10:41:47 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 113
+ERROR - 2019-09-05 10:41:47 --> Severity: Notice --> Undefined variable: Gender C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 324
+ERROR - 2019-09-05 10:41:47 --> Severity: Notice --> Undefined variable: Gender C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 325
+ERROR - 2019-09-05 10:41:48 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 10:50:10 --> Query error: Table 'payrolldb.tbluser' doesn't exist - Invalid query: SELECT `UserId`, `RoleId`, CONCAT(FirstName, LastName) AS FirstName, `EmailAddress`, `DateofBirth`, `PhoneNumber`, `ProfileImage`, `Gender`, `Address`, `PinCode`, `CountryId`, `StateId`, `City`, `IsActive`
+FROM `tbluser`
+WHERE `RoleId` = 1
+OR `RoleId` = 2
+ORDER BY `UserId` DESC
+ERROR - 2019-09-05 10:50:12 --> Query error: Table 'payrolldb.tbluser' doesn't exist - Invalid query: SELECT `UserId`, `RoleId`, CONCAT(FirstName, LastName) AS FirstName, `EmailAddress`, `DateofBirth`, `PhoneNumber`, `ProfileImage`, `Gender`, `Address`, `PinCode`, `CountryId`, `StateId`, `City`, `IsActive`
+FROM `tbluser`
+WHERE `RoleId` = 1
+OR `RoleId` = 2
+ORDER BY `UserId` DESC
+ERROR - 2019-09-05 10:51:51 --> Query error: Table 'payrolldb.tbluser' doesn't exist - Invalid query: SELECT *
+FROM `tbluser`
+WHERE `RoleId` = 3
+ERROR - 2019-09-05 11:04:46 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:04:46 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:04:46 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:04:46 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:04:46 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:05:49 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:05:49 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:05:49 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:05:49 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:05:49 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:05:52 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 113
+ERROR - 2019-09-05 11:05:52 --> Severity: Notice --> Undefined property: stdClass::$UserId C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 130
+ERROR - 2019-09-05 11:05:52 --> Severity: Notice --> Undefined property: stdClass::$UserId C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 132
+ERROR - 2019-09-05 11:05:52 --> Severity: Notice --> Undefined variable: Gender C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 324
+ERROR - 2019-09-05 11:05:52 --> Severity: Notice --> Undefined variable: Gender C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 325
+ERROR - 2019-09-05 11:05:52 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:06:55 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 108
+ERROR - 2019-09-05 11:06:55 --> Severity: Notice --> Undefined property: stdClass::$UserId C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 123
+ERROR - 2019-09-05 11:06:55 --> Severity: Notice --> Undefined property: stdClass::$UserId C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 125
+ERROR - 2019-09-05 11:06:55 --> Severity: Notice --> Undefined variable: Gender C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 315
+ERROR - 2019-09-05 11:06:55 --> Severity: Notice --> Undefined variable: Gender C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 316
+ERROR - 2019-09-05 11:06:55 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:07:15 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 108
+ERROR - 2019-09-05 11:07:15 --> Severity: Notice --> Undefined property: stdClass::$UserId C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 123
+ERROR - 2019-09-05 11:07:15 --> Severity: Notice --> Undefined property: stdClass::$UserId C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 125
+ERROR - 2019-09-05 11:07:15 --> Severity: Notice --> Undefined variable: Gender C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 315
+ERROR - 2019-09-05 11:07:15 --> Severity: Notice --> Undefined variable: Gender C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 316
+ERROR - 2019-09-05 11:07:15 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:07:58 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 108
+ERROR - 2019-09-05 11:07:58 --> Severity: Notice --> Undefined variable: Gender C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 315
+ERROR - 2019-09-05 11:07:58 --> Severity: Notice --> Undefined variable: Gender C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 316
+ERROR - 2019-09-05 11:07:58 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:08:06 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 108
+ERROR - 2019-09-05 11:08:06 --> Severity: Notice --> Undefined variable: Gender C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 315
+ERROR - 2019-09-05 11:08:06 --> Severity: Notice --> Undefined variable: Gender C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 316
+ERROR - 2019-09-05 11:08:06 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:08:08 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:08:12 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:08:19 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampps\htdocs\payroll\admin\application\views\Company\companylist.php 75
+ERROR - 2019-09-05 11:08:19 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:10:33 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 108
+ERROR - 2019-09-05 11:10:33 --> Severity: Notice --> Undefined variable: Gender C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 315
+ERROR - 2019-09-05 11:10:33 --> Severity: Notice --> Undefined variable: Gender C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 316
+ERROR - 2019-09-05 11:10:33 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:13:10 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 108
+ERROR - 2019-09-05 11:13:10 --> Severity: Notice --> Undefined variable: Gender C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 317
+ERROR - 2019-09-05 11:13:10 --> Severity: Notice --> Undefined variable: Gender C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 318
+ERROR - 2019-09-05 11:13:10 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:13:13 --> Severity: Notice --> Undefined variable: adminmasterData C:\xampps\htdocs\payroll\admin\application\views\Company\companylist.php 85
+ERROR - 2019-09-05 11:13:13 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:14:21 --> Severity: Notice --> Undefined variable: adminmasterData C:\xampps\htdocs\payroll\admin\application\views\Company\companylist.php 87
+ERROR - 2019-09-05 11:14:21 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:18:50 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:21:48 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:22:51 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:23:03 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:23:07 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:23:27 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:23:34 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:23:36 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:24:42 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:25:01 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:25:15 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:25:16 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:25:24 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:25:28 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:25:47 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:26:04 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:26:20 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:26:49 --> Query error: Table 'payrolldb.tbluser' doesn't exist - Invalid query: SELECT `t1`.`UserId`, `t1`.`RoleId`, `t1`.`FirstName`, `t1`.`LastName`, `t1`.`EmailAddress`, `t1`.`DateofBirth`, `t1`.`PhoneNumber`, `t1`.`Gender`, `t1`.`ProfileImage`, `t1`.`Address`, `t1`.`PinCode`, `t1`.`CountryId`, `t1`.`StateId`, `t1`.`City`, `t1`.`IsActive`, `t2`.*, `t3`.*
+FROM `tbluser` as `t1`
+LEFT JOIN `tblhr` as `t2` ON `t1`.`UserId` = `t2`.`UserId`
+LEFT JOIN `tblcompany` as `t3` ON `t2`.`companyid` = `t3`.`companyid`
+WHERE `RoleId` = 3
+ERROR - 2019-09-05 11:40:24 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:40:26 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 108
+ERROR - 2019-09-05 11:40:26 --> Severity: Notice --> Undefined variable: Gender C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 317
+ERROR - 2019-09-05 11:40:26 --> Severity: Notice --> Undefined variable: Gender C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 318
+ERROR - 2019-09-05 11:40:26 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:41:47 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 108
+ERROR - 2019-09-05 11:41:47 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 108
+ERROR - 2019-09-05 11:41:47 --> Severity: Notice --> Undefined variable: Gender C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 317
+ERROR - 2019-09-05 11:41:47 --> Severity: Notice --> Undefined variable: Gender C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 318
+ERROR - 2019-09-05 11:41:47 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:42:09 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 108
+ERROR - 2019-09-05 11:42:09 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 108
+ERROR - 2019-09-05 11:42:09 --> Severity: Notice --> Undefined variable: Gender C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 317
+ERROR - 2019-09-05 11:42:09 --> Severity: Notice --> Undefined variable: Gender C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 318
+ERROR - 2019-09-05 11:42:10 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:45:00 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 108
+ERROR - 2019-09-05 11:45:00 --> Severity: Notice --> Undefined property: stdClass::$LastName C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 108
+ERROR - 2019-09-05 11:45:00 --> Severity: Notice --> Undefined variable: Gender C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 317
+ERROR - 2019-09-05 11:45:00 --> Severity: Notice --> Undefined variable: Gender C:\xampps\htdocs\payroll\admin\application\views\dashboard\adminlist.php 318
+ERROR - 2019-09-05 11:45:00 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:45:15 --> Severity: Notice --> Undefined property: stdClass::$UserId C:\xampps\htdocs\payroll\admin\application\controllers\Login.php 33
+ERROR - 2019-09-05 11:45:15 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:45:15 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:45:15 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:45:15 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:45:15 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:47:03 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:47:03 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:47:03 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:47:03 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:47:03 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:47:04 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:47:07 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:47:07 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:47:07 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:47:07 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:47:07 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:49:37 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:49:37 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:49:37 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:49:37 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:49:37 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:50:13 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:50:13 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:50:13 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:50:13 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:50:13 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:50:32 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:50:32 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:50:32 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:50:32 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:50:32 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:50:54 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:50:54 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:50:54 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:50:54 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:50:54 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:50:55 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:50:56 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:50:56 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:50:56 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:50:56 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:51:16 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:51:16 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:51:16 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:51:16 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:51:16 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:51:49 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:51:49 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:51:49 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:51:49 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:51:49 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:52:15 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:52:15 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:52:15 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:52:15 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:52:15 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:52:33 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:52:33 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:52:33 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:52:33 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:52:33 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:54:39 --> Severity: error --> Exception: syntax error, unexpected '{', expecting ',' or ';' C:\xampps\htdocs\payroll\admin\application\views\common\header.php 130
+ERROR - 2019-09-05 11:55:00 --> Severity: error --> Exception: syntax error, unexpected '{' C:\xampps\htdocs\payroll\admin\application\views\common\header.php 130
+ERROR - 2019-09-05 11:55:36 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:55:36 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:55:36 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:55:36 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:55:36 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:56:20 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:56:20 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:56:20 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:56:20 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:56:20 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 11:56:29 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:56:29 --> 404 Page Not Found: Default/cdn-cgi
+ERROR - 2019-09-05 11:57:54 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:57:54 --> 404 Page Not Found: Default/cdn-cgi
+ERROR - 2019-09-05 11:58:25 --> Severity: Notice --> Undefined property: stdClass::$UserId C:\xampps\htdocs\payroll\admin\application\controllers\Login.php 47
+ERROR - 2019-09-05 11:58:25 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 11:58:25 --> 404 Page Not Found: Admin/assets
+ERROR - 2019-09-05 11:58:25 --> 404 Page Not Found: Admin/assets
+ERROR - 2019-09-05 11:58:25 --> 404 Page Not Found: Admin/assets
+ERROR - 2019-09-05 11:58:25 --> 404 Page Not Found: Admin/assets
+ERROR - 2019-09-05 12:01:31 --> Severity: Notice --> Undefined variable: session C:\xampps\htdocs\payroll\admin\application\controllers\Login.php 57
+ERROR - 2019-09-05 12:01:40 --> Severity: Notice --> Undefined property: stdClass::$UserId C:\xampps\htdocs\payroll\admin\application\controllers\Login.php 32
+ERROR - 2019-09-05 12:01:40 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 12:01:40 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:01:40 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:01:40 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:01:40 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:02:04 --> Severity: Notice --> Undefined property: stdClass::$UserId C:\xampps\htdocs\payroll\admin\application\controllers\Login.php 32
+ERROR - 2019-09-05 12:02:04 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 12:02:04 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:02:04 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:02:04 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:02:04 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:03:21 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:03:21 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:03:21 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:03:21 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:03:21 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 12:03:37 --> Severity: Notice --> Undefined variable: session C:\xampps\htdocs\payroll\admin\application\controllers\Login.php 57
+ERROR - 2019-09-05 12:03:44 --> Severity: Notice --> Undefined property: stdClass::$UserId C:\xampps\htdocs\payroll\admin\application\controllers\Login.php 32
+ERROR - 2019-09-05 12:03:44 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 12:03:44 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:03:44 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:03:44 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:03:44 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:03:55 --> Severity: Notice --> Undefined variable: session C:\xampps\htdocs\payroll\admin\application\controllers\Login.php 57
+ERROR - 2019-09-05 12:04:41 --> Severity: Notice --> Undefined property: stdClass::$UserId C:\xampps\htdocs\payroll\admin\application\controllers\Login.php 32
+ERROR - 2019-09-05 12:04:41 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 12:04:41 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:04:41 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:04:41 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:04:41 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:06:47 --> Severity: Notice --> Undefined variable: session C:\xampps\htdocs\payroll\admin\application\controllers\Login.php 57
+ERROR - 2019-09-05 12:06:54 --> Severity: Notice --> Undefined property: stdClass::$UserId C:\xampps\htdocs\payroll\admin\application\controllers\Login.php 32
+ERROR - 2019-09-05 12:06:54 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 12:06:54 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:06:54 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:06:54 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:06:54 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:07:02 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:07:02 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 12:07:02 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:07:02 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:07:02 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:07:04 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 12:07:06 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 12:11:15 --> Severity: Notice --> Undefined property: stdClass::$UserId C:\xampps\htdocs\payroll\admin\application\controllers\Login.php 32
+ERROR - 2019-09-05 12:11:15 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 12:11:15 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:11:15 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:11:15 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:11:15 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:11:52 --> Severity: Notice --> Undefined property: stdClass::$UserId C:\xampps\htdocs\payroll\admin\application\controllers\Login.php 32
+ERROR - 2019-09-05 12:11:52 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 12:11:52 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:11:52 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:11:52 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:11:52 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:11:54 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 12:11:54 --> 404 Page Not Found: Default/cdn-cgi
+ERROR - 2019-09-05 12:13:12 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 12:13:12 --> 404 Page Not Found: Default/cdn-cgi
+ERROR - 2019-09-05 12:15:12 --> Severity: error --> Exception: Call to undefined function peint_r() C:\xampps\htdocs\payroll\admin\application\controllers\Adminmaster.php 112
+ERROR - 2019-09-05 12:17:10 --> Severity: Notice --> Undefined variable: UserId C:\xampps\htdocs\payroll\admin\application\views\common\header.php 167
+ERROR - 2019-09-05 12:17:10 --> Severity: Notice --> Undefined variable: UserId C:\xampps\htdocs\payroll\admin\application\views\common\header.php 179
+ERROR - 2019-09-05 12:17:10 --> Severity: Notice --> Undefined variable: UserId C:\xampps\htdocs\payroll\admin\application\views\common\header.php 180
+ERROR - 2019-09-05 12:18:17 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 12:18:17 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:18:17 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:18:17 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:18:17 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:19:51 --> Severity: error --> Exception: Too few arguments to function Adminmaster::admin_master_profile(), 0 passed in C:\xampps\htdocs\payroll\admin\system\core\CodeIgniter.php on line 532 and exactly 1 expected C:\xampps\htdocs\payroll\admin\application\controllers\Adminmaster.php 108
+ERROR - 2019-09-05 12:20:26 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 12:20:26 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:20:26 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:20:26 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:20:26 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:20:48 --> Severity: Notice --> Undefined property: stdClass::$UserId C:\xampps\htdocs\payroll\admin\application\controllers\Login.php 32
+ERROR - 2019-09-05 12:20:49 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 12:20:49 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:20:49 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:20:49 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:20:49 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:21:53 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 12:21:53 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:21:53 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:21:53 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:21:53 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:25:31 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 12:25:31 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:25:31 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:25:31 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:25:31 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:26:39 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 12:26:39 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:26:39 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:26:39 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:26:39 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 12:26:54 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 12:26:54 --> 404 Page Not Found: Default/cdn-cgi
+ERROR - 2019-09-05 12:27:58 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 12:27:58 --> 404 Page Not Found: Default/cdn-cgi
+ERROR - 2019-09-05 12:29:27 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 12:29:28 --> 404 Page Not Found: Default/cdn-cgi
+ERROR - 2019-09-05 12:30:39 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 12:30:39 --> 404 Page Not Found: Default/cdn-cgi
+ERROR - 2019-09-05 12:32:13 --> Severity: error --> Exception: syntax error, unexpected ''PinCode'' (T_CONSTANT_ENCAPSED_STRING), expecting ')' C:\xampps\htdocs\payroll\admin\application\models\Adminmaster_model.php 279
+ERROR - 2019-09-05 12:32:13 --> Severity: error --> Exception: syntax error, unexpected ''PinCode'' (T_CONSTANT_ENCAPSED_STRING), expecting ')' C:\xampps\htdocs\payroll\admin\application\models\Adminmaster_model.php 279
+ERROR - 2019-09-05 12:32:14 --> Severity: error --> Exception: syntax error, unexpected ''PinCode'' (T_CONSTANT_ENCAPSED_STRING), expecting ')' C:\xampps\htdocs\payroll\admin\application\models\Adminmaster_model.php 279
+ERROR - 2019-09-05 12:32:23 --> 404 Page Not Found: Default/cdn-cgi
+ERROR - 2019-09-05 12:32:23 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 12:32:32 --> 404 Page Not Found: Default/cdn-cgi
+ERROR - 2019-09-05 12:32:32 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 12:32:57 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 12:32:57 --> 404 Page Not Found: Default/cdn-cgi
+ERROR - 2019-09-05 12:34:57 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-05 12:34:57 --> 404 Page Not Found: Default/cdn-cgi

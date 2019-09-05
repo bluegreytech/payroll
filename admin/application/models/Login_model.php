@@ -2,13 +2,6 @@
 
 class Login_model extends CI_Model
  {
-		// function login_where($table,$where)
-		// {
-		// 	$r = $this->db->get_where($table,$where);
-		// 	$res = $r->row();
-		// 	return $res;
-		// }
-
 		function login_where($table,$where)
 		{
 			$r = $this->db->get_where($table,$where);
@@ -16,12 +9,12 @@ class Login_model extends CI_Model
 			return $res;
 		}
 
-		public function changepass($UserId) 
+		public function changepass($AdminId) 
 		{
-			$this->db->select('UserId,Password');				
-			$this->db->where('UserId',$UserId);
+			$this->db->select('AdminId,Password');				
+			$this->db->where('AdminId',$AdminId);
 			$this->db->where('Password',md5($this->input->post('Password')));
-			$this->db->from('tbluser');
+			$this->db->from('tbladmin');
 			$query = $this->db->get();
 			if ($query->num_rows() == 1) 
 			{
@@ -29,8 +22,8 @@ class Login_model extends CI_Model
 					'Password'=>md5($this->input->post('NewPassword')),	
 				);
 				//print_r($pass_data);die;
-				$this->db->where('UserId',$UserId);
-				$res = $this->db->update('tbluser',$pass_data);
+				$this->db->where('AdminId',$AdminId);
+				$res = $this->db->update('tbladmin',$pass_data);
 				return 1;
 			}
 			else
@@ -44,36 +37,36 @@ class Login_model extends CI_Model
 		{
 			$this->db->select('*');				
 			$this->db->where('ResetPasswordCode',$ResetPasswordCode);
-			$this->db->from('tbluser');
+			$this->db->from('tbladmin');
 			$query = $this->db->get();
 			if($query->num_rows()>0)
 			{
-				return $query->row()->UserId; 
+				return $query->row()->AdminId; 
 				
 			}else{
 				return 2;
 			}
 		}
 
-		function updatePassword($UserId)
+		function updatePassword($AdminId)
 		{
 			$ResetPasswordCode=$this->input->post('ResetPasswordCode');
 			$this->db->select('*');				
-			$this->db->where('UserId',$UserId);
+			$this->db->where('AdminId',$AdminId);
 			$this->db->where('ResetPasswordCode',$ResetPasswordCode);
-			$this->db->from('tbluser');
+			$this->db->from('tbladmin');
 			$query = $this->db->get();
 			if($query->num_rows()>0)
 			{
 			    $data=array('Password'=>md5(trim($this->input->post('Password'))),'ResetPasswordCode'=>'');
-				$this->db->where(array('UserId'=>$this->input->post('UserId'),'ResetPasswordCode'=>trim($this->input->post('ResetPasswordCode'))));
-				$d=$this->db->update('tbluser',$data);
+				$this->db->where(array('AdminId'=>$this->input->post('AdminId'),'ResetPasswordCode'=>trim($this->input->post('ResetPasswordCode'))));
+				$d=$this->db->update('tbladmin',$data);
 
 								$this->db->select('*');
-								$this->db->where('UserId',$UserId);
-								$smtp2 = $this->db->get('tbluser');	
+								$this->db->where('AdminId',$AdminId);
+								$smtp2 = $this->db->get('tbladmin');	
 								foreach($smtp2->result() as $rows) {
-									$UserId = $rows->UserId;
+									$AdminId = $rows->AdminId;
 									$FirstName = $rows->FirstName;
 									$LastName = $rows->LastName;
 									$EmailAddress = $rows->EmailAddress;
@@ -133,7 +126,7 @@ class Login_model extends CI_Model
 			//echo site_url();die;
 			$email = trim($this->input->post('EmailAddress'));
 			$rnd=randomCode();
-			$query = $this->db->get_where('tbluser',array('EmailAddress'=>$email));
+			$query = $this->db->get_where('tbladmin',array('EmailAddress'=>$email));
 		//	echo $this->db->last_query(); die;
 			if($query->num_rows()>0)
 			{
@@ -151,14 +144,14 @@ class Login_model extends CI_Model
 								$ud=array(
 									'ResetPasswordCode'=>$rnd,
 								);	
-								$this->db->where('UserId',$row->UserId);
-								$this->db->update('tbluser',$ud);
+								$this->db->where('AdminId',$row->AdminId);
+								$this->db->update('tbladmin',$ud);
 
 								$this->db->select('*');
-								$this->db->where('UserId',$row->UserId);
-								$smtp2 = $this->db->get('tbluser');	
+								$this->db->where('AdminId',$row->AdminId);
+								$smtp2 = $this->db->get('tbladmin');	
 								foreach($smtp2->result() as $rows) {
-									$UserId = $rows->UserId;
+									$AdminId = $rows->AdminId;
 									$FirstName = $rows->FirstName;
 									$LastName = $rows->LastName;
 									$EmailAddress = $rows->EmailAddress;

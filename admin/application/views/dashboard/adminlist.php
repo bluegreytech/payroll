@@ -76,13 +76,8 @@
 											<th>Email Address</th>
 											<th>Contact Number</th>
 											<th>Gender</th>
-											<?php
-											if($this->session->userdata('RoleId')==1){
-											?>	
 											<th class="text-right">Action</th>
-											<?php
-											}
-											?>	
+											
 										</tr>
 									</thead>
 									<tbody>
@@ -120,23 +115,19 @@
 											<td><?php echo $adminlist->EmailAddress ;?></td>
 											<td><?php echo $adminlist->PhoneNumber ;?></td>
 											<td><?php echo $adminlist->Gender ;?></td>
-											<?php
-											if($this->session->userdata('RoleId')==1){
-											?>	
+											
 											<td class="text-right">
 												<div class="dropdown dropdown-action">
 													<a href="" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
 													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item" onClick="editadmin(<?php echo $adminlist->UserId;?>)" data-toggle="modal" data-target="#edit_salary" role="button">
+														<a class="dropdown-item" onClick="editadmin(<?php echo $adminlist->AdminId;?>)" data-toggle="modal" data-target="#edit_salary" role="button">
 														<i class="fa fa-pencil m-r-5"></i> Edit</a>
-														<a class="dropdown-item" onclick="deletedata(<?php echo $adminlist->UserId; ?>)"  data-toggle="modal" data-target="#delete_admin"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-														<!-- <a class="dropdown-item" href="<?php //echo base_url();?>Rights/rightsadd/<?php //echo $adminlist->UserId;?>"><i class="fa fa-trash-o m-r-5"></i> Add Rights</a> -->
+														<a class="dropdown-item" onclick="deletedata(<?php echo $adminlist->AdminId; ?>)"  data-toggle="modal" data-target="#delete_admin"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+														<!-- <a class="dropdown-item" href="<?php //echo base_url();?>Rights/rightsadd/<?php //echo $adminlist->AdminId;?>"><i class="fa fa-trash-o m-r-5"></i> Add Rights</a> -->
 													</div>
 												</div>
 											</td>
-											<?php
-											}
-											?>
+											
 										</tr>
 										<?php
 										$i++;
@@ -147,6 +138,8 @@
 							</div>
 						</div>
 					</div>
+
+					
                 </div>
 				<!-- /Page Content -->
 				
@@ -260,7 +253,7 @@
 							</div>
 							<div class="modal-body">
 								<form method="post" id="form_valid2" action="<?php echo base_url();?>Adminmaster/addadmin">
-								<input type="hidden" class="form-control" name="UserId" id="UserId" value="<?php $UserId?>">
+								<input type="hidden" class="form-control" name="AdminId" id="AdminId" value="<?php $AdminId?>">
 									<div class="profile-img-wrap edit-img">			
 												<img class="inline-block" src="<?php echo base_url(); ?>upload/default/avtar.jpg" alt="">
 										<div class="fileupload btn">
@@ -691,9 +684,9 @@ function editadmin(AdminId)
 		 data:{id:AdminId},
          success:function(response){
 			var response = JSON.parse(response);
-            //    console.log(response.UserId);
+            //    console.log(response.AdminId);
 			    console.log(response.Gender);
-            $('#UserId').val(response.UserId);
+            $('#AdminId').val(response.AdminId);
 			$('#FirstName').val(response.FirstName);
 			$('#LastName').val(response.LastName);
 			$('#EmailAddress').val(response.EmailAddress);
@@ -715,7 +708,7 @@ function editadmin(AdminId)
 }
 
 
-function deletedata(UserId){  
+function deletedata(AdminId){  
     $('#delete_admin').modal('show')
         $('#yes_btn').click(function(){
            
@@ -723,7 +716,7 @@ function deletedata(UserId){
                 $.ajax({
                 url: Url+'/Adminmaster/deleteadmin/',
                 type: "post",
-                data: {UserId:UserId} ,
+                data: {AdminId:AdminId} ,
                 success: function (response) {             
                // document.location.href = url+'adminmaster/adminlist/';          
             },

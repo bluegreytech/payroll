@@ -6,12 +6,13 @@ class Adminmaster_model extends CI_Model
 	{		
 			$this->db->select('*');
 			$this->db->where('EmailAddress',$this->input->post('EmailAddress'));
-			$query=$this->db->get('tbluser');
+			$query=$this->db->get('tbladmin');
 			if($query->num_rows() > 0)
 			{
 					return 3;
 			}
 			$code=rand(12,123456789);
+			$RoleId=$this->input->post('RoleId');
 			$FirstName=$this->input->post('FirstName');
 			$LastName=$this->input->post('LastName');
 			$EmailAddress=$this->input->post('EmailAddress');
@@ -22,7 +23,7 @@ class Adminmaster_model extends CI_Model
 			$PinCode=$this->input->post('PinCode');
 			$City=$this->input->post('City');
 			$data=array( 
-			'RoleId'=>1,
+			'RoleId'=>$RoleId,
 			'FirstName'=>$FirstName,
 			'LastName'=>$LastName,
 			'EmailAddress'=>$EmailAddress, 
@@ -37,14 +38,14 @@ class Adminmaster_model extends CI_Model
 			'CreatedOn'=>date('Y-m-d')
 			);
 			//print_r($data);die;
-			$this->db->insert('tbluser',$data);
+			$this->db->insert('tbladmin',$data);
 			$insert_id = $this->db->insert_id();
 
 				$this->db->select('*');
-				$this->db->where('UserId',$insert_id);
-				$smtp2 = $this->db->get('tbluser');	
+				$this->db->where('AdminId',$insert_id);
+				$smtp2 = $this->db->get('tbladmin');	
 				foreach($smtp2->result() as $rows) {
-					$UserId = $rows->UserId;
+					$AdminId = $rows->AdminId;
 					$FirstName = $rows->FirstName;
 					$LastName = $rows->LastName;
 					$EmailAddress = $rows->EmailAddress;
@@ -103,8 +104,8 @@ class Adminmaster_model extends CI_Model
 
 	function getuser(){
 		//$r=$this->db->select('*')
-		$r=$this->db->select('UserId,RoleId,CONCAT(FirstName ,LastName) AS FirstName,EmailAddress,DateofBirth,PhoneNumber,ProfileImage,Gender,Address,PinCode,CountryId,StateId,City,IsActive')
-					->from('tbluser')
+		$r=$this->db->select('AdminId,RoleId,CONCAT(FirstName ,LastName) AS FirstName,EmailAddress,DateofBirth,PhoneNumber,ProfileImage,Gender,Address,PinCode,CountryId,StateId,City,IsActive')
+					->from('tbladmin')
 					->where('RoleId',1)
 					->or_where('RoleId',2)
 					->get();
@@ -117,8 +118,8 @@ class Adminmaster_model extends CI_Model
 	function search($option,$keyword)
 	{
 			$keyword = str_replace('-', ' ', $keyword);
-			$this->db->select('UserId,RoleId,CONCAT(FirstName ,LastName) AS FirstName,EmailAddress,DateofBirth,PhoneNumber,ProfileImage,Gender,Address,PinCode,CountryId,StateId,City,IsActive');
-			$this->db->from('tbluser');
+			$this->db->select('AdminId,RoleId,CONCAT(FirstName ,LastName) AS FirstName,EmailAddress,DateofBirth,PhoneNumber,ProfileImage,Gender,Address,PinCode,CountryId,StateId,City,IsActive');
+			$this->db->from('tbladmin');
 			//$this->db->select('*');
 			$this->db->where('RoleId', 1);
 			$this->db->or_where('RoleId', 2);
@@ -135,7 +136,7 @@ class Adminmaster_model extends CI_Model
 				{
 					$this->db->where('PhoneNumber',$keyword);
 				} 
-			   	$this->db->order_by('UserId','desc');
+			   	$this->db->order_by('AdminId','desc');
 				// if($type == "result")
 				// {
 				// 	$this->db->limit($limit,$offset);
@@ -158,8 +159,8 @@ class Adminmaster_model extends CI_Model
 
 	function getdata($id){
 		$query=$this->db->select('*')
-			->from('tbluser')
-			->where('UserId',$id)
+			->from('tbladmin')
+			->where('AdminId',$id)
 			->get();
 			return $query->row_array();
 	}
@@ -167,9 +168,9 @@ class Adminmaster_model extends CI_Model
 	function updateadmin()
 	{	
 		     
-		$UserId=$this->input->post('UserId');
+		$AdminId=$this->input->post('AdminId');
 		$data=array(
-			'UserId'=>$this->input->post('UserId'),
+			'AdminId'=>$this->input->post('AdminId'),
 			'FirstName'=>$this->input->post('FirstName'),
 			'LastName'=>$this->input->post('LastName'),
 			'EmailAddress'=>$this->input->post('EmailAddress'),
@@ -182,8 +183,8 @@ class Adminmaster_model extends CI_Model
 			'City'=>$this->input->post('City')
 				);
 			// print_r($data);die;
-			$this->db->where("UserId",$UserId);
-			$this->db->update('tbluser',$data);	
+			$this->db->where("AdminId",$AdminId);
+			$this->db->update('tbladmin',$data);	
 			return 1;	      
 	}
 
@@ -192,7 +193,7 @@ class Adminmaster_model extends CI_Model
 
 
 	function updatedata()
-	{		
+	{
 		//echo "<pre>";print_r($_FILES);die;
 		 $user_image='';
          //$image_settings=image_setting();
@@ -263,33 +264,32 @@ class Adminmaster_model extends CI_Model
 					$user_image=$this->input->post('pre_profile_image');
 				}
 			}
-		//print_r($user_image);die;
-				//	echo $this->session->userdata('UserId');die;
+			//print_r($user_image);die;
+				//	echo $this->session->userdata('AdminId');die;
 		$data=array(
 			
 			'FirstName'=>$this->input->post('FirstName'),
 			'LastName'=>$this->input->post('LastName'),
-			//'EmailAddress'=>$this->input->post('EmailAddress'),
 			'DateofBirth'=>$this->input->post('DateofBirth'),
 			'PhoneNumber'=>$this->input->post('PhoneNumber'),
 			'Gender'=>$this->input->post('Gender'),
 		    'ProfileImage'=>$user_image,
-			'Address'=>$this->input->post('Address')
-			//'PinCode'=>$this->input->post('PinCode')
+			'Address'=>$this->input->post('Address'),
+			'PinCode'=>$this->input->post('PinCode')
 				);
 			//echo "<pre>"; print_r($data);die;
-			$this->db->where("UserId",$this->session->userdata('UserId'));
-			$this->db->update('tbluser',$data);	
+			$this->db->where("AdminId",$this->session->userdata('AdminId'));
+			$this->db->update('tbladmin',$data);	
 			//echo $this->db->last_query();die;
 			return 1;	      
 	}
 
-	public function changepass($UserId) 
+	public function changepass($AdminId) 
 	{
-		$this->db->select('UserId,Password');				
-		$this->db->where('UserId',$UserId);
+		$this->db->select('AdminId,Password');				
+		$this->db->where('AdminId',$AdminId);
 		$this->db->where('Password',md5($this->input->post('Password')));
-		$this->db->from('tbluser');
+		$this->db->from('tbladmin');
 		$query = $this->db->get();
 		if ($query->num_rows() == 1) 
 		{
@@ -297,14 +297,14 @@ class Adminmaster_model extends CI_Model
 				'Password'=>md5($this->input->post('NewPassword')),	
 			);
 			//print_r($pass_data);die;
-			$this->db->where('UserId',$UserId);
-			$res = $this->db->update('tbluser',$pass_data);
+			$this->db->where('AdminId',$AdminId);
+			$res = $this->db->update('tbladmin',$pass_data);
 
 			$this->db->select('*');
-					$this->db->where('UserId',$UserId);
-					$smtp2 = $this->db->get('tbluser');	
+					$this->db->where('AdminId',$AdminId);
+					$smtp2 = $this->db->get('tbladmin');	
 					foreach($smtp2->result() as $rows) {
-						$UserId = $rows->UserId;
+						$AdminId = $rows->AdminId;
 						$FirstName = $rows->FirstName;
 						$LastName = $rows->LastName;
 						$EmailAddress = $rows->EmailAddress;
