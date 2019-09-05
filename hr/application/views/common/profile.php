@@ -129,7 +129,7 @@
 											?>
 												<div class="fileupload btn">
 													<span class="btn-text">Upload</span>
-														<input type="hidden" name="pre_profile_image" class="form-control">
+														<input type="hidden" name="pre_profile_image" class="form-control" value="<?php echo $ProfileImage; ?>">
 													<input  type="file" name="ProfileImage" class="upload" onchange="readURL(this);">
 													
 												</div>
@@ -161,7 +161,7 @@
 													<?php// echo $endDate = date('d/m/Y', strtotime($DateofBirth))?>
 														<label>Date of Birth</label>
 														<div class="cal-icon">
-															<input class="form-control datetimepicker" type="text" name="DateofBirth" id="DateofBirth" value="<?php if($DateofBirth!='0000-00-00'){ echo date('d-m-Y', strtotime($DateofBirth));}else{ echo "DD-MM-YYYY"; } ?>">
+															<input class="form-control datetimepicker" type="text" name="DateofBirth" id="DateofBirth" value="<?php  if($DateofBirth!='0000-00-00'){ echo date('d/m/Y', strtotime($DateofBirth));} ?>">
 														</div>
 														
 													</div>
@@ -299,11 +299,11 @@
 		
 		<script type="text/javascript">
 				$('#DateofBirth').datetimepicker({
-				  	 format: 'DD-MM-YYYY',
+				  	 format: 'DD/MM/YYYY',
 					 maxDate: moment(),
 					 ignoreReadonly: true,
-					  todayBtn: true,
-				});
+					// setDate: new Date("<?php //echo  ($DateofBirth!='0000-00-00')  ? date('d/m/Y', strtotime($DateofBirth)) : ''; ?>"),
+				}).val('<?php echo  ($DateofBirth!='0000-00-00')  ? date('d/m/Y', strtotime($DateofBirth)) : ''; ?>');
 
 		</script>
 

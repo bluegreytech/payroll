@@ -1,4 +1,5 @@
 ﻿<!DOCTYPE html>
+
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -7,7 +8,7 @@
 		<meta name="keywords" content="">
         <meta name="author" content="">
         <meta name="robots" content="noindex, nofollow">
-        <title>Payroll System - Login</title>
+        <title>Payroll System - Reset Password</title>
 		
 		<!-- Favicon -->
         <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url(); ?>default/img/favicon.png">
@@ -34,11 +35,7 @@
 					
 					<div class="account-box">
 						<div class="account-wrapper">
-							<!-- Account Logo -->
-							<!--div class="account-logo">
-								<a href="index.php"><img src="assets\img\logo2.png" alt="Payroll System"></a>
-							</div-->
-							<!-- /Account Logo -->
+							
 							<?php if(($this->session->flashdata('error'))){ ?>
 									<div class="alert alert-danger" id="errorMessage">
 									<strong> <?php echo $this->session->flashdata('error'); ?></strong> 
@@ -58,16 +55,18 @@
 						
 							
 							<!-- Account Form -->
-							<form method="post" action="<?php echo base_url();?>Login/resetpassword/<?php echo $ResetPasswordCode;?>" id="form_valid">
+							 <?php $attributes = array('name'=>'frm_reset','id'=>'frm_restpwd','class'=>'reset-form');
+                       			 echo form_open('home/reset_password/'.$code,$attributes); ?>
 							<div class="form-group">
 									<label>New password</label>
-									<input type="hidden" name="ResetPasswordCode" value="<?php echo $ResetPasswordCode ?>">
-									<input type="hidden" name="UserId" value="<?php echo $UserId ?>">	
-									<input type="password" class="form-control" name="Password"  id="Password"  minlength="8" maxlength="15" placeholder="Enter new password">
+								
+									<input type="hidden" name="hr_id" value="<?php echo $hr_id ?>">	
+									 <input type="hidden"   value="<?php echo $code; ?>" name="code">
+									<input type="password" class="form-control" name="Password"  id="Password"   placeholder="Enter new password">
 								</div>
 								<div class="form-group">
 									<label>Retype password</label>
-									<input type="password" class="form-control" name="ConfirmPassword" minlength="8" maxlength="15" placeholder="Enter confirm new password">
+									<input type="password" class="form-control" name="ConfirmPassword" placeholder="Enter confirm new password">
 								</div>
 							
 								<div class="form-group text-center">
@@ -130,11 +129,11 @@ $(function() {
 });
 $(document).ready(function()
 {
-		$("#form_valid").validate(
+		$("#frm_restpwd").validate(
 		{
 					rules: {
 
-						Password: {
+						Password:{
 							required: true,
 								},	
 						ConfirmPassword: {
@@ -145,15 +144,7 @@ $(document).ready(function()
 
 				messages:{
 
-						Password: {
-								required: "Please enter your old password",
-								},
-						ConfirmPassword: {
-								required: "Please enter confirm password",
-								equalTo:"Your password did not matched",
-								pattern : "Enter only characters and numbers",
-								minlength: "Please enter at least 8 and maximum to 15 letters!",
-								},
+					
 						
 			}
 				

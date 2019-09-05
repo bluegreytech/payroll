@@ -5,15 +5,15 @@ class Login_model extends CI_Model
    
 
     function updatePassword()
-    {
+    {  //echo "<pre>";print_r($_POST);die;
         $code=$this->input->post('code');
-        $query=$this->db->get_where('tbladmin',array('PasswordResetCode'=>$code));
+        $query=$this->db->get_where('tblhr',array('PasswordResetCode'=>$code));
         if($query->num_rows()>0)
         {
           $data=array('Password'=>md5(trim($this->input->post('Password'))),'PasswordResetCode'=>'');
-            $this->db->where(array('AdminId'=>$this->input->post('AdminId'),'PasswordResetCode'=>trim($this->input->post('code'))));
+            $this->db->where(array('hr_id'=>$this->input->post('hr_id'),'PasswordResetCode'=>trim($this->input->post('code'))));
            // print_r($data);die;
-            $d=$this->db->update('tbladmin',$data);
+            $d=$this->db->update('tblhr',$data);
             return $d;
           
         }else
@@ -266,12 +266,12 @@ class Login_model extends CI_Model
     if($query->num_rows()>0)
     {
       $row = $query->row();
-      $admin_status=$row->IsActive;
-     // echo $admin_status;die;
-       if($admin_status =='Inactive')
+      $hr_status=$row->IsActive;
+     // echo $hr_status;die;
+       if($hr_status =='Inactive')
       {
          return "3"; 
-      }elseif($admin_status =='Active'){
+      }elseif($hr_status =='Active'){
 
                   if(!empty($row) && $row->EmailAddress != "")
                   {
@@ -279,8 +279,8 @@ class Login_model extends CI_Model
                     $ud=array('PasswordResetCode'=>$rnd,
                       //s'password' => MD5($rpass)
                     );
-                    $this->db->where('AdminId',$row->AdminId);
-                    $this->db->update('tbladmin',$ud);
+                    $this->db->where('hr_id',$row->hr_id);
+                    $this->db->update('tblhr',$ud);
                     
                     $email_template=$this->db->query("select * from ".$this->db->dbprefix('tblemail_template')." where task='Forgot Password by admin'");
                           $email_temp=$email_template->row();
@@ -307,7 +307,7 @@ class Login_model extends CI_Model
                     $email_message=str_replace('{email}',$email,$email_message);
                     $email_message=str_replace('{reset_link}',$login_link,$email_message);
                     $str=$email_message; //die;
-                     echo "<pre>";print_r($str);die;
+                    echo "<pre>";print_r($str);die;
                     $email_config = Array(
                     'protocol'  => 'smtp',
                     'smtp_host' => 'relay-hosting.secureserver.net',
@@ -320,7 +320,6 @@ class Login_model extends CI_Model
                     'charset'=>'utf-8',
                     'header'=> 'MIME-Version: 1.0',
                     'header'=> 'Content-type:text/html;charset=UTF-8',
-                   
                     );
 
                         
@@ -357,10 +356,10 @@ class Login_model extends CI_Model
     //reset password
     function checkResetCode($code='')
   {
-    $query=$this->db->get_where('tbladmin',array('PasswordResetCode'=>$code));
+    $query=$this->db->get_where('tblhr',array('PasswordResetCode'=>$code));
     if($query->num_rows()>0)
     {
-      return $query->row()->AdminId; 
+      return $query->row()->hr_id; 
       
     }else{
       return '';
@@ -369,15 +368,15 @@ class Login_model extends CI_Model
         
  
 
-  function updateAdminPassword(){
-    $id=$this->session->userdata('AdminId'); 
+  function updateHrPassword(){
+    $id=$this->session->userdata('hr_id'); 
 
     $data = array('Password' => md5($this->input->post('password')));
-    $query=$this->db->where(array('AdminId'=>$id))->get_where('tbladmin');
+    $query=$this->db->where(array('hr_id'=>$id))->get_where('tblhr');
     if($query->num_rows()>0){
-      $this->db->where(array('AdminId'=>$id));
-      $this->db->update('tbladmin',$data);
-      $query2 = $this->db->get_where('tbladmin',array('AdminId'=>$id));
+      $this->db->where(array('hr_id'=>$id));
+      $this->db->update('tblhr',$data);
+      $query2 = $this->db->get_where('tblhr',array('hr_id'=>$id));
       $row = $query2->row();
       return true;
     }else{
