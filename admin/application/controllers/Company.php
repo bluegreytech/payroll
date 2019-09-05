@@ -6,7 +6,6 @@ class Company extends CI_Controller
 	public function __construct() {
         parent::__construct();
 		$this->load->model('Company_model');
-		$this->load->model('Rights_model');
 	}
 
 	public function checkcode($code='')
@@ -120,8 +119,8 @@ class Company extends CI_Controller
 				}
 		} 
 		$data['stateData']=$this->Company_model->list_state();
-		$data['complianceData']=$this->Company_model->list_compliance();
-		$data['companytypeData']=$this->Company_model->list_companytype();
+		$data['complianceData']=$this->Company_model->list_complianceto();
+		$data['companytypeData']=$this->Company_model->list_companyto();
 		//print_r($data['stateData']);die;
 		$this->load->view('Company/companyadd',$data);	
 	}

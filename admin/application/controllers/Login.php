@@ -8,6 +8,7 @@ class Login extends CI_Controller {
       	parent::__construct();
 		$this->load->model('Login_model'); 
     }
+	
 	function index()
     {
 			if($this->input->post('logins'))
@@ -18,36 +19,53 @@ class Login extends CI_Controller {
 					$where = array(
 					"EmailAddress"=>$EmailAddress,
 					"Password"=>$Password,
-					"IsActive"=>$IsActive
 					);
-					$log = $this->Login_model->login_where('tbluser',$where);   
-					      
+					$log = $this->Login_model->login_where('tbladmin',$where);         
 					$cnt = count($log);
-					if($cnt>0)
-					{
-						$session= array(
-								'UserId'=> $log->UserId,
-								'FirstName'=> $log->FirstName,
-								'LastName'=> $log->LastName,
-								'RoleId'=> $log->RoleId,
-								'EmailAddress'=> $log->EmailAddress,
-								'ProfileImage'=>$log->ProfileImage,		
-							);
-							
-						$this->session->set_userdata($session);
-						$this->session->set_flashdata('success','User Login successfully!');
-						redirect('Dashboard');
-					}
-					else
-					{
-						$this->session->set_userdata($session);
-						$this->session->set_flashdata('error', 'Invalid Username or Password!');
-						redirect('Login');	
-					} 
+					
+						if($cnt>0)
+						{
+							if($IsActive == $log->IsActive)
+							{
+								
+									$session= array(
+										'AdminId'=> $log->AdminId,
+										'FirstName'=> $log->FirstName,
+										'LastName'=> $log->LastName,
+										'RoleId'=> $log->RoleId,
+										'EmailAddress'=> $log->EmailAddress,
+										'ProfileImage'=>$log->ProfileImage,		
+									);
+									$this->session->set_userdata($session);
+									$this->session->set_flashdata('success','User Login successfully!');
+									redirect('Dashboard');
+								
+								
+								
+									
+								
+							}
+							else
+							{
+									$this->session->set_userdata($session);
+									$this->session->set_flashdata('warning','You are not activate please contact to admin!');
+									redirect('Login');	
+							}
+						}
+						else
+						{
+							$this->session->set_userdata($session);
+							$this->session->set_flashdata('error', 'Invalid Username or Password!');
+							redirect('Login');	
+						} 
+					
+					
+					
 				}
 				$this->load->view('common/login');
 			
     }
+
 	
 	public function logout()
 	{

@@ -12,12 +12,10 @@ class Hr_model extends CI_Model
 					return 3;
 			}
 			$code=rand(12,123456789);
-
-			$FirstName=$this->input->post('FirstName');
-			$LastName=$this->input->post('LastName');
+			$FullName=$this->input->post('FullName');
 			$EmailAddress=$this->input->post('EmailAddress');
 			$DateofBirth=$this->input->post('DateofBirth');
-			$PhoneNumber=$this->input->post('PhoneNumber');
+			$Contact=$this->input->post('Contact');
 			$Gender=$this->input->post('Gender');
 			$Address=$this->input->post('Address');
 			$PinCode=$this->input->post('PinCode');
@@ -26,26 +24,23 @@ class Hr_model extends CI_Model
 			$companyid=$this->input->post('companyid');
 			$data=array( 
 			'RoleId'=>3,
-			'FirstName'=>$FirstName,
-			'LastName'=>$LastName,
+			'FullName'=>$FullName,
 			'EmailAddress'=>$EmailAddress, 
-			'DateofBirth'=>$DateofBirth, 
 			'Password'=>md5($code),
-			'PhoneNumber'=>$PhoneNumber,
-			'Gender'=>$Gender,
 			'Address'=>$Address,
-			'PinCode'=>$PinCode,
+			'Contact'=>$Contact,
+			'DateofBirth'=>$DateofBirth, 
 			'City'=>$City,
+			'PinCode'=>$PinCode,
+			'Gender'=>$Gender,
 			'IsActive'=>$IsActive,
 			'CreatedOn'=>date('Y-m-d')
 			);
 		//	print_r($data);die;
 			$this->db->insert('tbluser',$data);
 			$insert_id = $this->db->insert_id();
-
-			$insert_id = $this->db->insert_id();
 			$data2=array( 
-				'UserId'=>$insert_id,
+				'hr_id'=>$insert_id,
 				'companyid'=>$companyid,
 				'isactive'=>$IsActive,
 				'createdby'=>1,
@@ -187,6 +182,7 @@ class Hr_model extends CI_Model
 		function list_company(){
 			$this->db->select('*');
 			$this->db->from('tblcompany');
+			$this->db->where('isactive',1);
 			$r = $this->db->get();
 			return $query=$r->result();
 	}
@@ -196,23 +192,24 @@ class Hr_model extends CI_Model
 			$this->db->from('tbluser as t1');
 			$this->db->join('tblhr as t2', 't1.UserId = t2.UserId', 'LEFT');
 			$this->db->join('tblcompany as t3', 't2.companyid = t2.companyid', 'LEFT');
-			$this->db->where('t1.UserId',32);
+			$this->db->where('t1.UserId',$UserId);
 			$query = $this->db->get();
 			return $query->row_array();
 	}
 
 	function updatehr()
-	{	
-		     
+	{		     
 		$UserId=$this->input->post('UserId');
+		//  $hrid=$this->input->post('hrid');
+		// $companyid=$this->input->post('companyid');
+		
 		$data=array(
-			'UserId'=>$this->input->post('UserId'),
-			'FirstName'=>$this->input->post('FirstName'),
-			'LastName'=>$this->input->post('LastName'),
+			'hr_id'=>$this->input->post('hr_id'),
+			'FullName'=>$this->input->post('FullName'),
 			'EmailAddress'=>$this->input->post('EmailAddress'),
 			'DateofBirth'=>$this->input->post('DateofBirth'),
-			'PhoneNumber'=>$this->input->post('PhoneNumber'),
-			'ProfileImage'=>$this->input->post('ProfileImage'),
+			'Contact'=>$this->input->post('Contact'),
+			//'ProfileImage'=>$this->input->post('ProfileImage'),
 			'Gender'=>$this->input->post('Gender'),
 			'Address'=>$this->input->post('Address'),
 			'PinCode'=>$this->input->post('PinCode'),
@@ -220,9 +217,19 @@ class Hr_model extends CI_Model
 			'IsActive'=>$this->input->post('IsActive')
 				);
 			// print_r($data);die;
-			$this->db->where("UserId",$UserId);
-			$this->db->update('tbluser',$data);	
-			return 1;	      
+			$this->db->where("hr_id",$hr_id);
+			$this->db->update('tblhr',$data);	
+			return 1;
+			
+			// if($hrid!=''){
+			// 	$data2=array(
+			// 		'companyid'=>$this->input->post('companyid')
+			// 		  );
+			// 		$this->db->where("hrid",$hrid);
+			// 		$this->db->update('tblhr',$data2);
+			// 		return 1;		
+			// 	}
+				      
 	}
 
 

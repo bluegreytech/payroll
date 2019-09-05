@@ -27,9 +27,9 @@ class Rights extends CI_Controller
 		//print_r($UserId);die;
 		$data=array();
 		$data['UserId']=$UserId;
-		$data['rightsData']=$this->Rights_model->getdata($UserId);	
-		//$data['rightsData']=$this->Rights_model->list_rights();
-		echo "<pre>";print_r($data['rightsData']);die;
+		//$data['rightsData']=$this->Rights_model->getdata($UserId);	
+		$data['rightsData']=$this->Rights_model->list_rights();
+		//echo "<pre>";print_r($data['rightsData']);die;
 		$this->load->view('rights/rightsadd',$data);
 	}
 

@@ -7,27 +7,16 @@
 			<input type="hidden" name="RoleId" value="<?php echo $roleid=$this->session->userdata('RoleId');?>">
 				<!-- Page Content -->
                 <div class="content container-fluid">
-					<?php if($rightsData)
-					{                             
-						foreach($rightsData as $ritdata)
-						{ ?>
+				
 					<!-- Page Title -->
 					<div class="row">
 						<div class="col">
 							<h4 class="page-title">List of Company  </h4>
-						</div>
-						<?php 
-								 if($ritdata->add==1)
-								 {
-									 ?>
+						</div>	
 									<div class="col-12 text-right m-b-30">
 										<a href="<?php echo base_url();?>Company/companyadd" class="btn add-btn"><i class="fa fa-plus">
 										</i> Add Company</a>			
-									</div>
-						<?php
-								 }
-						?>
-						
+									</div>			
 					</div>
 					<!-- /Page Title -->
 					<?php if(($this->session->flashdata('error'))){ ?>
@@ -76,75 +65,55 @@
 					
 					<!-- Search Filter -->
 					
-
-					<div class="row staff-grid-row">
-						<?php                           
-							foreach($companyData as $comp)
-							{
-						?>
-						
-							<div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
-								<div class="profile-widget">
-									<div class="profile-img">
-										<a href="client-profile.php" class="avatar">
-										<?php
-										if($comp->companylogo!='')
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-responsive">
+								<!-- <table class="display" style="width:100%" id="example"> -->
+								 <table class="table table-striped custom-table datatable" class="display" style="width:100%">
+									<thead>
+										<tr>
+											<th>No</th>
+											<th>Company Name</th>
+											<th>Contact Number</th>
+											<th class="text-right">Action</th>
+											
+										</tr>
+									</thead>
+									<tbody>
+									<?php
+										$i=1;
+										if($companyData){                             
+										foreach($companyData as $comp)
 										{
-											?>
-												<img alt="" src="<?php echo base_url(); ?>default/img/profiles/avatar-19.jpg">
-											<?php
-										}
-										else
-										{
-											?>
-												<img alt="" src="<?php echo base_url(); ?>uploads/default/user_image.png">
-											<?php
-										}
-										?>
+									?>
+										<tr>
+										<td><?php echo $i;?></td>
+										<td><?php echo $comp->companyname ;?></td>
+										<td><?php echo $comp->comcontactnumber ;?></td>
 										
-										</a>
-									</div>
-									<?php
-									if($ritdata->update==1)
-								 	{
-									 ?>
-									<div class="dropdown profile-action">
-										<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-										<div class="dropdown-menu dropdown-menu-right">
-											<a class="dropdown-item" href="<?php echo base_url();?>Company/editcompany/<?php echo $comp->companyid;?>"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-											<a class="dropdown-item" onclick="deletedata(<?php echo $comp->companyid; ?>)" data-toggle="modal" data-target="#delete_client"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-										</div>
-									</div>
-									<?php
-									 }
-									?>
-									<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="client-profile.php">
-									<?php echo $comp->companyname;?></a></h4>
-									<h5 class="user-name m-t-10 mb-0 text-ellipsis"><a href="client-profile.php">Barry Cuda</a></h5>
+											<td class="text-right">
+												<div class="dropdown dropdown-action">
+													<a href="" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+													<div class="dropdown-menu dropdown-menu-right">
+														<a class="dropdown-item" href="<?php echo base_url();?>Company/editcompany/<?php echo $comp->companyid;?>" role="button">
+														<i class="fa fa-pencil m-r-5"></i> Edit</a>
+														<a class="dropdown-item" onclick="deletedata(<?php echo $comp->companyid; ?>)" data-toggle="modal" data-target="#delete_client"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+														<!-- <a class="dropdown-item" href="<?php //echo base_url();?>Rights/rightsadd/<?php //echo $comp->AdminId;?>"><i class="fa fa-trash-o m-r-5"></i> Add Rights</a> -->
+													</div>
+												</div>
+											</td>
+											
+										
 
-									<div class="small text-muted">
-									<?php 
-										if($comp->verificationcode!='')
-										{
-											echo "Verification Pending";
-										}
-										else
-										{
-											echo "Verification complete";
-										}
-									?>
-									</div>
-									<a href="#" class="btn btn-white btn-sm m-t-10">Message</a>
-									<a href="<?php echo base_url();?>Client/clientprofile" class="btn btn-white btn-sm m-t-10">View Profile</a>
-								</div>
+										</tr>
+										<?php
+										$i++;
+											} }
+										?>     
+									</tbody>
+								</table>
 							</div>
-
-							
-						<?php			
-							}
-						?>    
-
-<?php }}?>				
+						</div>
 					</div>
 
 
@@ -202,7 +171,8 @@
 		
 		<!-- Select2 JS -->
 		<script src="<?php echo base_url(); ?>default/js/select2.min.js"></script>
-		
+		<script src="<?php echo base_url(); ?>default/js/jquery.dataTables.min.js"></script>
+		<script src="<?php echo base_url(); ?>default/js/dataTables.bootstrap4.min.js"></script>
 		<!-- Custom JS -->
 		<script src="<?php echo base_url(); ?>default/js/app.js"></script>
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>

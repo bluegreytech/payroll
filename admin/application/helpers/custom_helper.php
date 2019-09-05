@@ -115,10 +115,10 @@
 		$CI =& get_instance();
 		
                 
-                if($CI->session->userdata('UserId')!='')
+                if($CI->session->userdata('AdminId')!='')
                 {
                     //check user active
-                    $a_data = get_one_admin($CI->session->userdata('UserId'));
+                    $a_data = get_one_admin($CI->session->userdata('AdminId'));
                     if($a_data->IsActive == '1'){
                      return true;
                     }
@@ -136,7 +136,7 @@
 	function get_one_admin($id)
 	{
 		$CI =& get_instance();
-		$query = $CI->db->get_where('tbluser',array('UserId'=>$id));
+		$query = $CI->db->get_where('tbladmin',array('AdminId'=>$id));
 		return $query->row();
 	}	
 	// --------------------------------------------------------------------
@@ -149,7 +149,7 @@
 	function get_authenticateadminID()
 	{		
 		$CI =& get_instance();
-		return $CI->session->userdata('admin_id');
+		return $CI->session->userdata('AdminId');
 	}
 	
 	
@@ -158,7 +158,7 @@
 	{
 		$CI =& get_instance();
 		
-			if($CI->session->userdata('admin_type')=='1')
+			if($CI->session->userdata('RoleId')=='1')
 			{
 				return true;
 			}

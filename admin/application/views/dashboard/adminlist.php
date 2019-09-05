@@ -76,13 +76,8 @@
 											<th>Email Address</th>
 											<th>Contact Number</th>
 											<th>Gender</th>
-											<?php
-											if($this->session->userdata('RoleId')==1){
-											?>	
 											<th class="text-right">Action</th>
-											<?php
-											}
-											?>	
+											
 										</tr>
 									</thead>
 									<tbody>
@@ -120,23 +115,19 @@
 											<td><?php echo $adminlist->EmailAddress ;?></td>
 											<td><?php echo $adminlist->PhoneNumber ;?></td>
 											<td><?php echo $adminlist->Gender ;?></td>
-											<?php
-											if($this->session->userdata('RoleId')==1){
-											?>	
+											
 											<td class="text-right">
 												<div class="dropdown dropdown-action">
 													<a href="" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
 													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item" onClick="editadmin(<?php echo $adminlist->UserId;?>)" data-toggle="modal" data-target="#edit_salary" role="button">
+														<a class="dropdown-item" onClick="editadmin(<?php echo $adminlist->AdminId;?>)" data-toggle="modal" data-target="#edit_salary" role="button">
 														<i class="fa fa-pencil m-r-5"></i> Edit</a>
-														<a class="dropdown-item" onclick="deletedata(<?php echo $adminlist->UserId; ?>)"  data-toggle="modal" data-target="#delete_admin"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-														<a class="dropdown-item" href="<?php echo base_url();?>Rights/rightsadd/<?php echo $adminlist->UserId;?>"><i class="fa fa-trash-o m-r-5"></i> Add Rights</a>
+														<a class="dropdown-item" onclick="deletedata(<?php echo $adminlist->AdminId; ?>)"  data-toggle="modal" data-target="#delete_admin"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+														<!-- <a class="dropdown-item" href="<?php //echo base_url();?>Rights/rightsadd/<?php //echo $adminlist->AdminId;?>"><i class="fa fa-trash-o m-r-5"></i> Add Rights</a> -->
 													</div>
 												</div>
 											</td>
-											<?php
-											}
-											?>
+											
 										</tr>
 										<?php
 										$i++;
@@ -147,6 +138,8 @@
 							</div>
 						</div>
 					</div>
+
+					
                 </div>
 				<!-- /Page Content -->
 				
@@ -162,72 +155,80 @@
 							</div>
 							<div class="modal-body">
 								<form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>Adminmaster/addadmin" id="form_valid">
-									<!-- <div class="row"> 
-										<div class="col-sm-6"> 
-											<div class="form-group">
-												<label>Select Staff</label>
-												<select class="select"> 
-													<option>John Doe</option>
-													<option>Richard Miles</option>
-												</select>
-											</div>
+									<div class="profile-img-wrap edit-img">			
+												<img class="inline-block" src="<?php echo base_url(); ?>upload/default/avtar.jpg" alt="">
+										<div class="fileupload btn">
+											<span class="btn-text">edit</span>
+											<input class="upload" type="file" name="pre_profile_image">
 										</div>
-										<div class="col-sm-6"> 
-											<label>Net Salary</label>
-											<input class="form-control" type="text">
-										</div>
-									</div> -->
+									</div>
 									<div class="row"> 
 										<div class="col-sm-6">
-										<div class="form-group">
-												<label>Upload profile</label>
-												
-												<input class="form-control" type="file" name="ProfileImage">
-											</div> 
+										
 											<div class="form-group">
-												<label>First Name</label>
-												
-												<input class="form-control" type="text" name="FirstName" Placeholder="Enter your first name" minlength="2" maxlength="50">
+												<label>First Name</label>	
+												<input class="form-control" tabindex="1" type="text" name="FirstName" Placeholder="Enter your first name" minlength="2" maxlength="50">
 											</div>
 											<div class="form-group">
 												<label>Email Address</label>
-												<input class="form-control" type="text" name="EmailAddress" Placeholder="Enter your email address" minlength="2" maxlength="50">
+												<input class="form-control" tabindex="3" type="email" name="EmailAddress" Placeholder="Enter your email address" minlength="2" maxlength="50">
 											</div>
 											<div class="form-group">
 												<label>Date of Birth</label>
-												<input class="form-control" id="datepicker1" type="text" name="DateofBirth" Placeholder="Enter your date of birth" readonly>
+												<input class="form-control" tabindex="5" id="datepicker1" type="text" name="DateofBirth" Placeholder="Enter your date of birth" readonly>
 														
 											</div>
 											<div class="form-group">
 												<label>Address</label>
-												<input class="form-control" type="text" name="Address" Placeholder="Enter your address" minlength="5" maxlength="500">
+												<input class="form-control" tabindex="7" type="text" name="Address" Placeholder="Enter your address" minlength="5" maxlength="500">
 											</div>
 											<div class="form-group">
 												<label>City</label>
-												<input class="form-control" type="text" name="City" Placeholder="Enter your city" minlength="2" maxlength="50">
+												<input class="form-control" tabindex="9" type="text" name="City" Placeholder="Enter your city" minlength="2" maxlength="50">
 											</div>
+
+											<div class="form-group">
+												<label>Isactive</label><br>
+												<label class="radio-inline" tabindex="12">
+													<input type="radio" name="isactive" checked value="1">Active
+												</label>
+												<label class="radio-inline" tabindex="13">
+													<input type="radio" name="isactive" value="0">Deactive
+												</label>
+											</div>
+											
 										</div>
 										<div class="col-sm-6">  
 											<div class="form-group">
 												<label>Last Name</label>
-												<input class="form-control" type="text" name="LastName" Placeholder="Enter your last name" minlength="2" maxlength="50">
+												<input class="form-control" tabindex="2" type="text" name="LastName" Placeholder="Enter your last name" minlength="2" maxlength="50">
 											</div> 
 											<div class="form-group">
 												<label>Contact Number</label>
-												<input class="form-control" type="text" name="PhoneNumber" Placeholder="Enter your contact number" minlength="10" maxlength="10" id="PhoneNumbers">
+												<input class="form-control" tabindex="4" type="text" name="PhoneNumber" Placeholder="Enter your contact number" minlength="10" maxlength="10" id="PhoneNumbers">
 											</div>
 											<div class="form-group">
 												<label>Gender</label>
-												<select class="select"> 
+												<select class="select" tabindex="6"> 
 													<option value="Male">Male</option>
 													<option value="Female">Female</option>
 												</select>
 											</div>
 											<div class="form-group">
 												<label>Pin-Code</label>
-												<input class="form-control" type="text" name="PinCode" id="PinCodeadd" Placeholder="Enter your pin-code"  minlength="6" maxlength="6">
+												<input class="form-control" tabindex="8" type="text" name="PinCode" id="PinCodeadd" Placeholder="Enter your pin-code"  minlength="6" maxlength="6">
+											</div>
+
+											<div class="form-group">
+												<label>Type of Role</label>
+												<select class="select" name="RoleId" tabindex="11"> 
+													<option value="" disabled>Select role</option>
+													<option value="1">Super Admin</option>
+													<option value="2">Admin</option>
+												</select>
 											</div>
 											
+												
 										</div>
 									</div>
 									<div class="submit-section">
@@ -252,64 +253,86 @@
 							</div>
 							<div class="modal-body">
 								<form method="post" id="form_valid2" action="<?php echo base_url();?>Adminmaster/addadmin">
-								<input type="hidden" class="form-control" name="UserId" id="UserId" value="<?php $UserId?>">
-									
+								<input type="hidden" class="form-control" name="AdminId" id="AdminId" value="<?php $AdminId?>">
+									<div class="profile-img-wrap edit-img">			
+												<img class="inline-block" src="<?php echo base_url(); ?>upload/default/avtar.jpg" alt="">
+										<div class="fileupload btn">
+											<span class="btn-text">edit</span>
+											<input class="upload" type="file" name="pre_profile_image">
+										</div>
+									</div>
 									<div class="row"> 
 										<div class="col-sm-6"> 
 											<div class="form-group">
 												<label>First Name</label>
 												
-												<input class="form-control" type="text" name="FirstName" Placeholder="Enter your first name" minlength="2" maxlength="50" id="FirstName">
+												<input class="form-control" tabindex="1" type="text" name="FirstName" Placeholder="Enter your first name" minlength="2" maxlength="50" id="FirstName">
 											</div>
 											<div class="form-group">
 												<label>Email Address</label>
-												<input class="form-control" type="text" name="EmailAddress" Placeholder="Enter your email address" minlength="2" maxlength="50" id="EmailAddress">
+												<input class="form-control" tabindex="3" type="email" name="EmailAddress" Placeholder="Enter your email address" minlength="2" maxlength="50" id="EmailAddress">
 											</div>
 											<div class="form-group">
 												<label>Date of Birth</label>
-												<input class="form-control" type="date" name="DateofBirth" Placeholder="Enter your date of birth" id="DateofBirth">			
+												<input class="form-control" tabindex="5" type="date" name="DateofBirth" Placeholder="Enter your date of birth" id="DateofBirth">			
 											</div>
 											<div class="form-group">
 												<label>Address</label>
-												<input class="form-control" type="text" name="Address" Placeholder="Enter your address" minlength="5" maxlength="500" id="Address">
+												<input class="form-control" tabindex="7" type="text" name="Address" Placeholder="Enter your address" minlength="5" maxlength="500" id="Address">
 											</div>
 											<div class="form-group">
 												<label>City</label>
-												<input class="form-control" type="text" name="City" Placeholder="Enter your city" minlength="2" maxlength="50" id="City">
+												<input class="form-control" tabindex="9" type="text" name="City" Placeholder="Enter your city" minlength="2" maxlength="50" id="City">
+											</div>
+
+											<div class="form-group">
+												<label class="col-form-label">IsActive</label><br>
+												<label class="radio-inline" tabindex="11">
+													<input type="radio" name="IsActive" value="1">Active
+												</label>
+												<label class="radio-inline" tabindex="12">
+													<input type="radio" name="IsActive"  value="0">Inactive
+												</label>	
 											</div>
 											
 										</div>
 										<div class="col-sm-6">  
 											<div class="form-group">
 												<label>Last Name</label>
-												<input class="form-control" type="text" name="LastName" Placeholder="Enter your last name" minlength="2" maxlength="50" id="LastName">
+												<input class="form-control" tabindex="2" type="text" name="LastName" Placeholder="Enter your last name" minlength="2" maxlength="50" id="LastName">
 											</div> 
 											<div class="form-group">
 												<label>Contact Number</label>
-												<input class="form-control" type="text" name="PhoneNumber" Placeholder="Enter your contact number" minlength="10" maxlength="10" id="PhoneNumber">
+												<input class="form-control" tabindex="4" type="text" name="PhoneNumber" Placeholder="Enter your contact number" minlength="10" maxlength="10" id="PhoneNumber">
 											</div>
 											<div class="form-group">
 												<label>Gender</label>
-												<select class="select" name="Gender" id="Gender"> 
+												<!-- <select class="select" name="Gender" id="Gender" tabindex="6"> 
 													<option value="Male">Male</option>
 													<option value="Female">Female</option>
-												</select>
+												</select> -->
+
+												<select class="select" name="Gender" tabindex="6">
+                                                    <option disabled="" selected="">Please Select</option>
+                                                    <option value="Male"<?php if($Gender=='Male'){ echo "selected";}?>>Male</option>
+                                                    <option value="Female"<?php if($Gender=='Female'){ echo "selected";}?>>Female</option>
+                                                                                                                
+                                            	 </select>
 											</div>
 											<div class="form-group">
 												<label>Pincode Number</label>
-												<input class="form-control" type="text" name="PinCode" Placeholder="Enter your pincode number" minlength="06" maxlength="06" id="PinCode">
+												<input class="form-control" tabindex="8" type="text" name="PinCode" Placeholder="Enter your pincode number" minlength="06" maxlength="06" id="PinCode">
+											</div>
+
+											<div class="form-group">
+												<label>Type of Role</label>
+												<select class="select" name="RoleId" tabindex="11"> 
+													<option value="1">Super Admin</option>
+													<option value="2">Admin</option>
+												</select>
 											</div>
 											
-											<div class="form-group">
-											<label class="col-form-label">IsActive<span class="text-danger">*</span></label><br>
-											<label class="radio-inline">
-												<input type="radio" name="IsActive"  value="1">Active
-											</label>
-											<label class="radio-inline">
-												<input type="radio" name="IsActive"  value="0">Inactive
-											</label>
 											
-									</div>
 										</div>
 									</div>
 									<div class="submit-section">
@@ -415,68 +438,25 @@
 </html>
 <script>
 			$('#datepicker1').datepicker();
-				 dateFormat: 'dd/mm/yy'  
-$(document).ready(function() {
-    $('#example').DataTable( {
-        dom: 'Bfrtip',
-        buttons: [
-            {
-                extend: 'excelHtml5',
-                title: 'Data export'
-            },
-            {
-                extend: 'pdfHtml5',
-                title: 'Data export'
-            },
-			{
-                extend: 'print',
-                title: 'Data export'
-            },
-        ]
-    } );
-} );
+					dateFormat: 'dd/mm/yy' ; 
+			$(function() { 
+				setTimeout(function() {
+			$('#errorMessage').fadeOut('fast');
+			}, 10000);  
+			});
 
-jQuery('#Gender').html(value);
-$(function() { 
-    setTimeout(function() {
-  $('#errorMessage').fadeOut('fast');
-}, 10000);  
-});
+			$(function() { 
+				setTimeout(function() {
+			$('#successMessage').fadeOut('fast');
+			}, 10000);  
+			});
 
-$(function() { 
-    setTimeout(function() {
-  $('#successMessage').fadeOut('fast');
-}, 10000);  
-});
+			$(function() { 
+				setTimeout(function() {
+			$('#warningMessage').fadeOut('fast');
+			}, 10000);  
+			});
 
-$(function() { 
-    setTimeout(function() {
-  $('#warningMessage').fadeOut('fast');
-}, 10000);  
-});
-
-$(document).ready(function()
-{
-
-	
-    // var table = $('#example').DataTable( {
-    //     responsive: true
-    // } );
- 
-	// $('#example').DataTable( {
-    //     dom: 'Bfrtip',
-    //     buttons: [
-    //         {
-    //             extend: 'excelHtml5',
-    //             title: 'Data export'
-    //         },
-    //         {
-    //             extend: 'pdfHtml5',
-    //             title: 'Data export'
-    //         }
-    //     ]
-    // } );
-	
 			$("#PhoneNumbers").on("input", function(evt) {
 			var self = $(this);
 			self.val(self.val().replace(/[^\d].+/, ""));
@@ -515,12 +495,15 @@ $(document).ready(function()
 
 			$('#add_salary').on('hidden.bs.modal', function () {
     			$(this).find('form').trigger('reset');
-			})
+			})			        
+</script>
 
-		$("#form_valid").validate(
-		{
+<script>
+$(document).ready(function()
+{
+				$("#form_valid").validate(
+				{
 					rules: {
-
 						FirstName: {
 							required: true,
 								},
@@ -549,10 +532,11 @@ $(document).ready(function()
 						City: {
 							required: true,
 								},
-					},
-
-				messages:{
-
+						RoleId: {
+							required: true,
+								},
+							},
+						messages:{		
 						FirstName: {
 							required: "Please enter a first name",
 								pattern : "Enter only characters and numbers and \"space , \" -",
@@ -588,93 +572,108 @@ $(document).ready(function()
 						City: {
 							required: "Please enter a city",
 							minlength: "Please enter at least 3 and maximum to 50 numbers!",
+								},
+						RoleId: {
+							required: "Please select type of role",
 								},	
-			}
-				
-		});
+								
+					}					
+				});	
 
 
-		$("#form_valid2").validate(
-		{
-					rules: {
 
-						FirstName: {
-							required: true,
-								},
-						LastName: {
-							required: true,
-								},
-						EmailAddress: {
-							required: true,
-								},		
-						DateofBirth: {
-							required: true,
-								},
-						Gender: {
-							required: true,
-								},
-						Address: {
-							required: true,
-								},
-						PhoneNumber: {
-							required: true,
-							digits: true,
-								},
-						PinCode: {
-							required: true,
-							digits: true,
-								},
-						City: {
-							required: true,
-								},
-					},
 
-				messages:{
+					$("#form_valid2").validate(
+					{
+								rules: {
+									FirstName: {
+										required: true,
+											},
+									LastName: {
+										required: true,
+											},
+									EmailAddress: {
+										required: true,
+											},		
+									DateofBirth: {
+										required: true,
+											},
+									Gender: {
+										required: true,
+											},
+									Address: {
+										required: true,
+											},
+									PhoneNumber: {
+										required: true,
+										digits: true,
+											},
+									PinCode: {
+										required: true,
+										digits: true,
+											},
+									City: {
+										required: true,
+											},
+									RoleId: {
+										required: true,
+											},
+								},
 
-						FirstName: {
-							required: "Please enter a first name",
-								pattern : "Enter only characters and numbers and \"space , \" -",
-								minlength: "Please enter at least 2 and maximum 50 letters!",
-								},
-						LastName: {
-							required: "Please enter a last name",
-								pattern : "Enter only characters and numbers and \"space , \" -",
-								minlength: "Please enter at least 2 and maximum 50 letters!",
-								},
-						EmailAddress: {
-							required: "Please enter a email address",
-								},
-						DateofBirth: {
-							required: "Please enter a date of birth",
-								},
-						Gender: {
-							required: "Please enter a gender",
-								},
-						'Address': {
-							required: "Please enter a address",
-							minlength: "Please enter at least 5 and maximum 500 letters!",
-								},	
-						PhoneNumber: {
-							required: "Please enter a contact number",
-							minlength: "Please enter at least 10 and maximum 13 numbers!",
-								},
-						PinCode: {
-							required: "Please enter a your area pincode number",
-							minlength: "Please enter at least 6 and maximum 6 numbers!",
-								},
-						City: {
-							required: "Please enter a city",
-							minlength: "Please enter at least 3 and maximum 50 numbers!",
-								},	
-			}
-				
-		});
-});					        
+						messages:{
+								FirstName: {
+									required: "Please enter a first name",
+										pattern : "Enter only characters and numbers and \"space , \" -",
+										minlength: "Please enter at least 2 and maximum 50 letters!",
+										},
+								LastName: {
+									required: "Please enter a last name",
+										pattern : "Enter only characters and numbers and \"space , \" -",
+										minlength: "Please enter at least 2 and maximum 50 letters!",
+										},
+								EmailAddress: {
+									required: "Please enter a email address",
+										},
+								DateofBirth: {
+									required: "Please enter a date of birth",
+										},
+								Gender: {
+									required: "Please enter a gender",
+										},
+								Address: {
+									required: "Please enter a address",
+									minlength: "Please enter at least 5 and maximum 500 letters!",
+										},	
+								PhoneNumber: {
+									required: "Please enter a contact number",
+									minlength: "Please enter at least 10 and maximum 13 numbers!",
+										},
+								PinCode: {
+									required: "Please enter a your area pincode number",
+									minlength: "Please enter at least 6 and maximum 6 numbers!",
+										},
+								City: {
+									required: "Please enter a city",
+									minlength: "Please enter at least 3 and maximum 50 numbers!",
+										},
+								RoleId: {
+									required: "Please select type of role",
+										},	
+							}
+								
+						});
+
+
+
+
+
+		});	
+
 </script>
 
 
-<SCRIPT>
 
+<SCRIPT>
 function editadmin(AdminId)
 {
 	Url="<?php echo base_url() ?>";
@@ -685,9 +684,9 @@ function editadmin(AdminId)
 		 data:{id:AdminId},
          success:function(response){
 			var response = JSON.parse(response);
-            //    console.log(response.UserId);
+            //    console.log(response.AdminId);
 			    console.log(response.Gender);
-            $('#UserId').val(response.UserId);
+            $('#AdminId').val(response.AdminId);
 			$('#FirstName').val(response.FirstName);
 			$('#LastName').val(response.LastName);
 			$('#EmailAddress').val(response.EmailAddress);
@@ -698,9 +697,8 @@ function editadmin(AdminId)
 			//$('#Gender').val(response.Gender);
 			//$("#Gender option:selected").val(response.Gender);
 		
-			$('#Gender').val(response.Gender);
-			//$("option[name=Gender][value=" + response.Gender + "]").attr('selected', 'selected');
-			//$("option[name=Gender][value=" + response.Gender + "]").attr('selected', 'selected');
+			//$('#Gender').val(response.Gender);
+			$("option[name=Gender][value=" + response.Gender + "]").attr('selected', 'selected');
 			$('#Address').val(response.Address);
 			$('#PinCode').val(response.PinCode);
 			$('#City').val(response.City);
@@ -710,7 +708,7 @@ function editadmin(AdminId)
 }
 
 
-function deletedata(UserId){  
+function deletedata(AdminId){  
     $('#delete_admin').modal('show')
         $('#yes_btn').click(function(){
            
@@ -718,7 +716,7 @@ function deletedata(UserId){
                 $.ajax({
                 url: Url+'/Adminmaster/deleteadmin/',
                 type: "post",
-                data: {UserId:UserId} ,
+                data: {AdminId:AdminId} ,
                 success: function (response) {             
                // document.location.href = url+'adminmaster/adminlist/';          
             },

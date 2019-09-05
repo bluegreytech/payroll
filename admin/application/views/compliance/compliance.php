@@ -58,7 +58,7 @@
 										<tr>
 											<td><?php echo $i;?></td>
 											<td><?php echo $comp->compliancename;?></td>
-											<td><?php echo $comp->compliancepercentage;?></td>
+											<td><?php echo $comp->compliancepercentage;?>%</td>
 											<td>
 												<?php 
 												if($comp->isactive=='1')
@@ -75,7 +75,6 @@
 												<div class="dropdown dropdown-action">
 													<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
 													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item"><i class="fa fa-download m-r-5"></i> Download</a>
 														<a class="dropdown-item" onClick="editcompliance(<?php echo $comp->complianceid;?>)" data-toggle="modal" data-target="#edit_policy"><i class="fa fa-pencil m-r-5"></i> Edit</a>
 														<a class="dropdown-item" onclick="deletedata(<?php echo $comp->complianceid; ?>)" data-toggle="modal" data-target="#delete_policy"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
 													</div>
@@ -111,12 +110,12 @@
 								<form method="post" id="form_valid">
 									<div class="form-group">
 										<label>Compliance Name <span class="text-danger">*</span></label>
-										<input class="form-control" type="text" name="compliancename" placeholder="Enter a compliance" minlength="2" maxlength="30">
+										<input class="form-control" type="text" name="compliancename" placeholder="Enter a compliance " minlength="2" maxlength="30">
 									</div>
 									
 									<div class="form-group">
 										<label>Compliance Percentage <span class="text-danger">*</span></label>
-										<input class="form-control" type="text" name="compliancepercentage" placeholder="Enter a compliance percentage" minlength="2" maxlength="20">
+										<input class="form-control" type="text" name="compliancepercentage" placeholder="Enter a compliance percentage : 12" minlength="2" maxlength="20" id="compliancepercentages">
 									</div>
 
 									<div class="col-md-6">
@@ -161,7 +160,7 @@
 									
 									<div class="form-group">
 										<label>Compliance Percentage <span class="text-danger">*</span></label>
-										<input class="form-control" type="text" name="compliancepercentage" id="compliancepercentage" placeholder="Enter a compliance percentage" minlength="2" maxlength="20">
+										<input class="form-control" type="text" name="compliancepercentage" id="compliancepercentage" placeholder="Enter a compliance percentage : 12" minlength="2" maxlength="20">
 									</div>
 
 									<div class="col-md-6">
@@ -292,6 +291,28 @@
 		}, 10000);  
 		});
 
+		$("#compliancepercentages").on("input", function(evt) {
+			var self = $(this);
+			self.val(self.val().replace(/[^\d].+/, ""));
+			if ((evt.which < 48 || evt.which > 57)) 
+			{
+				evt.preventDefault();
+			}
+			});
+
+			$("#compliancepercentage").on("input", function(evt) {
+			var self = $(this);
+			self.val(self.val().replace(/[^\d].+/, ""));
+			if ((evt.which < 48 || evt.which > 57)) 
+			{
+				evt.preventDefault();
+			}
+			});
+
+		jQuery.validator.addMethod("noSpace", function(value, element)   { //Code used for blank space Validation 
+    return value.indexOf(" ") < 0 && value != ""; 
+    }, "Please no space allowed and don't leave it empty"); 
+
 		$(document).ready(function()
 		{
 				$("#form_valid").validate(
@@ -302,6 +323,7 @@
 										},
 							compliancepercentage: {
 									required: true,
+									noSpace: true,
 										},
 							},
 						messages:{
@@ -324,6 +346,7 @@
 										},
 							compliancepercentage: {
 									required: true,
+									noSpace: true,
 										},
 							},
 						messages:{
