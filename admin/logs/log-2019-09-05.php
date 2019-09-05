@@ -1230,3 +1230,5 @@ ERROR - 2019-09-05 12:32:57 --> 404 Page Not Found: Uploads/default
 ERROR - 2019-09-05 12:32:57 --> 404 Page Not Found: Default/cdn-cgi
 ERROR - 2019-09-05 12:34:57 --> 404 Page Not Found: Uploads/default
 ERROR - 2019-09-05 12:34:57 --> 404 Page Not Found: Default/cdn-cgi
+ERROR - 2019-09-05 12:51:51 --> 404 Page Not Found: Default/cdn-cgi
+ERROR - 2019-09-05 12:51:51 --> 404 Page Not Found: Uploads/default
