@@ -130,7 +130,8 @@
 												?>
 												<div class="fileupload btn">
 													<span class="btn-text">edit</span>
-													<input class="upload" type="file" name="pre_profile_image">
+													<input class="upload" type="file" name="ProfileImage">
+													<input  type="hidden" name="pre_profile_image" value="<?php echo $ProfileImage; ?>">
 												</div>
 											</div>
 

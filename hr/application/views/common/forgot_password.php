@@ -7,7 +7,7 @@
 		<meta name="keywords" content="">
         <meta name="author" content="">
         <meta name="robots" content="noindex, nofollow">
-        <title>Payroll System - Login</title>
+        <title>Payroll System - Forgot Password</title>
 		
 		<!-- Favicon -->
         <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url(); ?>default/img/favicon.png">
@@ -59,7 +59,7 @@
 							<p class="account-subtitle">Enter your email to get a password reset link</p>
 							
 							<!-- Account Form -->
-							<form method="post" action="<?php echo base_url();?>Login/forgotpassword" id="form_valid">
+							<form method="post" action="<?php echo base_url();?>home/forgotpassword" id="frm_forgot">
 								<div class="form-group">
 									<label>Email Address</label>
 									<input class="form-control" type="text" name="EmailAddress"  placeholder="Enter your email address">
@@ -68,7 +68,7 @@
 									<input type="submit" name="logins" class="btn btn-primary account-btn" value="Reset Password">
 								</div>
 								<div class="account-footer">
-									<p>Remember your password? <a href="<?php echo base_url();?>Login">Login</a></p>
+									<p>Remember your password? <a href="<?php echo base_url();?>">Login</a></p>
 								</div>
 							</form>
 							<!-- /Account Form -->
@@ -117,20 +117,18 @@ $(function() {
 });
 $(document).ready(function()
 {
-		$("#form_valid").validate(
+		$("#frm_forgot").validate(
 		{
 					rules: {
 						EmailAddress: {
 							required: true,
+							email:true,
 								},
-						
 					},
 
 				messages:{
 
-						EmailAddress: {
-								required: "Please enter your email address",
-								},		
+							
 			}
 				
 		});

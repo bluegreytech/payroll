@@ -82,7 +82,7 @@ class Home extends CI_Controller {
 		$offset = 0;
 		 $limit =10;
 
-        $this->load->view('dashboard/profile',$data);    
+        $this->load->view('common/profile',$data);    
             
     }
 
@@ -125,7 +125,7 @@ class Home extends CI_Controller {
 			{ 
 			
 				$chk_mail=$this->Login_model->forgot_email();
-				//echo $chk_mail;die;
+				echo $chk_mail;die;
 				if($chk_mail==0)
 				{
 					$error=EMAIL_NOT_FOUND;
@@ -151,32 +151,32 @@ class Home extends CI_Controller {
 
 				}
 			}
-		$this->load->view('common/ForgotPassword');
+		$this->load->view('common/forgot_password');
 	}
 
 
 	function reset_password($code='')
 	{
-
+       // echo ":L:";die;
 		if(check_admin_authentication())
 			{
 				redirect('home/dashbord');
 			}
 			
-			$admin_id=$this->Login_model->checkResetCode($code);
-			//print_r($admin_id);die;
+			$hr_id=$this->Login_model->checkResetCode($code);
+			//print_r($hr_id);die;
 
 			$data = array();
-			$data['errorfail']=($code=='' || $admin_id=='')?'fail':'';
-			$data['AdminId']=$admin_id;
+			$data['errorfail']=($code=='' || $hr_id=='')?'fail':'';
+			$data['hr_id']=$hr_id;
 			$data['code']=$code;
 	        
-            if($admin_id){
+            if($hr_id){
             	if($_POST){
 				
-				if($this->input->post('AdminId') != ''){
+				if($this->input->post('hr_id') != ''){
 					$this->form_validation->set_rules('Password', 'Password', 'required');
-					$this->form_validation->set_rules('Confrim_password', 'Re-type Password', 'required|matches[Password]');
+					$this->form_validation->set_rules('ConfirmPassword', 'Re-type Password', 'required|matches[Password]');
 				
 					if($this->form_validation->run() == FALSE){			
 						if(validation_errors()){
@@ -189,12 +189,12 @@ class Home extends CI_Controller {
 							$this->session->set_flashdata('success',RESET_SUCCESS); 
 							redirect('login');
 						}elseif($up=='') {
-							
+							echo "gfgfdg";die;
 							$error = EXPIRED_RESET_LINK;
 					      $this->session->set_flashdata('error',EXPIRED_RESET_LINK); die; 
 						}
 						else{
-							//echo "gfgfdg";die;
+							echo "gfgfdg";die;
 							$error = PASS_RESET_FAIL;
 		                    $this->session->set_flashdata('error',PASS_RESET_FAIL); die; 
 						}
@@ -203,24 +203,23 @@ class Home extends CI_Controller {
 						
 					}
 				}else{
-					//echo "hii";die;
+					
 					$error = EXPIRED_RESET_LINK;
-					// $redirect=site_url('home/index');
-					//$redirect=site_url();
+				  
 	              $this->session->set_flashdata('error',EXPIRED_RESET_LINK); die; 
 				}
-				 $this->load->view('common/ResestPassword',$data);
+				 $this->load->view('common/reset_password',$data);
 		    }else{
 		    	//echo 'dfdfds';die;
-		    	$this->load->view('common/ResestPassword',$data);
+		    	$this->load->view('common/reset_password',$data);
 		    }
 
             }else{
 
-            	 // echo "hii";die;
-					$error = EXPIRED_RESET_LINK;
-					 $this->session->set_flashdata('error',EXPIRED_RESET_LINK); die; 
-					 redirect('home');
+        		  //cho "hii";die;
+				$error = EXPIRED_RESET_LINK;
+				 $this->session->set_flashdata('error',EXPIRED_RESET_LINK); 
+				 redirect('login');
 		    }
 	}
 
@@ -256,7 +255,7 @@ class Home extends CI_Controller {
 			
 		}else{
 			//echo "fghg";die;
-            $res=$this->Login_model->updateAdminPassword();
+            $res=$this->Login_model->updateHrPassword();
 			if($res){
          		$this->session->set_flashdata('success', 'Your password change successfully');
 				redirect('home/change_password');
@@ -266,7 +265,7 @@ class Home extends CI_Controller {
         $this->load->view('common/ChangePassword',$data);    
 	}
 	function oldpassword_check() {
-		$query = $this->db->query("select Password from " . $this->db->dbprefix('tbladmin') . " where Password ='".md5($this->input->post('password'))."' and AdminId='" . $this->session->userdata('AdminId') . "'");
+		$query = $this->db->query("select Password from " . $this->db->dbprefix('tblhr') . " where Password ='".md5($this->input->post('password'))."' and hr_id='" . $this->session->userdata('hr_id') . "'");
 		//aecho $this->db->last_query();die;
 		if ($query->num_rows() > 0) {
 			echo 1;die;

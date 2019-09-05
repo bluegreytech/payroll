@@ -58,7 +58,7 @@
 							</div>
 							<?php } ?>
 							<!-- Account Form -->
-							<form method="post" id="form_valid">
+						  <form class="form-horizontal form-simple" method="post"  href="<?php echo base_url()?>/home/login" id="frm_login">
 								<div class="form-group">
 									<label>Email Address</label>
 									<input class="form-control" type="text" name="EmailAddress" Placeholder="Enter your email address">
@@ -76,7 +76,7 @@
 									<input type="submit" name="logins" class="btn btn-primary account-btn" value="Login">
 								</div>
 								<div class="account-footer">
-								<a class="text-muted" href="<?php echo base_url();?>Login/forgotpassword">
+								<a class="text-muted" href="<?php echo base_url();?>home/forgotpassword">
 												Forgot password?
 											</a>
 								</div>
@@ -142,11 +142,12 @@ $(function() {
 
 $(document).ready(function()
 {
-		$("#form_valid").validate(
+		$("#frm_login").validate(
 		{
 					rules: {
 						EmailAddress: {
 							required: true,
+							email:true,
 								},
 						Password: {
 							required: true,
