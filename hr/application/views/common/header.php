@@ -53,12 +53,9 @@
 </head>
 
 <?php
-          if($this->session->userdata('EmailAddress'))
-          {
-			$UserId=$this->session->userdata('UserId');
-			$RoleId=$this->session->userdata('RoleId');
-			$FirstName=$this->session->userdata('FirstName');
-			$LastName=$this->session->userdata('LastName');
+           if(check_admin_authentication())
+           {
+			
 			$ProfileImage=$this->session->userdata('ProfileImage');
   ?>
     <body>
@@ -139,7 +136,7 @@
 										<a href="notification.php">
 											<div class="media">
 												<span class="avatar">
-													<img alt="" src="<?php echo base_url(); ?>default/img/profiles/avatar-02.jpg">
+													<img alt="" src="<?php echo base_url(); ?>upload/no_image/user_no_image.png">
 												</span>
 												<div class="media-body">
 													<p class="noti-details"><span class="noti-title">John Doe</span> added new task <span class="noti-title">Patient appointment booking</span></p>
@@ -152,7 +149,7 @@
 										<a href="notification.php">
 											<div class="media">
 												<span class="avatar">
-													<img alt="" src="<?php echo base_url(); ?>default/img/profiles/avatar-03.jpg">
+													<img alt="" src="<?php echo base_url(); ?>upload/no_image/user_no_image.png">
 												</span>
 												<div class="media-body">
 													<p class="noti-details"><span class="noti-title">Tarah Shropshire</span> changed the task name <span class="noti-title">Appointment booking with payment gateway</span></p>
@@ -165,7 +162,7 @@
 										<a href="notification.php">
 											<div class="media">
 												<span class="avatar">
-													<img alt="" src="<?php echo base_url(); ?>default/img/profiles/avatar-06.jpg">
+													<img alt="" src="<?php echo base_url(); ?>upload/no_image/user_no_image.png">
 												</span>
 												<div class="media-body">
 													<p class="noti-details"><span class="noti-title">Misty Tison</span> added <span class="noti-title">Domenic Houston</span> and <span class="noti-title">Claire Mapes</span> to project <span class="noti-title">Doctor available module</span></p>
@@ -178,7 +175,7 @@
 										<a href="notification.php">
 											<div class="media">
 												<span class="avatar">
-													<img alt="" src="<?php echo base_url(); ?>default/img/profiles/avatar-17.jpg">
+													<img alt="" src="<?php echo base_url(); ?>upload/no_image/user_no_image.png">
 												</span>
 												<div class="media-body">
 													<p class="noti-details"><span class="noti-title">Rolland Webber</span> completed task <span class="noti-title">Patient and Doctor video conferencing</span></p>
@@ -191,7 +188,7 @@
 										<a href="notification.php">
 											<div class="media">
 												<span class="avatar">
-													<img alt="" src="<?php echo base_url(); ?>default/img/profiles/avatar-13.jpg">
+													<img alt="" src="<?php echo base_url(); ?>upload/no_image/user_no_image.png">
 												</span>
 												<div class="media-body">
 													<p class="noti-details"><span class="noti-title">Bernardo Galaviz</span> added new task <span class="noti-title">Private chat module</span></p>
@@ -207,139 +204,34 @@
 							</div>
 						</div>
 					</li>
-					<!-- /Notifications -->
-					
-					<!-- Message Notifications -->
-					<!--li class="nav-item dropdown">
-						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-							<i class="fa fa-comment-o"></i> <span class="badge badge-pill">8</span>
-						</a>
-						<div class="dropdown-menu notifications">
-							<div class="topnav-dropdown-header">
-								<span class="notification-title">Messages</span>
-								<a href="javascript:void(0)" class="clear-noti"> Clear All </a>
-							</div>
-							<div class="noti-content">
-								<ul class="notification-list">
-									<li class="notification-message">
-										<a href="chat.html">
-											<div class="list-item">
-												<div class="list-left">
-													<span class="avatar">
-														<img alt="" src="assets\img\profiles\avatar-09.jpg">
-													</span>
-												</div>
-												<div class="list-body">
-													<span class="message-author">Richard Miles </span>
-													<span class="message-time">12:28 AM</span>
-													<div class="clearfix"></div>
-													<span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-												</div>
-											</div>
-										</a>
-									</li>
-									<li class="notification-message">
-										<a href="chat.html">
-											<div class="list-item">
-												<div class="list-left">
-													<span class="avatar">
-														<img alt="" src="assets\img\profiles\avatar-02.jpg">
-													</span>
-												</div>
-												<div class="list-body">
-													<span class="message-author">John Doe</span>
-													<span class="message-time">6 Mar</span>
-													<div class="clearfix"></div>
-													<span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-												</div>
-											</div>
-										</a>
-									</li>
-									<li class="notification-message">
-										<a href="chat.html">
-											<div class="list-item">
-												<div class="list-left">
-													<span class="avatar">
-														<img alt="" src="assets\img\profiles\avatar-03.jpg">
-													</span>
-												</div>
-												<div class="list-body">
-													<span class="message-author"> Tarah Shropshire </span>
-													<span class="message-time">5 Mar</span>
-													<div class="clearfix"></div>
-													<span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-												</div>
-											</div>
-										</a>
-									</li>
-									<li class="notification-message">
-										<a href="chat.html">
-											<div class="list-item">
-												<div class="list-left">
-													<span class="avatar">
-														<img alt="" src="assets\img\profiles\avatar-05.jpg">
-													</span>
-												</div>
-												<div class="list-body">
-													<span class="message-author">Mike Litorus</span>
-													<span class="message-time">3 Mar</span>
-													<div class="clearfix"></div>
-													<span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-												</div>
-											</div>
-										</a>
-									</li>
-									<li class="notification-message">
-										<a href="chat.html">
-											<div class="list-item">
-												<div class="list-left">
-													<span class="avatar">
-														<img alt="" src="assets\img\profiles\avatar-08.jpg">
-													</span>
-												</div>
-												<div class="list-body">
-													<span class="message-author"> Catherine Manseau </span>
-													<span class="message-time">27 Feb</span>
-													<div class="clearfix"></div>
-													<span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-												</div>
-											</div>
-										</a>
-									</li>
-								</ul>
-							</div>
-							<div class="topnav-dropdown-footer">
-								<a href="#">View all Messages</a>
-							</div>
-						</div>
-					</li-->
-					<!-- /Message Notifications -->
-	
+				   <?php $admin_profile=  get_one_admin($this->session->userdata('hr_id')); 
+                                          //  echo "<pre>";print_r($admin_profile->ProfileImage);die;
+                         ?>
 					<li class="nav-item dropdown has-arrow main-drop">
 						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
 							<span class="user-img">
 							
 							  <?php 
-							   if(($ProfileImage!='' && file_exists(base_path().'/upload/admin/'.$ProfileImage))){ ?>
+							   if(($admin_profile->ProfileImage!='' && file_exists(base_path().'/upload/hr/'.$admin_profile->ProfileImage))){   ?>
 							
 							
-								<img src="<?php echo base_url(); ?>upload/admin/<?php echo $this->session->userdata('ProfileImage'); ?>" alt="">
+								<img src="<?php echo base_url(); ?>upload/hr/<?php echo $admin_profile->ProfileImage; ?>" alt="">
 							<?php
 							}
 							else
 							{
 							?>
-								<img src="<?php echo base_url(); ?>uploads/default/avtar.jpg" alt="">
+								<img src="<?php echo base_url(); ?>upload/no_image/user_no_image.png" alt="">
 							<?php
 							}
 							?>
 								
 							<span class="status online"></span></span>
-							<span><?php echo $this->session->userdata('FirstName');?> <?php echo $this->session->userdata('LastName');?></span>
+							<span><?php echo $admin_profile->FullName;?> <?php //echo $this->session->userdata('LastName');?></span>
 						</a>
 						<div class="dropdown-menu">
-							<a class="dropdown-item" href="<?php echo base_url();?>Adminmaster/admin_master_profile/">My Profile</a>
-							<a class="dropdown-item" href="<?php echo base_url();?>Adminmaster/change_password/<?php echo $UserId ;?>">Change Password</a>
+							<a class="dropdown-item" href="<?php echo base_url();?>home/profile/">My Profile</a>
+							<a class="dropdown-item" href="<?php echo base_url();?>home/change_password">Change Password</a>
 							<a class="dropdown-item" href="<?php echo base_url();?>Login/logout">Logout</a>
 						</div>
 					</li>
@@ -351,8 +243,8 @@
 					<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i>
 					</a>
 					<div class="dropdown-menu dropdown-menu-right">
-						<a class="dropdown-item" href="<?php echo base_url();?>Adminmaster/admin_master_profile/<?php echo $UserId ;?>">My Profile</a>
-						<a class="dropdown-item" href="<?php echo base_url();?>Adminmaster/change_password/<?php echo $UserId ;?>">Change Password</a>
+						<a class="dropdown-item" href="<?php echo base_url();?>Adminmaster/admin_master_profile/">My Profile</a>
+						<a class="dropdown-item" href="<?php echo base_url();?>Adminmaster/change_password/">Change Password</a>
 						<a class="dropdown-item" href="<?php echo base_url();?>Login/logout">Logout</a>
 					</div>
 				</div>
@@ -362,6 +254,6 @@
 			<!-- /Header -->
 
 			<?php 
-                  }
+                 }
        ?>         
 

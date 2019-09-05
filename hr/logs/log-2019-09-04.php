@@ -137,3 +137,21 @@ ERROR - 2019-09-04 12:44:00 --> 404 Page Not Found: Assets/img
 ERROR - 2019-09-04 12:47:00 --> 404 Page Not Found: Assets/img
 ERROR - 2019-09-04 12:47:41 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\payroll\hr\application\controllers\Login.php 25
 ERROR - 2019-09-04 14:33:59 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-04 14:42:27 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-04 14:42:56 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\payroll\hr\application\controllers\Login.php 25
+ERROR - 2019-09-04 14:44:42 --> Severity: error --> Exception: syntax error, unexpected 'public' (T_PUBLIC) C:\xampp\htdocs\payroll\hr\application\controllers\Login.php 63
+ERROR - 2019-09-04 14:44:45 --> Severity: error --> Exception: syntax error, unexpected 'public' (T_PUBLIC) C:\xampp\htdocs\payroll\hr\application\controllers\Login.php 63
+ERROR - 2019-09-04 14:44:53 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-04 14:44:59 --> Severity: Notice --> Undefined property: Login::$login_model C:\xampp\htdocs\payroll\hr\application\controllers\Login.php 29
+ERROR - 2019-09-04 14:44:59 --> Severity: error --> Exception: Call to a member function check_login() on null C:\xampp\htdocs\payroll\hr\application\controllers\Login.php 29
+ERROR - 2019-09-04 14:45:06 --> Severity: error --> Exception: Call to undefined method Login_model::check_login() C:\xampp\htdocs\payroll\hr\application\controllers\Login.php 29
+ERROR - 2019-09-04 14:46:20 --> Query error: Table 'payrolldb.tbladmin' doesn't exist - Invalid query: SELECT *
+FROM `tbladmin`
+WHERE `EmailAddress` = 'siya@yopmail.com'
+AND `password` = '25d55ad283aa400af464c76d713c07ad'
+ERROR - 2019-09-04 14:46:45 --> Severity: Notice --> Undefined index: Admin_Type C:\xampp\htdocs\payroll\hr\application\models\Login_model.php 186
+ERROR - 2019-09-04 15:03:12 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-04 15:03:27 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-04 15:04:12 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-04 15:08:57 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-04 15:10:07 --> 404 Page Not Found: Assets/img

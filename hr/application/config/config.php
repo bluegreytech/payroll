@@ -23,9 +23,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/payroll/admin/';
-$config['base_url_site'] = 'http://localhost/payroll/admin/';
-$config['base_path']="C:/xampp/htdocs/payroll/admin";
+$config['base_url'] = 'http://localhost/payroll/hr/';
+$config['base_url_site'] = 'http://localhost/payroll/hr/';
+$config['base_path']="C:/xampp/htdocs/payroll/hr";
 //echo base_url();
 
 
