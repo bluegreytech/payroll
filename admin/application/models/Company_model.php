@@ -22,38 +22,51 @@ class Company_model extends CI_Model
 	}
 
 
-	function list_companytype(){
-		$r=$this->db->select('*')
-					->from('tblcompanytype')
-					->get();
+	function list_companytype()
+	{
+		$this->db->select('*');
+		$this->db->from('tblcompanytype');
+		$r=$this->db->get();
+		$res = $r->result();
+		return $res;
+	}
+
+	function list_companyto()
+	{
+		$this->db->select('*');
+		$this->db->from('tblcompanytype');
+		$this->db->where('isactive',1);
+		$r=$this->db->get();
+		$res = $r->result();
+		return $res;
+	}
+
+	function list_complianceto()
+	{
+		$this->db->select('*');
+		$this->db->from('tblcompliances');
+		$this->db->where('isactive',1);
+		$r=$this->db->get();
+		$res = $r->result();
+		return $res;
+	}
+
+	function list_compliance()
+	{
+		$this->db->select('*');
+		$this->db->from('tblcompliances');
+		$r=$this->db->get();
 		$res = $r->result();
 		return $res;
 
 	}
 
-	function list_compliance(){
-		$r=$this->db->select('*')
-					->from('tblcompliances')
-					->get();
-		$res = $r->result();
-		return $res;
-
-	}
-
-	function list2_compliance($companyid){
-		$r=$this->db->select('*')
-					->from('tblcompliances')
-					->where('companyid',$companyid)
-					->get();
-		$res = $r->result();
-		return $res;
-
-	}
 	
 	function list_state(){
 		$r=$this->db->select('*')
 					->from('tblstate')
 					->where('statename','Gujarat')
+					->or_where('isactive',1)
 					->get();
 		$res = $r->result();
 		return $res;

@@ -6,6 +6,10 @@ class Hr extends CI_Controller
         parent::__construct();
 		$this->load->model('Hr_model');
 	}
+	public function dashboard()
+	{
+		$this->load->view('hr/dashboard');
+	}
 	
 	function index()
 	{	
@@ -86,7 +90,6 @@ class Hr extends CI_Controller
 	function edithr()
 	{
 		$data=array();
-		$data['companyData']=$this->Hr_model->list_company();
 		$result=$this->Hr_model->getdata($this->input->post('UserId'));	
 		//echo "<br>";print_r($result);die;
 		$data['UserId']=$result['UserId'];
@@ -103,6 +106,7 @@ class Hr extends CI_Controller
 		$data['hrid']=$result['hrid'];
 		$data['companyid']=$result['companyid'];
 		$data['companyname']=$result['companyname'];
+		$data['companyData']=$this->Hr_model->list_company();
 		echo json_encode($data);
 	}
 

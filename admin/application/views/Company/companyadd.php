@@ -67,13 +67,20 @@
 							<div class="modal-body">
 								<form method="post" id="form_valid" action="<?php echo base_url();?>Company/companyadd">
 								<input type="hidden" class="form-control" name="companyid" value="<?php echo $companyid;?>">
-								<input type="hidden" class="form-control" name="companycomplianceid" value="<?php echo $companycomplianceid;?>">
+								<!-- <input type="hidden" class="form-control" name="companycomplianceid" value="<?php// echo $companycomplianceid;?>"> -->
+									<div class="profile-img-wrap edit-img">			
+												<img class="inline-block" src="<?php echo base_url(); ?>upload/default/avtar.jpg" alt="">
+										<div class="fileupload btn">
+											<span class="btn-text">edit</span>
+											<input class="upload" type="file" name="pre_profile_image">
+										</div>
+									</div>
 									<div class="row">
 										<div class="col-md-6">
 											<div class="form-group">
-													<label>Company Type</label>
+													<label>Type of Company</label>
 													<select class="select" name="companytypeid"> 
-														<option desabled value="">Please select company type</option>
+														<option desabled value="">Please select type of company</option>
 														<?php
 														 if($companytypeData){
 															foreach($companytypeData as $typecompany)
@@ -215,30 +222,23 @@
 										<table class="table table-striped custom-table">
 											<thead>
 												<tr>
-													<th>Add Compliance</th>
-													<!-- <th class="text-center">Read</th> -->
-												
+													<th>Type of Compliance</th>
+													<th >Percentage of Compliance</th>
+													<th class="text-center">Add on Compliance</th>
 												</tr>
 											</thead>
 											<tbody>
 											<?php                           
 												foreach($complianceData as $compdata)
-												// foreach($complianceid as $comid)
-												 { 
-													
-													
-												//echo	$dd=explode(',',$comid)
+												 { 		
 											?>
 												<tr>
 													<td><?php echo $compdata->compliancename;?></td>
+													<td><?php echo $compdata->compliancepercentage;?></td>
 													<td class="text-center">
 														<input type="checkbox"  value="<?php echo $compdata->complianceid; ?>" 
 														name="complianceid[]">
 													</td>
-													<!-- <td class="text-center">
-														<input type="checkbox"  value="<?php //echo $compdata->complianceid; ?>">
-													</td> -->
-													
 												</tr>
 											<?php
 												}
@@ -394,7 +394,7 @@ $(document).ready(function()
 						messages:{
 							
 							companytypeid: {
-									required: "Please select company type",
+									required: "Please select type of company",
 										},
 							companyname: {
 									required: "Please enter a company name",

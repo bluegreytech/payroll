@@ -187,6 +187,7 @@ class Hr_model extends CI_Model
 		function list_company(){
 			$this->db->select('*');
 			$this->db->from('tblcompany');
+			$this->db->where('isactive',1);
 			$r = $this->db->get();
 			return $query=$r->result();
 	}
@@ -196,15 +197,17 @@ class Hr_model extends CI_Model
 			$this->db->from('tbluser as t1');
 			$this->db->join('tblhr as t2', 't1.UserId = t2.UserId', 'LEFT');
 			$this->db->join('tblcompany as t3', 't2.companyid = t2.companyid', 'LEFT');
-			$this->db->where('t1.UserId',32);
+			$this->db->where('t1.UserId',$UserId);
 			$query = $this->db->get();
 			return $query->row_array();
 	}
 
 	function updatehr()
-	{	
-		     
+	{		     
 		$UserId=$this->input->post('UserId');
+		//  $hrid=$this->input->post('hrid');
+		// $companyid=$this->input->post('companyid');
+		
 		$data=array(
 			'UserId'=>$this->input->post('UserId'),
 			'FirstName'=>$this->input->post('FirstName'),
@@ -222,7 +225,16 @@ class Hr_model extends CI_Model
 			// print_r($data);die;
 			$this->db->where("UserId",$UserId);
 			$this->db->update('tbluser',$data);	
-			return 1;	      
+			return 1;
+			// if($hrid!=''){
+			// 	$data2=array(
+			// 		'companyid'=>$this->input->post('companyid')
+			// 		  );
+			// 		$this->db->where("hrid",$hrid);
+			// 		$this->db->update('tblhr',$data2);
+			// 		return 1;		
+			// 	}
+				      
 	}
 
 

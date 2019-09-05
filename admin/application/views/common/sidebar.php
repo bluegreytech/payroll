@@ -21,7 +21,7 @@
 							<li class="submenu">
 								<a href="<?php echo base_url();?>Dashboard"><i class="la la-user"></i> <span>Company</span> <span class="menu-arrow"></span></a>
 								<ul style="display: none;">
-									<li><a href="<?php echo base_url();?>company/companytype"><span>Company Type</span></a></li>
+									<li><a href="<?php echo base_url();?>company/companytype"><span>Type Company </span></a></li>
 									<li><a href="<?php echo base_url();?>company/compliance"><span>Compliance </span></a></li>
 									<li><a href="<?php echo base_url();?>company"><span>Company</span></a></li>
 								</ul>

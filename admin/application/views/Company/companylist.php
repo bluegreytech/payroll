@@ -7,26 +7,19 @@
 			<input type="hidden" name="RoleId" value="<?php echo $roleid=$this->session->userdata('RoleId');?>">
 				<!-- Page Content -->
                 <div class="content container-fluid">
-					<?php if($rightsData)
-					{                             
-						foreach($rightsData as $ritdata)
-						{ ?>
+				
 					<!-- Page Title -->
 					<div class="row">
 						<div class="col">
 							<h4 class="page-title">List of Company  </h4>
 						</div>
-						<?php 
-								 if($ritdata->add==1)
-								 {
-									 ?>
+						
+								
 									<div class="col-12 text-right m-b-30">
 										<a href="<?php echo base_url();?>Company/companyadd" class="btn add-btn"><i class="fa fa-plus">
 										</i> Add Company</a>			
 									</div>
-						<?php
-								 }
-						?>
+						
 						
 					</div>
 					<!-- /Page Title -->
@@ -104,10 +97,7 @@
 										
 										</a>
 									</div>
-									<?php
-									if($ritdata->update==1)
-								 	{
-									 ?>
+									
 									<div class="dropdown profile-action">
 										<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
 										<div class="dropdown-menu dropdown-menu-right">
@@ -115,9 +105,7 @@
 											<a class="dropdown-item" onclick="deletedata(<?php echo $comp->companyid; ?>)" data-toggle="modal" data-target="#delete_client"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
 										</div>
 									</div>
-									<?php
-									 }
-									?>
+									
 									<h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="client-profile.php">
 									<?php echo $comp->companyname;?></a></h4>
 									<h5 class="user-name m-t-10 mb-0 text-ellipsis"><a href="client-profile.php">Barry Cuda</a></h5>
@@ -140,11 +128,9 @@
 							</div>
 
 							
-						<?php			
-							}
-						?>    
+						
 
-<?php }}?>				
+<?php }?>				
 					</div>
 
 

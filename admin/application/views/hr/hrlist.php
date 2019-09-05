@@ -162,83 +162,77 @@
 							</div>
 							<div class="modal-body">
 								<form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>Hr/addhr" id="form_valid">
-									<!-- <div class="row"> 
-										<div class="col-sm-6"> 
-											<div class="form-group">
-												<label>Select Staff</label>
-												<select class="select"> 
-													<option>John Doe</option>
-													<option>Richard Miles</option>
-												</select>
+
+										<div class="profile-img-wrap edit-img">			
+													<img class="inline-block" src="<?php echo base_url(); ?>upload/default/avtar.jpg" alt="">
+											<div class="fileupload btn">
+												<span class="btn-text">edit</span>
+												<input class="upload" type="file" name="pre_profile_image">
 											</div>
 										</div>
-										<div class="col-sm-6"> 
-											<label>Net Salary</label>
-											<input class="form-control" type="text">
-										</div>
-									</div> -->
-									<div class="row"> 
+										<div class="row"> 
 										<div class="col-sm-6">
-											<!-- <div class="form-group">
-												<label>Upload profile</label>
-												
-												<input class="form-control" type="file" name="ProfileImage">
-											</div>  -->
+
+									
 											<div class="form-group">
 												<label>First Name</label>	
-												<input class="form-control" type="text" name="FirstName" Placeholder="Enter your first name" minlength="2" maxlength="50">
+												<input class="form-control" tabindex="1" type="text" name="FirstName" Placeholder="Enter your first name" minlength="2" maxlength="50">
 											</div>
 											<div class="form-group">
 												<label>Email Address</label>
-												<input class="form-control" type="text" name="EmailAddress" Placeholder="Enter your email address" minlength="2" maxlength="50">
+												<input class="form-control" tabindex="3" type="text" name="EmailAddress" Placeholder="Enter your email address" minlength="2" maxlength="50">
 											</div>
 											<div class="form-group">
 												<label>Date of Birth</label>
-												<input class="form-control" type="date" name="DateofBirth" Placeholder="Enter your date of birth">
+												<input class="form-control" tabindex="5" type="date" name="DateofBirth" Placeholder="Enter your date of birth">
 												<!-- <input class="form-control" id="datepicker1" type="text" name="DateofBirth" Placeholder="Enter your date of birth" readonly> -->
 											</div>
 											<div class="form-group">
 												<label>Address</label>
-												<input class="form-control" type="text" name="Address" Placeholder="Enter your address" minlength="5" maxlength="500">
+												<input class="form-control" tabindex="7" type="text" name="Address" Placeholder="Enter your address" minlength="5" maxlength="500">
 											</div>
 											<div class="form-group">
 												<label>City</label>
-												<input class="form-control" type="text" name="City" Placeholder="Enter your city" minlength="2" maxlength="50">
+												<input class="form-control" tabindex="9" type="text" name="City" Placeholder="Enter your city" minlength="2" maxlength="50">
 											</div>
+
 											<div class="form-group">
 														<label class="col-form-label">IsActive<span class="text-danger">*</span></label><br>
-														<label class="radio-inline">
+														<label class="radio-inline" tabindex="12">
 															<input type="radio" name="IsActive" checked  value="1">Active
 														</label>
-														<label class="radio-inline">
+														<label class="radio-inline" tabindex="13">
 															<input type="radio" name="IsActive" value="0">Deactive
 														</label>
 											</div>
+
+											
+											
 										</div>
 										<div class="col-sm-6">  
 											<div class="form-group">
 												<label>Last Name</label>
-												<input class="form-control" type="text" name="LastName" Placeholder="Enter your last name" minlength="2" maxlength="50">
+												<input class="form-control" tabindex="2" type="text" name="LastName" Placeholder="Enter your last name" minlength="2" maxlength="50">
 											</div> 
 											<div class="form-group">
 												<label>Contact Number</label>
-												<input class="form-control" type="text" name="PhoneNumber" Placeholder="Enter your contact number" minlength="10" maxlength="10" id="PhoneNumbers">
+												<input class="form-control" tabindex="4" type="text" name="PhoneNumber" Placeholder="Enter your contact number" minlength="10" maxlength="10" id="PhoneNumbers">
 											</div>
 											<div class="form-group">
 												<label>Gender</label>
-												<select class="select" name="Gender"> 
+												<select class="select" name="Gender" tabindex="6"> 
 													<option value="Male">Male</option>
 													<option value="Female">Female</option>
 												</select>
 											</div>
 											<div class="form-group">
 												<label>Pin-Code</label>
-												<input class="form-control" type="text" name="PinCode" id="PinCodes" Placeholder="Enter your pin-code"  minlength="6" maxlength="6">
+												<input class="form-control" tabindex="8" type="text" name="PinCode" id="PinCodes" Placeholder="Enter your pin-code"  minlength="6" maxlength="6">
 											</div>
-											
+
 											<div class="form-group">
 													<label>Company</label>
-													<select class="select" name="companyid"> 
+													<select class="select" name="companyid" tabindex="11"> 
 														<option desabled value="">Please select company</option>
 														<?php
 														 if($companyData){
@@ -254,6 +248,8 @@
 														?>
 													</select>
 											</div>
+											
+											
 										
 										</div>
 									</div>
@@ -280,7 +276,14 @@
 							<div class="modal-body">
 								<form method="post" id="form_valid2" action="<?php echo base_url();?>Hr/addhr">
 								<input type="hidden" class="form-control" name="UserId" id="UserId" value="<?php $UserId?>">
-									
+							
+									<div class="profile-img-wrap edit-img">			
+												<img class="inline-block" src="<?php echo base_url(); ?>upload/default/avtar.jpg" alt="">
+										<div class="fileupload btn">
+											<span class="btn-text">edit</span>
+											<input class="upload" type="file" name="pre_profile_image">
+										</div>
+									</div>
 									<div class="row"> 
 										<div class="col-sm-6"> 
 											<div class="form-group">
@@ -304,6 +307,18 @@
 												<label>City</label>
 												<input class="form-control" type="text" name="City" Placeholder="Enter your city" minlength="2" maxlength="50" id="City">
 											</div>
+
+											<div class="form-group">
+												<label class="col-form-label">IsActive<span class="text-danger">*</span></label><br>
+												<label class="radio-inline">
+													<input type="radio" name="IsActive"  value="1">Active
+												</label>
+												<label class="radio-inline">
+													<input type="radio" name="IsActive"  value="0">Inactive
+												</label>
+											</div>
+
+											
 											
 										</div>
 										<div class="col-sm-6">  
@@ -327,16 +342,29 @@
 												<input class="form-control" type="text" name="PinCode" Placeholder="Enter your pincode number" minlength="06" maxlength="06" id="PinCode">
 											</div>
 
+											
 											<div class="form-group">
-												<label class="col-form-label">IsActive<span class="text-danger">*</span></label><br>
-												<label class="radio-inline">
-													<input type="radio" name="IsActive"  value="1">Active
-												</label>
-												<label class="radio-inline">
-													<input type="radio" name="IsActive"  value="0">Inactive
-												</label>
-											</div>
+													<label>Company</label>
+													<select class="select" name="companyid"> 
+														<option desabled value="">Please select company</option>
+														<?php
+														 if($companyData){
+															foreach($companyData as $comp)
+															{
+														?>
+					
+															<option value="<?php echo $comp->companyid; ?>">
+															<?php echo $comp->companyname;?></option>
 
+														<!-- <option value="<?php //echo $comp->companyid; ?>" <?php //if($companyid==$comp->companyid){echo "selected" ;}?>><?php //echo $comp->companyname;?></option> -->
+
+														<?php
+														}}
+														?>
+													</select>
+											</div>
+											
+											
 											
 										</div>
 									</div>
@@ -746,8 +774,10 @@ function edithrs(UserId)
 			$('#PinCode').val(response.PinCode);
 			$('#City').val(response.City);
 			$("input[name=IsActive][value=" + response.IsActive + "]").attr('checked', 'checked');
-			// $('#companyid').val(response.companyid);
-			// $('#companyname').val(response.companyname);
+			// $("input[name=companyid][value=" + response.companyid + "]").attr('selected', 'selected');
+			// $("input[name=companyname][value=" + response.companyname + "]").attr('selected', 'selected');
+			$('#companyid').val(response.companyid);
+			$('#companyname').val(response.companyname);
          }
       });	
 }

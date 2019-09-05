@@ -10,10 +10,10 @@
 					<!-- Page Title -->
 					<div class="row">
 						<div class="col-sm-5 col-5">
-							<h4 class="page-title">Company Type <?php echo $isactive;?></h4>
+							<h4 class="page-title">Type of Company <?php echo $isactive;?></h4>
 						</div>
 						<div class="col-sm-7 col-7 text-right m-b-30">
-							<a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_holiday"><i class="fa fa-plus"></i> Add Company Type</a>
+							<a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_holiday"><i class="fa fa-plus"></i> Add Type of Company</a>
 						</div>
 					</div>
 					<!-- /Page Title -->
@@ -41,7 +41,7 @@
 									<thead>
 										<tr>
 											<th>#</th>
-											<th>Company Type </th>
+											<th>Type Company</th>
 											<th>Status</th>
 											<th class="text-right">Action</th>
 										</tr>
@@ -99,7 +99,7 @@
 					<div class="modal-dialog modal-dialog-centered" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
-								<h5 class="modal-title">Add Company Type</h5>
+								<h5 class="modal-title">Add Type of Company</h5>
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									<span aria-hidden="true">&times;</span>
 								</button>
@@ -107,8 +107,8 @@
 							<div class="modal-body">
 								<form method="post" id="form_valid">
 									<div class="form-group">
-										<label>Company Name<span class="text-danger">*</span></label>
-										<input class="form-control" type="text" name="companytype" Placeholder="Enter company type">
+										<label>Type Company<span class="text-danger">*</span></label>
+										<input class="form-control" type="text" name="companytype" Placeholder="Enter type of company">
 									</div>
 									<div class="col-md-6">
 											<div class="form-group">
@@ -137,7 +137,7 @@
 						<div class="modal-content">
 							<div class="modal-header">
 							
-								<h5 class="modal-title">Edit Company Type  </h5>
+								<h5 class="modal-title">Edit Type of Company  </h5>
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									<span aria-hidden="true">&times;</span>
 								</button>
@@ -147,8 +147,8 @@
 									<div class="form-group">
 									<input type="hidden" class="form-control" name="companytypeid" id="companytypeid" 
 									value="<?php echo $companytypeid;?>">
-										<label>Company Type<span class="text-danger">*</span></label>
-										<input class="form-control" type="text" name="companytype" id="companytype" Placeholder="Enter company type">
+										<label>Type Company<span class="text-danger">*</span></label>
+										<input class="form-control" type="text" name="companytype" id="companytype" Placeholder="Enter type of company">
 									</div>
 									<div class="col-md-6">
 											<div class="form-group">
@@ -162,7 +162,7 @@
 											</div>
 									</div>
 									<div class="submit-section">
-										<button class="btn btn-primary submit-btn">Save</button>
+										<button class="btn btn-primary submit-btn">Update</button>
 									</div>
 								</form>
 							</div>
@@ -177,7 +177,7 @@
 						<div class="modal-content">
 							<div class="modal-body">
 								<div class="form-header">
-									<h3>Delete Holiday</h3>
+									<h3>Delete Type of Company</h3>
 									<p>Are you sure want to delete?</p>
 								</div>
 								<div class="modal-btn delete-action">
@@ -264,7 +264,7 @@
 						messages:{
 
 							companytype: {
-									required: "Please enter a company type",
+									required: "Please enter a type of company",
 										},	
 					}					
 				});	
@@ -280,7 +280,7 @@
 						messages:{
 
 							companytype: {
-									required: "Please enter a company type",
+									required: "Please enter a type of company",
 										},	
 					}					
 				});		

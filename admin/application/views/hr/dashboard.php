@@ -27,8 +27,8 @@
 							<div class="dash-widget clearfix card-box">
 								<span class="dash-widget-icon"><i class="fa fa-cubes"></i></span>
 								<div class="dash-widget-info">
-									<h3><?php echo $companyData;?></h3>
-									<a href="<?php echo base_url();?>Company" title="Go to Companies list"><span>Total Companies</span></a>
+									<h3>112</h3>
+									<span>Projects</span>
 								</div>
 							</div>
 						</div>
@@ -36,8 +36,8 @@
 							<div class="dash-widget clearfix card-box">
 								<span class="dash-widget-icon"><i class="fa fa-usd"></i></span>
 								<div class="dash-widget-info">
-									<h3><?php echo $hrData;?></h3>
-									<a href="<?php echo base_url();?>hr" title="Go to HR list"><span> Total HR</span></a>
+									<h3>44</h3>
+									<span>Clients</span>
 								</div>
 							</div>
 						</div>
@@ -46,7 +46,7 @@
 								<span class="dash-widget-icon"><i class="fa fa-diamond"></i></span>
 								<div class="dash-widget-info">
 									<h3>37</h3>
-									<a href="<?php echo base_url();?>adminmaster/adminlist" title="Go to Admin list"><span>Total Admin</span></a>
+									<span>Tasks</span>
 								</div>
 							</div>
 						</div>

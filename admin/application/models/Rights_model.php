@@ -30,16 +30,16 @@ class Rights_model extends CI_Model
 			}
 		}
 
-	function getdata($UserId)
-	{
-		$this->db->select('t1.*,t2.*,t3.*');
-		$this->db->from('tbluser as t1');
-		$this->db->join('tblrightsuser as t2', 't1.UserId = t2.UserId', 'LEFT');
-		$this->db->join('tblrights as t3', 't2.rightsid = t3.rightsid', 'LEFT');
-		$this->db->where('t1.UserId',$UserId);
-		$r=$this->db->get();
-		return $query=$r->result();
-	}
+	// function getdata($UserId)
+	// {
+	// 	$this->db->select('t1.*,t2.*,t3.*');
+	// 	$this->db->from('tbluser as t1');
+	// 	$this->db->join('tblrightsuser as t2', 't1.UserId = t2.UserId', 'LEFT');
+	// 	$this->db->join('tblrights as t3', 't2.rightsid = t3.rightsid', 'LEFT');
+	// 	$this->db->where('t1.UserId',$UserId);
+	// 	$r=$this->db->get();
+	// 	return $query=$r->result();
+	// }
 
 
 	

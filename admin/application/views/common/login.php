@@ -52,16 +52,16 @@
 									<strong> <?php echo $this->session->flashdata('success'); ?></strong> 
 									</div>
 							<?php } ?>
-							<?php if(($this->session->flashdata('warnin'))){ ?>
-							<div class="alert alert-danger" id="warningMessage">
-							<strong> <?php echo $this->session->flashdata('warnin'); ?></strong> 
+							<?php if(($this->session->flashdata('warning'))){ ?>
+							<div class="alert alert-warning" id="warningMessage">
+							<strong> <?php echo $this->session->flashdata('warning'); ?></strong> 
 							</div>
 							<?php } ?>
 							<!-- Account Form -->
 							<form method="post" id="form_valid">
 								<div class="form-group">
 									<label>Email Address</label>
-									<input class="form-control" type="text" name="EmailAddress" Placeholder="Enter your email address">
+									<input class="form-control" type="email" name="EmailAddress" Placeholder="Enter your email address">
 								</div>
 								<div class="form-group">
 									<div class="row">

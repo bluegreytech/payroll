@@ -114,25 +114,26 @@
 									<div class="row">
 										<div class="col-md-12">
 										<input type="hidden" name="UserId" value="<?php echo $UserId ?>">
-											<div class="profile-img-wrap edit-img">	
-											<?php  
-											 if(($ProfileImage!='' && file_exists(base_path().'/upload/admin/'.$ProfileImage))){ ?>
-												<img class="inline-block" src="<?php echo base_url(); ?>upload/admin/<?php echo $ProfileImage; ?>" alt="">
-											<?php
-											}
-											else
-											{
-											?>
-												<img class="inline-block" src="<?php echo base_url(); ?>upload/default/avtar.jpg" alt="">
-											<?php
-											}
-											?>
+
+											<div class="profile-img-wrap edit-img">
+												<?php  
+												if(($ProfileImage!='' && file_exists(base_path().'/upload/admin/'.$ProfileImage))){ ?>
+													<img class="inline-block" src="<?php echo base_url(); ?>upload/admin/<?php echo $ProfileImage; ?>" alt="">
+												<?php
+												}
+												else
+												{
+												?>
+													<img class="inline-block" src="<?php echo base_url(); ?>upload/default/avtar.jpg" alt="">
+												<?php
+												}
+												?>
 												<div class="fileupload btn">
 													<span class="btn-text">edit</span>
-													<input type="hidden" name="pre_profile_image" class="form-control">
-													<input  type="file" name="ProfileImage">
+													<input class="upload" type="file" name="pre_profile_image">
 												</div>
 											</div>
+
 											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group">
@@ -167,6 +168,7 @@
 														value="<?php echo date('d-m-Y',strtotime($DateofBirth)); ?>" readonly>
 													</div>
 												</div>
+
 												<div class="col-md-6">
 													<div class="form-group">
 														<label>Gender</label>
@@ -190,29 +192,31 @@
 																<?php
 															}
 															?>
-															
-															
+														
 														</select>
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="form-group">
+														<label>Address</label>
+														<input type="text" class="form-control" Placeholder="Enter your address" name="Address" value="<?php echo $Address;?>" minlength="5" maxlength="500">
+													</div>
+												</div>
+												
+												<div class="col-md-6">
+													<div class="form-group">
+														<label>Pin Code</label>
+														<input type="text" class="form-control" id="PinCode" Placeholder="Enter your pin-code" name="PinCode" value="<?php echo $PinCode;?>" minlength="6" maxlength="6">
 													</div>
 												</div>
 											</div>
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-md-12">
-											<div class="form-group">
-												<label>Address</label>
-												<input type="text" class="form-control" Placeholder="Enter your address" name="Address" value="<?php echo $Address;?>" minlength="5" maxlength="500">
-											</div>
-										</div>
 										
 										
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>Pin Code</label>
-												<input type="text" class="form-control" id="PinCode" Placeholder="Enter your pin-code" name="PinCode" value="<?php echo $PinCode;?>" minlength="6" maxlength="6">
-											</div>
-										</div>
+										
+										
 										<!-- <div class="col-md-6">
 											<div class="form-group">
 												<label>City</label>
