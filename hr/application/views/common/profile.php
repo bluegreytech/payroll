@@ -54,7 +54,7 @@
 													<h3 class="user-name m-t-0 mb-0"><?php echo $full_name;?></h3>
 													<!-- <h6 class="text-muted">UI/UX Design Team</h6> -->
 													<!-- <small class="text-muted">Web Designer</small> -->
-													<div class="staff-id">Employee ID : FT-0001</div>
+													<div class="staff-id">Company Name</div>
 													<div class="small doj text-muted">Date of Join : <?php echo date('d M Y',strtotime($CreatedOn))?></div>
 													<div class="staff-msg"><a class="btn btn-custom" href="#">Send Message</a></div>
 												</div>

@@ -277,7 +277,7 @@ class Adminmaster_model extends CI_Model
 			'Address'=>$this->input->post('Address'),
 			'PinCode'=>$this->input->post('PinCode')
 				);
-			//echo "<pre>"; print_r($data);die;
+		//	echo "<pre>"; print_r($data);die;
 			$this->db->where("AdminId",$this->session->userdata('AdminId'));
 			$this->db->update('tbladmin',$data);	
 			//echo $this->db->last_query();die;
