@@ -18,13 +18,13 @@ class Hr extends CI_Controller
 			$option=$this->input->post('option');
 			$keyword=$this->input->post('keyword2');	
 			$data['hrData'] = $this->Hr_model->search($option,$keyword);
-			// echo "<pre>";print_r($data['adminmasterData']);die;
+			//echo "<pre>";print_r($data['hrData']);die;
 		}	
 		else
 		{
 			$data['hrData']=$this->Hr_model->hr_list();
 		}
-		$data['companyData']=$this->Hr_model->list_company();
+		//$data['companyData']=$this->Hr_model->list_company();
 		//echo "<pre>";print_r($data['companyData']);die;
 		$this->load->view('hr/hrlist',$data);
 	}
@@ -74,7 +74,7 @@ class Hr extends CI_Controller
 	function deletehr(){
 		$hr_id=$this->input->post('hr_id');
 		$this->db->where("hr_id",$hr_id);
-		$result=$this->db->delete('tbluser');
+		$result=$this->db->delete('tblhr');
 		if($result)
 		{
 			$this->session->set_flashdata('success', 'Hr was delete suucessfully!');

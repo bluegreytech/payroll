@@ -45,7 +45,6 @@
 										<select class="select floating" name="option"> 
 											<option value=""> -- Select -- </option>
 											<option value="FirstName">Hr Name</option>
-											<option value="companyname">Company Name</option>
 											<option value="EmailAddress">Email Address</option>
 											<option value="PhoneNumber">Contact Number</option>
 										</select>
@@ -76,7 +75,7 @@
 											<th>User Name</th>
 											<th>Email Address</th>
 											<th>Contact Number</th>
-											<th>From Company</th>
+							
 											<?php
 											if($this->session->userdata('RoleId')==1 || $this->session->userdata('RoleId')==2){
 											?>		
@@ -102,16 +101,16 @@
 												{
 													?>
 													<a href="" class="avatar"><img src="<?php echo base_url();?>uploads/UserProfile/<?php echo $hr->ProfileImage;?>" alt=""></a>
-													<a href="profile.html"><?php echo $hr->FirstName;?> 
-													<!-- <?php echo $hr->LastName ;?> <span>Android Developer</span></a> -->
+													<a href="profile.html"><?php echo $hr->FullName;?> 
+									
 													<?php
 												}
 												else
 												{
 													?>
 													<a href="" class="avatar"><img src="<?php echo base_url();?>uploads/default/avtar.jpg" alt=""></a>
-													<a href="profile.html"><?php echo $hr->FirstName;?> 
-													<!-- <?php echo $hr->LastName ;?> <span>Android Developer</span></a> -->
+													<a href="profile.html"><?php echo $hr->FullName;?> 
+	
 													<?php
 												}
 												?>
@@ -119,8 +118,8 @@
 												
 											</td>
 											<td><?php echo $hr->EmailAddress ;?></td>
-											<td><?php echo $hr->PhoneNumber ;?></td>
-											<td><?php echo $hr->companyname ;?></td>
+											<td><?php echo $hr->Contact ;?></td>
+							
 											<?php
 											if($this->session->userdata('RoleId')==1 || $this->session->userdata('RoleId')==2){
 											?>
@@ -128,9 +127,9 @@
 												<div class="dropdown dropdown-action">
 													<a href="" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
 													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item" onClick="edithrs(<?php echo $hr->UserId;?>)" data-toggle="modal" data-target="#edit_salary" role="button">
+														<a class="dropdown-item" onClick="edithrs(<?php echo $hr->hr_id;?>)" data-toggle="modal" data-target="#edit_salary" role="button">
 														<i class="fa fa-pencil m-r-5"></i> Edit</a>
-														<a class="dropdown-item" onclick="deletedata(<?php echo $hr->UserId; ?>)"  data-toggle="modal" data-target="#delete_admin"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+														<a class="dropdown-item" onclick="deletedata(<?php echo $hr->hr_id; ?>)"  data-toggle="modal" data-target="#delete_admin"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
 													</div>
 												</div>
 											</td>
@@ -175,12 +174,12 @@
 
 									
 											<div class="form-group">
-												<label>First Name</label>	
-												<input class="form-control" tabindex="1" type="text" name="FirstName" Placeholder="Enter your first name" minlength="2" maxlength="50">
+												<label>Full Name</label>	
+												<input class="form-control" tabindex="1" type="text" name="FullName" Placeholder="Enter your full name" minlength="1" maxlength="50">
 											</div>
 											<div class="form-group">
-												<label>Email Address</label>
-												<input class="form-control" tabindex="3" type="text" name="EmailAddress" Placeholder="Enter your email address" minlength="2" maxlength="50">
+												<label>Contact Number</label>
+												<input class="form-control" tabindex="3" type="text" name="Contact" Placeholder="Enter your contact number" minlength="10" maxlength="10" id="PhoneNumbers">
 											</div>
 											<div class="form-group">
 												<label>Date of Birth</label>
@@ -198,10 +197,10 @@
 
 											<div class="form-group">
 														<label class="col-form-label">IsActive<span class="text-danger">*</span></label><br>
-														<label class="radio-inline" tabindex="12">
+														<label class="radio-inline" tabindex="11">
 															<input type="radio" name="IsActive" checked  value="1">Active
 														</label>
-														<label class="radio-inline" tabindex="13">
+														<label class="radio-inline" tabindex="12">
 															<input type="radio" name="IsActive" value="0">Deactive
 														</label>
 											</div>
@@ -210,45 +209,42 @@
 											
 										</div>
 										<div class="col-sm-6">  
-											<div class="form-group">
-												<label>Last Name</label>
-												<input class="form-control" tabindex="2" type="text" name="LastName" Placeholder="Enter your last name" minlength="2" maxlength="50">
-											</div> 
-											<div class="form-group">
-												<label>Contact Number</label>
-												<input class="form-control" tabindex="4" type="text" name="PhoneNumber" Placeholder="Enter your contact number" minlength="10" maxlength="10" id="PhoneNumbers">
+										<div class="form-group">
+												<label>Email Address</label>
+												<input class="form-control" tabindex="2" type="email" name="EmailAddress" Placeholder="Enter your email address" minlength="2" maxlength="50">
 											</div>
+											
 											<div class="form-group">
 												<label>Gender</label>
-												<select class="select" name="Gender" tabindex="6"> 
+												<select class="select" name="Gender" tabindex="4"> 
 													<option value="Male">Male</option>
 													<option value="Female">Female</option>
 												</select>
 											</div>
 											<div class="form-group">
 												<label>Pin-Code</label>
-												<input class="form-control" tabindex="8" type="text" name="PinCode" id="PinCodes" Placeholder="Enter your pin-code"  minlength="6" maxlength="6">
+												<input class="form-control" tabindex="6" type="text" name="PinCode" id="PinCodes" Placeholder="Enter your pin-code"  minlength="6" maxlength="6">
 											</div>
 
-											<div class="form-group">
+											<!-- <div class="form-group">
 													<label>Company</label>
-													<select class="select" name="companyid" tabindex="11"> 
+													<select class="select" name="companyid" tabindex="8"> 
 														<option desabled value="">Please select company</option>
 														<?php
-														 if($companyData){
-															foreach($companyData as $comp)
-															{
+														//  if($companyData){
+														// 	foreach($companyData as $comp)
+														// 	{
 														?>
 					
-															<option value="<?php echo $comp->companyid; ?>">
-															<?php echo $comp->companyname;?></option>
+															<option value="<?php //echo $comp->companyid; ?>">
+															<?php //echo $comp->companyname;?></option>
 
 														<?php
-														}}
+														//}}
 														?>
 													</select>
 											</div>
-											
+											 -->
 											
 										
 										</div>
@@ -275,7 +271,7 @@
 							</div>
 							<div class="modal-body">
 								<form method="post" id="form_valid2" action="<?php echo base_url();?>Hr/addhr">
-								<input type="hidden" class="form-control" name="UserId" id="UserId" value="<?php $UserId?>">
+								<input type="hidden" class="form-control" name="hr_id" id="hr_id" value="<?php $hr_id?>">
 							
 									<div class="profile-img-wrap edit-img">			
 												<img class="inline-block" src="<?php echo base_url(); ?>upload/default/avtar.jpg" alt="">
@@ -527,25 +523,6 @@ $(function() {
 
 $(document).ready(function()
 {
-
-	
-    // var table = $('#example').DataTable( {
-    //     responsive: true
-    // } );
- 
-	// $('#example').DataTable( {
-    //     dom: 'Bfrtip',
-    //     buttons: [
-    //         {
-    //             extend: 'excelHtml5',
-    //             title: 'Data export'
-    //         },
-    //         {
-    //             extend: 'pdfHtml5',
-    //             title: 'Data export'
-    //         }
-    //     ]
-    // } );
 	
 			$("#PhoneNumbers").on("input", function(evt) {
 			var self = $(this);
@@ -751,19 +728,19 @@ $(document).ready(function()
 
 <SCRIPT>
 
-function edithrs(UserId)
+function edithrs(hr_id)
 {
 	Url="<?php echo base_url() ?>";
 //	alert(AdminId);
 	$.ajax({
          url: Url+'hr/edithr',
          type: 'post',
-		 data:{UserId:UserId},
+		 data:{hr_id:hr_id},
          success:function(response){
 			var response = JSON.parse(response);
-            //    console.log(response.UserId);
+            //    console.log(response.hr_id);
 			//    console.log(response.DateofBirth);
-            $('#UserId').val(response.UserId);
+            $('#hr_id').val(response.hr_id);
 			$('#FirstName').val(response.FirstName);
 			$('#LastName').val(response.LastName);
 			$('#EmailAddress').val(response.EmailAddress);
@@ -783,7 +760,7 @@ function edithrs(UserId)
 }
 
 
-function deletedata(UserId){  
+function deletedata(hr_id){  
     $('#myModal').modal('show')
         $('#yes_btn').click(function(){
            
@@ -791,7 +768,7 @@ function deletedata(UserId){
                 $.ajax({
                 url: Url+'/Hr/deletehr/',
                 type: "post",
-                data: {UserId:UserId} ,
+                data: {hr_id:hr_id} ,
                 success: function (response) {             
                // document.location.href = url+'adminmaster/adminlist/';          
             },

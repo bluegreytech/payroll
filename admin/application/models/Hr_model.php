@@ -6,7 +6,7 @@ class Hr_model extends CI_Model
 	{		
 			$this->db->select('*');
 			$this->db->where('EmailAddress',$this->input->post('EmailAddress'));
-			$query=$this->db->get('tbluser');
+			$query=$this->db->get('tblhr');
 			if($query->num_rows() > 0)
 			{
 					return 3;
@@ -21,9 +21,9 @@ class Hr_model extends CI_Model
 			$PinCode=$this->input->post('PinCode');
 			$City=$this->input->post('City');
 			$IsActive=$this->input->post('IsActive');
-			$companyid=$this->input->post('companyid');
+			//$companyid=$this->input->post('companyid');
 			$data=array( 
-			'RoleId'=>3,
+			'hr_type'=>3,
 			'FullName'=>$FullName,
 			'EmailAddress'=>$EmailAddress, 
 			'Password'=>md5($code),
@@ -36,8 +36,9 @@ class Hr_model extends CI_Model
 			'IsActive'=>$IsActive,
 			'CreatedOn'=>date('Y-m-d')
 			);
-		//	print_r($data);die;
-			$this->db->insert('tbluser',$data);
+			//print_r($data);die;
+			$this->db->insert('tblhr',$data);
+			return 1;
 			$insert_id = $this->db->insert_id();
 			$data2=array( 
 				'hr_id'=>$insert_id,
@@ -47,6 +48,7 @@ class Hr_model extends CI_Model
 				'createdon'=>date("Y-m-d h:i:s")
 				);
 			$this->db->insert('tblhr',$data2);	
+		
 			if($insert_id!=''){
 
 				$this->db->select('t1.*,t2.*,t3.*');
@@ -119,24 +121,24 @@ class Hr_model extends CI_Model
 
 
 
+	
+
 	// function hr_list()
 	// {
-	// 	$this->db->select('UserId,RoleId,CONCAT(FirstName ,LastName) AS FirstName,EmailAddress,DateofBirth,PhoneNumber,ProfileImage,Gender,Address,PinCode,CountryId,StateId,City,IsActive');
-	// 	$this->db->from('tbluser');
+	// 	$this->db->select('t1.UserId,t1.RoleId,t1.FirstName,t1.LastName,t1.EmailAddress,t1.DateofBirth,t1.PhoneNumber,t1.Gender,t1.ProfileImage,t1.Address,t1.PinCode,t1.CountryId,t1.StateId,t1.City,t1.IsActive,t2.*,t3.*');
+	// 	$this->db->from('tbluser as t1');
+	// 	$this->db->join('tblhr as t2', 't1.UserId = t2.UserId', 'LEFT');
+	// 	$this->db->join('tblcompany as t3', 't2.companyid = t3.companyid', 'LEFT');
 	// 	$this->db->where('RoleId',3);
 	// 	$r=$this->db->get();
 	// 	$res = $r->result();
-	// 	return $res;
-
+	// 	return $res;	
 	// }
 
 	function hr_list()
 	{
-		$this->db->select('t1.UserId,t1.RoleId,t1.FirstName,t1.LastName,t1.EmailAddress,t1.DateofBirth,t1.PhoneNumber,t1.Gender,t1.ProfileImage,t1.Address,t1.PinCode,t1.CountryId,t1.StateId,t1.City,t1.IsActive,t2.*,t3.*');
-		$this->db->from('tbluser as t1');
-		$this->db->join('tblhr as t2', 't1.UserId = t2.UserId', 'LEFT');
-		$this->db->join('tblcompany as t3', 't2.companyid = t3.companyid', 'LEFT');
-		$this->db->where('RoleId',3);
+		$this->db->select('*');
+		$this->db->from('tblhr');
 		$r=$this->db->get();
 		$res = $r->result();
 		return $res;	
@@ -148,27 +150,23 @@ class Hr_model extends CI_Model
 			// $this->db->select('UserId,RoleId,CONCAT(FirstName ,LastName) AS FirstName,EmailAddress,DateofBirth,PhoneNumber,ProfileImage,Gender,Address,PinCode,CountryId,StateId,City,IsActive');
 			// $this->db->from('tbluser');
 			// $this->db->where('RoleId',3);
-			$this->db->select('t1.UserId,t1.RoleId,t1.FirstName,t1.LastName,t1.EmailAddress,t1.DateofBirth,t1.PhoneNumber,t1.Gender,t1.ProfileImage,t1.Address,t1.PinCode,t1.CountryId,t1.StateId,t1.City,t1.IsActive,t2.*,t3.*');
-			$this->db->from('tbluser as t1');
-			$this->db->join('tblhr as t2', 't1.UserId = t2.UserId', 'LEFT');
-			$this->db->join('tblcompany as t3', 't2.companyid = t3.companyid', 'LEFT');
-			$this->db->where('RoleId',3);	
-			if($option == 'FirstName')
+			$this->db->select('*');
+			$this->db->from('tblhr');
+		//	$this->db->join('tblhr as t2', 't1.UserId = t2.UserId', 'LEFT');
+			//$this->db->join('tblcompany as t3', 't2.companyid = t3.companyid', 'LEFT');
+		//	$this->db->where('RoleId',3);	
+			if($option == 'FullName')
 			{
 			// echo $keyword; 
-				$this->db->like('FirstName',$keyword);
-			}
-			else if($option == 'companyname')
-			{
-					$this->db->like('companynamelist_company',$keyword);
+				$this->db->like('FullName',$keyword);
 			}
 			else if($option == 'EmailAddress')
 			{
 					$this->db->like('EmailAddress',$keyword);
 			}
-			else if($option == 'PhoneNumber')
+			else if($option == 'Contact')
 			{
-				$this->db->where('PhoneNumber',$keyword);
+				$this->db->where('Contact',$keyword);
 			} 
 			// 	$this->db->order_by('UserId','desc');
 			    $query = $this->db->get();
