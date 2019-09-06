@@ -6,25 +6,23 @@ class Hr extends CI_Controller
         parent::__construct();
 		$this->load->model('Hr_model');
 	}
-	public function dashboard()
-	{
-		$this->load->view('hr/dashboard');
-	}
-	
+
 	function index()
 	{	
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
 		if($_POST!='')
 		{
 			$option=$this->input->post('option');
 			$keyword=$this->input->post('keyword2');	
 			$data['hrData'] = $this->Hr_model->search($option,$keyword);
-			//echo "<pre>";print_r($data['hrData']);die;
 		}	
 		else
 		{
 			$data['hrData']=$this->Hr_model->hr_list();
 		}
-		//$data['companyData']=$this->Hr_model->listall_company();
+		$data['companyData']=$this->Hr_model->list_company();
 		//echo "<pre>";print_r($data['companyData']);die;
 		$this->load->view('hr/hrlist',$data);
 	}
@@ -32,6 +30,9 @@ class Hr extends CI_Controller
 
 	public function addhr()
 	{
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
 		$data['hr_id']=$this->input->post('companyid');
 		$data['companyid']=$this->input->post('companyid');
 		$data['FullName']=$this->input->post('FullName');
@@ -87,12 +88,19 @@ class Hr extends CI_Controller
 	}
 
 	function deletehr(){
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
 		$hr_id=$this->input->post('hr_id');
+		$data=array(
+			'IsDelete'=>1,
+			'IsActive'=>'Inactive'
+				);
 		$this->db->where("hr_id",$hr_id);
-		$result=$this->db->delete('tblhr');
+		$result=$this->db->update('tblhr',$data);
 		if($result)
 		{
-			$this->session->set_flashdata('success', 'Hr was delete suucessfully!');
+			$this->session->set_flashdata('success', 'Hr was delete successfully!');
 			redirect('hr');
 		}
 		else
@@ -104,6 +112,9 @@ class Hr extends CI_Controller
 
 	function edithr()
 	{
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
 		$data=array();
 		$result=$this->Hr_model->getdata($this->input->post('hr_id'));	
 		//echo "<br>";print_r($result);die;
@@ -120,7 +131,7 @@ class Hr extends CI_Controller
 		$data['IsActive']=$result['IsActive'];
 		
 		$data['companyname']=$result['companyname'];
-		//$data['companyData']=$this->Hr_model->list_company();
+		$data['companyData']=$this->Hr_model->list_company();
 		echo json_encode($data);
 	}
 

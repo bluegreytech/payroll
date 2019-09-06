@@ -62,7 +62,7 @@
 							<div class="form-group">
 									<label>New password</label>
 									<input type="hidden" name="ResetPasswordCode" value="<?php echo $ResetPasswordCode ?>">
-									<input type="hidden" name="UserId" value="<?php echo $UserId ?>">	
+									<input type="hidden" name="$AdminId" value="<?php echo $$AdminId ?>">	
 									<input type="password" class="form-control" name="Password"  id="Password"  minlength="8" maxlength="15" placeholder="Enter new password">
 								</div>
 								<div class="form-group">

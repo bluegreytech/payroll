@@ -6,12 +6,14 @@ class Hr_model extends CI_Model
 	{		
 			$this->db->select('*');
 			$this->db->where('EmailAddress',$this->input->post('EmailAddress'));
-			$query=$this->db->get('tbluser');
+			$query=$this->db->get('tblhr');
 			if($query->num_rows() > 0)
 			{
 					return 3;
 			}
 			$code=rand(12,123456789);
+			
+			$companyid=$this->input->post('companyid');
 			$FullName=$this->input->post('FullName');
 			$EmailAddress=$this->input->post('EmailAddress');
 			$DateofBirth=$this->input->post('DateofBirth');
@@ -24,6 +26,7 @@ class Hr_model extends CI_Model
 			$companyid=$this->input->post('companyid');
 			$data=array( 
 			'hr_type'=>1,
+			'companyid'=>$companyid,
 			'FullName'=>$FullName,
 			'EmailAddress'=>$EmailAddress, 
 			'Password'=>md5($code),
@@ -37,22 +40,12 @@ class Hr_model extends CI_Model
 			'CreatedOn'=>date('Y-m-d')
 			);
 			//print_r($data);die;
-			$this->db->insert('tbluser',$data);
-			return 1;
+			$this->db->insert('tblhr',$data);
 			$insert_id = $this->db->insert_id();
-			$data2=array( 
-				'hr_id'=>$insert_id,
-				'companyid'=>$companyid,
-				'isactive'=>$IsActive,
-				'createdby'=>1,
-				'createdon'=>date("Y-m-d h:i:s")
-				);
-			$this->db->insert('tblhr',$data2);	
-		
-			if($insert_id!=''){
-
+			if($insert_id!='')
+			{
 				$this->db->select('t1.*,t2.*,t3.*');
-				$this->db->from('tbluser as t1');
+				$this->db->from('tblhr as t1');
 				$this->db->join('tblhr as t2', 't1.UserId = t2.UserId', 'LEFT');
 				$this->db->join('tblcompany as t3', 't2.companyid = t3.companyid', 'LEFT');
 				$this->db->where('t1.UserId',$insert_id);
@@ -125,9 +118,10 @@ class Hr_model extends CI_Model
 
 	function hr_list()
 	{
-		$this->db->select('t1.hr_id,t1.companyid,t1.hr_type,t1.FullName,t1.EmailAddress,t1.DateofBirth,t1.Contact,t1.Gender,t1.Address,t1.ProfileImage,t1.PinCode,t1.City,t1.IsActive,t2.companyname');
+		$this->db->select('t1.*,t2.companyname');
 		$this->db->from('tblhr as t1');
 		$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
+		$this->db->where('t1.IsDelete!=',1);
 		$r=$this->db->get();
 		$res = $r->result();
 		return $res;	
@@ -147,9 +141,10 @@ class Hr_model extends CI_Model
 	function search($option,$keyword)
 	{
 			$keyword = str_replace('-', ' ', $keyword);
-			$this->db->select('t1.hr_id,t1.companyid,t1.hr_type,t1.FullName,t1.EmailAddress,t1.DateofBirth,t1.Contact,t1.Gender,t1.Address,t1.ProfileImage,t1.PinCode,t1.City,t1.IsActive,t2.companyname');
+			$this->db->select('t1.*,t2.companyname');
 			$this->db->from('tblhr as t1');
 			$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
+			$this->db->or_where('t1.IsDelete!=',1);
 			if($option == 'FullName')
 			{
 			// echo $keyword; 

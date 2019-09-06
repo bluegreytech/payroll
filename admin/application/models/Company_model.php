@@ -12,14 +12,9 @@ class Company_model extends CI_Model
 		$res = $r->result();
 		return $res;
 	}
-	function list_company(){
-		$r=$this->db->select('*')
-					->from('tblcompany')
-					->get();
-		$res = $r->result();
-		return $res;
 
-	}
+
+	
 
 
 	function list_companytype()
@@ -71,17 +66,27 @@ class Company_model extends CI_Model
 		$r=$this->db->select('*')
 					->from('tblstate')
 					->where('statename','Gujarat')
-					->or_where('isactive',1)
 					->get();
 		$res = $r->result();
 		return $res;
 
 	}
 	
+	function list_company()
+	{
+			$this->db->select('t1.*,t2.companytype');
+			$this->db->from('tblcompany as t1');
+			$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
+			$this->db->or_where('t1.isdelete!=',1);
+			$r=$this->db->get();
+			$res = $r->result();
+			return $res;
+	}
+
 	function search($option,$keyword)
 	{
 			$keyword = str_replace('-', ' ', $keyword);
-			$this->db->select('t1.*,t2.*');
+			$this->db->select('t1.*,t2.companytype');
 			$this->db->from('tblcompany as t1');
 			$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
 			$this->db->or_where('t1.isdelete!=',1);
@@ -482,7 +487,7 @@ class Company_model extends CI_Model
 			//print_r($data);die;
 			$this->db->where("companyid",$companyid);
 			$this->db->update('tblcompany',$data);	
-			//return 1;	
+			return 1;	
 		if($companycomplianceid!='')
 		{
 			$complianceid=implode(',',$this->input->post('complianceid'));

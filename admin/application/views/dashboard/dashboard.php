@@ -45,7 +45,7 @@
 							<div class="dash-widget clearfix card-box">
 								<span class="dash-widget-icon"><i class="fa fa-diamond"></i></span>
 								<div class="dash-widget-info">
-									<h3>37</h3>
+									<h3><?php echo $adminData;?></h3>
 									<a href="<?php echo base_url();?>adminmaster/adminlist" title="Go to Admin list"><span>Total Admin</span></a>
 								</div>
 							</div>
@@ -54,8 +54,8 @@
 							<div class="dash-widget clearfix card-box">
 								<span class="dash-widget-icon"><i class="fa fa-user"></i></span>
 								<div class="dash-widget-info">
-									<h3>218</h3>
-									<span>Employees</span>
+									<h3><?php echo $empData;?></h3>
+									<a href="<?php echo base_url();?>employee" title="Go to Admin list"><span>Employees</span></a>
 								</div>
 							</div>
 						</div>

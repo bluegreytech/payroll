@@ -180,9 +180,11 @@
 												<input class="form-control" tabindex="1" type="text" name="FullName" Placeholder="Enter your full name" minlength="2" maxlength="50">
 											</div>
 											<div class="form-group">
-												<label>Email Address</label>
-												<input class="form-control" tabindex="3" type="text" name="EmailAddress" Placeholder="Enter your email address" minlength="2" maxlength="50">
+												<label>Contact Number</label>
+												<input class="form-control" tabindex="3" type="text" name="Contact" Placeholder="Enter your contact number" minlength="10" maxlength="10" id="PhoneNumbers">
 											</div>
+
+											
 											<div class="form-group">
 												<label>Date of Birth</label>
 												<input class="form-control" tabindex="5" type="date" name="DateofBirth" Placeholder="Enter your date of birth">
@@ -192,48 +194,11 @@
 												<label>Address</label>
 												<input class="form-control" tabindex="7" type="text" name="Address" Placeholder="Enter your address" minlength="5" maxlength="500">
 											</div>
-											<div class="form-group">
-												<label>City</label>
-												<input class="form-control" tabindex="9" type="text" name="City" Placeholder="Enter your city" minlength="2" maxlength="50">
-											</div>
-
-											<div class="form-group">
-														<label class="col-form-label">IsActive<span class="text-danger">*</span></label><br>
-														<label class="radio-inline" tabindex="12">
-															<input type="radio" name="IsActive" checked  value="1">Active
-														</label>
-														<label class="radio-inline" tabindex="13">
-															<input type="radio" name="IsActive" value="0">Deactive
-														</label>
-											</div>
-
 											
-											
-										</div>
-										<div class="col-sm-6">  
-											<div class="form-group">
-												<label>Last Name</label>
-												<input class="form-control" tabindex="2" type="text" name="LastName" Placeholder="Enter your last name" minlength="2" maxlength="50">
-											</div> 
-											<div class="form-group">
-												<label>Contact Number</label>
-												<input class="form-control" tabindex="4" type="text" name="PhoneNumber" Placeholder="Enter your contact number" minlength="10" maxlength="10" id="PhoneNumbers">
-											</div>
-											<div class="form-group">
-												<label>Gender</label>
-												<select class="select" name="Gender" tabindex="6"> 
-													<option value="Male">Male</option>
-													<option value="Female">Female</option>
-												</select>
-											</div>
-											<div class="form-group">
-												<label>Pin-Code</label>
-												<input class="form-control" tabindex="8" type="text" name="PinCode" id="PinCodes" Placeholder="Enter your pin-code"  minlength="6" maxlength="6">
-											</div>
 
 											<div class="form-group">
 													<label>Company</label>
-													<select class="select" name="companyid" tabindex="11"> 
+													<select class="form-control" name="companyid" tabindex="8"> 
 														<option desabled value="">Please select company</option>
 														<?php
 														 if($companyData){
@@ -248,6 +213,45 @@
 														}}
 														?>
 													</select>
+											</div>
+
+											
+
+											
+											
+										</div>
+										<div class="col-sm-6">  
+											<div class="form-group">
+												<label>Email Address</label>
+												<input class="form-control" tabindex="2" type="text" name="EmailAddress" Placeholder="Enter your email address" minlength="2" maxlength="50">
+											</div>
+											
+											<div class="form-group">
+												<label>Gender</label>
+												<select class="form-control" name="Gender" tabindex="4">
+													<option value="">Please select gender</option>
+													<option value="Male">Male</option>
+													<option value="Female">Female</option>
+												</select>
+											</div>
+											<div class="form-group">
+												<label>Pin-Code</label>
+												<input class="form-control" tabindex="6" type="text" name="PinCode" id="PinCodes" Placeholder="Enter your pin-code"  minlength="6" maxlength="6">
+											</div>
+
+											<div class="form-group">
+												<label>City</label>
+												<input class="form-control" tabindex="8" type="text" name="City" Placeholder="Enter your city" minlength="2" maxlength="50">
+											</div>
+
+											<div class="form-group">
+														<label class="col-form-label">IsActive<span class="text-danger">*</span></label><br>
+														<label class="radio-inline" tabindex="10">
+															<input type="radio" name="IsActive" checked  value="1">Active
+														</label>
+														<label class="radio-inline" tabindex="11">
+															<input type="radio" name="IsActive" value="0">Deactive
+														</label>
 											</div>
 				
 										</div>
@@ -287,7 +291,7 @@
 										<div class="col-sm-6"> 
 											<div class="form-group">
 												<label>Full Name</label>										
-												<input class="form-control" type="text" name="FullName" Placeholder="Enter your full name" minlength="2" maxlength="50" id="FullName" tabindex="1">
+												<input class="form-control" type="text" name="FullName" Placeholder="Enter your full name" minlength="1" maxlength="50" id="FullName" tabindex="1">
 											</div>
 											<div class="form-group">
 												<label>Contact Number</label>
@@ -301,17 +305,23 @@
 												<label>Address</label>
 												<input class="form-control" type="text" name="Address" tabindex="7" Placeholder="Enter your address" minlength="5" maxlength="500" id="Address">
 											</div>
-											<!-- <input type="text" name="companyid" id="companyid"> -->
+			
+											<!-- <option value="<?php// echo $typecompany->companyid; ?>" <?php// if($companyid==$typecompany->companyid){echo "selected" ;}?>><?php //echo $typecompany->companyname;?></option> -->
+														
+											
 											<div class="form-group">
-													<label>Type of Company</label>
-													<select class="select" name="companyid" id="companyid" tabindex="9"> 
-														<option desabled value="">Please select type of company</option>
+													<label>Company</label>
+													<select class="form-control" name="companyid" tabindex="9"> 
+														<option desabled value="">Please select company</option>
 														<?php
-														 if($companytypeData){
-															foreach($companytypeData as $typecompany)
+														 if($companyData){
+															foreach($companyData as $comp)
 															{
 														?>
-															<option value="<?php echo $typecompany->companyid; ?>" <?php if($companyid==$typecompany->companyid){echo "selected" ;}?>><?php echo $typecompany->companyname;?></option>
+					
+															<option value="<?php echo $comp->companyid; ?>">
+															<?php echo $comp->companyname;?></option>
+
 														<?php
 														}}
 														?>
@@ -331,9 +341,10 @@
 											
 											<div class="form-group">
 												<label>Gender</label>
-												<select class="select" name="Gender" tabindex="4"> 
-													<option value="Male" id="Male">Male</option>
-													<option value="Female" id="Female">Female</option>
+												<select class="form-control" name="Gender" tabindex="4">
+													<option value="">Please select gender</option>
+													<option value="Male">Male</option>
+													<option value="Female">Female</option>
 												</select>
 											</div>
 											<div class="form-group">
@@ -341,12 +352,13 @@
 												<input class="form-control" type="text" name="PinCode" tabindex="6" Placeholder="Enter your pincode number" minlength="06" maxlength="06" id="PinCode">
 											</div>
 
+											
+
 											<div class="form-group">
 												<label>City</label>
 												<input class="form-control" type="text" name="City" Placeholder="Enter your city" minlength="2" maxlength="50" id="City" tabindex="8">
 											</div>
-
-										
+									
 											<div class="form-group">
 												<label class="col-form-label">IsActive</label><br>
 												<label class="radio-inline" tabindex="10">
@@ -356,8 +368,6 @@
 													<input type="radio" name="IsActive"  value="Inactive">Inactive
 												</label>
 											</div>
-									
-											
 											
 											
 										</div>
@@ -553,12 +563,10 @@ $(document).ready(function()
 		{
 					rules: {
 
-						FirstName: {
+						FullName: {
 							required: true,
 								},
-						LastName: {
-							required: true,
-								},
+						
 						EmailAddress: {
 							required: true,
 								},		
@@ -574,7 +582,7 @@ $(document).ready(function()
 						PinCode: {
 							required: true,
 								},
-						PhoneNumber: {
+						Contact: {
 							required: true,
 							digits: true,
 								},
@@ -588,10 +596,8 @@ $(document).ready(function()
 
 				messages:{
 
-						FirstName: {
-							required: "Please enter a first name",
-								pattern : "Enter only characters and numbers and \"space , \" -",
-								minlength: "Please enter at least 2 and maximum 50 letters!",
+						FullName: {
+							required: "Please enter a your full name",
 								},
 						LastName: {
 							required: "Please enter a last name",
@@ -616,7 +622,7 @@ $(document).ready(function()
 							pattern : "Enter only numbers",
 							minlength: "Please enter at least 6 and maximum 6 numbers!",
 								},
-						PhoneNumber: {
+						Contact: {
 							required: "Please enter a contact number",
 							minlength: "Please enter at least 10 and maximum 13 numbers!",
 								},

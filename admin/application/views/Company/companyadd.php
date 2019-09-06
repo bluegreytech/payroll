@@ -129,7 +129,7 @@
 														value="<?php
 														 if($companyid!='')
 														 {
-															echo date('d-m-Y',strtotime($digitalsignaturedate));
+															echo date('Y-m-d',strtotime($digitalsignaturedate));
 														 }
 														
 														 ?>" readonly>

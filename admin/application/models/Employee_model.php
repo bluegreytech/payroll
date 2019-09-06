@@ -3,7 +3,12 @@
 class Employee_model extends CI_Model
  {
 	function insertdata()
-	{		
+	{	
+		 
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}	
+
 			$this->db->select('*');
 			$this->db->where('EmailAddress',$this->input->post('EmailAddress'));
 			$query=$this->db->get('tbluser');
@@ -125,11 +130,14 @@ class Employee_model extends CI_Model
 
 	function emp_list()
 	{
+		 
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
 		$this->db->select('t1.*,t2.companyname');
 		$this->db->from('tblemployee as t1');
 		$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
 		$this->db->where('t1.isdelete!=',1);
-		$this->db->or_where('t1.isactive!=',0);
 		$r=$this->db->get();
 		$res = $r->result();
 		return $res;	
@@ -139,12 +147,15 @@ class Employee_model extends CI_Model
 
 	function search($option,$keyword)
 	{
+		 
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
 			$keyword = str_replace('-', ' ', $keyword);
 			$this->db->select('t1.*,t2.companyname');
 			$this->db->from('tblemployee as t1');
 			$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
 			$this->db->where('t1.isdelete!=',1);
-			$this->db->or_where('t1.isactive!=',0);
 			if($option == 'empfirstname')
 			{
 				$this->db->like('empfirstname',$keyword);
@@ -175,6 +186,10 @@ class Employee_model extends CI_Model
 	
 
 	function getdata($hr_id){
+		 
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
 			$this->db->select('t1.*,t2.*');
 			$this->db->from('tblhr as t1');
 			$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
@@ -184,7 +199,11 @@ class Employee_model extends CI_Model
 	}
 
 	function updatehr()
-	{		     
+	{		  
+		 
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}   
 		$hr_id=$this->input->post('hr_id');
 		//  $hrid=$this->input->post('hrid');
 		// $companyid=$this->input->post('companyid');
@@ -225,6 +244,10 @@ class Employee_model extends CI_Model
 
 	function updatedata()
 	{		
+		 
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
 		$UserId=$this->input->post('UserId');
 		
 		// if(isset($_FILES['ProfileImage']) &&  $_FILES['ProfileImage']['name']!='')
