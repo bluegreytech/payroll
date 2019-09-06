@@ -55,7 +55,7 @@
 <?php
           if($this->session->userdata('EmailAddress'))
           {
-			$AdminId=$this->session->userdata('AdminId');
+		 	$AdminId=$this->session->userdata('AdminId');
 			$RoleId=$this->session->userdata('RoleId');
 			$FirstName=$this->session->userdata('FirstName');
 			$LastName=$this->session->userdata('LastName');

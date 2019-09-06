@@ -287,7 +287,7 @@ class Adminmaster_model extends CI_Model
 
 	public function changepass($AdminId) 
 	{
-		$this->db->select('AdminId,Password');				
+		$this->db->select('*');				
 		$this->db->where('AdminId',$AdminId);
 		$this->db->where('Password',md5($this->input->post('Password')));
 		$this->db->from('tbladmin');

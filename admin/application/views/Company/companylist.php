@@ -47,6 +47,7 @@
 											<option value="companyname">Company Name</option>
 											<option value="comemailaddress">Email Address</option>
 											<option value="comcontactnumber">Contact Number</option>
+											
 										</select>
 										<!-- <label class="focus-label">Role</label> -->
 									</div>
@@ -76,7 +77,8 @@
 											<th>Company Name</th>
 											<th>Contact Number</th>
 											<th>Company Type</th>
-											<th>email Address </th>
+											<th>Rmail Address </th>
+											<th>Verification Status </th>
 											<th class="text-right">Action</th>
 											
 										</tr>
@@ -94,6 +96,15 @@
 										<td><?php echo $comp->comcontactnumber ;?></td>
 										<td><?php echo $comp->companytype ;?></td>
 										<td><?php echo $comp->comemailaddress ;?></td>
+										<td><?php if($comp->emailverifystatus=='Verify')
+												{
+													echo "Verified";
+												}
+												else
+												{
+													echo "Pending";
+												}
+										?></td>
 										
 											<td class="text-right">
 												<div class="dropdown dropdown-action">

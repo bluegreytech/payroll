@@ -180,13 +180,13 @@ class Adminmaster extends CI_Controller
 
 	public function change_password($AdminId)
 	{	
-		if(!check_admin_authentication()){ 
-			redirect(base_url('Login'));
-		}
+		// if(!check_admin_authentication()){ 
+		// 	redirect(base_url('Login'));
+		// }
 		$data=array();
-		$data['AdminId']=$this->input->post('AdminId');
+		//$data['AdminId']=$this->input->post('AdminId');
 		if($_POST){
-			$AdminId=$this->input->post('AdminId');
+			//$AdminId=$this->input->post('AdminId');
 			if($this->input->post('AdminId')!='')
 			{
 				$result=$this->Adminmaster_model->changepass($AdminId);

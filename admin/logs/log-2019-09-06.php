@@ -578,3 +578,301 @@ ERROR - 2019-09-06 12:56:38 --> 404 Page Not Found: Uploads/UserProfile
 ERROR - 2019-09-06 12:56:38 --> 404 Page Not Found: Uploads/default
 ERROR - 2019-09-06 12:58:56 --> 404 Page Not Found: Uploads/default
 ERROR - 2019-09-06 12:58:56 --> 404 Page Not Found: Uploads/UserProfile
+ERROR - 2019-09-06 12:59:56 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:59:56 --> 404 Page Not Found: Uploads/UserProfile
+ERROR - 2019-09-06 13:04:24 --> Severity: Notice --> Trying to get property 'IsActive' of non-object C:\xampp\htdocs\payroll\admin\application\helpers\custom_helper.php 122
+ERROR - 2019-09-06 13:04:39 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 24
+ERROR - 2019-09-06 13:04:39 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:04:39 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 13:04:39 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 13:04:39 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 13:04:39 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 13:04:43 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:04:43 --> 404 Page Not Found: Uploads/UserProfile
+ERROR - 2019-09-06 13:05:14 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:05:14 --> 404 Page Not Found: Uploads/UserProfile
+ERROR - 2019-09-06 13:06:21 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 24
+ERROR - 2019-09-06 13:06:21 --> Severity: Notice --> Undefined variable: session C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 57
+ERROR - 2019-09-06 13:06:44 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 24
+ERROR - 2019-09-06 13:06:44 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:06:44 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 13:06:44 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 13:06:44 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 13:06:44 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 13:07:01 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:07:03 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:07:15 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:07:15 --> 404 Page Not Found: Default/cdn-cgi
+ERROR - 2019-09-06 13:07:29 --> Severity: error --> Exception: Too few arguments to function Adminmaster::change_password(), 0 passed in C:\xampp\htdocs\payroll\admin\system\core\CodeIgniter.php on line 532 and exactly 1 expected C:\xampp\htdocs\payroll\admin\application\controllers\Adminmaster.php 181
+ERROR - 2019-09-06 13:08:02 --> 404 Page Not Found: Default/cdn-cgi
+ERROR - 2019-09-06 13:08:02 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:08:11 --> Severity: error --> Exception: Too few arguments to function Adminmaster::change_password(), 0 passed in C:\xampp\htdocs\payroll\admin\system\core\CodeIgniter.php on line 532 and exactly 1 expected C:\xampp\htdocs\payroll\admin\application\controllers\Adminmaster.php 181
+ERROR - 2019-09-06 13:09:29 --> 404 Page Not Found: Default/cdn-cgi
+ERROR - 2019-09-06 13:09:29 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:09:59 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:09:59 --> 404 Page Not Found: Default/cdn-cgi
+ERROR - 2019-09-06 13:10:07 --> Severity: error --> Exception: Too few arguments to function Adminmaster::change_password(), 0 passed in C:\xampp\htdocs\payroll\admin\system\core\CodeIgniter.php on line 532 and exactly 1 expected C:\xampp\htdocs\payroll\admin\application\controllers\Adminmaster.php 181
+ERROR - 2019-09-06 13:11:12 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:11:12 --> 404 Page Not Found: Default/cdn-cgi
+ERROR - 2019-09-06 13:11:42 --> Severity: Notice --> Undefined variable: AdminId C:\xampp\htdocs\payroll\admin\application\views\common\changepassword.php 25
+ERROR - 2019-09-06 13:11:42 --> Severity: Notice --> Undefined variable: AdminId C:\xampp\htdocs\payroll\admin\application\views\common\changepassword.php 28
+ERROR - 2019-09-06 13:11:43 --> Severity: Notice --> Undefined variable: AdminId C:\xampp\htdocs\payroll\admin\application\views\common\changepassword.php 25
+ERROR - 2019-09-06 13:11:43 --> Severity: Notice --> Undefined variable: AdminId C:\xampp\htdocs\payroll\admin\application\views\common\changepassword.php 28
+ERROR - 2019-09-06 13:11:43 --> 404 Page Not Found: Default/cdn-cgi
+ERROR - 2019-09-06 13:11:43 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:12:23 --> Severity: Notice --> Undefined variable: AdminId C:\xampp\htdocs\payroll\admin\application\views\common\changepassword.php 25
+ERROR - 2019-09-06 13:12:23 --> Severity: Notice --> Undefined variable: AdminId C:\xampp\htdocs\payroll\admin\application\views\common\changepassword.php 28
+ERROR - 2019-09-06 13:12:23 --> 404 Page Not Found: Default/cdn-cgi
+ERROR - 2019-09-06 13:12:23 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:12:55 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 24
+ERROR - 2019-09-06 13:12:55 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:12:55 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 13:12:55 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 13:12:55 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 13:12:55 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 13:12:59 --> Severity: Notice --> Undefined variable: AdminId C:\xampp\htdocs\payroll\admin\application\views\common\changepassword.php 25
+ERROR - 2019-09-06 13:12:59 --> Severity: Notice --> Undefined variable: AdminId C:\xampp\htdocs\payroll\admin\application\views\common\changepassword.php 28
+ERROR - 2019-09-06 13:12:59 --> 404 Page Not Found: Default/cdn-cgi
+ERROR - 2019-09-06 13:12:59 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:14:34 --> Severity: Notice --> Undefined variable: AdminId C:\xampp\htdocs\payroll\admin\application\views\common\changepassword.php 25
+ERROR - 2019-09-06 13:14:34 --> Severity: Notice --> Undefined variable: AdminId C:\xampp\htdocs\payroll\admin\application\views\common\changepassword.php 28
+ERROR - 2019-09-06 13:14:34 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:14:34 --> 404 Page Not Found: Default/cdn-cgi
+ERROR - 2019-09-06 13:14:35 --> Severity: Notice --> Undefined variable: AdminId C:\xampp\htdocs\payroll\admin\application\views\common\changepassword.php 25
+ERROR - 2019-09-06 13:14:35 --> Severity: Notice --> Undefined variable: AdminId C:\xampp\htdocs\payroll\admin\application\views\common\changepassword.php 28
+ERROR - 2019-09-06 13:14:35 --> 404 Page Not Found: Default/cdn-cgi
+ERROR - 2019-09-06 13:14:35 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:14:35 --> Severity: Notice --> Undefined variable: AdminId C:\xampp\htdocs\payroll\admin\application\views\common\changepassword.php 25
+ERROR - 2019-09-06 13:14:35 --> Severity: Notice --> Undefined variable: AdminId C:\xampp\htdocs\payroll\admin\application\views\common\changepassword.php 28
+ERROR - 2019-09-06 13:14:35 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:14:35 --> 404 Page Not Found: Default/cdn-cgi
+ERROR - 2019-09-06 13:15:59 --> Severity: Notice --> Undefined variable: AdminId C:\xampp\htdocs\payroll\admin\application\views\common\changepassword.php 25
+ERROR - 2019-09-06 13:15:59 --> Severity: Notice --> Undefined variable: AdminId C:\xampp\htdocs\payroll\admin\application\views\common\changepassword.php 28
+ERROR - 2019-09-06 13:15:59 --> 404 Page Not Found: Default/cdn-cgi
+ERROR - 2019-09-06 13:15:59 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:16:28 --> Severity: Notice --> Undefined variable: AdminId C:\xampp\htdocs\payroll\admin\application\views\common\changepassword.php 25
+ERROR - 2019-09-06 13:16:28 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:16:28 --> 404 Page Not Found: Default/cdn-cgi
+ERROR - 2019-09-06 13:17:08 --> Severity: Notice --> Undefined variable: AdminId C:\xampp\htdocs\payroll\admin\application\views\common\changepassword.php 25
+ERROR - 2019-09-06 13:17:08 --> Severity: Notice --> Undefined variable: AdminId C:\xampp\htdocs\payroll\admin\application\views\common\changepassword.php 28
+ERROR - 2019-09-06 13:17:08 --> 404 Page Not Found: Default/cdn-cgi
+ERROR - 2019-09-06 13:17:08 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:17:41 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 13:17:41 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:17:41 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 13:17:41 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 13:17:41 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 13:25:44 --> Severity: Notice --> Undefined variable: AdminId C:\xampp\htdocs\payroll\admin\application\views\common\reset_password.php 65
+ERROR - 2019-09-06 13:25:44 --> Severity: Notice --> Undefined variable:  C:\xampp\htdocs\payroll\admin\application\views\common\reset_password.php 65
+ERROR - 2019-09-06 13:27:04 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 24
+ERROR - 2019-09-06 13:27:04 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:27:04 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 13:27:04 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 13:27:04 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 13:27:04 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 13:27:06 --> Severity: Notice --> Undefined variable: AdminId C:\xampp\htdocs\payroll\admin\application\views\common\changepassword.php 25
+ERROR - 2019-09-06 13:27:06 --> Severity: Notice --> Undefined variable: AdminId C:\xampp\htdocs\payroll\admin\application\views\common\changepassword.php 28
+ERROR - 2019-09-06 13:27:06 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:27:06 --> 404 Page Not Found: Default/cdn-cgi
+ERROR - 2019-09-06 13:28:49 --> Severity: Notice --> Undefined variable: AdminId C:\xampp\htdocs\payroll\admin\application\views\common\changepassword.php 25
+ERROR - 2019-09-06 13:28:49 --> Severity: Notice --> Undefined variable: AdminId C:\xampp\htdocs\payroll\admin\application\views\common\changepassword.php 28
+ERROR - 2019-09-06 13:28:49 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:28:49 --> 404 Page Not Found: Default/cdn-cgi
+ERROR - 2019-09-06 13:28:50 --> Severity: Notice --> Undefined variable: AdminId C:\xampp\htdocs\payroll\admin\application\views\common\changepassword.php 25
+ERROR - 2019-09-06 13:28:50 --> Severity: Notice --> Undefined variable: AdminId C:\xampp\htdocs\payroll\admin\application\views\common\changepassword.php 28
+ERROR - 2019-09-06 13:28:50 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:28:50 --> 404 Page Not Found: Default/cdn-cgi
+ERROR - 2019-09-06 13:30:55 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 24
+ERROR - 2019-09-06 13:30:56 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 13:30:56 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 13:30:56 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 13:30:56 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:30:56 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 13:30:59 --> 404 Page Not Found: Uploads/UserProfile
+ERROR - 2019-09-06 13:30:59 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:31:04 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:31:09 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:31:14 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:31:34 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:31:42 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:31:44 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:31:46 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:32:20 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:32:21 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:34:08 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:38:25 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:38:52 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:39:10 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:39:43 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:41:55 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:42:27 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:42:31 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:42:38 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:43:02 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:43:11 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:43:52 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:44:16 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:48:15 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:48:24 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:48:34 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:48:38 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:48:40 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:48:47 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:48:52 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:48:55 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:48:59 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:49:00 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:49:32 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:49:34 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:49:54 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:49:54 --> 404 Page Not Found: Uploads/UserProfile
+ERROR - 2019-09-06 13:51:03 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:51:23 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:51:30 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:51:32 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:51:33 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:51:55 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:51:59 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:52:01 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:52:01 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:52:23 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:53:06 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:53:09 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:53:33 --> Severity: Warning --> implode(): Invalid arguments passed C:\xampp\htdocs\payroll\admin\application\models\Company_model.php 295
+ERROR - 2019-09-06 13:53:34 --> Query error: Column 'complianceid' cannot be null - Invalid query: INSERT INTO `tblcompanycompliances` (`companyid`, `complianceid`, `isactive`, `createdby`, `createdon`) VALUES (2, NULL, '1', 1, '2019-09-06 01:53:34')
+ERROR - 2019-09-06 13:53:45 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:53:51 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:54:00 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:54:02 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:54:09 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:54:11 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:54:32 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:54:34 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:54:39 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:54:41 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:54:44 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:54:49 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:54:53 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:55:00 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:55:02 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:55:21 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:56:12 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:56:15 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:56:21 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:56:52 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:57:31 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:57:36 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:57:40 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:58:32 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:58:34 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:58:45 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:59:19 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:59:26 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:59:26 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 13:59:26 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 13:59:26 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 13:59:26 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 13:59:34 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 13:59:43 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:00:47 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:01:38 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:01:51 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:02:01 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:02:05 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:02:05 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:02:10 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:03:03 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:03:24 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:04:55 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:05:06 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:06:04 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:06:06 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:06:07 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:06:20 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:07:16 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:08:20 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:08:31 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:08:34 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:08:36 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:08:43 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 14:08:43 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:08:43 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 14:08:43 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 14:08:43 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 14:08:50 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:08:50 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 14:08:50 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 14:08:50 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 14:08:50 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 14:09:03 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:09:10 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:09:15 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:09:19 --> Severity: Notice --> Undefined variable: UserId C:\xampp\htdocs\payroll\admin\application\views\Leave\leaves.php 158
+ERROR - 2019-09-06 14:09:19 --> Severity: Notice --> Undefined variable: UserId C:\xampp\htdocs\payroll\admin\application\views\Leave\leaves.php 473
+ERROR - 2019-09-06 14:09:19 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:09:19 --> 404 Page Not Found: Leave/assets
+ERROR - 2019-09-06 14:09:19 --> 404 Page Not Found: Leave/assets
+ERROR - 2019-09-06 14:09:19 --> 404 Page Not Found: Leave/assets
+ERROR - 2019-09-06 14:09:19 --> 404 Page Not Found: Leave/assets
+ERROR - 2019-09-06 14:09:19 --> 404 Page Not Found: Leave/assets
+ERROR - 2019-09-06 14:09:19 --> 404 Page Not Found: Leave/assets
+ERROR - 2019-09-06 14:09:19 --> 404 Page Not Found: Leave/assets
+ERROR - 2019-09-06 14:09:19 --> 404 Page Not Found: Leave/assets
+ERROR - 2019-09-06 14:09:19 --> 404 Page Not Found: Leave/assets
+ERROR - 2019-09-06 14:09:19 --> 404 Page Not Found: Leave/assets
+ERROR - 2019-09-06 14:09:37 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:09:38 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:09:39 --> Severity: Notice --> Undefined variable: UserId C:\xampp\htdocs\payroll\admin\application\views\Leave\leaves.php 158
+ERROR - 2019-09-06 14:09:39 --> Severity: Notice --> Undefined variable: UserId C:\xampp\htdocs\payroll\admin\application\views\Leave\leaves.php 473
+ERROR - 2019-09-06 14:09:39 --> 404 Page Not Found: Leave/assets
+ERROR - 2019-09-06 14:09:39 --> 404 Page Not Found: Leave/assets
+ERROR - 2019-09-06 14:09:39 --> 404 Page Not Found: Leave/assets
+ERROR - 2019-09-06 14:09:39 --> 404 Page Not Found: Leave/assets
+ERROR - 2019-09-06 14:09:39 --> 404 Page Not Found: Leave/assets
+ERROR - 2019-09-06 14:09:39 --> 404 Page Not Found: Leave/assets
+ERROR - 2019-09-06 14:09:40 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:09:40 --> 404 Page Not Found: Leave/assets
+ERROR - 2019-09-06 14:09:40 --> 404 Page Not Found: Leave/assets
+ERROR - 2019-09-06 14:09:40 --> 404 Page Not Found: Leave/assets
+ERROR - 2019-09-06 14:09:40 --> 404 Page Not Found: Leave/assets
+ERROR - 2019-09-06 14:09:41 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:10:46 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:12:22 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:12:27 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:12:36 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:13:30 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:14:31 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:15:18 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:16:17 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:16:45 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:17:09 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-06 14:17:09 --> 404 Page Not Found: Default/css
+ERROR - 2019-09-06 14:17:09 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-06 14:17:30 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:18:32 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:19:02 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:19:25 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:20:05 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:20:37 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:21:24 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:21:37 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:22:50 --> Severity: Notice --> Undefined variable: UserId C:\xampp\htdocs\payroll\admin\application\views\Leave\leaves.php 158
+ERROR - 2019-09-06 14:22:50 --> Severity: Notice --> Undefined variable: UserId C:\xampp\htdocs\payroll\admin\application\views\Leave\leaves.php 473
+ERROR - 2019-09-06 14:22:50 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:22:50 --> 404 Page Not Found: Leave/assets
+ERROR - 2019-09-06 14:22:50 --> 404 Page Not Found: Leave/assets
+ERROR - 2019-09-06 14:22:50 --> 404 Page Not Found: Leave/assets
+ERROR - 2019-09-06 14:22:50 --> 404 Page Not Found: Leave/assets
+ERROR - 2019-09-06 14:22:50 --> 404 Page Not Found: Leave/assets
+ERROR - 2019-09-06 14:22:50 --> 404 Page Not Found: Leave/assets
+ERROR - 2019-09-06 14:22:50 --> 404 Page Not Found: Leave/assets
+ERROR - 2019-09-06 14:22:50 --> 404 Page Not Found: Leave/assets
+ERROR - 2019-09-06 14:22:50 --> 404 Page Not Found: Leave/assets
+ERROR - 2019-09-06 14:22:50 --> 404 Page Not Found: Leave/assets
+ERROR - 2019-09-06 14:23:25 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:23:28 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:23:30 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:23:32 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:23:42 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:23:44 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 14:23:45 --> 404 Page Not Found: Uploads/default

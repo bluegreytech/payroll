@@ -41,21 +41,11 @@ class Hr_model extends CI_Model
 			);
 			//print_r($data);die;
 			$this->db->insert('tblhr',$data);
-			return 1;
 			$insert_id = $this->db->insert_id();
-			$data2=array( 
-				'hr_id'=>$insert_id,
-				'companyid'=>$companyid,
-				'isactive'=>$IsActive,
-				'createdby'=>1,
-				'createdon'=>date("Y-m-d h:i:s")
-				);
-			$this->db->insert('tblhr',$data2);	
-		
-			if($insert_id!=''){
-
+			if($insert_id!='')
+			{
 				$this->db->select('t1.*,t2.*,t3.*');
-				$this->db->from('tbluser as t1');
+				$this->db->from('tblhr as t1');
 				$this->db->join('tblhr as t2', 't1.UserId = t2.UserId', 'LEFT');
 				$this->db->join('tblcompany as t3', 't2.companyid = t3.companyid', 'LEFT');
 				$this->db->where('t1.UserId',$insert_id);

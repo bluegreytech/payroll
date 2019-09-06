@@ -76,18 +76,18 @@ class Login extends CI_Controller {
 
 	function resetpassword($ResetPasswordCode='')
 	{
-			$UserId=$this->Login_model->checkResetCode($ResetPasswordCode);
+			$AdminId=$this->Login_model->checkResetCode($ResetPasswordCode);
 			$data = array();
-			$data['UserId']=$UserId;
+			$data['AdminId']=$AdminId;
 			$data['ResetPasswordCode']=$ResetPasswordCode;
 			
-			if($UserId!='')
+			if($AdminId!='')
 			{	
 				if($_POST)
 				{
-					if($this->input->post('UserId')!='')
+					if($this->input->post('AdminId')!='')
 					{
-							$up=$this->Login_model->updatePassword($UserId);
+							$up=$this->Login_model->updatePassword($AdminId);
 							if($up==1)
 							{
 								$this->session->set_flashdata('success','Your password change successfully!'); 
