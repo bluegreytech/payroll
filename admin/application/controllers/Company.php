@@ -127,8 +127,12 @@ class Company extends CI_Controller
 
 	function delete_company(){
 			$companyid=$this->input->post('companyid');
+			$data=array(
+				'isdelete'=>1,
+				'isactive'=>0
+					);
 			$this->db->where("companyid",$companyid);
-			$result=$this->db->delete('tblcompany');
+			$result=$this->db->update('tblcompany',$data);
 			if($result)
 			{
 				$this->session->set_flashdata('success', 'Company was delete successfully!');
@@ -243,8 +247,12 @@ class Company extends CI_Controller
 
 	function delete_compliance(){
 		$complianceid=$this->input->post('complianceid');
+		$data=array(
+			'IsDelete'=>1,
+			'IsActive'=>0
+				);
 		$this->db->where("complianceid",$complianceid);
-		$result=$this->db->delete('tblcompliances');
+		$result=$this->db->update('tblcompliances',$data);
 		if($result)
 		{
 			$this->session->set_flashdata('success', 'Compliance was delete successfully!');
@@ -260,8 +268,12 @@ class Company extends CI_Controller
 
 	function delete_companytype(){
 		$companytypeid=$this->input->post('companytypeid');
+		$data=array(
+			'isdelete'=>1,
+			'isactive'=>0
+				);
 		$this->db->where("companytypeid",$companytypeid);
-		$result=$this->db->delete('tblcompanytype');
+		$result=$this->db->update('tblcompanytype',$data);
 		if($result)
 		{
 			$this->session->set_flashdata('success', 'Company type was delete successfully!');

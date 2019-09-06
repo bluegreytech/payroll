@@ -175,8 +175,7 @@
 											</div>
 											<div class="form-group">
 												<label>Date of Birth</label>
-												<input class="form-control" tabindex="5" id="datepicker1" type="text" name="DateofBirth" Placeholder="Enter your date of birth" readonly>
-														
+												<input class="form-control" tabindex="5" type="date" name="DateofBirth" Placeholder="Enter your date of birth" id="DateofBirth">			
 											</div>
 											<div class="form-group">
 												<label>Address</label>
@@ -307,17 +306,12 @@
 											</div>
 											<div class="form-group">
 												<label>Gender</label>
-												<!-- <select class="select" name="Gender" id="Gender" tabindex="6"> 
+												<select class="select" name="Gender" tabindex="6"> 
 													<option value="Male">Male</option>
 													<option value="Female">Female</option>
-												</select> -->
+												</select>
 
-												<select class="select" name="Gender" tabindex="6">
-                                                    <option disabled="" selected="">Please Select</option>
-                                                    <option value="Male"<?php if($Gender=='Male'){ echo "selected";}?>>Male</option>
-                                                    <option value="Female"<?php if($Gender=='Female'){ echo "selected";}?>>Female</option>
-                                                                                                                
-                                            	 </select>
+												
 											</div>
 											<div class="form-group">
 												<label>Pincode Number</label>
@@ -438,7 +432,7 @@
 </html>
 <script>
 			$('#datepicker1').datepicker();
-					dateFormat: 'dd/mm/yy' ; 
+					dateFormat: 'YYYY/MM/DD' ; 
 			$(function() { 
 				setTimeout(function() {
 			$('#errorMessage').fadeOut('fast');

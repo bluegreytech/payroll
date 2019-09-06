@@ -26,6 +26,8 @@ class Company_model extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('tblcompanytype');
+		$this->db->where('isactive!=',0);
+		$this->db->or_where('isdelete!=',1);
 		$r=$this->db->get();
 		$res = $r->result();
 		return $res;
@@ -36,6 +38,7 @@ class Company_model extends CI_Model
 		$this->db->select('*');
 		$this->db->from('tblcompanytype');
 		$this->db->where('isactive',1);
+		$this->db->or_where('isdelete!=',1);
 		$r=$this->db->get();
 		$res = $r->result();
 		return $res;
@@ -55,6 +58,8 @@ class Company_model extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('tblcompliances');
+		$this->db->where('isactive!=',0);
+		$this->db->or_where('isdelete!=',1);
 		$r=$this->db->get();
 		$res = $r->result();
 		return $res;
@@ -79,6 +84,7 @@ class Company_model extends CI_Model
 			$this->db->select('t1.*,t2.*');
 			$this->db->from('tblcompany as t1');
 			$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
+			$this->db->or_where('t1.isdelete!=',1);
 			if($option == 'companytype')
 			{
 				$this->db->like('companytype',$keyword);

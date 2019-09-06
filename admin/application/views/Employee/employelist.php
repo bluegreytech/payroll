@@ -11,11 +11,11 @@
 					<!-- Page Title -->
 					<div class="row">
 						<div class="col">
-							<h4 class="page-title">List of Company  </h4>
+							<h4 class="page-title">List of Employee  </h4>
 						</div>	
 									<div class="col-12 text-right m-b-30">
-										<a href="<?php echo base_url();?>Company/companyadd" class="btn add-btn"><i class="fa fa-plus">
-										</i> Add Company</a>			
+										<!-- <a href="<?php //echo base_url();?>Employee/addemployee" class="btn add-btn"><i class="fa fa-plus">
+										</i> Add Employee</a>			 -->
 									</div>			
 					</div>
 					<!-- /Page Title -->
@@ -36,17 +36,17 @@
 							<?php } ?>
 					
 					<!-- Search Filter -->
-					<form method="post" action="<?php echo base_url();?>Company">
+					<form method="post" action="<?php echo base_url();?>Employee">
 						<div class="row filter-row">
 						
 							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
 									<div class="form-group form-focus select-focus">
 										<select class="select floating" name="option"> 
 											<option value=""> -- Select -- </option>
-											<option value="companytype">Company Type</option>
 											<option value="companyname">Company Name</option>
-											<option value="comemailaddress">Email Address</option>
-											<option value="comcontactnumber">Contact Number</option>
+											<option value="empfirstname	">Employee Name</option>
+											<option value="empemailaddress">Email Address</option>
+											<option value="contactnumber">Contact Number</option>
 										</select>
 										<!-- <label class="focus-label">Role</label> -->
 									</div>
@@ -54,7 +54,7 @@
 							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
 									<div class="form-group form-focus">
 										<input type="text" name="keyword2" class="form-control floating">
-										<label class="focus-label">Company Search</label>
+										<label class="focus-label">Employee Search</label>
 									</div>
 							</div>
 							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
@@ -73,8 +73,10 @@
 									<thead>
 										<tr>
 											<th>No</th>
-											<th>Company Name</th>
-											<th>Contact Number</th>
+											<th>First Name</th>
+											<th>Last Number</th>
+											<th>Email Address</th>
+											<th>From Company</th>
 											<th class="text-right">Action</th>
 											
 										</tr>
@@ -82,23 +84,25 @@
 									<tbody>
 									<?php
 										$i=1;
-										if($companyData){                             
-										foreach($companyData as $comp)
+										if($employeeData){                             
+										foreach($employeeData as $empData)
 										{
 									?>
 										<tr>
 										<td><?php echo $i;?></td>
-										<td><?php echo $comp->companyname ;?></td>
-										<td><?php echo $comp->comcontactnumber ;?></td>
+										<td><?php echo $empData->empfirstname ;?></td>
+										<td><?php echo $empData->emplastname ;?></td>
+										<td><?php echo $empData->empemailaddress ;?></td>
+										<td><?php echo $empData->companyname ;?></td>
 										
 											<td class="text-right">
 												<div class="dropdown dropdown-action">
 													<a href="" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
 													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item" href="<?php echo base_url();?>Company/editcompany/<?php echo $comp->companyid;?>" role="button">
-														<i class="fa fa-pencil m-r-5"></i> Edit</a>
-														<a class="dropdown-item" onclick="deletedata(<?php echo $comp->companyid; ?>)" data-toggle="modal" data-target="#delete_client"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-														<!-- <a class="dropdown-item" href="<?php //echo base_url();?>Rights/rightsadd/<?php //echo $comp->AdminId;?>"><i class="fa fa-trash-o m-r-5"></i> Add Rights</a> -->
+														<!-- <a class="dropdown-item" href="<?php //echo base_url();?>empDataany/editempDataany/<?php //echo $empData->employeeid;?>" role="button">
+														<i class="fa fa-pencil m-r-5"></i> Edit</a> -->
+														<a class="dropdown-item" onclick="deletedata(<?php echo $empData->employeeid; ?>)" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+														
 													</div>
 												</div>
 											</td>
@@ -125,12 +129,12 @@
 				
 				
 				<!-- Delete Client Modal -->
-				<div class="modal custom-modal fade" id="delete_client" role="dialog">
+				<div class="modal custom-modal fade" id="delete_employee" role="dialog">
 					<div class="modal-dialog modal-dialog-centered">
 						<div class="modal-content">
 							<div class="modal-body">
 								<div class="form-header">
-									<h3>Delete Company</h3>
+									<h3>Delete Employee</h3>
 									<p>Are you sure want to delete?</p>
 								</div>
 								<div class="modal-btn delete-action">
@@ -199,15 +203,15 @@ $(function() {
 }, 10000);  
 });
 
-function deletedata(companyid){  
-			$('#delete_client').modal('show')
+function deletedata(employeeid){  
+			$('#delete_employee').modal('show')
 				$('#yes_btn').click(function(){
 				
 						Url="<?php echo base_url();?>"
 						$.ajax({
-						url: Url+'/Company/delete_company/',
+						url: Url+'/Employee/delete_employee/',
 						type: "post",
-						data: {companyid:companyid} ,
+						data: {employeeid:employeeid} ,
 						success: function (response) {             
 					// document.location.href = url+'adminmaster/adminlist/';          
 					},

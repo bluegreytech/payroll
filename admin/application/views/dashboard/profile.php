@@ -161,12 +161,13 @@
 													</div>
 												</div>
 
+
 												<div class="col-md-6">
 													<div class="form-group">
-													<?php// echo $endDate = date('d/m/Y', strtotime($DateofBirth))?>
-														<label>Date of Birth</label>
-														<input class="form-control" id="datepicker1" type="text" name="DateofBirth" Placeholder="Enter your date of birth" 
-														value="<?php if($DateofBirth!='0000-00-00'){ echo date('d-m-Y', strtotime($DateofBirth));}else{echo "DD-MM-YYYY";  } ?>" readonly>
+														<label>Birth Date</label>
+														<div class="cal-icon">
+															<input class="form-control datetimepicker" type="text" name="DateofBirth" id="DateofBirth" value="<?php  if($DateofBirth!='0000-00-00'){ echo date('d/m/Y', strtotime($DateofBirth));} ?>">
+														</div>
 													</div>
 												</div>
 
@@ -278,11 +279,16 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js" type="text/javascript" ></script>
 		  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 		
-		<script type="text/javascript">
- 				$('#datepicker1').datepicker({
- 					 dateFormat: 'dd-mm-yy',
- 					 maxDate: '0', 
- 				});
+
+<script type="text/javascript">
+				$('#DateofBirth').datetimepicker({
+				  	// format: 'DD/MM/YYYY',
+					 format: 'YYYY/MM/DD',
+					 maxDate: moment(),
+					 ignoreReadonly: true,
+					// setDate: new Date("<?php //echo  ($DateofBirth!='0000-00-00')  ? date('d/m/Y', strtotime($DateofBirth)) : ''; ?>"),
+				}).val('<?php echo  ($DateofBirth!='0000-00-00')  ? date('d/m/Y', strtotime($DateofBirth)) : ''; ?>');
+
 		</script>
 
 <script>

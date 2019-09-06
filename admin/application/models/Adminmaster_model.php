@@ -103,11 +103,12 @@ class Adminmaster_model extends CI_Model
 
 
 	function getuser(){
-		//$r=$this->db->select('*')
-		$r=$this->db->select('AdminId,RoleId,CONCAT(FirstName ,LastName) AS FirstName,EmailAddress,DateofBirth,PhoneNumber,ProfileImage,Gender,Address,PinCode,CountryId,StateId,City,IsActive')
+		$r=$this->db->select('*')
+		// $r=$this->db->select('AdminId,RoleId,CONCAT(FirstName ,LastName) AS FirstName,EmailAddress,DateofBirth,PhoneNumber,ProfileImage,Gender,Address,PinCode,CountryId,StateId,City,IsActive')
 					->from('tbladmin')
-					->where('RoleId',1)
-					->or_where('RoleId',2)
+					->where_in('RoleId="1" AND RoleId="2"')
+					->or_where('IsActive!=',0)
+					->or_where('IsDelete!=',1)
 					->get();
 		$res = $r->result();
 		return $res;
@@ -118,11 +119,12 @@ class Adminmaster_model extends CI_Model
 	function search($option,$keyword)
 	{
 			$keyword = str_replace('-', ' ', $keyword);
-			$this->db->select('AdminId,RoleId,CONCAT(FirstName ,LastName) AS FirstName,EmailAddress,DateofBirth,PhoneNumber,ProfileImage,Gender,Address,PinCode,CountryId,StateId,City,IsActive');
+			// $this->db->select('AdminId,RoleId,CONCAT(FirstName ,LastName) AS FirstName,EmailAddress,DateofBirth,PhoneNumber,ProfileImage,Gender,Address,PinCode,CountryId,StateId,City,IsActive');
+			$this->db->select('*');
 			$this->db->from('tbladmin');
-			//$this->db->select('*');
-			$this->db->where('RoleId', 1);
-			$this->db->or_where('RoleId', 2);
+			$this->db->where('RoleId="1" AND RoleId="2"');
+			$this->db->or_where('IsActive!=',0);
+			$this->db->or_where('IsDelete!=',1);
 				if($option == 'FirstName')
 				{
 				// echo $keyword; 
@@ -180,7 +182,8 @@ class Adminmaster_model extends CI_Model
 			'Gender'=>$this->input->post('Gender'),
 			'Address'=>$this->input->post('Address'),
 			'PinCode'=>$this->input->post('PinCode'),
-			'City'=>$this->input->post('City')
+			'City'=>$this->input->post('City'),
+			'IsActive'=>$this->input->post('IsActive')
 				);
 			// print_r($data);die;
 			$this->db->where("AdminId",$AdminId);
@@ -277,7 +280,7 @@ class Adminmaster_model extends CI_Model
 			'Address'=>$this->input->post('Address'),
 			'PinCode'=>$this->input->post('PinCode')
 				);
-		//	echo "<pre>"; print_r($data);die;
+			//echo "<pre>"; print_r($data);die;
 			$this->db->where("AdminId",$this->session->userdata('AdminId'));
 			$this->db->update('tbladmin',$data);	
 			//echo $this->db->last_query();die;

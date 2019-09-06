@@ -1,6 +1,6 @@
 <?php
 
-class Hr_model extends CI_Model
+class Employee_model extends CI_Model
  {
 	function insertdata()
 	{		
@@ -123,11 +123,13 @@ class Hr_model extends CI_Model
 
 	
 
-	function hr_list()
+	function emp_list()
 	{
-		$this->db->select('t1.hr_id,t1.companyid,t1.hr_type,t1.FullName,t1.EmailAddress,t1.DateofBirth,t1.Contact,t1.Gender,t1.Address,t1.ProfileImage,t1.PinCode,t1.City,t1.IsActive,t2.companyname');
-		$this->db->from('tblhr as t1');
+		$this->db->select('t1.*,t2.companyname');
+		$this->db->from('tblemployee as t1');
 		$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
+		$this->db->where('t1.isdelete!=',1);
+		$this->db->or_where('t1.isactive!=',0);
 		$r=$this->db->get();
 		$res = $r->result();
 		return $res;	
@@ -135,37 +137,29 @@ class Hr_model extends CI_Model
 
 
 
-	// function hr_list()
-	// {
-	// 	$this->db->select('*');
-	// 	$this->db->from('tblhr');
-	// 	$r=$this->db->get();
-	// 	$res = $r->result();
-	// 	return $res;	
-	// }
-
 	function search($option,$keyword)
 	{
 			$keyword = str_replace('-', ' ', $keyword);
-			$this->db->select('t1.hr_id,t1.companyid,t1.hr_type,t1.FullName,t1.EmailAddress,t1.DateofBirth,t1.Contact,t1.Gender,t1.Address,t1.ProfileImage,t1.PinCode,t1.City,t1.IsActive,t2.companyname');
-			$this->db->from('tblhr as t1');
+			$this->db->select('t1.*,t2.companyname');
+			$this->db->from('tblemployee as t1');
 			$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
-			if($option == 'FullName')
+			$this->db->where('t1.isdelete!=',1);
+			$this->db->or_where('t1.isactive!=',0);
+			if($option == 'empfirstname')
 			{
-			// echo $keyword; 
-				$this->db->like('FullName',$keyword);
+				$this->db->like('empfirstname',$keyword);
 			}
 			else if($option == 'companyname')
 			{
 					$this->db->like('companyname',$keyword);
 			}
-			else if($option == 'EmailAddress')
+			else if($option == 'empemailaddress')
 			{
-					$this->db->like('EmailAddress',$keyword);
+					$this->db->like('empemailaddress',$keyword);
 			}
-			else if($option == 'Contact')
+			else if($option == 'contactnumber')
 			{
-				$this->db->where('Contact',$keyword);
+				$this->db->where('contactnumber',$keyword);
 			} 
 			// 	$this->db->order_by('UserId','desc');
 			    $query = $this->db->get();
@@ -176,14 +170,9 @@ class Hr_model extends CI_Model
 		}
 
 	
+	
 		
-		function list_company(){
-			$this->db->select('*');
-			$this->db->from('tblcompany');
-			$this->db->where('isactive',1);
-			$r = $this->db->get();
-			return $query=$r->result();
-	}
+	
 
 	function getdata($hr_id){
 			$this->db->select('t1.*,t2.*');
