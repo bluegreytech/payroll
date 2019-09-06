@@ -75,6 +75,8 @@
 											<th>No</th>
 											<th>Company Name</th>
 											<th>Contact Number</th>
+											<th>Company Type</th>
+											<th>email Address </th>
 											<th class="text-right">Action</th>
 											
 										</tr>
@@ -90,6 +92,8 @@
 										<td><?php echo $i;?></td>
 										<td><?php echo $comp->companyname ;?></td>
 										<td><?php echo $comp->comcontactnumber ;?></td>
+										<td><?php echo $comp->companytype ;?></td>
+										<td><?php echo $comp->comemailaddress ;?></td>
 										
 											<td class="text-right">
 												<div class="dropdown dropdown-action">

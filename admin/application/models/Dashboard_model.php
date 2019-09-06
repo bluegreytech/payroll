@@ -13,12 +13,32 @@ class Dashboard_model extends CI_Model
 		return $res;
 
 	}
+	
+	
 
+	function list_employee()
+	{
+		$this->db->select('*');
+		$this->db->from('tblemployee');
+		$this->db->where('isdelete!=',1);
+		$r = $this->db->get();
+		return $query= $r->num_rows();
+	}
+
+	function list_admin()
+	{
+		$this->db->select('*');
+		$this->db->from('tbladmin');
+		$this->db->where('IsDelete!=',1);
+		$r = $this->db->get();
+		return $query= $r->num_rows();
+	}
 
 	function list_company()
 	{
 		$this->db->select('*');
 		$this->db->from('tblcompany');
+		$this->db->where('isdelete!=',1);
 		$r = $this->db->get();
 		return $query= $r->num_rows();
 	}
@@ -27,7 +47,7 @@ class Dashboard_model extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('tblhr');
-		//$this->db->where('RoleId',3);
+		$this->db->where('IsDelete!=',1);
 		$r = $this->db->get();
 		return $query= $r->num_rows();
 	}

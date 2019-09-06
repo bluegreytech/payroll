@@ -44,7 +44,7 @@
 										<select class="select floating" name="option"> 
 											<option value=""> -- Select -- </option>
 											<option value="companyname">Company Name</option>
-											<option value="empfirstname	">Employee Name</option>
+											<option value="empfirstname">Employee Name</option>
 											<option value="empemailaddress">Email Address</option>
 											<option value="contactnumber">Contact Number</option>
 										</select>
@@ -74,7 +74,7 @@
 										<tr>
 											<th>No</th>
 											<th>First Name</th>
-											<th>Last Number</th>
+											<th>Contact Number</th>
 											<th>Email Address</th>
 											<th>From Company</th>
 											<th class="text-right">Action</th>
@@ -91,7 +91,7 @@
 										<tr>
 										<td><?php echo $i;?></td>
 										<td><?php echo $empData->empfirstname ;?></td>
-										<td><?php echo $empData->emplastname ;?></td>
+										<td><?php echo $empData->contactnumber ;?></td>
 										<td><?php echo $empData->empemailaddress ;?></td>
 										<td><?php echo $empData->companyname ;?></td>
 										

@@ -107,7 +107,6 @@ class Adminmaster_model extends CI_Model
 		// $r=$this->db->select('AdminId,RoleId,CONCAT(FirstName ,LastName) AS FirstName,EmailAddress,DateofBirth,PhoneNumber,ProfileImage,Gender,Address,PinCode,CountryId,StateId,City,IsActive')
 					->from('tbladmin')
 					->where_in('RoleId="1" AND RoleId="2"')
-					->or_where('IsActive!=',0)
 					->or_where('IsDelete!=',1)
 					->get();
 		$res = $r->result();
@@ -123,7 +122,6 @@ class Adminmaster_model extends CI_Model
 			$this->db->select('*');
 			$this->db->from('tbladmin');
 			$this->db->where('RoleId="1" AND RoleId="2"');
-			$this->db->or_where('IsActive!=',0);
 			$this->db->or_where('IsDelete!=',1);
 				if($option == 'FirstName')
 				{

@@ -43,6 +43,9 @@ class Company extends CI_Controller
 
 	public function index()
 	{   
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
 		if($_POST!='')
 		{
 			$option=$this->input->post('option');
@@ -52,15 +55,16 @@ class Company extends CI_Controller
 		else
 		{
 			$data['companyData']=$this->Company_model->list_company();
-		}    
-		$data['rightsData']=$this->Company_model->list_rights();
-		//echo "<pre>";print_r($data['rightsData']);die;
+		} 
 		$this->load->view('Company/companylist',$data);			
 	}
 
 
 	function companyadd()
 	{
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
 		$data=array();
 			$data['companyid']=$this->input->post('companyid');
 			$data['companytypeid']=$this->input->post('companytypeid');
@@ -126,6 +130,9 @@ class Company extends CI_Controller
 	}
 
 	function delete_company(){
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
 			$companyid=$this->input->post('companyid');
 			$data=array(
 				'isdelete'=>1,
@@ -149,6 +156,9 @@ class Company extends CI_Controller
 
 	function editcompany($companyid)
 	{
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
 		$data=array();
 		
 		$result=$this->Company_model->get_company($companyid);	
@@ -182,6 +192,9 @@ class Company extends CI_Controller
 
 	function companytype()
 	{	
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
 		$data=array();
 			$data['companytypeid']=$this->input->post('companytypeid');
 			$data['companytype']=$this->input->post('companytype');
@@ -215,6 +228,9 @@ class Company extends CI_Controller
 
 	public function compliance()
 	{
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
 		$data=array();
 			$data['complianceid']=$this->input->post('complianceid');
 			$data['compliancename']=$this->input->post('compliancename');
@@ -246,6 +262,9 @@ class Company extends CI_Controller
 	}
 
 	function delete_compliance(){
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
 		$complianceid=$this->input->post('complianceid');
 		$data=array(
 			'IsDelete'=>1,
@@ -267,6 +286,9 @@ class Company extends CI_Controller
 	}
 
 	function delete_companytype(){
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
 		$companytypeid=$this->input->post('companytypeid');
 		$data=array(
 			'isdelete'=>1,
@@ -289,6 +311,9 @@ class Company extends CI_Controller
 
 	function editcompanytype()
 	{
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
 		$data=array();
 		$result=$this->Company_model->get_companytype($this->input->post('companytypeid'));	
 		//echo "<br>";print_r($result);die;
@@ -301,6 +326,9 @@ class Company extends CI_Controller
 
 	function editcompliance()
 	{
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
 		$data=array();
 		$result=$this->Company_model->get_compliance($this->input->post('complianceid'));	
 		//echo "<br>";print_r($result);die;

@@ -9,9 +9,9 @@ class Adminmaster extends CI_Controller
 	
 	function adminlist()
 	{
-		// if(!check_admin_authentication()){ 
-		// 	redirect(base_url('Login'));
-		// }
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
 		if($_POST!='')
 		{
 			$option=$this->input->post('option');
@@ -31,6 +31,9 @@ class Adminmaster extends CI_Controller
 
 	public function addadmin()
 	{	
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
 		 if($_POST){
 			
 			if($this->input->post('AdminId')!='')
@@ -71,6 +74,9 @@ class Adminmaster extends CI_Controller
 	}
 
 	function deleteadmin(){
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
 		$AdminId=$this->input->post('AdminId');
 		$data=array(
 			'IsDelete'=>1,
@@ -92,6 +98,9 @@ class Adminmaster extends CI_Controller
 
 	function editadminmaster()
 	{
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
 		$data=array();
 		$result=$this->Adminmaster_model->getdata($this->input->post('id'));	
 		$data['AdminId']=$result['AdminId'];
@@ -111,6 +120,9 @@ class Adminmaster extends CI_Controller
 
 	public function admin_master_profile()
 	{
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
 		$data=array();
 		$result=$this->Adminmaster_model->getdata($this->session->userdata('AdminId'));
 		//echo "<pre>";print_r($result);die;
@@ -129,7 +141,10 @@ class Adminmaster extends CI_Controller
 	}
 	
 	public function admin_master_profile_update()     
-	{      	
+	{     
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		} 	
 				$data=array();
 				$data['AdminId']=$this->input->post('AdminId');
 				$data['FirstName']=$this->input->post('FirstName');
@@ -165,6 +180,9 @@ class Adminmaster extends CI_Controller
 
 	public function change_password($AdminId)
 	{	
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
 		$data=array();
 		$data['AdminId']=$this->input->post('AdminId');
 		if($_POST){

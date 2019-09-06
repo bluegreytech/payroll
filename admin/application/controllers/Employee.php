@@ -10,6 +10,9 @@ class Employee extends CI_Controller
 	
 	public function index()
 	{
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
 		if($_POST!='')
 		{
 			$option=$this->input->post('option');
@@ -27,11 +30,17 @@ class Employee extends CI_Controller
 
 	public function addemployee()
 	{
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
 		$this->load->view('Employee/employeadd');
 	}
 
 	function delete_employee()
 	{
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
 		$employeeid=$this->input->post('employeeid');
 		$data=array(
 			'isdelete'=>1,

@@ -237,3 +237,344 @@ ERROR - 2019-09-06 07:17:45 --> 404 Page Not Found: Uploads/default
 ERROR - 2019-09-06 07:18:10 --> 404 Page Not Found: Uploads/default
 ERROR - 2019-09-06 07:18:14 --> 404 Page Not Found: Uploads/default
 ERROR - 2019-09-06 07:20:25 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:08:20 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:08:20 --> 404 Page Not Found: Uploads/UserProfile
+ERROR - 2019-09-06 11:08:30 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:08:30 --> 404 Page Not Found: Uploads/UserProfile
+ERROR - 2019-09-06 11:08:33 --> Severity: Notice --> Undefined variable: companyData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 239
+ERROR - 2019-09-06 11:08:33 --> Severity: Notice --> Undefined variable: companytypeData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 310
+ERROR - 2019-09-06 11:08:33 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:08:42 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 11:08:43 --> Severity: Notice --> Undefined variable: companyData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 239
+ERROR - 2019-09-06 11:08:43 --> Severity: Notice --> Undefined variable: companytypeData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 310
+ERROR - 2019-09-06 11:13:12 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 24
+ERROR - 2019-09-06 11:13:12 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:13:12 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 11:13:12 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 11:13:12 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 11:13:12 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 11:13:17 --> 404 Page Not Found: Uploads/UserProfile
+ERROR - 2019-09-06 11:13:17 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:13:19 --> Severity: Notice --> Undefined variable: companyData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 239
+ERROR - 2019-09-06 11:13:19 --> Severity: Notice --> Undefined variable: companytypeData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 310
+ERROR - 2019-09-06 11:13:19 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:13:48 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 24
+ERROR - 2019-09-06 11:13:48 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:13:48 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 11:13:48 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 11:13:48 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 11:13:48 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 11:14:08 --> 404 Page Not Found: Uploads/UserProfile
+ERROR - 2019-09-06 11:14:08 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:14:30 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 24
+ERROR - 2019-09-06 11:14:30 --> Severity: Notice --> Undefined variable: session C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 50
+ERROR - 2019-09-06 11:16:04 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 24
+ERROR - 2019-09-06 11:16:04 --> Severity: Notice --> Undefined variable: session C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 50
+ERROR - 2019-09-06 11:16:14 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 24
+ERROR - 2019-09-06 11:16:15 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:16:15 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 11:16:15 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 11:16:15 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 11:16:15 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 11:17:07 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:17:07 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 11:17:07 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 11:17:07 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 11:17:07 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 11:17:09 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:17:09 --> 404 Page Not Found: Uploads/UserProfile
+ERROR - 2019-09-06 11:17:13 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:17:38 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:17:45 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:17:55 --> 404 Page Not Found: Uploads/UserProfile
+ERROR - 2019-09-06 11:17:55 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:18:04 --> 404 Page Not Found: Uploads/UserProfile
+ERROR - 2019-09-06 11:18:04 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:19:00 --> 404 Page Not Found: Uploads/UserProfile
+ERROR - 2019-09-06 11:19:00 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:19:19 --> 404 Page Not Found: Uploads/UserProfile
+ERROR - 2019-09-06 11:19:19 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:19:26 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:19:31 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:19:31 --> 404 Page Not Found: Uploads/UserProfile
+ERROR - 2019-09-06 11:19:38 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:19:43 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:19:43 --> 404 Page Not Found: Uploads/UserProfile
+ERROR - 2019-09-06 11:19:50 --> 404 Page Not Found: Uploads/UserProfile
+ERROR - 2019-09-06 11:19:50 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:19:53 --> 404 Page Not Found: Uploads/UserProfile
+ERROR - 2019-09-06 11:19:53 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:20:04 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:20:39 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:20:44 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:20:58 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:21:49 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:21:54 --> 404 Page Not Found: Compliance/index
+ERROR - 2019-09-06 11:21:54 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:21:56 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:22:02 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:22:17 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:23:14 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:23:17 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:23:22 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:25:37 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:26:12 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:27:06 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:28:28 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:28:44 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:29:06 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:29:18 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:29:36 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:30:19 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:30:46 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:30:58 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:31:05 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:31:17 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:31:48 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:32:51 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:32:58 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:33:04 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:33:17 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:33:24 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:33:25 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:33:37 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:33:45 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:33:52 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:33:58 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:39:05 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:39:36 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:39:37 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:41:38 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:42:08 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:42:17 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:42:21 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:42:28 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:42:31 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:43:36 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:43:46 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:43:50 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:44:10 --> Severity: Notice --> Undefined variable: companyData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 239
+ERROR - 2019-09-06 11:44:10 --> Severity: Notice --> Undefined variable: companytypeData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 310
+ERROR - 2019-09-06 11:44:10 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:45:45 --> Severity: Notice --> Undefined variable: companyData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 239
+ERROR - 2019-09-06 11:45:45 --> Severity: Notice --> Undefined variable: companytypeData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 310
+ERROR - 2019-09-06 11:45:45 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:47:15 --> Severity: Notice --> Undefined variable: companyData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 239
+ERROR - 2019-09-06 11:47:15 --> Severity: Notice --> Undefined variable: companytypeData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 310
+ERROR - 2019-09-06 11:47:15 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:47:35 --> Severity: Notice --> Undefined variable: companyData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 239
+ERROR - 2019-09-06 11:47:35 --> Severity: Notice --> Undefined variable: companytypeData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 310
+ERROR - 2019-09-06 11:47:35 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:48:47 --> Severity: Notice --> Undefined variable: companyData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 239
+ERROR - 2019-09-06 11:48:47 --> Severity: Notice --> Undefined variable: companytypeData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 310
+ERROR - 2019-09-06 11:48:47 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:49:01 --> Severity: Notice --> Undefined variable: companyData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 239
+ERROR - 2019-09-06 11:49:01 --> Severity: Notice --> Undefined variable: companytypeData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 310
+ERROR - 2019-09-06 11:49:01 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:51:51 --> Severity: Notice --> Undefined variable: companyData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 239
+ERROR - 2019-09-06 11:51:51 --> Severity: Notice --> Undefined variable: companytypeData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 310
+ERROR - 2019-09-06 11:51:51 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:53:50 --> Severity: Notice --> Undefined variable: companytypeData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 310
+ERROR - 2019-09-06 11:53:50 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:54:13 --> Query error: Table 'payrolldb.tbluser' doesn't exist - Invalid query: SELECT *
+FROM `tbluser`
+WHERE `EmailAddress` = 'bluegreyindia@gmail.com'
+ERROR - 2019-09-06 11:55:36 --> Query error: Column 'Contact' cannot be null - Invalid query: INSERT INTO `tblhr` (`hr_type`, `FullName`, `EmailAddress`, `Password`, `Address`, `Contact`, `DateofBirth`, `City`, `PinCode`, `Gender`, `IsActive`, `CreatedOn`) VALUES (1, 'mitesh patel', 'bluegreyindia@gmail.com', '05b909ad5767b1ca6de513151a5d17b8', 'Vadodara', NULL, '2019-09-30', 'Vadodra', '111111', 'Male', '1', '2019-09-06')
+ERROR - 2019-09-06 11:57:59 --> Query error: Column 'Contact' cannot be null - Invalid query: INSERT INTO `tblhr` (`hr_type`, `FullName`, `EmailAddress`, `Password`, `Address`, `Contact`, `DateofBirth`, `City`, `PinCode`, `Gender`, `IsActive`, `CreatedOn`) VALUES (1, 'mitesh patel', 'bluegreyindia@gmail.com', '52cde3b797723acf97196a49b65f9729', 'Vadodara', NULL, '2019-09-30', 'Vadodra', '111111', 'Male', '1', '2019-09-06')
+ERROR - 2019-09-06 11:58:01 --> Severity: Notice --> Undefined variable: companytypeData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 309
+ERROR - 2019-09-06 11:58:45 --> Severity: Notice --> Undefined variable: companytypeData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 309
+ERROR - 2019-09-06 11:58:45 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 11:58:56 --> Severity: Notice --> Undefined variable: companytypeData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 309
+ERROR - 2019-09-06 11:58:56 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:00:08 --> Severity: Notice --> Undefined variable: companytypeData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 309
+ERROR - 2019-09-06 12:00:08 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:01:16 --> Severity: Notice --> Undefined variable: companytypeData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 309
+ERROR - 2019-09-06 12:01:16 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:02:42 --> Severity: Notice --> Undefined variable: companytypeData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 352
+ERROR - 2019-09-06 12:02:42 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:03:32 --> Severity: Notice --> Undefined variable: companytypeData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 354
+ERROR - 2019-09-06 12:03:32 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:03:57 --> Severity: Notice --> Undefined variable: companytypeData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 356
+ERROR - 2019-09-06 12:03:57 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:04:15 --> Severity: Notice --> Undefined variable: companytypeData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 356
+ERROR - 2019-09-06 12:04:15 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:05:47 --> Severity: Notice --> Undefined variable: companytypeData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 357
+ERROR - 2019-09-06 12:05:47 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:05:56 --> Severity: Notice --> Undefined variable: companytypeData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 357
+ERROR - 2019-09-06 12:05:56 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:06:18 --> Severity: Notice --> Undefined variable: companytypeData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 357
+ERROR - 2019-09-06 12:06:18 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:07:38 --> Severity: Notice --> Undefined variable: companytypeData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 357
+ERROR - 2019-09-06 12:07:38 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:07:43 --> Severity: Notice --> Undefined variable: companytypeData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 357
+ERROR - 2019-09-06 12:07:43 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:07:56 --> Severity: Notice --> Undefined variable: companytypeData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 357
+ERROR - 2019-09-06 12:07:56 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:08:11 --> Severity: Notice --> Undefined variable: companytypeData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 357
+ERROR - 2019-09-06 12:08:11 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:09:21 --> Severity: Notice --> Undefined variable: companytypeData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 321
+ERROR - 2019-09-06 12:09:21 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:09:53 --> Severity: Notice --> Undefined variable: companytypeData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 318
+ERROR - 2019-09-06 12:09:53 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:12:07 --> Severity: Notice --> Undefined variable: companytypeData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 315
+ERROR - 2019-09-06 12:12:07 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:12:27 --> Severity: Notice --> Undefined variable: companytypeData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 315
+ERROR - 2019-09-06 12:12:27 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:13:46 --> Severity: Notice --> Undefined variable: companytypeData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 315
+ERROR - 2019-09-06 12:13:46 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:14:31 --> Severity: Notice --> Undefined variable: companytypeData C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 315
+ERROR - 2019-09-06 12:14:31 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:15:40 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:17:00 --> Severity: Notice --> Undefined variable: Gender C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 357
+ERROR - 2019-09-06 12:17:00 --> Severity: Notice --> Undefined variable: Gender C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 364
+ERROR - 2019-09-06 12:17:00 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:18:28 --> Severity: error --> Exception: syntax error, unexpected 'echo' (T_ECHO), expecting ',' or ';' C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 346
+ERROR - 2019-09-06 12:18:51 --> Severity: Notice --> Undefined variable: Gender C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 346
+ERROR - 2019-09-06 12:18:51 --> Severity: Notice --> Undefined variable: Gender C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 347
+ERROR - 2019-09-06 12:18:51 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:19:43 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:20:05 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:20:51 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:21:10 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:21:14 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:21:15 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:25:11 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:25:46 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:25:55 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:27:22 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:27:36 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:28:49 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:28:59 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:30:01 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:30:02 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:30:57 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:30:58 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:31:15 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:31:15 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:31:27 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:31:36 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:31:43 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:32:04 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:32:12 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:32:15 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:32:24 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:32:28 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:32:34 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:32:38 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:32:45 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:33:11 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:33:15 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:34:14 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:34:34 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:36:17 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:36:26 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:36:30 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:36:39 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:36:52 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:38:02 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:38:11 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:38:26 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:38:29 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:38:37 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:38:40 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:39:15 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:39:33 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:39:42 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:39:46 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:39:57 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:40:32 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:40:39 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:40:42 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:41:02 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:41:02 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:41:02 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:41:02 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:41:02 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:42:05 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:42:05 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:42:05 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:42:05 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:42:05 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:42:46 --> Query error: Unknown column 't1.IsDelete' in 'where clause' - Invalid query: SELECT *
+FROM `tblcompany`
+WHERE `t1`.`IsDelete` != 1
+ERROR - 2019-09-06 12:43:12 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:43:12 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:43:12 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:43:12 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:43:12 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:44:00 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:44:00 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:44:00 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:44:00 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:44:00 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:44:16 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:44:16 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:44:16 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:44:16 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:44:16 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:44:23 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:44:23 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:44:23 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:44:23 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:44:23 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:46:25 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:46:25 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:46:25 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:46:25 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:46:25 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:47:46 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:47:46 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:47:46 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:47:46 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:47:46 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:48:00 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:48:00 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:48:00 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:48:00 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:48:00 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:49:05 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:49:18 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:49:18 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:49:18 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:49:18 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:49:18 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:49:20 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:49:46 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:49:46 --> 404 Page Not Found: Uploads/UserProfile
+ERROR - 2019-09-06 12:49:57 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:50:08 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 24
+ERROR - 2019-09-06 12:50:08 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:50:08 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:50:08 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:50:08 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:50:08 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:50:09 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:50:09 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:50:09 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:50:09 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:50:09 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:50:20 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 24
+ERROR - 2019-09-06 12:50:20 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:50:20 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:50:20 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:50:20 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:50:20 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-06 12:50:21 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:50:39 --> 404 Page Not Found: Uploads/UserProfile
+ERROR - 2019-09-06 12:50:39 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:51:30 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:51:30 --> 404 Page Not Found: Uploads/UserProfile
+ERROR - 2019-09-06 12:51:51 --> 404 Page Not Found: Uploads/UserProfile
+ERROR - 2019-09-06 12:51:51 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:52:19 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:53:01 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:53:01 --> 404 Page Not Found: Uploads/UserProfile
+ERROR - 2019-09-06 12:55:43 --> 404 Page Not Found: Uploads/UserProfile
+ERROR - 2019-09-06 12:55:43 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:56:02 --> 404 Page Not Found: Uploads/UserProfile
+ERROR - 2019-09-06 12:56:02 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:56:38 --> 404 Page Not Found: Uploads/UserProfile
+ERROR - 2019-09-06 12:56:38 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:58:56 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-06 12:58:56 --> 404 Page Not Found: Uploads/UserProfile

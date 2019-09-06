@@ -271,9 +271,14 @@
 												<label>Email Address</label>
 												<input class="form-control" tabindex="3" type="email" name="EmailAddress" Placeholder="Enter your email address" minlength="2" maxlength="50" id="EmailAddress">
 											</div>
-											<div class="form-group">
+											<!-- <div class="form-group">
 												<label>Date of Birth</label>
 												<input class="form-control" tabindex="5" type="date" name="DateofBirth" Placeholder="Enter your date of birth" id="DateofBirth">			
+											</div> -->
+
+											<div class="form-group">
+												<label>Date of Birth</label>
+												<input class="form-control" type="date" name="DateofBirth" Placeholder="Enter your date of birth" id="DateofBirth" tabindex="5">
 											</div>
 											<div class="form-group">
 												<label>Address</label>
@@ -432,7 +437,8 @@
 </html>
 <script>
 			$('#datepicker1').datepicker();
-					dateFormat: 'YYYY/MM/DD' ; 
+				 dateFormat: 'dd/mm/yy'  
+
 			$(function() { 
 				setTimeout(function() {
 			$('#errorMessage').fadeOut('fast');
