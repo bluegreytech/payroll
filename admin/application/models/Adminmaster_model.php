@@ -103,11 +103,12 @@ class Adminmaster_model extends CI_Model
 
 
 	function getuser(){
-		//$r=$this->db->select('*')
-		$r=$this->db->select('AdminId,RoleId,CONCAT(FirstName ,LastName) AS FirstName,EmailAddress,DateofBirth,PhoneNumber,ProfileImage,Gender,Address,PinCode,CountryId,StateId,City,IsActive')
+		$r=$this->db->select('*')
+		// $r=$this->db->select('AdminId,RoleId,CONCAT(FirstName ,LastName) AS FirstName,EmailAddress,DateofBirth,PhoneNumber,ProfileImage,Gender,Address,PinCode,CountryId,StateId,City,IsActive')
 					->from('tbladmin')
-					->where('RoleId',1)
-					->or_where('RoleId',2)
+					->where_in('RoleId="1" AND RoleId="2"')
+					->or_where('IsActive!=',0)
+					->or_where('IsDelete!=',1)
 					->get();
 		$res = $r->result();
 		return $res;
@@ -118,11 +119,12 @@ class Adminmaster_model extends CI_Model
 	function search($option,$keyword)
 	{
 			$keyword = str_replace('-', ' ', $keyword);
-			$this->db->select('AdminId,RoleId,CONCAT(FirstName ,LastName) AS FirstName,EmailAddress,DateofBirth,PhoneNumber,ProfileImage,Gender,Address,PinCode,CountryId,StateId,City,IsActive');
+			// $this->db->select('AdminId,RoleId,CONCAT(FirstName ,LastName) AS FirstName,EmailAddress,DateofBirth,PhoneNumber,ProfileImage,Gender,Address,PinCode,CountryId,StateId,City,IsActive');
+			$this->db->select('*');
 			$this->db->from('tbladmin');
-			//$this->db->select('*');
-			$this->db->where('RoleId', 1);
-			$this->db->or_where('RoleId', 2);
+			$this->db->where('RoleId="1" AND RoleId="2"');
+			$this->db->or_where('IsActive!=',0);
+			$this->db->or_where('IsDelete!=',1);
 				if($option == 'FirstName')
 				{
 				// echo $keyword; 
@@ -195,76 +197,76 @@ class Adminmaster_model extends CI_Model
 
 	function updatedata()
 	{
-		// //echo "<pre>";print_r($_FILES);die;
-		//  $user_image='';
-        //  //$image_settings=image_setting();
-		//   if(isset($_FILES['ProfileImage']) &&  $_FILES['ProfileImage']['name']!='')
-        //  {
-        //      $this->load->library('upload');
-        //      $rand=rand(0,100000); 
+		//echo "<pre>";print_r($_FILES);die;
+		 $user_image='';
+         //$image_settings=image_setting();
+		  if(isset($_FILES['ProfileImage']) &&  $_FILES['ProfileImage']['name']!='')
+         {
+             $this->load->library('upload');
+             $rand=rand(0,100000); 
 			  
-		// 	$_FILES['userfile']['name']     =   $_FILES['ProfileImage']['name'];
-		// 	$_FILES['userfile']['type']     =   $_FILES['ProfileImage']['type'];
-		// 	$_FILES['userfile']['tmp_name'] =   $_FILES['ProfileImage']['tmp_name'];
-		// 	$_FILES['userfile']['error']    =   $_FILES['ProfileImage']['error'];
-		// 	$_FILES['userfile']['size']     =   $_FILES['ProfileImage']['size'];
+			$_FILES['userfile']['name']     =   $_FILES['ProfileImage']['name'];
+			$_FILES['userfile']['type']     =   $_FILES['ProfileImage']['type'];
+			$_FILES['userfile']['tmp_name'] =   $_FILES['ProfileImage']['tmp_name'];
+			$_FILES['userfile']['error']    =   $_FILES['ProfileImage']['error'];
+			$_FILES['userfile']['size']     =   $_FILES['ProfileImage']['size'];
    
-		// 	$config['file_name'] = $rand.'Admin';			
-		// 	$config['upload_path'] = base_path().'upload/admin_orig/';		
-		// 	$config['allowed_types'] = 'jpg|jpeg|gif|png|bmp';  
+			$config['file_name'] = $rand.'Admin';			
+			$config['upload_path'] = base_path().'upload/admin_orig/';		
+			$config['allowed_types'] = 'jpg|jpeg|gif|png|bmp';  
  
-        //      $this->upload->initialize($config);
+             $this->upload->initialize($config);
  
-        //       if (!$this->upload->do_upload())
-		// 	  {
-		// 		$error =  $this->upload->display_errors();
-		// 		echo "<pre>";print_r($error);die;
-		// 	  } 
-        //    	  $picture = $this->upload->data();	   
-        //       $this->load->library('image_lib');		   
-        //       $this->image_lib->clear();
-		// 	  $gd_var='gd2';
+              if (!$this->upload->do_upload())
+			  {
+				$error =  $this->upload->display_errors();
+				echo "<pre>";print_r($error);die;
+			  } 
+           	  $picture = $this->upload->data();	   
+              $this->load->library('image_lib');		   
+              $this->image_lib->clear();
+			  $gd_var='gd2';
 
-        //       $this->image_lib->initialize(array(
-		// 		'image_library' => $gd_var,
-		// 		'source_image' => base_path().'upload/admin_orig/'.$picture['file_name'],
-		// 		'new_image' => base_path().'upload/admin/'.$picture['file_name'],
-		// 		'maintain_ratio' => FALSE,
-		// 		'quality' => '100%',
-		// 		'width' => 300,
-		// 		'height' => 300
-		// 	 ));
+              $this->image_lib->initialize(array(
+				'image_library' => $gd_var,
+				'source_image' => base_path().'upload/admin_orig/'.$picture['file_name'],
+				'new_image' => base_path().'upload/admin/'.$picture['file_name'],
+				'maintain_ratio' => FALSE,
+				'quality' => '100%',
+				'width' => 300,
+				'height' => 300
+			 ));
 			
 			
-		// 	if(!$this->image_lib->resize())
-		// 	{
-		// 		$error = $this->image_lib->display_errors();
-		// 	}
+			if(!$this->image_lib->resize())
+			{
+				$error = $this->image_lib->display_errors();
+			}
 			
-		// 	$user_image=$picture['file_name'];
+			$user_image=$picture['file_name'];
 		
 			
 		
-		// 	if($this->input->post('pre_profile_image')!='')
-		// 		{
-		// 			if(file_exists(base_path().'upload/admin/'.$this->input->post('pre_profile_image')))
-		// 			{
-		// 				$link=base_path().'upload/admin/'.$this->input->post('pre_profile_image');
-		// 				unlink($link);
-		// 			}
+			if($this->input->post('pre_profile_image')!='')
+				{
+					if(file_exists(base_path().'upload/admin/'.$this->input->post('pre_profile_image')))
+					{
+						$link=base_path().'upload/admin/'.$this->input->post('pre_profile_image');
+						unlink($link);
+					}
 					
-		// 			if(file_exists(base_path().'upload/admin_orig/'.$this->input->post('pre_profile_image')))
-		// 			{
-		// 				$link2=base_path().'upload/admin_orig/'.$this->input->post('pre_profile_image');
-		// 				unlink($link2);
-		// 			}
-		// 		}
-		// 	} else {
-		// 		if($this->input->post('pre_profile_image')!='')
-		// 		{
-		// 			$user_image=$this->input->post('pre_profile_image');
-		// 		}
-		// 	}
+					if(file_exists(base_path().'upload/admin_orig/'.$this->input->post('pre_profile_image')))
+					{
+						$link2=base_path().'upload/admin_orig/'.$this->input->post('pre_profile_image');
+						unlink($link2);
+					}
+				}
+			} else {
+				if($this->input->post('pre_profile_image')!='')
+				{
+					$user_image=$this->input->post('pre_profile_image');
+				}
+			}
 			//print_r($user_image);die;
 				//	echo $this->session->userdata('AdminId');die;
 		$data=array(
@@ -274,7 +276,7 @@ class Adminmaster_model extends CI_Model
 			'DateofBirth'=>$this->input->post('DateofBirth'),
 			'PhoneNumber'=>$this->input->post('PhoneNumber'),
 			'Gender'=>$this->input->post('Gender'),
-		    //'ProfileImage'=>$user_image,
+		    'ProfileImage'=>$user_image,
 			'Address'=>$this->input->post('Address'),
 			'PinCode'=>$this->input->post('PinCode')
 				);

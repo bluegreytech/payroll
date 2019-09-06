@@ -44,7 +44,8 @@
 									<div class="form-group form-focus select-focus">
 										<select class="select floating" name="option"> 
 											<option value=""> -- Select -- </option>
-											<option value="FirstName">Hr Name</option>
+											<option value="companyname">Company Name</option>
+											<option value="FullName">Hr Name</option>
 											<option value="EmailAddress">Email Address</option>
 											<option value="PhoneNumber">Contact Number</option>
 										</select>
@@ -75,7 +76,7 @@
 											<th>User Name</th>
 											<th>Email Address</th>
 											<th>Contact Number</th>
-							
+											<th>In Company</th>
 											<?php
 											if($this->session->userdata('RoleId')==1 || $this->session->userdata('RoleId')==2){
 											?>		
@@ -119,6 +120,7 @@
 											</td>
 											<td><?php echo $hr->EmailAddress ;?></td>
 											<td><?php echo $hr->Contact ;?></td>
+											<td><?php echo $hr->companyname ;?></td>
 							
 											<?php
 											if($this->session->userdata('RoleId')==1 || $this->session->userdata('RoleId')==2){
@@ -175,11 +177,11 @@
 									
 											<div class="form-group">
 												<label>Full Name</label>	
-												<input class="form-control" tabindex="1" type="text" name="FullName" Placeholder="Enter your full name" minlength="1" maxlength="50">
+												<input class="form-control" tabindex="1" type="text" name="FullName" Placeholder="Enter your full name" minlength="2" maxlength="50">
 											</div>
 											<div class="form-group">
-												<label>Contact Number</label>
-												<input class="form-control" tabindex="3" type="text" name="Contact" Placeholder="Enter your contact number" minlength="10" maxlength="10" id="PhoneNumbers">
+												<label>Email Address</label>
+												<input class="form-control" tabindex="3" type="text" name="EmailAddress" Placeholder="Enter your email address" minlength="2" maxlength="50">
 											</div>
 											<div class="form-group">
 												<label>Date of Birth</label>
@@ -197,10 +199,10 @@
 
 											<div class="form-group">
 														<label class="col-form-label">IsActive<span class="text-danger">*</span></label><br>
-														<label class="radio-inline" tabindex="11">
+														<label class="radio-inline" tabindex="12">
 															<input type="radio" name="IsActive" checked  value="1">Active
 														</label>
-														<label class="radio-inline" tabindex="12">
+														<label class="radio-inline" tabindex="13">
 															<input type="radio" name="IsActive" value="0">Deactive
 														</label>
 											</div>
@@ -209,44 +211,45 @@
 											
 										</div>
 										<div class="col-sm-6">  
-										<div class="form-group">
-												<label>Email Address</label>
-												<input class="form-control" tabindex="2" type="email" name="EmailAddress" Placeholder="Enter your email address" minlength="2" maxlength="50">
+											<div class="form-group">
+												<label>Last Name</label>
+												<input class="form-control" tabindex="2" type="text" name="LastName" Placeholder="Enter your last name" minlength="2" maxlength="50">
+											</div> 
+											<div class="form-group">
+												<label>Contact Number</label>
+												<input class="form-control" tabindex="4" type="text" name="PhoneNumber" Placeholder="Enter your contact number" minlength="10" maxlength="10" id="PhoneNumbers">
 											</div>
-											
 											<div class="form-group">
 												<label>Gender</label>
-												<select class="select" name="Gender" tabindex="4"> 
+												<select class="select" name="Gender" tabindex="6"> 
 													<option value="Male">Male</option>
 													<option value="Female">Female</option>
 												</select>
 											</div>
 											<div class="form-group">
 												<label>Pin-Code</label>
-												<input class="form-control" tabindex="6" type="text" name="PinCode" id="PinCodes" Placeholder="Enter your pin-code"  minlength="6" maxlength="6">
+												<input class="form-control" tabindex="8" type="text" name="PinCode" id="PinCodes" Placeholder="Enter your pin-code"  minlength="6" maxlength="6">
 											</div>
 
-											<!-- <div class="form-group">
+											<div class="form-group">
 													<label>Company</label>
-													<select class="select" name="companyid" tabindex="8"> 
+													<select class="select" name="companyid" tabindex="11"> 
 														<option desabled value="">Please select company</option>
 														<?php
-														//  if($companyData){
-														// 	foreach($companyData as $comp)
-														// 	{
+														 if($companyData){
+															foreach($companyData as $comp)
+															{
 														?>
 					
-															<option value="<?php //echo $comp->companyid; ?>">
-															<?php //echo $comp->companyname;?></option>
+															<option value="<?php echo $comp->companyid; ?>">
+															<?php echo $comp->companyname;?></option>
 
 														<?php
-														//}}
+														}}
 														?>
 													</select>
 											</div>
-											 -->
-											
-										
+				
 										</div>
 									</div>
 									<div class="submit-section">
@@ -271,7 +274,7 @@
 							</div>
 							<div class="modal-body">
 								<form method="post" id="form_valid2" action="<?php echo base_url();?>Hr/addhr">
-								<input type="hidden" class="form-control" name="hr_id" id="hr_id" value="<?php $hr_id?>">
+								<input type="hidden" class="form-control" name="hr_id" id="hr_id">
 							
 									<div class="profile-img-wrap edit-img">			
 												<img class="inline-block" src="<?php echo base_url(); ?>upload/default/avtar.jpg" alt="">
@@ -283,82 +286,77 @@
 									<div class="row"> 
 										<div class="col-sm-6"> 
 											<div class="form-group">
-												<label>First Name</label>
-												
-												<input class="form-control" type="text" name="FirstName" Placeholder="Enter your first name" minlength="2" maxlength="50" id="FirstName">
+												<label>Full Name</label>										
+												<input class="form-control" type="text" name="FullName" Placeholder="Enter your full name" minlength="2" maxlength="50" id="FullName" tabindex="1">
 											</div>
 											<div class="form-group">
-												<label>Email Address</label>
-												<input class="form-control" type="text" name="EmailAddress" Placeholder="Enter your email address" minlength="2" maxlength="50" id="EmailAddress">
+												<label>Contact Number</label>
+												<input class="form-control" type="text" name="Contact" tabindex="3" Placeholder="Enter your contact number" minlength="10" maxlength="10" id="PhoneNumber">
 											</div>
 											<div class="form-group">
 												<label>Date of Birth</label>
-												<input class="form-control" type="date" name="DateofBirth" Placeholder="Enter your date of birth" id="DateofBirth">
+												<input class="form-control" type="date" name="DateofBirth" Placeholder="Enter your date of birth" id="DateofBirth" tabindex="5">
 											</div>
 											<div class="form-group">
 												<label>Address</label>
-												<input class="form-control" type="text" name="Address" Placeholder="Enter your address" minlength="5" maxlength="500" id="Address">
+												<input class="form-control" type="text" name="Address" tabindex="7" Placeholder="Enter your address" minlength="5" maxlength="500" id="Address">
 											</div>
+											<!-- <input type="text" name="companyid" id="companyid"> -->
 											<div class="form-group">
-												<label>City</label>
-												<input class="form-control" type="text" name="City" Placeholder="Enter your city" minlength="2" maxlength="50" id="City">
+													<label>Type of Company</label>
+													<select class="select" name="companyid" id="companyid" tabindex="9"> 
+														<option desabled value="">Please select type of company</option>
+														<?php
+														 if($companytypeData){
+															foreach($companytypeData as $typecompany)
+															{
+														?>
+															<option value="<?php echo $typecompany->companyid; ?>" <?php if($companyid==$typecompany->companyid){echo "selected" ;}?>><?php echo $typecompany->companyname;?></option>
+														<?php
+														}}
+														?>
+													</select>
 											</div>
-
-											<div class="form-group">
-												<label class="col-form-label">IsActive<span class="text-danger">*</span></label><br>
-												<label class="radio-inline">
-													<input type="radio" name="IsActive"  value="1">Active
-												</label>
-												<label class="radio-inline">
-													<input type="radio" name="IsActive"  value="0">Inactive
-												</label>
-											</div>
+											
+											
 
 											
 											
 										</div>
 										<div class="col-sm-6">  
-											<div class="form-group">
-												<label>Last Name</label>
-												<input class="form-control" type="text" name="LastName" Placeholder="Enter your last name" minlength="2" maxlength="50" id="LastName">
-											</div> 
-											<div class="form-group">
-												<label>Contact Number</label>
-												<input class="form-control" type="text" name="PhoneNumber" Placeholder="Enter your contact number" minlength="10" maxlength="10" id="PhoneNumber">
+										<div class="form-group">
+												<label>Email Address</label>
+												<input class="form-control" type="text" name="EmailAddress" Placeholder="Enter your email address" minlength="2" maxlength="50" id="EmailAddress" tabindex="2">
 											</div>
+											
 											<div class="form-group">
 												<label>Gender</label>
-												<select class="select" name="Gender"> 
+												<select class="select" name="Gender" tabindex="4"> 
 													<option value="Male" id="Male">Male</option>
 													<option value="Female" id="Female">Female</option>
 												</select>
 											</div>
 											<div class="form-group">
 												<label>Pincode Number</label>
-												<input class="form-control" type="text" name="PinCode" Placeholder="Enter your pincode number" minlength="06" maxlength="06" id="PinCode">
+												<input class="form-control" type="text" name="PinCode" tabindex="6" Placeholder="Enter your pincode number" minlength="06" maxlength="06" id="PinCode">
 											</div>
 
-											
 											<div class="form-group">
-													<label>Company</label>
-													<select class="select" name="companyid"> 
-														<option desabled value="">Please select company</option>
-														<?php
-														 if($companyData){
-															foreach($companyData as $comp)
-															{
-														?>
-					
-															<option value="<?php echo $comp->companyid; ?>">
-															<?php echo $comp->companyname;?></option>
-
-														<!-- <option value="<?php //echo $comp->companyid; ?>" <?php //if($companyid==$comp->companyid){echo "selected" ;}?>><?php //echo $comp->companyname;?></option> -->
-
-														<?php
-														}}
-														?>
-													</select>
+												<label>City</label>
+												<input class="form-control" type="text" name="City" Placeholder="Enter your city" minlength="2" maxlength="50" id="City" tabindex="8">
 											</div>
+
+										
+											<div class="form-group">
+												<label class="col-form-label">IsActive</label><br>
+												<label class="radio-inline" tabindex="10">
+													<input type="radio" name="IsActive"  value="Active">Active
+												</label>
+												<label class="radio-inline" tabindex="11">
+													<input type="radio" name="IsActive"  value="Inactive">Inactive
+												</label>
+											</div>
+									
 											
 											
 											
@@ -375,19 +373,19 @@
 				<!-- /Edit Salary Modal -->
 				
 				<!-- Delete Salary Modal -->
-				<!-- <div class="modal custom-modal fade" id="delete_admin" role="dialog">
+				<div class="modal custom-modal fade" id="delete_admin" role="dialog">
 					<div class="modal-dialog modal-dialog-centered">
 						<div class="modal-content">
 							<div class="modal-body">
 								<div class="form-header">
-									<h3>Delete Admin</h3>
+									<h3>Delete Hr</h3>
 									<p>Are you sure want to delete?</p>
 								</div>
 								
 								<div class="modal-btn delete-action">
 									<div class="row">
 										<div class="col-6">
-											<a href="javascript:void(0);" id="yes_btn" ><a href="" id="deleteYes" value="Yes" class="btn btn-primary continue-btn">Delete</a>
+											<button type="button" class="btn btn-primary continue-btn" id="yes_btn" ><a href="" id="deleteYes" value="Yes">Delete</a></button>	
 										</div>
 										<div class="col-6">
 											<a href="javascript:void(0);" data-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
@@ -397,24 +395,11 @@
 							</div>
 						</div>
 					</div>
-				</div> -->
+				</div>
 				<!-- /Delete Salary Modal -->
 
 				
-			<div class="modal fade bs-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-				<div class="modal-dialog modal-sm" role="document" style="margin:20% auto;">
-					<div class="modal-content">
-						<div class="modal-body" >
-							<p>Are you sure you want to delete this record?</p>
-						</div>
-						<div class="modal-footer text-center">
-							<!--<button type="button" class="next_btn" id="yes_btn" name="update">Yes</button>-->
-							<center><button type="button" class="btn-md btn-icon btn-link p4" id="yes_btn" ><a href="" id="deleteYes" value="Yes"  class="btn btn-success">Yes</a></button>
-							<button type="button" class="btn btn-danger" data-dismiss="modal">No</button></center>
-						</div>
-					</div>
-				</div>
-			</div>
+			
 
 				
             </div>
@@ -731,7 +716,7 @@ $(document).ready(function()
 function edithrs(hr_id)
 {
 	Url="<?php echo base_url() ?>";
-//	alert(AdminId);
+	//alert(hr_id);
 	$.ajax({
          url: Url+'hr/edithr',
          type: 'post',
@@ -741,27 +726,27 @@ function edithrs(hr_id)
             //    console.log(response.hr_id);
 			//    console.log(response.DateofBirth);
             $('#hr_id').val(response.hr_id);
-			$('#FirstName').val(response.FirstName);
-			$('#LastName').val(response.LastName);
+			$('#companyid').val(response.companyid);
+			$('#FullName').val(response.FullName);
 			$('#EmailAddress').val(response.EmailAddress);
 			$('#DateofBirth').val(response.DateofBirth);
-			$('#PhoneNumber').val(response.PhoneNumber);
+			$('#PhoneNumber').val(response.Contact);
 			$('#Gender').val(response.Gender);
 			$('#Address').val(response.Address);
 			$('#PinCode').val(response.PinCode);
 			$('#City').val(response.City);
 			$("input[name=IsActive][value=" + response.IsActive + "]").attr('checked', 'checked');
-			// $("input[name=companyid][value=" + response.companyid + "]").attr('selected', 'selected');
-			// $("input[name=companyname][value=" + response.companyname + "]").attr('selected', 'selected');
-			$('#companyid').val(response.companyid);
-			$('#companyname').val(response.companyname);
+			//$("option[name=companyid][value=" + response.companyid + "]").attr('selected', 'selected');
+			//$("option[name=companyname][value=" + response.companyname + "]").attr('selected', 'selected');
+			
+			//$('#companyname').val(response.companyname);
          }
       });	
 }
 
 
 function deletedata(hr_id){  
-    $('#myModal').modal('show')
+    $('#delete_admin').modal('show')
         $('#yes_btn').click(function(){
            
                 Url="<?php echo base_url();?>"

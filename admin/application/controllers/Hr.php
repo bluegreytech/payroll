@@ -24,14 +24,26 @@ class Hr extends CI_Controller
 		{
 			$data['hrData']=$this->Hr_model->hr_list();
 		}
-		//$data['companyData']=$this->Hr_model->list_company();
+		//$data['companyData']=$this->Hr_model->listall_company();
 		//echo "<pre>";print_r($data['companyData']);die;
 		$this->load->view('hr/hrlist',$data);
 	}
 
 
 	public function addhr()
-	{	
+	{
+		$data['hr_id']=$this->input->post('companyid');
+		$data['companyid']=$this->input->post('companyid');
+		$data['FullName']=$this->input->post('FullName');
+		$data['EmailAddress']=$this->input->post('EmailAddress');
+		$data['DateofBirth']=$this->input->post('DateofBirth');
+		$data['Contact']=$this->input->post('Contact');
+		$data['Gender']=$this->input->post('Gender');
+		$data['Address']=$this->input->post('Address');
+		$data['PinCode']=$this->input->post('PinCode');
+		$data['City']=$this->input->post('City');
+		$data['IsActive']=$this->input->post('IsActive');
+		$data['companyname']=$this->input->post('companyname');	
 		 if($_POST){
 			
 			if($this->input->post('hr_id')!='')
@@ -69,6 +81,9 @@ class Hr extends CI_Controller
 				}	
 			}
 		}
+		$data['companytypeData']=$this->Hr_model->list_company();
+		//print_r($data['stateData']);die;
+		$this->load->view('hr/hrlist',$data);	
 	}
 
 	function deletehr(){
@@ -93,6 +108,7 @@ class Hr extends CI_Controller
 		$result=$this->Hr_model->getdata($this->input->post('hr_id'));	
 		//echo "<br>";print_r($result);die;
 		$data['hr_id']=$result['hr_id'];
+		$data['companyid']=$result['companyid'];
 		$data['FullName']=$result['FullName'];	
 		$data['EmailAddress']=$result['EmailAddress'];
 		$data['DateofBirth']=$result['DateofBirth'];
@@ -102,10 +118,9 @@ class Hr extends CI_Controller
 		$data['PinCode']=$result['PinCode'];
 		$data['City']=$result['City'];
 		$data['IsActive']=$result['IsActive'];
-		$data['hrid']=$result['hrid'];
-		$data['companyid']=$result['companyid'];
+		
 		$data['companyname']=$result['companyname'];
-		$data['companyData']=$this->Hr_model->list_company();
+		//$data['companyData']=$this->Hr_model->list_company();
 		echo json_encode($data);
 	}
 

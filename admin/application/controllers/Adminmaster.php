@@ -72,11 +72,15 @@ class Adminmaster extends CI_Controller
 
 	function deleteadmin(){
 		$AdminId=$this->input->post('AdminId');
+		$data=array(
+			'IsDelete'=>1,
+			'IsActive'=>0
+				);
 		$this->db->where("AdminId",$AdminId);
-		$result=$this->db->delete('tbladmin');
+		$result=$this->db->update('tbladmin',$data);
 		if($result)
 		{
-			$this->session->set_flashdata('success', 'Admin was delete suucessfully!');
+			$this->session->set_flashdata('success', 'Admin was delete successfully!');
 			redirect('adminmaster/adminlist');
 		}
 		else
