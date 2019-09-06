@@ -205,6 +205,9 @@ class Login_model extends CI_Model
         $data = array(
            'hr_id' => $hr_id,
             'FullName' => $hr['FullName'],
+            'companyid' => $hr['companyid'],
+            'EmailAddress' => $hr['EmailAddress'],
+            'Address' => $hr['Address'],
             'hr_type'=>$hr_type,
 
             );  
@@ -229,11 +232,13 @@ class Login_model extends CI_Model
       if($hr_type == 2)
       {
         $hr_id   = $hr['hr_id'];
-        //$hr_role = $hr['hr_role'];
-        //$site_id    = $hr['site_id'];
+       
         $data = array(
               'hr_id' => $hr_id,
               'FullName' => $hr['FullName'],
+              'companyid' => $hr['companyid'],
+              'EmailAddress' => $hr['EmailAddress'],
+              'Address' => $hr['Address'],
               'hr_type'=>$hr_type,         
             );  
           
@@ -395,5 +400,12 @@ class Login_model extends CI_Model
           $this->db->update('tblpage',$data);
        
     } 
+    function getcompliance($id){
+    $this->db->select("*");
+    $this->db->from("tblcompliances");
+    $this->db->where("complianceid",$id);
+    $query=$this->db->get();
+    return $query->row_array();
+  }
 
 }

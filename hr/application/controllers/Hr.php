@@ -9,17 +9,18 @@ class Hr extends CI_Controller
 	
 	function index()
 	{	
-		if($_POST!='')
-		{
-			$option=$this->input->post('option');
-			$keyword=$this->input->post('keyword2');	
-			$data['hrData'] = $this->Hr_model->search($option,$keyword);
-			// echo "<pre>";print_r($data['adminmasterData']);die;
-		}	
-		else
-		{
-			$data['hrData']=$this->Hr_model->hr_list();
-		}
+		//echo "jhj";die;
+		// if($_POST!='')
+		// {
+		// 	$option=$this->input->post('option');
+		// 	$keyword=$this->input->post('keyword2');	
+		// 	$data['hrData'] = $this->Hr_model->search($option,$keyword);
+		// 	// echo "<pre>";print_r($data['adminmasterData']);die;
+		// }	
+		// else
+		// {
+		// 	$data['hrData']=$this->Hr_model->hr_list();
+		// }
 		$data['companyData']=$this->Hr_model->list_company();
 		//echo "<pre>";print_r($data['hrData']);die;
 		$this->load->view('hr/hrlist',$data);
@@ -28,9 +29,10 @@ class Hr extends CI_Controller
 
 	public function addhr()
 	{	
+		echo "jhj";die;
 		 if($_POST){
 			
-			if($this->input->post('UserId')!='')
+			if($this->input->post('hr_id')!='')
 			{	
 				$result=$this->Hr_model->updatehr();	
 				if($result==1)
@@ -114,7 +116,7 @@ class Hr extends CI_Controller
 				$data['UserId']=$this->input->post('UserId');
 				$data['FirstName']=$this->input->post('FirstName');
 				$data['LastName']=$this->input->post('LastName');
-			//	$data['EmailAddress']=$this->input->post('EmailAddress');
+				//	$data['EmailAddress']=$this->input->post('EmailAddress');
 				$data['DateofBirth']=$this->input->post('DateofBirth');
 				$data['PhoneNumber']=$this->input->post('PhoneNumber');
 				$data['Gender']=$this->input->post('Gender');

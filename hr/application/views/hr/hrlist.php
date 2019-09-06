@@ -122,7 +122,7 @@
 											<td><?php echo $hr->PhoneNumber ;?></td>
 											<td><?php echo $hr->companyname ;?></td>
 											<?php
-											if($this->session->userdata('RoleId')==1 || $this->session->userdata('RoleId')==2){
+										
 											?>
 											<td class="text-right">
 												<div class="dropdown dropdown-action">
@@ -134,9 +134,7 @@
 													</div>
 												</div>
 											</td>
-											<?php
-											}
-											?>
+											
 										</tr>
 										<?php
 										$i++;

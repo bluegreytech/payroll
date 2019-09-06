@@ -850,11 +850,25 @@
 		}
 	}
         
-	function get_category_name($id)
+	function get_company_name($id)
 	{
 		$CI =& get_instance();
-		$query = $CI->db->select('category_name')->from('category')->where('category_id',$id)->get();
-		return $query->row()->category_name;
+		$CI->db->select('companyname');
+		$CI->db->from('tblcompany');
+		$CI->db->where('IsActive',"Active");
+		$CI->db->where('companyid',$id);
+		$query = $CI->db->get();
+		return $query->row()->companyname;
+	}
+	function get_companytype_name($id)
+	{
+		$CI =& get_instance();
+		$CI->db->select('companytype');
+		$CI->db->from('tblcompanytype');
+		$CI->db->where('IsActive',"Active");
+		$CI->db->where('companytypeid',$id);
+		$query = $CI->db->get();
+		return $query->row()->companytype;
 	}
 	
 	function get_country_iso($country)

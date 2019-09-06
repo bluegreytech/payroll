@@ -103,3 +103,48 @@ ERROR - 2019-09-05 12:51:25 --> 404 Page Not Found: Default/assets
 ERROR - 2019-09-05 12:51:25 --> 404 Page Not Found: Default/js
 ERROR - 2019-09-05 12:51:25 --> 404 Page Not Found: Default/js
 ERROR - 2019-09-05 12:51:25 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-09-05 12:56:50 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 14:28:59 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 14:28:59 --> 404 Page Not Found: Default/css
+ERROR - 2019-09-05 14:28:59 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-05 14:28:59 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-05 14:28:59 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-09-05 14:29:06 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 24
+ERROR - 2019-09-05 14:29:06 --> Severity: Notice --> Undefined variable: session C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 57
+ERROR - 2019-09-05 14:29:07 --> 404 Page Not Found: Default/css
+ERROR - 2019-09-05 14:29:07 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-05 14:29:07 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-05 14:29:07 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-09-05 14:29:31 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 24
+ERROR - 2019-09-05 14:29:31 --> Severity: Notice --> Undefined variable: session C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 57
+ERROR - 2019-09-05 14:29:31 --> 404 Page Not Found: Default/css
+ERROR - 2019-09-05 14:29:31 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-05 14:29:31 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-05 14:29:32 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-09-05 14:29:45 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 24
+ERROR - 2019-09-05 14:29:45 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 14:29:45 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 14:29:45 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 14:29:45 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-05 14:29:46 --> 404 Page Not Found: Default/css
+ERROR - 2019-09-05 14:29:46 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-05 14:29:46 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-05 14:29:46 --> 404 Page Not Found: Default/assets
+ERROR - 2019-09-05 14:29:49 --> Severity: Notice --> Undefined property: stdClass::$isactive C:\xampp\htdocs\payroll\admin\application\views\Company\companytypelist.php 60
+ERROR - 2019-09-05 14:29:49 --> Severity: Notice --> Undefined property: stdClass::$isactive C:\xampp\htdocs\payroll\admin\application\views\Company\companytypelist.php 60
+ERROR - 2019-09-05 14:29:49 --> Severity: Notice --> Undefined property: stdClass::$isactive C:\xampp\htdocs\payroll\admin\application\views\Company\companytypelist.php 60
+ERROR - 2019-09-05 14:29:49 --> Severity: Notice --> Undefined property: stdClass::$isactive C:\xampp\htdocs\payroll\admin\application\views\Company\companytypelist.php 60
+ERROR - 2019-09-05 14:29:50 --> 404 Page Not Found: Default/css
+ERROR - 2019-09-05 14:29:50 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-05 14:29:50 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-05 14:30:21 --> Severity: Notice --> Undefined property: stdClass::$isactive C:\xampp\htdocs\payroll\admin\application\views\Company\companytypelist.php 60
+ERROR - 2019-09-05 14:30:21 --> Severity: Notice --> Undefined property: stdClass::$isactive C:\xampp\htdocs\payroll\admin\application\views\Company\companytypelist.php 60
+ERROR - 2019-09-05 14:30:21 --> Severity: Notice --> Undefined property: stdClass::$isactive C:\xampp\htdocs\payroll\admin\application\views\Company\companytypelist.php 60
+ERROR - 2019-09-05 14:30:21 --> Severity: Notice --> Undefined property: stdClass::$isactive C:\xampp\htdocs\payroll\admin\application\views\Company\companytypelist.php 60
+ERROR - 2019-09-05 14:30:25 --> Query error: Table 'payrolldb.tblrights' doesn't exist - Invalid query: SELECT *
+FROM `tblrights`
+WHERE `rightsname` = 'company'
+ERROR - 2019-09-05 14:48:22 --> 404 Page Not Found: Default/assets
+ERROR - 2019-09-05 15:04:03 --> Query error: Table 'payrolldb.tblrights' doesn't exist - Invalid query: SELECT *
+FROM `tblrights`
+WHERE `rightsname` = 'company'

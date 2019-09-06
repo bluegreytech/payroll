@@ -54,7 +54,7 @@
 													<h3 class="user-name m-t-0 mb-0"><?php echo $full_name;?></h3>
 													<!-- <h6 class="text-muted">UI/UX Design Team</h6> -->
 													<!-- <small class="text-muted">Web Designer</small> -->
-													<div class="staff-id">Company Name</div>
+													<div class="staff-id">Company:  <?php //echo $companyname;?></div>
 													<div class="small doj text-muted">Date of Join : <?php echo date('d M Y',strtotime($CreatedOn))?></div>
 													<div class="staff-msg"><a class="btn btn-custom" href="#">Send Message</a></div>
 												</div>
@@ -138,6 +138,7 @@
 											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group">
+													
 													<label>Full Name</label>
 													<input type="text" class="form-control" name="FullName" value="<?php echo $full_name;?>" minlength="2" maxlength="50" Placeholder="Enter your full name">
 													</div>
