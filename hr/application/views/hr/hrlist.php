@@ -111,7 +111,7 @@
 													?>
 													<a href="" class="avatar"><img src="<?php echo base_url();?>uploads/default/avtar.jpg" alt=""></a>
 													<a href="profile.html"><?php echo $hr->FirstName;?> 
-													<!-- <?php echo $hr->LastName ;?> <span>Android Developer</span></a> -->
+													<!-- <?php //echo $hr->LastName ;?> <span>Android Developer</span></a> -->
 													<?php
 												}
 												?>
