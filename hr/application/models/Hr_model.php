@@ -39,7 +39,7 @@ class Hr_model extends CI_Model
 			'IsActive'=>$IsActive,
 			'CreatedOn'=>date('Y-m-d')
 			);
-		//	print_r($data);die;
+			//	print_r($data);die;
 			$this->db->insert('tbluser',$data);
 			$insert_id = $this->db->insert_id();
 
@@ -124,27 +124,22 @@ class Hr_model extends CI_Model
 
 
 
-	// function hr_list()
-	// {
-	// 	$this->db->select('UserId,RoleId,CONCAT(FirstName ,LastName) AS FirstName,EmailAddress,DateofBirth,PhoneNumber,ProfileImage,Gender,Address,PinCode,CountryId,StateId,City,IsActive');
-	// 	$this->db->from('tbluser');
-	// 	$this->db->where('RoleId',3);
-	// 	$r=$this->db->get();
-	// 	$res = $r->result();
-	// 	return $res;
+	
 
-	// }
-
-	function hr_list()
+	function hrlist()
 	{
-		$this->db->select('t1.UserId,t1.RoleId,t1.FirstName,t1.LastName,t1.EmailAddress,t1.DateofBirth,t1.PhoneNumber,t1.Gender,t1.ProfileImage,t1.Address,t1.PinCode,t1.CountryId,t1.StateId,t1.City,t1.IsActive,t2.*,t3.*');
-		$this->db->from('tbluser as t1');
-		$this->db->join('tblhr as t2', 't1.UserId = t2.UserId', 'LEFT');
-		$this->db->join('tblcompany as t3', 't2.companyid = t3.companyid', 'LEFT');
-		$this->db->where('RoleId',3);
-		$r=$this->db->get();
-		$res = $r->result();
-		return $res;	
+		
+		$this->db->select('*');
+		$this->db->from('tblhr');
+		$this->db->where('Is_deleted','0');
+		$this->db->where('hr_type!=','1');
+		$query=$this->db->get();
+		$res=$query->result();
+		return $res;
+		//echo "<pre>";print_r($res);die;
+
+
+
 	}
 
 	function search($option,$keyword)
@@ -184,21 +179,21 @@ class Hr_model extends CI_Model
 		}
 
 		
-		function list_company(){
-			$this->db->select('*');
-			$this->db->from('tblcompany');
-			$query = $this->db->get();
-			return $query->row_array();
+	function list_company(){
+		$this->db->select('*');
+		$this->db->from('tblcompany');
+		$query = $this->db->get();
+		return $query->row_array();
 	}
 
 	function getdata($UserId){
-			$this->db->select('t1.*,t2.*,t3.*');
-			$this->db->from('tbluser as t1');
-			$this->db->join('tblhr as t2', 't1.UserId = t2.UserId', 'LEFT');
-			$this->db->join('tblcompany as t3', 't2.companyid = t2.companyid', 'LEFT');
-			$this->db->where('t1.UserId',32);
-			$query = $this->db->get();
-			return $query->row_array();
+		$this->db->select('t1.*,t2.*,t3.*');
+		$this->db->from('tbluser as t1');
+		$this->db->join('tblhr as t2', 't1.UserId = t2.UserId', 'LEFT');
+		$this->db->join('tblcompany as t3', 't2.companyid = t2.companyid', 'LEFT');
+		$this->db->where('t1.UserId',32);
+		$query = $this->db->get();
+		return $query->row_array();
 	}
 
 	function updatehr()
@@ -314,5 +309,200 @@ class Hr_model extends CI_Model
 		}
  	}
 
+    function hr_insert()
+	{		
+		//echo "<pre>";print_r($_FILES);die;
+		$hr_image='';
+         //$image_settings=image_setting();
+		  if(isset($_FILES['ProfileImage']) &&  $_FILES['ProfileImage']['name']!='')
+         {
+             $this->load->library('upload');
+             $rand=rand(0,100000); 
+			  
+			$_FILES['userfile']['name']     =   $_FILES['ProfileImage']['name'];
+			$_FILES['userfile']['type']     =   $_FILES['ProfileImage']['type'];
+			$_FILES['userfile']['tmp_name'] =   $_FILES['ProfileImage']['tmp_name'];
+			$_FILES['userfile']['error']    =   $_FILES['ProfileImage']['error'];
+			$_FILES['userfile']['size']     =   $_FILES['ProfileImage']['size'];
+   
+			$config['file_name'] = $rand.'Admin';			
+			$config['upload_path'] = base_path().'upload/hr_orig/';		
+			$config['allowed_types'] = 'jpg|jpeg|gif|png|bmp';  
+ 
+             $this->upload->initialize($config);
+ 
+              if (!$this->upload->do_upload())
+			  {
+				$error =  $this->upload->display_errors();
+				echo "<pre>";print_r($error);
+			  } 
+           	  $picture = $this->upload->data();	   
+              $this->load->library('image_lib');		   
+              $this->image_lib->clear();
+			  $gd_var='gd2';
+
+              $this->image_lib->initialize(array(
+				'image_library' => $gd_var,
+				'source_image' => base_path().'upload/hr_orig/'.$picture['file_name'],
+				'new_image' => base_path().'upload/hr/'.$picture['file_name'],
+				'maintain_ratio' => FALSE,
+				'quality' => '100%',
+				'width' => 300,
+				'height' => 300
+			 ));
+			if(!$this->image_lib->resize())
+			{
+				$error = $this->image_lib->display_errors();
+			}
+			
+			$hr_image=$picture['file_name'];		
+			if($this->input->post('pre_profile_image')!='')
+				{
+					if(file_exists(base_path().'upload/hr/'.$this->input->post('pre_profile_image')))
+					{
+						$link=base_path().'upload/hr/'.$this->input->post('pre_profile_image');
+						unlink($link);
+					}
+					
+					if(file_exists(base_path().'upload/hr_orig/'.$this->input->post('pre_profile_image')))
+					{
+						$link2=base_path().'upload/hr_orig/'.$this->input->post('pre_profile_image');
+						unlink($link2);
+					}
+				}
+			} else {
+				if($this->input->post('pre_profile_image')!='')
+				{
+					$hr_image=$this->input->post('pre_profile_image');
+				}
+			}
+            $x=8;
+       		$rnd=substr(str_shuffle("23456789abcdefghjkmnpqrstvwxyzABCDEFGHJKMNPQRSTVWXYZ"), 0, $x);
+            //echo $rnd ;die;
+            $data = array(
+			'EmailAddress' => trim($this->input->post('EmailAddress')),		
+			'FullName' => trim($this->input->post('FullName')),
+			'ProfileImage'=>$hr_image,
+			'Address'=>$this->input->post('Address'), 
+			'Contact'=>$this->input->post('PhoneNumber'), 		
+			'Gender' => $this->input->post('Gender'),	
+			'DateofBirth' => date('Y-m-d',strtotime($this->input->post('DateofBirth'))),	
+			'City' => $this->input->post('City'),	
+			'PinCode' => $this->input->post('PinCode'),	
+			'companyid' =>$this->session->userdata('companyid'),
+			'Password' =>md5($rnd),
+			'hr_type'=>'2',			
+			'CreatedOn'=>date('Y-m-d')		
+			);
+			//echo "<pre>";print_r($data);die;	
+                    
+            $res=$this->db->insert('tblhr',$data);	
+			return $res;
+			
+	}
+
+	function gethrdata($hrid){
+
+		$this->db->select("*");
+		$this->db->from("tblhr");
+		$this->db->where("Is_deleted",'0');
+		$this->db->where("hr_id",$hrid);
+		$query=$this->db->get();	
+		return $query->row_array();
+	
+
+	}
+	 function hr_update()
+	{		
+		//echo "<pre>";print_r($_FILES);die;
+		$hr_image='';
+         //$image_settings=image_setting();
+		  if(isset($_FILES['ProfileImage']) &&  $_FILES['ProfileImage']['name']!='')
+         {
+             $this->load->library('upload');
+             $rand=rand(0,100000); 
+			  
+			$_FILES['userfile']['name']     =   $_FILES['ProfileImage']['name'];
+			$_FILES['userfile']['type']     =   $_FILES['ProfileImage']['type'];
+			$_FILES['userfile']['tmp_name'] =   $_FILES['ProfileImage']['tmp_name'];
+			$_FILES['userfile']['error']    =   $_FILES['ProfileImage']['error'];
+			$_FILES['userfile']['size']     =   $_FILES['ProfileImage']['size'];
+   
+			$config['file_name'] = $rand.'Admin';			
+			$config['upload_path'] = base_path().'upload/hr_orig/';		
+			$config['allowed_types'] = 'jpg|jpeg|gif|png|bmp';  
+ 
+             $this->upload->initialize($config);
+ 
+              if (!$this->upload->do_upload())
+			  {
+				$error =  $this->upload->display_errors();
+				echo "<pre>";print_r($error);
+			  } 
+           	  $picture = $this->upload->data();	   
+              $this->load->library('image_lib');		   
+              $this->image_lib->clear();
+			  $gd_var='gd2';
+
+              $this->image_lib->initialize(array(
+				'image_library' => $gd_var,
+				'source_image' => base_path().'upload/hr_orig/'.$picture['file_name'],
+				'new_image' => base_path().'upload/hr/'.$picture['file_name'],
+				'maintain_ratio' => FALSE,
+				'quality' => '100%',
+				'width' => 300,
+				'height' => 300
+			 ));
+			if(!$this->image_lib->resize())
+			{
+				$error = $this->image_lib->display_errors();
+			}
+			
+			$hr_image=$picture['file_name'];		
+			if($this->input->post('pre_profile_image')!='')
+				{
+					if(file_exists(base_path().'upload/hr/'.$this->input->post('pre_profile_image')))
+					{
+						$link=base_path().'upload/hr/'.$this->input->post('pre_profile_image');
+						unlink($link);
+					}
+					
+					if(file_exists(base_path().'upload/hr_orig/'.$this->input->post('pre_profile_image')))
+					{
+						$link2=base_path().'upload/hr_orig/'.$this->input->post('pre_profile_image');
+						unlink($link2);
+					}
+				}
+			} else {
+				if($this->input->post('pre_profile_image')!='')
+				{
+					$hr_image=$this->input->post('pre_profile_image');
+				}
+			}
+            $x=8;
+       		$rnd=substr(str_shuffle("23456789abcdefghjkmnpqrstvwxyzABCDEFGHJKMNPQRSTVWXYZ"), 0, $x);
+            //echo $rnd ;die;
+            $data = array(
+			//'EmailAddress' => trim($this->input->post('EmailAddress')),		
+			'FullName' => trim($this->input->post('FullName')),
+			'ProfileImage'=>$hr_image,
+			'Address'=>$this->input->post('Address'), 
+			'Contact'=>$this->input->post('PhoneNumber'), 		
+			'Gender' => $this->input->post('Gender'),	
+			'DateofBirth' => date('Y-m-d',strtotime($this->input->post('DateofBirth'))),	
+			'City' => $this->input->post('City'),	
+			'PinCode' => $this->input->post('PinCode'),	
+			'companyid' =>$this->session->userdata('companyid'),
+			'UpdatedOn'=>date('Y-m-d')		
+			);
+			//echo "<pre>";print_r($data);die;
+            $this->db->where('hr_id',$this->input->post('hr_id'));       
+            $res=$this->db->update('tblhr',$data);	
+			return $res;
+
+
+
+			
+	}
 
 }

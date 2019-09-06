@@ -34,7 +34,7 @@
 							<li class="submenu">
 								<a href="<?php echo base_url();?>Dashboard"><i class="la la-user"></i> <span>Hr</span> <span class="menu-arrow"></span></a>
 								<ul style="display: none;">
-								<li><a href="<?php echo base_url();?>hr"><span>List of Hr</span></a></li>
+								<li><a href="<?php echo base_url();?>hr/hrlist"><span>List of Hr</span></a></li>
 								</ul>
 							</li>
 

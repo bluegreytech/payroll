@@ -113,7 +113,7 @@
 								<form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>home/profile" id="frm_profile">
 									<div class="row">
 										<div class="col-md-12">
-										<input type="hidden" name="UserId" value="<?php //echo $UserId ?>">
+										
 											<div class="profile-img-wrap edit-img">
 											<?php  
 											 if(($ProfileImage!='' && file_exists(base_path().'/upload/hr/'.$ProfileImage))){ ?>
@@ -374,5 +374,23 @@ function readURL(input) {
                 };
              reader.readAsDataURL(input.files[0]);
             }
-        }				        
+        }
+
+        $(function() { 
+    setTimeout(function() {
+  $('#errorMessage').fadeOut('fast');
+}, 10000);  
+});
+
+$(function() { 
+    setTimeout(function() {
+  $('#successMessage').fadeOut('fast');
+}, 10000);  
+});
+
+$(function() { 
+    setTimeout(function() {
+  $('#warningMessage').fadeOut('fast');
+}, 10000);  
+});				        
 </script>

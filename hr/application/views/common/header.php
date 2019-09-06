@@ -80,7 +80,7 @@
 			
 				<!-- Logo -->
                 <div class="header-left">
-                    <a href="index.php" class="logo">
+                    <a href="<?php echo base_url(); ?>home/dashboard" class="logo">
 						<img src="<?php echo base_url(); ?>default/img/logo.png" width="40" height="40" alt="Payroll System">
 					</a>
                 </div>
