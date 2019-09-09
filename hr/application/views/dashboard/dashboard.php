@@ -27,7 +27,7 @@
 							<div class="dash-widget clearfix card-box">
 								<span class="dash-widget-icon"><i class="fa fa-cubes"></i></span>
 								<div class="dash-widget-info">
-									<h3><?php echo $companyData;?></h3>
+									<h3><?php //echo $companyData;?> 0</h3>
 									<span>Total Companies</span>
 								</div>
 							</div>
@@ -36,7 +36,7 @@
 							<div class="dash-widget clearfix card-box">
 								<span class="dash-widget-icon"><i class="fa fa-usd"></i></span>
 								<div class="dash-widget-info">
-									<h3><?php echo $hrData;?></h3>
+									<h3><?php //echo $hrData;?> 0</h3>
 									<span> Total HR</span>
 								</div>
 							</div>
