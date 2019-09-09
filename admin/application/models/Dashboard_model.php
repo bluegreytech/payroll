@@ -20,7 +20,7 @@ class Dashboard_model extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('tblemployee');
-		$this->db->where('isdelete!=',1);
+		$this->db->where('isdelete!=','1');
 		$r = $this->db->get();
 		return $query= $r->num_rows();
 	}
@@ -38,7 +38,7 @@ class Dashboard_model extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('tblcompany');
-		$this->db->where('isdelete!=',1);
+		$this->db->where('isdelete!=','1');
 		$r = $this->db->get();
 		return $query= $r->num_rows();
 	}
@@ -47,7 +47,7 @@ class Dashboard_model extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('tblhr');
-		$this->db->where('Is_deleted!=',1);
+		$this->db->where('Is_deleted!=','1');
 		$r = $this->db->get();
 		return $query= $r->num_rows();
 	}

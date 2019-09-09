@@ -82,8 +82,7 @@ class Company extends CI_Controller
 			$data['pincode']=$this->input->post('pincode');		
 			$data['isactive']=$this->input->post('isactive');
 			$data['companycomplianceid']=$this->input->post('companycomplianceid');
-			if($_POST){
-				
+			if($_POST){	
 				if($this->input->post('companyid')==''){
 							
 					$result=$this->Company_model->add_company();	

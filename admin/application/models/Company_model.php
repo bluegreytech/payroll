@@ -24,7 +24,7 @@ class Company_model extends CI_Model
 		$this->db->from('tblcompanytype');
 
 		$this->db->where('isactive!=',0);
-		$this->db->or_where('Is_deleted','0');
+		$this->db->or_where('isdelete','0');
 
 	
 
@@ -40,7 +40,7 @@ class Company_model extends CI_Model
 		$this->db->from('tblcompanytype');
 
 		$this->db->where('isactive',1);
-		$this->db->or_where('Is_deleted','0');
+		$this->db->or_where('isdelete','0');
 
 		$this->db->where($where);
 
@@ -69,7 +69,7 @@ class Company_model extends CI_Model
 		$this->db->select('*');
 		$this->db->from('tblcompliances');
 		$this->db->where('isactive!=','0');
-		$this->db->or_where('Is_deleted','0');
+		$this->db->or_where('isdelete','0');
 		$r=$this->db->get();
 		$res = $r->result();
 		return $res;
@@ -94,7 +94,7 @@ class Company_model extends CI_Model
 			$this->db->from('tblcompany as t1');
 			$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
 
-			$this->db->or_where('t1.Is_deleted','0');
+			$this->db->or_where('t1.isdelete','0');
 
 			// $this->db->where('t1.isactive','Active');
 			// $this->db->or_where('t1.isdelete','0');
@@ -113,7 +113,7 @@ class Company_model extends CI_Model
 			$this->db->from('tblcompany as t1');
 			$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
 
-			$this->db->or_where('t1.Is_deleted','0');
+			$this->db->or_where('t1.isdelete','0');
 
 			// $this->db->where('t1.isactive','Active');
 			// $this->db->or_where('t1.isdelete','0');
@@ -511,9 +511,10 @@ class Company_model extends CI_Model
 
 	function update_company()
 	{	
-		     
 		$companyid=$this->input->post('companyid');
 		$companycomplianceid=$this->input->post('companycomplianceid');
+		
+		 //echo $companycomplianceid;die;
 		$data=array(
 			'companyid'=>$this->input->post('companyid'),
 			'companytypeid'=>$this->input->post('companytypeid'),
@@ -531,23 +532,23 @@ class Company_model extends CI_Model
 			//print_r($data);die;
 			$this->db->where("companyid",$companyid);
 			$this->db->update('tblcompany',$data);	
-			return 1;	
-		if($companycomplianceid!='')
-		{
-			$complianceid=implode(',',$this->input->post('complianceid'));
-			$data2=array( 
-				'companycomplianceid'=>$companycomplianceid,
-				'companyid'=>$companyid,
-				'complianceid'=>$complianceid,
-				'isactive'=>$this->input->post('isactive'),
-				'createdby'=>1,
-				'createdon'=>date("Y-m-d h:i:s")
-				);
-			$this->db->where("companycomplianceid",$companycomplianceid);
-			$this->db->update('tblcompanycompliances',$data2);
-			return 1;	 	
+			if($companycomplianceid!='')
+			{
+				$complianceid='1,2,3';	
+				$data2=array( 
+					'companycomplianceid'=>$companycomplianceid,
+					'companyid'=>$companyid,
+					'complianceid'=>$complianceid,
+					'isactive'=>$this->input->post('isactive'),
+					'createdby'=>1,
+					'createdon'=>date("Y-m-d h:i:s")
+					);
+				//print_r($data2);die;
+				$this->db->where("companycomplianceid",$companycomplianceid);
+				$this->db->update('tblcompanycompliances',$data2);
+				return 1;	 	
 
-		} 
+			} 
 			
 	}
 

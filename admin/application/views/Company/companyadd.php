@@ -66,8 +66,8 @@
 
 							<div class="modal-body">
 								<form method="post" id="form_valid" action="<?php echo base_url();?>Company/companyadd">
-								<input type="hidden" class="form-control" name="companyid" value="<?php echo $companyid;?>">
-								<!-- <input type="hidden" class="form-control" name="companycomplianceid" value="<?php// echo $companycomplianceid;?>"> -->
+								<input type="text" class="form-control" name="companyid" value="<?php echo $companyid;?>">
+								<input type="text" class="form-control" name="companycomplianceid" value="<?php echo $companycomplianceid;?>">
 									<div class="profile-img-wrap edit-img">			
 												<img class="inline-block" src="<?php echo base_url(); ?>upload/default/avtar.jpg" alt="">
 										<div class="fileupload btn">
@@ -205,7 +205,7 @@
 															
 														</label>
 														<label class="radio-inline">
-															<input type="radio" name="isactive" <?php if($isactive==0){echo "checked";}?>value="0">Deactive
+															<input type="radio" name="isactive" <?php if($isactive==0){echo "checked";}?>value="0">Inactive
 															
 														</label>
 														</div>
@@ -244,7 +244,7 @@
 													<td><?php echo $compdata->compliancename;?></td>
 													<td><?php echo $compdata->compliancepercentage;?></td>
 													<td class="text-center">
-														<input type="checkbox"   value="<?php echo $compdata->complianceid; ?>" 
+														<input type="checkbox" name="complianceid"   value="<?php echo $compdata->complianceid; ?>" 
 														 <?php if(in_array($comid,$compliance_idarr)) { echo "checked"; }?> >
 													</td>
 												</tr>
