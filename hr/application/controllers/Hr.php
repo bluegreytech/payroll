@@ -41,35 +41,34 @@ class Hr extends CI_Controller
 			$data['PinCode']=$this->input->post('PinCode');
 			$data['IsActive']=$this->input->post('IsActive');
 			$data["pre_profile_image"] = $this->input->post('ProfileImage');
-			
+			$data['option']='';
+			$data['keyword']='';	
 			}
 			else
 			{
+
 				if($this->input->post("hr_id")!="")
-			{	
-				//echo "dsfdf";die;
-				$this->hr_model->hr_update();
-				$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
-				redirect('hr/hrlist');
+				{	
+					echo "dsfdf if";die;
+					$this->hr_model->hr_update();
+					$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
+					redirect('hr/hrlist');
+					
+				}
+				else
+				{ 	echo "dsfdf else";die;
+					$this->hr_model->hr_insert();
+					$this->session->set_flashdata('success', 'Record has been Inserted Succesfully!');
+					redirect('hr/hrlist');
 				
-			}
-			else
-			{ 	//echo "dsfdf";die;
-				$this->hr_model->hr_insert();
-				$this->session->set_flashdata('success', 'Record has been Inserted Succesfully!');
-				redirect('hr/hrlist');
-			
-			}
+				}
 				
 			}
 		
-		$data['result']=$this->hr_model->hrlist();
+		 $data['result']=$this->hr_model->hrlist();
 		//echo "<pre>";print_r($data['result']);die;
 		$this->load->view('hr/hrlist',$data);
 	}
-
-
-	
 
 	function deletedata(){
 		if(!check_admin_authentication())
@@ -147,8 +146,6 @@ class Hr extends CI_Controller
 	
 	}
 
-
-
 	public function admin_master_profile_update()     
 	{      	
 				$data=array();
@@ -176,10 +173,30 @@ class Hr extends CI_Controller
 				$this->load->view('Adminmaster/admin_master_profile',$data);			
 
 	}
-
-
-	
-	
+	public	function searchhr(){
+		 if(!check_admin_authentication()){ 
+			redirect(base_url());
+		}   
+			$data=array();
+			$data['activeTab']="searchhr";	
+			
+		 if($this->input->post("search")!=''){
+		 	$data['option']=$this->input->post('option');
+		 	$data['keyword']=$this->input->post('keyword');	
+		 	$option=$data['option'];
+          	$keyword=$data['keyword'];
+			
+			$data['result'] = $this->hr_model->search($option,$keyword);
+		 }else{
+		 	$data['option']='';
+          	$data['keyword']='';
+          	$data['result']=$this->hr_model->hrlist();
+		 }
+		 	
+		$data['redirect_page']="hrlist";
+		//echo "<pre>";print_r($data['result']);die;
+		$this->load->view('hr/hrlist',$data);
+	}
 
 }
 

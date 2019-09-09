@@ -72,7 +72,7 @@ class Home extends CI_Controller {
            	$data['Gender']=$oneHr->Gender;
            	$data['PinCode']=$oneHr->PinCode;
            	$data['companyid']=$oneHr->companyid;
-          // echo //$data['companyname']=get_company_name($oneHr->companyid); die;
+            $data['companyname']=get_company_name($oneHr->companyid);
  
 			}
 		}else{
@@ -121,7 +121,7 @@ class Home extends CI_Controller {
 			{ 
 			
 				$chk_mail=$this->Login_model->forgot_email();
-				echo $chk_mail;die;
+				//echo $chk_mail;die;
 				if($chk_mail==0)
 				{
 					$error=EMAIL_NOT_FOUND;
@@ -313,7 +313,7 @@ class Home extends CI_Controller {
 			$data['companytypeid']=$oneCompany->companytypeid;
 		    $compliancedetail=get_one_record('tblcompanycompliances','companyid',$this->session->userdata('companyid'));
 		   
-				$complianceid = explode(',',$compliancedetail->complianceid );
+				$complianceid = explode(',',$compliancedetail->complianceid);
               $com_compliances= array();
 				foreach ($complianceid as $row){
 					
