@@ -177,7 +177,7 @@ class Login_model extends CI_Model
 								$email_message=str_replace('{base_url}',$base_url,$email_message);
 								$email_message=str_replace('{year}',$currentyear,$email_message);
 								$email_message=str_replace('{username}',$username,$email_message);
-								$email_message=str_replace('{EmailAddress}',$EmailAddress,$email_message);
+								//$email_message=str_replace('{EmailAddress}',$EmailAddress,$email_message);
 								$email_message=str_replace('{forgot_link}',$forgot_link,$email_message);
 								$str=$email_message; //die;
 

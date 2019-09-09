@@ -67,7 +67,7 @@
 												}
 												else
 												{
-													echo "Deactive";
+													echo "Inactive";
 												}
 												?>
 											</td>
@@ -125,7 +125,7 @@
 												<input type="radio" name="isactive" checked value="1">Active
 											</label>
 											<label class="radio-inline">
-												<input type="radio" name="isactive" value="0">Deactive
+												<input type="radio" name="isactive" value="0">Inactive
 											</label>
 											</div>
 										</div>
@@ -166,31 +166,10 @@
 									<div class="col-md-6">
 											<div class="form-group">
 											<label class="col-form-label">Isactive<span class="text-danger">*</span></label><br>
+									
 											<label class="radio-inline">
-												
-												<?php
-												if($isactive==1)
-												{
-													?>
-													<input type="radio" name="isactive" checked  value="1">Active
-													<input type="radio" name="isactive" value="0">Deactive
-													<?php
-												}
-												?>
-												
-											</label>
-											<label class="radio-inline">
-												
-												<?php
-												if($isactive==0)
-												{
-													?>
 													<input type="radio" name="isactive"  value="1">Active
-													<input type="radio" name="isactive" checked value="0">Deactive
-													<?php
-												}
-												?>
-												 
+													<input type="radio" name="isactive" checked value="0">Inactive 
 											</label>
 											</div>
 										</div>
@@ -375,7 +354,8 @@
 					$('#complianceid').val(response.complianceid);
 					$('#compliancename').val(response.compliancename);
 					$('#compliancepercentage').val(response.compliancepercentage);
-					$('#isactive').val(response.isactive);
+					//$('#isactive').val(response.isactive);
+					$("input[name=isactive][value=" + response.isactive + "]").attr('checked', 'checked');
 				}
 			});	
 		}

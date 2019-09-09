@@ -39,7 +39,7 @@ class Adminmaster_model extends CI_Model
 			);
 			//print_r($data);die;
 			$this->db->insert('tbladmin',$data);
-			return 1;
+			//return 1;
 			$insert_id = $this->db->insert_id();
 
 				$this->db->select('*');

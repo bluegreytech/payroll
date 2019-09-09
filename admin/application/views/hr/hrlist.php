@@ -245,12 +245,12 @@
 											</div>
 
 											<div class="form-group">
-														<label class="col-form-label">IsActive<span class="text-danger">*</span></label><br>
+														<label class="col-form-label">Isactive</label><br>
 														<label class="radio-inline" tabindex="10">
-															<input type="radio" name="IsActive" checked  value="1">Active
+															<input type="radio" name="IsActive" checked  value="Active">Active
 														</label>
 														<label class="radio-inline" tabindex="11">
-															<input type="radio" name="IsActive" value="0">Deactive
+															<input type="radio" name="IsActive" value="Inactive">Inactive
 														</label>
 											</div>
 				

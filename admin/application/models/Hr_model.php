@@ -46,14 +46,13 @@ class Hr_model extends CI_Model
 			{
 				$this->db->select('t1.*,t2.*,t3.*');
 				$this->db->from('tblhr as t1');
-				$this->db->join('tblhr as t2', 't1.UserId = t2.UserId', 'LEFT');
+				$this->db->join('tblhr as t2', 't1.hr_id = t2.hr_id', 'LEFT');
 				$this->db->join('tblcompany as t3', 't2.companyid = t3.companyid', 'LEFT');
-				$this->db->where('t1.UserId',$insert_id);
+				$this->db->where('t1.hr_id',$insert_id);
 				$smtp2 = $this->db->get();	
 				foreach($smtp2->result() as $rows) {
-					$UserId = $rows->UserId;
-					$FirstName = $rows->FirstName;
-					$LastName = $rows->LastName;
+					$hr_id = $rows->hr_id;
+					$FullName = $rows->FullName;
 					$EmailAddress = $rows->EmailAddress;
 					$Password = $rows->Password;
 					$companyid = $rows->companyid;
@@ -68,7 +67,7 @@ class Hr_model extends CI_Model
 					$email_subject=$email_temp->subject;        
 					$email_message=$email_temp->message;
 					
-					$username =$rows->FirstName.' '.$LastName;
+					$username =$rows->FullName;
 					$EmailAddress = $rows->EmailAddress;
 					$companyname =$rows->companyname;
 					$comemailaddress = $rows->comemailaddress;
@@ -84,7 +83,7 @@ class Hr_model extends CI_Model
 					$email_message=str_replace('{Password}',$code,$email_message);
 					$email_message=str_replace('{companyname}',$companyname,$email_message);
 					$email_message=str_replace('{comemailaddress}',$comemailaddress,$email_message);
-					$email_message=str_replace('{login_link}',$login_link,$email_message);
+					//$email_message=str_replace('{login_link}',$login_link,$email_message);
 					$str=$email_message; //die;
 
 					$config['protocol']='smtp';
@@ -113,38 +112,30 @@ class Hr_model extends CI_Model
 	}
 
 
-
-	
-
 	function hr_list()
 	{
+		$where = array('t1.IsActive' =>'Active', 't1.Is_deleted' =>'0');
 		$this->db->select('t1.*,t2.companyname');
 		$this->db->from('tblhr as t1');
 		$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
-		$this->db->where('t1.IsDelete!=',1);
+		// $this->db->where('t1.IsActive','Active');
+		// $this->db->or_where('t1.Is_deleted','0');
+		$this->db->where($where);
 		$r=$this->db->get();
 		$res = $r->result();
 		return $res;	
 	}
-
-
-
-	// function hr_list()
-	// {
-	// 	$this->db->select('*');
-	// 	$this->db->from('tblhr');
-	// 	$r=$this->db->get();
-	// 	$res = $r->result();
-	// 	return $res;	
-	// }
-
+	
 	function search($option,$keyword)
 	{
+			$where = array('t1.IsActive' =>'Active', 't1.Is_deleted' =>'0');
 			$keyword = str_replace('-', ' ', $keyword);
 			$this->db->select('t1.*,t2.companyname');
 			$this->db->from('tblhr as t1');
 			$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
-			$this->db->or_where('t1.IsDelete!=',1);
+			// $this->db->where('t1.IsActive','Active');
+			// $this->db->or_where('t1.Is_deleted','0');
+			$this->db->where($where);
 			if($option == 'FullName')
 			{
 			// echo $keyword; 
@@ -152,15 +143,15 @@ class Hr_model extends CI_Model
 			}
 			else if($option == 'companyname')
 			{
-					$this->db->like('companyname',$keyword);
+				$this->db->like('companyname',$keyword);
 			}
 			else if($option == 'EmailAddress')
 			{
-					$this->db->like('EmailAddress',$keyword);
+				$this->db->like('EmailAddress',$keyword);
 			}
 			else if($option == 'Contact')
 			{
-				$this->db->where('Contact',$keyword);
+				$this->db->like('Contact',$keyword);
 			} 
 			// 	$this->db->order_by('UserId','desc');
 			    $query = $this->db->get();
@@ -173,7 +164,7 @@ class Hr_model extends CI_Model
 	
 		
 		function list_company(){
-			$where = array('isactive' =>1, 'isdelete' =>0);
+			$where = array('isactive' =>'Active', 'isdelete' =>'0');
 			$this->db->select('*');
 			$this->db->from('tblcompany');
 			$this->db->where($where);

@@ -54,7 +54,7 @@
 							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
 									<div class="form-group form-focus">
 										<input type="text" name="keyword2" class="form-control floating">
-										<label class="focus-label">Admin Search</label>
+										<label class="focus-label">Search</label>
 									</div>
 							</div>
 							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
@@ -76,8 +76,14 @@
 											<th>Email Address</th>
 											<th>Contact Number</th>
 											<th>Type Role</th>
+											<?php 
+											if($this->session->userdata('RoleId')==1)
+											{
+											?>
 											<th class="text-right">Action</th>
-											
+											<?php 
+											}
+											?>
 										</tr>
 									</thead>
 									<tbody>
@@ -126,6 +132,10 @@
 											}
 											?></td>
 											
+											<?php 
+											if($this->session->userdata('RoleId')==1)
+											{
+											?>
 											<td class="text-right">
 												<div class="dropdown dropdown-action">
 													<a href="" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
@@ -137,6 +147,9 @@
 													</div>
 												</div>
 											</td>
+											<?php 
+											}
+											?>
 											
 										</tr>
 										<?php
@@ -211,7 +224,7 @@
 													<input type="radio" name="isactive" checked value="1">Active
 												</label>
 												<label class="radio-inline" tabindex="13">
-													<input type="radio" name="isactive" value="0">Deactive
+													<input type="radio" name="isactive" value="0">Inactive
 												</label>
 											</div>
 											

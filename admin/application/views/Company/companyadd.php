@@ -79,7 +79,7 @@
 										<div class="col-md-6">
 											<div class="form-group">
 													<label>Type of Company</label>
-													<select class="select" name="companytypeid"> 
+													<select class="form-control" name="companytypeid"> 
 														<option desabled value="">Please select type of company</option>
 														<?php
 														 if($companytypeData){
@@ -172,46 +172,19 @@
 												<input class="form-control" minlength="06" maxlength="06" type="text" name="pincode" id="pincode" placeholder="Enter pincode" value="<?php echo $pincode; ?>">
 											</div>
 										</div>
-										<?php
-										if($companyid=='')
-										{ 
-											?>
+										
 												<div class="col-md-6">
 													<div class="form-group">
 													<label class="col-form-label">Isactive<span class="text-danger">*</span></label><br>
 													<label class="radio-inline">
-														<input type="radio" name="isactive"  checked value="1">Active
+														<input type="radio" name="isactive"  checked value="Active">Active
 													</label>
 													<label class="radio-inline">
-														<input type="radio" name="isactive" value="0">Deactive
+														<input type="radio" name="isactive" value="Inactive">Inactive
 													</label>
 													</div>
 												</div>
-											<?php
-										}
-										else
-										{
-											
-												?>
-													<div class="col-md-6">
-														<div class="form-group">
-														<label class="col-form-label">Isactive<span class="text-danger">*</span></label><br>
-														<label class="radio-inline">
-															<input type="radio" name="isactive" <?php if($isactive==1){echo "checked";}?> 
-																 value="1">Active
-															
-														</label>
-														<label class="radio-inline">
-															<input type="radio" name="isactive" <?php if($isactive==0){echo "checked";}?>value="0">Deactive
-															
-														</label>
-														</div>
-													</div>
-												<?php
-											}
 										
-										
-										?>
 									
 									</div>
 										
@@ -219,39 +192,44 @@
 										<table class="table table-striped custom-table">
 											<thead>
 												<tr>
-													<th>Type of Compliance</th>
+													<th>Type of Compliance </th>
 													<th >Percentage of Compliance</th>
 													<th class="text-center">Add on Compliance</th>
 												</tr>
 											</thead>
 											<tbody>
 											<?php      
-											    
+												$com_compliances=array();
+												 $compliance_id = explode(',',$complianceid);
+												 //echo "<pre>";print_r($compliance_id);
+												 foreach ($compliance_id as $row){
+													 $companycompliances=$this->Company_model->getcompliance($row);
+													 $com_compliances[]= $companycompliances;
+												
+												 }
+											
+												 
 												foreach($complianceData as $compdata)
 												 { 	
-								
+												  foreach($com_compliances as $row){
+                         
+													//echo "<pre>";print_r($row['compliance_id']);
 											?>
 												<tr>
 													<td><?php echo $compdata->compliancename;?></td>
 													<td><?php echo $compdata->compliancepercentage;?></td>
 													<td class="text-center">
-											<?php
-											                    
-											if($compdata->complianceid!='')
-											{
-												$complianceid=explode(",",$comyyyy); 
-												?>
-													<input type="checkbox" name="complianceid[]" value="<?php echo $compdata->complianceid; ?>">
-												<?php
-											}
+													<input type="checkbox" name="complianceid[]" value="<?php echo $compdata->complianceid; ?><?php if($compdata->complianceid==$row['compliance_id']){ echo "checked";}?>">
 											
-											?>		
 						
 													</td>
 													
 												</tr>
 											<?php
+													 }
+													
 												}
+												die;
 											?>
 											</tbody>
 										</table>

@@ -93,14 +93,14 @@ class Hr extends CI_Controller
 		}
 		$hr_id=$this->input->post('hr_id');
 		$data=array(
-			'IsDelete'=>1,
+			'Is_deleted'=>'1',
 			'IsActive'=>'Inactive'
 				);
 		$this->db->where("hr_id",$hr_id);
 		$result=$this->db->update('tblhr',$data);
 		if($result)
 		{
-			$this->session->set_flashdata('success', 'Hr was delete successfully!');
+			$this->session->set_flashdata('success', 'Rocord has been deleted!');
 			redirect('hr');
 		}
 		else
