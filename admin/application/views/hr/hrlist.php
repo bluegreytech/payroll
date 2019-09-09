@@ -186,10 +186,12 @@
 
 											
 											<div class="form-group">
-												<label>Date of Birth</label>
-												<input class="form-control" tabindex="5" type="date" name="DateofBirth" Placeholder="Enter your date of birth">
-												<!-- <input class="form-control" id="datepicker1" type="text" name="DateofBirth" Placeholder="Enter your date of birth" readonly> -->
+												<label>Birth Date</label>
+												<div class="cal-icon">
+													<input class="form-control datetimepicker" type="text" name="DateofBirth" id="DateofBirth2">
+												</div>
 											</div>
+
 											<div class="form-group">
 												<label>Address</label>
 												<input class="form-control" tabindex="7" type="text" name="Address" Placeholder="Enter your address" minlength="5" maxlength="500">
@@ -297,9 +299,16 @@
 												<label>Contact Number</label>
 												<input class="form-control" type="text" name="Contact" tabindex="3" Placeholder="Enter your contact number" minlength="10" maxlength="10" id="PhoneNumber">
 											</div>
-											<div class="form-group">
+											<!-- <div class="form-group">
 												<label>Date of Birth</label>
 												<input class="form-control" type="date" name="DateofBirth" Placeholder="Enter your date of birth" id="DateofBirth" tabindex="5">
+											</div> -->
+
+											<div class="form-group">
+												<label>Birth Date</label>
+												<div class="cal-icon">
+													<input class="form-control datetimepicker" type="text" name="DateofBirth" id="DateofBirth">
+												</div>
 											</div>
 											<div class="form-group">
 												<label>Address</label>
@@ -473,10 +482,26 @@
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     </body>
 </html>
+
+<script type="text/javascript">
+				$('#DateofBirth2').datetimepicker({
+					 format: 'YYYY/MM/DD',
+					 maxDate: moment(),
+					 ignoreReadonly: true,
+				});
+
+				$('#DateofBirth').datetimepicker({
+				  	// format: 'DD/MM/YYYY',
+					 format: 'YYYY/MM/DD',
+					 maxDate: moment(),
+					 ignoreReadonly: true,
+				}).val('#DateofBirth');
+
+</script>
 <script>
 
-			$('#datepicker1').datepicker();
-				 dateFormat: 'dd/mm/yy'  
+			// $('#datepicker1').datepicker();
+			// 	 dateFormat: 'dd/mm/yy'  
 
 $(document).ready(function() {
     $('#example').DataTable( {

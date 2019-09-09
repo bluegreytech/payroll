@@ -115,7 +115,7 @@
 									
 									<div class="form-group">
 										<label>Compliance Percentage <span class="text-danger">*</span></label>
-										<input class="form-control" type="text" name="compliancepercentage" placeholder="Enter a compliance percentage : 12" minlength="2" maxlength="20" id="compliancepercentages">
+										<input class="form-control" type="text" name="compliancepercentage" placeholder="Enter a compliance percentage : 12" minlength="2" maxlength="6" id="compliancepercentages">
 									</div>
 
 									<div class="col-md-6">
@@ -272,7 +272,7 @@
 
 		$("#compliancepercentages").on("input", function(evt) {
 			var self = $(this);
-			self.val(self.val().replace(/[^\d].+/, ""));
+			self.val(self.val().replace(/[^\d]+/, "."));
 			if ((evt.which < 48 || evt.which > 57)) 
 			{
 				evt.preventDefault();
@@ -281,7 +281,7 @@
 
 			$("#compliancepercentage").on("input", function(evt) {
 			var self = $(this);
-			self.val(self.val().replace(/[^\d].+/, ""));
+			self.val(self.val().replace(/[^\d]+/, "."));
 			if ((evt.which < 48 || evt.which > 57)) 
 			{
 				evt.preventDefault();
