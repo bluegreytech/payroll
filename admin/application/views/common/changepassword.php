@@ -5,7 +5,7 @@
 			<!-- Page Wrapper -->
             <div class="page-wrapper">
 			<?php 
-					$UserId=$this->session->userdata('UserId');
+					$AdminId=$this->session->userdata('AdminId');
 					?>
 				<div class="recover-pass content container-fluid">
 					<div class="row">
@@ -22,10 +22,10 @@
 							<?php } ?>
 							<h4 class="page-title">Change Password</h4>
 							<form method="post" id="form_valid"
-								action="<?php echo base_url();?>Adminmaster/change_password/<?php echo $AdminId;?>">
+								action="<?php echo base_url();?>Adminmaster/change_password/<?php $this->session->userdata('AdminId');?>">
 								<div class="form-group">
 									<label>Old password</label>
-									<input type="hidden" name="AdminId" value="<?php echo $AdminId ?>">	
+									<input type="hidden" name="AdminId" value="<?php echo $AdminId=$this->session->userdata('AdminId'); ?>">	
 									<input type="password" class="form-control" name="Password"  minlength="8" maxlength="15" placeholder="Enter your old password">
 								</div>
 								<div class="form-group">

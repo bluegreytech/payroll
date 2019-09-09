@@ -95,7 +95,8 @@ class Login extends CI_Controller {
 							}
 							elseif($up==2)
 							{
-								$this->session->set_flashdata('error','Your link was expired'); 
+								$this->session->set_flashdata('error','Your link has been expired!'); 
+								redirect('Login/forgotpassword');
 							}
 					}
 					else
@@ -141,7 +142,7 @@ class Login extends CI_Controller {
 				}
 				else if($chk_mail==2)
 				{
-					$this->session->set_flashdata('error','Your email address not activated!');	 
+					$this->session->set_flashdata('error','Your are not activated please contact to Admin!');	 
 				}
 				else if($chk_mail==3)
 				{
@@ -151,11 +152,7 @@ class Login extends CI_Controller {
 				{
 					$this->session->set_flashdata('error','Email function is not working!');  
 				}
-				// else
-				// {				
-				// 	$this->session->set_flashdata('success','Please check your email for reset the password!');
-				// 	redirect('Login');
-				// }
+			
 		//	}
 			
 			}

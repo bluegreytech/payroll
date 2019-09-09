@@ -47,7 +47,7 @@
 											<option value="companyname">Company Name</option>
 											<option value="comemailaddress">Email Address</option>
 											<option value="comcontactnumber">Contact Number</option>
-											
+											<option value="emailverifystatus">Verification Status</option>
 										</select>
 										<!-- <label class="focus-label">Role</label> -->
 									</div>
@@ -55,7 +55,7 @@
 							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
 									<div class="form-group form-focus">
 										<input type="text" name="keyword2" class="form-control floating">
-										<label class="focus-label">Company Search</label>
+										<label class="focus-label">Search</label>
 									</div>
 							</div>
 							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
@@ -77,7 +77,7 @@
 											<th>Company Name</th>
 											<th>Contact Number</th>
 											<th>Company Type</th>
-											<th>Rmail Address </th>
+											<th>Email Address </th>
 											<th>Verification Status </th>
 											<th class="text-right">Action</th>
 											
@@ -98,7 +98,7 @@
 										<td><?php echo $comp->comemailaddress ;?></td>
 										<td><?php if($comp->emailverifystatus=='Verify')
 												{
-													echo "Verified";
+													echo "Verify";
 												}
 												else
 												{

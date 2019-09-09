@@ -144,17 +144,16 @@
 						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
 							<span class="user-img">
 							
-							  <?php 
-							   if(($ProfileImage!='' && file_exists(base_path().'/upload/admin/'.$ProfileImage))){ ?>
-							
-							
+							<?php 
+							if(($ProfileImage!=''))
+							{ ?>
 								<img src="<?php echo base_url(); ?>upload/admin/<?php echo $this->session->userdata('ProfileImage'); ?>" alt="">
 							<?php
 							}
 							else
 							{
 							?>
-								<img src="<?php echo base_url(); ?>uploads/default/avtar.jpg" alt="">
+								<img src="<?php echo base_url(); ?>upload/default/avtar.jpg" alt="">
 							<?php
 							}
 							?>
@@ -163,8 +162,8 @@
 							<span><?php echo $this->session->userdata('FirstName');?> <?php echo $this->session->userdata('LastName');?></span>
 						</a>
 						<div class="dropdown-menu">
-							<a class="dropdown-item" href="<?php echo base_url();?>Adminmaster/admin_master_profile/<?php echo $AdminId ;?>">My Profile</a>
-							<a class="dropdown-item" href="<?php echo base_url();?>Adminmaster/change_password/<?php echo $AdminId ;?>">Change Password</a>
+							<a class="dropdown-item" href="<?php echo base_url();?>Adminmaster/admin_master_profile">My Profile</a>
+							<a class="dropdown-item" href="<?php echo base_url();?>Adminmaster/change_password">Change Password</a>
 							<a class="dropdown-item" href="<?php echo base_url();?>Login/logout">Logout</a>
 						</div>
 					</li>
@@ -176,8 +175,8 @@
 					<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i>
 					</a>
 					<div class="dropdown-menu dropdown-menu-right">
-						<a class="dropdown-item" href="<?php echo base_url();?>Adminmaster/admin_master_profile/<?php echo $AdminId ;?>">My Profile</a>
-						<a class="dropdown-item" href="<?php echo base_url();?>Adminmaster/change_password/<?php echo $AdminId ;?>">Change Password</a>
+						<a class="dropdown-item" href="<?php echo base_url();?>Adminmaster/admin_master_profile">My Profile</a>
+						<a class="dropdown-item" href="<?php echo base_url();?>Adminmaster/change_password">Change Password</a>
 						<a class="dropdown-item" href="<?php echo base_url();?>Login/logout">Logout</a>
 					</div>
 				</div>

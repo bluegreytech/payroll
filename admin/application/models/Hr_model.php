@@ -173,9 +173,10 @@ class Hr_model extends CI_Model
 	
 		
 		function list_company(){
+			$where = array('isactive' =>1, 'isdelete' =>0);
 			$this->db->select('*');
 			$this->db->from('tblcompany');
-			$this->db->where('isactive',1);
+			$this->db->where($where);
 			$r = $this->db->get();
 			return $query=$r->result();
 	}

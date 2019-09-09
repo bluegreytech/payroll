@@ -55,7 +55,7 @@
 							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
 									<div class="form-group form-focus">
 										<input type="text" name="keyword2" class="form-control floating">
-										<label class="focus-label">Hr Search</label>
+										<label class="focus-label">Search</label>
 									</div>
 							</div>
 							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
@@ -229,7 +229,7 @@
 											<div class="form-group">
 												<label>Gender</label>
 												<select class="form-control" name="Gender" tabindex="4">
-													<option value="">Please select gender</option>
+													<option value="">Select gender</option>
 													<option value="Male">Male</option>
 													<option value="Female">Female</option>
 												</select>
@@ -311,7 +311,7 @@
 											
 											<div class="form-group">
 													<label>Company</label>
-													<select class="form-control" name="companyid" tabindex="9"> 
+													<select class="form-control" id="companyid" name="companyid" tabindex="9"> 
 														<option desabled value="">Please select company</option>
 														<?php
 														 if($companyData){
@@ -341,8 +341,8 @@
 											
 											<div class="form-group">
 												<label>Gender</label>
-												<select class="form-control" name="Gender" tabindex="4">
-													<option value="">Please select gender</option>
+												<select class="form-control" id="Gender" name="Gender" tabindex="4">
+													<option value="">Select gender</option>
 													<option value="Male">Male</option>
 													<option value="Female">Female</option>
 												</select>
@@ -729,23 +729,27 @@ function edithrs(hr_id)
 		 data:{hr_id:hr_id},
          success:function(response){
 			var response = JSON.parse(response);
-            //    console.log(response.hr_id);
-			//    console.log(response.DateofBirth);
-            $('#hr_id').val(response.hr_id);
+                console.log(response.hr_id);
+				console.log(response.Gender);
+			$('#hr_id').val(response.hr_id);
 			$('#companyid').val(response.companyid);
 			$('#FullName').val(response.FullName);
 			$('#EmailAddress').val(response.EmailAddress);
 			$('#DateofBirth').val(response.DateofBirth);
 			$('#PhoneNumber').val(response.Contact);
 			$('#Gender').val(response.Gender);
+			$("option[id=Gender][value=" + response.Gender=='Male' + "]").attr('selected', 'selected');
+			$("option[id=Gender][value=" + response.Gender=='Female' + "]").attr('selected', 'selected');
 			$('#Address').val(response.Address);
 			$('#PinCode').val(response.PinCode);
 			$('#City').val(response.City);
 			$("input[name=IsActive][value=" + response.IsActive + "]").attr('checked', 'checked');
-			//$("option[name=companyid][value=" + response.companyid + "]").attr('selected', 'selected');
-			//$("option[name=companyname][value=" + response.companyname + "]").attr('selected', 'selected');
+
+			$('#companyname').val(response.companyname);
+			$("option[id=companyid][value=" + response.companyid=='#companyid' + "]").attr('selected', 'selected');
+			//$("option[id=companyname][value=" + response.companyname + "]").attr('selected', 'selected');
 			
-			//$('#companyname').val(response.companyname);
+			
          }
       });	
 }

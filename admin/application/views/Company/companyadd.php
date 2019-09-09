@@ -13,7 +13,7 @@
 						<div class="col">
 							<h4 class="page-title">
 							<?php 
-								if($companyid)
+								if($companyid!='')
 								{
 									?>
 									Edit Company
@@ -66,8 +66,8 @@
 
 							<div class="modal-body">
 								<form method="post" id="form_valid" action="<?php echo base_url();?>Company/companyadd">
-								<input type="hidden" class="form-control" name="companyid" value="<?php echo $companyid;?>">
-								<!-- <input type="hidden" class="form-control" name="companycomplianceid" value="<?php// echo $companycomplianceid;?>"> -->
+								<input type="hidden" class="form-control" name="companyid"
+								 value="<?php echo $companyid;?>">
 									<div class="profile-img-wrap edit-img">			
 												<img class="inline-block" src="<?php echo base_url(); ?>upload/default/avtar.jpg" alt="">
 										<div class="fileupload btn">
@@ -119,22 +119,19 @@
 												<input class="form-control floating" minlength="05" maxlength="20" type="text" name="gstnumber" id="gstnumber" placeholder="Enter gst number" value="<?php echo $gstnumber; ?>">
 											</div>
 										</div>
+
+
 										<div class="col-md-6">
 											<div class="form-group">
-												<label class="col-form-label">Digital Signature Expire Date<span class="text-danger">*</span></label>
-												<!-- <input class="form-control" minlength="10" maxlength="10" type="date" name="digitalsignaturedate" id="digitalsignaturedate" placeholder="Enter digital signature date"  
-												value="<?php //echo $digitalsignaturedate; ?>"> -->
-
-												<input class="form-control" id="datepicker1" name="digitalsignaturedate"  type="text" 
-														value="<?php
-														 if($companyid!='')
-														 {
-															echo date('Y-m-d',strtotime($digitalsignaturedate));
-														 }
-														
-														 ?>" readonly>
+														<label>Company Licence Expired</label>
+														<div class="cal-icon">
+															<input class="form-control datetimepicker" type="text" name="digitalsignaturedate" id="digitalsignaturedate" 
+															value="<?php  if($digitalsignaturedate!='0000-00-00'){ echo date('Y/m/d', strtotime($digitalsignaturedate));} ?>">
+														</div>
 											</div>
 										</div>
+
+
 										<div class="col-md-6">
 											<div class="form-group">
 												<label class="col-form-label">Address<span class="text-danger">*</span></label>
@@ -228,17 +225,30 @@
 												</tr>
 											</thead>
 											<tbody>
-											<?php                           
+											<?php      
+											    
 												foreach($complianceData as $compdata)
-												 { 		
+												 { 	
+								
 											?>
 												<tr>
 													<td><?php echo $compdata->compliancename;?></td>
 													<td><?php echo $compdata->compliancepercentage;?></td>
 													<td class="text-center">
-														<input type="checkbox"  value="<?php echo $compdata->complianceid; ?>" 
-														name="complianceid[]">
+											<?php
+											                    
+											if($compdata->complianceid!='')
+											{
+												$complianceid=explode(",",$comyyyy); 
+												?>
+													<input type="checkbox" name="complianceid[]" value="<?php echo $compdata->complianceid; ?>">
+												<?php
+											}
+											
+											?>		
+						
 													</td>
+													
 												</tr>
 											<?php
 												}
@@ -295,6 +305,10 @@
 		
 		<!-- Select2 JS -->
 		<script src="<?php echo base_url(); ?>default/js/select2.min.js"></script>
+
+		<!-- Datetimepicker JS -->
+		<script src="<?php echo base_url(); ?>default/js/moment.min.js"></script>
+		<script src="<?php echo base_url(); ?>default/js/bootstrap-datetimepicker.min.js"></script>
 		
 		<!-- Custom JS -->
 		<script src="<?php echo base_url(); ?>default/js/app.js"></script>
@@ -302,11 +316,14 @@
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     </body>
 </html>
+<script type="text/javascript">
+				$('#digitalsignaturedate').datetimepicker({
+					 //format: 'Y/m/d',
+					 format: 'YYYY/MM/DD',
+					 ignoreReadonly: true,
+				});
 
-		<script type="text/javascript">
- 				$('#datepicker1').datepicker();
-				 dateFormat: 'dd/mm/yy'   		
-		</script>
+</script>
 
 <script>
 			

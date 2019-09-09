@@ -156,6 +156,7 @@ class Company extends CI_Controller
 
 	function editcompany($companyid)
 	{
+		//echo $companyid;die;
 		if(!check_admin_authentication()){ 
 			redirect(base_url('Login'));
 		}
@@ -174,17 +175,17 @@ class Company extends CI_Controller
 		$data['companyaddress']=$result['companyaddress'];
 		$data['stateid']=$result['stateid'];
 		$data['statename']=$result['statename'];
-
 		$data['companycity']=$result['companycity'];
 		$data['pincode']=$result['pincode'];
 		$data['isactive']=$result['isactive'];
 		$data['companycomplianceid']=$result['companycomplianceid'];
-		$data['complianceid']=$result['complianceid'];
+		//$data['complianceid']=$result['complianceid'];
+		$data['comyyyy']=$result['complianceid'];
 
 		$data['stateData']=$this->Company_model->list_state();
 		$data['complianceData']=$this->Company_model->list_compliance();
-		//echo "<pre>";print_r($data['complianceData']);die;
 		$data['companytypeData']=$this->Company_model->list_companytype();
+			//echo "<pre>";print_r($data['complianceData']);die;
 		$this->load->view('Company/companyadd',$data);	
 	}
 
