@@ -145,35 +145,34 @@ class Hr_model extends CI_Model
 	function search($option,$keyword)
 	{
 			$keyword = str_replace('-', ' ', $keyword);
-			// $this->db->select('UserId,RoleId,CONCAT(FirstName ,LastName) AS FirstName,EmailAddress,DateofBirth,PhoneNumber,ProfileImage,Gender,Address,PinCode,CountryId,StateId,City,IsActive');
-			// $this->db->from('tbluser');
-			// $this->db->where('RoleId',3);
-			$this->db->select('t1.UserId,t1.RoleId,t1.FirstName,t1.LastName,t1.EmailAddress,t1.DateofBirth,t1.PhoneNumber,t1.Gender,t1.ProfileImage,t1.Address,t1.PinCode,t1.CountryId,t1.StateId,t1.City,t1.IsActive,t2.*,t3.*');
-			$this->db->from('tbluser as t1');
-			$this->db->join('tblhr as t2', 't1.UserId = t2.UserId', 'LEFT');
-			$this->db->join('tblcompany as t3', 't2.companyid = t3.companyid', 'LEFT');
-			$this->db->where('RoleId',3);	
-			if($option == 'FirstName')
+			
+			$this->db->select('*');
+			$this->db->from('tblhr');	
+			$this->db->where('Is_deleted','0');
+			$this->db->where('hr_type!=','1');
+			
+			if($option == 'FullName')
 			{
-			// echo $keyword; 
-				$this->db->like('FirstName',$keyword);
+				// echo $keyword; 
+				$this->db->like('FullName',$keyword);
 			}
-			else if($option == 'companyname')
-			{
-					$this->db->like('companynamelist_company',$keyword);
-			}
+			
 			else if($option == 'EmailAddress')
 			{
 					$this->db->like('EmailAddress',$keyword);
 			}
 			else if($option == 'PhoneNumber')
 			{
-				$this->db->where('PhoneNumber',$keyword);
-			} 
+				$this->db->like('PhoneNumber',$keyword);
+			}
+			else if($option == 'IsActive')
+			{
+				$this->db->where('IsActive',$keyword);
+			}  
 			// 	$this->db->order_by('UserId','desc');
 			    $query = $this->db->get();
 			 if($query->num_rows() > 0)
-			 {
+			 {  //echo $this->db->last_query();die;
 				return $query->result();
 			 }        
 		}

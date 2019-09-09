@@ -16,8 +16,8 @@ class Dashboard extends CI_Controller {
 		
 		$data['empData']=$this->Dashboard_model->list_employee();
 		$data['adminData']=$this->Dashboard_model->list_admin();
-		$data['hrData']=$this->Dashboard_model->list_hr();
-		$data['companyData']=$this->Dashboard_model->list_company();
+		//$data['hrData']=$this->Dashboard_model->list_hr();
+		//$data['companyData']=$this->Dashboard_model->list_company();
 		//echo "<pre>";print_r($data['companyData']);die;
 		$this->load->view('dashboard/dashboard',$data);		
     }

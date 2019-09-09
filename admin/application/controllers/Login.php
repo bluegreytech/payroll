@@ -40,10 +40,6 @@ class Login extends CI_Controller {
 									$this->session->set_flashdata('success','User Login successfully!');
 									redirect('Dashboard');
 								
-								
-								
-									
-								
 							}
 							else
 							{

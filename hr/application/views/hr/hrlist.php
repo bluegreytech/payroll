@@ -37,29 +37,33 @@
 		<!-- /Page Title -->
 
 		<!-- Search Filter -->
-		<form method="post" action="<?php echo base_url();?>Hr">
+		<form method="post" action="<?php echo base_url();?>hr/searchhr" id="frm_search">
 		<div class="row filter-row">
 
-		<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+		<div class="col-md-3">  
 		<div class="form-group form-focus select-focus">
-		<select class="select floating" name="option"> 
-		<option value=""> -- Select -- </option>
-		<option value="FirstName">Hr Name</option>
-		<option value="companyname">Company Name</option>
-		<option value="EmailAddress">Email Address</option>
-		<option value="PhoneNumber">Contact Number</option>
+		<select class="select floating" name="option" > 
+		<option value="" disabled="">Please Select</option>
+		<option value="FullName" <?php if($option=='FullName'){echo 'selected';} ?> >Hr Name</option>
+		<option value="EmailAddress" <?php if($option=='EmailAddress'){echo 'selected';} ?>>Email Address</option>
+		<option value="PhoneNumber" <?php if($option=='PhoneNumber'){echo 'selected';} ?>>Contact Number</option>
+		<option value="IsActive" <?php if($option=='IsActive'){echo 'selected';} ?>>Status</option>
 		</select>
 		<!-- <label class="focus-label">Role</label> -->
 		</div>
 		</div>
-		<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+		<div class="col-md-3">  
 		<div class="form-group form-focus">
-		<input type="text" name="keyword2" class="form-control floating">
+		<input type="text" name="keyword" class="form-control floating" value="<?php echo $keyword;?>">
 		<label class="focus-label">Hr Search</label>
 		</div>
 		</div>
-		<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
-		<input type="submit" value="Search" class="btn btn-success btn-block">
+		<div class="col-md-3">  
+		<input type="submit" value="Search" name="search" class="btn btn-success btn-block">
+		</div> 
+		<div class="col-md-3"> 
+		<a href="<?php echo base_url()?>/hr/<?php echo $redirect_page;?>" class="btn btn-info"><i class="fa fa-refresh"></i></a> 
+	
 		</div>     
 		</div> 
 		</form>
@@ -489,6 +493,31 @@ $(document).ready(function()
 			
 				
 		});
+		$("#frm_search").validate(
+		{
+				rules: {
+
+					FullName: {
+						required: true,
+							},
+					
+					EmailAddress: {
+						required: true,
+							},		
+					DateofBirth: {
+						required: true,
+							},
+					IsActive:{
+						required: true,
+					}
+				
+				},
+
+			
+				
+		});
+
+		
 
 
 		

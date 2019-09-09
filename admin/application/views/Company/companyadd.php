@@ -13,7 +13,7 @@
 						<div class="col">
 							<h4 class="page-title">
 							<?php 
-								if($companyid!='')
+								if($companyid)
 								{
 									?>
 									Edit Company
@@ -66,8 +66,8 @@
 
 							<div class="modal-body">
 								<form method="post" id="form_valid" action="<?php echo base_url();?>Company/companyadd">
-								<input type="hidden" class="form-control" name="companyid"
-								 value="<?php echo $companyid;?>">
+								<input type="hidden" class="form-control" name="companyid" value="<?php echo $companyid;?>">
+								<!-- <input type="hidden" class="form-control" name="companycomplianceid" value="<?php// echo $companycomplianceid;?>"> -->
 									<div class="profile-img-wrap edit-img">			
 												<img class="inline-block" src="<?php echo base_url(); ?>upload/default/avtar.jpg" alt="">
 										<div class="fileupload btn">
@@ -79,7 +79,7 @@
 										<div class="col-md-6">
 											<div class="form-group">
 													<label>Type of Company</label>
-													<select class="form-control" name="companytypeid"> 
+													<select class="select" name="companytypeid"> 
 														<option desabled value="">Please select type of company</option>
 														<?php
 														 if($companytypeData){
@@ -119,19 +119,22 @@
 												<input class="form-control floating" minlength="05" maxlength="20" type="text" name="gstnumber" id="gstnumber" placeholder="Enter gst number" value="<?php echo $gstnumber; ?>">
 											</div>
 										</div>
-
-
 										<div class="col-md-6">
 											<div class="form-group">
-														<label>Company Licence Expired</label>
-														<div class="cal-icon">
-															<input class="form-control datetimepicker" type="text" name="digitalsignaturedate" id="digitalsignaturedate" 
-															value="<?php  if($digitalsignaturedate!='0000-00-00'){ echo date('Y/m/d', strtotime($digitalsignaturedate));} ?>">
-														</div>
+												<label class="col-form-label">Digital Signature Expire Date<span class="text-danger">*</span></label>
+												<!-- <input class="form-control" minlength="10" maxlength="10" type="date" name="digitalsignaturedate" id="digitalsignaturedate" placeholder="Enter digital signature date"  
+												value="<?php //echo $digitalsignaturedate; ?>"> -->
+
+												<input class="form-control" id="datepicker1" name="digitalsignaturedate"  type="text" 
+														value="<?php
+														 if($companyid!='')
+														 {
+															echo date('Y-m-d',strtotime($digitalsignaturedate));
+														 }
+														
+														 ?>" readonly>
 											</div>
 										</div>
-
-
 										<div class="col-md-6">
 											<div class="form-group">
 												<label class="col-form-label">Address<span class="text-danger">*</span></label>
@@ -172,19 +175,46 @@
 												<input class="form-control" minlength="06" maxlength="06" type="text" name="pincode" id="pincode" placeholder="Enter pincode" value="<?php echo $pincode; ?>">
 											</div>
 										</div>
-										
+										<?php
+										if($companyid=='')
+										{ 
+											?>
 												<div class="col-md-6">
 													<div class="form-group">
 													<label class="col-form-label">Isactive<span class="text-danger">*</span></label><br>
 													<label class="radio-inline">
-														<input type="radio" name="isactive"  checked value="Active">Active
+														<input type="radio" name="isactive"  checked value="1">Active
 													</label>
 													<label class="radio-inline">
-														<input type="radio" name="isactive" value="Inactive">Inactive
+														<input type="radio" name="isactive" value="0">Deactive
 													</label>
 													</div>
 												</div>
+											<?php
+										}
+										else
+										{
+											
+												?>
+													<div class="col-md-6">
+														<div class="form-group">
+														<label class="col-form-label">Isactive<span class="text-danger">*</span></label><br>
+														<label class="radio-inline">
+															<input type="radio" name="isactive" <?php if($isactive==1){echo "checked";}?> 
+																 value="1">Active
+															
+														</label>
+														<label class="radio-inline">
+															<input type="radio" name="isactive" <?php if($isactive==0){echo "checked";}?>value="0">Deactive
+															
+														</label>
+														</div>
+													</div>
+												<?php
+											}
 										
+										
+										?>
 									
 									</div>
 										
@@ -192,44 +222,34 @@
 										<table class="table table-striped custom-table">
 											<thead>
 												<tr>
-													<th>Type of Compliance </th>
+													<th>Type of Compliance</th>
 													<th >Percentage of Compliance</th>
 													<th class="text-center">Add on Compliance</th>
 												</tr>
 											</thead>
 											<tbody>
-											<?php      
-												$com_compliances=array();
-												 $compliance_id = explode(',',$complianceid);
-												 //echo "<pre>";print_r($compliance_id);
-												 foreach ($compliance_id as $row){
-													 $companycompliances=$this->Company_model->getcompliance($row);
-													 $com_compliances[]= $companycompliances;
+											<?php  
+											  	 $comid=$complianceid;
+											 
+												$compliance_idarr = explode(",",$complianceid);
 												
-												 }
-											
-												 
 												foreach($complianceData as $compdata)
-												 { 	
-												  foreach($com_compliances as $row){
-                         
-													//echo "<pre>";print_r($row['compliance_id']);
+												 {  
+
+												 	$comid=$compdata->complianceid;
+												 		$checkedStatus = "";
+													
 											?>
 												<tr>
 													<td><?php echo $compdata->compliancename;?></td>
 													<td><?php echo $compdata->compliancepercentage;?></td>
 													<td class="text-center">
-													<input type="checkbox" name="complianceid[]" value="<?php echo $compdata->complianceid; ?><?php if($compdata->complianceid==$row['compliance_id']){ echo "checked";}?>">
-											
-						
+														<input type="checkbox"   value="<?php echo $compdata->complianceid; ?>" 
+														 <?php if(in_array($comid,$compliance_idarr)) { echo "checked"; }?> >
 													</td>
-													
 												</tr>
 											<?php
-													 }
-													
 												}
-												die;
 											?>
 											</tbody>
 										</table>
@@ -283,10 +303,6 @@
 		
 		<!-- Select2 JS -->
 		<script src="<?php echo base_url(); ?>default/js/select2.min.js"></script>
-
-		<!-- Datetimepicker JS -->
-		<script src="<?php echo base_url(); ?>default/js/moment.min.js"></script>
-		<script src="<?php echo base_url(); ?>default/js/bootstrap-datetimepicker.min.js"></script>
 		
 		<!-- Custom JS -->
 		<script src="<?php echo base_url(); ?>default/js/app.js"></script>
@@ -294,14 +310,11 @@
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     </body>
 </html>
-<script type="text/javascript">
-				$('#digitalsignaturedate').datetimepicker({
-					 //format: 'Y/m/d',
-					 format: 'YYYY/MM/DD',
-					 ignoreReadonly: true,
-				});
 
-</script>
+		<script type="text/javascript">
+ 				$('#datepicker1').datepicker();
+				 dateFormat: 'dd/mm/yy'   		
+		</script>
 
 <script>
 			
