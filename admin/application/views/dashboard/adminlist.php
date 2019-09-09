@@ -54,7 +54,7 @@
 							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
 									<div class="form-group form-focus">
 										<input type="text" name="keyword2" class="form-control floating">
-										<label class="focus-label">Admin Search</label>
+										<label class="focus-label">Search</label>
 									</div>
 							</div>
 							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
@@ -75,9 +75,15 @@
 											<th>User Name</th>
 											<th>Email Address</th>
 											<th>Contact Number</th>
-											<th>Gender</th>
+											<th>Type Role</th>
+											<?php 
+											if($this->session->userdata('RoleId')==1)
+											{
+											?>
 											<th class="text-right">Action</th>
-											
+											<?php 
+											}
+											?>
 										</tr>
 									</thead>
 									<tbody>
@@ -114,8 +120,22 @@
 											</td>
 											<td><?php echo $adminlist->EmailAddress ;?></td>
 											<td><?php echo $adminlist->PhoneNumber ;?></td>
-											<td><?php echo $adminlist->Gender ;?></td>
+											<td>
+											<?php 
+											if($adminlist->RoleId=='1')
+											{
+												echo "Super Admin";
+											}
+											else
+											{
+												echo "Admin";
+											}
+											?></td>
 											
+											<?php 
+											if($this->session->userdata('RoleId')==1)
+											{
+											?>
 											<td class="text-right">
 												<div class="dropdown dropdown-action">
 													<a href="" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
@@ -127,6 +147,9 @@
 													</div>
 												</div>
 											</td>
+											<?php 
+											}
+											?>
 											
 										</tr>
 										<?php
@@ -173,10 +196,19 @@
 												<label>Email Address</label>
 												<input class="form-control" tabindex="3" type="email" name="EmailAddress" Placeholder="Enter your email address" minlength="2" maxlength="50">
 											</div>
-											<div class="form-group">
+											<!-- <div class="form-group">
 												<label>Date of Birth</label>
 												<input class="form-control" tabindex="5" type="date" name="DateofBirth" Placeholder="Enter your date of birth" id="DateofBirth">			
+											</div> -->
+
+										
+											<div class="form-group">
+												<label>Birth Date</label>
+												<div class="cal-icon">
+													<input class="form-control datetimepicker" type="text" name="DateofBirth" id="DateofBirth2">
+												</div>
 											</div>
+											
 											<div class="form-group">
 												<label>Address</label>
 												<input class="form-control" tabindex="7" type="text" name="Address" Placeholder="Enter your address" minlength="5" maxlength="500">
@@ -192,7 +224,7 @@
 													<input type="radio" name="isactive" checked value="1">Active
 												</label>
 												<label class="radio-inline" tabindex="13">
-													<input type="radio" name="isactive" value="0">Deactive
+													<input type="radio" name="isactive" value="0">Inactive
 												</label>
 											</div>
 											
@@ -208,7 +240,8 @@
 											</div>
 											<div class="form-group">
 												<label>Gender</label>
-												<select class="select" tabindex="6"> 
+												<select class="form-control" name="Gender" tabindex="4">
+													<option value="">Please select gender</option>
 													<option value="Male">Male</option>
 													<option value="Female">Female</option>
 												</select>
@@ -219,9 +252,9 @@
 											</div>
 
 											<div class="form-group">
-												<label>Type of Role</label>
-												<select class="select" name="RoleId" tabindex="11"> 
-													<option value="" disabled>Select role</option>
+												<label>Role</label>
+												<select class="form-control" name="RoleId" tabindex="4">
+													<option value="">Select role</option>
 													<option value="1">Super Admin</option>
 													<option value="2">Admin</option>
 												</select>
@@ -277,13 +310,17 @@
 											</div> -->
 
 											<div class="form-group">
-												<label>Date of Birth</label>
-												<input class="form-control" type="date" name="DateofBirth" Placeholder="Enter your date of birth" id="DateofBirth" tabindex="5">
+												<label>Birth Date</label>
+												<div class="cal-icon">
+													<input class="form-control datetimepicker" type="text" name="DateofBirth" id="DateofBirth">
+												</div>
 											</div>
+
 											<div class="form-group">
 												<label>Address</label>
 												<input class="form-control" tabindex="7" type="text" name="Address" Placeholder="Enter your address" minlength="5" maxlength="500" id="Address">
 											</div>
+
 											<div class="form-group">
 												<label>City</label>
 												<input class="form-control" tabindex="9" type="text" name="City" Placeholder="Enter your city" minlength="2" maxlength="50" id="City">
@@ -305,27 +342,30 @@
 												<label>Last Name</label>
 												<input class="form-control" tabindex="2" type="text" name="LastName" Placeholder="Enter your last name" minlength="2" maxlength="50" id="LastName">
 											</div> 
+
 											<div class="form-group">
 												<label>Contact Number</label>
 												<input class="form-control" tabindex="4" type="text" name="PhoneNumber" Placeholder="Enter your contact number" minlength="10" maxlength="10" id="PhoneNumber">
 											</div>
+
 											<div class="form-group">
 												<label>Gender</label>
-												<select class="select" name="Gender" tabindex="6"> 
+												<select class="form-control" id="Gender" name="Gender" tabindex="4">
+													<option value="">Select gender</option>
 													<option value="Male">Male</option>
 													<option value="Female">Female</option>
 												</select>
-
-												
 											</div>
+
 											<div class="form-group">
 												<label>Pincode Number</label>
 												<input class="form-control" tabindex="8" type="text" name="PinCode" Placeholder="Enter your pincode number" minlength="06" maxlength="06" id="PinCode">
 											</div>
 
 											<div class="form-group">
-												<label>Type of Role</label>
-												<select class="select" name="RoleId" tabindex="11"> 
+												<label>Role</label>
+												<select class="form-control" id="RoleId" name="RoleId" tabindex="4">
+													<option value="">Select role</option>
 													<option value="1">Super Admin</option>
 													<option value="2">Admin</option>
 												</select>
@@ -435,9 +475,26 @@
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     </body>
 </html>
+
+<script type="text/javascript">
+				$('#DateofBirth2').datetimepicker({
+					 format: 'YYYY/MM/DD',
+					 maxDate: moment(),
+					 ignoreReadonly: true,
+				});
+
+				$('#DateofBirth').datetimepicker({
+				  	// format: 'DD/MM/YYYY',
+					 format: 'YYYY/MM/DD',
+					 maxDate: moment(),
+					 ignoreReadonly: true,
+				}).val('#DateofBirth');
+
+</script>
+
 <script>
-			$('#datepicker1').datepicker();
-				 dateFormat: 'dd/mm/yy'  
+			// $('#datepicker1').datepicker();
+			// 	 dateFormat: 'dd/mm/yy'  
 
 			$(function() { 
 				setTimeout(function() {
@@ -684,25 +741,24 @@ function editadmin(AdminId)
 		 data:{id:AdminId},
          success:function(response){
 			var response = JSON.parse(response);
-            //    console.log(response.AdminId);
-			    console.log(response.Gender);
+               console.log(response.AdminId);
             $('#AdminId').val(response.AdminId);
 			$('#FirstName').val(response.FirstName);
 			$('#LastName').val(response.LastName);
 			$('#EmailAddress').val(response.EmailAddress);
 			$('#DateofBirth').val(response.DateofBirth);
 			$('#PhoneNumber').val(response.PhoneNumber);
-			//$("input[id=Gender][value=" + response.Gender + "]").attr('selected');
-			//$( "#myselect option:selected" ).text();
-			//$('#Gender').val(response.Gender);
-			//$("#Gender option:selected").val(response.Gender);
-		
-			//$('#Gender').val(response.Gender);
-			$("option[name=Gender][value=" + response.Gender + "]").attr('selected', 'selected');
+			$('#Gender').val(response.Gender);
+			$("option[id=Gender][value=" + response.Gender=='Male' + "]").attr('selected', 'selected');
+			$("option[id=Gender][value=" + response.Gender=='Female' + "]").attr('selected', 'selected');
 			$('#Address').val(response.Address);
 			$('#PinCode').val(response.PinCode);
 			$('#City').val(response.City);
+			$('#RoleId').val(response.RoleId);
+			$("option[id=RoleId][value=" + response.RoleId==1 + "]").attr('selected', 'selected');
+			$("option[id=RoleId][value=" + response.RoleId==2 + "]").attr('selected', 'selected');
 			$("input[name=IsActive][value=" + response.IsActive + "]").attr('checked', 'checked');
+			
          }
       });	
 }

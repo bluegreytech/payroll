@@ -39,6 +39,7 @@ class Adminmaster_model extends CI_Model
 			);
 			//print_r($data);die;
 			$this->db->insert('tbladmin',$data);
+			//return 1;
 			$insert_id = $this->db->insert_id();
 
 				$this->db->select('*');
@@ -171,6 +172,7 @@ class Adminmaster_model extends CI_Model
 		$AdminId=$this->input->post('AdminId');
 		$data=array(
 			'AdminId'=>$this->input->post('AdminId'),
+			'RoleId'=>$this->input->post('RoleId'),
 			'FirstName'=>$this->input->post('FirstName'),
 			'LastName'=>$this->input->post('LastName'),
 			'EmailAddress'=>$this->input->post('EmailAddress'),
@@ -183,7 +185,7 @@ class Adminmaster_model extends CI_Model
 			'City'=>$this->input->post('City'),
 			'IsActive'=>$this->input->post('IsActive')
 				);
-			// print_r($data);die;
+			 //print_r($data);die;
 			$this->db->where("AdminId",$AdminId);
 			$this->db->update('tbladmin',$data);	
 			return 1;	      
@@ -266,9 +268,7 @@ class Adminmaster_model extends CI_Model
 				}
 			}
 			//print_r($user_image);die;
-				//	echo $this->session->userdata('AdminId');die;
 		$data=array(
-			
 			'FirstName'=>$this->input->post('FirstName'),
 			'LastName'=>$this->input->post('LastName'),
 			'DateofBirth'=>$this->input->post('DateofBirth'),
@@ -297,11 +297,9 @@ class Adminmaster_model extends CI_Model
 			$pass_data = array(	
 				'Password'=>md5($this->input->post('NewPassword')),	
 			);
-			//print_r($pass_data);die;
 			$this->db->where('AdminId',$AdminId);
 			$res = $this->db->update('tbladmin',$pass_data);
-
-			$this->db->select('*');
+					$this->db->select('*');
 					$this->db->where('AdminId',$AdminId);
 					$smtp2 = $this->db->get('tbladmin');	
 					foreach($smtp2->result() as $rows) {

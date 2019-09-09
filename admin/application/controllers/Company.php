@@ -138,8 +138,8 @@ class Company extends CI_Controller
 		}
 			$companyid=$this->input->post('companyid');
 			$data=array(
-				'isdelete'=>1,
-				'isactive'=>0
+				'isdelete'=>'1',
+				'isactive'=>'Inactive'
 					);
 			$this->db->where("companyid",$companyid);
 			$result=$this->db->update('tblcompany',$data);
@@ -159,6 +159,7 @@ class Company extends CI_Controller
 
 	function editcompany($companyid)
 	{
+		//echo $companyid;die;
 		if(!check_admin_authentication()){ 
 			redirect(base_url('Login'));
 		}
@@ -182,10 +183,21 @@ class Company extends CI_Controller
 		$data['isactive']=$result['isactive'];
 		$data['companycomplianceid']=$result['companycomplianceid'];
 		$data['complianceid']=$result['complianceid'];
+
+		   
+		// $complianceid = explode(',',$data['complianceid']);
+	  	// $com_compliances= array();
+		// foreach ($complianceid as $row){
+		// 	$data['companycompliances']=$this->Company_model->getcompliance($row);
+		// 	$com_compliances[]=$data['companycompliances'];
+		// }
+		// $data['com_compliances']=$com_compliances;
+		//echo "<pre>";print_r($data['com_compliances']);die;
+
 		$data['stateData']=$this->Company_model->list_state();
 		$data['complianceData']=$this->Company_model->list_compliance();
-		//echo "<pre>";print_r($data['complianceData']);die;
 		$data['companytypeData']=$this->Company_model->list_companytype();
+		//	echo "<pre>";print_r($data['complianceData']);die;
 		$this->load->view('Company/companyadd',$data);	
 	}
 

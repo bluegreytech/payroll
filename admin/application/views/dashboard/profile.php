@@ -289,14 +289,33 @@
 					// setDate: new Date("<?php //echo  ($DateofBirth!='0000-00-00')  ? date('d/m/Y', strtotime($DateofBirth)) : ''; ?>"),
 				}).val('<?php echo  ($DateofBirth!='0000-00-00')  ? date('d/m/Y', strtotime($DateofBirth)) : ''; ?>');
 
-		</script>
+</script>
 
 <script>
 $('#profile_info').on('hidden.bs.modal', function () {
     $(this).find('form').trigger('reset');
-})
+});
 
-$("#PhoneNumber").on("input", function(evt) {
+	$(function() { 
+			setTimeout(function() {
+		$('#errorMessage').fadeOut('fast');
+		}, 10000);  
+		});
+
+		$(function() { 
+			setTimeout(function() {
+		$('#successMessage').fadeOut('fast');
+		}, 10000);  
+		});
+
+		$(function() { 
+			setTimeout(function() {
+		$('#warningMessage').fadeOut('fast');
+		}, 10000);  
+		});
+
+
+			$("#PhoneNumber").on("input", function(evt) {
 			var self = $(this);
 			self.val(self.val().replace(/[^\d].+/, ""));
 			if ((evt.which < 48 || evt.which > 57)) 
@@ -304,6 +323,7 @@ $("#PhoneNumber").on("input", function(evt) {
 				evt.preventDefault();
 			}
 			});
+
 			$("#PinCode").on("input", function(evt) {
 			var self = $(this);
 			self.val(self.val().replace(/[^\d].+/, ""));

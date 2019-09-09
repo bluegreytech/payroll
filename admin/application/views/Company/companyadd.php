@@ -239,7 +239,6 @@
 												 	$comid=$compdata->complianceid;
 												 		$checkedStatus = "";
 													
-												 
 											?>
 												<tr>
 													<td><?php echo $compdata->compliancename;?></td>

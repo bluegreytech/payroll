@@ -67,7 +67,7 @@
 												}
 												else
 												{
-													echo "Deactive";
+													echo "Inactive";
 												}
 												?>
 											</td>
@@ -115,7 +115,7 @@
 									
 									<div class="form-group">
 										<label>Compliance Percentage <span class="text-danger">*</span></label>
-										<input class="form-control" type="text" name="compliancepercentage" placeholder="Enter a compliance percentage : 12" minlength="2" maxlength="20" id="compliancepercentages">
+										<input class="form-control" type="text" name="compliancepercentage" placeholder="Enter a compliance percentage : 12" minlength="2" maxlength="6" id="compliancepercentages">
 									</div>
 
 									<div class="col-md-6">
@@ -125,7 +125,7 @@
 												<input type="radio" name="isactive" checked value="1">Active
 											</label>
 											<label class="radio-inline">
-												<input type="radio" name="isactive" value="0">Deactive
+												<input type="radio" name="isactive" value="0">Inactive
 											</label>
 											</div>
 										</div>
@@ -166,31 +166,10 @@
 									<div class="col-md-6">
 											<div class="form-group">
 											<label class="col-form-label">Isactive<span class="text-danger">*</span></label><br>
+									
 											<label class="radio-inline">
-												
-												<?php
-												if($isactive==1)
-												{
-													?>
-													<input type="radio" name="isactive" checked  value="1">Active
-													<input type="radio" name="isactive" value="0">Deactive
-													<?php
-												}
-												?>
-												
-											</label>
-											<label class="radio-inline">
-												
-												<?php
-												if($isactive==0)
-												{
-													?>
 													<input type="radio" name="isactive"  value="1">Active
-													<input type="radio" name="isactive" checked value="0">Deactive
-													<?php
-												}
-												?>
-												 
+													<input type="radio" name="isactive" checked value="0">Inactive 
 											</label>
 											</div>
 										</div>
@@ -293,7 +272,7 @@
 
 		$("#compliancepercentages").on("input", function(evt) {
 			var self = $(this);
-			self.val(self.val().replace(/[^\d].+/, ""));
+			self.val(self.val().replace(/[^\d]+/, "."));
 			if ((evt.which < 48 || evt.which > 57)) 
 			{
 				evt.preventDefault();
@@ -302,7 +281,7 @@
 
 			$("#compliancepercentage").on("input", function(evt) {
 			var self = $(this);
-			self.val(self.val().replace(/[^\d].+/, ""));
+			self.val(self.val().replace(/[^\d]+/, "."));
 			if ((evt.which < 48 || evt.which > 57)) 
 			{
 				evt.preventDefault();
@@ -375,7 +354,8 @@
 					$('#complianceid').val(response.complianceid);
 					$('#compliancename').val(response.compliancename);
 					$('#compliancepercentage').val(response.compliancepercentage);
-					$('#isactive').val(response.isactive);
+					//$('#isactive').val(response.isactive);
+					$("input[name=isactive][value=" + response.isactive + "]").attr('checked', 'checked');
 				}
 			});	
 		}

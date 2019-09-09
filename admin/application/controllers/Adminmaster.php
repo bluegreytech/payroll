@@ -104,6 +104,7 @@ class Adminmaster extends CI_Controller
 		$data=array();
 		$result=$this->Adminmaster_model->getdata($this->input->post('id'));	
 		$data['AdminId']=$result['AdminId'];
+		$data['RoleId']=$result['RoleId'];
 		$data['FirstName']=$result['FirstName'];	
 		$data['LastName']=$result['LastName'];	
 		$data['EmailAddress']=$result['EmailAddress'];
@@ -124,7 +125,8 @@ class Adminmaster extends CI_Controller
 			redirect(base_url('Login'));
 		}
 		$data=array();
-		$result=$this->Adminmaster_model->getdata($this->session->userdata('AdminId'));
+		$id=$this->session->userdata('AdminId');
+		$result=$this->Adminmaster_model->getdata($id);
 		//echo "<pre>";print_r($result);die;
 		$data['AdminId']=$result['AdminId'];
 		$data['FirstName']=$result['FirstName'];
@@ -178,22 +180,22 @@ class Adminmaster extends CI_Controller
 	}
 
 
-	public function change_password($AdminId)
+	public function change_password()
 	{	
-		// if(!check_admin_authentication()){ 
-		// 	redirect(base_url('Login'));
-		// }
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
 		$data=array();
 		//$data['AdminId']=$this->input->post('AdminId');
 		if($_POST){
-			//$AdminId=$this->input->post('AdminId');
+			$AdminId=$this->session->userdata('AdminId');
 			if($this->input->post('AdminId')!='')
 			{
 				$result=$this->Adminmaster_model->changepass($AdminId);
 				if($result==1)
 				{   
-					 $this->session->set_flashdata('success', 'Your password has been Updated Succesfully!');
-					 redirect('Adminmaster/change_password/'.$AdminId);
+					 $this->session->set_flashdata('success', 'Your password has been changed Successfully!');
+					 redirect('Adminmaster/change_password');
 				}
 				else
 				{ 
@@ -202,7 +204,7 @@ class Adminmaster extends CI_Controller
 					{
 						$AdminId=$data['AdminId']; 
 						$this->session->set_flashdata('error','Your old password was not match please try again!');  
-						redirect('Adminmaster/change_password/'.$AdminId);
+						redirect('Adminmaster/change_password');
 					}
 				}
 			}

@@ -55,7 +55,7 @@
 							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
 									<div class="form-group form-focus">
 										<input type="text" name="keyword2" class="form-control floating">
-										<label class="focus-label">Hr Search</label>
+										<label class="focus-label">Search</label>
 									</div>
 							</div>
 							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
@@ -186,10 +186,12 @@
 
 											
 											<div class="form-group">
-												<label>Date of Birth</label>
-												<input class="form-control" tabindex="5" type="date" name="DateofBirth" Placeholder="Enter your date of birth">
-												<!-- <input class="form-control" id="datepicker1" type="text" name="DateofBirth" Placeholder="Enter your date of birth" readonly> -->
+												<label>Birth Date</label>
+												<div class="cal-icon">
+													<input class="form-control datetimepicker" type="text" name="DateofBirth" id="DateofBirth2">
+												</div>
 											</div>
+
 											<div class="form-group">
 												<label>Address</label>
 												<input class="form-control" tabindex="7" type="text" name="Address" Placeholder="Enter your address" minlength="5" maxlength="500">
@@ -229,7 +231,7 @@
 											<div class="form-group">
 												<label>Gender</label>
 												<select class="form-control" name="Gender" tabindex="4">
-													<option value="">Please select gender</option>
+													<option value="">Select gender</option>
 													<option value="Male">Male</option>
 													<option value="Female">Female</option>
 												</select>
@@ -245,12 +247,12 @@
 											</div>
 
 											<div class="form-group">
-														<label class="col-form-label">IsActive<span class="text-danger">*</span></label><br>
+														<label class="col-form-label">Isactive</label><br>
 														<label class="radio-inline" tabindex="10">
-															<input type="radio" name="IsActive" checked  value="1">Active
+															<input type="radio" name="IsActive" checked  value="Active">Active
 														</label>
 														<label class="radio-inline" tabindex="11">
-															<input type="radio" name="IsActive" value="0">Deactive
+															<input type="radio" name="IsActive" value="Inactive">Inactive
 														</label>
 											</div>
 				
@@ -297,9 +299,16 @@
 												<label>Contact Number</label>
 												<input class="form-control" type="text" name="Contact" tabindex="3" Placeholder="Enter your contact number" minlength="10" maxlength="10" id="PhoneNumber">
 											</div>
-											<div class="form-group">
+											<!-- <div class="form-group">
 												<label>Date of Birth</label>
 												<input class="form-control" type="date" name="DateofBirth" Placeholder="Enter your date of birth" id="DateofBirth" tabindex="5">
+											</div> -->
+
+											<div class="form-group">
+												<label>Birth Date</label>
+												<div class="cal-icon">
+													<input class="form-control datetimepicker" type="text" name="DateofBirth" id="DateofBirth">
+												</div>
 											</div>
 											<div class="form-group">
 												<label>Address</label>
@@ -311,7 +320,7 @@
 											
 											<div class="form-group">
 													<label>Company</label>
-													<select class="form-control" name="companyid" tabindex="9"> 
+													<select class="form-control" id="companyid" name="companyid" tabindex="9"> 
 														<option desabled value="">Please select company</option>
 														<?php
 														 if($companyData){
@@ -341,8 +350,8 @@
 											
 											<div class="form-group">
 												<label>Gender</label>
-												<select class="form-control" name="Gender" tabindex="4">
-													<option value="">Please select gender</option>
+												<select class="form-control" id="Gender" name="Gender" tabindex="4">
+													<option value="">Select gender</option>
 													<option value="Male">Male</option>
 													<option value="Female">Female</option>
 												</select>
@@ -473,10 +482,26 @@
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     </body>
 </html>
+
+<script type="text/javascript">
+				$('#DateofBirth2').datetimepicker({
+					 format: 'YYYY/MM/DD',
+					 maxDate: moment(),
+					 ignoreReadonly: true,
+				});
+
+				$('#DateofBirth').datetimepicker({
+				  	// format: 'DD/MM/YYYY',
+					 format: 'YYYY/MM/DD',
+					 maxDate: moment(),
+					 ignoreReadonly: true,
+				}).val('#DateofBirth');
+
+</script>
 <script>
 
-			$('#datepicker1').datepicker();
-				 dateFormat: 'dd/mm/yy'  
+			// $('#datepicker1').datepicker();
+			// 	 dateFormat: 'dd/mm/yy'  
 
 $(document).ready(function() {
     $('#example').DataTable( {
@@ -729,23 +754,27 @@ function edithrs(hr_id)
 		 data:{hr_id:hr_id},
          success:function(response){
 			var response = JSON.parse(response);
-            //    console.log(response.hr_id);
-			//    console.log(response.DateofBirth);
-            $('#hr_id').val(response.hr_id);
+                console.log(response.hr_id);
+				console.log(response.Gender);
+			$('#hr_id').val(response.hr_id);
 			$('#companyid').val(response.companyid);
 			$('#FullName').val(response.FullName);
 			$('#EmailAddress').val(response.EmailAddress);
 			$('#DateofBirth').val(response.DateofBirth);
 			$('#PhoneNumber').val(response.Contact);
 			$('#Gender').val(response.Gender);
+			$("option[id=Gender][value=" + response.Gender=='Male' + "]").attr('selected', 'selected');
+			$("option[id=Gender][value=" + response.Gender=='Female' + "]").attr('selected', 'selected');
 			$('#Address').val(response.Address);
 			$('#PinCode').val(response.PinCode);
 			$('#City').val(response.City);
 			$("input[name=IsActive][value=" + response.IsActive + "]").attr('checked', 'checked');
-			//$("option[name=companyid][value=" + response.companyid + "]").attr('selected', 'selected');
-			//$("option[name=companyname][value=" + response.companyname + "]").attr('selected', 'selected');
+
+			$('#companyname').val(response.companyname);
+			$("option[id=companyid][value=" + response.companyid=='#companyid' + "]").attr('selected', 'selected');
+			//$("option[id=companyname][value=" + response.companyname + "]").attr('selected', 'selected');
 			
-			//$('#companyname').val(response.companyname);
+			
          }
       });	
 }

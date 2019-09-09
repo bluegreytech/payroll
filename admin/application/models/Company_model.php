@@ -19,10 +19,15 @@ class Company_model extends CI_Model
 
 	function list_companytype()
 	{
+		//$where = array('isactive' =>1, 'isdelete' =>0);
 		$this->db->select('*');
 		$this->db->from('tblcompanytype');
+
 		$this->db->where('isactive!=',0);
 		$this->db->or_where('Is_deleted','0');
+
+	
+
 		$r=$this->db->get();
 		$res = $r->result();
 		return $res;
@@ -30,10 +35,15 @@ class Company_model extends CI_Model
 
 	function list_companyto()
 	{
+		$where = array('isactive' =>1, 'isdelete' =>0);
 		$this->db->select('*');
 		$this->db->from('tblcompanytype');
+
 		$this->db->where('isactive',1);
 		$this->db->or_where('Is_deleted','0');
+
+		$this->db->where($where);
+
 		$r=$this->db->get();
 		$res = $r->result();
 		return $res;
@@ -41,9 +51,14 @@ class Company_model extends CI_Model
 
 	function list_complianceto()
 	{
+		$where = array('isactive' =>1, 'isdelete' =>0);
 		$this->db->select('*');
 		$this->db->from('tblcompliances');
+
 		$this->db->where('isactive','1');
+
+		$this->db->where($where);
+
 		$r=$this->db->get();
 		$res = $r->result();
 		return $res;
@@ -74,10 +89,17 @@ class Company_model extends CI_Model
 	
 	function list_company()
 	{
+		$where = array('t1.isactive' =>'Active', 't1.isdelete' =>'0');
 			$this->db->select('t1.*,t2.companytype');
 			$this->db->from('tblcompany as t1');
 			$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
+
 			$this->db->or_where('t1.Is_deleted','0');
+
+			// $this->db->where('t1.isactive','Active');
+			// $this->db->or_where('t1.isdelete','0');
+			$this->db->where($where);
+
 			$r=$this->db->get();
 			$res = $r->result();
 			return $res;
@@ -85,11 +107,18 @@ class Company_model extends CI_Model
 
 	function search($option,$keyword)
 	{
+		$where = array('t1.isactive' =>'Active', 't1.isdelete' =>'0');
 			$keyword = str_replace('-', ' ', $keyword);
 			$this->db->select('t1.*,t2.companytype');
 			$this->db->from('tblcompany as t1');
 			$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
+
 			$this->db->or_where('t1.Is_deleted','0');
+
+			// $this->db->where('t1.isactive','Active');
+			// $this->db->or_where('t1.isdelete','0');
+			$this->db->where($where);
+
 			if($option == 'companytype')
 			{
 				$this->db->like('companytype',$keyword);
@@ -104,7 +133,11 @@ class Company_model extends CI_Model
 			}
 			else if($option == 'comcontactnumber')
 			{
-				$this->db->where('comcontactnumber',$keyword);
+				$this->db->like('comcontactnumber',$keyword);
+			} 
+			else if($option == 'emailverifystatus')
+			{
+				$this->db->like('emailverifystatus',$keyword);
 			} 
 			$this->db->order_by('companyid','desc');	
 			$query = $this->db->get();	
@@ -312,7 +345,8 @@ class Company_model extends CI_Model
 			);
 			// print_r($data);
 			// die;
-			$this->db->insert('tblcompany',$data);	
+			$this->db->insert('tblcompany',$data);
+		//	return 1;	
 			$insert_id = $this->db->insert_id();
 			$data2=array( 
 				'companyid'=>$insert_id,
@@ -371,7 +405,7 @@ class Company_model extends CI_Model
 					$body =$str;
 					$this->email->from('bluegreyindia@gmail.com');
 					$this->email->to($comemailaddress);		
-					$this->email->subject('Forgot Password Admin To Payroll System');
+					$this->email->subject('Company verification To Payroll System');
 					$this->email->message($body);	
 					if($this->email->send())
 					{
@@ -409,10 +443,11 @@ class Company_model extends CI_Model
 
 	function get_company($companyid)
 	{
+		//echo $companyid; echo "hhhh";die;
 		$this->db->select('t1.*,t2.*,t3.*,t4.*');
 		$this->db->from('tblcompany as t1');
 		$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
-		$this->db->join('tblcompanycompliances as t3', 't1.companyid = t3.companyid', 'LEFT');
+		$this->db->join('tblcompanycompliances as t3', 't1.companyid = '.$companyid, 'LEFT');
 		$this->db->join('tblstate as t4', 't1.stateid = t4.stateid', 'LEFT');
 		$this->db->where('t1.companyid',$companyid);
 		$query=$this->db->get();
@@ -446,6 +481,15 @@ class Company_model extends CI_Model
 			->get();
 			return $query->row_array();
 	}
+
+	 function getcompliance($row)
+	 {
+		$query=$this->db->select('complianceid as compliance_id')
+			->from('tblcompliances')
+			->where('complianceid',$row)
+			->get();
+			return $query->row_array();
+	 }
 
 	function add_compliance()
 	{	
