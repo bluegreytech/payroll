@@ -228,16 +228,25 @@
 												</tr>
 											</thead>
 											<tbody>
-											<?php                           
+											<?php  
+											  	 $comid=$complianceid;
+											 
+												$compliance_idarr = explode(",",$complianceid);
+												
 												foreach($complianceData as $compdata)
-												 { 		
+												 {  
+
+												 	$comid=$compdata->complianceid;
+												 		$checkedStatus = "";
+													
+												 
 											?>
 												<tr>
 													<td><?php echo $compdata->compliancename;?></td>
 													<td><?php echo $compdata->compliancepercentage;?></td>
 													<td class="text-center">
-														<input type="checkbox"  value="<?php echo $compdata->complianceid; ?>" 
-														name="complianceid[]">
+														<input type="checkbox"   value="<?php echo $compdata->complianceid; ?>" 
+														 <?php if(in_array($comid,$compliance_idarr)) { echo "checked"; }?> >
 													</td>
 												</tr>
 											<?php

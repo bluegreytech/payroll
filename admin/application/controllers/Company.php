@@ -43,17 +43,20 @@ class Company extends CI_Controller
 
 	public function index()
 	{   
+
 		if(!check_admin_authentication()){ 
 			redirect(base_url('Login'));
 		}
 		if($_POST!='')
 		{
+
 			$option=$this->input->post('option');
 			$keyword=$this->input->post('keyword2');	
 			$data['companyData'] = $this->Company_model->search($option,$keyword);
 		}	
 		else
 		{
+			echo "jkjh";die;
 			$data['companyData']=$this->Company_model->list_company();
 		} 
 		$this->load->view('Company/companylist',$data);			
@@ -174,13 +177,11 @@ class Company extends CI_Controller
 		$data['companyaddress']=$result['companyaddress'];
 		$data['stateid']=$result['stateid'];
 		$data['statename']=$result['statename'];
-
 		$data['companycity']=$result['companycity'];
 		$data['pincode']=$result['pincode'];
 		$data['isactive']=$result['isactive'];
 		$data['companycomplianceid']=$result['companycomplianceid'];
 		$data['complianceid']=$result['complianceid'];
-
 		$data['stateData']=$this->Company_model->list_state();
 		$data['complianceData']=$this->Company_model->list_compliance();
 		//echo "<pre>";print_r($data['complianceData']);die;
