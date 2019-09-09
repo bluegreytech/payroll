@@ -43,19 +43,19 @@ class Employee extends CI_Controller
 		}
 		$employeeid=$this->input->post('employeeid');
 		$data=array(
-			'isdelete'=>1,
-			'isactive'=>0
+			'isdelete'=>'1',
+			'isactive'=>'Inactive'
 				);
 		$this->db->where("employeeid",$employeeid);
 		$result=$this->db->update('tblemployee',$data);
 		if($result)
 		{
-			$this->session->set_flashdata('success', 'Employee was delete suucessfully!');
+			$this->session->set_flashdata('success', 'Record has been deleted!');
 			redirect('hr');
 		}
 		else
 		{
-			$this->session->set_flashdata('error', 'Employee was not deleted!');
+			$this->session->set_flashdata('error', 'Record was not delete!');
 			redirect('hr');
 		}
 	}

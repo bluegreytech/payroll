@@ -462,3 +462,63 @@ ERROR - 2019-09-09 11:39:19 --> 404 Page Not Found: Uploads/default
 ERROR - 2019-09-09 11:42:18 --> 404 Page Not Found: Uploads/default
 ERROR - 2019-09-09 11:42:26 --> 404 Page Not Found: Uploads/default
 ERROR - 2019-09-09 11:42:57 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-09 11:50:15 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-09 11:53:37 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-09 11:57:36 --> Severity: Notice --> Undefined variable: companyid C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 16
+ERROR - 2019-09-09 11:57:36 --> Severity: Notice --> Undefined variable: companyid C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 69
+ERROR - 2019-09-09 11:57:36 --> Severity: Notice --> Undefined variable: companytypeData C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 85
+ERROR - 2019-09-09 11:57:36 --> Severity: Notice --> Undefined variable: companyname C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 100
+ERROR - 2019-09-09 11:57:36 --> Severity: Notice --> Undefined variable: comemailaddress C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 106
+ERROR - 2019-09-09 11:57:36 --> Severity: Notice --> Undefined variable: comcontactnumber C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 113
+ERROR - 2019-09-09 11:57:36 --> Severity: Notice --> Undefined variable: gstnumber C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 119
+ERROR - 2019-09-09 11:57:36 --> Severity: Notice --> Undefined variable: companyid C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 130
+ERROR - 2019-09-09 11:57:36 --> Severity: Notice --> Undefined variable: companyaddress C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 142
+ERROR - 2019-09-09 11:57:36 --> Severity: Notice --> Undefined variable: stateData C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 151
+ERROR - 2019-09-09 11:57:36 --> Severity: Notice --> Undefined variable: companycity C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 169
+ERROR - 2019-09-09 11:57:36 --> Severity: Notice --> Undefined variable: pincode C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 175
+ERROR - 2019-09-09 11:57:36 --> Severity: Notice --> Undefined variable: companyid C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 179
+ERROR - 2019-09-09 11:57:36 --> Severity: Notice --> Undefined variable: complianceData C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 232
+ERROR - 2019-09-09 11:57:36 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 232
+ERROR - 2019-09-09 11:57:36 --> Severity: Notice --> Undefined variable: companyid C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 252
+ERROR - 2019-09-09 11:58:36 --> Severity: Notice --> Undefined variable: companyid C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 16
+ERROR - 2019-09-09 11:58:36 --> Severity: Notice --> Undefined variable: companyid C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 69
+ERROR - 2019-09-09 11:58:36 --> Severity: Notice --> Undefined variable: companytypeData C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 85
+ERROR - 2019-09-09 11:58:36 --> Severity: Notice --> Undefined variable: companyname C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 100
+ERROR - 2019-09-09 11:58:36 --> Severity: Notice --> Undefined variable: comemailaddress C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 106
+ERROR - 2019-09-09 11:58:36 --> Severity: Notice --> Undefined variable: comcontactnumber C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 113
+ERROR - 2019-09-09 11:58:36 --> Severity: Notice --> Undefined variable: gstnumber C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 119
+ERROR - 2019-09-09 11:58:36 --> Severity: Notice --> Undefined variable: companyid C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 130
+ERROR - 2019-09-09 11:58:36 --> Severity: Notice --> Undefined variable: companyaddress C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 142
+ERROR - 2019-09-09 11:58:36 --> Severity: Notice --> Undefined variable: stateData C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 151
+ERROR - 2019-09-09 11:58:36 --> Severity: Notice --> Undefined variable: companycity C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 169
+ERROR - 2019-09-09 11:58:36 --> Severity: Notice --> Undefined variable: pincode C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 175
+ERROR - 2019-09-09 11:58:36 --> Severity: Notice --> Undefined variable: companyid C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 179
+ERROR - 2019-09-09 11:58:36 --> Severity: Notice --> Undefined variable: complianceData C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 232
+ERROR - 2019-09-09 11:58:36 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 232
+ERROR - 2019-09-09 11:58:36 --> Severity: Notice --> Undefined variable: companyid C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 252
+ERROR - 2019-09-09 11:59:45 --> Severity: Notice --> Undefined variable: companyid C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 59
+ERROR - 2019-09-09 12:01:21 --> Severity: Notice --> Undefined variable: companyData C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 99
+ERROR - 2019-09-09 12:01:40 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-09 12:01:47 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-09 12:02:15 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-09 12:02:21 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-09 12:02:54 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-09 12:02:58 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-09 12:03:05 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-09 12:03:18 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-09 12:03:22 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-09 12:03:50 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-09 12:03:56 --> Severity: Notice --> Undefined variable: companyData C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 99
+ERROR - 2019-09-09 12:04:56 --> Severity: Notice --> Undefined variable: companyData C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 99
+ERROR - 2019-09-09 12:05:30 --> Severity: Notice --> Undefined variable: companyData C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 99
+ERROR - 2019-09-09 12:05:33 --> Severity: Notice --> Undefined variable: companyData C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 99
+ERROR - 2019-09-09 12:05:34 --> 404 Page Not Found: Default/assets
+ERROR - 2019-09-09 12:06:09 --> Severity: Notice --> Undefined variable: companyData C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 99
+ERROR - 2019-09-09 12:06:12 --> Severity: Notice --> Undefined variable: companyData C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 99
+ERROR - 2019-09-09 12:20:40 --> Severity: Notice --> Undefined variable: companyData C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 99
+ERROR - 2019-09-09 12:20:59 --> Severity: Notice --> Undefined variable: companyData C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 99
+ERROR - 2019-09-09 12:22:26 --> Severity: Notice --> Undefined variable: companyData C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 99
+ERROR - 2019-09-09 12:22:26 --> Severity: Notice --> Undefined variable: companyData C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 99
+ERROR - 2019-09-09 12:22:30 --> Severity: Notice --> Undefined variable: companyData C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 99
+ERROR - 2019-09-09 12:23:45 --> Severity: Notice --> Undefined variable: companyData C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 99
+ERROR - 2019-09-09 12:24:44 --> Severity: Notice --> Undefined variable: companyData C:\xampp\htdocs\payroll\admin\application\views\Employee\employeadd.php 99

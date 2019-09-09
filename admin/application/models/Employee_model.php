@@ -134,10 +134,13 @@ class Employee_model extends CI_Model
 		if(!check_admin_authentication()){ 
 			redirect(base_url('Login'));
 		}
+		$where = array('t1.isactive' =>'Active', 't1.isdelete' =>'0');
 		$this->db->select('t1.*,t2.companyname');
 		$this->db->from('tblemployee as t1');
 		$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
-		$this->db->where('t1.isdelete!=',1);
+		// $this->db->where('t1.isactive','Active');
+		// $this->db->or_where('t1.isdelete!=','1');
+		$this->db->where($where);
 		$r=$this->db->get();
 		$res = $r->result();
 		return $res;	
@@ -151,11 +154,14 @@ class Employee_model extends CI_Model
 		if(!check_admin_authentication()){ 
 			redirect(base_url('Login'));
 		}
+			$where = array('t1.isactive' =>'Active', 't1.isdelete' =>'0');
 			$keyword = str_replace('-', ' ', $keyword);
 			$this->db->select('t1.*,t2.companyname');
 			$this->db->from('tblemployee as t1');
 			$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
-			$this->db->where('t1.isdelete!=',1);
+			// $this->db->where('t1.isactive','Active');
+			// $this->db->or_where('t1.isdelete!=','1');
+			$this->db->where($where);
 			if($option == 'empfirstname')
 			{
 				$this->db->like('empfirstname',$keyword);
@@ -170,7 +176,7 @@ class Employee_model extends CI_Model
 			}
 			else if($option == 'contactnumber')
 			{
-				$this->db->where('contactnumber',$keyword);
+				$this->db->like('contactnumber',$keyword);
 			} 
 			// 	$this->db->order_by('UserId','desc');
 			    $query = $this->db->get();

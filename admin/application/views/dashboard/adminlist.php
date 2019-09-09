@@ -205,7 +205,7 @@
 											<div class="form-group">
 												<label>Birth Date</label>
 												<div class="cal-icon">
-													<input class="form-control datetimepicker" type="text" name="DateofBirth" id="DateofBirth2">
+													<input class="form-control datetimepicker" type="text" name="DateofBirth" id="DateofBirth2" readonly>
 												</div>
 											</div>
 											
@@ -312,7 +312,7 @@
 											<div class="form-group">
 												<label>Birth Date</label>
 												<div class="cal-icon">
-													<input class="form-control datetimepicker" type="text" name="DateofBirth" id="DateofBirth">
+													<input class="form-control datetimepicker" type="text" name="DateofBirth" id="DateofBirth" readonly>
 												</div>
 											</div>
 
