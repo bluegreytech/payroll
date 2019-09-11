@@ -11,6 +11,87 @@ class Adminmaster_model extends CI_Model
 			{
 					return 3;
 			}
+
+			//echo "<pre>";print_r($_FILES);die;
+			$user_image='';
+			//$image_settings=image_setting();
+			 if(isset($_FILES['ProfileImage']) &&  $_FILES['ProfileImage']['name']!='')
+			{
+				$this->load->library('upload');
+				$rand=rand(0,100000); 
+				 
+			   $_FILES['userfile']['name']     =   $_FILES['ProfileImage']['name'];
+			   $_FILES['userfile']['type']     =   $_FILES['ProfileImage']['type'];
+			   $_FILES['userfile']['tmp_name'] =   $_FILES['ProfileImage']['tmp_name'];
+			   $_FILES['userfile']['error']    =   $_FILES['ProfileImage']['error'];
+			   $_FILES['userfile']['size']     =   $_FILES['ProfileImage']['size'];
+	  
+			   $config['file_name'] = $rand.'Admin';			
+			   $config['upload_path'] = base_path().'upload/admin_orig/';		
+			   $config['allowed_types'] = 'jpg|jpeg|gif|png|bmp';  
+	
+				$this->upload->initialize($config);
+	
+				 if (!$this->upload->do_upload())
+				 {
+				   $error =  $this->upload->display_errors();
+				   echo "<pre>";print_r($error);die;
+				 } 
+					$picture = $this->upload->data();	   
+				 $this->load->library('image_lib');		   
+				 $this->image_lib->clear();
+				 $gd_var='gd2';
+   
+				 $this->image_lib->initialize(array(
+				   'image_library' => $gd_var,
+				   'source_image' => base_path().'upload/admin_orig/'.$picture['file_name'],
+				   'new_image' => base_path().'upload/admin/'.$picture['file_name'],
+				   'maintain_ratio' => FALSE,
+				   'quality' => '100%',
+				   'width' => 300,
+				   'height' => 300
+				));
+			   
+			   
+			   if(!$this->image_lib->resize())
+			   {
+				   $error = $this->image_lib->display_errors();
+			   }
+			   
+			   $user_image=$picture['file_name'];
+		   
+			   
+		   
+			   if($this->input->post('pre_profile_image')!='')
+				   {
+					   if(file_exists(base_path().'upload/admin/'.$this->input->post('pre_profile_image')))
+					   {
+						   $link=base_path().'upload/admin/'.$this->input->post('pre_profile_image');
+						   unlink($link);
+					   }
+					   
+					   if(file_exists(base_path().'upload/admin_orig/'.$this->input->post('pre_profile_image')))
+					   {
+						   $link2=base_path().'upload/admin_orig/'.$this->input->post('pre_profile_image');
+						   unlink($link2);
+					   }
+				   }
+			   } else {
+				   if($this->input->post('pre_profile_image')!='')
+				   {
+					   $user_image=$this->input->post('pre_profile_image');
+				   }
+			   }
+			   //print_r($user_image);die;
+		if($user_image!='')
+		{
+			$ProfileImage=$user_image;
+		}
+		else
+		{
+			$ProfileImage='';
+		}
+
 			$code=rand(12,123456789);
 			$RoleId=$this->input->post('RoleId');
 			$FirstName=$this->input->post('FirstName');
@@ -30,6 +111,7 @@ class Adminmaster_model extends CI_Model
 			'DateofBirth'=>$DateofBirth, 
 			'Password'=>md5($code),
 			'PhoneNumber'=>$PhoneNumber,
+			'ProfileImage'=> $ProfileImage,
 			'Gender'=>$Gender,
 			'Address'=>$Address,
 			'PinCode'=>$PinCode,
@@ -78,16 +160,27 @@ class Adminmaster_model extends CI_Model
 					$str=$email_message; //die;
 					
 					$config['protocol']='smtp';
-					$config['smtp_host']='ssl://smtp.googlemail.com';
-					$config['smtp_port']='465';
-					$config['smtp_user']='bluegreyindia@gmail.com';
-					$config['smtp_pass']='Test@123';
-					$config['charset']='utf-8';
-					$config['newline']="\r\n";
-					$config['mailtype'] = 'html';								
-					$this->email->initialize($config);
+				
+					$email_config = Array(
+						'protocol'  => 'smtp',
+						'smtp_host' => 'relay-hosting.secureserver.net',
+						'smtp_port' => '465',
+						'smtp_user' => 'binny@bluegreytech.co.in',
+						'smtp_pass' => 'Binny@123',
+						'mailtype'  => 'html',
+						'starttls'  => true,
+						'newline'   => "\r\n",
+						'charset'=>'utf-8',
+						'header'=> 'MIME-Version: 1.0',
+						'header'=> 'Content-type:text/html;charset=UTF-8',
+						);
+		
+						$this->load->library('email', $email_config);
+					   
+
 					$body =$str;	
-					$this->email->from('bluegreyindia@gmail.com');
+
+					$this->email->from('binny@bluegreytech.co.in');
 					$this->email->to($EmailAddress);		
 					$this->email->subject('You are register complete');
 					$this->email->message($body);
@@ -135,7 +228,7 @@ class Adminmaster_model extends CI_Model
 				}
 				else if($option == 'PhoneNumber')
 				{
-					$this->db->where('PhoneNumber',$keyword);
+					$this->db->like('PhoneNumber',$keyword);
 				} 
 			   	$this->db->order_by('AdminId','desc');
 				// if($type == "result")
@@ -170,6 +263,78 @@ class Adminmaster_model extends CI_Model
 	{	
 		     
 		$AdminId=$this->input->post('AdminId');
+
+		//echo "<pre>";print_r($_FILES);die;
+		$user_image='';
+		//$image_settings=image_setting();
+		 if(isset($_FILES['ProfileImage']) &&  $_FILES['ProfileImage']['name']!='')
+		{
+			$this->load->library('upload');
+			$rand=rand(0,100000); 
+			 
+		   $_FILES['userfile']['name']     =   $_FILES['ProfileImage']['name'];
+		   $_FILES['userfile']['type']     =   $_FILES['ProfileImage']['type'];
+		   $_FILES['userfile']['tmp_name'] =   $_FILES['ProfileImage']['tmp_name'];
+		   $_FILES['userfile']['error']    =   $_FILES['ProfileImage']['error'];
+		   $_FILES['userfile']['size']     =   $_FILES['ProfileImage']['size'];
+  
+		   $config['file_name'] = $rand.'Admin';			
+		   $config['upload_path'] = base_path().'upload/admin_orig/';		
+		   $config['allowed_types'] = 'jpg|jpeg|gif|png|bmp';  
+
+			$this->upload->initialize($config);
+
+			 if (!$this->upload->do_upload())
+			 {
+			   $error =  $this->upload->display_errors();
+			   echo "<pre>";print_r($error);die;
+			 } 
+				$picture = $this->upload->data();	   
+			 $this->load->library('image_lib');		   
+			 $this->image_lib->clear();
+			 $gd_var='gd2';
+
+			 $this->image_lib->initialize(array(
+			   'image_library' => $gd_var,
+			   'source_image' => base_path().'upload/admin_orig/'.$picture['file_name'],
+			   'new_image' => base_path().'upload/admin/'.$picture['file_name'],
+			   'maintain_ratio' => FALSE,
+			   'quality' => '100%',
+			   'width' => 300,
+			   'height' => 300
+			));
+		   
+		   
+		   if(!$this->image_lib->resize())
+		   {
+			   $error = $this->image_lib->display_errors();
+		   }
+		   
+		   $user_image=$picture['file_name'];
+	   
+		   
+	   
+		   if($this->input->post('pre_profile_image')!='')
+			   {
+				   if(file_exists(base_path().'upload/admin/'.$this->input->post('pre_profile_image')))
+				   {
+					   $link=base_path().'upload/admin/'.$this->input->post('pre_profile_image');
+					   unlink($link);
+				   }
+				   
+				   if(file_exists(base_path().'upload/admin_orig/'.$this->input->post('pre_profile_image')))
+				   {
+					   $link2=base_path().'upload/admin_orig/'.$this->input->post('pre_profile_image');
+					   unlink($link2);
+				   }
+			   }
+		   } else {
+			   if($this->input->post('pre_profile_image')!='')
+			   {
+				   $user_image=$this->input->post('pre_profile_image');
+			   }
+		   }
+
 		$data=array(
 			'AdminId'=>$this->input->post('AdminId'),
 			'RoleId'=>$this->input->post('RoleId'),
@@ -178,7 +343,7 @@ class Adminmaster_model extends CI_Model
 			'EmailAddress'=>$this->input->post('EmailAddress'),
 			'DateofBirth'=>$this->input->post('DateofBirth'),
 			'PhoneNumber'=>$this->input->post('PhoneNumber'),
-			'ProfileImage'=>$this->input->post('ProfileImage'),
+			'ProfileImage'=>$user_image,
 			'Gender'=>$this->input->post('Gender'),
 			'Address'=>$this->input->post('Address'),
 			'PinCode'=>$this->input->post('PinCode'),
