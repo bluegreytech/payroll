@@ -28,128 +28,153 @@ class Company_model extends CI_Model
 
 
 
+	public function send_company_notification()
+	{
 
+		$companyid=implode(',',$this->input->post('companyid'));	
+		$Enddate=$this->input->post('Enddate');
+		// $Documentfile = $this->input->post('Documentfile');
+		// print_r($Documentfile);die;
+		$data=array( 
+		'companyid'=>$companyid,
+		'Enddate'=>$Enddate,
+		'Isactive'=>'Active',
+		'Createdby'=>1,
+		'Createdon'=>date("Y-m-d h:i:s")
+		);
+		// print_r($data); die;
+		$this->db->insert('tblcompanynotification',$data);
+		//return 1;	
+		$insert_id = $this->db->insert_id();
+		$data = array();
+		$Documentfile = count($this->input->post('Documentfile'));
+		//print_r($Documentfile);die;
+		for($i=0; $i<$Documentfile; $i++)
+		{
+			$Documenttitle=$this->input->post('Documenttitle');
+			$Notificationdescription=$this->input->post('Notificationdescription');
+			$Documentfile=$this->input->post('Documentfile');
+			$data2=array( 
+				'Companynotificationid'=>$insert_id[$i],
+				'Documenttitle'=>$Documenttitle[$i],
+				'Notificationdescription'=>$Notificationdescription[$i],
+				'Documentfile'=>$Documentfile[$i],
+				'Isactive'=>'Active',
+				'Createdby'=>1,
+				'Createdon'=>date("Y-m-d h:i:s")
+				);
+				// print_r($data2); die;
+			$this->db->insert('tblcomnotdocument',$data2);
+		//	return 1;	
+		}
+		return true;
+		
+	}
 
 	
-
+	function list_company_notification($companyid)
+	{
+		$where = array('t1.companyid' =>$companyid, 't1.isactive' =>'Active');
+		$this->db->select('t1.*,t2.*,t3.*,t4.*,t5.*');
+		$this->db->from('tblcompany as t1');
+		$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
+		$this->db->join('tblcompanycompliances as t3', 't1.companyid = '.$companyid, 'LEFT');
+		$this->db->join('tblstate as t4', 't1.stateid = t4.stateid', 'LEFT');
+		$this->db->join('tblcompanynotification as t5', 't1.companyid = t5.companyid', 'LEFT');
+		$this->db->where($where);
+		$query=$this->db->get();
+		// $res = $query->result_array();
+		// echo "<pre>";print_r($res);die;
+		$array=array();
+		foreach($query->result() as $rows) {
+			$companyid = $rows->companyid;
+			$companyname = $rows->companyname;
+			$comemailaddress = $rows->comemailaddress;	
+			$Companynotificationid = $rows->Companynotificationid;	
+			$Enddate = $rows->Enddate;				
+			$today = date('Y-m-d');
+			$datetime1 = date_create($today);
+			$datetime2 = date_create($Enddate);
+			$interval = date_diff($datetime1, $datetime2);
+			$dd= $interval->format('%R%a');
+			if($dd=='0')
+			{
+				$data=array(
+					'companyid'=>$companyid,
+					'Companynotificationid'=>$Companynotificationid,
+					'Enddate'=>null
+						);
+					//print_r($data);die;
+					$this->db->where("Companynotificationid",$Companynotificationid);
+					$res=$this->db->update('tblcompanynotification',$data);
+					if($res)
+					{
+						return 1;
+					}else
+					{
+						return 2;
+					}
+			}
+				
+		}
+		//die;
+		//return $res;
+	}
 
 
 
 
 	function list_companytype()
-
 	{
 
 		//$where = array('isactive' =>1, 'isdelete' =>0);
-
 		$this->db->select('*');
-
 		$this->db->from('tblcompanytype');
-
-
-
 		$this->db->where('isactive!=',0);
-
 		$this->db->or_where('isdelete','0');
-
-
-
-	
-
-
-
 		$r=$this->db->get();
-
 		$res = $r->result();
-
 		return $res;
-
 	}
 
-
-
 	function list_companyto()
-
 	{
-
 		$where = array('isactive' =>1, 'isdelete' =>0);
-
 		$this->db->select('*');
-
 		$this->db->from('tblcompanytype');
-
-
-
 		$this->db->where('isactive',1);
-
 		$this->db->or_where('isdelete','0');
-
-
-
 		$this->db->where($where);
-
-
-
 		$r=$this->db->get();
-
 		$res = $r->result();
-
 		return $res;
-
 	}
 
 
 
 	function list_complianceto()
-
 	{
-
 		$where = array('isactive' =>1, 'isdelete' =>0);
-
 		$this->db->select('*');
-
 		$this->db->from('tblcompliances');
-
-
-
 		$this->db->where('isactive','1');
-
-
-
 		$this->db->where($where);
-
-
-
 		$r=$this->db->get();
-
 		$res = $r->result();
-
 		return $res;
-
 	}
 
 
 
 	function list_compliance()
-
 	{
-
 		$this->db->select('*');
-
 		$this->db->from('tblcompliances');
-
 		$this->db->where('isactive!=','0');
-
 		$this->db->or_where('isdelete','0');
-
 		$r=$this->db->get();
-
 		$res = $r->result();
-
 		return $res;
-
-
-
 	}
 
 
@@ -923,6 +948,21 @@ class Company_model extends CI_Model
 
 			//return $res;
 
+	}
+
+
+		function get_companyprofile($companyid)
+	{
+		$this->db->select('t1.*,t2.*,t3.*,t4.*,t5.*');
+		$this->db->from('tblcompany as t1');
+		$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
+		$this->db->join('tblcompanycompliances as t3', 't1.companyid = '.$companyid, 'LEFT');
+		$this->db->join('tblstate as t4', 't1.stateid = t4.stateid', 'LEFT');
+		$this->db->join('tblcompanynotification as t5', 't1.companyid = t5.companyid', 'LEFT');
+		//$this->db->join('tblcomnotdocument as t6', 't1.Companynotificationid = t6.Companynotificationid', 'LEFT');
+		$this->db->where('t1.companyid',$companyid);
+		$query=$this->db->get();
+		return $query->row_array();
 	}
 
 

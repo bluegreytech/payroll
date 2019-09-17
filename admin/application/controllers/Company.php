@@ -1,63 +1,107 @@
 <?php
 
 defined('BASEPATH') OR exit('No direct script access allowed');
-
-
-
 class Company extends CI_Controller 
-
 {
-
 	public function __construct() {
-
         parent::__construct();
-
 		$this->load->model('Company_model');
+	}
 
+	public function profile($companyid)
+	{	
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
+		$data=array();
+		$result=$this->Company_model->get_companyprofile($companyid);	
+		//echo "<br>";print_r($result);die;
+		$data['companyid']=$result['companyid'];
+		$data['companytypeid']=$result['companytypeid'];
+		$data['companytype']=$result['companytype'];
+		$data['companyname']=$result['companyname'];
+		$data['comemailaddress']=$result['comemailaddress'];
+		$data['comcontactnumber']=$result['comcontactnumber'];
+		$data['gstnumber']=$result['gstnumber'];
+		$data['digitalsignaturedate']=$result['digitalsignaturedate'];
+		$data['ProfileImage']= $result['ProfileImage'];
+		$data['companyaddress']=$result['companyaddress'];
+		$data['stateid']=$result['stateid'];
+		$data['statename']=$result['statename'];
+		$data['companycity']=$result['companycity'];
+		$data['pincode']=$result['pincode'];
+		$data['isactive']=$result['isactive'];
+		$data['companycomplianceid']=$result['companycomplianceid'];
+		$data['complianceid']=$result['complianceid'];
+		$data['Companynotificationid']=$result['Companynotificationid'];
+		$data['Enddate']=$result['Enddate'];
+		$data['Companydocumentid']=$result['Companydocumentid'];
+		$data['Documenttitle']=$result['Documenttitle'];
+		$data['Notificationdescription']=$result['Notificationdescription'];
+		$data['Documentfile']=$result['Documentfile'];
+		
+		$data['stateData']=$this->Company_model->list_state();
+		$data['complianceData']=$this->Company_model->list_compliance();
+		$data['companytypeData']=$this->Company_model->list_companytype();
+		//	echo "<pre>";print_r($data['complianceData']);die;
+		$this->load->view('Company/profile',$data);	
+
+	}
+
+	public function Sendnotification()
+	{ 
+		if($_POST)
+		{
+			$result=$this->Company_model->send_company_notification();
+			if($result==1)
+			{
+				$this->session->set_flashdata('success', 'Notification has been send Successfully!');
+				redirect('Company/Sendnotification');
+			}
+			else if($result==2)
+			{
+				$this->session->set_flashdata('error', 'Your was not Inserted!');
+				redirect('Company/Sendnotification');
+			}	
+		}
+		$data['companyData']=$this->Company_model->list_company();
+        $this->load->view('Company/sendnotification',$data);
+	}
+
+	public function company_notification_expired($companyid)
+	{	
+		$result=$this->Company_model->list_company_notification($companyid);
+		//echo "<pre>";print_r($result);die;
+		if($result)
+		{
+			echo "success";
+		}
+		else
+		{
+			echo "fail";
+		}
 	}
 
 
 
 	public function checkcode($code='')
-
 	{	
-
 		$result=$this->Company_model->checkResetCode($code);
-
 		if($result==1)
-
 		{
-
 			$this->session->set_flashdata('success', 'Your company verification has been Successfully!');
-
 			//redirect('Company');
-
 		}
-
 		elseif($result==2)
-
 		{
-
 			//$this->session->set_flashdata('error', 'Your company verification link has been expired!');
-
 			echo "link expired";
-
 		}
-
-	
-
-	
-
 	}
 
-
-
 	public function company_licence()
-
 	{	
-
 		$result=$this->Company_model->list_licence_company();
-
 		//echo "<pre>";print_r($result);die;
 
 		if($result)

@@ -70,42 +70,31 @@
 
 							<?php } ?>
 
-					
-
-					<!-- Search Filter -->
-
-					<form method="post" action="<?php echo base_url();?>Company">
-
+						<!-- Search Filter -->
+						<form method="post" action="<?php echo base_url();?>Company">
 						<div class="row filter-row">
-
 						
-
 							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
-
 									<div class="form-group form-focus select-focus">
-
-										<select class="select floating" name="option" id="colorselector"> 
+										<select class="select floating" name="option" id="purpose"> 
 											<option value=""> -- Select -- </option>
 											<option value="companytype">Company Type</option>
 											<option value="companyname">Company Name</option>
-											<option value="comemailaddress" >Email Address</option>
+											<option value="comemailaddress">Email Address</option>
 											<option value="comcontactnumber">Contact Number</option>
 											<option value="emailverifystatus">Verification Status</option>
-
 										</select>
+										<!-- <label class="focus-label">Role</label> -->
 									</div>
-
 							</div>
-
-							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12 colors">  
-									<div class="form-group form-focus">
+							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12" >  
+									<div class="form-group form-focus box" id='business'>
 										<input type="text" name="keyword2" class="form-control floating">
 										<label class="focus-label">Search</label>
 									</div>
-							</div>
 
-							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12 colors">  
-							<div class="form-group">
+									<div class="form-group form-focus box2" id='business2' style="display: none;">
+									<div class="form-group">
 								<select class="form-control" name="keyword2"> 
 									<option desabled value="">Please select company</option>
 									<?php
@@ -119,18 +108,14 @@
 									?>
 								</select>
 							</div>
+									</div>
 							</div>
-
 							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
 								<input type="submit" value="Search" class="btn btn-success btn-block">
 							</div>     
-
 						</div> 
-
 					</form>
-
 					
-
 					<!-- Search Filter -->
 
 					
@@ -229,7 +214,10 @@
 
 														<a class="dropdown-item" onclick="deletedata(<?php echo $comp->companyid; ?>)" data-toggle="modal" data-target="#delete_client"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
 
-														<!-- <a class="dropdown-item" href="<?php //echo base_url();?>Rights/rightsadd/<?php //echo $comp->AdminId;?>"><i class="fa fa-trash-o m-r-5"></i> Add Rights</a> -->
+														<!-- <a class="dropdown-item" href="<?php// echo base_url();?>Company/profile/<?php// echo $comp->companyid;?>" role="button">
+														<i class="fa fa-pencil m-r-5"></i>Profile View</a>
+														<a class="dropdown-item" href="<?php// echo base_url();?>Company/company_notification_expired/<?php// echo $comp->companyid;?>" role="button">
+														<i class="fa fa-pencil m-r-5"></i>Notfication Expired</a> -->
 
 													</div>
 
@@ -393,32 +381,22 @@
 
 <script>
 
-$(function() {
-        $('#colorselector').change(function(){
-            $('.colors').hide();
-           // $('#' + $(this).val('companyname')).show();
-        });
+$(document).ready(function(){
+    $('#purpose').on('change', function() {
+      if(this.value == 'companyname')
+      {
+        $("#business2").show();
+		$("#business").hide();
+		$(".box").hide();
+      }
+      else
+      {
+        $("#business2").hide();
+		$("#business").show();
+		$(".box2").hide();
+      }
     });
-
-// $(document).ready(function(){
-//   $("#red").click(function(){
-//     $("#yellow1").hide();
-//   });
-//   $("#yellow").click(function(){
-//     $("#red1").show();
-//   });
-// });
-
-// $(function() {
-//   $('#red').change(function(){
-//     $('#yellow1').hide();
-//     $('#red1').show();
-//   });
-//   $('#yellow').change(function(){
-//     $('#red1').hide();
-//     $('#yellow1').show();
-//   });
-// });
+});
 
 
 $(function() { 
