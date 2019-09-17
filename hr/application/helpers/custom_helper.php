@@ -579,10 +579,10 @@
 		
 	}     
 	
-	function getOneAdmin($admin_id=0)
+	function getOneCompany($companyid=0)
 	{
 		$CI =& get_instance();
-		$query=$CI->db->get_where('admin',array('admin_id'=>$admin_id));
+		$query=$CI->db->get_where('tblcompany',array('companyid'=>$companyid,'IsActive'=>'Active'));
 		if($query->num_rows() > 0)
 		{
 			return $query->row();
@@ -663,33 +663,9 @@
         }
     }
 	
-	/* Sate And City Code */
-	function get_all_state_by_country_id($id=0)
-		{
-		$CI =& get_instance();
-		$CI->db->where(array('status'=>'active','country_id'=>$id));
-		$CI->db->order_by('state_name','asc');
-		$query = $CI->db->get('state_master');
-		if($query->num_rows() > 0)
-		{
-			return $query->result();
-		}else{
-			return '';
-		}
-		}
-	function get_all_city_by_state_id($id=0)
-	{
-		$CI =& get_instance();
-		$CI->db->where(array('status'=>'active','state_id'=>$id));
-		$CI->db->order_by('city_name','asc');
-		$query = $CI->db->get('city_master');
-		if($query->num_rows() > 0)
-		{
-			return $query->result();
-		}else{
-			return '';
-		}
-	}
+	
+
+	
 	 
         /* commom function for all module */
          //get all record count
@@ -816,40 +792,13 @@
 	}
 		
 		
-	function get_all_active_country()
-	{
-	 	$CI =& get_instance();
-		$CI->db->order_by('country_name', 'asc');
-		$query = $CI->db->get_where("country_master",array('status'=>'active'));
-		if($query->num_rows() > 0)
-		{
-			return $query->result();
-		}
-		else
-		{
-			return 0;
-		}
-	}
+	
 	 
 	
 	 
 	 
 	 
-	function get_all_active_categories()
-	{
-	 	$CI =& get_instance();
-		$CI->db->order_by('category_name', 'asc');
-		$query = $CI->db->get("category");
-		if($query->num_rows() > 0)
-		{
-			return $query->result();
-		}
-		else
-		{
-			return 0;
-		}
-	}
-        
+	  
 	function get_company_name($id)
 	{
 		$CI =& get_instance();

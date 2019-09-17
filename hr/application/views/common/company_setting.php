@@ -48,7 +48,7 @@
 									<input type="text" class="form-control" name="cpassword"   placeholder="Company Digital signature" value="<?php echo date('d/m/Y',strtotime($digitalsignaturedate)); ?>" readonly> 
 								</div>
 								<div class="submit-section">
-										<input type="submit" value="Submit" class="btn btn-primary submit-btn" readonly>
+										<input type="button" value="Submit" class="btn btn-primary submit-btn" readonly>
 								</div>
 							</form>
 						</div>

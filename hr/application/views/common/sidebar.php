@@ -41,19 +41,19 @@
 							<li class="submenu">
 								<a href="<?php echo base_url();?>Dashboard"><i class="la la-user"></i> <span>Employees</span> <span class="menu-arrow"></span></a>
 								<ul style="display: none;">
-								<li><a href="<?php echo base_url();?>employee">List of Employees</a></li>
-								<li><a href="<?php echo base_url();?>employeesalary">Employee Salary </a></li>
+								<li><a href="<?php echo base_url();?>employee/emplist">List of Employees</a></li>
+								<!-- <li><a href="<?php //echo base_url();?>employeesalary">Employee Salary </a></li> -->
 								</ul>
 							</li>
 
 							
 
 							<li class="submenu">
-								<a href="<?php echo base_url();?>Dashboard"><i class="la la-user"></i> <span>Leave</span> <span class="menu-arrow"></span></a>
+								<a href="<?php echo base_url();?>Dashboard"><i class="fa fa-calendar-check-o"></i> <span>Leave</span> <span class="menu-arrow"></span></a>
 								<ul style="display: none;">
-								<li><a href="<?php echo base_url();?>holiday">List of Holidays</a></li>
-									<li><a href="<?php echo base_url();?>leave">List of Leave Type</a></li>
-									<li><a href="<?php echo base_url();?>leave/Leaveadd">List of Leaves<span class="badge badge-pill bg-primary float-right">1</span></a></li>
+								<li><a href="<?php echo base_url();?>holiday/holidaylist">List of Holidays</a></li>
+									<li><a href="<?php echo base_url();?>leave/leavelist">List of Leave Type</a></li>
+									<li><a href="#">List of Leaves<span class="badge badge-pill bg-primary float-right">1</span></a></li>
 								</ul>
 							</li>
 

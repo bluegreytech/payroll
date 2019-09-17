@@ -96,7 +96,15 @@
 				
 				<!-- Header Title -->
                 <div class="page-title-box">
-					<h3>PAYROLL SYSTEM</h3>
+                	<?php  $cmpdetail= getOneCompany($this->session->userdata('companyid'));
+                	 //echo "<pre>";print_r($cmpdetail->companyname);
+                	if(!empty($cmpdetail)){ ?>
+                       <h3><?php echo strtoupper($cmpdetail->companyname); ?></h3>
+                	<?php }else{ ?>
+                		<h3>PAYROLL SYSTEM</h3>
+                	<?php } ?>
+                	 
+					
                 </div>
 				<!-- /Header Title -->
 				

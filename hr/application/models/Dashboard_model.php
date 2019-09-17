@@ -5,13 +5,15 @@ class Dashboard_model extends CI_Model
 		
 		
 	function hr_list(){
-		$this->db->select('UserId,RoleId,CONCAT(FirstName ,LastName) AS FirstName,EmailAddress,DateofBirth,PhoneNumber,ProfileImage,Gender,Address,PinCode,CountryId,StateId,City,IsActive');
-		$this->db->from('tbluser');
-		$this->db->where('RoleId',3);
-		$r=$this->db->get();
-		$res = $r->result();
+		$this->db->select('*');
+		$this->db->from('tblhr');
+		$this->db->where('Is_deleted','0');
+		$this->db->where('hr_type!=','1');
+		$this->db->order_by('hr_id','Desc');
+		$query=$this->db->get();
+		$res=$query->result();
+		//echo "<pre>";print_r($res);die;
 		return $res;
-
 	}
 
 
@@ -23,26 +25,5 @@ class Dashboard_model extends CI_Model
 		return $query= $r->num_rows();
 	}
 
-	function list_hr()
-	{
-		$this->db->select('*');
-		$this->db->from('tbluser');
-		$this->db->where('RoleId',3);
-		$r = $this->db->get();
-		return $query= $r->num_rows();
-	}
-
-	function getdata($UserId){
-			$this->db->select('t1.*,t2.*,t3.*');
-			$this->db->from('tbluser as t1');
-			$this->db->join('tblhr as t2', 't1.UserId = t2.UserId', 'LEFT');
-			$this->db->join('tblcompany as t3', 't2.companyid = t2.companyid', 'LEFT');
-			$this->db->where('t1.UserId',32);
-			$query = $this->db->get();
-			return $query->row_array();
-	}
-
 	
-
-
 }

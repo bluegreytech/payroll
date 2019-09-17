@@ -7110,3 +7110,10 @@ ul.comment-list li ul.children {
 		padding: 0px;
 	}
 }
+
+.fa-pencil{
+	color: #3376AE;
+}
+.fa-trash-o{
+	color:red;
+}
