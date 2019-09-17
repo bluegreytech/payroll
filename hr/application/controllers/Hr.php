@@ -29,7 +29,7 @@ class Hr extends CI_Controller
 			}else{
 				$data["error"] = "";
 			}
-           	$data['redirect_page']="userlist";
+           	$data['redirect_page']="hrlist";
 			$data['hr_id']=$this->input->post('hr_id');
 			$data['FullName']=$this->input->post('FullName');
 			$data['EmailAddress']=$this->input->post('EmailAddress');
@@ -49,14 +49,14 @@ class Hr extends CI_Controller
 
 				if($this->input->post("hr_id")!="")
 				{	
-					echo "dsfdf if";die;
+					//echo "dsfdf if";die;
 					$this->hr_model->hr_update();
 					$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
 					redirect('hr/hrlist');
 					
 				}
 				else
-				{ 	echo "dsfdf else";die;
+				{ 	//echo "dsfdf else";die;
 					$this->hr_model->hr_insert();
 					$this->session->set_flashdata('success', 'Record has been Inserted Succesfully!');
 					redirect('hr/hrlist');
@@ -88,7 +88,7 @@ class Hr extends CI_Controller
 						unlink($link);
 					}
 			}
-		$data= array('Is_deleted' =>'1','IsActive'=>'Inactive');
+		$data= array('Is_deleted' =>'1','IsActive'=>'Inactive','ProfileImage'=>'');
 		$id=$this->input->post('id');
 		$this->db->where("hr_id",$id);
 		$res=$this->db->update('tblhr',$data);
@@ -143,7 +143,6 @@ class Hr extends CI_Controller
 			die ;
 		}
 	
-	
 	}
 
 	public function admin_master_profile_update()     
@@ -174,24 +173,24 @@ class Hr extends CI_Controller
 
 	}
 	public	function searchhr(){
-		 if(!check_admin_authentication()){ 
+		if(!check_admin_authentication()){ 
 			redirect(base_url());
 		}   
-			$data=array();
-			$data['activeTab']="searchhr";	
+		$data=array();
+		$data['activeTab']="searchhr";	
 			
-		 if($this->input->post("search")!=''){
+		if($this->input->post("search")!=''){
 		 	$data['option']=$this->input->post('option');
 		 	$data['keyword']=$this->input->post('keyword');	
 		 	$option=$data['option'];
           	$keyword=$data['keyword'];
 			
 			$data['result'] = $this->hr_model->search($option,$keyword);
-		 }else{
+		}else{
 		 	$data['option']='';
           	$data['keyword']='';
           	$data['result']=$this->hr_model->hrlist();
-		 }
+		}
 		 	
 		$data['redirect_page']="hrlist";
 		//echo "<pre>";print_r($data['result']);die;

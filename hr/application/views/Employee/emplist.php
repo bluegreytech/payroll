@@ -26,10 +26,10 @@
 		<!-- Page Title -->
 		<div class="row">
 			<div class="col-sm-4 col-5">
-				<h4 class="page-title">List of Hr </h4>
+				<h4 class="page-title">List of Employee </h4>
 			</div>
 			<div class="col-sm-8 col-7 text-right m-b-30">
-				<a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_salary"><i class="fa fa-plus"></i> Add Hr
+				<a href="<?php echo base_url()?>employee/addemp" class="btn add-btn" ><i class="fa fa-plus"></i> Add Employee
 				</a>
 			</div>
 
@@ -37,17 +37,17 @@
 		<!-- /Page Title -->
 
 		<!-- Search Filter -->
-		<form method="post" action="<?php echo base_url();?>hr/searchhr" id="frm_search">
+		<form method="post" action="<?php echo base_url();?>employee/searchemp" id="frm_search">
 		<div class="row filter-row">
 
 		<div class="col-md-3">  
 		<div class="form-group form-focus select-focus">
 		<select class="select floating" name="option" > 
 		<option value="" disabled="">Please Select</option>
-		<option value="FullName" <?php if($option=='FullName'){echo 'selected';} ?> >Hr Name</option>
+		<option value="first_name" <?php if($option=='first_name'){echo 'selected';} ?> >Employee Name</option>
 		<option value="EmailAddress" <?php if($option=='EmailAddress'){echo 'selected';} ?>>Email Address</option>
 		<option value="PhoneNumber" <?php if($option=='PhoneNumber'){echo 'selected';} ?>>Contact Number</option>
-		<option value="IsActive" <?php if($option=='IsActive'){echo 'selected';} ?>>Status</option>
+		<option value="status" <?php if($option=='status'){echo 'selected';} ?>>Status</option>
 		</select>
 		<!-- <label class="focus-label">Role</label> -->
 		</div>
@@ -55,14 +55,14 @@
 		<div class="col-md-3">  
 		<div class="form-group form-focus">
 		<input type="text" name="keyword" class="form-control floating" value="<?php echo $keyword;?>">
-		<label class="focus-label">Hr Search</label>
+		<label class="focus-label">Employee Search</label>
 		</div>
 		</div>
 		<div class="col-md-3">  
 		<input type="submit" value="Search" name="search" class="btn btn-success btn-block">
 		</div> 
 		<div class="col-md-3"> 
-		<a href="<?php echo base_url()?>/hr/<?php echo $redirect_page;?>" class="btn btn-info"><i class="fa fa-refresh"></i></a> 
+		<a href="<?php echo base_url()?>employee/<?php echo $redirect_page;?>" class="btn btn-info"><i class="fa fa-refresh"></i></a> 
 	
 		</div>     
 		</div> 
@@ -75,10 +75,11 @@
 					<table class="table table-striped custom-table datatable" >
 						<thead>
 						<tr>
-							<th>No.</th>
+							<th>No</th>
 							<th>Full Name</th>
 							<th>Email Address</th>
 							<th>Contact Number</th>
+							<th>Join Date</th>
 							<th>Status</th>		
 							<th class="text-right">Action</th>
 						</tr>
@@ -88,8 +89,8 @@
 						$i=1;
 						if($result){  
 						foreach($result as $row)
-						{
-						//echo "<pre>";print_r($row);          
+						{ 
+						 //echo "<pre>";print_r($row);          
 						?>
 						<tr>
 							<td><?php echo $i;?></td>
@@ -97,19 +98,17 @@
 						<h2 class="table-avatar">
 							<?php 
 							
-							 if(($row->ProfileImage!='' && file_exists(base_path().'/upload/hr/'.$row->ProfileImage))){  ?>
-							
+							 if(($row->ProfileImage!='' && file_exists(base_path().'/upload/emp/'.$row->ProfileImage))){  ?>
 								
-								<img src="<?php echo base_url();?>upload/hr/<?php echo $row->ProfileImage;?>" alt="" class="avatar">
-								<?php echo ucfirst($row->FullName);?> 
-							
+								<img src="<?php echo base_url();?>upload/emp/<?php echo $row->ProfileImage;?>" alt="" class="avatar">
+								<?php echo ucfirst($row->first_name.' '.$row->last_name);?> 
 							<?php
 							}
 							else
 							{ 
-								?>
+							?>
 								<img src="<?php echo base_url();?>upload/no_image/user_no_image.png" alt="" class="avatar">
-								<?php echo $row->FullName;?> 
+								<?php echo ucfirst($row->first_name.' '.$row->last_name);?> 
 							
 							<?php
 							}
@@ -117,12 +116,14 @@
 						</h2>
 
 						</td>
-						<td><?php echo $row->EmailAddress ;?></td>
-						<td><?php echo $row->Contact ;?></td>
+						<td><?php echo $row->email;?></td>
+						<td><?php echo $row->phone;?></td>
+						<td><?php echo date("d M Y",strtotime($row->joiningdate));?></td>
 						<td>
 							<div class="action-label">
-							<a class="btn btn-white btn-sm btn-rounded" href="javascript:void(0);"  onclick="statusdata('<?php echo $row->hr_id; ?>','<?php echo $row->IsActive ;?>')">
-								<i class="fa fa-dot-circle-o <?php if($row->IsActive=='Active'){echo "text-success";}else{ echo "text-danger";}?>"></i><?php echo $row->IsActive ;?>
+
+							<a class="btn btn-white btn-sm btn-rounded" href="javascript:void(0);"  onclick="statusdata('<?php echo $row->emp_id; ?>','<?php echo $row->status ;?>')">
+								<i class="fa fa-dot-circle-o <?php if($row->status=='Active'){echo "text-success";}else{ echo "text-danger";}?>"></i><?php echo $row->status ;?>
 							</a>
 						</div>
 							</td>
@@ -130,9 +131,8 @@
 
 						?>
 						<td class="text-center">
-						<a  onclick="editdata('<?php echo $row->hr_id; ?>')" data-toggle="modal" data-target="#add_salary" >
-								<i class="fa fa-pencil fa-lg"></i></a>
-						<a  onclick="deletedata('<?php echo $row->hr_id; ?>','<?php echo $row->ProfileImage ;?>')" data-toggle="modal" data-target="#delete_admin"><i class="fa fa-trash-o fa-lg"></i></a>
+							<?php echo anchor('employee/edit_emp/'.$row->emp_id,'<i class="fa fa-pencil fa-lg" ></i>'); ?>
+						    <a href="javascript:void(0)"  onclick="deletedata('<?php echo $row->emp_id; ?>','<?php echo $row->ProfileImage ;?>')" ><i class="fa fa-trash-o fa-lg"></i></a>
 						</td>
 
 						</tr>
@@ -148,123 +148,10 @@
 		</div>
 		<!-- /Page Content -->
 		<!--Start Add Hr Modal -->
-		<div id="add_salary" class="modal custom-modal fade" role="dialog">
-			<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title">Add Hr</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>hr/hrlist" id="frm_hr">
-							<div class="profile-img-wrap edit-img">
-									<?php  
-
-									 //if(($ProfileImage!='' && file_exists(base_path().'/upload/hr/'.$ProfileImage))){ ?>
-										<!-- <img class="inline-block" src="<?php //echo base_url(); ?>upload/hr/<?php //echo $ProfileImage; ?>" alt="" id="blah"> -->
-									<?php
-									//}else{
-									?>
-										<img class="inline-block" src="<?php echo base_url(); ?>upload/no_image/user_no_image.png" alt="" id="blah">
-									<?php
-									//}
-									?>
-										<div class="fileupload btn">
-											<span class="btn-text">Upload</span>
-												<input type="hidden" name="pre_profile_image" class="form-control" value="" id="pre_profile_image">
-											<input type="file" name="ProfileImage" class="upload" onchange="readURL(this);">
-										</div>
-									</div>
-							
-							<div class="row"> 
-								<div class="col-sm-6">
-									
-									<div class="form-group">
-										<label>Full Name</label>
-										<input type="hidden" name="hr_id" id="hr_id">	
-										<input class="form-control" type="text" name="FullName" Placeholder="Full Name" id="FullName">
-									</div>
-									<div class="form-group">
-										<label>Email Address</label>
-										<input class="form-control" type="text" name="EmailAddress" Placeholder="EmailAddress"  id="EmailAddress" >
-									</div>
-									<div class="form-group">
-										<label>Phone</label>
-										<input class="form-control" type="text" name="PhoneNumber" Placeholder="Phone" minlength="10" maxlength="10" id="PhoneNumber" >
-									</div>
-									<div class="form-group">
-										<label>Date of Birth</label>
-										<div class="cal-icon">
-										<input class="form-control datetimepicker" type="text" name="DateofBirth"  id="DateofBirth" Placeholder="Date of Birth" >
-										</div>
-
-									</div>
-								
-								</div>
-								<div class="col-sm-6"> 
-									<div class="form-group">
-										<label>Gender</label>
-										<select class="form-control" name="Gender"  id="Gender">
-											<option disabled="" selected="">Please Select</option>
-											<option value="Male">Male</option>
-											<option value="Female">Female</option>
-										</select>
-									</div>
-									<div class="form-group">
-										<label>City</label>
-										<input class="form-control" type="text" name="City" Placeholder="City" id="City">
-									</div>
-									<div class="form-group">
-										<label>Pincode</label>
-										<input class=" form-control" type="text" name="PinCode" id="Pincode" Placeholder="Pincode">
-									</div>
-										<div class="form-group">
-												<label class="col-form-label">IsActive<span class="text-danger">*</span></label><br>
-												<label class="radio-inline">
-													<input type="radio" name="IsActive" checked  value="Active">Active
-												</label>
-												<label class="radio-inline">
-													<input type="radio" name="IsActive" value="Inactive">Inactive
-												</label>
-									</div>
-								
-								</div>
-								<div class="col-md-12">
-									<div class="form-group">
-										<label>Address</label>
-										<textarea class="form-control" name="Address" id="Address"></textarea>
-										</div>
-									</div>
-							</div>
-							<div class="submit-section">
-								<input type="submit" name="Save" class="btn btn-primary submit-btn" value="Submit">
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
+		
 		<!-- End Add Hr Modal -->
 
 
-<!--Start Delete model-->
-		<!-- <div class="modal fade bs-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-			<div class="modal-dialog modal-sm" role="document" style="margin:20% auto;">
-				<div class="modal-content">
-					<div class="modal-body" >
-						<p>Are you sure you want to delete this record?</p>
-					</div>
-					<div class="modal-footer text-center">
-					<center>
-						<button type="button" class="btn-md btn-icon btn-link p4" id="yes_btn" ><a href="" id="deleteYes" value="Yes"  class="btn btn-success">Yes</a></button>
-						<button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
-					</center>
-					</div>
-				</div>
-			</div>
-		</div> -->
 
 
 	<div class="modal custom-modal fade" id="delete_approve" role="dialog">
@@ -272,13 +159,13 @@
 			<div class="modal-content">
 				<div class="modal-body">
 					<div class="form-header">
-						<h3>Delete HR</h3>
-						<p>Are you sure want to hr?</p>
+						<h3>Delete Employee</h3>
+						<p>Are you sure want to delete this employee?</p>
 					</div>
 					<div class="modal-btn delete-action">
 						<div class="row">
 							<div class="col-6">
-								<a href="javascript:void(0);"  id="yes_btn" class="btn btn-primary continue-btn">Delete</a>
+								<a href="javascript:void(0);"  id="yes_btn" class="btn btn-primary continue-btn">Ok</a>
 							</div>
 							<div class="col-6">
 								<a href="javascript:void(0);" data-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
@@ -390,12 +277,12 @@ $(function() {
 
 $(document).ready(function()
 {
-	
-		$('#add_salary').on('hidden.bs.modal', function () {
-			$(this).find('form').trigger('reset');
-			
-			$('#blah').attr('src', url+'upload/no_image/user_no_image.png');
-		});
+
+			$('#add_salary').on('hidden.bs.modal', function () {
+    			$(this).find('form').trigger('reset');
+    			
+    			$('#blah').attr('src', url+'upload/no_image/user_no_image.png');
+			});
 
 		$("#frm_hr").validate(
 		{
@@ -405,10 +292,10 @@ $(document).ready(function()
 						required: true,
 							},
 					
-					EmailAddress:{
+					EmailAddress: {
 						required: true,
 							},		
-					DateofBirth:{
+					DateofBirth: {
 						required: true,
 							},
 					Gender: {
@@ -452,24 +339,26 @@ $(document).ready(function()
 					}
 				
 				},
+				
 		});
 });					        
 
 function deletedata(id,image){  
-   // alert(id);
+   // alert(image);
     $('#delete_approve').modal('show');
    
         $('#yes_btn').click(function(){
-        	//alert('dfdsf');
-           
+        	
                 url="<?php echo base_url();?>"
                 $.ajax({
-                url: url+"/hr/deletedata/",
-                type: "post",
-                data: {id:id,hr_image:image} ,
+                url:url+"/employee/delete_emp/",
+                type:"post",
+                data:{id:id,emp_image:image} ,
                 success: function (response) {  
-                //console.log(response);           
-                document.location.href = url+'hr/hrlist';                  
+                	//alert(response);
+               // console.log(response);  
+                //return false;         
+                document.location.href = url+'employee/emplist';                  
 
             },
             error: function(jqXHR, textStatus, errorThrown) {
@@ -498,12 +387,12 @@ function statusdata(id,status){
            
                 url="<?php echo base_url();?>"
                 $.ajax({
-                url: url+"/hr/statusdata/",
+                url: url+"/employee/statusdata/",
                 type: "post",
                 data: {id:id,status:status} ,
                 success: function (response) {  
                 //console.log(response);           
-                document.location.href = url+'hr/hrlist';                  
+                document.location.href = url+'employee/emplist';                  
 
             },
             error: function(jqXHR, textStatus, errorThrown) {
@@ -528,9 +417,9 @@ function editdata(hr_id)
 		 data:{id:hr_id},
          success:function(response){
 			var response = JSON.parse(response);
-               console.log(response.ProfileImage);
+            //    console.log(response.hr_id);
 			//    console.log(response.DateofBirth);
-			//alert($('#DateofBirth').val($.datetimepicker.formatDate('dd M yy', response.DateofBirth)));
+//alert($('#DateofBirth').val($.datetimepicker.formatDate('dd M yy', response.DateofBirth)));
             $('#hr_id').val(response.hr_id);
 			$('#companyid').val(response.companyid);
 			$('#FullName').val(response.FullName);
@@ -553,7 +442,7 @@ function editdata(hr_id)
 			 $('#blah').attr('src', url+'upload/hr/'+response.ProfileImage);
 			}else{
 			
-			  $('#blah').attr('src', url+'upload/no_image/user_no_image.png');
+			  $('#blah').attr('src', url+'upload/hr/no_image/user_no_image.png');
 			}
 			//$("option[name=companyid][value=" + response.companyid + "]").attr('selected', 'selected');
 			//$("option[name=companyname][value=" + response.companyname + "]").attr('selected', 'selected');
