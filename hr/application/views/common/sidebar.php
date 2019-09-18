@@ -60,7 +60,7 @@
 							<li class="submenu">
 								<a href="<?php echo base_url();?>Dashboard"><i class="la la-user"></i> <span>Attendance</span> <span class="menu-arrow"></span></a>
 								<ul style="display: none;">
-								<li><a href="<?php echo base_url();?>attendance">List of Attendance</a></li>
+								<li><a href="<?php echo base_url();?>attendance/attendancelist">List of Attendance</a></li>
 								</ul>
 							</li>
 							<li class="active">
