@@ -154,45 +154,25 @@ class Adminmaster extends CI_Controller
 
 
 	function editadminmaster()
-
 	{
-
 		if(!check_admin_authentication()){ 
-
-			redirect(base_url('Login'));
-
+		redirect(base_url('Login'));
 		}
-
 		$data=array();
-
 		$result=$this->Adminmaster_model->getdata($this->input->post('id'));	
-
 		$data['AdminId']=$result['AdminId'];
-
 		$data['RoleId']=$result['RoleId'];
-
 		$data['FirstName']=$result['FirstName'];	
-
 		$data['LastName']=$result['LastName'];	
-
 		$data['EmailAddress']=$result['EmailAddress'];
-
 		$data['DateofBirth']=$result['DateofBirth'];
-
 		$data['PhoneNumber']=$result['PhoneNumber'];
 		$data['ProfileImage']= $result['ProfileImage'];
-		$data['ProfileImage']= $result['ProfileImage'];
-
 		$data['Gender']=$result['Gender'];
-
 		$data['Address']=$result['Address'];
-
 		$data['PinCode']=$result['PinCode'];
-
 		$data['City']=$result['City'];
-
 		$data['IsActive']=$result['IsActive'];
-
 		echo json_encode($data);
 
 	}

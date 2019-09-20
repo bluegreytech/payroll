@@ -219,7 +219,6 @@ class Adminmaster_model extends CI_Model
 			$this->db->or_where('IsDelete!=',1);
 				if($option == 'FirstName')
 				{
-				// echo $keyword; 
 					$this->db->like('FirstName',$keyword);
 				}
 				else if($option == 'EmailAddress')
@@ -231,21 +230,11 @@ class Adminmaster_model extends CI_Model
 					$this->db->like('PhoneNumber',$keyword);
 				} 
 			   	$this->db->order_by('AdminId','desc');
-				// if($type == "result")
-				// {
-				// 	$this->db->limit($limit,$offset);
-				// }
 			    $query = $this->db->get();
 				// echo $this->db->last_query();
 				// echo "<pre>";print_r($query->result());die;
 			 if($query->num_rows() > 0)
 			 {
-				//    if($type == "count"){
-				//  // echo "hello count";
-				// 	 return $query->num_rows();
-				//  }else{
-				// 	return $query->result();
-				//  } 
 				return $query->result();
 			 }        
 		}
@@ -260,10 +249,8 @@ class Adminmaster_model extends CI_Model
 	}
 
 	function updateadmin()
-	{	
-		     
+	{    
 		$AdminId=$this->input->post('AdminId');
-
 		//echo "<pre>";print_r($_FILES);die;
 		$user_image='';
 		//$image_settings=image_setting();

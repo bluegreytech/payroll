@@ -94,20 +94,20 @@
 									</div>
 
 									<div class="form-group form-focus box2" id='business2' style="display: none;">
-									<div class="form-group">
-								<select class="form-control" name="keyword2"> 
-									<option desabled value="">Please select company</option>
-									<?php
-									if($companyData){
-										foreach($companyData as $comp)
-										{
-									?>
-										<option value="<?php echo $comp->companyname; ?>"><?php echo $comp->companyname;?></option>
-									<?php
-									}}
-									?>
-								</select>
-							</div>
+										<div class="form-group">
+											<select class="form-control" name="keyword2"> 
+												<option desabled value="">Please select company</option>
+												<?php
+												if($companyData){
+													foreach($companyData as $comp)
+													{
+												?>
+													<option value="<?php echo $comp->companyname; ?>"><?php echo $comp->companyname;?></option>
+												<?php
+												}}
+												?>
+											</select>
+										</div>
 									</div>
 							</div>
 							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
@@ -118,112 +118,87 @@
 					
 					<!-- Search Filter -->
 
-					
-
 					<div class="row">
-
 						<div class="col-md-12">
-
 							<div class="table-responsive">
-
 								<!-- <table class="display" style="width:100%" id="example"> -->
-
 								 <table class="table table-striped custom-table datatable" class="display" style="width:100%">
-
 									<thead>
-
 										<tr>
-
 											<th>No</th>
-
 											<th>Company Name</th>
-
 											<th>Contact Number</th>
-
 											<th>Company Type</th>
-
 											<th>Email Address </th>
-
 											<th>Verification Status </th>
-
 											<th class="text-right">Action</th>
-
-											
-
 										</tr>
-
 									</thead>
-
 									<tbody>
-
 									<?php
-
 										$i=1;
-
 										if($companyData){                             
-
 										foreach($companyData as $comp)
-
 										{
-
 									?>
-
 										<tr>
-
 										<td><?php echo $i;?></td>
+										<td>
+											<h2 class="table-avatar">
+											<?php 
+											if($comp->companyimage!='')
+											{
+												?>
+												<a href="<?php echo base_url();?>Company/profile/<?php echo $comp->companyid;?>" title="show company profile" class="avatar"><img src="<?php echo base_url();?>upload/company/<?php echo $comp->companyimage;?>" ></a>
+												<a href="<?php echo base_url();?>Company/profile/<?php echo $comp->companyid;?>" title="show company profile"><?php echo $comp->companyname ;?> </a>
+												<?php
 
-										<td><?php echo $comp->companyname ;?></td>
-
-										<td><?php echo $comp->comcontactnumber ;?></td>
-
-										<td><?php echo $comp->companytype ;?></td>
-
-										<td><?php echo $comp->comemailaddress ;?></td>
-
-										<td><?php if($comp->emailverifystatus=='Verify')
-
-												{
-
-													echo "Verify";
-
-												}
-
-												else
-
-												{
-
-													echo "Pending";
-
-												}
-
-										?></td>
+											}
+											else
+											{
+												?>
+												<a href="<?php echo base_url();?>Company/profile/<?php echo $comp->companyid;?>" title="show company profile" class="avatar"><img src="<?php echo base_url();?>upload/default/avtar.jpg" ></a>
+												<a href="<?php echo base_url();?>Company/profile/<?php echo $comp->companyid;?>" title="show company profile"><?php echo $comp->companyname ;?> </a>
+												<?php
+											}
+											?>
+											</h2>
+											</td>
 
 										
+										<td><?php echo $comp->comcontactnumber ;?></td>
+										<td><?php echo $comp->companytype ;?></td>
+										<td><?php echo $comp->comemailaddress ;?></td>
+										
+										<td>	
+												<div class="action-label">
+												<a class="btn btn-white btn-sm btn-rounded">
+												<?php if($comp->emailverifystatus=='Verify')
+												{?>
+													<i class="fa fa-dot-circle-o 
+												<?php if($comp->emailverifystatus=='Verify'){ echo "text-success";}?>"></i>Verify
+												<?php
+												}
+												else
+												{
+													?>
+													<i class="fa fa-dot-circle-o 
+												<?php if($comp->emailverifystatus==null){ echo "text-danger";}?>"></i>Pending
+												<?php
 
-											<td class="text-right">
-
-												<div class="dropdown dropdown-action">
-
-													<a href="" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-
-													<div class="dropdown-menu dropdown-menu-right">
-
-														<a class="dropdown-item" href="<?php echo base_url();?>Company/editcompany/<?php echo $comp->companyid;?>" role="button">
-
-														<i class="fa fa-pencil m-r-5"></i> Edit</a>
-
-														<a class="dropdown-item" onclick="deletedata(<?php echo $comp->companyid; ?>)" data-toggle="modal" data-target="#delete_client"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-
-														<!-- <a class="dropdown-item" href="<?php// echo base_url();?>Company/profile/<?php// echo $comp->companyid;?>" role="button">
-														<i class="fa fa-pencil m-r-5"></i>Profile View</a>
-														<a class="dropdown-item" href="<?php// echo base_url();?>Company/company_notification_expired/<?php// echo $comp->companyid;?>" role="button">
-														<i class="fa fa-pencil m-r-5"></i>Notfication Expired</a> -->
-
-													</div>
-
+												}
+												?>
+												</a>
 												</div>
-
 											</td>
+
+										<td class="text-center">
+											<a class="dropdown-item" href="<?php echo base_url();?>Company/editcompany/<?php echo $comp->companyid;?>" role="button">
+													<i class="fa fa-pencil m-r-5"></i> </a>
+											<a class="dropdown-item" onclick="deletedata(<?php echo $comp->companyid; ?>)" data-toggle="modal" data-target="#delete_client"><i class="fa fa-trash-o m-r-5"></i> </a>
+										    <a class="dropdown-item" href="<?php// echo base_url();?>Company/company_notification_expired/<?php// echo $comp->companyid;?>" role="button">
+													<i class="fa fa-pencil m-r-5"></i>Notfication</a>				
+										</td>
 
 											
 
@@ -336,42 +311,10 @@
 		<!-- Sidebar Overlay -->
 
 		<div class="sidebar-overlay" data-reff=""></div>
-
+        <?php $this->load->view('common/footer');?>
 		
 
-		<!-- jQuery -->
-
-        <script src="<?php echo base_url(); ?>default/js/jquery-3.2.1.min.js"></script>
-
-		
-
-		<!-- Bootstrap Core JS -->
-
-        <script src="<?php echo base_url(); ?>default/js/popper.min.js"></script>
-
-        <script src="<?php echo base_url(); ?>default/js/bootstrap.min.js"></script>
-
-		
-
-		<!-- Slimscroll JS -->
-
-		<script src="<?php echo base_url(); ?>default/js/jquery.slimscroll.min.js"></script>
-
-		
-
-		<!-- Select2 JS -->
-
-		<script src="<?php echo base_url(); ?>default/js/select2.min.js"></script>
-
-		<script src="<?php echo base_url(); ?>default/js/jquery.dataTables.min.js"></script>
-
-		<script src="<?php echo base_url(); ?>default/js/dataTables.bootstrap4.min.js"></script>
-
-		<!-- Custom JS -->
-
-		<script src="<?php echo base_url(); ?>default/js/app.js"></script>
-
-		<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
+	
 
     </body>
 

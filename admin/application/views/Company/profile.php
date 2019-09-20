@@ -1,4 +1,6 @@
-﻿<?php 
+﻿
+<?php 
+
 	 $this->load->view('common/header.php');
 	 $this->load->view('common/sidebar.php');
 ?>
@@ -24,15 +26,15 @@
                
 				<div class="content container-fluid">
 						<!-- Page Title -->
+
 						<div class="row">
-						<div class="col">
+							<div class="col-sm-5 col-5">
 							<h4 class="page-title">Profile of Company  </h4>
-						</div>	
-						<div class="col-12 text-right m-b-30">
-										<a href="<?php echo base_url();?>Company" class="btn add-btn"><i class="fa fa-plus">
-										</i>Back to List of Company</a>			
-									</div>			
-					</div>
+							</div>
+							<div class="col-sm-7 col-7 text-right m-b-30">
+							<a href="<?php echo base_url();?>Company" class="btn add-btn">Back to List of Company</a>	
+							</div>
+						</div>
 					<!-- /Page Title -->
 						<div class="row">
 							<div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
@@ -42,35 +44,38 @@
 								if($Enddate!='')
 								{
 								?>		
-
-
 								<div class="row">
+								<input type="hidden" class="form-control" name="Companydocumentid" value="<?php echo $Companydocumentid;?>">
+								<input type="hidden" class="form-control" name="Companynotificationid" value="<?php echo $Companynotificationid;?>">
 										<div class="col-md-6">
 												<div class="form-group">
 													<label class="col-form-label">Notification End Date<span class="text-danger">*</span></label>
 													<input class="form-control" id="Enddate" name="Enddate"  type="text" 
 															value="<?php														
 																echo date('Y-m-d',strtotime($Enddate));												
-															?>" readonly>
+															?>" disabled>
 												</div>
 											</div>
 										<div class="col-md-6">	
 												<div class="form-group">
 													<label class="col-form-label">Document Title  <span class="text-danger">*</span></label>
-													<input class="form-control"  maxlength="200" name="Documenttitle" value="<?php echo $Documenttitle; ?>">
+													<input class="form-control"  maxlength="200" name="Documenttitle" value="<?php echo $Documenttitle; ?>" readOnly>
 												</div>
 										</div>
+
+								
+
 										<div class="col-md-12">	
 											<div class="form-group">
-												<label>Course Description</label>
+												<label>Notification Description</label>
 												<textarea id="editor1" readOnly rows="5" class="form-control" name="Documenttitle"><?php echo $Documenttitle; ?>
 												</textarea>
 												<script>
 													CKEDITOR.replace('editor1');
 												</script>
-											</div>
-												
+											</div>		
 										</div>
+
 										<!-- <div class="col-md-6">
 											<div class="form-group">
 												<label class="col-form-label">Important Document <span class="text-danger">*</span></label>
@@ -94,8 +99,8 @@
 									
 									<div class="profile-img-wrap edit-img">
 											<?php  
-											 if(($ProfileImage!='' && file_exists(base_path().'/upload/admin/'.$ProfileImage))){ ?>
-												<img class="inline-block" src="<?php echo base_url(); ?>upload/admin/<?php echo $ProfileImage; ?>" alt="" id="blah">
+											 if(($companyimage!='' && file_exists(base_path().'/upload/company/'.$companyimage))){ ?>
+												<img class="inline-block" src="<?php echo base_url(); ?>upload/company/<?php echo $companyimage; ?>" alt="" id="blah">
 											<?php
 											}
 											else
@@ -106,7 +111,7 @@
 											}
 											?>
 												<div class="fileupload btn">
-														<input type="hidden" name="pre_profile_image" class="form-control" value="<?php echo $ProfileImage; ?>" onchange="readURL(this);">				
+														<input type="hidden" name="pre_profile_image" class="form-control" value="<?php echo $companyimage; ?>" onchange="readURL(this);">				
 												</div>
 											</div>
 
@@ -115,7 +120,7 @@
 										<div class="col-md-6">
 											<div class="form-group">
 													<label>Type of Company</label>
-													<select class="select" name="companytypeid"> 
+													<select class="select" name="companytypeid" disabled> 
 														<option desabled value="">Please select type of company</option>
 														<?php
 														 if($companytypeData){
@@ -132,33 +137,33 @@
 										<div class="col-md-6">
 											<div class="form-group">
 												<label class="col-form-label">Company Name <span class="text-danger">*</span></label>
-												<input class="form-control" type="text" minlength="2" maxlength="100" name="companyname" placeholder="Enter company name" value="<?php echo $companyname; ?>">
+												<input class="form-control" type="text" minlength="2" maxlength="100" name="companyname" placeholder="Enter company name" value="<?php echo $companyname; ?>" readOnly>
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
 												<label class="col-form-label">Email Address</label><span class="text-danger">*</span></label>
-												<input class="form-control" minlength="2" maxlength="50" type="email" name="comemailaddress" placeholder="Enter email address" value="<?php echo $comemailaddress; ?>">
+												<input class="form-control" minlength="2" maxlength="50" type="email" name="comemailaddress" placeholder="Enter email address" value="<?php echo $comemailaddress; ?>" readOnly>
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
 												<label class="col-form-label">Contact Number <span class="text-danger">*</span></label>
 												<input class="form-control" minlength="10" maxlength="10" type="text" name="comcontactnumber" id="comcontactnumber" placeholder="Enter contact number"  
-												value="<?php echo $comcontactnumber; ?>">
+												value="<?php echo $comcontactnumber; ?>" readOnly>
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
 												<label class="col-form-label">GST Number <span class="text-danger">*</span></label>
-												<input class="form-control floating" minlength="05" maxlength="20" type="text" name="gstnumber" id="gstnumber" placeholder="Enter gst number" value="<?php echo $gstnumber; ?>">
+												<input class="form-control floating" minlength="05" maxlength="20" type="text" name="gstnumber" id="gstnumber" placeholder="Enter gst number" value="<?php echo $gstnumber; ?>" readOnly>
 											</div>
 										</div>	
 										<div class="col-md-6">
 													<div class="form-group">
 														<label>Digital Signature Date</label>
 														<div class="cal-icon">
-															<input class="form-control datetimepicker" type="text" name="digitalsignaturedate" id="digitalsignaturedate" value="<?php if($digitalsignaturedate!='0000-00-00'){ echo date('d/m/Y', strtotime($digitalsignaturedate));} ?>">
+															<input class="form-control datetimepicker" type="text" name="digitalsignaturedate" id="digitalsignaturedate" value="<?php if($digitalsignaturedate!='0000-00-00'){ echo date('d/m/Y', strtotime($digitalsignaturedate));} ?>" disabled>
 														</div>
 													</div>
 										</div>
@@ -166,13 +171,13 @@
 											<div class="form-group">
 												<label class="col-form-label">Address<span class="text-danger">*</span></label>
 												<input class="form-control"  type="text" name="companyaddress" id="companyaddress" placeholder="Enter company address"  
-												value="<?php echo $companyaddress; ?>">
+												value="<?php echo $companyaddress; ?>" readOnly>
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
 													<label>State</label>
-													<select class="select" name="stateid"> 
+													<select class="select" name="stateid" disabled> 
 														<option desabled value="">Please select state</option>
 														<?php
 														 if($stateData){
@@ -190,13 +195,13 @@
 										<div class="col-md-6">
 											<div class="form-group">
 												<label class="col-form-label">City</label><span class="text-danger">*</span></label>
-												<input class="form-control" minlength="2" maxlength="50" type="text" name="companycity" placeholder="Enter city" value="<?php echo $companycity; ?>">
+												<input class="form-control" minlength="2" maxlength="50" type="text" name="companycity" placeholder="Enter city" value="<?php echo $companycity; ?>" readOnly>
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
 												<label class="col-form-label">Pincode</label><span class="text-danger">*</span></label>
-												<input class="form-control" minlength="06" maxlength="06" type="text" name="pincode" id="pincode" placeholder="Enter pincode" value="<?php echo $pincode; ?>">
+												<input class="form-control" minlength="06" maxlength="06" type="text" name="pincode" id="pincode" placeholder="Enter pincode" value="<?php echo $pincode; ?>" readOnly>
 											</div>
 										</div>
 										<?php
@@ -207,10 +212,10 @@
 													<div class="form-group">
 													<label class="col-form-label">Isactive<span class="text-danger">*</span></label><br>
 													<label class="radio-inline">
-														<input type="radio" name="isactive"  checked value="1">Active
+														<input type="radio" name="isactive" disabled  checked value="1">Active
 													</label>
 													<label class="radio-inline">
-														<input type="radio" name="isactive" value="0">Deactive
+														<input type="radio" name="isactive" disabled value="0">Deactive
 													</label>
 													</div>
 												</div>
@@ -224,12 +229,12 @@
 														<div class="form-group">
 														<label class="col-form-label">Isactive<span class="text-danger">*</span></label><br>
 														<label class="radio-inline">
-															<input type="radio" name="isactive" <?php if($isactive==1){echo "checked";}?> 
+															<input type="radio" name="isactive" disabled <?php if($isactive==1){echo "checked";}?> 
 																 value="1">Active
 															
 														</label>
 														<label class="radio-inline">
-															<input type="radio" name="isactive" <?php if($isactive==0){echo "checked";}?>value="0">Inactive
+															<input type="radio" name="isactive" disabled <?php if($isactive==0){echo "checked";}?>value="0">Inactive
 															
 														</label>
 														</div>
@@ -271,7 +276,7 @@
 													<td><?php echo $compdata->compliancename;?></td>
 													<td><?php echo $compdata->compliancepercentage;?></td>
 													<td class="text-center">
-														<input type="checkbox" name="complianceid[]"   value="<?php echo $compdata->complianceid; ?>" 
+														<input type="checkbox" name="complianceid[]" disabled  value="<?php echo $compdata->complianceid; ?>" 
 														 <?php 	if($companyid!='')
 																{	if(in_array($comid,$compliance_idarr)) { echo "checked"; }}?> >
 													</td>
@@ -283,23 +288,7 @@
 										</table>
 									</div>
 									
-									<div class="submit-section">
-									<?php 
-										if($companyid)
-										{
-											?>
-												<button class="btn btn-primary submit-btn">Update</button>
-											<?php
-										}	
-										else
-										{
-											?>
-												<button class="btn btn-primary submit-btn">Submit</button>
-											<?php
-										}
-									?>
-									
-									</div>
+								
 								</form>
 							
 					
@@ -319,32 +308,9 @@
 		
 		<!-- Sidebar Overlay -->
 		<div class="sidebar-overlay" data-reff=""></div>
+		<?php $this->load->view('common/footer');?>
 		
-		<!-- jQuery -->
-        <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="<?php echo base_url(); ?>default/js/jquery-3.2.1.min.js"></script>
-		
-		<!-- Bootstrap Core JS -->
-        <script src="<?php echo base_url(); ?>default/js/popper.min.js"></script>
-        <script src="<?php echo base_url(); ?>default/js/bootstrap.min.js"></script>
-		
-		<!-- Slimscroll JS -->
-		<script src="<?php echo base_url(); ?>default/js/jquery.slimscroll.min.js"></script>
-
-		<!-- Select2 JS -->
-		<script src="<?php echo base_url(); ?>default/js/select2.min.js"></script>
 	
-		<!-- Datetimepicker JS -->
-		<script src="<?php echo base_url(); ?>default/js/moment.min.js"></script>
-		<script src="<?php echo base_url(); ?>default/js/bootstrap-datetimepicker.min.js"></script>
-		
-		
-		<!-- Chart JS -->
-		<script src="<?php echo base_url(); ?>default/plugins/morris/morris.min.js"></script>
-		<script src="<?php echo base_url(); ?>default/plugins/raphael/raphael.min.js"></script>
-		<script src="<?php echo base_url(); ?>default/js/chart.js"></script>
-		
-		<!-- Custom JS -->
-		<script src="<?php echo base_url(); ?>default/js/app.js"></script>
 		
     </body>
 </html>

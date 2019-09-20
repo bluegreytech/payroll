@@ -121,8 +121,8 @@
 
 									<div class="profile-img-wrap edit-img">
 											<?php  
-											 if(($companyimage!='' && file_exists(base_path().'/upload/admin/'.$companyimage))){ ?>
-												<img class="inline-block" src="<?php echo base_url(); ?>upload/admin/<?php echo $companyimage; ?>" alt="" id="blah">
+											 if(($companyimage!='' && file_exists(base_path().'/upload/company/'.$companyimage))){ ?>
+												<img class="inline-block" src="<?php echo base_url(); ?>upload/company/<?php echo $companyimage; ?>" alt="" id="blah">
 											<?php
 											}
 											else
@@ -233,7 +233,7 @@
 										<div class="form-group">
 														<label>Licence Expired Date</label>
 														<div class="cal-icon">
-															<input  class="form-control datetimepicker" type="text" name="digitalsignaturedate" id="digitalsignaturedate" value="<?php  if($digitalsignaturedate!='0000-00-00'){ echo date('d/m/Y', strtotime($digitalsignaturedate));} ?>" readonly>
+															<input  class="form-control datetimepicker" type="text" name="digitalsignaturedate" id="digitalsignaturedate" value="<?php  if($digitalsignaturedate!='0000-00-00'){ echo date('Y/m/d', strtotime($digitalsignaturedate));} ?>" readonly>
 														</div>
 													</div>
 
@@ -524,56 +524,7 @@
 
 		<div class="sidebar-overlay" data-reff=""></div>
 
-		
-
-		<!-- jQuery -->
-
-        <script src="<?php echo base_url(); ?>default/js/jquery-3.2.1.min.js"></script>
-
-		
-
-		<!-- Bootstrap Core JS -->
-
-        <script src="<?php echo base_url(); ?>default/js/popper.min.js"></script>
-
-        <script src="<?php echo base_url(); ?>default/js/bootstrap.min.js"></script>
-
-		
-
-		<!-- Slimscroll JS -->
-
-		<script src="<?php echo base_url(); ?>default/js/jquery.slimscroll.min.js"></script>
-
-		
-
-		<!-- Select2 JS -->
-
-	<!-- Datetimepicker JS -->
-
-	<script src="<?php echo base_url(); ?>default/js/moment.min.js"></script>
-
-<script src="<?php echo base_url(); ?>default/js/bootstrap-datetimepicker.min.js"></script>
-
-
-
-<!-- Tagsinput JS -->
-
-<script src="<?php echo base_url(); ?>default/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
-
-
-
-<!-- Custom JS -->
-
-<script src="<?php echo base_url(); ?>default/js/app.js"></script>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js" type="text/javascript" ></script>
-
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-
-
+		<?php $this->load->view('common/footer');?>
     </body>
 
 </html>
@@ -586,7 +537,7 @@
 					  format: 'YYYY/MM/DD',
 					 maxDate: moment(),
 					 ignoreReadonly: true,
-				}).val('<?php echo  ($digitalsignaturedate!='0000-00-00')  ? date('d/m/Y', strtotime($digitalsignaturedate)) : ''; ?>');
+				}).val('<?php echo  ($digitalsignaturedate!='0000-00-00')  ? date('Y/m/d', strtotime($digitalsignaturedate)) : ''; ?>');
 </script>
 
 <script>

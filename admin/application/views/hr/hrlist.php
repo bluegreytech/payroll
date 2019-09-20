@@ -173,71 +173,35 @@
 										</tr>
 
 									</thead>
-
 									<tbody>
-
 									<?php
-
 										$i=1;
-
 										if($hrData){                             
-
 										foreach($hrData as $hr)
-
 										{
-
 									?>
-
 										<tr>
-
 										<td><?php echo $i;?></td>
-
 											<td>
-
 												<h2 class="table-avatar">
-
 												<?php 
-
 												if($hr->ProfileImage!='')
-
 												{
-
 													?>
-
 													<a href="" class="avatar"><img src="<?php echo base_url();?>uploads/UserProfile/<?php echo $hr->ProfileImage;?>" alt=""></a>
-
 													<a href="profile.html"><?php echo $hr->FullName;?> 
-
-									
-
-													<?php
-
+												<?php
 												}
-
 												else
-
 												{
-
 													?>
-
-													<a href="" class="avatar"><img src="<?php echo base_url();?>uploads/default/avtar.jpg" alt=""></a>
-
-													<a href="profile.html"><?php echo $hr->FullName;?> 
-
-	
-
+												<a href="" class="avatar"><img src="<?php echo base_url();?>uploads/default/avtar.jpg" alt=""></a>
+												<a href="profile.html"><?php echo $hr->FullName;?> 
 													<?php
-
 												}
-
 												?>
-
 												</h2>
-
-												
-
 											</td>
-
 											<td><?php echo $hr->EmailAddress ;?></td>
 
 											<td><?php echo $hr->Contact ;?></td>
@@ -247,43 +211,19 @@
 							
 
 											<?php
-
 											if($this->session->userdata('RoleId')==1 || $this->session->userdata('RoleId')==2){
-
 											?>
-
-											<td class="text-right">
-
-												<div class="dropdown dropdown-action">
-
-													<a href="" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-
-													<div class="dropdown-menu dropdown-menu-right">
-
+											<td class="text-center">
 														<a class="dropdown-item" onClick="edithrs(<?php echo $hr->hr_id;?>)" data-toggle="modal" data-target="#edit_salary" role="button">
-
-														<i class="fa fa-pencil m-r-5"></i> Edit</a>
-
-														<a class="dropdown-item" onclick="deletedata(<?php echo $hr->hr_id; ?>)"  data-toggle="modal" data-target="#delete_admin"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-
-													</div>
-
-												</div>
-
+														<i class="fa fa-pencil m-r-5"></i></a>
+														<a class="dropdown-item" onclick="deletedata(<?php echo $hr->hr_id; ?>)"  data-toggle="modal" data-target="#delete_admin"><i class="fa fa-trash-o m-r-5"></i> </a>
 											</td>
-
 											<?php
-
 											}
-
 											?>
-
 										</tr>
-
 										<?php
-
 										$i++;
-
 											} }
 
 										?>     
@@ -812,133 +752,19 @@
 
 				<!-- /Delete Salary Modal -->
 
-
-
-				
-
-			
-
-
-
-				
-
             </div>
 
 			<!-- /Page Wrapper -->
 
-
-
         </div>
-
 		<!-- /Main Wrapper -->
-
-
-
 		<!-- Sidebar Overlay -->
 
 		<div class="sidebar-overlay" data-reff=""></div>
-
-
-
-		<!-- jQuery -->
-
-        <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="<?php echo base_url(); ?>default/js/jquery-3.2.1.min.js"></script>
-
-
-
-		<!-- Bootstrap Core JS -->
-
-        <script src="<?php echo base_url(); ?>default/js/popper.min.js"></script>
-
-        <script src="<?php echo base_url(); ?>default/js/bootstrap.min.js"></script>
-
-
-
-		<!-- Slimscroll JS -->
-
-		<script src="<?php echo base_url(); ?>default/js/jquery.slimscroll.min.js"></script>
-
-		
-
-		<!-- Select2 JS -->
-
-		<script src="<?php echo base_url(); ?>default/js/select2.min.js"></script>
-
-		
-
-		<!-- Datetimepicker JS -->
-
-		<script src="<?php echo base_url(); ?>default/js/moment.min.js"></script>
-
-		<script src="<?php echo base_url(); ?>default/js/bootstrap-datetimepicker.min.js"></script>
-
-		
-
-		<!-- Datatable JS -->
-
-		 <script src="<?php echo base_url(); ?>default/js/jquery.dataTables.min.js"></script>
-
-		<script src="<?php echo base_url(); ?>default/js/dataTables.bootstrap4.min.js"></script>		 
-
-
-
-
-
-		<!-- External -->
-
-		<!-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-
-		<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>	
-
-		<script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>	
-
-
-
-		<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>		
-
-		<script src="https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>		
-
-		<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>		
-
-		<script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>		 -->
-
-		
-
-
-
-
-
-	
-
-		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-
-		<script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
-
-		<script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script> -->
-
+		<?php $this->load->view('common/footer');?>
 
 
 		
-
-
-
-
-
-		<!-- Custom JS -->
-
-		<script src="<?php echo base_url(); ?>default/js/app.js"></script>
-
-		<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
-
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js" type="text/javascript" ></script>
-
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
-
-		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     </body>
 
