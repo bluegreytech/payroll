@@ -4,45 +4,36 @@
 ?>	
 
 <script language="javascript">
-	function func1() {
-	$(document).ready(function() 
+	function get_state(companyid)
 	{
-	alert($("#companyid").val());
-	url="<?php echo base_url();?>"
-	$.ajax({
-         url: url+'Invoice/gethr',
-         type: 'post',
-		 data:{companyid:companyid},
-         success:function(response){
-			var response = JSON.parse(response);
-               console.log(response);
-			//   console.log(response.FullName);
-            $('#hr_id').val(response.hr_id);
-			$('#FullName').val(response.FullName);
-			$('#EmailAddress').val(response.EmailAddress);
-			$("option[id=hr_id][value=" + response.hr_id=='#hr_id' + "]").attr('selected', 'selected');
-         }
-      });	
-});	
-}
-window.onload=func1;
+		//alert(sid);
+		var http  = new XMLHttpRequest();
+		http.open("GET","get_state/"+companyid,true);
+		http.send();
+		http.onreadystatechange=function()
+		{
+			if(http.readyState==4)
+			{
+				document.getElementById('getstate').innerHTML=http.responseText;
+			}
+		}
+	}
+	
 </script>
-
 <script>
 	function m1()
 	{
 		var a=document.getElementById("txt1").value;
 		var b=document.getElementById("txt2").value;
 		var c=document.getElementById("txt3").value;
+		var d=document.getElementById("txt4").value;
 
 		var z=a*b;		
-		var t=z*c/100;
-		document.getElementById("tax").value=t;
-		var h= +z;
-		document.getElementById("total").value=h;
+		var h= +z + +c;
+		var m=h-d;
+		document.getElementById("total").value=m;
 		
-		var x=t+h;
-		document.getElementById("nettotal").value=x;
+		
 	}
 	</script>
 		<!-- Page Wrapper -->			
@@ -64,9 +55,8 @@ window.onload=func1;
 
 					<div class="row">
 						<div class="col-md-12">
-							<form method="post" action="<?php echo base_url();?>Invoice/createinvoice"  id="form_valid">
+							<form method="post" action="<?php echo base_url();?>Invoice/createinvoice">
 								<div class="row">
-								<input class="form-control" type="text" name="Companyinvoiceid" value="<?php echo $Companyinvoiceid; ?>">
 									<div class="col-sm-6 col-md-3">
 										<div class="form-group">
 											<label>Company <span class="text-danger">*</span></label>
@@ -77,8 +67,7 @@ window.onload=func1;
 													foreach($companyData as $comp)
 													{
 												?>
-													<option value="<?php echo $comp->companyid; ?>"<?php if($companyid==$comp->companyid){echo "selected" ;}?>><?php echo $comp->companyname;?></option>
-													
+													<option value="<?php echo $comp->companyid; ?>"><?php echo $comp->companyname;?></option>
 												<?php
 												}}
 												?>
@@ -108,16 +97,14 @@ window.onload=func1;
 									<div class="col-sm-6 col-md-3">
 										<div class="form-group">
 											<label>Email</label>
-											<input class="form-control" type="email" name="EmailAddress" id="EmailAddress" >
+											<input class="form-control" type="email" name="EmailAddress" id="EmailAddress">
 										</div>
 									</div>
-									<?php if($Companyinvoiceid=='')
-									{
-										?>
+
 									<div class="col-sm-6 col-md-3">
 										<div class="form-group">
 											<label>Payment option</label>
-											<select class="form-control" name="paymentopt" id="txt1">
+											<select class="select" name="taxamountper" id="txt1">
 												<option value="" disabled>Select payment option</option>
 												<option value="1">Monthly</option>
 												<option value="3">Quarterly</option>
@@ -126,28 +113,8 @@ window.onload=func1;
 											</select>
 										</div>
 									</div>
-									<?php 
-							}
-								?>
-									
-							<?php if($Companyinvoiceid!='')
-							{
-								?>
-									<div class="col-sm-6 col-md-3">
-										<div class="form-group">
-											<label>Payment option</label>
-											<select class="form-control" name="paymentopt" id="txt1">
-												<option value="" disabled>Select payment option</option>
-												<option value="<?php if($paymentopt==1){echo "selected";}?>">Monthly</option>
-												<option value="<?php if($paymentopt==3){echo "selected";}?>">Quarterly</option>
-												<option value="<?php if($paymentopt==6){echo "selected";}?>">Halfly</option>
-												<option value="<?php if($paymentopt==12){echo "selected";}?>">Yearly</option>
-											</select>
-										</div>
-									</div>
-									<?php 
-							}
-								?>
+
+								
 
 									<div class="col-sm-6 col-md-3">
 										<div class="form-group">
@@ -179,37 +146,31 @@ window.onload=func1;
 														<td></td><td></td><td></td><td></td>
 														<td class="text-right">Monthly Payment</td>
 														<td style="text-align: right; width: 230px">
-														<input class="form-control" type="text" name="amount" id="txt2" onChange="m1()">
-														</td>
-													</tr>
-													<tr>
-														<td colspan="5" style="text-align: right; font-weight: bold">
-															Total
-														</td>
-														<td>
-															<input class="form-control" name="totalamount" value="<?php echo $totalamount; ?>"  type="text" id="total" onChange="m1()">
+														<input class="form-control" type="text" name="totalamount" id="txt2" onChange="m1()">
 														</td>
 													</tr>
 													<tr>
 														<td colspan="5" style="text-align: right">Add Tax %</td>
 														<td style="text-align: right;width: 230px">
-															<input class="form-control" type="text" name="addtax" id="txt3" onChange="m1()">
+															<input class="form-control" type="text" name="taxamount" id="txt3" onChange="m1()">
 														</td>
-
-														<td colspan="5" style="text-align: right"> Tax Amount</td>
-														<td style="text-align: right;width: 230px">
-															<input class="form-control" type="text" value="<?php echo $taxamount; ?>" name="taxamount" id="tax" onChange="m1()">
+													</tr>
+													<tr>
+														<td colspan="5" style="text-align: right">
+															Discount %
+														</td>
+														<td style="text-align: right; width: 230px">
+															<input class="form-control" type="text" name="discount" id="txt4" onChange="m1()">
 														</td>
 													</tr>
 													<tr>
 														<td colspan="5" style="text-align: right; font-weight: bold">
-														Net	Total
+															Net Total
 														</td>
 														<td>
-															<input class="form-control" name="netamount" value="<?php echo $netamount; ?>" type="text" id="nettotal" onChange="m1()">
+															<input class="form-control" name="netamount"  type="text" id="total" onChange="m1()">
 														</td>
 													</tr>
-													
 												</tbody>
 											</table>                               
 										</div>
@@ -223,27 +184,37 @@ window.onload=func1;
 								<div class="submit-section">
 									<input type="submit" name="submit" class="btn btn-primary account-btn" value="Save">
 								</div>
+
 							</form>
+
 						</div>
+
 					</div>
+
 				</div>
+
 				<!-- /Page Content -->
 
+				
 
             </div>
 
 			<!-- /Page Wrapper -->
+
 			
 
         </div>
+
 		<!-- /Main Wrapper -->
+
+		
+
 		<!-- Sidebar Overlay -->
 
 		<div class="sidebar-overlay" data-reff=""></div>
 		<?php $this->load->view('common/footer');?>
     </body>
 </html>
-
 <script type="text/javascript">
 				$('#invoicedate').datetimepicker({
 					format: 'YYYY/MM/DD',
@@ -272,49 +243,11 @@ function gethr(companyid) {
 			$('#EmailAddress').val(response.EmailAddress);
 			$("option[id=hr_id][value=" + response.hr_id=='#hr_id' + "]").attr('selected', 'selected');
          }
+
       });	
+
 }
 
+
+
 </script>
-<script>
-$(document).ready(function()
-{
-		$("#form_valid").validate(
-		{
-				rules: {
-						companyid: {
-							required: true,
-								},
-						invoicedate: {
-							required: true,
-								},
-						duedate: {
-							required: true,
-								},
-						taxpayment: {
-							required: true,
-								},		
-					},
-				messages:{
-						companyid: {
-							required: "Please select company",
-						},
-						invoicedate: {
-							required: "Please select invoice date",
-						},
-						duedate: {
-							required: "Please select invoice due date",
-						},
-						taxpayment: {
-							required: "Please select payment option",
-								},
-					
-
-			}
-		});
-});					        
-</script>
-
-
-<button type="button" class="btn btn-info" onclick=$("#d").load("load-text.php");>Load Page</button>
-<div id='companyid'></div> 

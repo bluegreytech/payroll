@@ -143,267 +143,325 @@
 									<div class="row">
 
 										<div class="col-md-6">
-
 											<div class="form-group">
-
 													<label>Type of Company</label>
-
 													<select class="form-control" name="companytypeid"> 
-
 														<option desabled value="">Please select type of company</option>
-
 														<?php
-
 														 if($companytypeData){
-
 															foreach($companytypeData as $typecompany)
-
 															{
-
 														?>
-
 															<option value="<?php echo $typecompany->companytypeid; ?>" <?php if($companytypeid==$typecompany->companytypeid){echo "selected" ;}?>><?php echo $typecompany->companytype;?></option>
-
 														<?php
-
 														}}
-
 														?>
-
 													</select>
-
 											</div>
-
 										</div>
 
 										<div class="col-md-6">
-
 											<div class="form-group">
-
-											
-
 												<label class="col-form-label">Company Name <span class="text-danger">*</span></label>
-
 												<input class="form-control" type="text" minlength="2" maxlength="100" name="companyname" placeholder="Enter company name" value="<?php echo $companyname; ?>">
-
 											</div>
-
 										</div>
-
 										<div class="col-md-6">
-
 											<div class="form-group">
-
 												<label class="col-form-label">Email Address</label><span class="text-danger">*</span></label>
-
 												<input class="form-control" minlength="2" maxlength="50" type="email" name="comemailaddress" placeholder="Enter email address" value="<?php echo $comemailaddress; ?>">
-
 											</div>
-
 										</div>
 
 										<div class="col-md-6">
-
 											<div class="form-group">
-
 												<label class="col-form-label">Contact Number <span class="text-danger">*</span></label>
-
 												<input class="form-control" minlength="10" maxlength="10" type="text" name="comcontactnumber" id="comcontactnumber" placeholder="Enter contact number"  
-
 												value="<?php echo $comcontactnumber; ?>">
-
 											</div>
-
 										</div>
 
 										<div class="col-md-6">
-
 											<div class="form-group">
-
 												<label class="col-form-label">GST Number <span class="text-danger">*</span></label>
-
 												<input class="form-control floating" minlength="05" maxlength="20" type="text" name="gstnumber" id="gstnumber" placeholder="Enter gst number" value="<?php echo $gstnumber; ?>">
-
 											</div>
-
 										</div>
 
 										<div class="col-md-6">
-
 										<div class="form-group">
 														<label>Licence Expired Date</label>
 														<div class="cal-icon">
 															<input  class="form-control datetimepicker" type="text" name="digitalsignaturedate" id="digitalsignaturedate" value="<?php  if($digitalsignaturedate!='0000-00-00'){ echo date('Y/m/d', strtotime($digitalsignaturedate));} ?>" readonly>
 														</div>
 													</div>
-
 										</div>
 
 										<div class="col-md-6">
-
 											<div class="form-group">
-
 												<label class="col-form-label">Address<span class="text-danger">*</span></label>
-
 												<input class="form-control"  type="text" name="companyaddress" id="companyaddress" placeholder="Enter company address"  
-
 												value="<?php echo $companyaddress; ?>">
-
 											</div>
-
 										</div>
 
 										<div class="col-md-6">
-
 											<div class="form-group">
-
 													<label>State</label>
-
 													<select class="form-control" name="stateid"> 
-
 														<option desabled value="">Please select state</option>
-
 														<?php
-
 														 if($stateData){
-
 															foreach($stateData as $state)
-
 															{
-
 														?>
-
 															<option value="<?php echo $state->stateid; ?>" <?php if($stateid==$state->stateid){echo "selected" ;}?>><?php echo $state->statename;?></option>
-
-
 
 															<!-- <option value="<?php //echo $state->stateid; ?>">
 
 															<?php //echo $state->statename;?></option> -->
-
-
-
 														<?php
-
 														}}
-
 														?>
-
 													</select>
-
 											</div>
-
 										</div>
 
 										<div class="col-md-6">
-
 											<div class="form-group">
-
 												<label class="col-form-label">City</label><span class="text-danger">*</span></label>
-
 												<input class="form-control" minlength="2" maxlength="50" type="text" name="companycity" placeholder="Enter city" value="<?php echo $companycity; ?>">
-
 											</div>
-
 										</div>
 
 										<div class="col-md-6">
-
 											<div class="form-group">
-
 												<label class="col-form-label">Pincode</label><span class="text-danger">*</span></label>
-
 												<input class="form-control" minlength="06" maxlength="06" type="text" name="pincode" id="pincode" placeholder="Enter pincode" value="<?php echo $pincode; ?>">
-
 											</div>
-
 										</div>
 
 										<?php
 
 										if($companyid=='')
-
 										{ 
-
 											?>
-
 												<div class="col-md-6">
-
 													<div class="form-group">
-
 													<label class="col-form-label">Isactive<span class="text-danger">*</span></label><br>
-
 													<label class="radio-inline">
-
 														<input type="radio" name="isactive"  checked value="1">Active
-
 													</label>
 
 													<label class="radio-inline">
-
 														<input type="radio" name="isactive" value="0">Deactive
-
 													</label>
-
 													</div>
-
 												</div>
-
 											<?php
-
 										}
-
 										else
-
 										{
-
-											
-
 												?>
 
 													<div class="col-md-6">
-
 														<div class="form-group">
-
 														<label class="col-form-label">Isactive<span class="text-danger">*</span></label><br>
-
 														<label class="radio-inline">
-
 															<input type="radio" name="isactive" <?php if($isactive==1){echo "checked";}?> 
-
 																 value="1">Active
-
-															
-
 														</label>
-
 														<label class="radio-inline">
-
 															<input type="radio" name="isactive" <?php if($isactive==0){echo "checked";}?>value="0">Inactive
-
-															
-
 														</label>
-
 														</div>
-
 													</div>
-
 												<?php
-
 											}
-
-										
-
-										
-
 										?>
 
-									
+										<div class="col-md-6">
+											<div class="form-group">
+													<label>Company Shift Hours</label>
+													<select class="form-control" name="Shifthours[]"  id="purpose"> 
+														<option desabled value="">Please select hours</option>
+														<option  value="8">08 Hours</option>
+														<option  value="16">16 Hours</option>
+														<option  value="24">24 Hours</option>
+													
+													</select>
+											</div>
+										</div>
 
 									</div>
 
-										
+							
+													
+								<div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+									<fieldset  id='business'>
+									<legend>Shift</legend>
+										<div class="dash-widget clearfix card-box">	
+											<div class="row">
+												<div class="col-md-12">
+															<div class="form-group">
+																<label class="col-form-label">Shift Name <span class="text-danger">*</span></label>
+																<input class="form-control" minlength="02" maxlength="20" type="text" name="Shiftname"  placeholder="Enter shift name">
+															</div>
+												</div>
+
+												<div class="col-md-6">
+															<div class="form-group">
+																<label class="col-form-label">Shift In Time <span class="text-danger">*</span></label>
+																<input class="form-control" type="time" name="Shiftintime"   placeholder="Enter shift in time number">
+																
+															</div>
+												</div>
+
+												<div class="col-md-6">
+															<div class="form-group">
+																<label class="col-form-label"> Shift Out Time <span class="text-danger">*</span></label>
+																<input class="form-control" type="time" name="Shiftouttime" placeholder="Enter shift out time number">
+															</div>
+												</div>		
+											</div>
+										</div>
+									</fieldset>
+
+									<fieldset id='business2' style="display: none;">
+									<legend>Shift</legend>
+										<div class="dash-widget clearfix card-box" >	
+											<div class="row">
+												<div class="col-md-12">
+															<div class="form-group">
+																<label class="col-form-label">Shift Name <span class="text-danger">*</span></label>
+																<input class="form-control" minlength="02" maxlength="30" type="text" name="Shiftname"  placeholder="Enter shift name">
+															</div>
+												</div>
+
+												<div class="col-md-6">
+															<div class="form-group">
+																<label class="col-form-label">Shift In Time <span class="text-danger">*</span></label>
+																<input class="form-control"  type="text" name="Shiftintime"  placeholder="Enter shift in time number" >
+																
+															</div>
+												</div>
+
+												<div class="col-md-6">
+															<div class="form-group">
+																<label class="col-form-label"> Shift Out Time <span class="text-danger">*</span></label>
+																<input class="form-control"  type="text" name="Shiftouttime" placeholder="Enter shift out time number"  >
+																
+															</div>
+												</div>		
+											</div>
+											<legend>Shift 2</legend>
+											<div class="row">
+												<div class="col-md-12">
+															<div class="form-group">
+																<label class="col-form-label">Shift Name <span class="text-danger">*</span></label>
+																<input class="form-control" minlength="02" maxlength="30" type="text" name="Shiftname"  placeholder="Enter shift name">
+															</div>
+												</div>
+
+												<div class="col-md-6">
+															<div class="form-group">
+																<label class="col-form-label">Shift In Time <span class="text-danger">*</span></label>
+																<input class="form-control"  type="time" name="Shiftintime"  placeholder="Enter shift in time number" >
+																
+															</div>
+												</div>
+
+												<div class="col-md-6">
+															<div class="form-group">
+																<label class="col-form-label"> Shift Out Time <span class="text-danger">*</span></label>
+																<input class="form-control"  type="time" name="Shiftouttime" placeholder="Enter shift out time number"  >
+																
+															</div>
+												</div>		
+											</div>
+										</div>
+									</fieldset>
+
+									<fieldset id='business3' style="display: none;">
+									<legend>Shift </legend>
+										<div class="dash-widget clearfix card-box" >	
+											<div class="row">
+												<div class="col-md-12">
+															<div class="form-group">
+																<label class="col-form-label">Shift Name <span class="text-danger">*</span></label>
+																<input class="form-control" minlength="02" maxlength="30" type="text" name="Shiftname[]"  placeholder="Enter shift name">
+															</div>
+												</div>
+
+												<div class="col-md-6">
+															<div class="form-group">
+																<label class="col-form-label">Shift In Time <span class="text-danger">*</span></label>
+																<input class="form-control"  type="time" name="Shiftintime[]"  placeholder="Enter shift in time number" >
+																
+															</div>
+												</div>
+
+												<div class="col-md-6">
+															<div class="form-group">
+																<label class="col-form-label"> Shift Out Time <span class="text-danger">*</span></label>
+																<input class="form-control" type="time" name="Shiftouttime[]" placeholder="Enter shift out time number"  >
+																
+															</div>
+												</div>		
+											</div>
+											<legend>Shift 2</legend>
+											<div class="row">
+												<div class="col-md-12">
+															<div class="form-group">
+																<label class="col-form-label">Shift Name <span class="text-danger">*</span></label>
+																<input class="form-control" minlength="02" maxlength="30" type="text" name="Shiftname[]"  placeholder="Enter shift name">
+															</div>
+												</div>
+
+												<div class="col-md-6">
+															<div class="form-group">
+																<label class="col-form-label">Shift In Time <span class="text-danger">*</span></label>
+																<input class="form-control"  type="time" name="Shiftintime[]"  placeholder="Enter shift in time number" >
+																
+															</div>
+												</div>
+
+												<div class="col-md-6">
+															<div class="form-group">
+																<label class="col-form-label"> Shift Out Time <span class="text-danger">*</span></label>
+																<input class="form-control" type="time" name="Shiftouttime[]" placeholder="Enter shift out time number"  >
+																
+															</div>
+												</div>		
+											</div>
+											<legend>Shift 3</legend>
+											<div class="row">
+												<div class="col-md-12">
+															<div class="form-group">
+																<label class="col-form-label">Shift Name <span class="text-danger">*</span></label>
+																<input class="form-control"  minlength="02" maxlength="30" type="text" name="Shiftname[]"  placeholder="Enter shift name">
+															</div>
+												</div>
+
+												<div class="col-md-6">
+															<div class="form-group">
+																<label class="col-form-label">Shift In Time <span class="text-danger">*</span></label>
+																<input class="form-control"  type="time" name="Shiftintime[]"  placeholder="Enter shift in time number" >
+																
+															</div>
+												</div>
+
+												<div class="col-md-6">
+															<div class="form-group">
+																<label class="col-form-label"> Shift Out Time <span class="text-danger">*</span></label>
+																<input class="form-control" type="time" name="Shiftouttime[]" placeholder="Enter shift out time number"  >
+																
+															</div>
+												</div>		
+											</div>
+										</div>
+									</fieldset> 
+								</div>
 
 									<div class="table-responsive m-t-15">
 
@@ -498,35 +556,15 @@
 
 							</div></div>
 
-						
-
 				<!-- /Add Client Modal -->
-
-				
-
-			
-
-			
-
             </div>
-
 			<!-- /Page Wrapper -->
-
-			
-
         </div>
-
 		<!-- /Main Wrapper -->
-
-		
-
 		<!-- Sidebar Overlay -->
-
 		<div class="sidebar-overlay" data-reff=""></div>
-
 		<?php $this->load->view('common/footer');?>
     </body>
-
 </html>
 
 
@@ -535,12 +573,48 @@
 				$('#digitalsignaturedate').datetimepicker({
 				  	// format: 'DD/MM/YYYY',
 					  format: 'YYYY/MM/DD',
-					 maxDate: moment(),
 					 ignoreReadonly: true,
 				}).val('<?php echo  ($digitalsignaturedate!='0000-00-00')  ? date('Y/m/d', strtotime($digitalsignaturedate)) : ''; ?>');
+
+
+				// $('#Shiftintime').datetimepicker({
+				//   	// format: 'DD/MM/YYYY',
+				// 	  format: 'h:i',
+				// 	 //maxDate: moment(),
+				// 	 ignoreReadonly: true,
+				// }).val('<?php //echo  ($Shiftintime!='00-00')  ? date('h:i', strtotime($Shiftintime)) : ''; ?>');
+
+				// $('#Shiftouttime').datetimepicker({
+				//   	// format: 'DD/MM/YYYY',
+				// 	  format: 'h:i',
+				// 	 //maxDate: moment(),
+				// 	 ignoreReadonly: true,
+				// }).val('<?php// echo  ($Shiftouttime!='00-00')  ? date('h:i', strtotime($Shiftouttime)) : ''; ?>');
 </script>
 
 <script>
+$(document).ready(function(){
+    $('#purpose').on('change', function() {
+      if(this.value==8)
+      {
+        $("#business").show();
+		$("#business2").hide();
+		$("#business3").hide();	
+      }
+      else if(this.value==16)
+      {
+        $("#business").hide();
+		$("#business2").show();
+		$("#business3").hide();
+      }
+	  else if(this.value==24)
+	  {
+		$("#business").hide();
+		$("#business2").hide();
+		$("#business3").show();
+	  }
+    });
+});
 
 function readURL(input) {
             if (input.files && input.files[0]) {
@@ -554,238 +628,153 @@ function readURL(input) {
         }	
 		
 		$(function() { 
-
 			setTimeout(function() {
-
 		$('#errorMessage').fadeOut('fast');
-
 		}, 10000);  
-
 		});
 
-
-
 		$(function() { 
-
 			setTimeout(function() {
-
 		$('#successMessage').fadeOut('fast');
-
 		}, 10000);  
-
 		});
-
-
 
 		$(function() { 
-
 			setTimeout(function() {
-
 		$('#warningMessage').fadeOut('fast');
-
 		}, 10000);  
-
 		});
-
-
 
 		$("#comcontactnumber").on("input", function(evt) {
-
 		var self = $(this);
-
 		self.val(self.val().replace(/[^\d].+/, ""));
-
 		if ((evt.which < 48 || evt.which > 57)) 
-
 		{
-
 			evt.preventDefault();
-
 		}
-
 		});
-
 		$("#gstnumber").on("input", function(evt) {
-
 		var self = $(this);
-
 		self.val(self.val().replace(/[^\d].+/, ""));
-
 		if ((evt.which < 48 || evt.which > 57)) 
-
 		{
-
-			evt.preventDefault();
-
+		evt.preventDefault();
 		}
-
 		});
 
 
 
 		$("#pincode").on("input", function(evt) {
-
 		var self = $(this);
-
 		self.val(self.val().replace(/[^\d].+/, ""));
-
 		if ((evt.which < 48 || evt.which > 57)) 
-
 		{
-
 			evt.preventDefault();
-
 		}
-
 		});
-
 		$.validator.addMethod('filesize', function (value, element, param) {
 		return this.optional(element) || (element.files[0].size <= param)
 		} ,'File size must be equal to or less then 2MB');
 
 
 $(document).ready(function()
-
 		{
-
 				$("#form_valid").validate(
-
 				{
-
 						rules: {
-
 							companytypeid: {
-
 									required: true,
-
 										},
-
 							companyname: {
-
 									required: true,
-
 										},
-
 							comemailaddress: {
-
 									required: true,
-
 										},
-
 							comcontactnumber: {
-
 									required: true,
-
 										},
-
 							gstnumber: {
-
 									required: true,
-
 										},
-
 							digitalsignaturedate: {
-
 									required: true,
-
 										},	
-							// companyimage: {
-							// 		extension: "JPG|jpeg|png|bmp",
-							// 	//	filesize : 2000000,	
-							// 				},
+							companyimage: {
+									extension: "JPG|jpeg|png|bmp",
+									filesize : 2000000,	
+											},
 							companyaddress: {
-
 									required: true,
-
 										},
-
 							stateid: {
-
 									required: true,
-
 										},
-
 							companycity: {
-
 									required: true,
-
 										},
-
 							pincode:{
-
 									required: true,
-
 							},
-
+							Shiftid:{
+									required: true,
 							},
-
+							Shiftname:{
+									required: true,
+							},
+							Shiftintime:{
+									required: true,
+							},
+							Shiftouttime:{
+									required: true,
+							},
+						},
 						messages:{
-
-							
-
 							companytypeid: {
-
 									required: "Please select type of company",
-
 										},
-
 							companyname: {
-
 									required: "Please enter a company name",
-
 										},	
-
 							comemailaddress: {
-
 									required: "Please enter a company email address",
-
 										},	
-
 							comcontactnumber: {
-
 									required: "Please enter a company contact number",
-
 										},	
-
 							gstnumber: {
-
 									required: "Please enter a company gst number",
-
 										},
-
 							digitalsignaturedate: {
-
 									required: "Please select company signature expire date",
-
 										},	
-							// companyimage: {
-							// 		extension: "Only jpg,jpeg,png file allowed",
-							// 				},
-
+							companyimage: {
+									extension: "Only jpg,jpeg,png file allowed",
+											},
 							companyaddress: {
-
 									required: "Please enter a company address",
-
 										},	
-
 							stateid: {
-
 									required: "Please select state",
-
 										},
-
 							companycity: {
-
 									required: "Please enter a city",
-
 										},	
-
 							pincode: {
-
 									required: "Please enter a pincode",
-
 										},	
-
+							Shiftid: {
+									required: "Please select hours",
+										},			
+							Shiftname: {
+									required: "Please enter shift name",
+										},
+							Shiftintime: {
+									required: "Please enter shift in time",
+										},			
+							Shiftouttime: {
+									required: "Please enter shift out time",
+										},	
 					},
 					errorPlacement: function (error, element)
 					{

@@ -150,7 +150,7 @@
 											<th>From Company</th>
 											<th>Department</th>
 											<th>Designation</th>
-											<th class="text-right">Action</th>
+											<!-- <th class="text-right">Action</th> -->
 
 											
 
@@ -168,7 +168,27 @@
 
 										<tr>
 										<td><?php echo $i;?></td>
-										<td><?php echo $empData->first_name ;?></td>
+										<td>
+											<span  class="table-avatar">
+											<?php 
+											if($empData->ProfileImage!='')
+											{
+												?>
+												<a href="<?php echo base_url();?>Employee/profile/<?php echo $empData->emp_id;?>" title="show employee profile" class="avatar"><img src="http://localhost/payroll/hr/upload/emp/<?php echo $empData->ProfileImage;?>"></a>
+												<a href="<?php echo base_url();?>Employee/profile/<?php echo $empData->emp_id;?>" title="show employee profile"><?php echo $empData->first_name;?></a>
+												<?php
+
+											}
+											else
+											{
+												?>
+												<a href="<?php echo base_url();?>Employee/profile/<?php echo $empData->emp_id;?>" title="show employee profile" class="avatar"><img src="<?php echo base_url();?>upload/default/avtar.jpg"></a>
+												<a href="<?php echo base_url();?>Employee/profile/<?php echo $empData->emp_id;?>" title="show employee profile"><?php echo $empData->first_name;?></a>
+												<?php
+											}
+											?>
+											</h2>
+											</td>
 										<td><?php echo $empData->phone ;?></td>
 										<td><?php echo $empData->email ;?></td>
 										<td><?php echo $empData->companyname ;?></td>
@@ -176,25 +196,8 @@
 										<td><?php echo $empData->desgination ;?></td>
 
 											<td class="text-right">
-
-												<div class="dropdown dropdown-action">
-
-													<a href="" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-
-													<div class="dropdown-menu dropdown-menu-right">
-
-														<!-- <a class="dropdown-item" href="<?php //echo base_url();?>empDataany/editempDataany/<?php //echo $empData->emp_id;?>" role="button">
-
-														<i class="fa fa-pencil m-r-5"></i> Edit</a> -->
-
-														<a class="dropdown-item" onclick="deletedata(<?php echo $empData->emp_id; ?>)" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-
-														
-
-													</div>
-
-												</div>
-
+													<!-- <a class="dropdown-item" href="<?php //echo base_url();?><?php //echo $empData->emp_id;?>" role="button">Show Profile </a> -->
+														<!-- <a class="dropdown-item" onclick="deletedata(<?php// echo $empData->emp_id; ?>)" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o m-r-5"></i> Delete</a> -->
 											</td>
 
 											

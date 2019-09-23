@@ -188,15 +188,15 @@
 												if($hr->ProfileImage!='')
 												{
 													?>
-													<a href="" class="avatar"><img src="<?php echo base_url();?>uploads/UserProfile/<?php echo $hr->ProfileImage;?>" alt=""></a>
-													<a href="profile.html"><?php echo $hr->FullName;?> 
+													<a href="<?php echo base_url();?>Hr/profile/<?php echo $hr->hr_id;?>" title="show hr profile" class="avatar"><img src="<?php echo base_url();?>upload/hr/<?php echo $hr->ProfileImage;?>" ></a>
+													<a href="<?php echo base_url();?>Hr/profile/<?php echo $hr->hr_id;?>" title="show hr profile"><?php echo $hr->FullName;?> 
 												<?php
 												}
 												else
 												{
 													?>
-												<a href="" class="avatar"><img src="<?php echo base_url();?>uploads/default/avtar.jpg" alt=""></a>
-												<a href="profile.html"><?php echo $hr->FullName;?> 
+												<a href="<?php echo base_url();?>Hr/profile/<?php echo $hr->hr_id;?>" title="show hr profile" class="avatar"><img src="<?php echo base_url();?>upload/default/avtar.jpg"></a>
+												<a href="<?php echo base_url();?>Hr/profile/<?php echo $hr->hr_id;?>" title="show hr profile"><?php echo $hr->FullName;?> 
 													<?php
 												}
 												?>

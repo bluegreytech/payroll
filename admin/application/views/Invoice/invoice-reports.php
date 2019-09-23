@@ -91,13 +91,22 @@
 										<td><?php echo $compInvoice->companyname ;?></td>
 										<td><?php echo $compInvoice->invoicedate ;?></td>
 										<td><?php echo $compInvoice->duedate ;?></td>
-										<td><?php echo $compInvoice->netamount ;?></td>	
-										<td><span class="badge badge-success-border">Paid</span></td>
+										<td><?php echo $compInvoice->netamount ;?></td>		
+										<td>		
+											<?php if($compInvoice->status=='Paid'){ 
+												echo "<span class='badge badge-success-border'>Paid</span>";
+												}?>
+											<?php if($compInvoice->status=='Pending'){
+													echo "<span class='badge badge-danger-border'>Pending</span>";
+													}?>
+								
+											
+										</td>
 										<td class="text-right">
 										<div class="dropdown dropdown-action">
 											<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
 											<div class="dropdown-menu dropdown-menu-right">
-												<a class="dropdown-item" href="<?php echo base_url();?>Invoice/edit_invoice"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+												<a class="dropdown-item" href="<?php echo base_url();?>Invoice/edit_invoice/<?php echo $compInvoice->Companyinvoiceid;?>"><i class="fa fa-pencil m-r-5"></i> Edit</a>
 												<a class="dropdown-item" href="<?php echo base_url();?>Invoice/invoice_view/<?php echo $compInvoice->Companyinvoiceid;?>"><i class="fa fa-eye m-r-5"></i> View</a>
 												<a class="dropdown-item" href="#"><i class="fa fa-file-pdf-o m-r-5"></i> Download</a>
 												<a class="dropdown-item" href="#"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
@@ -105,12 +114,6 @@
 										</div>
 
 										</td>
-
-											
-
-										
-
-
 
 										</tr>
 

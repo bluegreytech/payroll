@@ -12,14 +12,24 @@ class Invoice extends CI_Controller
 	public function index()
 	{
 		$data['invoiceData']=$this->Invoice_model->list_companyinvoice();
-	//echo "<pre>";	print_r($data['invoiceData']);die;
+			//echo "<pre>";	print_r($data['invoiceData']);die;
 		$this->load->view('Invoice/invoice-reports',$data);
 	}
 
 
 	public function createinvoice()
 	{
-		if($_POST){	
+			$data=array();
+			$data['Companyinvoiceid']=$this->input->post('Companyinvoiceid');
+			$data['companyid']=$this->input->post('companyid');
+			$data['hr_id']=$this->input->post('hr_id');
+			$data['invoicedate']=$this->input->post('invoicedate');
+			$data['duedate']=$this->input->post('duedate');
+			$data['totalamount']=$this->input->post('totalamount');
+			$data['taxamount']=$this->input->post('taxamount');
+			$data['netamount']=$this->input->post('netamount');
+		if($_POST)
+		{	
 			if($this->input->post('Companyinvoiceid')==''){			
 				$result=$this->Invoice_model->add_invoice();	
 				if($result==1)
@@ -41,7 +51,7 @@ class Invoice extends CI_Controller
 			}
 			else
 			{
-				$result=$this->Invoice_model->update_company();
+				$result=$this->Invoice_model->update_invoice();
 				if($result==1)
 				{
 					$this->session->set_flashdata('success', 'Record has been Updated Successfully!');
@@ -68,38 +78,28 @@ class Invoice extends CI_Controller
 	}
 
 
-	public function edit_invoice()
+	public function edit_invoice($Companyinvoiceid)
 	{
 		$data=array();
-		// $result=$this->Invoice_model->get_companyprofile($companyid);	
-		// //echo "<br>";print_r($result);die;
-		// $data['companyid']=$result['companyid'];
-		// $data['companytypeid']=$result['companytypeid'];
-		// $data['companytype']=$result['companytype'];
-		// $data['companyname']=$result['companyname'];
-		// $data['comemailaddress']=$result['comemailaddress'];
-		// $data['comcontactnumber']=$result['comcontactnumber'];
-		// $data['gstnumber']=$result['gstnumber'];
-		// $data['digitalsignaturedate']=$result['digitalsignaturedate'];
-		// $data['companyimage']= $result['companyimage'];
-		// $data['companyaddress']=$result['companyaddress'];
-		// $data['stateid']=$result['stateid'];
-		// $data['statename']=$result['statename'];
-		// $data['companycity']=$result['companycity'];
-		// $data['pincode']=$result['pincode'];
-		// $data['isactive']=$result['isactive'];
-		// $data['companycomplianceid']=$result['companycomplianceid'];
-		// $data['complianceid']=$result['complianceid'];
-		// $data['Companynotificationid']=$result['Companynotificationid'];
-		// $data['Enddate']=$result['Enddate'];
-		// $data['Companydocumentid']=$result['Companydocumentid'];
-		// $data['Documenttitle']=$result['Documenttitle'];
-		// $data['Notificationdescription']=$result['Notificationdescription'];
-		// $data['Documentfile']=$result['Documentfile'];
+		$result=$this->Invoice_model->get_invoice($Companyinvoiceid);	
+		$data['Companyinvoiceid']=$result['Companyinvoiceid'];
+		$data['companyid']=$result['companyid'];
+
+		$data['hr_id']=$result['hr_id'];
+		$data['hr_type']=$result['hr_type'];
+		$data['FullName']=$result['FullName'];
+		$data['EmailAddress']=$result['EmailAddress'];
 		
-	
+		$data['paymentopt']=$result['paymentopt'];
+		$data['invoicedate']=$result['invoicedate'];
+		$data['duedate']=$this->input->post('duedate');
+		$data['totalamount']=$result['totalamount'];
+		$data['taxamount']=$result['taxamount'];
+		$data['netamount']=$result['netamount'];
+		
+		$data['hrData']=$this->Invoice_model->list_hr();
 	    $data['companyData']=$this->Invoice_model->list_company();
-	   $this->load->view('Invoice/edit-invoice',$data);
+		$this->load->view('Invoice/add-invoice',$data);
 	}
 
 
@@ -139,12 +139,10 @@ class Invoice extends CI_Controller
 	}
 
 
-	public function gethr($companyid)
+	public function gethr()
 	{
 		$data=array();
-		$result=$this->Invoice_model->getdatahr($companyid);	
-		// print_r($result);
-		// die;
+		$result=$this->Invoice_model->getdatahr($this->input->post('companyid'));	
 		$data['hr_id']=$result['hr_id'];
 		$data['companyid']=$result['companyid'];
 		$data['hr_type']=$result['hr_type'];	
@@ -154,7 +152,6 @@ class Invoice extends CI_Controller
 		$data['Contact']=$result['Contact'];
 		$data['DateofBirth']= $result['DateofBirth'];
 		echo json_encode($data);
-		//$this->load->view('Invoice/add-invoice',$data);
 	}
 	
 

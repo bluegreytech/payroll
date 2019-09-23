@@ -55,6 +55,33 @@ class Hr extends CI_Controller
 	}
 
 
+	public function profile($hr_id)
+	{	
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
+		$data=array();
+		$result=$this->Hr_model->get_hrprofile($hr_id);	
+		//echo "<br>";print_r($result);die;
+		$data['hr_id']=$result['hr_id'];
+		$data['companyid']=$result['companyid'];	
+		$data['hr_type']=$result['hr_type'];
+		$data['FullName']=$result['FullName'];
+		$data['EmailAddress']=$result['EmailAddress'];
+		$data['Address']=$result['Address'];
+		$data['ProfileImage']=$result['ProfileImage'];
+		$data['Contact']=$result['Contact'];
+		$data['DateofBirth']=$result['DateofBirth'];
+		$data['City']= $result['City'];
+		$data['PinCode']=$result['PinCode'];
+		$data['Gender']=$result['Gender'];
+		$data['companyname']=$result['companyname'];
+	
+		$data['companyData']=$this->Hr_model->list_company();
+		//	echo "<pre>";print_r($data['complianceData']);die;
+		$this->load->view('hr/profile',$data);	
+
+	}
 
 
 

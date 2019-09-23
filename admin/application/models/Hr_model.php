@@ -244,11 +244,19 @@ class Hr_model extends CI_Model
 	}
 
 
+	function get_hrprofile($hr_id)
+	{
+		$this->db->select('t1.*,t2.*');
+		$this->db->from('tblhr as t1');
+		$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
+		$this->db->where('t1.hr_id',$hr_id);
+		$query=$this->db->get();
+		return $query->row_array();
+	}
 
 
 
 	function hr_list()
-
 	{
 
 		$where = array('t1.isdelete' =>'0');

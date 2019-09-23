@@ -138,3 +138,131 @@ ERROR - 2019-09-20 08:37:34 --> 404 Page Not Found: Default/css
 ERROR - 2019-09-20 08:37:34 --> 404 Page Not Found: Default/js
 ERROR - 2019-09-20 08:37:34 --> 404 Page Not Found: Default/js
 ERROR - 2019-09-20 08:37:34 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-09-20 09:05:07 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-20 09:05:14 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 47
+ERROR - 2019-09-20 09:05:14 --> Severity: Notice --> Undefined variable: session C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 105
+ERROR - 2019-09-20 09:05:20 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 47
+ERROR - 2019-09-20 09:05:20 --> Severity: Notice --> Undefined variable: session C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 105
+ERROR - 2019-09-20 09:05:33 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 47
+ERROR - 2019-09-20 09:05:33 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-20 09:05:33 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-20 09:05:33 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-20 09:05:33 --> 404 Page Not Found: Assets/img
+ERROR - 2019-09-20 09:09:04 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-20 09:09:04 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-20 09:09:04 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-09-20 09:09:04 --> 404 Page Not Found: Default/css
+ERROR - 2019-09-20 09:09:40 --> 404 Page Not Found: Default/css
+ERROR - 2019-09-20 09:09:41 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-20 09:09:41 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-20 09:09:41 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-09-20 09:09:45 --> Severity: error --> Exception: Too few arguments to function Invoice::gethr(), 0 passed in C:\xampp\htdocs\payroll\admin\system\core\CodeIgniter.php on line 532 and exactly 1 expected C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 142
+ERROR - 2019-09-20 09:12:43 --> 404 Page Not Found: Default/css
+ERROR - 2019-09-20 09:12:43 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-20 09:12:43 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-20 09:12:43 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-09-20 09:15:38 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-20 09:15:38 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-20 09:15:38 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-09-20 09:15:38 --> 404 Page Not Found: Default/css
+ERROR - 2019-09-20 09:16:21 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-20 09:16:21 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-09-20 09:16:21 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-20 09:16:21 --> 404 Page Not Found: Default/css
+ERROR - 2019-09-20 09:16:43 --> 404 Page Not Found: Default/css
+ERROR - 2019-09-20 09:16:43 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-20 09:16:43 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-20 09:16:43 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-09-20 09:16:59 --> 404 Page Not Found: Default/css
+ERROR - 2019-09-20 09:17:00 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-20 09:17:00 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-20 09:17:00 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-09-20 09:17:44 --> 404 Page Not Found: Default/css
+ERROR - 2019-09-20 09:17:44 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-20 09:17:44 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-20 09:17:44 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-09-20 09:21:37 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-20 09:21:37 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-20 09:21:37 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-09-20 09:21:37 --> 404 Page Not Found: Default/css
+ERROR - 2019-09-20 09:22:31 --> 404 Page Not Found: Default/css
+ERROR - 2019-09-20 09:22:31 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-20 09:22:31 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-20 09:22:31 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-09-20 09:22:51 --> 404 Page Not Found: Default/css
+ERROR - 2019-09-20 09:22:51 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-20 09:22:51 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-09-20 09:22:51 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-20 11:13:24 --> Severity: Notice --> Undefined variable: Companyinvoiceid C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 84
+ERROR - 2019-09-20 11:13:24 --> Query error: Not unique table/alias: 't2' - Invalid query: SELECT `t1`.*, `t2`.*, `t3`.*, `t4`.*
+FROM `tblcompanyinvoice` as `t1`
+LEFT JOIN `tblcompany` as `t2` ON `t1`.`companyid` = `t2`.`companyid`
+LEFT JOIN `tblhr` as `t2` ON `t1`.`companyid` = `t2`.`companyid`
+WHERE `t1`.`companyid` IS NULL
+ERROR - 2019-09-20 11:15:31 --> Severity: Notice --> Undefined variable: Companyinvoiceid C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 84
+ERROR - 2019-09-20 11:15:31 --> Query error: Not unique table/alias: 't2' - Invalid query: SELECT `t1`.*, `t2`.*, `t3`.*, `t4`.*
+FROM `tblcompanyinvoice` as `t1`
+LEFT JOIN `tblcompany` as `t2` ON `t1`.`companyid` = `t2`.`companyid`
+LEFT JOIN `tblhr` as `t2` ON `t1`.`companyid` = `t2`.`companyid`
+WHERE `t1`.`companyid` IS NULL
+ERROR - 2019-09-20 11:16:31 --> Query error: Not unique table/alias: 't2' - Invalid query: SELECT `t1`.*, `t2`.*, `t3`.*, `t4`.*
+FROM `tblcompanyinvoice` as `t1`
+LEFT JOIN `tblcompany` as `t2` ON `t1`.`companyid` = `t2`.`companyid`
+LEFT JOIN `tblhr` as `t2` ON `t1`.`companyid` = `t2`.`companyid`
+WHERE `t1`.`companyid` = '1'
+ERROR - 2019-09-20 11:17:08 --> Severity: Notice --> Undefined variable: hrData C:\xampp\htdocs\payroll\admin\application\views\Invoice\add-invoice.php 86
+ERROR - 2019-09-20 11:17:13 --> Severity: Notice --> Undefined variable: hrData C:\xampp\htdocs\payroll\admin\application\views\Invoice\add-invoice.php 86
+ERROR - 2019-09-20 11:18:04 --> Severity: Notice --> Undefined variable: hrData C:\xampp\htdocs\payroll\admin\application\views\Invoice\add-invoice.php 86
+ERROR - 2019-09-20 11:20:04 --> Severity: Notice --> Undefined variable: hrData C:\xampp\htdocs\payroll\admin\application\views\Invoice\add-invoice.php 86
+ERROR - 2019-09-20 11:21:35 --> Severity: Notice --> Undefined variable: hrData C:\xampp\htdocs\payroll\admin\application\views\Invoice\add-invoice.php 86
+ERROR - 2019-09-20 11:24:01 --> Severity: Notice --> Undefined variable: hrData C:\xampp\htdocs\payroll\admin\application\views\Invoice\add-invoice.php 86
+ERROR - 2019-09-20 11:24:04 --> Severity: Notice --> Undefined variable: hrData C:\xampp\htdocs\payroll\admin\application\views\Invoice\add-invoice.php 86
+ERROR - 2019-09-20 11:24:50 --> Severity: Notice --> Undefined variable: hrData C:\xampp\htdocs\payroll\admin\application\views\Invoice\add-invoice.php 86
+ERROR - 2019-09-20 11:24:56 --> Severity: Notice --> Undefined variable: hrData C:\xampp\htdocs\payroll\admin\application\views\Invoice\add-invoice.php 86
+ERROR - 2019-09-20 11:27:54 --> Severity: Notice --> Undefined variable: hrData C:\xampp\htdocs\payroll\admin\application\views\Invoice\add-invoice.php 87
+ERROR - 2019-09-20 11:28:29 --> Severity: Notice --> Undefined variable: hrData C:\xampp\htdocs\payroll\admin\application\views\Invoice\add-invoice.php 87
+ERROR - 2019-09-20 11:28:42 --> Severity: Notice --> Undefined variable: hrData C:\xampp\htdocs\payroll\admin\application\views\Invoice\add-invoice.php 87
+ERROR - 2019-09-20 11:28:50 --> Severity: Notice --> Undefined variable: hrData C:\xampp\htdocs\payroll\admin\application\views\Invoice\add-invoice.php 87
+ERROR - 2019-09-20 11:29:22 --> Severity: Notice --> Undefined variable: hrData C:\xampp\htdocs\payroll\admin\application\views\Invoice\add-invoice.php 87
+ERROR - 2019-09-20 11:29:29 --> Severity: Notice --> Undefined variable: hrData C:\xampp\htdocs\payroll\admin\application\views\Invoice\add-invoice.php 87
+ERROR - 2019-09-20 11:31:53 --> Severity: Notice --> Undefined variable: hrData C:\xampp\htdocs\payroll\admin\application\views\Invoice\add-invoice.php 87
+ERROR - 2019-09-20 11:32:21 --> Severity: Notice --> Undefined variable: hrData C:\xampp\htdocs\payroll\admin\application\views\Invoice\add-invoice.php 87
+ERROR - 2019-09-20 11:33:28 --> Severity: Notice --> Undefined variable: hrData C:\xampp\htdocs\payroll\admin\application\views\Invoice\add-invoice.php 87
+ERROR - 2019-09-20 11:33:28 --> Severity: Notice --> Undefined variable: hrData C:\xampp\htdocs\payroll\admin\application\views\Invoice\add-invoice.php 87
+ERROR - 2019-09-20 11:33:34 --> Severity: Notice --> Undefined variable: hrData C:\xampp\htdocs\payroll\admin\application\views\Invoice\add-invoice.php 87
+ERROR - 2019-09-20 11:34:12 --> Severity: Notice --> Undefined variable: hrData C:\xampp\htdocs\payroll\admin\application\views\Invoice\add-invoice.php 87
+ERROR - 2019-09-20 11:48:25 --> Severity: Notice --> Undefined variable: paymentopt C:\xampp\htdocs\payroll\admin\application\views\Invoice\add-invoice.php 98
+ERROR - 2019-09-20 11:48:25 --> Severity: Notice --> Undefined variable: paymentopt C:\xampp\htdocs\payroll\admin\application\views\Invoice\add-invoice.php 99
+ERROR - 2019-09-20 11:48:25 --> Severity: Notice --> Undefined variable: paymentopt C:\xampp\htdocs\payroll\admin\application\views\Invoice\add-invoice.php 100
+ERROR - 2019-09-20 11:48:25 --> Severity: Notice --> Undefined variable: paymentopt C:\xampp\htdocs\payroll\admin\application\views\Invoice\add-invoice.php 101
+ERROR - 2019-09-20 11:49:06 --> Severity: Notice --> Undefined variable: paymentopt C:\xampp\htdocs\payroll\admin\application\views\Invoice\add-invoice.php 98
+ERROR - 2019-09-20 11:49:06 --> Severity: Notice --> Undefined variable: paymentopt C:\xampp\htdocs\payroll\admin\application\views\Invoice\add-invoice.php 99
+ERROR - 2019-09-20 11:49:06 --> Severity: Notice --> Undefined variable: paymentopt C:\xampp\htdocs\payroll\admin\application\views\Invoice\add-invoice.php 100
+ERROR - 2019-09-20 11:49:06 --> Severity: Notice --> Undefined variable: paymentopt C:\xampp\htdocs\payroll\admin\application\views\Invoice\add-invoice.php 101
+ERROR - 2019-09-20 11:49:49 --> Severity: Notice --> Undefined variable: paymentopt C:\xampp\htdocs\payroll\admin\application\views\Invoice\add-invoice.php 98
+ERROR - 2019-09-20 11:49:49 --> Severity: Notice --> Undefined variable: paymentopt C:\xampp\htdocs\payroll\admin\application\views\Invoice\add-invoice.php 99
+ERROR - 2019-09-20 11:49:49 --> Severity: Notice --> Undefined variable: paymentopt C:\xampp\htdocs\payroll\admin\application\views\Invoice\add-invoice.php 100
+ERROR - 2019-09-20 11:49:49 --> Severity: Notice --> Undefined variable: paymentopt C:\xampp\htdocs\payroll\admin\application\views\Invoice\add-invoice.php 101
+ERROR - 2019-09-20 11:54:54 --> Severity: Notice --> Undefined variable: paymentopt C:\xampp\htdocs\payroll\admin\application\views\Invoice\add-invoice.php 92
+ERROR - 2019-09-20 11:55:40 --> Severity: Notice --> Undefined variable: paymentopt C:\xampp\htdocs\payroll\admin\application\views\Invoice\add-invoice.php 92
+ERROR - 2019-09-20 12:02:27 --> 404 Page Not Found: Uploads/default
+ERROR - 2019-09-20 13:18:22 --> Severity: Warning --> A non-numeric value encountered C:\xampp\htdocs\payroll\admin\application\views\Invoice\add-invoice.php 92
+ERROR - 2019-09-20 13:39:57 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-20 13:39:57 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-20 13:39:57 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-09-20 13:39:58 --> 404 Page Not Found: Default/css
+ERROR - 2019-09-20 13:42:27 --> 404 Page Not Found: Default/css
+ERROR - 2019-09-20 13:42:27 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-20 13:42:27 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-20 13:42:27 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-09-20 14:00:25 --> Severity: error --> Exception: Too few arguments to function Invoice::edit_invoice(), 0 passed in C:\xampp\htdocs\payroll\admin\system\core\CodeIgniter.php on line 532 and exactly 1 expected C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 81
+ERROR - 2019-09-20 14:02:42 --> Severity: error --> Exception: Too few arguments to function Invoice::edit_invoice(), 0 passed in C:\xampp\htdocs\payroll\admin\system\core\CodeIgniter.php on line 532 and exactly 1 expected C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 81
+ERROR - 2019-09-20 14:09:26 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-20 14:09:26 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-20 14:09:26 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-09-20 14:09:26 --> 404 Page Not Found: Default/css
+ERROR - 2019-09-20 14:09:42 --> 404 Page Not Found: Default/css
+ERROR - 2019-09-20 14:09:42 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-20 14:09:42 --> 404 Page Not Found: Default/js
+ERROR - 2019-09-20 14:09:42 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-09-20 14:29:30 --> 404 Page Not Found: Assets/img

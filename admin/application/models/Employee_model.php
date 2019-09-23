@@ -78,7 +78,19 @@ class Employee_model extends CI_Model
 	
 
 		
-
+		function get_employeeprofile($emp_id)
+	{
+		$this->db->select('t1.*');
+		$this->db->from('tblemp as t1');
+		// $this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
+		// $this->db->join('tblcompanycompliances as t3', 't1.companyid = '.$companyid, 'LEFT');
+		// $this->db->join('tblstate as t4', 't1.stateid = t4.stateid', 'LEFT');
+		// $this->db->join('tblcompanynotification as t5', 't1.companyid = t5.companyid', 'LEFT');
+		// $this->db->join('tblcomnotdocument as t6', 't5.Companynotificationid = t6.Companynotificationid', 'LEFT');
+		$this->db->where('t1.emp_id',$emp_id);
+		$query=$this->db->get();
+		return $query->row_array();
+	}
 	
 
 

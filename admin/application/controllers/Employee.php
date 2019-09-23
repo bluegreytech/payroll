@@ -36,6 +36,49 @@ class Employee extends CI_Controller
 	}
 
 
+	public function profile($emp_id)
+	{	
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
+		$data=array();
+		$result=$this->Employee_model->get_employeeprofile($emp_id);	
+		//echo "<br>";print_r($result);die;
+		$data['emp_id']=$result['emp_id'];
+		$data['companyid']=$result['companyid'];
+		$data['employee_code']=$result['employee_code'];
+		$data['department']=$result['department'];
+		$data['desgination']=$result['desgination'];
+		$data['first_name']=$result['first_name'];
+		$data['last_name']=$result['last_name'];
+	
+		$data['ProfileImage']= $result['ProfileImage'];
+		$data['gender']=$result['gender'];
+		$data['Father_name']=$result['Father_name'];
+		$data['Dateofbirth']=$result['Dateofbirth'];
+		$data['Placeofbirth']=$result['Placeofbirth'];
+		$data['marital_status']=$result['marital_status'];
+		$data['Address']=$result['Address'];
+		$data['phone']=$result['phone'];
+		$data['email']=$result['email'];
+		$data['religion']=$result['religion'];
+		$data['nationality']=$result['nationality'];
+		$data['status']=$result['status'];
+		$data['qualification_emp']=$result['qualification_emp'];
+		$data['bloodgroup']=$result['bloodgroup'];
+		$data['probation_preriod_day']=$result['probation_preriod_day'];
+		$data['physically_challenged']=$result['physically_challenged'];
+		$data['joiningdate']=$result['joiningdate'];
+		$data['salaryamt']=$result['salaryamt'];
+		$data['salary']=$result['salary'];
+		$data['aadharcard']=$result['aadharcard'];
+		$data['pancard']=$result['pancard'];
+		$data['bankdetail']=$result['bankdetail'];
+		$data['passport']=$result['passport'];	
+		$data['companyData']=$this->Employee_model->list_company();
+		$this->load->view('Employee/profile',$data);	
+	}
+
 
 	function delete_employee()
 	{

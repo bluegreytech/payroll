@@ -103,27 +103,14 @@ class Company extends CI_Controller
 	{	
 		$result=$this->Company_model->list_licence_company();
 		//echo "<pre>";print_r($result);die;
-
 		if($result)
-
 		{
-
 			echo "success";
-
 		}
-
 		else
-
 		{
-
 			echo "fail";
-
 		}
-
-	
-
-	
-
 	}
 
 
@@ -212,15 +199,11 @@ class Company extends CI_Controller
 				}
 
 		} 
-
+		$data['shiftData']=$this->Company_model->list_shift();
 		$data['stateData']=$this->Company_model->list_state();
-
 		$data['complianceData']=$this->Company_model->list_complianceto();
-
 		$data['companytypeData']=$this->Company_model->list_companyto();
-
-		//print_r($data['stateData']);die;
-
+		//print_r($data['shiftData']);die;
 		$this->load->view('Company/companyadd',$data);	
 
 	}

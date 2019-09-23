@@ -196,7 +196,7 @@
 											<a class="dropdown-item" href="<?php echo base_url();?>Company/editcompany/<?php echo $comp->companyid;?>" role="button">
 													<i class="fa fa-pencil m-r-5"></i> </a>
 											<a class="dropdown-item" onclick="deletedata(<?php echo $comp->companyid; ?>)" data-toggle="modal" data-target="#delete_client"><i class="fa fa-trash-o m-r-5"></i> </a>
-										    <a class="dropdown-item" href="<?php// echo base_url();?>Company/company_notification_expired/<?php// echo $comp->companyid;?>" role="button">
+										    <a class="dropdown-item" href="<?php echo base_url();?>Company/company_notification_expired/<?php echo $comp->companyid;?>" role="button">
 													<i class="fa fa-pencil m-r-5"></i>Notfication</a>				
 										</td>
 
