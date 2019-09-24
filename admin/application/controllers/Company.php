@@ -157,6 +157,9 @@ class Company extends CI_Controller
 			$data['pincode']=$this->input->post('pincode');		
 			$data['isactive']=$this->input->post('isactive');
 			$data['companycomplianceid']=$this->input->post('companycomplianceid');
+			$data['Companyshiftid']=$this->input->post('Companyshiftid');
+			$data['Bankdetailid']=$this->input->post('Bankdetailid');
+			
 			if($_POST){	
 				if($this->input->post('companyid')==''){			
 					$result=$this->Company_model->add_company();	
@@ -292,10 +295,24 @@ class Company extends CI_Controller
 		$data['companycomplianceid']=$result['companycomplianceid'];
 		$data['complianceid']=$result['complianceid'];
 
+		$data['Companyshiftid']=$result['Companyshiftid'];
+		$data['Shifthours']=$result['Shifthours'];
+		$data['Shiftname']=$result['Shiftname'];
+		$data['Shiftintime']=$result['Shiftintime'];
+		$data['Shiftouttime']=$result['Shiftouttime'];
+
+		$data['Bankdetailid']=$result['Bankdetailid'];
+		$data['Accountnumber']=$result['Accountnumber'];
+		$data['Branch']=$result['Branch'];
+		$data['Bankname']=$result['Bankname'];
+		$data['Ibannumber']=$result['Ibannumber'];
+		$data['Swiftcode']=$result['Swiftcode'];
+		
+		$data['shiftData']=$this->Company_model->list_companyshift($companyid);
 		$data['stateData']=$this->Company_model->list_state();
 		$data['complianceData']=$this->Company_model->list_compliance();
 		$data['companytypeData']=$this->Company_model->list_companytype();
-		//	echo "<pre>";print_r($data['complianceData']);die;
+			//echo "<pre>";print_r($data['shiftData']);die;
 		$this->load->view('Company/companyadd',$data);	
 
 	}

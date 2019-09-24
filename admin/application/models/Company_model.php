@@ -500,13 +500,87 @@ class Company_model extends CI_Model
 
 	function add_company()
 	{	
-			$this->db->select('*');
-			$this->db->where('comemailaddress',$this->input->post('comemailaddress'));
-			$query=$this->db->get('tblcompany');
-			if($query->num_rows() > 0)
-			{
-					return 3;
-			}
+		$this->db->select('*');
+		$this->db->where('comemailaddress',$this->input->post('comemailaddress'));
+		$query=$this->db->get('tblcompany');
+		if($query->num_rows() > 0)
+		{
+				return 3;
+		}
+
+		$user_image='';
+	//$image_settings=image_setting();
+	 if(isset($_FILES['companyimage']) &&  $_FILES['companyimage']['name']!='')
+	{
+		$this->load->library('upload');
+		$rand=rand(0,100000); 
+		 
+	   $_FILES['userfile']['name']     =   $_FILES['companyimage']['name'];
+	   $_FILES['userfile']['type']     =   $_FILES['companyimage']['type'];
+	   $_FILES['userfile']['tmp_name'] =   $_FILES['companyimage']['tmp_name'];
+	   $_FILES['userfile']['error']    =   $_FILES['companyimage']['error'];
+	   $_FILES['userfile']['size']     =   $_FILES['companyimage']['size'];
+
+	   $config['file_name'] = $rand.'Company';			
+	   $config['upload_path'] = base_path().'upload/company_orig/';		
+	   $config['allowed_types'] = 'jpg|jpeg|gif|png|bmp';  
+
+		$this->upload->initialize($config);
+
+		 if (!$this->upload->do_upload())
+		 {
+		   $error =  $this->upload->display_errors();
+		   echo "<pre>";print_r($error);die;
+		 } 
+		$picture = $this->upload->data();	   
+		 $this->load->library('image_lib');		   
+		 $this->image_lib->clear();
+		 $gd_var='gd2';
+
+		 $this->image_lib->initialize(array(
+		   'image_library' => $gd_var,
+		   'source_image' => base_path().'upload/company_orig/'.$picture['file_name'],
+		   'new_image' => base_path().'upload/company/'.$picture['file_name'],
+		   'maintain_ratio' => FALSE,
+		   'quality' => '100%',
+		   'width' => 300,
+		   'height' => 300
+		));
+	   
+	   if(!$this->image_lib->resize())
+	   {
+		   $error = $this->image_lib->display_errors();
+	   } 
+	   $user_image=$picture['file_name'];
+   
+	   if($this->input->post('pre_profile_image')!='')
+		   {
+			   if(file_exists(base_path().'upload/company/'.$this->input->post('pre_profile_image')))
+			   {
+				   $link=base_path().'upload/company/'.$this->input->post('pre_profile_image');
+				   unlink($link);
+			   }
+			   
+			   if(file_exists(base_path().'upload/company_orig/'.$this->input->post('pre_profile_image')))
+			   {
+				   $link2=base_path().'upload/company_orig/'.$this->input->post('pre_profile_image');
+				   unlink($link2);
+			   }
+		   }
+	   } else {
+		   if($this->input->post('pre_profile_image')!='')
+		   {
+			   $user_image=$this->input->post('pre_profile_image');
+		   }
+	   }
+	   if($user_image!='')
+	   {
+			$companyimage=$user_image;
+	   }
+	   else
+	   {
+			$companyimage='';
+	   }
 
 			$code=rand(12,123456789);
 			$companytypeid=$this->input->post('companytypeid');
@@ -550,7 +624,7 @@ class Company_model extends CI_Model
 
 			$data3=array( 
 			'companyid'=>$insert_id,
-			'Shifthours'=>$Shifthours,
+			//'Shifthours'=>$Shifthours,
 			'Shiftname'=>$Shiftname,
 			'Shiftintime'=>$Shiftintime,
 			'Shiftouttime'=>$Shiftouttime
@@ -559,60 +633,111 @@ class Company_model extends CI_Model
 			$this->db->insert('tblcompanyshift',$data3);	
 				//echo "<pre>";print_r($data3);
 				
-													 
+				$complianceid=implode(',',$this->input->post('complianceid'));
+				$data2=array( 
+					'companyid'=>$insert_id,
+					'complianceid'=>$complianceid,
+					'isactive'=>$isactive,
+					'createdby'=>1,
+					'createdon'=>date("Y-m-d h:i:s")
+					);
+				$this->db->insert('tblcompanycompliances',$data2);	
+
+
+				$Accountnumber=$this->input->post('Accountnumber');
+				$Branch=$this->input->post('Branch');	
+				$Bankname=$this->input->post('Bankname');
+				$Ibannumber=$this->input->post('Ibannumber');
+				$Swiftcode=$this->input->post('Swiftcode');
+				$data4=array( 
+					'companyid'=>$insert_id,
+					'Accountnumber'=>$Accountnumber,
+					'Branch'=>$Branch,
+					'Bankname'=>$Bankname,
+					'Ibannumber'=>$Ibannumber,
+					'Swiftcode'=>$Swiftcode
+					);
+				$this->db->insert('tblcompanybankdetail',$data4);	
+				return 1;
+	
+				if($insert_id!=''){
+					$this->db->select('t1.*,t2.*');
+					$this->db->from('tblcompany as t1');
+					$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
+					$this->db->where('t1.companyid',$insert_id);
+					$smtp2 = $this->db->get('tblcompany');	
+					foreach($smtp2->result() as $rows) {
+						$companyid = $rows->companyid;
+						$companytypeid = $rows->companytypeid;
+						$companytype = $rows->companytype;
+						$companyname = $rows->companyname;
+						$comemailaddress = $rows->comemailaddress;
+						$verificationcode = $rows->verificationcode;	
+					}
+	
+						$email_template=$this->db->query("select * from ".$this->db->dbprefix('tblemail_template')." where task='Company verification'");
+						$email_temp=$email_template->row();
+						$email_address_from=$email_temp->from_address;
+						$email_address_reply=$email_temp->reply_address;
+						$email_subject=$email_temp->subject;        
+						$email_message=$email_temp->message;
 	
 			
-
+						$companyname =$rows->companyname;
+						$comemailaddress = $rows->comemailaddress;		
+						$base_url=base_url();
+						$verification_link=  '<a href="'.site_url('Company/checkcode/'.$code).'">Click Here</a>';	
+						$currentyear=date('Y');
+						$email_message=str_replace('{break}','<br/>',$email_message);
+						$email_message=str_replace('{base_url}',$base_url,$email_message);
+						$email_message=str_replace('{year}',$currentyear,$email_message);
+						$email_message=str_replace('{companyname}',$companyname,$email_message);
+						$email_message=str_replace('{comemailaddress}',$comemailaddress,$email_message);
+						$email_message=str_replace('{verification_link}',$verification_link,$email_message);
+						$str=$email_message; //die;
+	
+						$email_config = Array(
+							'protocol'  => 'smtp',
+							'smtp_host' => 'relay-hosting.secureserver.net',
+							'smtp_port' => '465',
+							'smtp_user' => 'binny@bluegreytech.co.in',
+							'smtp_pass' => 'Binny@123',
+							'mailtype'  => 'html',
+							'starttls'  => true,
+							'newline'   => "\r\n",
+							'charset'=>'utf-8',
+							'header'=> 'MIME-Version: 1.0',
+							'header'=> 'Content-type:text/html;charset=UTF-8',
+							);
 			
-
-
+							$this->load->library('email', $email_config);
+						   
+	
+						$body =$str;	
+						$this->email->from('binny@bluegreytech.co.in');
+						$this->email->to($comemailaddress);		
+						$this->email->subject('Company verification To Payroll System');
+						$this->email->message($body);	
+						if($this->email->send())
+						{
+							return 1;
+						}else
+						{
+							return 2;
+						}
+				}
+				else
+				{
+					return 2;
+				}	
+	
+				return $res;
+												 
+	
 	}
 
 
-	function insertdata()
-
-	{	//echo "<pre>";print_r($_POST);die;	
-
-		//$rightsid=$this->input->post('rightsid');
-
-		$data = array();
-		$rightsid = count($this->input->post('rightsid'));
-		 for($i=0; $i<$rightsid; $i++)
-		 {
-			$rightsid=$this->input->post('rightsid');
-			$UserId=$this->input->post('UserId');
-			$rightsid=$this->input->post('rightsid');
-			$view=$this->input->post('view');
-			$add=$this->input->post('add');
-			$update=$this->input->post('update');
-			$delete=$this->input->post('delete');
-
-			$data=array( 
-			'UserId'=>$UserId[$i],
-			'rightsid'=>$rightsid[$i],
-			'views'=>isset($view[$i]) ? $view[$i] : '0',
-			'adds'=>isset($add[$i]) ? $add[$i] : '0',
-			'updates'=>isset($update[$i]) ? $update[$i] : '0',
-			'deletes'=>isset($delete[$i]) ? $delete[$i] : '0',
-			'isactive'=>1,
-			'createdby'=>1,
-			'createdon'=>date('Y-m-d')
-			);
-
-				//echo "<pre>";print_r($data);die;
-
-			$this->db->insert('tblrightsuser',$data);
-
-			
-
-		}
-
-		//return true;	
-
-            
-
-	}
-
+	
 
 
 	function get_companyprofile($companyid)
@@ -654,12 +779,13 @@ class Company_model extends CI_Model
 
 	function get_company($companyid)
 	{
-		$this->db->select('t1.*,t2.*,t3.*,t4.*');
+		$this->db->select('t1.*,t2.*,t3.*,t4.*,t5.*,t6.*');
 		$this->db->from('tblcompany as t1');
 		$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
-		//$this->db->join('tblcompanycompliances as t3', 't1.companyid = '.$companyid, 'LEFT');
 		$this->db->join('tblcompanycompliances as t3','t1.companyid = t3.companyid', 'LEFT');
 		$this->db->join('tblstate as t4', 't1.stateid = t4.stateid', 'LEFT');
+		$this->db->join('tblcompanyshift as t5', $companyid.'= t5.companyid', 'LEFT');
+		$this->db->join('tblcompanybankdetail as t6', $companyid.'= t6.companyid', 'LEFT');
 		$this->db->where('t1.companyid',$companyid);
 		$query=$this->db->get();
 		return $query->row_array();
@@ -722,12 +848,22 @@ class Company_model extends CI_Model
 			return $res;
 	}
 
-
+	function list_companyshift($companyid)
+	{
+		$this->db->select('*');
+		$this->db->from('tblcompanyshift');	
+		$this->db->where('companyid',$companyid);
+		$r=$this->db->get();
+		$res = $r->result();
+		return $res;
+	}
 
 	function update_company()
 	{	
 		$companyid=$this->input->post('companyid');
 		$companycomplianceid=$this->input->post('companycomplianceid');
+		$Companyshiftid=$this->input->post('Companyshiftid');
+		$Bankdetailid=$this->input->post('Bankdetailid');
 		//echo "<pre>";print_r($_FILES);die;
 		$user_image='';
 		//$image_settings=image_setting();
@@ -827,14 +963,47 @@ class Company_model extends CI_Model
 					'createdby'=>1,
 					'createdon'=>date("Y-m-d h:i:s")
 					);
-				//print_r($data2);die;
 				$this->db->where("companycomplianceid",$companycomplianceid);
 				$this->db->update('tblcompanycompliances',$data2);
-				return 1;	 	
+			 	
 			} 
-
-			
-
+			if($Companyshiftid!='')
+			{
+					$Shifthours=$this->input->post('Shifthours');
+					$Shiftname=$this->input->post('Shiftname');	
+					$Shiftintime=$this->input->post('Shiftintime');
+					$Shiftouttime=$this->input->post('Shiftouttime');	
+				$data3=array( 
+					'companyid'=>$companyid,
+					'Shifthours'=>$Shifthours,
+					'Shiftname'=>$Shiftname,
+					'Shiftintime'=>$Shiftintime,
+					'Shiftouttime'=>$Shiftouttime
+					);
+					//print_r($data3);
+					$this->db->where("Companyshiftid",$Companyshiftid);
+					$this->db->update('tblcompanyshift',$data3);		
+				}
+					
+				if($Bankdetailid!='')
+				{
+					$Accountnumber=$this->input->post('Accountnumber');
+					$Branch=$this->input->post('Branch');	
+					$Bankname=$this->input->post('Bankname');
+					$Ibannumber=$this->input->post('Ibannumber');
+					$Swiftcode=$this->input->post('Swiftcode');
+				$data4=array( 
+					'Accountnumber'=>$Accountnumber,
+					'Branch'=>$Branch,
+					'Bankname'=>$Bankname,
+					'Ibannumber'=>$Ibannumber,
+					'Swiftcode'=>$Swiftcode
+					);
+				//	print_r($data4);
+					$this->db->where("Bankdetailid",$Bankdetailid);
+					$this->db->update('tblcompanybankdetail',$data4);
+					return 1;
+				}
 	}
 
 

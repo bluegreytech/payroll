@@ -114,10 +114,10 @@
 							<div class="modal-body">
 
 								<form method="post" id="form_valid" action="<?php echo base_url();?>Company/companyadd" enctype="multipart/form-data">
-
 								<input type="hidden" class="form-control" name="companyid" value="<?php echo $companyid;?>">
-
 								<input type="hidden" class="form-control" name="companycomplianceid" value="<?php echo $companycomplianceid;?>">
+								<input type="hidden" class="form-control" name="Companyshiftid" value="<?php echo $Companyshiftid;?>">
+								<input type="hidden" class="form-control" name="Bankdetailid" value="<?php echo $Bankdetailid;?>">
 
 									<div class="profile-img-wrap edit-img">
 											<?php  
@@ -280,18 +280,61 @@
 											}
 										?>
 
+										<?php if($Companyshiftid==''){?>
 										<div class="col-md-6">
 											<div class="form-group">
 													<label>Company Shift Hours</label>
-													<select class="form-control" name="Shifthours[]"  id="purpose"> 
+													<select class="form-control" name="Shifthours"  id="purpose"> 
 														<option desabled value="">Please select hours</option>
-														<option  value="8">08 Hours</option>
+														<option  value="8" >08 Hours</option>
 														<option  value="16">16 Hours</option>
 														<option  value="24">24 Hours</option>
-													
 													</select>
 											</div>
 										</div>
+										<?php }?>
+
+										<?php if($Companyshiftid!=''){?>
+										<div class="col-md-6">
+											<div class="form-group">
+													<label>Company Shift Hours</label>
+													<select class="form-control" name="Shifthours"  id="purpose"> 
+														
+													<?php	
+													if($Companyshiftid!='')		
+													{		if($Shifthours=='8')
+															{
+																?>
+																<option value="8" selected>08 Hours</option>
+																<option value="16" >16 Hours</option>
+																<option value="24">24 Hours</option>
+
+																<?php
+
+															}
+
+															else if($Shifthours=='16')
+															{
+																?>
+																<option value="8">08 Hours</option>
+																<option value="16" selected>16 Hours</option>
+																<option value="24">24 Hours</option>
+																<?php
+															}
+															else if($Shifthours=='24')
+															{
+																?>
+															<option value="8">08 Hours</option>
+															<option value="16">16 Hours</option>
+															<option value="24" selected>24 Hours</option>
+																<?php
+															}
+														}
+															?>
+														</select>
+											</div>
+										</div>
+										<?php }?>
 
 									</div>
 
@@ -305,7 +348,7 @@
 												<div class="col-md-12">
 															<div class="form-group">
 																<label class="col-form-label">Shift Name <span class="text-danger">*</span></label>
-																<input class="form-control" minlength="02" maxlength="20" type="text" name="Shiftname"  placeholder="Enter shift name">
+																<input class="form-control" minlength="02" maxlength="20" type="text" name="Shiftname"   placeholder="Enter shift name">
 															</div>
 												</div>
 
@@ -320,21 +363,21 @@
 												<div class="col-md-6">
 															<div class="form-group">
 																<label class="col-form-label"> Shift Out Time <span class="text-danger">*</span></label>
-																<input class="form-control" type="time" name="Shiftouttime" placeholder="Enter shift out time number">
+																<input class="form-control" type="time" name="Shiftouttime"   placeholder="Enter shift out time number">
 															</div>
 												</div>		
 											</div>
 										</div>
 									</fieldset>
 
-									<fieldset id='business2' style="display: none;">
+									<!-- <fieldset id='business2' style="display: none;">
 									<legend>Shift</legend>
 										<div class="dash-widget clearfix card-box" >	
 											<div class="row">
 												<div class="col-md-12">
 															<div class="form-group">
 																<label class="col-form-label">Shift Name <span class="text-danger">*</span></label>
-																<input class="form-control" minlength="02" maxlength="30" type="text" name="Shiftname"  placeholder="Enter shift name">
+																<input class="form-control" minlength="02" maxlength="30" type="text" name="Shiftname"  value="<?php echo $Shiftname;?>" placeholder="Enter shift name">
 															</div>
 												</div>
 
@@ -348,8 +391,8 @@
 
 												<div class="col-md-6">
 															<div class="form-group">
-																<label class="col-form-label"> Shift Out Time <span class="text-danger">*</span></label>
-																<input class="form-control"  type="text" name="Shiftouttime" placeholder="Enter shift out time number"  >
+																<label class="col-form-label">Shift Out Time <span class="text-danger">*</span></label>
+																<input class="form-control"  type="text" name="Shiftouttime" placeholder="Enter shift out time number">
 																
 															</div>
 												</div>		
@@ -359,7 +402,7 @@
 												<div class="col-md-12">
 															<div class="form-group">
 																<label class="col-form-label">Shift Name <span class="text-danger">*</span></label>
-																<input class="form-control" minlength="02" maxlength="30" type="text" name="Shiftname"  placeholder="Enter shift name">
+																<input class="form-control" minlength="02" maxlength="30" type="text" name="Shiftname"  value="<?php echo $Shiftname;?>"  placeholder="Enter shift name">
 															</div>
 												</div>
 
@@ -380,23 +423,23 @@
 												</div>		
 											</div>
 										</div>
-									</fieldset>
+									</fieldset> -->
 
-									<fieldset id='business3' style="display: none;">
+									<!-- <fieldset id='business3' style="display: none;">
 									<legend>Shift </legend>
 										<div class="dash-widget clearfix card-box" >	
 											<div class="row">
 												<div class="col-md-12">
 															<div class="form-group">
 																<label class="col-form-label">Shift Name <span class="text-danger">*</span></label>
-																<input class="form-control" minlength="02" maxlength="30" type="text" name="Shiftname[]"  placeholder="Enter shift name">
+																<input class="form-control" minlength="02" maxlength="30" type="text" name="Shiftname" value="<?php //echo $Shiftname;?>"  placeholder="Enter shift name">
 															</div>
 												</div>
 
 												<div class="col-md-6">
 															<div class="form-group">
 																<label class="col-form-label">Shift In Time <span class="text-danger">*</span></label>
-																<input class="form-control"  type="time" name="Shiftintime[]"  placeholder="Enter shift in time number" >
+																<input class="form-control"  type="time" name="Shiftintime"  placeholder="Enter shift in time number">
 																
 															</div>
 												</div>
@@ -404,7 +447,7 @@
 												<div class="col-md-6">
 															<div class="form-group">
 																<label class="col-form-label"> Shift Out Time <span class="text-danger">*</span></label>
-																<input class="form-control" type="time" name="Shiftouttime[]" placeholder="Enter shift out time number"  >
+																<input class="form-control" type="time" name="Shiftouttime" placeholder="Enter shift out time number">
 																
 															</div>
 												</div>		
@@ -414,14 +457,14 @@
 												<div class="col-md-12">
 															<div class="form-group">
 																<label class="col-form-label">Shift Name <span class="text-danger">*</span></label>
-																<input class="form-control" minlength="02" maxlength="30" type="text" name="Shiftname[]"  placeholder="Enter shift name">
+																<input class="form-control" minlength="02" maxlength="30" type="text" value="<?php// echo $Shiftname;?>" name="Shiftname"  placeholder="Enter shift name">
 															</div>
 												</div>
 
 												<div class="col-md-6">
 															<div class="form-group">
 																<label class="col-form-label">Shift In Time <span class="text-danger">*</span></label>
-																<input class="form-control"  type="time" name="Shiftintime[]"  placeholder="Enter shift in time number" >
+																<input class="form-control"  type="time" name="Shiftintime"  placeholder="Enter shift in time number">
 																
 															</div>
 												</div>
@@ -429,7 +472,7 @@
 												<div class="col-md-6">
 															<div class="form-group">
 																<label class="col-form-label"> Shift Out Time <span class="text-danger">*</span></label>
-																<input class="form-control" type="time" name="Shiftouttime[]" placeholder="Enter shift out time number"  >
+																<input class="form-control" type="time" name="Shiftouttime" placeholder="Enter shift out time number">
 																
 															</div>
 												</div>		
@@ -439,14 +482,14 @@
 												<div class="col-md-12">
 															<div class="form-group">
 																<label class="col-form-label">Shift Name <span class="text-danger">*</span></label>
-																<input class="form-control"  minlength="02" maxlength="30" type="text" name="Shiftname[]"  placeholder="Enter shift name">
+																<input class="form-control"  minlength="02" maxlength="30" type="text" name="Shiftname" value="<?php //echo $Shiftname;?>"  placeholder="Enter shift name">
 															</div>
 												</div>
 
 												<div class="col-md-6">
 															<div class="form-group">
 																<label class="col-form-label">Shift In Time <span class="text-danger">*</span></label>
-																<input class="form-control"  type="time" name="Shiftintime[]"  placeholder="Enter shift in time number" >
+																<input class="form-control"  type="time" name="Shiftintime"  placeholder="Enter shift in time number">
 																
 															</div>
 												</div>
@@ -454,13 +497,99 @@
 												<div class="col-md-6">
 															<div class="form-group">
 																<label class="col-form-label"> Shift Out Time <span class="text-danger">*</span></label>
-																<input class="form-control" type="time" name="Shiftouttime[]" placeholder="Enter shift out time number"  >
+																<input class="form-control" type="time" name="Shiftouttime" placeholder="Enter shift out time number">
 																
 															</div>
 												</div>		
 											</div>
 										</div>
-									</fieldset> 
+									</fieldset>  -->
+
+									<?php 
+									if($Companyshiftid!=''){
+										$i=1;
+										foreach($shiftData as $shift)
+										{
+										?>
+										<fieldset>
+									<legend>Shift <?php echo $i;?></legend>
+										<div class="dash-widget clearfix card-box">	
+											<div class="row">
+												<div class="col-md-12">
+															<div class="form-group">
+																<label class="col-form-label">Shift Name <span class="text-danger">*</span></label>
+																<input class="form-control" minlength="02" maxlength="20" type="text" name="Shiftname" value="<?php echo $shift->Shiftname;?>"  placeholder="Enter shift name">
+															</div>
+												</div>
+
+												<div class="col-md-6">
+															<div class="form-group">
+																<label class="col-form-label">Shift In Time <span class="text-danger">*</span></label>
+																<input class="form-control" type="time" name="Shiftintime" value="<?php echo $shift->Shiftintime;?>"   placeholder="Enter shift in time number">
+																
+															</div>
+												</div>
+
+												<div class="col-md-6">
+															<div class="form-group">
+																<label class="col-form-label"> Shift Out Time <span class="text-danger">*</span></label>
+																<input class="form-control" type="time" name="Shiftouttime" value="<?php echo $shift->Shiftouttime;?>"  placeholder="Enter shift out time number">
+															</div>
+												</div>		
+											</div>
+										</div>
+									</fieldset>
+									<?php
+									$i++;
+										}
+									}
+									?>
+								</div>
+								<br>
+								<div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+									<fieldset>
+									<legend>Add Company of Bank Detail</legend>
+										<div class="dash-widget clearfix card-box">	
+											<div class="row">
+												<div class="col-md-6">
+															<div class="form-group">
+																<label class="col-form-label">Branch Name <span class="text-danger">*</span></label>
+																<input class="form-control" minlength="02" maxlength="40" type="text" name="Branch" value="<?php echo $Branch; ?>" placeholder="Enter branch name">
+															</div>
+												</div>
+
+												<div class="col-md-6">
+															<div class="form-group">
+																<label class="col-form-label">Bank Name <span class="text-danger">*</span></label>
+																<input class="form-control" minlength="02" maxlength="40" type="text" name="Bankname" value="<?php echo $Bankname; ?>" placeholder="Enter bank name">
+															</div>
+												</div>
+
+												<div class="col-md-6">
+															<div class="form-group">
+																<label class="col-form-label">Account Number <span class="text-danger">*</span></label>
+																<input class="form-control" minlength="14" maxlength="20" type="text" name="Accountnumber" value="<?php echo $Accountnumber; ?>" id="Accountnumber" placeholder="Enter account number">
+															</div>
+												</div>
+
+												<div class="col-md-6">
+															<div class="form-group">
+																<label class="col-form-label">IBAN Number <span class="text-danger">*</span></label>
+																<input class="form-control" minlength="14" maxlength="20" type="text" name="Ibannumber" value="<?php echo $Ibannumber; ?>" placeholder="Enter IBAN number">
+															</div>
+												</div>
+
+												<div class="col-md-6">
+															<div class="form-group">
+																<label class="col-form-label">SWIFT Code<span class="text-danger">*</span></label>
+																<input class="form-control" minlength="05" maxlength="05" type="text" name="Swiftcode" value="<?php echo $Swiftcode; ?>" placeholder="Enter SWIFT code">
+															</div>
+												</div>
+		
+											</div>
+										</div>
+									</fieldset>
+
 								</div>
 
 									<div class="table-responsive m-t-15">
@@ -661,10 +790,15 @@ function readURL(input) {
 		evt.preventDefault();
 		}
 		});
-
-
-
 		$("#pincode").on("input", function(evt) {
+		var self = $(this);
+		self.val(self.val().replace(/[^\d].+/, ""));
+		if ((evt.which < 48 || evt.which > 57)) 
+		{
+			evt.preventDefault();
+		}
+		});
+		$("#Accountnumber").on("input", function(evt) {
 		var self = $(this);
 		self.val(self.val().replace(/[^\d].+/, ""));
 		if ((evt.which < 48 || evt.which > 57)) 
@@ -716,7 +850,7 @@ $(document).ready(function()
 							pincode:{
 									required: true,
 							},
-							Shiftid:{
+							Shifthours:{
 									required: true,
 							},
 							Shiftname:{
@@ -728,6 +862,22 @@ $(document).ready(function()
 							Shiftouttime:{
 									required: true,
 							},
+							Accountnumber:{
+									required: true,
+							},
+							Branch:{
+									required: true,
+							},
+							Bankname:{
+									required: true,
+							},
+							Ibannumber:{
+									required: true,
+							},
+							Swiftcode:{
+									required: true,
+							},
+							
 						},
 						messages:{
 							companytypeid: {
@@ -763,8 +913,8 @@ $(document).ready(function()
 							pincode: {
 									required: "Please enter a pincode",
 										},	
-							Shiftid: {
-									required: "Please select hours",
+							Shifthours: {
+									required: "Please select shift hours",
 										},			
 							Shiftname: {
 									required: "Please enter shift name",
@@ -775,6 +925,21 @@ $(document).ready(function()
 							Shiftouttime: {
 									required: "Please enter shift out time",
 										},	
+							Accountnumber: {
+									required: "Please enter bank account number",
+										},
+							Branch: {
+									required: "Please enter branch city",
+										},
+							Bankname: {
+									required: "Please enter bank name",
+										},	
+							Ibannumber: {
+									required: "Please enter bank iban number",
+										},
+							Swiftcode: {
+									required: "Please enter bank swift code",
+										},
 					},
 					errorPlacement: function (error, element)
 					{
