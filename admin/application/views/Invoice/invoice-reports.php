@@ -10,6 +10,36 @@
             <div class="page-wrapper">
 				<!-- Page Content -->
                 <div class="content container-fluid">
+				<?php if(($this->session->flashdata('error'))){ ?>
+
+<div class="alert alert-danger" id="errorMessage">
+
+<strong> <?php echo $this->session->flashdata('error'); ?></strong> 
+
+</div>
+
+<?php } ?>
+
+<?php if(($this->session->flashdata('success'))){ ?>
+
+		<div class="alert alert-success" id="successMessage">
+
+		<strong> <?php echo $this->session->flashdata('success'); ?></strong> 
+
+		</div>
+
+<?php } ?>
+
+<?php if(($this->session->flashdata('warning'))){ ?>
+
+<div class="alert alert-warning" id="warningMessage">
+
+<strong> <?php echo $this->session->flashdata('warning'); ?></strong> 
+
+</div>
+
+<?php } ?>
+
 					<!-- Page Title -->
 						<div class="row">
 						<div class="col-sm-5 col-5">
@@ -20,8 +50,6 @@
 						</div>
 					</div>
 					<!-- /Page Title -->
-
-					
 
 					<!-- Search Filter -->
 					<div class="row filter-row">
@@ -69,7 +97,7 @@
 								<table class="table table-striped custom-table mb-0 datatable">
 									<thead>
 										<tr>
-											<th>Invoice Number</th>
+											<th>No</th>
 											<th>Client</th>
 											<th>Created Date</th>
 											<th>Due Date</th>
@@ -103,15 +131,11 @@
 											
 										</td>
 										<td class="text-right">
-										<div class="dropdown dropdown-action">
-											<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-											<div class="dropdown-menu dropdown-menu-right">
-												<a class="dropdown-item" href="<?php echo base_url();?>Invoice/edit_invoice/<?php echo $compInvoice->Companyinvoiceid;?>"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-												<a class="dropdown-item" href="<?php echo base_url();?>Invoice/invoice_view/<?php echo $compInvoice->Companyinvoiceid;?>"><i class="fa fa-eye m-r-5"></i> View</a>
-												<a class="dropdown-item" href="#"><i class="fa fa-file-pdf-o m-r-5"></i> Download</a>
-												<a class="dropdown-item" href="#"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-											</div>
-										</div>
+										
+												<a  href="<?php echo base_url();?>Invoice/edit_invoice/<?php echo $compInvoice->Companyinvoiceid;?>" title="Edit"><i class="fa fa-pencil m-r-5"></i></a>
+												<a  href="<?php echo base_url();?>Invoice/invoice_view/<?php echo $compInvoice->Companyinvoiceid;?>"  title="View"><i class="fa fa-eye m-r-5"></i></a>
+												<a  onclick="deletedata(<?php echo $compInvoice->Companyinvoiceid; ?>)" data-toggle="modal" data-target="#delete_client"><i class="fa fa-trash-o m-r-5" title="Delete"></i> </a>
+												
 
 										</td>
 
@@ -140,7 +164,55 @@
 
 				<!-- /Page Content -->
 
-				
+				<!-- Delete Client Modal -->
+
+				<div class="modal custom-modal fade" id="delete_client" role="dialog">
+
+					<div class="modal-dialog modal-dialog-centered">
+
+						<div class="modal-content">
+
+							<div class="modal-body">
+
+								<div class="form-header">
+
+									<h3>Delete Invoice</h3>
+
+									<p>Are you sure want to delete?</p>
+
+								</div>
+
+								<div class="modal-btn delete-action">
+
+									<div class="row">
+
+										<div class="col-6">
+
+											<button type="button" class="btn btn-primary continue-btn" id="yes_btn" ><a href="" id="deleteYes" value="Yes">Delete</a></button>
+
+
+
+										</div>
+
+										<div class="col-6">
+
+											<a href="javascript:void(0);" data-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
+
+										</div>
+
+									</div>
+
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+
+				<!-- /Delete Client Modal -->
 
             </div>
 
@@ -158,7 +230,22 @@
 
 		<div class="sidebar-overlay" data-reff=""></div>
 		<?php $this->load->view('common/footer');?>
-
+		<script>
+		function deletedata(Companyinvoiceid){  
+		$('#delete_client').modal('show')
+			$('#yes_btn').click(function(){
+					Url="<?php echo base_url();?>"
+					$.ajax({
+					url: Url+'/Invoice/delete_invoice/',
+					type: "post",
+					data: {Companyinvoiceid:Companyinvoiceid} ,
+					success: function (response) {             
+				// document.location.href = url+'adminmaster/adminlist/';          
+				},
+				})
+			});
+		}			
+		</script>
 		
     </body>
 

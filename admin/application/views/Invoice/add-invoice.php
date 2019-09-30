@@ -3,31 +3,6 @@
 	 $this->load->view('common/sidebar.php');
 ?>	
 
-<script language="javascript">
-	function func1() {
-	$(document).ready(function() 
-	{
-	alert($("#companyid").val());
-	url="<?php echo base_url();?>"
-	$.ajax({
-         url: url+'Invoice/gethr',
-         type: 'post',
-		 data:{companyid:companyid},
-         success:function(response){
-			var response = JSON.parse(response);
-               console.log(response);
-			//   console.log(response.FullName);
-            $('#hr_id').val(response.hr_id);
-			$('#FullName').val(response.FullName);
-			$('#EmailAddress').val(response.EmailAddress);
-			$("option[id=hr_id][value=" + response.hr_id=='#hr_id' + "]").attr('selected', 'selected');
-         }
-      });	
-});	
-}
-window.onload=func1;
-</script>
-
 <script>
 	function m1()
 	{
@@ -66,7 +41,7 @@ window.onload=func1;
 						<div class="col-md-12">
 							<form method="post" action="<?php echo base_url();?>Invoice/createinvoice"  id="form_valid">
 								<div class="row">
-								<input class="form-control" type="text" name="Companyinvoiceid" value="<?php echo $Companyinvoiceid; ?>">
+								<input class="form-control" type="hidden" name="Companyinvoiceid" value="<?php echo $Companyinvoiceid; ?>">
 									<div class="col-sm-6 col-md-3">
 										<div class="form-group">
 											<label>Company <span class="text-danger">*</span></label>
@@ -111,9 +86,8 @@ window.onload=func1;
 											<input class="form-control" type="email" name="EmailAddress" id="EmailAddress" >
 										</div>
 									</div>
-									<?php if($Companyinvoiceid=='')
-									{
-										?>
+									
+									<?php if($paymentopt==''){ ?>
 									<div class="col-sm-6 col-md-3">
 										<div class="form-group">
 											<label>Payment option</label>
@@ -126,34 +100,47 @@ window.onload=func1;
 											</select>
 										</div>
 									</div>
-									<?php 
-							}
-								?>
-									
-							<?php if($Companyinvoiceid!='')
-							{
-								?>
+								<?php }?>
+
+								<?php if($paymentopt!=''){ ?>
 									<div class="col-sm-6 col-md-3">
 										<div class="form-group">
 											<label>Payment option</label>
 											<select class="form-control" name="paymentopt" id="txt1">
 												<option value="" disabled>Select payment option</option>
-												<option value="<?php if($paymentopt==1){echo "selected";}?>">Monthly</option>
-												<option value="<?php if($paymentopt==3){echo "selected";}?>">Quarterly</option>
-												<option value="<?php if($paymentopt==6){echo "selected";}?>">Halfly</option>
-												<option value="<?php if($paymentopt==12){echo "selected";}?>">Yearly</option>
+								<?php if($paymentopt=='1')
+								{?>
+								<option value="1" selected>Monthly</option>
+								<option value="3">Quarterly</option>
+								<option value="6">Halfly</option>
+								<option value="12">Yearly</option>
+								<?php }else if($paymentopt=='3'){?>
+								<option value="1">Monthly</option>
+								<option value="3" selected>Quarterly</option>
+								<option value="6">Halfly</option>
+								<option value="12">Yearly</option>
+								<?php }else if($paymentopt=='6'){?>
+								<option value="1">Monthly</option>
+								<option value="3">Quarterly</option>
+								<option value="6" selected>Halfly</option>
+								<option value="12">Yearly</option>
+								<?php }else if($paymentopt=='12'){?>
+								<option value="1">Monthly</option>
+								<option value="3">Quarterly</option>
+								<option value="6">Halfly</option>
+								<option value="12" selected>Yearly</option>
+								<?php }?>		
 											</select>
 										</div>
 									</div>
-									<?php 
-							}
-								?>
+								<?php }?>
 
-									<div class="col-sm-6 col-md-3">
+								<div class="col-sm-6 col-md-3">
 										<div class="form-group">
 											<label>Invoice date <span class="text-danger">*</span></label>
 											<div class="cal-icon">
-												<input  class="form-control datetimepicker" type="text" id="invoicedate" name="invoicedate" readOnly>
+												<input  class="form-control datetimepicker" type="text" id="invoicedate" name="invoicedate"
+												 value="<?php  if($invoicedate!='0000-00-00'){ echo date('Y/m/d', strtotime($invoicedate));} ?>" readonly>
 											</div>
 										</div>
 									</div>
@@ -163,7 +150,7 @@ window.onload=func1;
 											<label>Due Date <span class="text-danger">*</span></label>
 											<div class="cal-icon">
 												
-												<input  class="form-control datetimepicker" type="text" id="duedate" name="duedate" readOnly>
+												<input  class="form-control datetimepicker" type="text" id="duedate" name="duedate" value="<?php  if($duedate!='0000-00-00'){ echo date('Y/m/d', strtotime($duedate));} ?>" readonly>
 											</div>
 										</div>
 									</div>
@@ -179,7 +166,7 @@ window.onload=func1;
 														<td></td><td></td><td></td><td></td>
 														<td class="text-right">Monthly Payment</td>
 														<td style="text-align: right; width: 230px">
-														<input class="form-control" type="text" name="amount" id="txt2" onChange="m1()">
+														<input class="form-control" type="text" name="amount" id="txt2" onChange="m1()" value="<?php echo $amount; ?>">
 														</td>
 													</tr>
 													<tr>
@@ -193,7 +180,7 @@ window.onload=func1;
 													<tr>
 														<td colspan="5" style="text-align: right">Add Tax %</td>
 														<td style="text-align: right;width: 230px">
-															<input class="form-control" type="text" name="addtax" id="txt3" onChange="m1()">
+															<input class="form-control" type="text" name="addtax" id="txt3" onChange="m1()" value="<?php echo $addtax; ?>">
 														</td>
 
 														<td colspan="5" style="text-align: right"> Tax Amount</td>
@@ -243,17 +230,37 @@ window.onload=func1;
 		<?php $this->load->view('common/footer');?>
     </body>
 </html>
-
+<script language="javascript">
+	function gethr1() {
+	$(document).ready(function() 
+	{
+	url="<?php echo base_url();?>"
+	$.ajax({
+        url: url+'Invoice/getedithr/' + $('#companyid').val(),
+        success:function(response){
+			var response = JSON.parse(response);
+			//console.log(response);
+             $('#hr_id').val(response.hr_id);
+			 $('#FullName').val(response.FullName);
+			 $('#EmailAddress').val(response.EmailAddress);
+			 $("option[id=hr_id][value=" + response.hr_id=='#hr_id' + "]").attr('selected', 'selected');
+         }
+      });	
+});	
+}
+window.onload=gethr1;
+</script>
 <script type="text/javascript">
 				$('#invoicedate').datetimepicker({
 					format: 'YYYY/MM/DD',
 					 ignoreReadonly: true,
-				});
+				}).val('<?php echo  ($invoicedate!='0000-00-00')  ? date('Y/m/d', strtotime($invoicedate)) : ''; ?>');;
 
 				$('#duedate').datetimepicker({
 					format: 'YYYY/MM/DD',
-					 ignoreReadonly: true,
-				});
+					ignoreReadonly: true,
+				}).val('<?php echo  ($duedate!='0000-00-00')  ? date('Y/m/d', strtotime($duedate)) : ''; ?>');;
+
 
 
 function gethr(companyid) {

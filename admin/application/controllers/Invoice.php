@@ -84,16 +84,16 @@ class Invoice extends CI_Controller
 		$result=$this->Invoice_model->get_invoice($Companyinvoiceid);	
 		$data['Companyinvoiceid']=$result['Companyinvoiceid'];
 		$data['companyid']=$result['companyid'];
-
 		$data['hr_id']=$result['hr_id'];
 		$data['hr_type']=$result['hr_type'];
 		$data['FullName']=$result['FullName'];
 		$data['EmailAddress']=$result['EmailAddress'];
-		
 		$data['paymentopt']=$result['paymentopt'];
 		$data['invoicedate']=$result['invoicedate'];
-		$data['duedate']=$this->input->post('duedate');
+		$data['duedate']=$result['duedate'];
+		$data['amount']=$result['amount'];
 		$data['totalamount']=$result['totalamount'];
+		$data['addtax']=$result['addtax'];
 		$data['taxamount']=$result['taxamount'];
 		$data['netamount']=$result['netamount'];
 		
@@ -102,39 +102,59 @@ class Invoice extends CI_Controller
 		$this->load->view('Invoice/add-invoice',$data);
 	}
 
-
+	public function getedithr($companyid)
+	{
+		$data=array();
+		$result=$this->Invoice_model->getdatahr($companyid);	
+		$data['hr_id']=$result['hr_id'];
+		$data['companyid']=$result['companyid'];
+		$data['hr_type']=$result['hr_type'];	
+		$data['FullName']=$result['FullName'];	
+		$data['EmailAddress']=$result['EmailAddress'];
+		$data['DateofBirth']=$result['DateofBirth'];
+		$data['Contact']=$result['Contact'];
+		$data['DateofBirth']= $result['DateofBirth'];
+		echo json_encode($data);
+	}
 
 	public function invoice_view($Companyinvoiceid)
 	{
 		$data=array();
+		$AdminId=$this->session->userdata('AdminId');
 		$result=$this->Invoice_model->get_companyinvoice($Companyinvoiceid);	
 	//	echo "<br>";print_r($result);die;
-	
 		$data['Companyinvoiceid']=$result['Companyinvoiceid'];
 		$data['invoicedate']=$result['invoicedate'];
 		$data['duedate']=$result['duedate'];
 		$data['totalamount']=$result['totalamount'];
 		$data['taxamount']=$result['taxamount'];
-		$data['discount']=$result['discount'];
 		$data['netamount']=$result['netamount'];
 		$data['status']=$result['status'];
-	
-		
 		$data['companyid']=$result['companyid'];
 		$data['companyname']=$result['companyname'];
 		$data['comemailaddress']=$result['comemailaddress'];
 		$data['comcontactnumber']=$result['comcontactnumber'];
 		$data['gstnumber']=$result['gstnumber'];
 		$data['digitalsignaturedate']=$result['digitalsignaturedate'];
+		$data['companyimage']=$result['companyimage'];
 		$data['companyimage']= $result['companyimage'];
 		$data['companyaddress']=$result['companyaddress'];
 		$data['companycity']=$result['companycity'];
 		$data['pincode']=$result['pincode'];
 		$data['isactive']=$result['isactive'];
-		
 		$data['hr_id']=$result['hr_id'];
 		$data['FullName']=$result['FullName'];
 		$data['EmailAddress']=$result['EmailAddress'];
+		$data['Bankdetailid']=$result['Bankdetailid'];
+		$data['Accountnumber']=$result['Accountnumber'];
+		$data['Branch']=$result['Branch'];
+		$data['Bankname']=$result['Bankname'];
+		$data['Ibannumber']=$result['Ibannumber'];
+		$data['Swiftcode']=$result['Swiftcode'];
+		$data['addtax']=$result['addtax'];
+		$data['taxamount']=$result['taxamount'];
+		$data['netamount']=$result['netamount'];
+		$data['Address']=$result['Address'];
 		$this->load->view('Invoice/invoice-view',$data);
 	}
 
@@ -155,7 +175,32 @@ class Invoice extends CI_Controller
 	}
 	
 
+	function delete_invoice(){
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
+			$Companyinvoiceid=$this->input->post('Companyinvoiceid');
+			$data=array(
+				'isdelete'=>'1',
+				'isactive'=>'Inactive'
+					);
+			$this->db->where("Companyinvoiceid",$Companyinvoiceid);
+			$result=$this->db->update('tblcompanyinvoice',$data);
+			if($result)
+			{
+				$this->session->set_flashdata('success', 'Invoice has been deleted!');
+				redirect('Company');
+			}
+			else
+			{
+				$this->session->set_flashdata('error', 'Invoice was not delete!');
+				redirect('Company');
+			}
+
 	
+
+	}
+
 
 }
 

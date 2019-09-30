@@ -66,15 +66,37 @@ class Invoice_model extends CI_Model
 
 	public function update_invoice()
 	{
-
+		$Companyinvoiceid=$this->input->post('Companyinvoiceid');
+		$data=array(
+			'companyid'=>$this->input->post('companyid'),
+			'hr_id'=>$this->input->post('hr_id'),
+			'paymentopt'=>$this->input->post('paymentopt'),
+			'invoicedate'=>$this->input->post('invoicedate'),
+			'duedate'=>$this->input->post('duedate'),
+			'amount'=>$this->input->post('amount'),
+			'totalamount'=>$this->input->post('totalamount'),
+			'addtax'=>$this->input->post('addtax'),
+			'taxamount'=>$this->input->post('taxamount'),
+			'netamount'=>$this->input->post('netamount')
+				);
+			//print_r($data);die;
+			$this->db->where("Companyinvoiceid",$Companyinvoiceid);
+			$this->db->update('tblcompanyinvoice',$data);	
+			return 1;	 	
+		
 	}
+
+
 
 	public function get_companyinvoice($Companyinvoiceid)
 	{
-		$this->db->select('t1.*,t2.*,t3.*');
+		$AdminId=$this->session->userdata('AdminId');
+		$this->db->select('t1.*,t2.*,t3.*,t4.*,t5.*');
 		$this->db->from('tblcompanyinvoice as t1');
 		$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
 		$this->db->join('tblhr as t3', 't1.hr_id = t3.hr_id', 'LEFT');
+		$this->db->join('tblcompanybankdetail as t4', 't2.companyid = t4.companyid', 'LEFT');
+		$this->db->join('tbladmin as t5', $AdminId.'= t5.AdminId', 'LEFT');
 		$this->db->where('t1.Companyinvoiceid',$Companyinvoiceid);
 		$query=$this->db->get();
 		return $query->row_array();
