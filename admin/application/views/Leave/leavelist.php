@@ -90,6 +90,9 @@
 							</div>
 							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
 								<input type="submit" value="Search" class="btn btn-success btn-block">
+							</div> 
+							<div class="col-md-3"> 
+								<a href="<?php echo base_url()?>Leave/leavelist" class="btn btn-info"><i class="fa fa-refresh"></i></a> 
 							</div>     
 						</div> 
 					</form>

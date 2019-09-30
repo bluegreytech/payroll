@@ -21,22 +21,17 @@
 					<!-- Page Title -->
 
 					<div class="row">
+							<div class="col-sm-5 col-5">
+							<h4 class="page-title">List of Company   </h4>
+							</div>
+							<div class="col-sm-7 col-7 text-right m-b-30">
+							<a href="<?php echo base_url();?>Company/companyadd" class="btn add-btn"><i class="fa fa-plus">
 
-						<div class="col">
+</i> Add Company</a>
+							</div>
+						</div>
 
-							<h4 class="page-title">List of Company  </h4>
-
-						</div>	
-
-									<div class="col-12 text-right m-b-30">
-
-										<a href="<?php echo base_url();?>Company/companyadd" class="btn add-btn"><i class="fa fa-plus">
-
-										</i> Add Company</a>			
-
-									</div>			
-
-					</div>
+					
 
 					<!-- /Page Title -->
 
@@ -112,7 +107,11 @@
 							</div>
 							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
 								<input type="submit" value="Search" class="btn btn-success btn-block">
-							</div>     
+							</div> 
+							<div class="col-md-3"> 
+								<a href="<?php echo base_url()?>Company" class="btn btn-info"><i class="fa fa-refresh"></i></a> 
+							</div> 
+							    
 						</div> 
 					</form>
 					
@@ -193,10 +192,10 @@
 											</td>
 
 										<td class="text-center">
-											<a class="dropdown-item" href="<?php echo base_url();?>Company/editcompany/<?php echo $comp->companyid;?>" role="button">
+											<a href="<?php echo base_url();?>Company/editcompany/<?php echo $comp->companyid;?>" role="button">
 													<i class="fa fa-pencil m-r-5"></i> </a>
-											<a class="dropdown-item" onclick="deletedata(<?php echo $comp->companyid; ?>)" data-toggle="modal" data-target="#delete_client"><i class="fa fa-trash-o m-r-5"></i> </a>
-										    <a class="dropdown-item" href="<?php echo base_url();?>Company/company_notification_expired/<?php echo $comp->companyid;?>" role="button">
+											<a  onclick="deletedata(<?php echo $comp->companyid; ?>)" data-toggle="modal" data-target="#delete_client"><i class="fa fa-trash-o m-r-5"></i> </a>
+										    <a  href="<?php echo base_url();?>Company/company_notification_expired/<?php echo $comp->companyid;?>" role="button">
 													<i class="fa fa-pencil m-r-5"></i>Notfication</a>				
 										</td>
 

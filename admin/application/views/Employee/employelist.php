@@ -21,21 +21,9 @@
 					<!-- Page Title -->
 
 					<div class="row">
-
 						<div class="col">
-
 							<h4 class="page-title">List of Employee  </h4>
-
 						</div>	
-
-									<!-- <div class="col-12 text-right m-b-30">
-
-										<a href="<?php //echo base_url();?>Employee/addemployee" class="btn add-btn"><i class="fa fa-plus">
-
-										</i> Add Employee</a>			
-
-									</div>			 -->
-
 					</div>
 
 					<!-- /Page Title -->
@@ -118,7 +106,9 @@
 							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
 								<input type="submit" value="Search" class="btn btn-success btn-block">
 							</div>    
-
+							<div class="col-md-3"> 
+								<a href="<?php echo base_url()?>Employee" class="btn btn-info"><i class="fa fa-refresh"></i></a> 
+							</div> 
 						</div> 
 
 					</form>

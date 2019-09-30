@@ -3,38 +3,67 @@
 
 
 class Company_model extends CI_Model
-
 {
+	function get_docfile()
+	{	
+		// $insert_id='1';
+		// 	$this->db->select('t1.*,t2.*');
+		// 	$this->db->from('tblcompanynotification as t1');
+		// 	$this->db->join('tblcomnotdocument as t2', 't1.Companynotificationid = t2.Companynotificationid', 'LEFT');
+		// 	$this->db->where('t1.Companynotificationid',$insert_id);
+		// 	$smtp2 = $this->db->get();	
+		// 	foreach($smtp2->result() as $rows) {
+		
+		// 	echo	$Documentfile = $rows->Documentfile;
+				
+		// 	}
+		// 	die;
 
-
-
-	function list_rights()
-
-	{
-
-		$this->db->select('*');
-
-		$this->db->from('tblrights');
-
-		$this->db->where('rightsname','company');
-
-		$r=$this->db->get();
-
-		$res = $r->result();
-
-		return $res;
-
+		
+		
+		
+		$email_message='hiiiiiiii testing';
+		$str=$email_message; 
+		$config['protocol']='smtp';
+		$config['smtp_host']='ssl://smtp.googlemail.com';
+		$config['smtp_port']='465';
+		$config['smtp_user']='bluegreyindia@gmail.com';
+		$config['smtp_pass']='Test@123';
+		$config['charset']='utf-8';
+		$config['newline']="\r\n";
+		$config['mailtype'] = 'html';								
+		$this->email->initialize($config);
+		$body =$str;	
+		$this->email->from('bluegreyindia@gmail.com');
+		$this->email->to('bluegreyindia@gmail.com');		
+		$this->email->subject('Important notification to company');
+		$this->email->message($body);
+		$this->db->select('t1.*,t2.*');
+		$this->db->from('tblcompanynotification as t1');
+		$this->db->join('tblcomnotdocument as t2', 't1.Companynotificationid = t2.Companynotificationid', 'LEFT');
+		$this->db->where('t1.Companynotificationid',1);
+		$smtp3 = $this->db->get();	
+		foreach($smtp3->result() as $rows) {
+			echo $Documentfile = $rows->Documentfile;
+			$atch=base_url().'upload/company/Document/'.$Documentfile;	
+			$this->email->attach($atch);
+		}
+		//die;	
+		if($this->email->send())
+		{
+			return 1;
+		}else
+		{
+			return 2;
+		}
 	}
 
 
 
 	public function send_company_notification()
 	{
-
 		$companyid=implode(',',$this->input->post('companyid'));	
 		$Enddate=$this->input->post('Enddate');
-		// $Documentfile = $this->input->post('Documentfile');
-		// print_r($Documentfile);die;
 		$data=array( 
 		'companyid'=>$companyid,
 		'Enddate'=>$Enddate,
@@ -42,34 +71,148 @@ class Company_model extends CI_Model
 		'Createdby'=>1,
 		'Createdon'=>date("Y-m-d h:i:s")
 		);
-		// print_r($data); die;
 		$this->db->insert('tblcompanynotification',$data);
-		//return 1;	
 		$insert_id = $this->db->insert_id();
 		$data = array();
-		$Documentfile = count($this->input->post('Documentfile'));
-		//print_r($Documentfile);die;
-		for($i=0; $i<$Documentfile; $i++)
+		$user_image='';
+
+		$cpt = count($_FILES['Documentfile']['name']);
+		for($i=0; $i<$cpt; $i++)
+		{ 
+			if(isset($_FILES['Documentfile']) &&  $_FILES['Documentfile']['name']!='')
+			{      
+				$this->load->library('upload');
+				$rand=rand(0,100000); 
+				$_FILES['userfile']['name']     =   $_FILES['Documentfile']['name'][$i];
+				$_FILES['userfile']['type']     =   $_FILES['Documentfile']['type'][$i];
+				$_FILES['userfile']['tmp_name'] =   $_FILES['Documentfile']['tmp_name'][$i];
+				$_FILES['userfile']['error']    =   $_FILES['Documentfile']['error'][$i];
+				$_FILES['userfile']['size']     =   $_FILES['Documentfile']['size'][$i];
+				$config['file_name'] = $rand.'Document';			
+				$config['upload_path'] = base_path().'upload/company_orig/Document_orig/';		
+				$config['allowed_types'] = 'jpg|jpeg|png|pdf|doc';  
+				$this->upload->initialize($config);
+				if (!$this->upload->do_upload())
+				{
+					$error =  $this->upload->display_errors();
+					echo "<pre>";print_r($error);die;
+				} 
+				$picture = $this->upload->data();	   
+				$this->load->library('image_lib');		   
+				$this->image_lib->clear();
+				$gd_var='gd2';
+
+			 	$this->image_lib->initialize(array(
+					'image_library' => $gd_var,
+					'source_image' => base_path().'upload/company_orig/Document_orig/'.$picture['file_name'],
+					'new_image' => base_path().'upload/company/Document/'.$picture['file_name'],
+					'maintain_ratio' => FALSE,
+					'quality' => '100%',
+					'width' => 300,
+					'height' => 300
+				));
+				if(!$this->image_lib->resize())
+				{
+					$error = $this->image_lib->display_errors();
+				}
+		  		$user_image=$picture['file_name'];
+			}
+	
+		if($user_image!='')
 		{
-			$Documenttitle=$this->input->post('Documenttitle');
-			$Notificationdescription=$this->input->post('Notificationdescription');
-			$Documentfile=$this->input->post('Documentfile');
-			$data2=array( 
-				'Companynotificationid'=>$insert_id[$i],
-				'Documenttitle'=>$Documenttitle[$i],
-				'Notificationdescription'=>$Notificationdescription[$i],
-				'Documentfile'=>$Documentfile[$i],
-				'Isactive'=>'Active',
-				'Createdby'=>1,
-				'Createdon'=>date("Y-m-d h:i:s")
-				);
-				// print_r($data2); die;
-			$this->db->insert('tblcomnotdocument',$data2);
-		//	return 1;	
+			$Documentfile[$i]=$user_image;
 		}
-		return true;
-		
+		else
+		{
+			$Documentfile[$i]='';
+		}
+
+		$Documenttitle=$this->input->post('Documenttitle');
+		$Notificationdescription=$this->input->post('Notificationdescription');
+		$data2=array( 
+			'Companynotificationid'=>$insert_id,
+			'Documenttitle'=>$Documenttitle,
+			'Notificationdescription'=>$Notificationdescription,
+			'Documentfile'=>$Documentfile[$i],
+			'Isactive'=>'Active',
+			'Createdby'=>1,
+			'Createdon'=>date("Y-m-d h:i:s")
+			);
+			//print_r($data2); die;
+			$this->db->insert('tblcomnotdocument',$data2);	
+			$insert_idss = $this->db->insert_id();
+		 } 
+
+		if($insert_id!=''){
+			$this->db->select('t1.*,t2.*,t3.*');
+			$this->db->from('tblcompanynotification as t1');
+			$this->db->join('tblcomnotdocument as t2', 't1.Companynotificationid = t2.Companynotificationid', 'LEFT');
+			$this->db->join('tblcompany as t3', 't1.companyid = t3.companyid', 'LEFT');
+			$this->db->where('t1.Companynotificationid',$insert_id);
+			$smtp2 = $this->db->get();	
+			foreach($smtp2->result() as $rows) {
+				$Companynotificationid = $rows->Companynotificationid;
+				$companyid = $rows->companyid;
+				$Enddate = $rows->Enddate;
+				$Companydocumentid = $rows->Companydocumentid;
+				$companyname = $rows->companyname;
+				$comemailaddress = $rows->comemailaddress;
+				$Documenttitle = $rows->Documenttitle;
+				$Notificationdescription = $rows->Notificationdescription;
+				$companyimage = $rows->companyimage;		
+			}
+
+				// $email_template=$this->db->query("select * from ".$this->db->dbprefix('tblemail_template')." where task='Company verification'");
+				// $email_temp=$email_template->row();
+				// $email_address_from=$email_temp->from_address;
+				// $email_address_reply=$email_temp->reply_address;
+				// $email_subject=$email_temp->subject;        
+				// $email_message=$email_temp->message;
+
+			
+				
+				$email_message='hiiiiiiii testing';
+				$str=$email_message; 
+				$config['protocol']='smtp';
+				$config['smtp_host']='ssl://smtp.googlemail.com';
+				$config['smtp_port']='465';
+				$config['smtp_user']='bluegreyindia@gmail.com';
+				$config['smtp_pass']='Test@123';
+				$config['charset']='utf-8';
+				$config['newline']="\r\n";
+				$config['mailtype'] = 'html';								
+				$this->email->initialize($config);
+				$body =$str;	
+				$this->email->from('bluegreyindia@gmail.com');
+				$this->email->to($comemailaddress);		
+				$this->email->subject('Important notification to company');
+				$this->email->message($body);
+				$this->db->select('t1.*,t2.*,t3.*');
+				$this->db->from('tblcompany as t1');
+				$this->db->join('tblcompanynotification as t2', 't1.companyid = t2.companyid', 'LEFT');
+				$this->db->join('tblcomnotdocument as t3', 't2.Companynotificationid = t3.Companynotificationid', 'LEFT');
+				$this->db->where('t1.companyid',$insert_id);
+				$smtp3 = $this->db->get();	
+				
+				foreach($smtp3->result() as $rows) {
+					$Documentfile = $rows->Documentfile;
+					$atch=base_url().'upload/company/Document/'.$Documentfile;	
+					$this->email->attach($atch);
+				}	
+				if($this->email->send())
+				{
+					return 1;
+				}else
+				{
+					return 2;
+				}
+		}
+		else
+		{
+			return 2;
+		}
 	}
+
 
 	
 	function list_company_notification($companyid)
@@ -508,6 +651,14 @@ class Company_model extends CI_Model
 				return 3;
 		}
 
+		$this->db->select('*');
+		$this->db->where('gstnumber',$this->input->post('gstnumber'));
+		$query=$this->db->get('tblcompany');
+		if($query->num_rows() > 0)
+		{
+				return 4;
+		}
+
 		$user_image='';
 	//$image_settings=image_setting();
 	 if(isset($_FILES['companyimage']) &&  $_FILES['companyimage']['name']!='')
@@ -615,23 +766,27 @@ class Company_model extends CI_Model
 			// print_r($data); die;
 			$this->db->insert('tblcompany',$data);
 			$insert_id = $this->db->insert_id();
-			  
-			
+				
 			$Shifthours=$this->input->post('Shifthours');
-			$Shiftname=$this->input->post('Shiftname');	
+			$Shiftname=$this->input->post('Shiftname');
 			$Shiftintime=$this->input->post('Shiftintime');
 			$Shiftouttime=$this->input->post('Shiftouttime');
-
-			$data3=array( 
-			'companyid'=>$insert_id,
-			//'Shifthours'=>$Shifthours,
-			'Shiftname'=>$Shiftname,
-			'Shiftintime'=>$Shiftintime,
-			'Shiftouttime'=>$Shiftouttime
-			);
+			$data3 = array();
+			$Shiftnames = count($this->input->post('Shiftname'));
+			for($i=0; $i<$Shiftnames; $i++)
+			 {
+				$data3=array( 
+				'companyid'=>$insert_id,
+				'Shifthours'=>$Shifthours,
+				'Shiftname'=>isset($Shiftname[$i]) ? $Shiftname[$i] : '0',
+				'Shiftintime'=>isset($Shiftintime[$i]) ? $Shiftintime[$i] : '0',
+				'Shiftouttime'=>isset($Shiftouttime[$i]) ? $Shiftouttime[$i] : '0',
+				);
+				  // echo "<pre>";print_r($data3);
+				$this->db->insert('tblcompanyshift',$data3);	
+			 }	
+												 	
 				
-			$this->db->insert('tblcompanyshift',$data3);	
-				//echo "<pre>";print_r($data3);
 				
 				$complianceid=implode(',',$this->input->post('complianceid'));
 				$data2=array( 
@@ -642,7 +797,6 @@ class Company_model extends CI_Model
 					'createdon'=>date("Y-m-d h:i:s")
 					);
 				$this->db->insert('tblcompanycompliances',$data2);	
-
 
 				$Accountnumber=$this->input->post('Accountnumber');
 				$Branch=$this->input->post('Branch');	
@@ -738,7 +892,16 @@ class Company_model extends CI_Model
 
 
 	
-
+	function list_companydocument($companyid)
+	{
+		$this->db->select('t1.*,t2.*');
+		$this->db->from('tblcompanynotification as t1');
+		$this->db->join('tblcomnotdocument as t2', 't1.Companynotificationid = t2.Companynotificationid', 'LEFT');
+		$this->db->where('companyid',$companyid);
+		$r=$this->db->get();
+		$res = $r->result();
+		return $res;
+	}
 
 	function get_companyprofile($companyid)
 	{
@@ -964,27 +1127,32 @@ class Company_model extends CI_Model
 					'createdon'=>date("Y-m-d h:i:s")
 					);
 				$this->db->where("companycomplianceid",$companycomplianceid);
-				$this->db->update('tblcompanycompliances',$data2);
-			 	
+				$this->db->update('tblcompanycompliances',$data2);	
 			} 
-			if($Companyshiftid!='')
-			{
-					$Shifthours=$this->input->post('Shifthours');
-					$Shiftname=$this->input->post('Shiftname');	
+		
+				$data3 = array();
+				$Shiftnames = count($this->input->post('Shiftname'));
+				for($i=0; $i<$Shiftnames; $i++)
+				 {
+					 $Shifthours=$this->input->post('Shifthours');
+					 $Shiftname=$this->input->post('Shiftname');
 					$Shiftintime=$this->input->post('Shiftintime');
-					$Shiftouttime=$this->input->post('Shiftouttime');	
-				$data3=array( 
+					$Shiftouttime=$this->input->post('Shiftouttime');
+					$data3=array( 
+					'Companyshiftid'=>$Companyshiftid[$i],
 					'companyid'=>$companyid,
 					'Shifthours'=>$Shifthours,
-					'Shiftname'=>$Shiftname,
-					'Shiftintime'=>$Shiftintime,
-					'Shiftouttime'=>$Shiftouttime
+					'Shiftname'=>isset($Shiftname[$i]) ? $Shiftname[$i] : '0',
+					'Shiftintime'=>isset($Shiftintime[$i]) ? $Shiftintime[$i] : '0',
+					'Shiftouttime'=>isset($Shiftouttime[$i]) ? $Shiftouttime[$i] : '0',
 					);
-					//print_r($data3);
-					$this->db->where("Companyshiftid",$Companyshiftid);
-					$this->db->update('tblcompanyshift',$data3);		
-				}
-					
+					//echo "<pre>";print_r($data3);
+					$this->db->where("Companyshiftid",$Companyshiftid[$i]);
+					$this->db->update('tblcompanyshift',$data3);	
+				 }	
+				
+			
+				
 				if($Bankdetailid!='')
 				{
 					$Accountnumber=$this->input->post('Accountnumber');

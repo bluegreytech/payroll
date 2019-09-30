@@ -131,8 +131,8 @@
 												</div>
 											</td>
 											<td class="text-center">
-												<a class="dropdown-item" onClick="editcompanytype(<?php echo $comp->companytypeid;?>)" data-toggle="modal" data-target="#edit_holiday"><i class="fa fa-pencil m-r-5"></i> </a>
-												<a class="dropdown-item"  onclick="deletedata(<?php echo $comp->companytypeid; ?>)" data-toggle="modal" data-target="#delete_holiday"><i class="fa fa-trash-o m-r-5"></i> </a>			
+												<a  onClick="editcompanytype(<?php echo $comp->companytypeid;?>)" data-toggle="modal" data-target="#edit_holiday"><i class="fa fa-pencil m-r-5"></i> </a>
+												<a   onclick="deletedata(<?php echo $comp->companytypeid; ?>)" data-toggle="modal" data-target="#delete_holiday"><i class="fa fa-trash-o m-r-5"></i> </a>			
 											</td>
 										</tr>
 

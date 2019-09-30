@@ -12,8 +12,22 @@
 				<!-- Page Content -->
 
                 <div class="content container-fluid">
+				<?php if(($this->session->flashdata('error'))){ ?>
+				<div class="alert alert-danger" id="errorMessage">
+				<strong> <?php echo $this->session->flashdata('error'); ?></strong> 
+				</div>
+				<?php } ?>
+				<?php if(($this->session->flashdata('success'))){ ?>
+						<div class="alert alert-success" id="successMessage">
+						<strong> <?php echo $this->session->flashdata('success'); ?></strong> 
+						</div>
+				<?php } ?>
+				<?php if(($this->session->flashdata('warning'))){ ?>
+				<div class="alert alert-warning" id="warningMessage">
+				<strong> <?php echo $this->session->flashdata('warning'); ?></strong> 
+				</div>
+				<?php } ?>
 
-				
 
 				<!-- Page Title -->
 	<div class="row">
@@ -26,35 +40,6 @@
 	</div>
 	<!-- /Page Title -->
 
-					<?php if(($this->session->flashdata('error'))){ ?>
-
-							<div class="alert alert-danger" id="errorMessage">
-
-							<strong> <?php echo $this->session->flashdata('error'); ?></strong> 
-
-							</div>
-
-							<?php } ?>
-
-							<?php if(($this->session->flashdata('success'))){ ?>
-
-									<div class="alert alert-success" id="successMessage">
-
-									<strong> <?php echo $this->session->flashdata('success'); ?></strong> 
-
-									</div>
-
-							<?php } ?>
-
-							<?php if(($this->session->flashdata('warning'))){ ?>
-
-							<div class="alert alert-warning" id="warningMessage">
-
-							<strong> <?php echo $this->session->flashdata('warning'); ?></strong> 
-
-							</div>
-
-							<?php } ?>
 
 						<!-- Search Filter -->
 						<form method="post" action="<?php echo base_url();?>Holiday/holidaylist">
@@ -90,7 +75,10 @@
 							</div>
 							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
 								<input type="submit" value="Search" class="btn btn-success btn-block">
-							</div>     
+							</div>
+							<div class="col-md-3"> 
+								<a href="<?php echo base_url()?>Holiday/holidaylist" class="btn btn-info"><i class="fa fa-refresh"></i></a> 
+							</div>      
 						</div> 
 					</form>
 					

@@ -119,11 +119,11 @@
 							</div>
 
 							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
-
 								<input type="submit" value="Search" class="btn btn-success btn-block">
-
 							</div>     
-
+							<div class="col-md-3"> 
+								<a href="<?php echo base_url()?>Hr" class="btn btn-info"><i class="fa fa-refresh"></i></a> 
+							</div> 
 						</div> 
 
 					</form>
@@ -214,9 +214,9 @@
 											if($this->session->userdata('RoleId')==1 || $this->session->userdata('RoleId')==2){
 											?>
 											<td class="text-center">
-														<a class="dropdown-item" onClick="edithrs(<?php echo $hr->hr_id;?>)" data-toggle="modal" data-target="#edit_salary" role="button">
+														<a  onClick="edithrs(<?php echo $hr->hr_id;?>)" data-toggle="modal" data-target="#edit_salary" role="button">
 														<i class="fa fa-pencil m-r-5"></i></a>
-														<a class="dropdown-item" onclick="deletedata(<?php echo $hr->hr_id; ?>)"  data-toggle="modal" data-target="#delete_admin"><i class="fa fa-trash-o m-r-5"></i> </a>
+														<a  onclick="deletedata(<?php echo $hr->hr_id; ?>)"  data-toggle="modal" data-target="#delete_admin"><i class="fa fa-trash-o m-r-5"></i> </a>
 											</td>
 											<?php
 											}

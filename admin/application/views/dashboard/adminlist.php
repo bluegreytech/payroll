@@ -118,7 +118,10 @@
 								<input type="submit" value="Search" class="btn btn-success btn-block">
 
 							</div>     
-
+							<div class="col-md-3"> 
+								<a href="<?php echo base_url()?>adminmaster/adminlist" class="btn btn-info"><i class="fa fa-refresh"></i></a> 
+						
+							</div>  
 						</div> 
 
 					</form>
@@ -202,20 +205,14 @@
 
 
 											<?php 
-
 											if($this->session->userdata('RoleId')==1)
-
 											{
-
 											?>
-
 							<td class="text-center">
-								<a class="dropdown-item" onClick="editadmin(<?php echo $adminlist->AdminId;?>)" data-toggle="modal" data-target="#edit_salary" role="button"><i class="fa fa-pencil m-r-5"></i></a>
-
-								<a class="dropdown-item" onclick="deletedata(<?php echo $adminlist->AdminId; ?>)"  data-toggle="modal" data-target="#delete_admin"><i class="fa fa-trash-o m-r-5"></i> </a>
+								<a  onClick="editadmin(<?php echo $adminlist->AdminId;?>)" data-toggle="modal" data-target="#edit_salary" role="button"><i class="fa fa-pencil m-r-5"></i></a>
+								<a  onclick="deletedata(<?php echo $adminlist->AdminId; ?>)"  data-toggle="modal" data-target="#delete_admin"><i class="fa fa-trash-o m-r-5"></i> </a>
 
 							</td>
-
 
 											<?php 
 

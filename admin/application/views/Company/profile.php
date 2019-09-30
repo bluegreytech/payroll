@@ -43,10 +43,12 @@
 								<?php
 								if($Enddate!='')
 								{
+									
 								?>		
 								<div class="row">
 								<input type="hidden" class="form-control" name="Companydocumentid" value="<?php echo $Companydocumentid;?>">
 								<input type="hidden" class="form-control" name="Companynotificationid" value="<?php echo $Companynotificationid;?>">
+								
 										<div class="col-md-6">
 												<div class="form-group">
 													<label class="col-form-label">Notification End Date<span class="text-danger">*</span></label>
@@ -75,16 +77,22 @@
 												</script>
 											</div>		
 										</div>
-
-										<!-- <div class="col-md-6">
+										<?php
+								if($documentData){
+									foreach($documentData as $doc)
+									{
+								?>
+										<div class="col-md-6">
 											<div class="form-group">
 												<label class="col-form-label">Important Document <span class="text-danger">*</span></label>
-												<br><a href="<?php //echo base_url();?>upload/CompanyDcuments/<?php //echo $Documentname; ?>" target="_blank"><?php// echo $Documentname; ?></a>
+												<br><a href="<?php echo base_url();?>upload/Company/Document/<?php echo $doc->Documentfile; ?>" target="_blank"><?php echo $doc->Documentfile; ?></a>
 											</div>
-										</div> -->
+										</div>
 									
 										
-									    	
+										<?php
+								}}
+								?>	    	
 								</div>	
 										
 								<?php

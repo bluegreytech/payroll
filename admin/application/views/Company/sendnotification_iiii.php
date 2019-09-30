@@ -5,11 +5,7 @@
 			
 			<!-- Page Wrapper -->
             <div class="page-wrapper">
-						
-				<!-- Page Content -->
-               
-				<div class="content container-fluid">
-				<?php if(($this->session->flashdata('error'))){ ?>
+						<?php if(($this->session->flashdata('error'))){ ?>
 							<div class="alert alert-danger" id="errorMessage">
 							<strong> <?php echo $this->session->flashdata('error'); ?></strong> 
 							</div>
@@ -24,16 +20,19 @@
 							<strong> <?php echo $this->session->flashdata('warnin'); ?></strong> 
 							</div>
 							<?php } ?>
+				<!-- Page Content -->
+               
+				<div class="content container-fluid">
 						<!-- Page Title -->
 						<div class="row">
-							<div class="col-sm-5 col-5">
-							<h4 class="page-title">Send Company notification</h4>
-							</div>
-							<div class="col-sm-7 col-7 text-right m-b-30">
-							<a href="<?php echo base_url();?>Company" class="btn add-btn">Back to Company List</a>
-							</div>
-						</div>
-
+						<div class="col">
+							<h4 class="page-title">Send Notification to Company</h4>
+						</div>	
+						<div class="col-12 text-right m-b-30">
+										<a href="<?php echo base_url();?>Company" class="btn add-btn"><i class="fa fa-plus">
+										</i>Back to List of Company</a>			
+									</div>			
+					</div>
 					<!-- /Page Title -->
 						<div class="row">
 							<div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
@@ -44,7 +43,7 @@
 											<div class="form-group">
 													<label>Type of Company</label>
 													<select class="form-control" name="companyid[]" multiple> 
-														<option desabled>Please select type of company</option>
+														<option desabled value="">Please select type of company</option>
 														<?php
 														 if($companyData){
 															foreach($companyData as $company)
@@ -89,7 +88,7 @@
 										<div class="col-md-6">
 											<div class="form-group">
 												<label class="col-form-label">Upload File<span class="text-danger">*</span></label>
-												<input class="form-control" type="file" name="Documentfile[]" placeholder="Upload document file" multiple="multiple">
+												<input class="form-control" type="file" minlength="2" maxlength="100" name="Documentfile[]" placeholder="Upload document file" multiple="multiple">
 											</div>
 										</div>	
 									</div>
@@ -124,6 +123,7 @@
 <script type="text/javascript">
 				$('#Enddate').datetimepicker({
 					 format: 'YYYY/MM/DD',
+					 maxDate: moment(),
 					 ignoreReadonly: true,
 				});			
 </script>

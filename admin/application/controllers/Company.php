@@ -8,6 +8,12 @@ class Company extends CI_Controller
 		$this->load->model('Company_model');
 	}
 
+	public function getfile(){
+		$result=$this->Company_model->get_docfile();	
+		echo "<br>";print_r($result);die;
+		$this->load->view('Company/sendnotification',$data);
+	}
+
 	public function profile($companyid)
 	{	
 		if(!check_admin_authentication()){ 
@@ -43,6 +49,7 @@ class Company extends CI_Controller
 		$data['stateData']=$this->Company_model->list_state();
 		$data['complianceData']=$this->Company_model->list_compliance();
 		$data['companytypeData']=$this->Company_model->list_companytype();
+		$data['documentData']=$this->Company_model->list_companydocument($companyid);
 		//	echo "<pre>";print_r($data['complianceData']);die;
 		$this->load->view('Company/profile',$data);	
 
@@ -158,7 +165,17 @@ class Company extends CI_Controller
 			$data['isactive']=$this->input->post('isactive');
 			$data['companycomplianceid']=$this->input->post('companycomplianceid');
 			$data['Companyshiftid']=$this->input->post('Companyshiftid');
+
+			$data['Shiftname']=$this->input->post('Shiftname');
+			$data['Shiftintime']=$this->input->post('Shiftintime');
+			$data['Shiftouttime']=$this->input->post('Shiftouttime');
+	
 			$data['Bankdetailid']=$this->input->post('Bankdetailid');
+			$data['Accountnumber']=$this->input->post('Accountnumber');
+			$data['Branch']=$this->input->post('Branch');
+			$data['Bankname']=$this->input->post('Bankname');
+			$data['Ibannumber']=$this->input->post('Ibannumber');
+			$data['Swiftcode']=$this->input->post('Swiftcode');
 			
 			if($_POST){	
 				if($this->input->post('companyid')==''){			
@@ -177,6 +194,11 @@ class Company extends CI_Controller
 					{
 						//$this->session->set_flashdata('error', 'Your data was not Insert!');
 						$this->session->set_flashdata('warning', 'This email address already registered!');
+						redirect('Company');
+					}
+					else if($result==4)
+					{
+						$this->session->set_flashdata('warning', 'This GST number already registered!');
 						redirect('Company');
 					}
 				}
@@ -265,15 +287,9 @@ class Company extends CI_Controller
 
 	function editcompany($companyid)
 	{
-
-		//echo $companyid;die;
-
 		if(!check_admin_authentication()){ 
-
 			redirect(base_url('Login'));
-
 		}
-
 		$data=array();
 		$result=$this->Company_model->get_company($companyid);	
 		//echo "<br>";print_r($result);die;

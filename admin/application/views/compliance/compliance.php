@@ -140,8 +140,8 @@
 											</td>
 
 											<td class="text-center">
-														<a class="dropdown-item" onClick="editcompliance(<?php echo $comp->complianceid;?>)" data-toggle="modal" data-target="#edit_policy"><i class="fa fa-pencil m-r-5"></i> </a>
-														<a class="dropdown-item" onclick="deletedata(<?php echo $comp->complianceid; ?>)" data-toggle="modal" data-target="#delete_policy"><i class="fa fa-trash-o m-r-5"></i> </a>			
+														<a onClick="editcompliance(<?php echo $comp->complianceid;?>)" data-toggle="modal" data-target="#edit_policy"><i class="fa fa-pencil m-r-5"></i> </a>
+														<a  onclick="deletedata(<?php echo $comp->complianceid; ?>)" data-toggle="modal" data-target="#delete_policy"><i class="fa fa-trash-o m-r-5"></i> </a>			
 											</td>
 
 										</tr>
