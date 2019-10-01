@@ -86,22 +86,22 @@
 										<label class="focus-label">Search</label>
 									</div>
 
-									<!-- <div class="form-group form-focus box2" id='business2' style="display: none;">
+									<div class="form-group form-focus box2" id='business2' style="display: none;">
 										<div class="form-group">
 											<select class="form-control" name="keyword2"> 
 												<option desabled value="">Please select company</option>
 												<?php
-												// if($companyData){
-												// 	foreach($companyData as $comp)
-												// 	{
+												if($companyData){
+													foreach($companyData as $comp)
+													{
 												?>
-													<option value="<?php //echo $comp->companyname; ?>"><?php// echo $comp->companyname;?></option>
+													<option value="<?php echo $comp->companyname; ?>"><?php echo $comp->companyname;?></option>
 												<?php
-												//}}
+												}}
 												?>
 											</select>
 										</div>
-									</div> -->
+									</div>
 							</div>
 							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
 								<input type="submit" value="Search" class="btn btn-success btn-block">
