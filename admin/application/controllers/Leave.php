@@ -17,18 +17,11 @@ class Leave extends CI_Controller
 		}      
 		if($_POST!='')
 		{
-			$option=$this->input->post('option');
 			$keyword=$this->input->post('keyword2');	
-			$data['result'] = $this->Leave_model->search($option,$keyword);
+			$data['result'] = $this->Leave_model->search($keyword);	
 		}	
-		else
-		{	
-			$data['result']=$this->Leave_model->leavelist();
-		} 
 		$data['companyData'] = $this->Leave_model->list_company();
-		//echo "<pre>";print_r($data['result']);die;
 		$this->load->view('Leave/leavelist',$data);
-      
 	}
 
 	
