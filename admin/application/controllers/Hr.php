@@ -201,6 +201,32 @@ class Hr extends CI_Controller
 	}
 
 
+function statusdata(){
+		if(!check_admin_authentication())
+		{ 
+			redirect(base_url());
+		}
+		$action=$this->input->post('status');
+		$id=$this->input->post('id');
+		if ($action == "Active") {
+
+			$data = array("IsActive" => "Inactive");
+			update_record('tblhr', $data, 'hr_id', $id);
+
+			$res = array('status' => 'done', 'msg' => ACTIVE);
+			echo json_encode($res);
+			die ;
+		}else if ($action == "Inactive") {
+			
+				$data = array("IsActive" => "Active");
+				update_record('tblhr', $data, 'hr_id', $id);
+			
+			$res = array('status' => 'done', 'msg' => ACTIVE);
+			echo json_encode($res);
+			die ;
+		}
+	
+	}
 
 
 

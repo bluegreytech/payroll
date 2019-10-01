@@ -259,7 +259,7 @@ class Hr_model extends CI_Model
 	function hr_list()
 	{
 
-		$where = array('t1.isdelete' =>'0');
+		$where = array('t1.Is_deleted' =>'0');
 
 		$this->db->select('t1.*,t2.companyname');
 
@@ -287,7 +287,7 @@ class Hr_model extends CI_Model
 
 	{
 
-			$where = array('t1.isdelete' =>'0');
+			$where = array('t1.Is_deleted' =>'0');
 
 			$keyword = str_replace('-', ' ', $keyword);
 

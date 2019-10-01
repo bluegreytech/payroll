@@ -146,6 +146,7 @@
 											<th>Email Address</th>
 											<th>Contact Number</th>
 											<th>Type Role</th>
+											<th>Status</th>
 											<?php 
 											if($this->session->userdata('RoleId')==1)
 											{
@@ -202,7 +203,25 @@
 											}
 											?></td>
 
-
+                                            <td>
+							<div class="action-label">
+							<a class="btn btn-white btn-sm btn-rounded" href="javascript:void(0);"  onclick="statusdata('<?php echo $adminlist->AdminId; ?>','<?php echo $adminlist->IsActive ;?>')">
+								<?php if($adminlist->IsActive=='1')
+								{
+									?>
+                   <i class="fa fa-dot-circle-o text-success"></i>Active
+									<?php
+								}else
+								{
+									?>
+									<i class="fa fa-dot-circle-o text-danger"></i>Inactive
+									<?php
+								}
+								?>
+								
+							</a>
+						</div>
+							</td>
 
 											<?php 
 											if($this->session->userdata('RoleId')==1)
@@ -647,6 +666,28 @@
 
 </html>
 
+	<div class="modal custom-modal fade" id="status_approve" role="dialog">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="form-header">
+						<h3>Status</h3>
+						<p>Are you sure, you want to <span id="statustxt"></span> selected record?</p>
+					</div>
+					<div class="modal-btn delete-action">
+						<div class="row">
+							<div class="col-6">
+								<a href="javascript:void(0);" id="ok_btn" class="btn btn-primary continue-btn">Ok</a>
+							</div>
+							<div class="col-6">
+								<a href="javascript:void(0);" data-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 <script>
 $(document).ready(function() {
@@ -1167,6 +1208,41 @@ function readURL(input) {
              reader.readAsDataURL(input.files[0]);
             }
         }
+
+function statusdata(id,status){  
+  
+    $('#status_approve').modal('show');
+
+    if(status=="0"){
+    	 $('#statustxt').text('Active');
+    	}else{
+    		 $('#statustxt').text("Inactive");
+    	}
+   
+        $('#ok_btn').click(function(){
+
+                url="<?php echo base_url();?>"
+                $.ajax({
+                url: url+"/adminmaster/statusdata/",
+                type: "post",
+                data: {id:id,status:status} ,
+                success: function (response) { 
+
+                //console.log(response);           
+                document.location.href = url+'adminmaster/adminlist';                  
+
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                 console.log(textStatus, errorThrown);
+            }
+            })
+           
+
+        });
+    
+   
+
+}
 
 
 </script>

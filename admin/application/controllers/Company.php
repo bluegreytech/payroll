@@ -508,6 +508,34 @@ class Company extends CI_Controller
 
 
 
+function statusdata(){
+		if(!check_admin_authentication())
+		{ 
+			redirect(base_url());
+		}
+		$action=$this->input->post('status');
+		
+		$id=$this->input->post('id');
+	
+		if ($action == "1") {
+
+			$data = array("IsActive" => "0");
+			update_record('tblcompliances', $data, 'complianceid', $id);
+
+			$res = array('status' => 'done', 'msg' => ACTIVE);
+			echo json_encode($res);
+			die ;
+		}else if ($action == "0") {
+			
+				$data = array("IsActive" => "1");
+				update_record('tblcompliances', $data, 'complianceid', $id);
+			
+			$res = array('status' => 'done', 'msg' => ACTIVE);
+			echo json_encode($res);
+			die ;
+		}
+}
+
 	
 
 	
