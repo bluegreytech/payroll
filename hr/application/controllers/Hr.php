@@ -172,7 +172,7 @@ class Hr extends CI_Controller
 				$this->load->view('Adminmaster/admin_master_profile',$data);			
 
 	}
-	public	function searchhr(){
+	public function searchhr(){
 		if(!check_admin_authentication()){ 
 			redirect(base_url());
 		}   

@@ -72,7 +72,7 @@
 									</div>
 									<div class="form-group">
 										<label>Email Address</label>
-										<input class="form-control" type="text" name="EmailAddress" Placeholder="EmailAddress"  id="EmailAddress" value="<?php echo $email; ?>">
+										<input class="form-control" type="text" name="EmailAddress" Placeholder="EmailAddress"  id="EmailAddress" value="<?php echo $email; ?>" <?php if($email){ echo "readonly"; }?>>
 									</div>
 									<div class="form-group">
 										<label>Phone<span class="text-danger">*</span></label>
@@ -81,7 +81,7 @@
 									<div class="form-group">
 										<label>Date of Birth<span class="text-danger">*</span></label>
 										<div class="cal-icon">
-										<input class="form-control datetimepicker" type="text" name="dob"  id="dob" Placeholder="Date of Birth" value="<?php //echo $Dateofbirth?$Dateofbirth:''; ?>">
+										<input class="form-control" type="text" name="dob"  id="dob" Placeholder="Date of Birth" value="<?php //echo $Dateofbirth?$Dateofbirth:''; ?>" readonly>
 										</div>
 									</div>
 									<div class="form-group">
@@ -124,7 +124,7 @@
 									<div class="form-group">
 										<label>Joining Date<span class="text-danger">*</span></label>
 										<div class="cal-icon">
-										<input class="form-control datetimepicker" type="text" name="jod" id="jod" Placeholder="Joining Date"  value="<?php echo $joiningdate;?>">
+										<input class="form-control" type="text" name="jod" id="jod" Placeholder="Joining Date"  value="<?php echo $joiningdate;?>" readonly>
 										</div>
 									</div>
 									<div class="form-group">
@@ -179,7 +179,7 @@
 									<div class="form-group">
 										<label class="col-form-label">Probation Period Day<span class="text-danger">*</span></label>
 										<div class="cal-icon">
-									  		<input type="text" name="probation_period_day" class="form-control datetimepicker" id="probation_period_day" value="<?php echo $probation_period_day;?>" >
+									  		<input type="text" name="probation_period_day" class="form-control" id="probation_period_day" value="<?php echo $probation_period_day;?>" readonly>
 										</div>
 									</div>
 
@@ -195,8 +195,8 @@
 								<?php  if($status!=''){ //echo $status; ?>
                                 
 									<div class="form-group">
-										<label>Status</label>
-                                         <label class="col-form-label" style="margin-top: 11px;">Status<span class="text-danger">*</span></label>
+										
+                                         <label class="col-form-label" style="margin-top: 11px;">Status<span class="text-danger">*</span></label> &nbsp;
 											<label class="radio-inline">
 												<input type="radio" name="status" <?php if($status=="Active") { echo "checked"; } ?>  value="Active" >Active
 											</label>
@@ -215,35 +215,49 @@
 											</label>
 										</div>
 							<?php } ?>
-									
-								  
 								</div>
-								
 
 									<div class="col-md-12">
 										<hr>
 									    <h3 class="card-title">Employee Documents </h3>
 									    <div class="row">
 										    <div class="col-md-6">
+												<div class="form-group">
+													<label class="col-form-label">Adharcard No.<span class="text-danger">*</span></label>
+													<input type="text" class="form-control" name="aadharcard" id="aadharcard" value="<?php echo $aadharcard;?>"  minlength="14">
+												</div>
 											    <div class="form-group">
-														<label>Bank Detail <span class="text-danger">*</span></label>
-														<input type="hidden" class="form-control" name="pre_bank_detail" id="pre_bank_detail" value="<?php echo $bankdetail;?>">
-														<input type="file" class="form-control" name="bank_detail" id="bank_detail" value="<?php echo $bankdetail;?>">
-														<span class="form-text text-muted">Recommended image size is 40px x 40px</span>
+													<label>Upload Document <span class="text-danger">*</span></label>
+													<input type="hidden" class="form-control" name="pre_bank_detail" id="pre_bank_detail" value="<?php echo $bankdetail;?>">
+													<input type="file" class="form-control" name="bank_detail" id="bank_detail" onchange="readURLdcox(this);">
+													<span class="form-text text-muted">Recommended image size is 40px x 40px</span>
 												</div>
 											</div>
 											<div class="col-md-6">
+												<div class="form-group">
+													<label class="col-form-label">Pancard No.<span class="text-danger">*</span></label>
+													<input type="text" class="form-control" name="pancard" id="pancard" value="<?php echo $pancard;?>">
+												</div>
 												<div class="preview">
 												<?php if(($bankdetail!='' && file_exists(base_path().'/upload/empdetail/'.$bankdetail))){ ?>
-												<img id="blah" src="<?php echo base_url()?>upload/empdetail/<?php echo $bankdetail;?>" class="img-thumbnail border-0" style="display: block;  width: 100px; height: 100px;">
+													<?php
+														$filename = $bankdetail;
+														$ext = pathinfo($filename, PATHINFO_EXTENSION); 
+														if($ext=="pdf"){ ?>
+														<a target="_blank" href="<?php echo base_url()?>upload/empdetail/<?php echo $bankdetail;?>"><img id="blahbroch" src="<?php echo base_url()?>upload/no_image/pdfimage.png" class="img-thumbnail border-0" style="display: block;  width: 100px; height: 100px;"></a>
+														<?php  }else{  ?>
 
-												<?php } else{?>
-												<img id="blah" src="" class="img-thumbnail border-0" style="display: none;  width: 100px; height: 100px;">
+														<a target="_blank" href="<?php echo base_url()?>upload/empdetail/<?php echo $bankdetail;?>"><img id="blahdocx" src="<?php echo base_url()?>upload/empdetail/<?php echo $bankdetail;?>" class="img-thumbnail border-0" style="display: block;  width: 100px; height: 100px;"></a>
+														<?php } ?>
+
+												<?php } else{ ?>
+
+												<img id="blahdocx" src="" class="img-thumbnail border-0" style="display: none;  width: 100px; height: 100px;">
 												<?php } ?>
 											</div> 
 											</div>
 										</div>
-										<div class="row">
+									<!-- 	<div class="row">
 											<div class="col-md-6">
 										    <div class="form-group">
 													<label>Passport </label>
@@ -341,18 +355,19 @@
 													<img id="blah" src="" class="img-thumbnail border-0" style="display: none;  width: 100px; height: 100px;">
 													<?php } ?>
 												</div>
-											</div>
+											</div> -->
 											
 										</div>
 									</div>
-							</div>
-							
-							<div class="submit-section">
+									<div class="submit-section">
 								<hr>
 								<button class="btn btn-primary submit-btn" name="Save" type="submit"><?php echo ($emp_id!='')?'Update':'Submit' ?></button>
 								<button type="button" name="cancel" class="btn btn-secondary submit-btn" onClick="location.href='<?php echo base_url(); ?>employee/<?php echo $redirect_page; ?>'">Cancel
 								</button>
 							</div>
+							</div>
+							
+							
 						</form>
 						</div>
 					</div>
@@ -423,6 +438,7 @@ $(document).ready(function()
 	      data:{employee_code:value},  
 	      async:false,
 	      success:function(data) {
+	      
 	      	console.log(data);
 	        response = data;
 	      }
@@ -437,38 +453,72 @@ $(document).ready(function()
       
 		$('#dob').datetimepicker({
 				  	format: 'DD/MM/YYYY',
-					minDate: new Date(),
+					maxDate: new Date(),
 					ignoreReadonly: true,
-					datesDisabled:new Date(),					
+					icons: {
+					    time:'fa fa-clock-o',
+					    date:'fa fa-calendar',
+					    up:'fa fa-chevron-up',
+					    down:'fa fa-chevron-down',
+					    previous:'fa fa-chevron-left',
+					    next:'fa fa-chevron-right',
+					    today:'fa fa-calendar-check-o',
+					    clear:'fa fa-delete',
+					    close:'fa fa-times'
+ 	 					},									
 				}).val('<?php echo ($Dateofbirth!='0000-00-00')&&($Dateofbirth!='')  ? date('d/m/Y', strtotime($Dateofbirth)) : ''; ?>');
-		$('#jod').datetimepicker({
-					 defaultDate: new Date(),
-				  	 format: 'DD/MM/YYYY',
-					 maxDate: moment(),
-					 ignoreReadonly: true,					
+		$('#jod').datetimepicker({					
+				  	 format: 'DD/MM/YYYY',					
+					 ignoreReadonly: true,
+					 icons: {
+				    time:'fa fa-clock-o',
+				    date:'fa fa-calendar',
+				    up:'fa fa-chevron-up',
+				    down:'fa fa-chevron-down',
+				    previous:'fa fa-chevron-left',
+				    next:'fa fa-chevron-right',
+				    today:'fa fa-calendar-check-o',
+				    clear:'fa fa-delete',
+				    close:'fa fa-times'
+	 	 			},					
 				}).val('<?php echo  ($joiningdate!='0000-00-00')&&($joiningdate!='')  ? date('d/m/Y', strtotime($joiningdate)) : ''; ?>');
-		$('#probation_period_day').datetimepicker({
-				     defaultDate:new Date(),
-				  	 format: 'DD/MM/YYYY',
-					 maxDate: moment(),
-					 ignoreReadonly: true,					
+		$('#probation_period_day').datetimepicker({				     
+				  	format: 'DD/MM/YYYY',					
+					ignoreReadonly: true,	
+					icons: {
+					time:'fa fa-clock-o',
+					date:'fa fa-calendar',
+					up:'fa fa-chevron-up',
+					down:'fa fa-chevron-down',
+					previous:'fa fa-chevron-left',
+					next:'fa fa-chevron-right',
+					today:'fa fa-calendar-check-o',
+					clear:'fa fa-delete',
+					close:'fa fa-times'
+					},				
 				}).val('<?php echo  ($probation_period_day!='0000-00-00')&&($probation_period_day!='')  ? date('d/m/Y', strtotime($probation_period_day)) : ''; ?>');
+
 	$.validator.addMethod('filesize', function (value, element, param) {
 	return this.optional(element) || (element.files[0].size <= param)
 	} ,'File size must be equal to or less then 2MB');
+	  jQuery.validator.addMethod("pan", function(value, element)
+    {
+        return this.optional(element) || /^[A-Z]{5}\d{4}[A-Z]{1}$/.test(value);
+    }, "Please enter a valid PAN");  
 		$("#frm_emp").validate(
 		{
 					rules: {
 						employee_code:{
-							required:true,
 							employeecode_check:function(){
 								employeecode_check='<?php echo $employee_code; ?>';
-								if(employeecode_check){
-									return false;
-								}else{
-									return true;
-								}
+								if(employeecode_check==''){
+									 return true;
+										//return false;
+                                  
+									}
 							}, 
+							required:true,
+							
 					    },
 						department:{
 							required:true,
@@ -487,10 +537,9 @@ $(document).ready(function()
 							email:true,
 							email_check:function(){
 								emailcheck='<?php echo $email; ?>';
-								if(emailcheck){
-									return false;
-								}else{
+								if(emailcheck==''){
 									return true;
+								
 								}
 							}, 
 
@@ -546,36 +595,49 @@ $(document).ready(function()
 									return true;
 								}
 							},
-							extension: "JPG|jpeg|png|bmp",
+							extension: "JPG|jpeg|png|bmp|pdf",
 							filesize: 2097152,	
 						},
-						address_proof:{
-							required:function(){
-							addressesproof='<?php echo $addressesproof; ?>';
-								if(addressesproof){
-							    	return false;
-								}else{
-									return true;
-								}
-							},
+						// address_proof:{
+						// 	required:function(){
+						// 	addressesproof='<?php //echo $addressesproof; ?>';
+						// 		if(addressesproof){
+						// 	    	return false;
+						// 		}else{
+						// 			return true;
+						// 		}
+						// 	},
 							
-							extension: "JPG|jpeg|png|bmp",
-							filesize: 2097152,	
-						},
+						// 	extension: "JPG|jpeg|png|bmp",
+						// 	filesize: 2097152,	
+						// },
 						aadharcard:{
 							required:function(){
-							aadharcard='<?php echo $aadharcard; ?>';
-								if(aadharcard){
+							aadharcarddeatil='<?php echo $aadharcard; ?>';
+								if(aadharcarddeatil){
 							    	return false;
 								}else{
 									return true;
 								}
 							},
-
-							
-							extension: "JPG|jpeg|png|bmp",
-							filesize: 2097152,	
+							maxlength:14,
+							minlength:14										
+						
 						},
+							pancard:{
+							required:function(){
+							pancarddetail='<?php echo $pancard; ?>';
+								if(pancarddetail){
+							    	return false;
+								}else{
+									return true;
+								}
+							},
+							pan:true       
+							},
+						// 	extension: "JPG|jpeg|png|bmp",
+						// 	filesize: 2097152,	
+						// },
 						ProfileImage:{
 							extension: "JPG|jpeg|png|bmp",
 							filesize: 2097152,   
@@ -601,8 +663,8 @@ $(document).ready(function()
 });	
 $.validator.addMethod("password_check", function(value, element) {
 
-        var response;
-        var user_id=$("#old_password").val();
+    var response;
+    var user_id=$("#old_password").val();
     $.ajax({
       type: "POST",
       url: "<?php echo site_url('home/oldpassword_check'); ?>",
@@ -619,7 +681,7 @@ $.validator.addMethod("password_check", function(value, element) {
       return true;
     }
   }, "The old password you have entered is incorrect.");
-  function readURL(input) {
+function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function (e) {
@@ -628,6 +690,33 @@ $.validator.addMethod("password_check", function(value, element) {
                 };
              reader.readAsDataURL(input.files[0]);
             }
-        }				        
+        }
+function readURLdcox(input) {
+        var fileName = input.files[0].name;
+		URL="<?php echo base_url();?>";
+		
+            if(input.files && input.files[0]) {
+                var reader = new FileReader();
+               
+                reader.onload = function (e) {
+                	var ext = fileName.split('.')[1];
+                    $('#blahdocx').css('display', 'block');
+                    if(ext=="pdf"){
+                        $('#blahdocx').attr('src', URL+'upload/no_image/pdfimage.png' );
+                    }
+                    else{
+ 						 $('#blahdocx').attr('src', e.target.result);
+                    }
+
+                  
+                };
+             reader.readAsDataURL(input.files[0]);
+            }
+}		
+$('[name="aadharcard"]').keyup(function() {
+  var value = $(this).val();
+  value = value.replace(/\D/g, "").split(/(?:([\d]{4}))/g).filter(s => s.length > 0).join("-");
+  $(this).val(value);
+});		        
 </script>
     
