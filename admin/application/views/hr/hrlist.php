@@ -155,7 +155,7 @@
 											<th>Contact Number</th>
 
 											<th>In Company</th>
-
+                                            <th>Status</th>
 											<?php
 
 											if($this->session->userdata('RoleId')==1 || $this->session->userdata('RoleId')==2){
@@ -208,7 +208,13 @@
 
 											<td><?php echo $hr->companyname ;?></td>
 
-							
+							                <td>
+							<div class="action-label">
+							<a class="btn btn-white btn-sm btn-rounded" href="javascript:void(0);"  onclick="statusdata('<?php echo $hr->hr_id; ?>','<?php echo $hr->IsActive ;?>')">
+								<i class="fa fa-dot-circle-o <?php if($hr->IsActive=='Active'){echo "text-success";}else{ echo "text-danger";}?>"></i><?php echo $hr->IsActive ;?>
+							</a>
+						</div>
+							</td>
 
 											<?php
 											if($this->session->userdata('RoleId')==1 || $this->session->userdata('RoleId')==2){
@@ -770,7 +776,28 @@
 
 </html>
 
-
+	<div class="modal custom-modal fade" id="status_approve" role="dialog">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="form-header">
+						<h3>Status</h3>
+						<p>Are you sure, you want to <span id="statustxt"></span> selected record?</p>
+					</div>
+					<div class="modal-btn delete-action">
+						<div class="row">
+							<div class="col-6">
+								<a href="javascript:void(0);" id="ok_btn" class="btn btn-primary continue-btn">Ok</a>
+							</div>
+							<div class="col-6">
+								<a href="javascript:void(0);" data-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 <script type="text/javascript">
 
@@ -1345,6 +1372,38 @@ function deletedata(hr_id){
 
 }
 
+function statusdata(id,status){  
+  
+    $('#status_approve').modal('show');
 
+    if(status=="Inactive"){
+    	 $('#statustxt').text('Active');
+    	}else{
+    		 $('#statustxt').text("Inactive");
+    	}
+   
+        $('#ok_btn').click(function(){
+           
+                url="<?php echo base_url();?>"
+                $.ajax({
+                url: url+"/hr/statusdata/",
+                type: "post",
+                data: {id:id,status:status} ,
+                success: function (response) {  
+                //console.log(response);           
+                document.location.href = url+'hr';                  
+
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                 console.log(textStatus, errorThrown);
+            }
+            })
+           
+
+        });
+    
+   
+
+}
 
 </script>

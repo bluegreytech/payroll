@@ -1544,6 +1544,21 @@ table.dataTable thead > tr > td.sorting {
     right: 15px;
     top: 10px;
 }
+.clock-icon {
+	position: relative;
+	width: 100%;
+}
+.clock-icon:after {
+	color: #979797;
+	content: "\f017";
+	display: block;
+	font-family: "FontAwesome";
+    font-size: 15px;
+    margin: auto;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+}
 .form-focus .cal-icon:after {
 	top: 15px;
 }
@@ -7117,3 +7132,16 @@ ul.comment-list li ul.children {
 .fa-trash-o{
 	color:red;
 }
+.text-purple {
+    color: #9a21d9!important;
+}
+.text-blue{
+	color: #007bff!important;
+}
+.text-red {
+    color: #ff0000 !important;
+}
+
+/* .multiselect-container {
+        width: 100% !important;
+    }*/

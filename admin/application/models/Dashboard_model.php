@@ -47,7 +47,7 @@ class Dashboard_model extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('tblhr');
-		$this->db->where('isdelete!=','1');
+		$this->db->where('Is_deleted','0');
 		$r = $this->db->get();
 		return $query= $r->num_rows();
 	}

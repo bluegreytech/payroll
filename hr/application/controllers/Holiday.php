@@ -51,7 +51,7 @@ class Holiday extends CI_Controller
 					redirect('holiday/holidaylist');
 				}
 				else
-				{  //echo "jhjhg";die;
+				{  
 					$this->holiday_model->holiday_insert();
 					$this->session->set_flashdata('success', 'Record has been Inserted Succesfully!');
 					redirect('holiday/holidaylist');

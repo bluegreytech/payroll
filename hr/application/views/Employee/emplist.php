@@ -121,7 +121,6 @@
 						<td><?php echo date("d M Y",strtotime($row->joiningdate));?></td>
 						<td>
 							<div class="action-label">
-
 							<a class="btn btn-white btn-sm btn-rounded" href="javascript:void(0);"  onclick="statusdata('<?php echo $row->emp_id; ?>','<?php echo $row->status ;?>')">
 								<i class="fa fa-dot-circle-o <?php if($row->status=='Active'){echo "text-success";}else{ echo "text-danger";}?>"></i><?php echo $row->status ;?>
 							</a>

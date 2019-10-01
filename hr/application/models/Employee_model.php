@@ -146,7 +146,7 @@ class Employee_model extends CI_Model
    
 			$config['file_name'] = $rand.'bank_detail';			
 			$config['upload_path'] = base_path().'upload/empdetail/';		
-			$config['allowed_types'] = 'jpg|jpeg|gif|png|bmp';  
+			$config['allowed_types'] = 'jpg|jpeg|gif|png|bmp|pdf';  
  
              $this->upload->initialize($config);
  
@@ -175,208 +175,208 @@ class Employee_model extends CI_Model
 			}
 		}
 
-		$passport_image='';
-		if(isset($_FILES['passport']) &&  $_FILES['passport']['name']!='')
-        {
-			$this->load->library('upload');
-			$rand=rand(0,100000);			  
-			$_FILES['userfile']['name']     =   $_FILES['passport']['name'];
-			$_FILES['userfile']['type']     =   $_FILES['passport']['type'];
-			$_FILES['userfile']['tmp_name'] =   $_FILES['passport']['tmp_name'];
-			$_FILES['userfile']['error']    =   $_FILES['passport']['error'];
-			$_FILES['userfile']['size']     =   $_FILES['passport']['size'];
+		// $passport_image='';
+		// if(isset($_FILES['passport']) &&  $_FILES['passport']['name']!='')
+  //       {
+		// 	$this->load->library('upload');
+		// 	$rand=rand(0,100000);			  
+		// 	$_FILES['userfile']['name']     =   $_FILES['passport']['name'];
+		// 	$_FILES['userfile']['type']     =   $_FILES['passport']['type'];
+		// 	$_FILES['userfile']['tmp_name'] =   $_FILES['passport']['tmp_name'];
+		// 	$_FILES['userfile']['error']    =   $_FILES['passport']['error'];
+		// 	$_FILES['userfile']['size']     =   $_FILES['passport']['size'];
    
-			$config['file_name'] = $rand.'passport';			
-			$config['upload_path'] = base_path().'upload/empdetail/';		
-			$config['allowed_types'] = 'jpg|jpeg|gif|png|bmp';  
+		// 	$config['file_name'] = $rand.'passport';			
+		// 	$config['upload_path'] = base_path().'upload/empdetail/';		
+		// 	$config['allowed_types'] = 'jpg|jpeg|gif|png|bmp';  
  
-             $this->upload->initialize($config);
+  //            $this->upload->initialize($config);
  
-              if (!$this->upload->do_upload())
-			  {
-				$error =  $this->upload->display_errors();
-				echo "<pre>";print_r($error);
-			  } 
-           	  $picture = $this->upload->data();	
+  //             if (!$this->upload->do_upload())
+		// 	  {
+		// 		$error =  $this->upload->display_errors();
+		// 		echo "<pre>";print_r($error);
+		// 	  } 
+  //          	  $picture = $this->upload->data();	
 			
-			$passport_image=$picture['file_name'];		
-			if($this->input->post('pre_passport')!='')
-				{
-					if(file_exists(base_path().'upload/empdetail/'.$this->input->post('pre_passport')))
-					{
-						$link=base_path().'upload/empdetail/'.$this->input->post('pre_passport');
-						unlink($link);
-					}
+		// 	$passport_image=$picture['file_name'];		
+		// 	if($this->input->post('pre_passport')!='')
+		// 		{
+		// 			if(file_exists(base_path().'upload/empdetail/'.$this->input->post('pre_passport')))
+		// 			{
+		// 				$link=base_path().'upload/empdetail/'.$this->input->post('pre_passport');
+		// 				unlink($link);
+		// 			}
 					
-				}
-		} else {
-			if($this->input->post('pre_passport')!='')
-			{
-				$passport_image=$this->input->post('pre_passport');
-			}
-		}
+		// 		}
+		// } else {
+		// 	if($this->input->post('pre_passport')!='')
+		// 	{
+		// 		$passport_image=$this->input->post('pre_passport');
+		// 	}
+		// }
 
 		
-		$driveinglicence_image='';
-		if(isset($_FILES['driveinglicence']) &&  $_FILES['driveinglicence']['name']!='')
-        {
-			$this->load->library('upload');
-			$rand=rand(0,100000);			  
-			$_FILES['userfile']['name']     =   $_FILES['driveinglicence']['name'];
-			$_FILES['userfile']['type']     =   $_FILES['driveinglicence']['type'];
-			$_FILES['userfile']['tmp_name'] =   $_FILES['driveinglicence']['tmp_name'];
-			$_FILES['userfile']['error']    =   $_FILES['driveinglicence']['error'];
-			$_FILES['userfile']['size']     =   $_FILES['driveinglicence']['size'];
+		// $driveinglicence_image='';
+		// if(isset($_FILES['driveinglicence']) &&  $_FILES['driveinglicence']['name']!='')
+  //       {
+		// 	$this->load->library('upload');
+		// 	$rand=rand(0,100000);			  
+		// 	$_FILES['userfile']['name']     =   $_FILES['driveinglicence']['name'];
+		// 	$_FILES['userfile']['type']     =   $_FILES['driveinglicence']['type'];
+		// 	$_FILES['userfile']['tmp_name'] =   $_FILES['driveinglicence']['tmp_name'];
+		// 	$_FILES['userfile']['error']    =   $_FILES['driveinglicence']['error'];
+		// 	$_FILES['userfile']['size']     =   $_FILES['driveinglicence']['size'];
    
-			$config['file_name'] = $rand.'driveinglicence';			
-			$config['upload_path'] = base_path().'upload/empdetail/';		
-			$config['allowed_types'] = 'jpg|jpeg|gif|png|bmp';  
+		// 	$config['file_name'] = $rand.'driveinglicence';			
+		// 	$config['upload_path'] = base_path().'upload/empdetail/';		
+		// 	$config['allowed_types'] = 'jpg|jpeg|gif|png|bmp';  
  
-             $this->upload->initialize($config);
+  //            $this->upload->initialize($config);
  
-              if (!$this->upload->do_upload())
-			  {
-				$error =  $this->upload->display_errors();
-				echo "<pre>";print_r($error);
-			  } 
-           	  $picture = $this->upload->data();	
+  //             if (!$this->upload->do_upload())
+		// 	  {
+		// 		$error =  $this->upload->display_errors();
+		// 		echo "<pre>";print_r($error);
+		// 	  } 
+  //          	  $picture = $this->upload->data();	
 			
-			$driveinglicence_image=$picture['file_name'];		
-			if($this->input->post('pre_driveinglicence')!='')
-				{
-					if(file_exists(base_path().'upload/empdetail/'.$this->input->post('pre_driveinglicence')))
-					{
-						$link=base_path().'upload/empdetail/'.$this->input->post('pre_driveinglicence');
-						unlink($link);
-					}
+		// 	$driveinglicence_image=$picture['file_name'];		
+		// 	if($this->input->post('pre_driveinglicence')!='')
+		// 		{
+		// 			if(file_exists(base_path().'upload/empdetail/'.$this->input->post('pre_driveinglicence')))
+		// 			{
+		// 				$link=base_path().'upload/empdetail/'.$this->input->post('pre_driveinglicence');
+		// 				unlink($link);
+		// 			}
 					
-				}
-		} else {
-			if($this->input->post('pre_driveinglicence')!='')
-			{
-				$driveinglicence_image=$this->input->post('pre_driveinglicence');
-			}
-		}
-		$pancard_image='';
-		if(isset($_FILES['pancard']) &&  $_FILES['pancard']['name']!='')
-        {
-			$this->load->library('upload');
-			$rand=rand(0,100000);			  
-			$_FILES['userfile']['name']     =   $_FILES['pancard']['name'];
-			$_FILES['userfile']['type']     =   $_FILES['pancard']['type'];
-			$_FILES['userfile']['tmp_name'] =   $_FILES['pancard']['tmp_name'];
-			$_FILES['userfile']['error']    =   $_FILES['pancard']['error'];
-			$_FILES['userfile']['size']     =   $_FILES['pancard']['size'];
+		// 		}
+		// } else {
+		// 	if($this->input->post('pre_driveinglicence')!='')
+		// 	{
+		// 		$driveinglicence_image=$this->input->post('pre_driveinglicence');
+		// 	}
+		// }
+		// $pancard_image='';
+		// if(isset($_FILES['pancard']) &&  $_FILES['pancard']['name']!='')
+  //       {
+		// 	$this->load->library('upload');
+		// 	$rand=rand(0,100000);			  
+		// 	$_FILES['userfile']['name']     =   $_FILES['pancard']['name'];
+		// 	$_FILES['userfile']['type']     =   $_FILES['pancard']['type'];
+		// 	$_FILES['userfile']['tmp_name'] =   $_FILES['pancard']['tmp_name'];
+		// 	$_FILES['userfile']['error']    =   $_FILES['pancard']['error'];
+		// 	$_FILES['userfile']['size']     =   $_FILES['pancard']['size'];
    
-			$config['file_name'] = $rand.'pancard';			
-			$config['upload_path'] = base_path().'upload/empdetail/';		
-			$config['allowed_types'] = 'jpg|jpeg|gif|png|bmp';  
+		// 	$config['file_name'] = $rand.'pancard';			
+		// 	$config['upload_path'] = base_path().'upload/empdetail/';		
+		// 	$config['allowed_types'] = 'jpg|jpeg|gif|png|bmp';  
  
-             $this->upload->initialize($config);
+  //            $this->upload->initialize($config);
  
-              if (!$this->upload->do_upload())
-			  {
-				$error =  $this->upload->display_errors();
-				echo "<pre>";print_r($error);
-			  } 
-           	  $picture = $this->upload->data();	
+  //             if (!$this->upload->do_upload())
+		// 	  {
+		// 		$error =  $this->upload->display_errors();
+		// 		echo "<pre>";print_r($error);
+		// 	  } 
+  //          	  $picture = $this->upload->data();	
 			
-			$pancard_image=$picture['file_name'];		
-			if($this->input->post('pre_pancard')!='')
-				{
-					if(file_exists(base_path().'upload/empdetail/'.$this->input->post('pre_pancard')))
-					{
-						$link=base_path().'upload/empdetail/'.$this->input->post('pre_pancard');
-						unlink($link);
-					}
+		// 	$pancard_image=$picture['file_name'];		
+		// 	if($this->input->post('pre_pancard')!='')
+		// 		{
+		// 			if(file_exists(base_path().'upload/empdetail/'.$this->input->post('pre_pancard')))
+		// 			{
+		// 				$link=base_path().'upload/empdetail/'.$this->input->post('pre_pancard');
+		// 				unlink($link);
+		// 			}
 					
-				}
-		} else {
-			if($this->input->post('pre_pancard')!='')
-			{
-				$pancard_image=$this->input->post('pre_pancard');
-			}
-		}
-		$aadharcard_image='';
-		if(isset($_FILES['aadharcard']) &&  $_FILES['aadharcard']['name']!='')
-        {
-			$this->load->library('upload');
-			$rand=rand(0,100000);			  
-			$_FILES['userfile']['name']     =   $_FILES['aadharcard']['name'];
-			$_FILES['userfile']['type']     =   $_FILES['aadharcard']['type'];
-			$_FILES['userfile']['tmp_name'] =   $_FILES['aadharcard']['tmp_name'];
-			$_FILES['userfile']['error']    =   $_FILES['aadharcard']['error'];
-			$_FILES['userfile']['size']     =   $_FILES['aadharcard']['size'];
+		// 		}
+		// } else {
+		// 	if($this->input->post('pre_pancard')!='')
+		// 	{
+		// 		$pancard_image=$this->input->post('pre_pancard');
+		// 	}
+		// }
+		// $aadharcard_image='';
+		// if(isset($_FILES['aadharcard']) &&  $_FILES['aadharcard']['name']!='')
+  //       {
+		// 	$this->load->library('upload');
+		// 	$rand=rand(0,100000);			  
+		// 	$_FILES['userfile']['name']     =   $_FILES['aadharcard']['name'];
+		// 	$_FILES['userfile']['type']     =   $_FILES['aadharcard']['type'];
+		// 	$_FILES['userfile']['tmp_name'] =   $_FILES['aadharcard']['tmp_name'];
+		// 	$_FILES['userfile']['error']    =   $_FILES['aadharcard']['error'];
+		// 	$_FILES['userfile']['size']     =   $_FILES['aadharcard']['size'];
    
-			$config['file_name'] = $rand.'aadharcard';			
-			$config['upload_path'] = base_path().'upload/empdetail/';		
-			$config['allowed_types'] = 'jpg|jpeg|gif|png|bmp';  
+		// 	$config['file_name'] = $rand.'aadharcard';			
+		// 	$config['upload_path'] = base_path().'upload/empdetail/';		
+		// 	$config['allowed_types'] = 'jpg|jpeg|gif|png|bmp';  
  
-             $this->upload->initialize($config);
+  //            $this->upload->initialize($config);
  
-              if (!$this->upload->do_upload())
-			  {
-				$error =  $this->upload->display_errors();
-				echo "<pre>";print_r($error);
-			  } 
-           	  $picture = $this->upload->data();	
+  //             if (!$this->upload->do_upload())
+		// 	  {
+		// 		$error =  $this->upload->display_errors();
+		// 		echo "<pre>";print_r($error);
+		// 	  } 
+  //          	  $picture = $this->upload->data();	
 			
-			$aadharcard_image=$picture['file_name'];		
-			if($this->input->post('pre_aadharcard')!='')
-				{
-					if(file_exists(base_path().'upload/empdetail/'.$this->input->post('pre_aadharcard')))
-					{
-						$link=base_path().'upload/empdetail/'.$this->input->post('pre_aadharcard');
-						unlink($link);
-					}
+		// 	$aadharcard_image=$picture['file_name'];		
+		// 	if($this->input->post('pre_aadharcard')!='')
+		// 		{
+		// 			if(file_exists(base_path().'upload/empdetail/'.$this->input->post('pre_aadharcard')))
+		// 			{
+		// 				$link=base_path().'upload/empdetail/'.$this->input->post('pre_aadharcard');
+		// 				unlink($link);
+		// 			}
 					
-				}
-		} else {
-			if($this->input->post('pre_aadharcard')!='')
-			{
-				$aadharcard_image=$this->input->post('pre_aadharcard');
-			}
-		}
-		$addressproof_image='';
-		if(isset($_FILES['address_proof']) &&  $_FILES['address_proof']['name']!='')
-        {
-			$this->load->library('upload');
-			$rand=rand(0,100000);			  
-			$_FILES['userfile']['name']     =   $_FILES['address_proof']['name'];
-			$_FILES['userfile']['type']     =   $_FILES['address_proof']['type'];
-			$_FILES['userfile']['tmp_name'] =   $_FILES['address_proof']['tmp_name'];
-			$_FILES['userfile']['error']    =   $_FILES['address_proof']['error'];
-			$_FILES['userfile']['size']     =   $_FILES['address_proof']['size'];
+		// 		}
+		// } else {
+		// 	if($this->input->post('pre_aadharcard')!='')
+		// 	{
+		// 		$aadharcard_image=$this->input->post('pre_aadharcard');
+		// 	}
+		// }
+		// $addressproof_image='';
+		// if(isset($_FILES['address_proof']) &&  $_FILES['address_proof']['name']!='')
+  //       {
+		// 	$this->load->library('upload');
+		// 	$rand=rand(0,100000);			  
+		// 	$_FILES['userfile']['name']     =   $_FILES['address_proof']['name'];
+		// 	$_FILES['userfile']['type']     =   $_FILES['address_proof']['type'];
+		// 	$_FILES['userfile']['tmp_name'] =   $_FILES['address_proof']['tmp_name'];
+		// 	$_FILES['userfile']['error']    =   $_FILES['address_proof']['error'];
+		// 	$_FILES['userfile']['size']     =   $_FILES['address_proof']['size'];
    
-			$config['file_name'] = $rand.'address_proof';			
-			$config['upload_path'] = base_path().'upload/empdetail/';		
-			$config['allowed_types'] = 'jpg|jpeg|gif|png|bmp';  
+		// 	$config['file_name'] = $rand.'address_proof';			
+		// 	$config['upload_path'] = base_path().'upload/empdetail/';		
+		// 	$config['allowed_types'] = 'jpg|jpeg|gif|png|bmp';  
  
-             $this->upload->initialize($config);
+  //            $this->upload->initialize($config);
  
-              if (!$this->upload->do_upload())
-			  {
-				$error =  $this->upload->display_errors();
-				echo "<pre>";print_r($error);
-			  } 
-           	  $picture = $this->upload->data();	
+  //             if (!$this->upload->do_upload())
+		// 	  {
+		// 		$error =  $this->upload->display_errors();
+		// 		echo "<pre>";print_r($error);
+		// 	  } 
+  //          	  $picture = $this->upload->data();	
 			
-			$addressproof_image=$picture['file_name'];		
-			if($this->input->post('pre_addressproof')!='')
-				{
-					if(file_exists(base_path().'upload/empdetail/'.$this->input->post('pre_addressproof')))
-					{
-						$link=base_path().'upload/empdetail/'.$this->input->post('pre_addressproof');
-						unlink($link);
-					}
+		// 	$addressproof_image=$picture['file_name'];		
+		// 	if($this->input->post('pre_addressproof')!='')
+		// 		{
+		// 			if(file_exists(base_path().'upload/empdetail/'.$this->input->post('pre_addressproof')))
+		// 			{
+		// 				$link=base_path().'upload/empdetail/'.$this->input->post('pre_addressproof');
+		// 				unlink($link);
+		// 			}
 					
-				}
-		} else {
-			if($this->input->post('pre_addressproof')!='')
-			{
-				$addressproof_image=$this->input->post('pre_addressproof');
-			}
-		}
+		// 		}
+		// } else {
+		// 	if($this->input->post('pre_addressproof')!='')
+		// 	{
+		// 		$addressproof_image=$this->input->post('pre_addressproof');
+		// 	}
+		// }
         $x=8;
    		$rnd=substr(str_shuffle("23456789abcdefghjkmnpqrstvwxyzABCDEFGHJKMNPQRSTVWXYZ"), 0, $x);
         //echo $rnd ;die;
@@ -417,11 +417,11 @@ class Employee_model extends CI_Model
 		'physically_challenged' =>$this->input->post('physically_challenged'),
 		'status' =>$this->input->post('status'),
 		'bankdetail' =>$bankdetail_image,
-		'passport' =>$passport_image,
-		'pancard' =>$pancard_image,		
-		'drivinglicense' =>$driveinglicence_image,
-		'aadharcard	' =>$aadharcard_image,
-		'addressesproof' =>$addressproof_image,
+		//'passport' =>$passport_image,
+		'pancard' =>trim($this->input->post('pancard')),
+		//'drivinglicense' =>$driveinglicence_image,
+		'aadharcard	' =>trim($this->input->post('aadharcard')),
+		//'addressesproof' =>$addressproof_image,
 		'employee_code' =>$this->input->post('employee_code'),	
 		'companyid' =>$this->session->userdata('companyid'),
 		'Password' =>md5($rnd),			
@@ -527,7 +527,7 @@ class Employee_model extends CI_Model
    
 			$config['file_name'] = $rand.'bank_detail';			
 			$config['upload_path'] = base_path().'upload/empdetail/';		
-			$config['allowed_types'] = 'jpg|jpeg|gif|png|bmp';  
+			$config['allowed_types'] = 'jpg|jpeg|gif|png|bmp|pdf';  
  
              $this->upload->initialize($config);
  
@@ -556,208 +556,208 @@ class Employee_model extends CI_Model
 			}
 		}
 
-		$passport_image='';
-		if(isset($_FILES['passport']) &&  $_FILES['passport']['name']!='')
-        {
-			$this->load->library('upload');
-			$rand=rand(0,100000);			  
-			$_FILES['userfile']['name']     =   $_FILES['passport']['name'];
-			$_FILES['userfile']['type']     =   $_FILES['passport']['type'];
-			$_FILES['userfile']['tmp_name'] =   $_FILES['passport']['tmp_name'];
-			$_FILES['userfile']['error']    =   $_FILES['passport']['error'];
-			$_FILES['userfile']['size']     =   $_FILES['passport']['size'];
+		// $passport_image='';
+		// if(isset($_FILES['passport']) &&  $_FILES['passport']['name']!='')
+  //       {
+		// 	$this->load->library('upload');
+		// 	$rand=rand(0,100000);			  
+		// 	$_FILES['userfile']['name']     =   $_FILES['passport']['name'];
+		// 	$_FILES['userfile']['type']     =   $_FILES['passport']['type'];
+		// 	$_FILES['userfile']['tmp_name'] =   $_FILES['passport']['tmp_name'];
+		// 	$_FILES['userfile']['error']    =   $_FILES['passport']['error'];
+		// 	$_FILES['userfile']['size']     =   $_FILES['passport']['size'];
    
-			$config['file_name'] = $rand.'passport';			
-			$config['upload_path'] = base_path().'upload/empdetail/';		
-			$config['allowed_types'] = 'jpg|jpeg|gif|png|bmp';  
+		// 	$config['file_name'] = $rand.'passport';			
+		// 	$config['upload_path'] = base_path().'upload/empdetail/';		
+		// 	$config['allowed_types'] = 'jpg|jpeg|gif|png|bmp';  
  
-             $this->upload->initialize($config);
+  //            $this->upload->initialize($config);
  
-              if (!$this->upload->do_upload())
-			  {
-				$error =  $this->upload->display_errors();
-				echo "<pre>";print_r($error);
-			  } 
-           	  $picture = $this->upload->data();	
+  //             if (!$this->upload->do_upload())
+		// 	  {
+		// 		$error =  $this->upload->display_errors();
+		// 		echo "<pre>";print_r($error);
+		// 	  } 
+  //          	  $picture = $this->upload->data();	
 			
-			$passport_image=$picture['file_name'];		
-			if($this->input->post('pre_passport')!='')
-				{
-					if(file_exists(base_path().'upload/empdetail/'.$this->input->post('pre_passport')))
-					{
-						$link=base_path().'upload/empdetail/'.$this->input->post('pre_passport');
-						unlink($link);
-					}
+		// 	$passport_image=$picture['file_name'];		
+		// 	if($this->input->post('pre_passport')!='')
+		// 		{
+		// 			if(file_exists(base_path().'upload/empdetail/'.$this->input->post('pre_passport')))
+		// 			{
+		// 				$link=base_path().'upload/empdetail/'.$this->input->post('pre_passport');
+		// 				unlink($link);
+		// 			}
 					
-				}
-		} else {
-			if($this->input->post('pre_passport')!='')
-			{
-				$passport_image=$this->input->post('pre_passport');
-			}
-		}
+		// 		}
+		// } else {
+		// 	if($this->input->post('pre_passport')!='')
+		// 	{
+		// 		$passport_image=$this->input->post('pre_passport');
+		// 	}
+		// }
 
 		
-		$driveinglicence_image='';
-		if(isset($_FILES['driveinglicence']) &&  $_FILES['driveinglicence']['name']!='')
-        {
-			$this->load->library('upload');
-			$rand=rand(0,100000);			  
-			$_FILES['userfile']['name']     =   $_FILES['driveinglicence']['name'];
-			$_FILES['userfile']['type']     =   $_FILES['driveinglicence']['type'];
-			$_FILES['userfile']['tmp_name'] =   $_FILES['driveinglicence']['tmp_name'];
-			$_FILES['userfile']['error']    =   $_FILES['driveinglicence']['error'];
-			$_FILES['userfile']['size']     =   $_FILES['driveinglicence']['size'];
+		// $driveinglicence_image='';
+		// if(isset($_FILES['driveinglicence']) &&  $_FILES['driveinglicence']['name']!='')
+  //       {
+		// 	$this->load->library('upload');
+		// 	$rand=rand(0,100000);			  
+		// 	$_FILES['userfile']['name']     =   $_FILES['driveinglicence']['name'];
+		// 	$_FILES['userfile']['type']     =   $_FILES['driveinglicence']['type'];
+		// 	$_FILES['userfile']['tmp_name'] =   $_FILES['driveinglicence']['tmp_name'];
+		// 	$_FILES['userfile']['error']    =   $_FILES['driveinglicence']['error'];
+		// 	$_FILES['userfile']['size']     =   $_FILES['driveinglicence']['size'];
    
-			$config['file_name'] = $rand.'driveinglicence';			
-			$config['upload_path'] = base_path().'upload/empdetail/';		
-			$config['allowed_types'] = 'jpg|jpeg|gif|png|bmp';  
+		// 	$config['file_name'] = $rand.'driveinglicence';			
+		// 	$config['upload_path'] = base_path().'upload/empdetail/';		
+		// 	$config['allowed_types'] = 'jpg|jpeg|gif|png|bmp';  
  
-             $this->upload->initialize($config);
+  //            $this->upload->initialize($config);
  
-              if (!$this->upload->do_upload())
-			  {
-				$error =  $this->upload->display_errors();
-				echo "<pre>";print_r($error);
-			  } 
-           	  $picture = $this->upload->data();	
+  //             if (!$this->upload->do_upload())
+		// 	  {
+		// 		$error =  $this->upload->display_errors();
+		// 		echo "<pre>";print_r($error);
+		// 	  } 
+  //          	  $picture = $this->upload->data();	
 			
-			$driveinglicence_image=$picture['file_name'];		
-			if($this->input->post('pre_driveinglicence')!='')
-				{
-					if(file_exists(base_path().'upload/empdetail/'.$this->input->post('pre_driveinglicence')))
-					{
-						$link=base_path().'upload/empdetail/'.$this->input->post('pre_driveinglicence');
-						unlink($link);
-					}
+		// 	$driveinglicence_image=$picture['file_name'];		
+		// 	if($this->input->post('pre_driveinglicence')!='')
+		// 		{
+		// 			if(file_exists(base_path().'upload/empdetail/'.$this->input->post('pre_driveinglicence')))
+		// 			{
+		// 				$link=base_path().'upload/empdetail/'.$this->input->post('pre_driveinglicence');
+		// 				unlink($link);
+		// 			}
 					
-				}
-		} else {
-			if($this->input->post('pre_driveinglicence')!='')
-			{
-				$driveinglicence_image=$this->input->post('pre_driveinglicence');
-			}
-		}
-		$pancard_image='';
-		if(isset($_FILES['pancard']) &&  $_FILES['pancard']['name']!='')
-        {
-			$this->load->library('upload');
-			$rand=rand(0,100000);			  
-			$_FILES['userfile']['name']     =   $_FILES['pancard']['name'];
-			$_FILES['userfile']['type']     =   $_FILES['pancard']['type'];
-			$_FILES['userfile']['tmp_name'] =   $_FILES['pancard']['tmp_name'];
-			$_FILES['userfile']['error']    =   $_FILES['pancard']['error'];
-			$_FILES['userfile']['size']     =   $_FILES['pancard']['size'];
+		// 		}
+		// } else {
+		// 	if($this->input->post('pre_driveinglicence')!='')
+		// 	{
+		// 		$driveinglicence_image=$this->input->post('pre_driveinglicence');
+		// 	}
+		// }
+		// $pancard_image='';
+		// if(isset($_FILES['pancard']) &&  $_FILES['pancard']['name']!='')
+  //       {
+		// 	$this->load->library('upload');
+		// 	$rand=rand(0,100000);			  
+		// 	$_FILES['userfile']['name']     =   $_FILES['pancard']['name'];
+		// 	$_FILES['userfile']['type']     =   $_FILES['pancard']['type'];
+		// 	$_FILES['userfile']['tmp_name'] =   $_FILES['pancard']['tmp_name'];
+		// 	$_FILES['userfile']['error']    =   $_FILES['pancard']['error'];
+		// 	$_FILES['userfile']['size']     =   $_FILES['pancard']['size'];
    
-			$config['file_name'] = $rand.'pancard';			
-			$config['upload_path'] = base_path().'upload/empdetail/';		
-			$config['allowed_types'] = 'jpg|jpeg|gif|png|bmp';  
+		// 	$config['file_name'] = $rand.'pancard';			
+		// 	$config['upload_path'] = base_path().'upload/empdetail/';		
+		// 	$config['allowed_types'] = 'jpg|jpeg|gif|png|bmp';  
  
-             $this->upload->initialize($config);
+  //            $this->upload->initialize($config);
  
-              if (!$this->upload->do_upload())
-			  {
-				$error =  $this->upload->display_errors();
-				echo "<pre>";print_r($error);
-			  } 
-           	  $picture = $this->upload->data();	
+  //             if (!$this->upload->do_upload())
+		// 	  {
+		// 		$error =  $this->upload->display_errors();
+		// 		echo "<pre>";print_r($error);
+		// 	  } 
+  //          	  $picture = $this->upload->data();	
 			
-			$pancard_image=$picture['file_name'];		
-			if($this->input->post('pre_pancard')!='')
-				{
-					if(file_exists(base_path().'upload/empdetail/'.$this->input->post('pre_pancard')))
-					{
-						$link=base_path().'upload/empdetail/'.$this->input->post('pre_pancard');
-						unlink($link);
-					}
+		// 	$pancard_image=$picture['file_name'];		
+		// 	if($this->input->post('pre_pancard')!='')
+		// 		{
+		// 			if(file_exists(base_path().'upload/empdetail/'.$this->input->post('pre_pancard')))
+		// 			{
+		// 				$link=base_path().'upload/empdetail/'.$this->input->post('pre_pancard');
+		// 				unlink($link);
+		// 			}
 					
-				}
-		} else {
-			if($this->input->post('pre_pancard')!='')
-			{
-				$pancard_image=$this->input->post('pre_pancard');
-			}
-		}
-		$aadharcard_image='';
-		if(isset($_FILES['aadharcard']) &&  $_FILES['aadharcard']['name']!='')
-        {
-			$this->load->library('upload');
-			$rand=rand(0,100000);			  
-			$_FILES['userfile']['name']     =   $_FILES['aadharcard']['name'];
-			$_FILES['userfile']['type']     =   $_FILES['aadharcard']['type'];
-			$_FILES['userfile']['tmp_name'] =   $_FILES['aadharcard']['tmp_name'];
-			$_FILES['userfile']['error']    =   $_FILES['aadharcard']['error'];
-			$_FILES['userfile']['size']     =   $_FILES['aadharcard']['size'];
+		// 		}
+		// } else {
+		// 	if($this->input->post('pre_pancard')!='')
+		// 	{
+		// 		$pancard_image=$this->input->post('pre_pancard');
+		// 	}
+		// }
+		// $aadharcard_image='';
+		// if(isset($_FILES['aadharcard']) &&  $_FILES['aadharcard']['name']!='')
+  //       {
+		// 	$this->load->library('upload');
+		// 	$rand=rand(0,100000);			  
+		// 	$_FILES['userfile']['name']     =   $_FILES['aadharcard']['name'];
+		// 	$_FILES['userfile']['type']     =   $_FILES['aadharcard']['type'];
+		// 	$_FILES['userfile']['tmp_name'] =   $_FILES['aadharcard']['tmp_name'];
+		// 	$_FILES['userfile']['error']    =   $_FILES['aadharcard']['error'];
+		// 	$_FILES['userfile']['size']     =   $_FILES['aadharcard']['size'];
    
-			$config['file_name'] = $rand.'aadharcard';			
-			$config['upload_path'] = base_path().'upload/empdetail/';		
-			$config['allowed_types'] = 'jpg|jpeg|gif|png|bmp';  
+		// 	$config['file_name'] = $rand.'aadharcard';			
+		// 	$config['upload_path'] = base_path().'upload/empdetail/';		
+		// 	$config['allowed_types'] = 'jpg|jpeg|gif|png|bmp';  
  
-             $this->upload->initialize($config);
+  //            $this->upload->initialize($config);
  
-              if (!$this->upload->do_upload())
-			  {
-				$error =  $this->upload->display_errors();
-				echo "<pre>";print_r($error);
-			  } 
-           	  $picture = $this->upload->data();	
+  //             if (!$this->upload->do_upload())
+		// 	  {
+		// 		$error =  $this->upload->display_errors();
+		// 		echo "<pre>";print_r($error);
+		// 	  } 
+  //          	  $picture = $this->upload->data();	
 			
-			$aadharcard_image=$picture['file_name'];		
-			if($this->input->post('pre_aadharcard')!='')
-				{
-					if(file_exists(base_path().'upload/empdetail/'.$this->input->post('pre_aadharcard')))
-					{
-						$link=base_path().'upload/empdetail/'.$this->input->post('pre_aadharcard');
-						unlink($link);
-					}
+		// 	$aadharcard_image=$picture['file_name'];		
+		// 	if($this->input->post('pre_aadharcard')!='')
+		// 		{
+		// 			if(file_exists(base_path().'upload/empdetail/'.$this->input->post('pre_aadharcard')))
+		// 			{
+		// 				$link=base_path().'upload/empdetail/'.$this->input->post('pre_aadharcard');
+		// 				unlink($link);
+		// 			}
 					
-				}
-		} else {
-			if($this->input->post('pre_aadharcard')!='')
-			{
-				$aadharcard_image=$this->input->post('pre_aadharcard');
-			}
-		}
-		$addressproof_image='';
-		if(isset($_FILES['address_proof']) &&  $_FILES['address_proof']['name']!='')
-        {
-			$this->load->library('upload');
-			$rand=rand(0,100000);			  
-			$_FILES['userfile']['name']     =   $_FILES['address_proof']['name'];
-			$_FILES['userfile']['type']     =   $_FILES['address_proof']['type'];
-			$_FILES['userfile']['tmp_name'] =   $_FILES['address_proof']['tmp_name'];
-			$_FILES['userfile']['error']    =   $_FILES['address_proof']['error'];
-			$_FILES['userfile']['size']     =   $_FILES['address_proof']['size'];
+		// 		}
+		// } else {
+		// 	if($this->input->post('pre_aadharcard')!='')
+		// 	{
+		// 		$aadharcard_image=$this->input->post('pre_aadharcard');
+		// 	}
+		// }
+		// $addressproof_image='';
+		// if(isset($_FILES['address_proof']) &&  $_FILES['address_proof']['name']!='')
+  //       {
+		// 	$this->load->library('upload');
+		// 	$rand=rand(0,100000);			  
+		// 	$_FILES['userfile']['name']     =   $_FILES['address_proof']['name'];
+		// 	$_FILES['userfile']['type']     =   $_FILES['address_proof']['type'];
+		// 	$_FILES['userfile']['tmp_name'] =   $_FILES['address_proof']['tmp_name'];
+		// 	$_FILES['userfile']['error']    =   $_FILES['address_proof']['error'];
+		// 	$_FILES['userfile']['size']     =   $_FILES['address_proof']['size'];
    
-			$config['file_name'] = $rand.'address_proof';			
-			$config['upload_path'] = base_path().'upload/empdetail/';		
-			$config['allowed_types'] = 'jpg|jpeg|gif|png|bmp';  
+		// 	$config['file_name'] = $rand.'address_proof';			
+		// 	$config['upload_path'] = base_path().'upload/empdetail/';		
+		// 	$config['allowed_types'] = 'jpg|jpeg|gif|png|bmp';  
  
-             $this->upload->initialize($config);
+  //            $this->upload->initialize($config);
  
-              if (!$this->upload->do_upload())
-			  {
-				$error =  $this->upload->display_errors();
-				echo "<pre>";print_r($error);
-			  } 
-           	  $picture = $this->upload->data();	
+  //             if (!$this->upload->do_upload())
+		// 	  {
+		// 		$error =  $this->upload->display_errors();
+		// 		echo "<pre>";print_r($error);
+		// 	  } 
+  //          	  $picture = $this->upload->data();	
 			
-			$addressproof_image=$picture['file_name'];		
-			if($this->input->post('pre_addressproof')!='')
-				{
-					if(file_exists(base_path().'upload/empdetail/'.$this->input->post('pre_addressproof')))
-					{
-						$link=base_path().'upload/empdetail/'.$this->input->post('pre_addressproof');
-						unlink($link);
-					}
+		// 	$addressproof_image=$picture['file_name'];		
+		// 	if($this->input->post('pre_addressproof')!='')
+		// 		{
+		// 			if(file_exists(base_path().'upload/empdetail/'.$this->input->post('pre_addressproof')))
+		// 			{
+		// 				$link=base_path().'upload/empdetail/'.$this->input->post('pre_addressproof');
+		// 				unlink($link);
+		// 			}
 					
-				}
-		} else {
-			if($this->input->post('pre_addressproof')!='')
-			{
-				$addressproof_image=$this->input->post('pre_addressproof');
-			}
-		}
+		// 		}
+		// } else {
+		// 	if($this->input->post('pre_addressproof')!='')
+		// 	{
+		// 		$addressproof_image=$this->input->post('pre_addressproof');
+		// 	}
+		// }
         $x=8;
    		$rnd=substr(str_shuffle("23456789abcdefghjkmnpqrstvwxyzABCDEFGHJKMNPQRSTVWXYZ"), 0, $x);
         //echo $rnd ;die;
@@ -798,11 +798,12 @@ class Employee_model extends CI_Model
 		'physically_challenged' =>$this->input->post('physically_challenged'),
 		'status' =>$this->input->post('status'),
 		'bankdetail' =>$bankdetail_image,
-		'passport' =>$passport_image,
-		'pancard' =>$pancard_image,		
-		'drivinglicense' =>$driveinglicence_image,
-		'aadharcard	' =>$aadharcard_image,
-		'addressesproof' =>$addressproof_image,
+
+		//'passport' =>$passport_image,
+		'pancard' =>trim($this->input->post('pancard')),	
+		//'drivinglicense' =>$driveinglicence_image,
+		'aadharcard' =>trim($this->input->post('aadharcard')),
+		//'addressesproof' =>$addressproof_image,
 		'employee_code' =>$this->input->post('employee_code'),	
 		'companyid' =>$this->session->userdata('companyid'),
 		'upated_date'=>date('Y-m-d')		
