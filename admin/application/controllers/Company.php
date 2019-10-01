@@ -224,7 +224,7 @@ class Company extends CI_Controller
 				}
 
 		} 
-		$data['shiftData']=$this->Company_model->list_shift();
+	//	$data['shiftData']=$this->Company_model->list_shift();
 		$data['stateData']=$this->Company_model->list_state();
 		$data['complianceData']=$this->Company_model->list_complianceto();
 		$data['companytypeData']=$this->Company_model->list_companyto();

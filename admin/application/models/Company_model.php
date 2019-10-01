@@ -320,15 +320,15 @@ class Company_model extends CI_Model
 		return $res;
 	}
 
-	function list_shift()
-	{
-		$this->db->select('*');
-		$this->db->from('tblshift');	
-		$this->db->where('Isdelete','0');
-		$r=$this->db->get();
-		$res = $r->result();
-		return $res;
-	}
+	// function list_shift()
+	// {
+	// 	$this->db->select('*');
+	// 	$this->db->from('tblshift');	
+	// 	$this->db->where('Isdelete','0');
+	// 	$r=$this->db->get();
+	// 	$res = $r->result();
+	// 	return $res;
+	// }
 
 	function list_state(){
 		$r=$this->db->select('*')
@@ -773,19 +773,23 @@ class Company_model extends CI_Model
 			$Shiftouttime=$this->input->post('Shiftouttime');
 			$data3 = array();
 			$Shiftnames = count($this->input->post('Shiftname'));
+		
 			for($i=0; $i<$Shiftnames; $i++)
 			 {
-				$data3=array( 
-				'companyid'=>$insert_id,
-				'Shifthours'=>$Shifthours,
-				'Shiftname'=>isset($Shiftname[$i]) ? $Shiftname[$i] : '0',
-				'Shiftintime'=>isset($Shiftintime[$i]) ? $Shiftintime[$i] : '0',
-				'Shiftouttime'=>isset($Shiftouttime[$i]) ? $Shiftouttime[$i] : '0',
-				);
-				  // echo "<pre>";print_r($data3);
-				$this->db->insert('tblcompanyshift',$data3);	
+				if($Shiftname!='' || $Shiftname!=null || $Shiftname!='0')
+				{	
+					$data3=array( 
+					'companyid'=>$insert_id,
+					'Shifthours'=>$Shifthours,
+					'Shiftname'=>isset($Shiftname[$i]) ? $Shiftname[$i] : '0',
+					'Shiftintime'=>isset($Shiftintime[$i]) ? $Shiftintime[$i] : '0',
+					'Shiftouttime'=>isset($Shiftouttime[$i]) ? $Shiftouttime[$i] : '0',
+					);
+					 echo "<pre>";print_r($data3);
+					//$this->db->insert('tblcompanyshift',$data3);	
+				}
 			 }	
-												 	
+				die;								 	
 				
 				
 				$complianceid=implode(',',$this->input->post('complianceid'));
