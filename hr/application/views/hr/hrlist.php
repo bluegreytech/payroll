@@ -62,8 +62,7 @@
 		<input type="submit" value="Search" name="search" class="btn btn-success btn-block">
 		</div> 
 		<div class="col-md-3"> 
-		<a href="<?php echo base_url()?>/hr/<?php echo $redirect_page;?>" class="btn btn-info"><i class="fa fa-refresh"></i></a> 
-	
+		<a href="<?php echo base_url()?>/hr/<?php echo $redirect_page;?>" class="btn btn-info"><i class="fa fa-refresh"></i></a> 	
 		</div>     
 		</div> 
 		</form>
@@ -104,10 +103,7 @@
 								<?php echo ucfirst($row->FullName);?> 
 							
 							<?php
-							}
-							else
-							{ 
-								?>
+							}else{ ?>
 								<img src="<?php echo base_url();?>upload/no_image/user_no_image.png" alt="" class="avatar">
 								<?php echo $row->FullName;?> 
 							
@@ -126,9 +122,7 @@
 							</a>
 						</div>
 							</td>
-						<?php
-
-						?>
+						
 						<td class="text-center">
 						<a  onclick="editdata('<?php echo $row->hr_id; ?>')" data-toggle="modal" data-target="#add_salary" >
 								<i class="fa fa-pencil fa-lg"></i></a>

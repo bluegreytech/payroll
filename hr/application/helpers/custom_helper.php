@@ -482,13 +482,19 @@
 		}
 	}
 	
-	function getActiveCountry()
+	function getallholiday($attendancemonth)
 	{
 		$CI =& get_instance();
-		$query = $CI->db->get_where("country_code",array('status'=>'Active'));
+		$CI->db->select('holidaydate');
+		$CI->db->from('tblcmpholiday');
+		$CI->db->like('holidaydate',date($attendancemonth));
+		$CI->db->where('is_deleted',"0");
+	
+		$query = $CI->db->get();
+		//echo $CI->db->last_query();die;		
 		if($query->num_rows() > 0)
 		{
-			return $query->result();
+			return $query->result_array();
 		}
 	}
 	
@@ -790,15 +796,20 @@
 	    $CI->db->where($primaryfield,$id);
 	    $CI->db->delete($table);
 	}
-		
-		
 	
-	 
-	
-	 
-	 
-	 
 	  
+	function checkattedancestatus($id)
+	{
+		$CI =& get_instance();
+		$CI->db->select('attendance_status');
+		$CI->db->from('tblattendance');		
+		$CI->db->where('attendance_id',$id);
+		$query = $CI->db->get();
+		//echo $CI->db->last_query();die;
+		//echo "<pre>";print_r($query);die;
+		return $query->row()->attendance_status;
+	}
+
 	function get_company_name($id)
 	{
 		$CI =& get_instance();
@@ -1313,6 +1324,14 @@
 		{
 			return $query->result_array();
 		}
+	}
+
+	function cal_days_in_year($year){
+	    $days=0; 
+	    for($month=1;$month<=12;$month++){ 
+	        $days = $days + cal_days_in_month(CAL_GREGORIAN,$month,$year);
+	     }
+	 		return $days;
 	}
 
 

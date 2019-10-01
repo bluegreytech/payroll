@@ -28,9 +28,8 @@
 
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
 		<script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
- 			
-		
-		<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script> -->
+ 		
+		<script src="<?php echo base_url(); ?>default/js/bootstrap-select.min.js"></script>
 
 		</body>
 </html>
