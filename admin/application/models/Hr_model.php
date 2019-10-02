@@ -119,7 +119,7 @@ class Hr_model extends CI_Model
 			'CreatedOn'=>date('Y-m-d')
 			);
 
-			print_r($data);die;
+			//print_r($data);die;
 			$this->db->insert('tblhr',$data);
 			$insert_id = $this->db->insert_id();
 			if($insert_id!='')

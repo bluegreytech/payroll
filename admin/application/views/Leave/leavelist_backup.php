@@ -60,15 +60,15 @@
 						<form method="post" action="<?php echo base_url();?>Leave/leavelist">
 						<div class="row filter-row">
 						
-							<!-- <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
 									<div class="form-group form-focus select-focus">
 										<select class="select floating" name="option" > 
 											<option value=""> -- Select -- </option>
 											<option value="companyname">Company Name</option>
 										</select>
-								
+										<!-- <label class="focus-label">Role</label> -->
 									</div>
-							</div> -->
+							</div>
 							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12" >  
 
 									<div class="form-group form-focus box2">
@@ -80,7 +80,7 @@
 													foreach($companyData as $comp)
 													{
 												?>
-													<option value="<?php echo $comp->companyid; ?>"><?php echo $comp->companyname;?></option>
+													<option value="<?php echo $comp->companyname; ?>"><?php echo $comp->companyname;?></option>
 												<?php
 												}}
 												?>

@@ -196,13 +196,10 @@
 													<i class="fa fa-pencil m-r-5"></i> </a>
 											<a  onclick="deletedata(<?php echo $comp->companyid; ?>)" data-toggle="modal" data-target="#delete_client"><i class="fa fa-trash-o m-r-5"></i> </a>
 										    <a  href="<?php echo base_url();?>Company/company_notification_expired/<?php echo $comp->companyid;?>" role="button">
-													<i class="fa fa-pencil m-r-5"></i>Notfication</a>				
+											<i class="fa fa-bell-o" aria-hidden="true"></i></a>
+											<a  href="<?php echo base_url();?>Leave/leavelist" role="button">
+													<i class="fa fa-calendar-check-o" aria-hidden="true"></i></a>				
 										</td>
-
-											
-
-										
-
 
 
 										</tr>

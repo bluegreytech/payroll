@@ -7,7 +7,7 @@ class Employee_model extends CI_Model
 		if(!check_admin_authentication()){ 
 			redirect(base_url('Login'));
 		}
-		$where = array('t1.Is_deleted' =>'0');
+		$where = array('t1.Is_deleted'=>'0');
 		$this->db->select('t1.*,t2.companyname');
 		$this->db->from('tblemp as t1');
 		$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
@@ -24,12 +24,12 @@ class Employee_model extends CI_Model
 		if(!check_admin_authentication()){ 
 			redirect(base_url('Login'));
 		}
-			//$where = array('t1.Is_deleted' =>'0');
+			$where = array('t1.Is_deleted' =>'0');
 			$keyword = str_replace('-', ' ', $keyword);
 			$this->db->select('t1.*,t2.companyname');
 			$this->db->from('tblemp as t1');
 			$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
-			//$this->db->where($where);
+			$this->db->where($where);
 			if($option == 'first_name')
 			{
 				$this->db->like('first_name',$keyword);

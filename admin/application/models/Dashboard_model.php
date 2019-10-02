@@ -19,8 +19,8 @@ class Dashboard_model extends CI_Model
 	function list_employee()
 	{
 		$this->db->select('*');
-		$this->db->from('tblemployee');
-		$this->db->where('isdelete!=','1');
+		$this->db->from('tblemp');
+		$this->db->where('Is_deleted!=','1');
 		$r = $this->db->get();
 		return $query= $r->num_rows();
 	}

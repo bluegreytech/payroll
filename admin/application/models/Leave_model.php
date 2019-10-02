@@ -26,18 +26,13 @@ class Leave_model extends CI_Model
 
 
 
-	function search($option,$keyword)
-	{
-		   
-		 	$keyword = str_replace('-', ' ', $keyword);
+	function search($keyword)
+	{  
+			$where=array('t1.companyid'=>$keyword,'t2.Is_deleted'=>'0');
 			$this->db->select('t1.*,t2.*');
 			$this->db->from('tblcompany as t1');
-			$this->db->join('tblcmpleave as t2', 't1.companyid = t2.companyid', 'LEFT');
-			$this->db->where('Is_deleted','0');
-			if($option == 'companyname')
-			{
-				$this->db->like('companyname',$keyword);
-			}	
+			$this->db->join('tblcmpleave as t2','t1.companyid = t2.companyid', 'LEFT');
+			$this->db->where($where);	
 			$query = $this->db->get();	
 			if($query->num_rows() > 0)
 			{
