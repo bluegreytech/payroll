@@ -270,7 +270,7 @@
 										<div class="col-md-6">
 											<div class="form-group">
 													<label>Company Shift Hours <span class="text-danger">*</span></label>
-													<select class="form-control" name="Shifthours"  id="purpose"> 
+													<select class="form-control" name="Shifthours"  id="purpose1"> 
 														
 													<?php	
 													if($Companyshiftid!='')		
@@ -657,6 +657,7 @@ $(document).ready(function(){
 		$("#business3").show();
 	  }
     });
+  
 });
 
 function readURL(input) {
