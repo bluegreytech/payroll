@@ -303,14 +303,15 @@
 												<input class="form-control" tabindex="3" type="email" name="EmailAddress" Placeholder="Enter your email address" minlength="2" maxlength="50">
 											</div>
 	
-
+										
 											<div class="form-group">
-												<label>Birth Date</label>
+												<label>Birth Date <span class="text-danger">*</span></label>
 												<div class="cal-icon">
-													<input class="form-control datetimepicker" type="text" name="DateofBirth" id="DateofBirth2" readonly>
+													<input  class="form-control datetimepicker" type="text" id="DateofBirth2" name="DateofBirth"
+													readonly>
 												</div>
 											</div>
-
+									
 											
 											<div class="form-group">
 												<label>Address</label>
@@ -458,10 +459,18 @@
 											</div>
 
 
-											<div class="form-group">
+											<!-- <div class="form-group">
 												<label>Birth Date</label>
 												<div class="cal-icon">
 													<input class="form-control datetimepicker" type="text" name="DateofBirth" id="DateofBirth" readonly>
+												</div>
+											</div> -->
+
+											<div class="form-group">
+												<label>Birth Date<span class="text-danger">*</span></label>
+												<div class="cal-icon">
+													<input  class="form-control datetimepicker" type="text" id="DateofBirth" name="DateofBirth"
+												  readonly>
 												</div>
 											</div>
 
@@ -705,16 +714,20 @@ $(document).ready(function() {
 </script>
 <script type="text/javascript">
 				$('#DateofBirth2').datetimepicker({
-					 format: 'YYYY/MM/DD',
-					 maxDate: moment(),
-					 ignoreReadonly: true,
+					defaultDate: new Date(),
+				  	format: 'DD/MM/YYYY',
+					maxDate: moment(),
+					ignoreReadonly: true,
 				});
 				$('#DateofBirth').datetimepicker({
-				  	// format: 'DD/MM/YYYY',
-					 format: 'YYYY/MM/DD',
+					 format: 'DD/MM/YYYY',
 					 maxDate: moment(),
 					 ignoreReadonly: true,
 				}).val('#DateofBirth');
+
+				
+
+		
 </script>
 
 
@@ -1154,7 +1167,8 @@ function editadmin(AdminId)
 			$('#FirstName').val(response.FirstName);
 			$('#LastName').val(response.LastName);
 			$('#EmailAddress').val(response.EmailAddress);
-			$('#DateofBirth').val(response.DateofBirth);
+			//$('#DateofBirth').val(response.DateofBirth);
+			$('#DateofBirth').val( myDateFormatter(response.DateofBirth));
 			$('#PhoneNumber').val(response.PhoneNumber);
 			$('#Gender').val(response.Gender);
 			$("option[id=Gender][value=" + response.Gender=='Male' + "]").attr('selected', 'selected');
@@ -1181,7 +1195,21 @@ function editadmin(AdminId)
 }
 
 
-
+function myDateFormatter (dobdate) 
+			{
+			var d = new Date(dobdate);
+			var day = d.getDate();
+			var month = d.getMonth() + 1;
+			var year = d.getFullYear();
+			if (day < 10) {
+				day = "0" + day;
+			}
+			if (month < 10) {
+				month = "0" + month;
+			}
+			var date = day + "/" + month + "/" + year;
+			return date;
+			}; 
 
 
 function deletedata(AdminId){  

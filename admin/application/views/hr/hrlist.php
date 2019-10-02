@@ -298,35 +298,18 @@
 
 											</div>
 
-
-
-											
-
 											<div class="form-group">
-
-												<label>Birth Date</label>
-
+												<label>Birth Date <span class="text-danger">*</span></label>
 												<div class="cal-icon">
-
-													<input class="form-control datetimepicker" type="text" name="DateofBirth" id="DateofBirth2" readonly>
-
+													<input  class="form-control datetimepicker" type="text" id="DateofBirth2" name="DateofBirth"
+													readonly>
 												</div>
-
 											</div>
-
-
 
 											<div class="form-group">
-
 												<label>Address</label>
-
 												<input class="form-control" tabindex="7" type="text" name="Address" Placeholder="Enter your address" minlength="5" maxlength="500">
-
 											</div>
-
-											
-
-
 
 											<div class="form-group">
 
@@ -532,26 +515,12 @@
 
 											</div>
 
-											<!-- <div class="form-group">
-
-												<label>Date of Birth</label>
-
-												<input class="form-control" type="date" name="DateofBirth" Placeholder="Enter your date of birth" id="DateofBirth" tabindex="5">
-
-											</div> -->
-
-
-
 											<div class="form-group">
-
-												<label>Birth Date</label>
-
+												<label>Birth Date<span class="text-danger">*</span></label>
 												<div class="cal-icon">
-
-													<input class="form-control datetimepicker" type="text" name="DateofBirth" id="DateofBirth" readonly>
-
+													<input  class="form-control datetimepicker" type="text" id="DateofBirth" name="DateofBirth"
+												  readonly>
 												</div>
-
 											</div>
 
 											<div class="form-group">
@@ -801,18 +770,17 @@
 
 <script type="text/javascript">
 
-				$('#DateofBirth2').datetimepicker({
-					 format: 'YYYY/MM/DD',
-					 maxDate: moment(),
-					 ignoreReadonly: true,
+$('#DateofBirth2').datetimepicker({
+					defaultDate: new Date(),
+				  	format: 'DD/MM/YYYY',
+					maxDate: moment(),
+					ignoreReadonly: true,
 				});
-
 				$('#DateofBirth').datetimepicker({
-				  	// format: 'DD/MM/YYYY',
-					 format: 'YYYY/MM/DD',
+					 format: 'DD/MM/YYYY',
 					 maxDate: moment(),
 					 ignoreReadonly: true,
-				}).val('#DateofBirth');
+				}).val('#DateofBirth');	
 
 $(document).ready(function() {
     $('#example').DataTable( {
@@ -1315,7 +1283,9 @@ function edithrs(hr_id)
 			$('#companyid').val(response.companyid);
 			$('#FullName').val(response.FullName);
 			$('#EmailAddress').val(response.EmailAddress);
-			$('#DateofBirth').val(response.DateofBirth);
+			//$('#DateofBirth').val(response.DateofBirth);
+			$('#DateofBirth').val( myDateFormatter(response.DateofBirth));
+			$('#PhoneNumber').val(response.PhoneNumber);
 			$('#PhoneNumber').val(response.Contact);
 			$('#Gender').val(response.Gender);
 			$("option[id=Gender][value=" + response.Gender=='Male' + "]").attr('selected', 'selected');
@@ -1339,6 +1309,21 @@ function edithrs(hr_id)
 }
 
 
+function myDateFormatter (dobdate) 
+			{
+			var d = new Date(dobdate);
+			var day = d.getDate();
+			var month = d.getMonth() + 1;
+			var year = d.getFullYear();
+			if (day < 10) {
+				day = "0" + day;
+			}
+			if (month < 10) {
+				month = "0" + month;
+			}
+			var date = day + "/" + month + "/" + year;
+			return date;
+			}; 
 
 
 
