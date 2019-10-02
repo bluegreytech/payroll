@@ -11,7 +11,20 @@ class Invoice extends CI_Controller
 
 	public function index()
 	{
-		$data['invoiceData']=$this->Invoice_model->list_companyinvoice();
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
+		if($_POST!='')
+		{
+			$option=$this->input->post('option');
+			$keyword=$this->input->post('keyword2');	
+			$data['invoiceData'] = $this->Invoice_model->search($option,$keyword);
+		}	
+		else
+		{
+			$data['invoiceData']=$this->Invoice_model->list_companyinvoice();
+		}
+		$data['companyData'] = $this->Invoice_model->list_company();
 			//echo "<pre>";	print_r($data['invoiceData']);die;
 		$this->load->view('Invoice/invoice-reports',$data);
 	}
@@ -23,9 +36,12 @@ class Invoice extends CI_Controller
 			$data['Companyinvoiceid']=$this->input->post('Companyinvoiceid');
 			$data['companyid']=$this->input->post('companyid');
 			$data['hr_id']=$this->input->post('hr_id');
+			$data['paymentopt']=$this->input->post('paymentopt');
 			$data['invoicedate']=$this->input->post('invoicedate');
 			$data['duedate']=$this->input->post('duedate');
+			$data['amount']=$this->input->post('amount');
 			$data['totalamount']=$this->input->post('totalamount');
+			$data['addtax']=$this->input->post('addtax');
 			$data['taxamount']=$this->input->post('taxamount');
 			$data['netamount']=$this->input->post('netamount');
 		if($_POST)

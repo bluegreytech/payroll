@@ -12,33 +12,33 @@
                 <div class="content container-fluid">
 				<?php if(($this->session->flashdata('error'))){ ?>
 
-<div class="alert alert-danger" id="errorMessage">
+						<div class="alert alert-danger" id="errorMessage">
 
-<strong> <?php echo $this->session->flashdata('error'); ?></strong> 
+						<strong> <?php echo $this->session->flashdata('error'); ?></strong> 
 
-</div>
+						</div>
 
-<?php } ?>
+						<?php } ?>
 
-<?php if(($this->session->flashdata('success'))){ ?>
+						<?php if(($this->session->flashdata('success'))){ ?>
 
-		<div class="alert alert-success" id="successMessage">
+								<div class="alert alert-success" id="successMessage">
 
-		<strong> <?php echo $this->session->flashdata('success'); ?></strong> 
+								<strong> <?php echo $this->session->flashdata('success'); ?></strong> 
 
-		</div>
+								</div>
 
-<?php } ?>
+						<?php } ?>
 
-<?php if(($this->session->flashdata('warning'))){ ?>
+						<?php if(($this->session->flashdata('warning'))){ ?>
 
-<div class="alert alert-warning" id="warningMessage">
+						<div class="alert alert-warning" id="warningMessage">
 
-<strong> <?php echo $this->session->flashdata('warning'); ?></strong> 
+						<strong> <?php echo $this->session->flashdata('warning'); ?></strong> 
 
-</div>
+						</div>
 
-<?php } ?>
+						<?php } ?>
 
 					<!-- Page Title -->
 						<div class="row">
@@ -52,7 +52,7 @@
 					<!-- /Page Title -->
 
 					<!-- Search Filter -->
-					<div class="row filter-row">
+					<!-- <div class="row filter-row">
 						<div class="col-sm-6 col-md-3"> 
 							<div class="form-group form-focus select-focus">
 								<select class="select floating"> 
@@ -84,7 +84,81 @@
 						<div class="col-sm-6 col-md-3">  
 							<a href="#" class="btn btn-success btn-block"> Search </a>  
 						</div>     
-                    </div>
+                    </div> -->
+
+						<!-- Search Filter -->
+
+						<form method="post" action="<?php echo base_url();?>Invoice">
+
+							<div class="row filter-row">
+
+								<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+										<div class="form-group form-focus select-focus">
+											<select class="select floating" name="option" id="purpose"> 
+												<option value=""> -- Select -- </option>
+												<option value="companyname">Company Name</option>
+												<option value="status">Paymeny Status</option>
+												<option value="datefromto">Date From to To</option>
+													<!-- <option value="phone">Contact Number</option>
+												<option value="department">Department</option>
+												<option value="desgination">Designation</option> -->
+											</select>
+										</div>
+								</div>
+
+							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12" >  
+										<div class="form-group form-focus box" id='business'>
+											<input type="text" name="keyword2" class="form-control floating">
+											<label class="focus-label">Search</label>
+										</div>
+
+										<div class="form-group form-focus box2" id='business2' style="display: none;">
+											<div class="form-group">
+												<select class="form-control" name="keyword2"> 
+													<option desabled value="">Please select company</option>
+													<?php
+													if($companyData){
+														foreach($companyData as $comp)
+														{
+													?>
+														<option value="<?php echo $comp->companyname; ?>"><?php echo $comp->companyname;?></option>
+													<?php
+													}}
+													?>
+												</select>
+											</div>
+										</div>
+
+										
+										<div class="form-group form-focus" id='business3' style="display: none;">
+											<div class="cal-icon">
+												<input class="form-control floating datetimepicker" type="text">
+											</div>
+											<label class="focus-label">From</label>
+										</div>
+								
+										<div class="form-group form-focus" id='business4' style="display: none;">
+											<div class="cal-icon">
+												<input class="form-control floating datetimepicker" type="text">
+											</div>
+											<label class="focus-label">From</label>
+										</div>
+										
+									
+								</div>
+								<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+									<input type="submit" value="Search" class="btn btn-success btn-block">
+								</div>    
+								<div class="col-md-3"> 
+									<a href="<?php echo base_url()?>Invoice" class="btn btn-info"><i class="fa fa-refresh"></i></a> 
+								</div> 
+							</div> 
+
+							</form>
+
+
+
+
 
 					<!-- /Search Filter -->
 
@@ -117,17 +191,26 @@
 									
 										<td><a href="invoice-view.php"><?php echo $i;?></a></td>
 										<td><?php echo $compInvoice->companyname ;?></td>
-										<td><?php echo $compInvoice->invoicedate ;?></td>
-										<td><?php echo $compInvoice->duedate ;?></td>
+										<td><?php 
+											echo 	$invdate = date("d-m-Y", strtotime($compInvoice->invoicedate));?></td>
+										
+										<td><?php	echo 	$invdate = date("d-m-Y", strtotime($compInvoice->duedate));?></td>
 										<td><?php echo $compInvoice->netamount ;?></td>		
+										<!-- <td>		
+											<?php //if($compInvoice->status=='Paid'){ 
+												//echo "<span class='badge badge-success-border'>$compInvoice->status</span>";
+												//}?>
+											<?php //if($compInvoice->status=='Pending'){
+													//echo "<span class='badge badge-danger-border'>$compInvoice->status</span>";
+													//}?>
+										</td> -->
 										<td>		
 											<?php if($compInvoice->status=='Paid'){ 
-												echo "<span class='badge badge-success-border'>Paid</span>";
-												}?>
-											<?php if($compInvoice->status=='Pending'){
-													echo "<span class='badge badge-danger-border'>Pending</span>";
-													}?>
-								
+												echo "Paid";
+												}else{
+													echo "Pending";
+												}
+													?>
 											
 										</td>
 										<td class="text-right">
@@ -244,7 +327,34 @@
 				},
 				})
 			});
-		}			
+		}	
+
+		$(document).ready(function(){
+    $('#purpose').on('change', function() {
+      if(this.value == 'companyname')
+      {
+        $("#business2").show();
+		$("#business").hide();
+		$("#business3").hide();
+		$("#business4").hide();
+      }
+      else if(this.value == 'status')
+      {
+        $("#business").show();
+		$("#business2").hide();
+		$("#business3").hide();
+		$("#business4").hide();
+      }
+	  else if(this.value == 'datefromto')
+      {
+		$("#business").hide();
+		$("#business2").hide();
+		$("#business3").show();
+		$("#business4").show();
+      }
+    });
+});
+		
 		</script>
 		
     </body>
