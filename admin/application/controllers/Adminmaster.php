@@ -17,37 +17,20 @@ class Adminmaster extends CI_Controller
 	
 
 	function adminlist()
-
 	{
-
 		if(!check_admin_authentication()){ 
-
 			redirect(base_url('Login'));
-
 		}
-
 		if($_POST!='')
-
 		{
-
 			$option=$this->input->post('option');
-
 			$keyword=$this->input->post('keyword2');	
-
 			$data['adminmasterData'] = $this->Adminmaster_model->search($option,$keyword);
-
 		}	
-
 		else
-
 		{
-
 			$data['adminmasterData']=$this->Adminmaster_model->getuser();
-
 		}
-
-		
-
 		$this->load->view('dashboard/adminlist',$data);
 
 	}

@@ -31,7 +31,7 @@
 							<h4 class="page-title">Add Invoice</h4>
 						</div>
 						<div class="col-sm-7 col-7 text-right m-b-30">
-						<a href="<?php echo base_url();?>Invoice" class="btn add-btn"><i class="fa fa-plus"></i>Back to List of Invoice</a>
+						<a href="<?php echo base_url();?>Invoice" class="btn add-btn">Back to List of Invoice</a>
 						</div>
 					</div>
 					<!-- /Page Title -->
@@ -83,7 +83,7 @@
 									<div class="col-sm-6 col-md-3">
 										<div class="form-group">
 											<label>Email</label>
-											<input class="form-control" type="email" name="EmailAddress" id="EmailAddress" >
+											<input class="form-control" readOnly type="email" name="EmailAddress" id="EmailAddress" >
 										</div>
 									</div>
 									
@@ -140,7 +140,7 @@
 											<label>Invoice date <span class="text-danger">*</span></label>
 											<div class="cal-icon">
 												<input  class="form-control datetimepicker" type="text" id="invoicedate" name="invoicedate"
-												 value="<?php  if($invoicedate!='0000-00-00'){ echo date('Y/m/d', strtotime($invoicedate));} ?>" readonly>
+												 value="<?php echo $invoicedate; ?>" readonly>
 											</div>
 										</div>
 									</div>
@@ -150,7 +150,7 @@
 											<label>Due Date <span class="text-danger">*</span></label>
 											<div class="cal-icon">
 												
-												<input  class="form-control datetimepicker" type="text" id="duedate" name="duedate" value="<?php  if($duedate!='0000-00-00'){ echo date('Y/m/d', strtotime($duedate));} ?>" readonly>
+												<input  class="form-control datetimepicker" type="text" id="duedate" name="duedate"  value="<?php echo $duedate; ?>" readonly>
 											</div>
 										</div>
 									</div>
@@ -174,7 +174,7 @@
 															Total
 														</td>
 														<td>
-															<input class="form-control" name="totalamount" value="<?php echo $totalamount; ?>"  type="text" id="total" onChange="m1()">
+															<input class="form-control"  name="totalamount" value="<?php echo $totalamount; ?>"  type="text" id="total" onChange="m1()">
 														</td>
 													</tr>
 													<tr>
@@ -185,7 +185,7 @@
 
 														<td colspan="5" style="text-align: right"> Tax Amount</td>
 														<td style="text-align: right;width: 230px">
-															<input class="form-control" type="text" value="<?php echo $taxamount; ?>" name="taxamount" id="tax" onChange="m1()">
+															<input class="form-control" type="text"  value="<?php echo $taxamount; ?>" name="taxamount" id="tax" onChange="m1()">
 														</td>
 													</tr>
 													<tr>
@@ -193,7 +193,7 @@
 														Net	Total
 														</td>
 														<td>
-															<input class="form-control" name="netamount" value="<?php echo $netamount; ?>" type="text" id="nettotal" onChange="m1()">
+															<input class="form-control" name="netamount"  value="<?php echo $netamount; ?>" type="text" id="nettotal" onChange="m1()">
 														</td>
 													</tr>
 													
@@ -249,19 +249,42 @@
 });	
 }
 window.onload=gethr1;
+
 </script>
 <script type="text/javascript">
 				$('#invoicedate').datetimepicker({
-					format: 'YYYY/MM/DD',
-					 ignoreReadonly: true,
-				}).val('<?php echo  ($invoicedate!='0000-00-00')  ? date('Y/m/d', strtotime($invoicedate)) : ''; ?>');;
+					 defaultDate: new Date(),
+				  	 format: 'DD/MM/YYYY',
+					 ignoreReadonly: true,					
+				}).val('<?php echo  ($invoicedate!='0000-00-00')&&($invoicedate!='')  ? date('d/m/Y', strtotime($invoicedate)) : ''; ?>');
 
 				$('#duedate').datetimepicker({
-					format: 'YYYY/MM/DD',
-					ignoreReadonly: true,
-				}).val('<?php echo  ($duedate!='0000-00-00')  ? date('Y/m/d', strtotime($duedate)) : ''; ?>');;
+					 defaultDate: new Date(),
+				  	 format: 'DD/MM/YYYY',
+					 ignoreReadonly: true,					
+				}).val('<?php echo  ($duedate!='0000-00-00')&&($duedate!='')  ? date('d/m/Y', strtotime($duedate)) : ''; ?>');
 
+				$("#txt2").on("input", function(evt) {
+				var self = $(this);
+				self.val(self.val().replace(/[^\d].+/, ""));
+				if ((evt.which < 48 || evt.which > 57)) 
+				{
+					evt.preventDefault();
+				}
+				});
 
+				
+				$("#txt3").on("input", function(evt) {
+				var self = $(this);
+				self.val(self.val().replace(/[^\d].+/, ""));
+				if ((evt.which < 48 || evt.which > 57)) 
+				{
+					evt.preventDefault();
+				}
+				});
+			
+
+				
 
 function gethr(companyid) {
 //	alert(companyid);
@@ -298,7 +321,10 @@ $(document).ready(function()
 						duedate: {
 							required: true,
 								},
-						taxpayment: {
+						amount: {
+							required: true,
+								},		
+						addtax: {
 							required: true,
 								},		
 					},
@@ -312,7 +338,10 @@ $(document).ready(function()
 						duedate: {
 							required: "Please select invoice due date",
 						},
-						taxpayment: {
+						amount: {
+							required: "Please enter amount",
+						},
+						addtax: {
 							required: "Please select payment option",
 								},
 					
@@ -322,6 +351,3 @@ $(document).ready(function()
 });					        
 </script>
 
-
-<button type="button" class="btn btn-info" onclick=$("#d").load("load-text.php");>Load Page</button>
-<div id='companyid'></div> 

@@ -28,7 +28,7 @@ class Invoice_model extends CI_Model
 
 	function list_hr()
 	{
-		$where = array('t1.isdelete' =>'0','t1.hr_type'=>'1');
+		$where = array('t1.Is_deleted' =>'0','t1.hr_type'=>'1');
 		$this->db->select('t1.*');
 		$this->db->from('tblhr as t1');
 		$this->db->where($where);
@@ -41,17 +41,30 @@ class Invoice_model extends CI_Model
 	{	
 			$companyid=$this->input->post('companyid');
 			$hr_id=$this->input->post('hr_id');
+			$paymentopt=$this->input->post('paymentopt');
+			
 			$invoicedate=$this->input->post('invoicedate');
+			$indate = str_replace('/', '-', $invoicedate );
+			$invdate = date("Y-m-d", strtotime($indate));
+
 			$duedate=$this->input->post('duedate');
+			$ddate = str_replace('/', '-', $duedate);
+			$dueedate = date("Y-m-d", strtotime($ddate));
+			
+			$amount=$this->input->post('amount');	
 			$totalamount=$this->input->post('totalamount');	
+			$addtax=$this->input->post('addtax');	
 			$taxamount=$this->input->post('taxamount');
 			$netamount=$this->input->post('netamount');
 			$data=array( 
 			'companyid'=>$companyid,
 			'hr_id'=>$hr_id,
-			'invoicedate'=>$invoicedate,
-			'duedate'=>$duedate,
+			'paymentopt'=>$paymentopt,
+			'invoicedate'=>$invdate,
+			'duedate'=>$dueedate,
+			'amount'=>$amount, 
 			'totalamount'=>$totalamount, 
+			'addtax'=>$addtax, 
 			'taxamount'=>$taxamount,
 			'netamount'=>$netamount,
 			'status'=>'Pending',
@@ -67,12 +80,19 @@ class Invoice_model extends CI_Model
 	public function update_invoice()
 	{
 		$Companyinvoiceid=$this->input->post('Companyinvoiceid');
+		$invoicedate=$this->input->post('invoicedate');
+		$indate = str_replace('/', '-', $invoicedate );
+		$invdate = date("Y-m-d", strtotime($indate));
+
+		$duedate=$this->input->post('duedate');
+		$ddate = str_replace('/', '-', $duedate);
+		$dueedate = date("Y-m-d", strtotime($ddate));
 		$data=array(
 			'companyid'=>$this->input->post('companyid'),
 			'hr_id'=>$this->input->post('hr_id'),
 			'paymentopt'=>$this->input->post('paymentopt'),
-			'invoicedate'=>$this->input->post('invoicedate'),
-			'duedate'=>$this->input->post('duedate'),
+			'invoicedate'=>$invdate,
+			'duedate'=>$dueedate,
 			'amount'=>$this->input->post('amount'),
 			'totalamount'=>$this->input->post('totalamount'),
 			'addtax'=>$this->input->post('addtax'),
@@ -119,9 +139,36 @@ class Invoice_model extends CI_Model
 		$this->db->select('*');
 		$this->db->from('tblhr');
 		$this->db->where($where);
-	//	$this->db->or_where('hr_type','1');
 		$query=$this->db->get();
 		return $query->row_array();
 	}
+
+	function search($option,$keyword)
+	{
+			$where=array('t1.isdelete'=>'0');
+			$keyword = str_replace('-', ' ', $keyword);
+			$this->db->select('t1.*,t2.*,t3.*');
+			$this->db->from('tblcompanyinvoice as t1');
+			$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
+			$this->db->join('tblhr as t3', 't1.hr_id = t3.hr_id', 'LEFT');
+			$this->db->where($where);
+				if($option == 'companyname')
+				{
+					$this->db->like('companyname',$keyword);
+				}
+				else if($option == 'status')
+				{
+					$this->db->like('status',$keyword);
+				}
+			
+			   //	$this->db->order_by('AdminId','desc');
+			    $query = $this->db->get();
+				// echo $this->db->last_query();
+				// echo "<pre>";print_r($query->result());die;
+				if($query->num_rows() > 0)
+				{
+					return $query->result();
+				}        
+		}
 
 }

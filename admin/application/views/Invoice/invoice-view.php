@@ -38,11 +38,11 @@
 					<?php
 						$AdminId=$this->session->userdata('AdminId');
 					?>
-					<div class="row">
+					<div class="row" id="tblCustomers">
 						<div class="col-md-12">
 						<div class="table-responsive">
 							<table class="display" style="width:100%">
-								<div class="card" id="tblCustomers">
+								<div class="card">
 									<div class="card-body">
 										<div class="row">
 											<div class="col-sm-6 m-b-20">

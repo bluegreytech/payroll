@@ -9,39 +9,41 @@
 			<!-- Page Wrapper -->
 
             <div class="page-wrapper">
-						<?php if(($this->session->flashdata('error'))){ ?>
-
-							<div class="alert alert-danger" id="errorMessage">
-
-							<strong> <?php echo $this->session->flashdata('error'); ?></strong> 
-
-							</div>
-
-							<?php } ?>
-
-							<?php if(($this->session->flashdata('success'))){ ?>
-
-									<div class="alert alert-success" id="successMessage">
-
-									<strong> <?php echo $this->session->flashdata('success'); ?></strong> 
-
-									</div>
-
-							<?php } ?>
-
-							<?php if(($this->session->flashdata('warnin'))){ ?>
-
-							<div class="alert alert-danger" id="warningMessage">
-
-							<strong> <?php echo $this->session->flashdata('warnin'); ?></strong> 
-
-							</div>
-
-							<?php } ?>
+						
 
 				<!-- Page Content -->
 
                 <div class="content container-fluid">
+
+				<?php if(($this->session->flashdata('error'))){ ?>
+
+					<div class="alert alert-danger" id="errorMessage">
+
+					<strong> <?php echo $this->session->flashdata('error'); ?></strong> 
+
+					</div>
+
+					<?php } ?>
+
+					<?php if(($this->session->flashdata('success'))){ ?>
+
+							<div class="alert alert-success" id="successMessage">
+
+							<strong> <?php echo $this->session->flashdata('success'); ?></strong> 
+
+							</div>
+
+					<?php } ?>
+
+					<?php if(($this->session->flashdata('warnin'))){ ?>
+
+					<div class="alert alert-danger" id="warningMessage">
+
+					<strong> <?php echo $this->session->flashdata('warnin'); ?></strong> 
+
+					</div>
+
+					<?php } ?>
 
 					<div class="row">
 
