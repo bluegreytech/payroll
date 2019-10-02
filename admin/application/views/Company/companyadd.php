@@ -90,8 +90,8 @@
 
 								<form method="post" id="form_valid" action="<?php echo base_url();?>Company/companyadd" enctype="multipart/form-data">
 								<input type="hidden" class="form-control" name="companyid" value="<?php echo $companyid;?>">
-								<input type="hidden" class="form-control" name="companycomplianceid" value="<?php echo $companycomplianceid;?>">
-								<input type="hidden" class="form-control" name="Companyshiftid" value="<?php echo $Companyshiftid;?>">
+								<input type="text" class="form-control" name="companycomplianceid" value="<?php echo $companycomplianceid;?>">
+								<input type="text" class="form-control" name="Companyshiftid" value="<?php echo $Companyshiftid;?>">
 								<input type="hidden" class="form-control" name="Bankdetailid" value="<?php echo $Bankdetailid;?>">
 
 									<div class="profile-img-wrap edit-img">
@@ -314,7 +314,9 @@
 								<?php 
 								if($Companyshiftid=='')
 								{
+									//echo 'here';
 								?>
+								
 									<fieldset  id='business'>
 									<legend>Shift 1</legend>
 										<div class="dash-widget clearfix card-box">	
@@ -411,6 +413,7 @@
 										
 										</div>
 									</fieldset> 
+								
 
 <?php
 }?>

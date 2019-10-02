@@ -773,7 +773,11 @@ class Company_model extends CI_Model
 			$Shiftouttime=$this->input->post('Shiftouttime');
 			$data3 = array();
 			$Shiftnames = count($this->input->post('Shiftname'));
-		
+
+       
+			// print_r($Shiftnames);
+			// exit;
+
 			for($i=0; $i<$Shiftnames; $i++)
 			 {
 				if($Shiftname!='' || $Shiftname!=null || $Shiftname!='0')
@@ -1027,6 +1031,8 @@ class Company_model extends CI_Model
 
 	function update_company()
 	{	
+
+
 		$companyid=$this->input->post('companyid');
 		$companycomplianceid=$this->input->post('companycomplianceid');
 		$Companyshiftid=$this->input->post('Companyshiftid');
@@ -1135,7 +1141,10 @@ class Company_model extends CI_Model
 			} 
 		
 				$data3 = array();
+				//$Shiftnames = explode(',',$this->input->post('Shiftname'));
+
 				$Shiftnames = count($this->input->post('Shiftname'));
+				
 				for($i=0; $i<$Shiftnames; $i++)
 				 {
 					 $Shifthours=$this->input->post('Shifthours');

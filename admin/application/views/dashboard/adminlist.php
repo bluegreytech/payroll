@@ -420,7 +420,11 @@
 							<div class="modal-body">
 								<form method="post" id="form_valid2" action="<?php echo base_url();?>Adminmaster/addadmin"  enctype="multipart/form-data">
 								<input type="hidden" class="form-control" name="AdminId" id="AdminId" value="<?php $AdminId?>">
+
+
 								<div class="profile-img-wrap edit-img">
+
+
 									<?php  
 
 									 //if(($ProfileImage!='' && file_exists(base_path().'/upload/hr/'.$ProfileImage))){ ?>
@@ -428,14 +432,14 @@
 									<?php
 									//}else{
 									?>
-										<img class="inline-block" src="<?php echo base_url(); ?>upload/default/avtar.jpg" alt="" id="blah">
+										<img class="inline-block" src="<?php echo base_url(); ?>upload/default/avtar.jpg" alt="" id="blah1">
 									<?php
 									//}
 									?>
 										<div class="fileupload btn">
 											<span class="btn-text">Upload</span>
 												<input type="hidden" name="pre_profile_image" class="form-control" id="pre_profile_image">
-											<input type="file" name="ProfileImage" class="upload" onchange="readURL(this);">
+											<input type="file" name="ProfileImage" class="upload" onchange="readURL1(this);">
 										</div>
 									</div>
 
@@ -1143,6 +1147,7 @@ function editadmin(AdminId)
 		 data:{id:AdminId},
          success:function(response){
 			var response = JSON.parse(response);
+          //console.log(response);
                console.log(response.AdminId);
 			   console.log(response.ProfileImage);
             $('#AdminId').val(response.AdminId);
@@ -1163,9 +1168,10 @@ function editadmin(AdminId)
 			$("input[name=IsActive][value=" + response.IsActive + "]").attr('checked', 'checked');
 
 			if(response.ProfileImage!=''){
-				$('#blah').attr('src', url+'upload/admin/'+response.ProfileImage);
-			   }else{
-				 $('#blah').attr('src', url+'upload/default/avtar.jpg');
+				$('#blah1').attr('src', Url+'upload/admin/'+response.ProfileImage);
+				$('#pre_profile_image').val(response.ProfileImage);
+			   }else if(response.ProfileImage == ''){
+				 $('#blah1').attr('src', Url+'upload/default/avtar.jpg');
 			   }
 
          }
@@ -1208,7 +1214,16 @@ function readURL(input) {
              reader.readAsDataURL(input.files[0]);
             }
         }
-
+function readURL1(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#blah1').css('display', 'block');
+                    $('#blah1').attr('src', e.target.result);
+                };
+             reader.readAsDataURL(input.files[0]);
+            }
+        }
 function statusdata(id,status){  
   
     $('#status_approve').modal('show');
