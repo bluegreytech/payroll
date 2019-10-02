@@ -426,10 +426,14 @@ class Adminmaster_model extends CI_Model
 				}
 			}
 			//print_r($user_image);die;
+
+			$DateofBirth=$this->input->post('DateofBirth');
+			$bdate = str_replace('/', '-', $DateofBirth );
+			$birth = date("Y-m-d", strtotime($bdate));
 		$data=array(
 			'FirstName'=>$this->input->post('FirstName'),
 			'LastName'=>$this->input->post('LastName'),
-			'DateofBirth'=>$this->input->post('DateofBirth'),
+			'DateofBirth'=>$birth,
 			'PhoneNumber'=>$this->input->post('PhoneNumber'),
 			'Gender'=>$this->input->post('Gender'),
 		    'ProfileImage'=>$user_image,
