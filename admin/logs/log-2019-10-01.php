@@ -203,3 +203,116 @@ ERROR - 2019-10-01 10:44:44 --> 404 Page Not Found: Upload/hr
 ERROR - 2019-10-01 10:44:44 --> 404 Page Not Found: Upload/hr
 ERROR - 2019-10-01 10:44:44 --> 404 Page Not Found: Upload/hr
 ERROR - 2019-10-01 10:44:44 --> 404 Page Not Found: Upload/hr
+ERROR - 2019-10-01 11:12:22 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-01 11:12:22 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-01 11:12:22 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-01 11:12:22 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-10-01 11:16:53 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-01 11:16:53 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-10-01 11:16:53 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-01 11:16:53 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-01 11:17:49 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-01 11:17:50 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-01 11:17:50 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-01 11:17:50 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-10-01 11:18:03 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-01 11:18:03 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-01 11:18:03 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-01 11:18:03 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-10-01 11:27:06 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-01 11:27:06 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-10-01 11:27:06 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-01 11:27:07 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-01 11:29:20 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-01 11:29:20 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-01 11:29:20 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-10-01 11:29:20 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-01 11:30:28 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-01 11:30:28 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-10-01 11:30:28 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-01 11:30:28 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-01 11:34:32 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-01 11:34:32 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-01 11:34:32 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-10-01 11:34:32 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-01 11:34:52 --> 404 Page Not Found: Upload/admin
+ERROR - 2019-10-01 11:35:00 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-01 11:35:00 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-01 11:35:00 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-10-01 11:35:00 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-01 11:35:19 --> 404 Page Not Found: Upload/admin
+ERROR - 2019-10-01 11:35:58 --> 404 Page Not Found: Upload/admin
+ERROR - 2019-10-01 11:36:01 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-01 11:36:01 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-01 11:36:01 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-01 11:36:01 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-10-01 11:36:57 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-01 11:36:57 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-01 11:36:57 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-10-01 11:36:57 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-01 11:37:00 --> 404 Page Not Found: Upload/admin
+ERROR - 2019-10-01 11:37:22 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-01 11:37:22 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-01 11:37:22 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-01 11:37:22 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-10-01 11:37:25 --> 404 Page Not Found: Upload/admin
+ERROR - 2019-10-01 11:37:36 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-01 11:37:37 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-01 11:37:37 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-10-01 11:37:37 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-01 11:37:39 --> 404 Page Not Found: Upload/admin
+ERROR - 2019-10-01 11:38:33 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-01 11:38:33 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-10-01 11:38:33 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-01 11:38:33 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-01 11:38:35 --> 404 Page Not Found: Upload/admin
+ERROR - 2019-10-01 11:38:48 --> 404 Page Not Found: Upload/admin
+ERROR - 2019-10-01 11:39:37 --> 404 Page Not Found: Upload/admin
+ERROR - 2019-10-01 11:45:28 --> Severity: Notice --> Uninitialized string offset: 0 C:\xampp\htdocs\payroll\admin\application\models\Company_model.php 1142
+ERROR - 2019-10-01 11:45:28 --> Severity: Notice --> Uninitialized string offset: 0 C:\xampp\htdocs\payroll\admin\application\models\Company_model.php 1150
+ERROR - 2019-10-01 11:45:28 --> Severity: Notice --> Uninitialized string offset: 1 C:\xampp\htdocs\payroll\admin\application\models\Company_model.php 1142
+ERROR - 2019-10-01 11:45:28 --> Severity: Notice --> Uninitialized string offset: 1 C:\xampp\htdocs\payroll\admin\application\models\Company_model.php 1150
+ERROR - 2019-10-01 11:45:28 --> Severity: Notice --> Uninitialized string offset: 2 C:\xampp\htdocs\payroll\admin\application\models\Company_model.php 1142
+ERROR - 2019-10-01 11:45:28 --> Severity: Notice --> Uninitialized string offset: 2 C:\xampp\htdocs\payroll\admin\application\models\Company_model.php 1150
+ERROR - 2019-10-01 11:45:28 --> Severity: Warning --> Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\payroll\admin\system\core\Exceptions.php:271) C:\xampp\htdocs\payroll\admin\system\helpers\url_helper.php 564
+ERROR - 2019-10-01 11:47:44 --> Severity: Notice --> Uninitialized string offset: 0 C:\xampp\htdocs\payroll\admin\application\models\Company_model.php 1142
+ERROR - 2019-10-01 11:47:44 --> Severity: Notice --> Uninitialized string offset: 0 C:\xampp\htdocs\payroll\admin\application\models\Company_model.php 1150
+ERROR - 2019-10-01 11:47:44 --> Severity: Notice --> Uninitialized string offset: 1 C:\xampp\htdocs\payroll\admin\application\models\Company_model.php 1142
+ERROR - 2019-10-01 11:47:44 --> Severity: Notice --> Uninitialized string offset: 1 C:\xampp\htdocs\payroll\admin\application\models\Company_model.php 1150
+ERROR - 2019-10-01 11:47:44 --> Severity: Notice --> Uninitialized string offset: 2 C:\xampp\htdocs\payroll\admin\application\models\Company_model.php 1142
+ERROR - 2019-10-01 11:47:44 --> Severity: Notice --> Uninitialized string offset: 2 C:\xampp\htdocs\payroll\admin\application\models\Company_model.php 1150
+ERROR - 2019-10-01 11:47:44 --> Severity: Warning --> Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\payroll\admin\system\core\Exceptions.php:271) C:\xampp\htdocs\payroll\admin\system\helpers\url_helper.php 564
+ERROR - 2019-10-01 11:48:27 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-01 11:48:27 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-10-01 11:48:27 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-01 11:48:27 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-01 11:49:40 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-01 11:49:40 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-10-01 11:49:40 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-01 11:49:40 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-01 11:55:11 --> Severity: Notice --> Uninitialized string offset: 0 C:\xampp\htdocs\payroll\admin\application\models\Company_model.php 1142
+ERROR - 2019-10-01 11:55:11 --> Severity: Notice --> Uninitialized string offset: 0 C:\xampp\htdocs\payroll\admin\application\models\Company_model.php 1150
+ERROR - 2019-10-01 11:55:11 --> Severity: Notice --> Uninitialized string offset: 1 C:\xampp\htdocs\payroll\admin\application\models\Company_model.php 1142
+ERROR - 2019-10-01 11:55:11 --> Severity: Notice --> Uninitialized string offset: 1 C:\xampp\htdocs\payroll\admin\application\models\Company_model.php 1150
+ERROR - 2019-10-01 11:55:11 --> Severity: Notice --> Uninitialized string offset: 2 C:\xampp\htdocs\payroll\admin\application\models\Company_model.php 1142
+ERROR - 2019-10-01 11:55:11 --> Severity: Notice --> Uninitialized string offset: 2 C:\xampp\htdocs\payroll\admin\application\models\Company_model.php 1150
+ERROR - 2019-10-01 11:55:11 --> Severity: Warning --> Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\payroll\admin\system\core\Exceptions.php:271) C:\xampp\htdocs\payroll\admin\system\helpers\url_helper.php 564
+ERROR - 2019-10-01 11:55:47 --> 404 Page Not Found: Upload/hr
+ERROR - 2019-10-01 11:55:47 --> 404 Page Not Found: Upload/hr
+ERROR - 2019-10-01 11:55:47 --> 404 Page Not Found: Upload/hr
+ERROR - 2019-10-01 11:55:47 --> 404 Page Not Found: Upload/hr
+ERROR - 2019-10-01 11:56:03 --> 404 Page Not Found: Upload/hr
+ERROR - 2019-10-01 11:56:03 --> 404 Page Not Found: Upload/hr
+ERROR - 2019-10-01 11:56:03 --> 404 Page Not Found: Upload/hr
+ERROR - 2019-10-01 11:56:03 --> 404 Page Not Found: Upload/hr
+ERROR - 2019-10-01 11:57:16 --> 404 Page Not Found: Upload/hr
+ERROR - 2019-10-01 11:57:16 --> 404 Page Not Found: Upload/hr
+ERROR - 2019-10-01 11:57:16 --> 404 Page Not Found: Upload/hr
+ERROR - 2019-10-01 11:57:16 --> 404 Page Not Found: Upload/hr
+ERROR - 2019-10-01 12:12:58 --> Severity: Warning --> explode() expects parameter 2 to be string, array given C:\xampp\htdocs\payroll\admin\application\models\Company_model.php 1136
+ERROR - 2019-10-01 12:20:02 --> Severity: Warning --> explode() expects parameter 2 to be string, array given C:\xampp\htdocs\payroll\admin\application\models\Company_model.php 1136
+ERROR - 2019-10-01 12:27:11 --> Severity: Warning --> explode() expects parameter 2 to be string, array given C:\xampp\htdocs\payroll\admin\application\models\Company_model.php 1136
+ERROR - 2019-10-01 12:40:25 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-01 12:40:25 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-10-01 12:40:25 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-01 12:40:25 --> 404 Page Not Found: Default/js
