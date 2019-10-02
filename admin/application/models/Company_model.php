@@ -772,11 +772,10 @@ class Company_model extends CI_Model
 			$Shiftintime=$this->input->post('Shiftintime');
 			$Shiftouttime=$this->input->post('Shiftouttime');
 			$data3 = array();
-			$Shiftnames = count($this->input->post('Shiftname'));
-
+			//$Shiftnames = count($this->input->post('Shiftname'));
+                   $Shiftnames = count(array_filter($this->input->post('Shiftname')));
        
-			// print_r($Shiftnames);
-			// exit;
+			
 
 			for($i=0; $i<$Shiftnames; $i++)
 			 {
@@ -789,11 +788,11 @@ class Company_model extends CI_Model
 					'Shiftintime'=>isset($Shiftintime[$i]) ? $Shiftintime[$i] : '0',
 					'Shiftouttime'=>isset($Shiftouttime[$i]) ? $Shiftouttime[$i] : '0',
 					);
-					 echo "<pre>";print_r($data3);
-					//$this->db->insert('tblcompanyshift',$data3);	
+					 //echo "<pre>";print_r($data3);
+					$this->db->insert('tblcompanyshift',$data3);	
 				}
 			 }	
-				die;								 	
+												 	
 				
 				
 				$complianceid=implode(',',$this->input->post('complianceid'));
@@ -1143,8 +1142,8 @@ class Company_model extends CI_Model
 				$data3 = array();
 				//$Shiftnames = explode(',',$this->input->post('Shiftname'));
 
-				$Shiftnames = count($this->input->post('Shiftname'));
-				
+				//$Shiftnames = count($this->input->post('Shiftname'));
+				 $Shiftnames = count(array_filter($this->input->post('Shiftname')));
 				for($i=0; $i<$Shiftnames; $i++)
 				 {
 					 $Shifthours=$this->input->post('Shifthours');
