@@ -1611,25 +1611,13 @@ $(document).ready(function()
 
 
 				$("#form_valid").validate(
-
-
-
 				{
-
-
-
 					rules: {
-
-
-
-						FirstName: {
-
-
-
+						ProfileImage: {
 							required: true,
-
-
-
+								},
+						FirstName: {
+							required: true,
 								},
 
 
@@ -1752,13 +1740,16 @@ $(document).ready(function()
 
 						messages:{		
 
-
-
+							
+						ProfileImage: {
+								required: "Please upload a file type only jpg,jpeg,png,bit",
+									
+									},
 						FirstName: {
 
 
 
-							required: "Please enter a first name",
+								required: "Please enter a first name",
 
 
 
