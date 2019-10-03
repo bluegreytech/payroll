@@ -30,6 +30,7 @@
 									<li><a href="<?php echo base_url();?>company/Sendnotification"><span>Send Notification</span></a></li>
 									<li><a href="<?php echo base_url();?>invoice">Invoice Report </a></li>
 									<li><a href="<?php echo base_url();?>leave/leavelist">Leave Type</a></li>
+									
 								</ul>
 							</li>
 
