@@ -659,3 +659,4 @@ ERROR - 2019-10-03 05:52:16 --> Severity: Warning --> Use of undefined constant 
 ERROR - 2019-10-03 05:52:17 --> 404 Page Not Found: Upload/company
 ERROR - 2019-10-03 08:21:09 --> 404 Page Not Found: Assets/img
 ERROR - 2019-10-03 08:21:10 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 70
+ERROR - 2019-10-03 08:39:22 --> 404 Page Not Found: Assets/img

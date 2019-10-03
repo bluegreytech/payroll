@@ -48,9 +48,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 */
 //echo getcwd();die;
-$config['base_url'] = 'http://payroll.bluegreytech.co.in/admin/';
-$config['base_url_site'] = 'http://payroll.bluegreytech.co.in/admin/';
-$config['base_path']="/home/et635dt5xqj1/public_html/payroll.bluegreytech.co.in/admin";
+$config['base_url'] = 'http://localhost/payroll/admin/';
+$config['base_url_site'] = 'http://localhost/payroll/admin/';
+$config['base_path']="C:/xampp/htdocs/payroll/admin";
+//$config['base_path']="/home/et635dt5xqj1/public_html/payroll.bluegreytech.co.in/admin";
 
 //echo base_url();
 

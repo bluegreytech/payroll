@@ -729,10 +729,8 @@ class Hr_model extends CI_Model
 
    
 
-			$config['file_name'] = $rand.'Admin';			
-
+			$config['file_name'] = $rand.'Hr';			
 			$config['upload_path'] = base_path().'upload/hr_orig/';		
-
 			$config['allowed_types'] = 'jpg|jpeg|gif|png|bmp';  
 
  

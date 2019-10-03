@@ -2606,7 +2606,7 @@ function edithrs(hr_id)
 
 			if(response.ProfileImage!=''){
 
-				$('#blah').attr('src', url+'upload/hr/'+response.ProfileImage);
+				$('#blah').attr('src', 'http://localhost/hr/upload/hr/'+response.ProfileImage);
 
 			   }else{
 
