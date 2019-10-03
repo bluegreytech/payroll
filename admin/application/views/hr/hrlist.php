@@ -372,7 +372,7 @@
 
 													?>
 
-													<a href="<?php echo base_url();?>Hr/profile/<?php echo $hr->hr_id;?>" title="show hr profile" class="avatar"><img src="http://payroll.bluegreytech.co.in/hr/upload/hr/<?php echo $hr->ProfileImage;?>" ></a>
+													<a href="<?php echo base_url();?>Hr/profile/<?php echo $hr->hr_id;?>" title="show hr profile" class="avatar"><img src="http://localhost/payroll/hr/upload/hr/<?php echo $hr->ProfileImage;?>" ></a>
 
 													<a href="<?php echo base_url();?>Hr/profile/<?php echo $hr->hr_id;?>" title="show hr profile"><?php echo $hr->FullName;?> 
 
@@ -964,7 +964,7 @@
 
 									?>
 
-										<img class="inline-block" src="<?php echo base_url(); ?>upload/default/avtar.jpg" alt="" id="blah">
+										<img class="inline-block" src="<?php echo base_url(); ?>upload/default/avtar.jpg" alt="" id="blah1">
 
 									<?php
 
@@ -978,7 +978,7 @@
 
 												<input type="hidden" name="pre_profile_image" class="form-control" id="pre_profile_image">
 
-											<input type="file" name="ProfileImage" class="upload" onchange="readURL(this);">
+											<input type="file" name="ProfileImage" class="upload" onchange="readURL1(this);">
 
 										</div>
 
@@ -1714,7 +1714,25 @@ function readURL(input) {
 
         }
 
+function readURL1(input) {
 
+            if (input.files && input.files[0]) {
+
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+
+                    $('#blah1').css('display', 'block');
+
+                    $('#blah1').attr('src', e.target.result);
+
+                };
+
+             reader.readAsDataURL(input.files[0]);
+
+            }
+
+        }
 
 $(document).ready(function()
 
@@ -2605,12 +2623,14 @@ function edithrs(hr_id)
 			$("option[id=companyid][value=" + response.companyid=='#companyid' + "]").attr('selected', 'selected');
 
 			if(response.ProfileImage!=''){
-
-				$('#blah').attr('src', 'http://localhost/hr/upload/hr/'+response.ProfileImage);
+              
+$('#blah1').attr('src', 'http://localhost/payroll/hr/upload/hr/'+response.ProfileImage);
+				$('#pre_profile_image').val(response.ProfileImage);
+				
 
 			   }else{
 
-				 $('#blah').attr('src', url+'upload/default/avtar.jpg');
+				 $('#blah1').attr('src', Url+'upload/default/avtar.jpg');
 
 			   }	
 
