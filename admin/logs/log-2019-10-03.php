@@ -660,3 +660,12 @@ ERROR - 2019-10-03 05:52:17 --> 404 Page Not Found: Upload/company
 ERROR - 2019-10-03 08:21:09 --> 404 Page Not Found: Assets/img
 ERROR - 2019-10-03 08:21:10 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 70
 ERROR - 2019-10-03 08:39:22 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-03 08:41:24 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 70
+ERROR - 2019-10-03 08:41:25 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-03 08:41:25 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-03 08:41:25 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-03 08:41:25 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-03 09:10:41 --> Severity: error --> Exception: Too few arguments to function Invoice::getedithr(), 0 passed in C:\xampp\htdocs\payroll\admin\system\core\CodeIgniter.php on line 1063 and exactly 1 expected C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 241
+ERROR - 2019-10-03 09:10:46 --> Severity: error --> Exception: Too few arguments to function Invoice::getedithr(), 0 passed in C:\xampp\htdocs\payroll\admin\system\core\CodeIgniter.php on line 1063 and exactly 1 expected C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 241
+ERROR - 2019-10-03 09:17:01 --> Severity: error --> Exception: Too few arguments to function Invoice::getedithr(), 0 passed in C:\xampp\htdocs\payroll\admin\system\core\CodeIgniter.php on line 1063 and exactly 1 expected C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 241
+ERROR - 2019-10-03 09:17:13 --> Severity: error --> Exception: Too few arguments to function Invoice::getedithr(), 0 passed in C:\xampp\htdocs\payroll\admin\system\core\CodeIgniter.php on line 1063 and exactly 1 expected C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 241

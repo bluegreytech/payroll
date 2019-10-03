@@ -349,21 +349,9 @@
 														</td>
 
 														<td>
-															<?php 
-															if($Companyinvoiceid!='')
-															{	
-															?>
 
-															<input class="form-control"  name="totalamount" value="<?php echo $totalamount; ?>"  type="text" id="total" onChange="m1()" readOnly>
+															<input class="form-control"  name="totalamount" value="<?php echo $totalamount; ?>"  type="text" id="total" onChange="m1()">
 
-															<?php
-															}
-															else{
-																?>
-																<input class="form-control"  name="totalamount"   type="text" id="total" onChange="m1()" readOnly>
-																<?php
-															}
-															?>
 														</td>
 
 													</tr>
@@ -384,7 +372,7 @@
 
 														<td style="text-align: right;width: 230px">
 
-															<input class="form-control" type="text"  value="<?php echo $taxamount; ?>" name="taxamount" id="tax" onChange="m1()" readOnly>
+															<input class="form-control" type="text"  value="<?php echo $taxamount; ?>" name="taxamount" id="tax" onChange="m1()">
 
 														</td>
 
@@ -400,7 +388,7 @@
 
 														<td>
 
-															<input class="form-control" name="netamount"  value="<?php echo $netamount; ?>" type="text" id="nettotal" onChange="m1()" readOnly>
+															<input class="form-control" name="netamount"  value="<?php echo $netamount; ?>" type="text" id="nettotal" onChange="m1()">
 
 														</td>
 
@@ -563,12 +551,19 @@ window.onload=gethr1;
 				
 
 				$("#txt3").on("input", function(evt) {
+
 				var self = $(this);
-				self.val(self.val().replace(/[^\d].[^\d]+/, ""));
+
+				self.val(self.val().replace(/[^\d].+/, ""));
+
 				if ((evt.which < 48 || evt.which > 57)) 
+
 				{
+
 					evt.preventDefault();
+
 				}
+
 				});
 
 			
