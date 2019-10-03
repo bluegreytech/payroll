@@ -51,6 +51,7 @@
 								<a href="<?php echo base_url();?>Dashboard"><i class="fa fa-users" aria-hidden="true"></i><span>Employees</span> <span class="menu-arrow"></span></a>
 								<ul style="display: none;">
 								<li><a href="<?php echo base_url();?>employee">List of Employees</a></li>
+								<li><a href="<?php echo base_url();?>Attendance">Employee Attendance</a></li>
 								<!-- <li><a href="<?php //echo base_url();?>employeesalary">Employee Salary </a></li> -->
 								</ul>
 							</li>
