@@ -59,10 +59,14 @@
 										</div>
 								
 										<div class="col-md-6">
+												
+
 												<div class="form-group">
-													<label class="col-form-label">Notification End Date<span class="text-danger">*</span></label>
-													<input class="form-control" id="Enddate" name="Enddate"  type="text" 
-													 readonly>
+													<label>Notification End Date <span class="text-danger">*</span></label>
+													<div class="cal-icon">
+														<input  class="form-control datetimepicker" type="text" id="Enddate" name="Enddate"
+														 readonly>
+													</div>
 												</div>
 											</div>
 										<div class="col-md-6">	
@@ -122,10 +126,13 @@
 </html>
 
 <script type="text/javascript">
+							
 				$('#Enddate').datetimepicker({
-					 format: 'YYYY/MM/DD',
-					 ignoreReadonly: true,
-				});			
+					 defaultDate: new Date(),
+				  	 format: 'DD/MM/YYYY',
+					 ignoreReadonly: true,					
+				});
+
 </script>
 
 <script>

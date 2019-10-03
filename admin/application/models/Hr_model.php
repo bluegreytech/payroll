@@ -95,6 +95,9 @@ class Hr_model extends CI_Model
 			$FullName=$this->input->post('FullName');
 			$EmailAddress=$this->input->post('EmailAddress');
 			$DateofBirth=$this->input->post('DateofBirth');
+			$bdate = str_replace('/', '-', $DateofBirth );
+			$birth = date("Y-m-d", strtotime($bdate));
+
 			$Contact=$this->input->post('Contact');
 			$Gender=$this->input->post('Gender');
 			$Address=$this->input->post('Address');
@@ -111,7 +114,7 @@ class Hr_model extends CI_Model
 			'Address'=>$Address,
 			'ProfileImage'=>$hr_image,
 			'Contact'=>$Contact,
-			'DateofBirth'=>$DateofBirth, 
+			'DateofBirth'=>$birth, 
 			'City'=>$City,
 			'PinCode'=>$PinCode,
 			'Gender'=>$Gender,
@@ -463,12 +466,16 @@ class Hr_model extends CI_Model
 				}
 			}
 
+			$DateofBirth=$this->input->post('DateofBirth');
+			$bdate = str_replace('/', '-', $DateofBirth );
+			$birth = date("Y-m-d", strtotime($bdate));
+
 		$data=array(
 			'hr_id'=>$this->input->post('hr_id'),
 			'companyid'=>$this->input->post('companyid'),
 			'FullName'=>$this->input->post('FullName'),
 			'EmailAddress'=>$this->input->post('EmailAddress'),
-			'DateofBirth'=>$this->input->post('DateofBirth'),
+			'DateofBirth'=>$birth, 
 			'Contact'=>$this->input->post('Contact'),
 			'ProfileImage'=>$hr_image,
 			'Gender'=>$this->input->post('Gender'),

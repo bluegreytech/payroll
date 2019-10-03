@@ -98,6 +98,9 @@ class Adminmaster_model extends CI_Model
 			$LastName=$this->input->post('LastName');
 			$EmailAddress=$this->input->post('EmailAddress');
 			$DateofBirth=$this->input->post('DateofBirth');
+			$bdate = str_replace('/', '-', $DateofBirth );
+			$birth = date("Y-m-d", strtotime($bdate));
+
 			$PhoneNumber=$this->input->post('PhoneNumber');
 			$Gender=$this->input->post('Gender');
 			$Address=$this->input->post('Address');
@@ -108,7 +111,7 @@ class Adminmaster_model extends CI_Model
 			'FirstName'=>$FirstName,
 			'LastName'=>$LastName,
 			'EmailAddress'=>$EmailAddress, 
-			'DateofBirth'=>$DateofBirth, 
+			'DateofBirth'=>$birth, 
 			'Password'=>md5($code),
 			'PhoneNumber'=>$PhoneNumber,
 			'ProfileImage'=> $ProfileImage,
@@ -322,13 +325,16 @@ class Adminmaster_model extends CI_Model
 			   }
 		   }
 
+		   $DateofBirth=$this->input->post('DateofBirth');
+		   $bdate = str_replace('/', '-', $DateofBirth );
+		   $birth = date("Y-m-d", strtotime($bdate));
 		$data=array(
 			'AdminId'=>$this->input->post('AdminId'),
 			'RoleId'=>$this->input->post('RoleId'),
 			'FirstName'=>$this->input->post('FirstName'),
 			'LastName'=>$this->input->post('LastName'),
 			'EmailAddress'=>$this->input->post('EmailAddress'),
-			'DateofBirth'=>$this->input->post('DateofBirth'),
+			'DateofBirth'=>$birth,
 			'PhoneNumber'=>$this->input->post('PhoneNumber'),
 			'ProfileImage'=>$user_image,
 			'Gender'=>$this->input->post('Gender'),
@@ -420,10 +426,14 @@ class Adminmaster_model extends CI_Model
 				}
 			}
 			//print_r($user_image);die;
+
+			$DateofBirth=$this->input->post('DateofBirth');
+			$bdate = str_replace('/', '-', $DateofBirth );
+			$birth = date("Y-m-d", strtotime($bdate));
 		$data=array(
 			'FirstName'=>$this->input->post('FirstName'),
 			'LastName'=>$this->input->post('LastName'),
-			'DateofBirth'=>$this->input->post('DateofBirth'),
+			'DateofBirth'=>$birth,
 			'PhoneNumber'=>$this->input->post('PhoneNumber'),
 			'Gender'=>$this->input->post('Gender'),
 		    'ProfileImage'=>$user_image,

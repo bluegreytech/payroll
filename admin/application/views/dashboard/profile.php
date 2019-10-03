@@ -514,8 +514,7 @@
 <script type="text/javascript">
 
 				$('#DateofBirth').datetimepicker({
-				  	// format: 'DD/MM/YYYY',
-					 format: 'YYYY/MM/DD',
+				  	 format: 'DD/MM/YYYY',
 					 maxDate: moment(),
 					 ignoreReadonly: true,
 				}).val('<?php echo  ($DateofBirth!='0000-00-00')  ? date('d/m/Y', strtotime($DateofBirth)) : ''; ?>');

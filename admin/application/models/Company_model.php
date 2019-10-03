@@ -6,18 +6,18 @@ class Company_model extends CI_Model
 {
 	function get_docfile()
 	{	
-		// $insert_id='1';
-		// 	$this->db->select('t1.*,t2.*');
-		// 	$this->db->from('tblcompanynotification as t1');
-		// 	$this->db->join('tblcomnotdocument as t2', 't1.Companynotificationid = t2.Companynotificationid', 'LEFT');
-		// 	$this->db->where('t1.Companynotificationid',$insert_id);
-		// 	$smtp2 = $this->db->get();	
-		// 	foreach($smtp2->result() as $rows) {
+		$insert_id='1';
+			$this->db->select('t1.*,t2.*');
+			$this->db->from('tblcompanynotification as t1');
+			$this->db->join('tblcomnotdocument as t2', 't1.Companynotificationid = t2.Companynotificationid', 'LEFT');
+			$this->db->where('t1.Companynotificationid',3);
+			$smtp2 = $this->db->get();	
+			foreach($smtp2->result() as $rows) {
 		
-		// 	echo	$Documentfile = $rows->Documentfile;
+			echo	$Documentfile = $rows->Documentfile;
 				
-		// 	}
-		// 	die;
+			}
+			//die;
 
 		
 		
@@ -64,9 +64,12 @@ class Company_model extends CI_Model
 	{
 		$companyid=implode(',',$this->input->post('companyid'));	
 		$Enddate=$this->input->post('Enddate');
+
+		$bdate = str_replace('/', '-', $Enddate );
+		$birth = date("Y-m-d", strtotime($bdate));
 		$data=array( 
 		'companyid'=>$companyid,
-		'Enddate'=>$Enddate,
+		'Enddate'=>$birth,
 		'Isactive'=>'Active',
 		'Createdby'=>1,
 		'Createdon'=>date("Y-m-d h:i:s")
@@ -171,7 +174,7 @@ class Company_model extends CI_Model
 
 			
 				
-				$email_message='hiiiiiiii testing';
+				$email_message=$Notificationdescription;
 				$str=$email_message; 
 				$config['protocol']='smtp';
 				$config['smtp_host']='ssl://smtp.googlemail.com';
@@ -188,10 +191,10 @@ class Company_model extends CI_Model
 				$this->email->subject('Important notification to company');
 				$this->email->message($body);
 				$this->db->select('t1.*,t2.*,t3.*');
-				$this->db->from('tblcompany as t1');
-				$this->db->join('tblcompanynotification as t2', 't1.companyid = t2.companyid', 'LEFT');
-				$this->db->join('tblcomnotdocument as t3', 't2.Companynotificationid = t3.Companynotificationid', 'LEFT');
-				$this->db->where('t1.companyid',$insert_id);
+				$this->db->from('tblcompanynotification as t1');
+				$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
+				$this->db->join('tblcomnotdocument as t3', 't1.Companynotificationid = t3.Companynotificationid', 'LEFT');
+				$this->db->where('t1.Companynotificationid',$insert_id);
 				$smtp3 = $this->db->get();	
 				
 				foreach($smtp3->result() as $rows) {
