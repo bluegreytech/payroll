@@ -602,3 +602,17 @@ ERROR - 2019-10-04 08:10:12 --> Severity: Warning --> Use of undefined constant 
 ERROR - 2019-10-04 08:10:15 --> Severity: Warning --> Use of undefined constant ACTIVE - assumed 'ACTIVE' (this will throw an Error in a future version of PHP) C:\xampp\htdocs\payroll\admin\application\controllers\Company.php 1103
 ERROR - 2019-10-04 08:10:49 --> Severity: Notice --> Undefined variable: attmonth C:\xampp\htdocs\payroll\admin\application\views\Attendance\attendance.php 46
 ERROR - 2019-10-04 08:10:54 --> Severity: Notice --> Undefined variable: attmonth C:\xampp\htdocs\payroll\admin\application\views\Attendance\attendance.php 46
+ERROR - 2019-10-04 09:12:23 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 70
+ERROR - 2019-10-04 09:12:24 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-04 09:12:24 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-04 09:12:24 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-04 09:12:24 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-04 09:13:48 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 70
+ERROR - 2019-10-04 09:13:48 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-04 09:13:48 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-04 09:13:48 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-04 09:13:48 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-04 09:14:08 --> Severity: Warning --> Use of undefined constant ACTIVE - assumed 'ACTIVE' (this will throw an Error in a future version of PHP) C:\xampp\htdocs\payroll\admin\application\controllers\Company.php 1087
+ERROR - 2019-10-04 09:14:10 --> Severity: Warning --> Use of undefined constant ACTIVE - assumed 'ACTIVE' (this will throw an Error in a future version of PHP) C:\xampp\htdocs\payroll\admin\application\controllers\Company.php 1103
+ERROR - 2019-10-04 09:14:19 --> Severity: Warning --> Use of undefined constant ACTIVE - assumed 'ACTIVE' (this will throw an Error in a future version of PHP) C:\xampp\htdocs\payroll\admin\application\controllers\Hr.php 431
+ERROR - 2019-10-04 09:14:22 --> Severity: Warning --> Use of undefined constant ACTIVE - assumed 'ACTIVE' (this will throw an Error in a future version of PHP) C:\xampp\htdocs\payroll\admin\application\controllers\Hr.php 447
