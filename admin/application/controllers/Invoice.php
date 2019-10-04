@@ -31,15 +31,23 @@ class Invoice extends CI_Controller
 		}
 
 		if($_POST!='')
-		{	print_r($_POST);
+		{	
 			$option=$this->input->post('option');
-			$keyword=$this->input->post('keyword2');	
-			$data['invoiceData'] = $this->Invoice_model->search($option,$keyword);
-		}	
-		else
-		{
-			$data['invoiceData']=$this->Invoice_model->list_companyinvoice();
-		}
+			$keyword=$this->input->post('keyword');
+			$keyword3=$this->input->post('keyword3');
+			echo $keyword3;
+			if($option!='' && $option!='$keyword3')
+			{
+				$data['invoiceData'] = $this->Invoice_model->searchbystatus($option,$keyword3);
+			}
+			else if($option!='' && $option!='$keyword')
+			{
+				$data['invoiceData'] = $this->Invoice_model->search($option,$keyword);
+			}	
+			else
+			{
+				$data['invoiceData']=$this->Invoice_model->list_companyinvoice();
+			}
 		$data['companyData'] = $this->Invoice_model->list_company();
 
 			//echo "<pre>";	print_r($data['invoiceData']);die;
@@ -47,7 +55,7 @@ class Invoice extends CI_Controller
 
 	}
 
-
+}
 
 
 

@@ -198,7 +198,7 @@
 
 												<option value="status">Paymeny Status</option>
 
-												<option value="invoicedate">Date From to To</option>
+												<!-- <option value="invoicedate">Date From to To</option> -->
 
 													<!-- <option value="phone">Contact Number</option>
 
@@ -218,7 +218,7 @@
 
 										<div class="form-group form-focus box" id='business'>
 
-											<input type="text" name="keyword2" class="form-control floating">
+											<input type="text" name="keyword3" class="form-control floating">
 
 											<label class="focus-label">Search</label>
 
@@ -262,7 +262,7 @@
 
 										
 
-										<div class="form-group form-focus" id='business3' style="display: none;">
+										<!-- <div class="form-group form-focus" id='business3' style="display: none;">
 
 											<div class="cal-icon">
 
@@ -273,7 +273,7 @@
 											<label class="focus-label">From</label>
 
 										</div>
-
+ -->
 								
 
 										<!-- <div class="form-group form-focus" id='business4' style="display: none;">

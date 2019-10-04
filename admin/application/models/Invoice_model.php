@@ -263,6 +263,8 @@ class Invoice_model extends CI_Model
 
 	function search($option,$keyword)
 	{
+		print_r($_POST);
+		
 			$where=array('t1.isdelete'=>'0');
 			//$where=array('t1.status'=>'Paid');
 			$keyword = str_replace('-', ' ', $keyword);
@@ -275,14 +277,14 @@ class Invoice_model extends CI_Model
 				{
 					$this->db->like('companyname',$keyword);
 				}
-				else if($option == 'status')
-				{
-					$this->db->like('status',$keyword);
-				}
-				else if($option == 'invoicedate')
-				{
-					$this->db->like('invoicedate',$keyword);
-				}
+				 else if($option == 'status')
+				 {
+				 	$this->db->like('status',$keyword);
+				 }
+				// else if($option == 'invoicedate')
+				// {
+				// 	$this->db->like('invoicedate',$keyword);
+				// }
 				
 
 			
@@ -295,7 +297,42 @@ class Invoice_model extends CI_Model
 				}        
 
 		}
+function searchbystatus($option,$keyword)
+	{
+		print_r($_POST);
+		
+			$where=array('t1.isdelete'=>'0');
+			//$where=array('t1.status'=>'Paid');
+			$keyword = str_replace('-', ' ', $keyword);
+			$this->db->select('t1.*,t2.*,t3.*');
+			$this->db->from('tblcompanyinvoice as t1');
+			$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
+			$this->db->join('tblhr as t3', 't1.hr_id = t3.hr_id', 'LEFT');
+			$this->db->where($where);
+				if($option == 'companyname')
+				{
+					$this->db->like('companyname',$keyword);
+				}
+				 else if($option == 'status')
+				 {
+				 	$this->db->like('status',$keyword);
+				 }
+				// else if($option == 'invoicedate')
+				// {
+				// 	$this->db->like('invoicedate',$keyword);
+				// }
+				
 
+			
+			    $query = $this->db->get();
+				// echo $this->db->last_query();
+				// echo "<pre>";print_r($query->result());die;
+				if($query->num_rows() > 0)
+				{
+					return $query->result();
+				}        
+
+		}
 
 
 }
