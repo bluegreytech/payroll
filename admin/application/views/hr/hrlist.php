@@ -372,7 +372,7 @@
 
 													?>
 
-													<a href="<?php echo base_url();?>Hr/profile/<?php echo $hr->hr_id;?>" title="show hr profile" class="avatar"><img src="<?php echo base_path_hr();?>upload/hr/<?php echo $hr->ProfileImage;?>"></a>
+													<a href="<?php echo base_url();?>Hr/profile/<?php echo $hr->hr_id;?>" title="show hr profile" class="avatar"><img src="<?php echo base_url_hr();?>upload/hr/<?php echo $hr->ProfileImage;?>"></a>
 
 													<a href="<?php echo base_url();?>Hr/profile/<?php echo $hr->hr_id;?>" title="show hr profile"><?php echo $hr->FullName;?> 
 
@@ -2072,23 +2072,7 @@ $(document).ready(function()
 
 
 
-						LastName: {
-
-
-
-							required: "Please enter a last name",
-
-
-
-								pattern : "Enter only characters and numbers and \"space , \" -",
-
-
-
-								minlength: "Please enter at least 2 and maximum 50 letters!",
-
-
-
-								},
+						
 
 
 
@@ -2247,7 +2231,7 @@ $(document).ready(function()
 										extension:'jpg|jpeg|bmp|png'
 									},
 
-						FirstName: {
+						FullName: {
 
 
 
@@ -2259,15 +2243,7 @@ $(document).ready(function()
 
 
 
-						LastName: {
-
-
-
-							required: true,
-
-
-
-								},
+				
 
 
 
@@ -2382,19 +2358,11 @@ $(document).ready(function()
 									
 									},
 
-						FirstName: {
+						FullName: {
 
 
 
-							required: "Please enter a first name",
-
-
-
-								pattern : "Enter only characters and numbers and \"space , \" -",
-
-
-
-								minlength: "Please enter at least 2 and maximum 50 letters!",
+							required: "Please enter a your full name",
 
 
 

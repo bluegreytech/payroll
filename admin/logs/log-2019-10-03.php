@@ -71,3 +71,25 @@ ERROR - 2019-10-03 11:58:13 --> Your server does not support the GD function req
 ERROR - 2019-10-03 12:00:36 --> The upload path does not appear to be valid.
 ERROR - 2019-10-03 12:00:36 --> The path to the image is not correct.
 ERROR - 2019-10-03 12:00:36 --> Your server does not support the GD function required to process this type of image.
+ERROR - 2019-10-03 13:45:37 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-03 13:46:02 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 70
+ERROR - 2019-10-03 13:46:02 --> Severity: Notice --> Undefined variable: session C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 157
+ERROR - 2019-10-03 13:46:18 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 70
+ERROR - 2019-10-03 13:46:18 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-03 13:46:18 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-03 13:46:18 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-03 13:46:18 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-03 13:50:56 --> The upload path does not appear to be valid.
+ERROR - 2019-10-03 13:50:56 --> The path to the image is not correct.
+ERROR - 2019-10-03 13:50:56 --> Your server does not support the GD function required to process this type of image.
+ERROR - 2019-10-03 13:55:55 --> The upload path does not appear to be valid.
+ERROR - 2019-10-03 13:55:55 --> The path to the image is not correct.
+ERROR - 2019-10-03 13:55:55 --> Your server does not support the GD function required to process this type of image.
+ERROR - 2019-10-03 13:56:35 --> The upload path does not appear to be valid.
+ERROR - 2019-10-03 13:56:35 --> The path to the image is not correct.
+ERROR - 2019-10-03 13:56:35 --> Your server does not support the GD function required to process this type of image.
+ERROR - 2019-10-03 13:57:56 --> The upload path does not appear to be valid.
+ERROR - 2019-10-03 14:11:34 --> The upload path does not appear to be valid.
+ERROR - 2019-10-03 14:11:51 --> The upload path does not appear to be valid.
+ERROR - 2019-10-03 14:12:13 --> The upload path does not appear to be valid.
+ERROR - 2019-10-03 14:16:31 --> Severity: error --> Exception: Call to undefined function base_url_hr() C:\xampp\htdocs\payroll\admin\application\views\hr\hrlist.php 375

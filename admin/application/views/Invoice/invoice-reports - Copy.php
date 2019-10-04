@@ -198,7 +198,7 @@
 
 												<option value="status">Paymeny Status</option>
 
-												<option value="invoicedate">Date From to To</option>
+												<option value="datefromto">Date From to To</option>
 
 													<!-- <option value="phone">Contact Number</option>
 
@@ -214,7 +214,7 @@
 
 
 
-							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12" >  
 
 										<div class="form-group form-focus box" id='business'>
 
@@ -266,7 +266,7 @@
 
 											<div class="cal-icon">
 
-												<input class="form-control floating datetimepicker" type="text" name="keyword2" id="invoicedate">
+												<input class="form-control floating datetimepicker" type="text">
 
 											</div>
 
@@ -276,7 +276,7 @@
 
 								
 
-										<!-- <div class="form-group form-focus" id='business4' style="display: none;">
+										<div class="form-group form-focus" id='business4' style="display: none;">
 
 											<div class="cal-icon">
 
@@ -286,7 +286,7 @@
 
 											<label class="focus-label">From</label>
 
-										</div> -->
+										</div>
 
 										
 
@@ -614,18 +614,7 @@
 		<div class="sidebar-overlay" data-reff=""></div>
 
 		<?php $this->load->view('common/footer');?>
-		<script type="text/javascript">
 
-$('#invoicedate').datetimepicker({
-	 defaultDate: new Date(),
-	   format: 'YYYY/MM/DD',
-	 ignoreReadonly: true,					
-});
-
-
-
-
-</script>
 		<script>
 
 		function deletedata(Companyinvoiceid){  
@@ -663,27 +652,44 @@ $('#invoicedate').datetimepicker({
     $('#purpose').on('change', function() {
 
       if(this.value == 'companyname')
+
       {
 
         $("#business2").show();
+
 		$("#business").hide();
+
 		$("#business3").hide();
-		//$("#business4").hide();
-      }
-      else if(this.value == 'status')
-      {
-        $("#business").show();
-		$("#business2").hide();
-		$("#business3").hide();
-		//$("#business4").hide();
+
+		$("#business4").hide();
+
       }
 
-	  else if(this.value == 'invoicedate')
+      else if(this.value == 'status')
+
       {
-		$("#business").hide();
+
+        $("#business").show();
+
 		$("#business2").hide();
+
+		$("#business3").hide();
+
+		$("#business4").hide();
+
+      }
+
+	  else if(this.value == 'datefromto')
+
+      {
+
+		$("#business").hide();
+
+		$("#business2").hide();
+
 		$("#business3").show();
-	//	$("#business4").hide();
+
+		$("#business4").show();
 
       }
 

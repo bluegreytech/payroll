@@ -15,27 +15,22 @@
 	{
 
 		var a=document.getElementById("txt1").value;
-
 		var b=document.getElementById("txt2").value;
-
 		var c=document.getElementById("txt3").value;
 
-
-
 		var z=a*b;		
-
 		var t=z*c/100;
+		var cgst=t/2;
 
-		document.getElementById("tax").value=t;
+		document.getElementById("tax").value=cgst;
+		document.getElementById("cgsttax").value=cgst;
 
 		var h= +z;
-
 		document.getElementById("total").value=h;
 
 		
 
 		var x=t+h;
-
 		document.getElementById("nettotal").value=x;
 
 	}
@@ -310,6 +305,26 @@
 
 									</div>
 
+									
+
+									<!-- <div class="col-sm-6 col-md-3">
+
+										<div class="form-group">
+
+											<label>Tax option</label>
+
+											<select class="form-control" name="taxoption">
+												<option value="" disabled>Select tax option</option>
+												<option value="GST">GST</option>
+												<option value="CGST">CGST</option>
+											</select>
+
+										</div>
+
+									</div> -->
+
+
+
 
 
 								</div>
@@ -369,41 +384,52 @@
 													</tr>
 
 													<tr>
-
 														<td colspan="5" style="text-align: right">Add Tax %</td>
-
 														<td style="text-align: right;width: 230px">
-
 															<input class="form-control" type="text" name="addtax" id="txt3" onChange="m1()" value="<?php echo $addtax; ?>">
-
 														</td>
+													</tr>
 
-
-
-														<td colspan="5" style="text-align: right"> Tax Amount</td>
+													<tr>
+															
+														<td colspan="5" style="text-align: right"> GST Tax Amount</td>
 
 														<td style="text-align: right;width: 230px">
 
 															<input class="form-control" type="text"  value="<?php echo $taxamount; ?>" name="taxamount" id="tax" onChange="m1()" readOnly>
 
 														</td>
-
 													</tr>
 
 													<tr>
+															
+															<td colspan="5" style="text-align: right"> CGST Tax Amount</td>
+	
+															<td style="text-align: right;width: 230px">
+	
+																<input class="form-control" type="text"  value="<?php echo $cgstamount; ?>"  name="cgstamount" id="cgsttax" onChange="m1()" readOnly>
+	
+															</td>
+													</tr>
 
+													<!-- <tr>
+															
+															<td colspan="5" style="text-align: right"> Tax Amount</td>
+	
+															<td style="text-align: right;width: 230px">
+	
+																<input class="form-control" type="text"  value="<?php //echo $taxamount; ?>" name="taxamount" id="tax" onChange="m1()" readOnly>
+	
+															</td>
+													</tr> -->
+
+													<tr>
 														<td colspan="5" style="text-align: right; font-weight: bold">
-
 														Net	Total
-
 														</td>
-
 														<td>
-
 															<input class="form-control" name="netamount"  value="<?php echo $netamount; ?>" type="text" id="nettotal" onChange="m1()" readOnly>
-
 														</td>
-
 													</tr>
 
 													
@@ -704,6 +730,42 @@ $(document).ready(function()
 		});
 
 });					        
+
+
+$(document).ready(function(){
+
+$('#purpose').on('change', function() {
+
+  if(this.value == 'CGST')
+
+  {
+
+	$("#business").show();
+
+	$("#business2").show();
+
+	
+
+  }
+
+  else if(this.value == 'GST')
+
+  {
+
+	$("#business").show();
+
+	$("#business2").hide();
+
+	
+
+  }
+
+ 
+
+});
+
+});
+
 
 </script>
 

@@ -53,7 +53,8 @@ $config['base_url_site'] = 'http://localhost/payroll/admin/';
 $config['base_path']="C:/xampp/htdocs/payroll/admin";
 
 //$config['base_path_hr']="http://localhost/payroll/hr/";
-$config['base_path_hr']="http://localhost/payroll/hr/";
+$config['base_url_hr']="http://localhost/payroll/hr/";
+$config['base_path_hr']="C:/xampp/htdocs/payroll/hr/";
 //$config['base_path_hr_folder']="http://localhost/payroll/hr/upload/hr";
 //$config['base_path']="/home/et635dt5xqj1/public_html/payroll.bluegreytech.co.in/admin";
 

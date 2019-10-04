@@ -48,202 +48,111 @@ class Hr_model extends CI_Model
 
 		$hr_image='';
 
-		
-
 		 if(isset($_FILES['ProfileImage']) &&  $_FILES['ProfileImage']['name']!='')
 		{
-
 			$this->load->library('upload');
-
-			$rand=rand(0,100000); 
-
-			 
+			$rand=rand(0,100000); 		 
 
 		   $_FILES['userfile']['name']     =   $_FILES['ProfileImage']['name'];
-
 		   $_FILES['userfile']['type']     =   $_FILES['ProfileImage']['type'];
-
 		   $_FILES['userfile']['tmp_name'] =   $_FILES['ProfileImage']['tmp_name'];
-
 		   $_FILES['userfile']['error']    =   $_FILES['ProfileImage']['error'];
+		   $_FILES['userfile']['size']     =   $_FILES['ProfileImage']['size']; 
 
-		   $_FILES['userfile']['size']     =   $_FILES['ProfileImage']['size'];
-
-  
-
-		   $config['file_name'] = $rand.'Hr';			
-
-		   $config['upload_path'] = base_path_hr().'upload/hr_orig/';		
-
+		   $config['file_name'] = $rand.'Hr';
+		   $config['upload_path'] = base_path_hr().'upload/hr_orig/';
 		   $config['allowed_types'] = 'jpg|jpeg|gif|png|bmp';  
 
 			
-
+		// echo "<pre>";print_r($config);die;
 			$this->upload->initialize($config);
-
-
-
 			 if (!$this->upload->do_upload())
-
 			 {
-
-			   $error =  $this->upload->display_errors();
-
+				$error =  $this->upload->display_errors();
 			   echo "<pre>";print_r($error);
+			} 
 
-			 } 
-
-				$picture = $this->upload->data();	   
-
-			 $this->load->library('image_lib');		   
-
+			$picture = $this->upload->data();
+			 $this->load->library('image_lib');
 			 $this->image_lib->clear();
-
 			 $gd_var='gd2';
-
-
-
 			 $this->image_lib->initialize(array(
-
 			   'image_library' => $gd_var,
-
 			   'source_image' => base_path_hr().'upload/hr_orig/'.$picture['file_name'],
-
 			   'new_image' => base_path_hr().'upload/hr/'.$picture['file_name'],
-
 			   'maintain_ratio' => FALSE,
-
 			   'quality' => '100%',
-
 			   'width' => 300,
-
 			   'height' => 300
-
 			));
 
 		   if(!$this->image_lib->resize())
-
 		   {
+			   	$error = $this->image_lib->display_errors();
+		   }	   
 
-			   $error = $this->image_lib->display_errors();
-
-		   }
-
-		   
-
-		   $hr_image=$picture['file_name'];		
-
+		   $hr_image=$picture['file_name'];
 		   if($this->input->post('pre_profile_image')!='')
-
 			   {
-
 				   if(file_exists(base_path_hr().'upload/hr/'.$this->input->post('pre_profile_image')))
-
 				   {
-
 					   $link=base_path_hr().'upload/hr/'.$this->input->post('pre_profile_image');
-
 					   unlink($link);
-
-				   }
-
-				   
+				   }			   
 
 				   if(file_exists(base_path_hr().'upload/hr_orig/'.$this->input->post('pre_profile_image')))
-
 				   {
-
 					   $link2=base_path_hr().'upload/hr_orig/'.$this->input->post('pre_profile_image');
-
 					   unlink($link2);
-
 				   }
-
 			   }
 
 		   } else {
-
 			   if($this->input->post('pre_profile_image')!='')
-
 			   {
-
 				   $hr_image=$this->input->post('pre_profile_image');
 
 			   }
-
 		   }
 
 
 
 			$code=rand(12,123456789);
-
 			$companyid=$this->input->post('companyid');
-
 			$FullName=$this->input->post('FullName');
-
 			$EmailAddress=$this->input->post('EmailAddress');
-
 			$DateofBirth=$this->input->post('DateofBirth');
-
 			$bdate = str_replace('/', '-', $DateofBirth );
-
 			$birth = date("Y-m-d", strtotime($bdate));
-
-
-
 			$Contact=$this->input->post('Contact');
-
 			$Gender=$this->input->post('Gender');
-
 			$Address=$this->input->post('Address');
-
 			$PinCode=$this->input->post('PinCode');
-
 			$City=$this->input->post('City');
-
 			$IsActive=$this->input->post('IsActive');
-
 			$companyid=$this->input->post('companyid');
-
 			$data=array( 
-
 			'hr_type'=>1,
-
 			'companyid'=>$companyid,
-
 			'FullName'=>$FullName,
-
 			'EmailAddress'=>$EmailAddress, 
-
 			'Password'=>md5($code),
-
 			'Address'=>$Address,
-
 			'ProfileImage'=>$hr_image,
-
 			'Contact'=>$Contact,
-
 			'DateofBirth'=>$birth, 
-
 			'City'=>$City,
-
 			'PinCode'=>$PinCode,
-
 			'Gender'=>$Gender,
-
 			'IsActive'=>$IsActive,
-
 			'CreatedOn'=>date('Y-m-d')
-
 			);
 			//print_r($data);die;
 			$this->db->insert('tblhr',$data);
 			//return 1;
 			$insert_id = $this->db->insert_id();
 			if($insert_id!='')
-
 			{
-
 				$this->db->select('t1.*,t2.*,t3.*');
 				$this->db->from('tblhr as t1');
 				$this->db->join('tblhr as t2', 't1.hr_id = t2.hr_id', 'LEFT');
@@ -257,7 +166,6 @@ class Hr_model extends CI_Model
 					$Password = $rows->Password;
 					$companyid = $rows->companyid;
 					$companyname = $rows->companyname;
-
 				}
 
 
@@ -430,19 +338,6 @@ class Hr_model extends CI_Model
 	}
 
 
-
-
-
-
-
-	
-
-
-
-		
-
-
-
 		function list_company(){
 
 
@@ -520,140 +415,78 @@ class Hr_model extends CI_Model
 	{		     
 
 		$hr_id=$this->input->post('hr_id');
-
-
-
-		//echo "<pre>";print_r($_FILES);die;
-
+	//	echo "<pre>";print_r($_FILES);die;
 		$hr_image='';
-
          //$image_settings=image_setting();
+		
 
-		  if(isset($_FILES['ProfileImage']) &&  $_FILES['ProfileImage']['name']!='')
+		 if(isset($_FILES['ProfileImage']) &&  $_FILES['ProfileImage']['name']!='')
+		{
+			$this->load->library('upload');
+			$rand=rand(0,100000); 		 
 
-         {
+		   $_FILES['userfile']['name']     =   $_FILES['ProfileImage']['name'];
+		   $_FILES['userfile']['type']     =   $_FILES['ProfileImage']['type'];
+		   $_FILES['userfile']['tmp_name'] =   $_FILES['ProfileImage']['tmp_name'];
+		   $_FILES['userfile']['error']    =   $_FILES['ProfileImage']['error'];
+		   $_FILES['userfile']['size']     =   $_FILES['ProfileImage']['size']; 
 
-             $this->load->library('upload');
-
-             $rand=rand(0,100000); 
-
-			  
-
-			$_FILES['userfile']['name']     =   $_FILES['ProfileImage']['name'];
-
-			$_FILES['userfile']['type']     =   $_FILES['ProfileImage']['type'];
-
-			$_FILES['userfile']['tmp_name'] =   $_FILES['ProfileImage']['tmp_name'];
-
-			$_FILES['userfile']['error']    =   $_FILES['ProfileImage']['error'];
-
-			$_FILES['userfile']['size']     =   $_FILES['ProfileImage']['size'];
-
-   
-
-			$config['file_name'] = $rand.'Hr';			
-
-			$config['upload_path'] = base_path_hr().'upload/hr_orig/';		
- 
-			$config['allowed_types'] = 'jpg|jpeg|gif|png|bmp';  
-
- 
-		//echo "<pre>";	print_r($config);die;
-             $this->upload->initialize($config);
-
- 
-
-              if (!$this->upload->do_upload())
-
-			  {
-
-				$error =  $this->upload->display_errors();
-
-				echo "<pre>";print_r($error);
-
-			  } 
-
-           	  $picture = $this->upload->data();	   
-
-              $this->load->library('image_lib');		   
-
-              $this->image_lib->clear();
-
-			  $gd_var='gd2';
-
-
-
-              $this->image_lib->initialize(array(
-
-				'image_library' => $gd_var,
-
-				'source_image' => base_path_hr().'upload/hr_orig/'.$picture['file_name'],
-
-				'new_image' => base_path_hr().'upload/hr/'.$picture['file_name'],
-
-				'maintain_ratio' => FALSE,
-
-				'quality' => '100%',
-
-				'width' => 300,
-
-				'height' => 300
-
-			 ));
-
-			if(!$this->image_lib->resize())
-
-			{
-
-				$error = $this->image_lib->display_errors();
-
-			}
+		   $config['file_name'] = $rand.'Hr';
+		   $config['upload_path'] = base_path_hr().'upload/hr_orig/';
+		   $config['allowed_types'] = 'jpg|jpeg|gif|png|bmp';  
 
 			
+		// echo "<pre>";print_r($config);die;
+			$this->upload->initialize($config);
+			 if (!$this->upload->do_upload())
+			 {
+				$error =  $this->upload->display_errors();
+			  // echo "<pre>gfgfg";print_r($error); die;
+			} 
 
-			$hr_image=$picture['file_name'];	
-			//print_r($hr_image);die;
+			$picture = $this->upload->data();
+			//echo "<pre>";print_r($picture);die;
+			 $this->load->library('image_lib');
+			 $this->image_lib->clear();
+			 $gd_var='gd2';
+			 $this->image_lib->initialize(array(
+			   'image_library' => $gd_var,
+			   'source_image' => base_path_hr().'upload/hr_orig/'.$picture['file_name'],
+			   'new_image' => base_path_hr().'upload/hr/'.$picture['file_name'],
+			   'maintain_ratio' => FALSE,
+			   'quality' => '100%',
+			   'width' => 300,
+			   'height' => 300
+			));
 
-			if($this->input->post('pre_profile_image')!='')
+		   if(!$this->image_lib->resize())
+		   {
+			   	$error = $this->image_lib->display_errors();
+		   }	   
 
-				{
+		   $hr_image=$picture['file_name'];
+		   if($this->input->post('pre_profile_image')!='')
+			   {
+				   if(file_exists(base_path_hr().'upload/hr/'.$this->input->post('pre_profile_image')))
+				   {
+					   $link=base_path_hr().'upload/hr/'.$this->input->post('pre_profile_image');
+					   unlink($link);
+				   }			   
 
-					if(file_exists(base_path_hr().'upload/hr/'.$this->input->post('pre_profile_image')))
+				   if(file_exists(base_path_hr().'upload/hr_orig/'.$this->input->post('pre_profile_image')))
+				   {
+					   $link2=base_path_hr().'upload/hr_orig/'.$this->input->post('pre_profile_image');
+					   unlink($link2);
+				   }
+			   }
 
-					{
+		   } else {
+			   if($this->input->post('pre_profile_image')!='')
+			   {
+				   $hr_image=$this->input->post('pre_profile_image');
 
-						$link=base_path_hr().'upload/hr/'.$this->input->post('pre_profile_image');
-
-						unlink($link);
-
-					}
-
-					
-
-					if(file_exists(base_path_hr().'upload/hr_orig/'.$this->input->post('pre_profile_image')))
-
-					{
-
-						$link2=base_path_hr().'upload/hr_orig/'.$this->input->post('pre_profile_image');
-
-						unlink($link2);
-
-					}
-
-				}
-
-			} else {
-
-				if($this->input->post('pre_profile_image')!='')
-
-				{
-
-					$hr_image=$this->input->post('pre_profile_image');
-
-				}
-
-			}
-
+			   }
+		   }
 
 
 			$DateofBirth=$this->input->post('DateofBirth');

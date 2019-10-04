@@ -31,29 +31,18 @@ class Invoice extends CI_Controller
 		}
 
 		if($_POST!='')
-
-		{
-
+		{	print_r($_POST);
 			$option=$this->input->post('option');
-
 			$keyword=$this->input->post('keyword2');	
-
 			$data['invoiceData'] = $this->Invoice_model->search($option,$keyword);
-
 		}	
-
 		else
-
 		{
-
 			$data['invoiceData']=$this->Invoice_model->list_companyinvoice();
-
 		}
-
 		$data['companyData'] = $this->Invoice_model->list_company();
 
 			//echo "<pre>";	print_r($data['invoiceData']);die;
-
 		$this->load->view('Invoice/invoice-reports',$data);
 
 	}
@@ -87,6 +76,8 @@ class Invoice extends CI_Controller
 			$data['addtax']=$this->input->post('addtax');
 
 			$data['taxamount']=$this->input->post('taxamount');
+			$data['cgstamount']=$this->input->post('cgstamount');
+			
 
 			$data['netamount']=$this->input->post('netamount');
 
@@ -224,6 +215,7 @@ class Invoice extends CI_Controller
 
 		$data['taxamount']=$result['taxamount'];
 
+		$data['cgstamount']=$result['cgstamount'];
 		$data['netamount']=$result['netamount'];
 
 		
@@ -321,29 +313,18 @@ class Invoice extends CI_Controller
 		$data['hr_id']=$result['hr_id'];
 
 		$data['FullName']=$result['FullName'];
-
 		$data['EmailAddress']=$result['EmailAddress'];
-
 		$data['Bankdetailid']=$result['Bankdetailid'];
-
 		$data['Accountnumber']=$result['Accountnumber'];
-
 		$data['Branch']=$result['Branch'];
-
 		$data['Bankname']=$result['Bankname'];
-
 		$data['Ibannumber']=$result['Ibannumber'];
-
 		$data['Swiftcode']=$result['Swiftcode'];
-
 		$data['addtax']=$result['addtax'];
-
 		$data['taxamount']=$result['taxamount'];
-
+		$data['cgstamount']=$result['cgstamount'];
 		$data['netamount']=$result['netamount'];
-
 		$data['Address']=$result['Address'];
-
 		$this->load->view('Invoice/invoice-view',$data);
 
 	}
@@ -353,7 +334,6 @@ class Invoice extends CI_Controller
 
 
 	public function gethr()
-
 	{
 
 		$data=array();
