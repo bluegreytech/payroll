@@ -32,9 +32,18 @@
 
 	
 
+
+	function base_path_hr()
+	{		
+
+		$CI =& get_instance();
+
+		return $base_path_hr = $CI->config->slash_item('base_path_hr');		
+
+	}
+
 	
 
-	// --------------------------------------------------------------------
 
 
 
@@ -61,6 +70,18 @@
 		return $base_path = $CI->config->slash_item('base_url_site');		
 
 	}
+
+
+	function base_url_hr()
+
+	{		
+
+		$CI =& get_instance();
+
+		return $base_url_hr = $CI->config->slash_item('base_url_hr');		
+
+	}
+
 
 	
 
@@ -221,6 +242,7 @@
 	 */
 
 	 
+
 function checkattedancestatus($id)
 	{
 		$CI =& get_instance();
@@ -232,6 +254,9 @@ function checkattedancestatus($id)
 		//echo "<pre>";print_r($query);die;
 		return $query->row()->attendance_status;
 	}
+
+
+
 	function check_admin_authentication()
 
 	{		

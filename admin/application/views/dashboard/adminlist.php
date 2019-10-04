@@ -583,7 +583,7 @@
 											</div>
 
 										</div>
-
+									<center><h6>Uplopad only jpeg,jpg,png,bmp image file</h6></center>
 									<div class="row"> 
 
 										<div class="col-sm-6">
@@ -887,10 +887,7 @@
 										</div>
 
 									</div>
-
-
-
-								
+									<center><h6>Uplopad only jpeg,jpg,png,bmp image file</h6></center>
 
 
 
@@ -1611,25 +1608,14 @@ $(document).ready(function()
 
 
 				$("#form_valid").validate(
-
-
-
 				{
-
-
-
 					rules: {
-
-
-
+						ProfileImage: {
+							//required: true,
+							extension:'jpg|jpeg|bmp|png'
+								},
 						FirstName: {
-
-
-
 							required: true,
-
-
-
 								},
 
 
@@ -1752,13 +1738,16 @@ $(document).ready(function()
 
 						messages:{		
 
-
-
+							
+						ProfileImage: {
+								required: "Please upload a file type only jpg,jpeg,png,bit",
+									
+									},
 						FirstName: {
 
 
 
-							required: "Please enter a first name",
+								required: "Please enter a first name",
 
 
 
@@ -1939,25 +1928,14 @@ $(document).ready(function()
 
 
 					$("#form_valid2").validate(
-
-
-
 					{
-
-
-
 								rules: {
-
-
-
+									ProfileImage: {
+										//required: true,
+										extension:'jpg|jpeg|bmp|png'
+									},
 									FirstName: {
-
-
-
 										required: true,
-
-
-
 											},
 
 
@@ -2088,7 +2066,10 @@ $(document).ready(function()
 
 						messages:{
 
-
+							ProfileImage: {
+								required: "Please upload a file type only jpg,jpeg,png,bit",
+									
+									},
 
 								FirstName: {
 
