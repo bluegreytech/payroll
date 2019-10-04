@@ -263,7 +263,6 @@ class Invoice_model extends CI_Model
 
 	function search($option,$keyword)
 	{
-		print_r($_POST);
 		
 			$where=array('t1.isdelete'=>'0');
 			//$where=array('t1.status'=>'Paid');
@@ -277,17 +276,6 @@ class Invoice_model extends CI_Model
 				{
 					$this->db->like('companyname',$keyword);
 				}
-				 else if($option == 'status')
-				 {
-				 	$this->db->like('status',$keyword);
-				 }
-				// else if($option == 'invoicedate')
-				// {
-				// 	$this->db->like('invoicedate',$keyword);
-				// }
-				
-
-			
 			    $query = $this->db->get();
 				// echo $this->db->last_query();
 				// echo "<pre>";print_r($query->result());die;
@@ -297,33 +285,23 @@ class Invoice_model extends CI_Model
 				}        
 
 		}
-function searchbystatus($option,$keyword)
-	{
-		print_r($_POST);
-		
+		function searchbystatus($option,$keyword2)
+		{
+			
 			$where=array('t1.isdelete'=>'0');
 			//$where=array('t1.status'=>'Paid');
-			$keyword = str_replace('-', ' ', $keyword);
+			$keyword = str_replace('-', ' ', $keyword2);
 			$this->db->select('t1.*,t2.*,t3.*');
 			$this->db->from('tblcompanyinvoice as t1');
 			$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
 			$this->db->join('tblhr as t3', 't1.hr_id = t3.hr_id', 'LEFT');
 			$this->db->where($where);
-				if($option == 'companyname')
-				{
-					$this->db->like('companyname',$keyword);
-				}
-				 else if($option == 'status')
-				 {
-				 	$this->db->like('status',$keyword);
-				 }
-				// else if($option == 'invoicedate')
-				// {
-				// 	$this->db->like('invoicedate',$keyword);
-				// }
-				
-
 			
+				if($option == 'status')
+				{
+				$this->db->like('status',$keyword2);
+				}
+				
 			    $query = $this->db->get();
 				// echo $this->db->last_query();
 				// echo "<pre>";print_r($query->result());die;
@@ -331,6 +309,25 @@ function searchbystatus($option,$keyword)
 				{
 					return $query->result();
 				}        
+
+		}
+
+		function searchbydate($option,$keyword3,$keyword4)
+		{
+			$keywordinvone = str_replace('/', '-', $keyword3);
+			$keywordinvtwo = str_replace('/', '-', $keyword4);
+			$this->db->select('t1.*,t2.*,t3.*');
+			$this->db->from('tblcompanyinvoice as t1');
+			$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
+			$this->db->join('tblhr as t3', 't1.hr_id = t3.hr_id', 'LEFT');
+			$this->db->where('invoicedate BETWEEN "'. date('Y-m-d', strtotime($keywordinvone)). '" and "'. date('Y-m-d', strtotime($keywordinvtwo)).'"');	
+			$query = $this->db->get();
+			// echo $this->db->last_query();
+			// echo "<pre>";print_r($query->result());die;
+			if($query->num_rows() > 0)
+			{
+				return $query->result();
+			}        
 
 		}
 

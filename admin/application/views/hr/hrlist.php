@@ -167,56 +167,24 @@
 
 
 							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
-
-
-
 									<div class="form-group form-focus select-focus">
-
-
-
 										<select class="select floating" name="option" id="purpose"> 
-
-
-
 											<option value=""> -- Select -- </option>
-
-
-
 											<option value="companyname">Company Name</option>
-
-
-
 											<option value="FullName">Hr Name</option>
-
-
-
 											<option value="EmailAddress">Email Address</option>
-
-
-
-											<option value="PhoneNumber">Contact Number</option>
-
-
+											<option value="Contact">Contact Number</option>
 
 										</select>
 
-
-
-										<!-- <label class="focus-label">Role</label> -->
-
-
-
 									</div>
-
-
-
 							</div>
 
 
 
 							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12" >  
 									<div class="form-group form-focus box" id='business'>
-										<input type="text" name="keyword2" class="form-control floating">
+										<input type="text" name="keyword3" class="form-control floating">
 										<label class="focus-label">Search</label>
 									</div>
 
@@ -436,11 +404,11 @@
 
 											<td class="text-center">
 
-														<a  onClick="edithrs(<?php echo $hr->hr_id;?>)" data-toggle="modal" data-target="#edit_salary" role="button">
+														<a  onClick="edithrs(<?php echo $hr->hr_id;?>)" data-toggle="modal" data-target="#edit_salary" role="button"  title="Edit">
 
 														<i class="fa fa-pencil m-r-5"></i></a>
 
-														<a  onclick="deletedata(<?php echo $hr->hr_id; ?>)"  data-toggle="modal" data-target="#delete_admin"><i class="fa fa-trash-o m-r-5"></i> </a>
+														<a  onclick="deletedata(<?php echo $hr->hr_id; ?>)"  data-toggle="modal" data-target="#delete_admin" title="Delete"><i class="fa fa-trash-o m-r-5"></i> </a>
 
 											</td>
 

@@ -198,7 +198,7 @@
 
 												<option value="status">Paymeny Status</option>
 
-												<!-- <option value="invoicedate">Date From to To</option> -->
+												<option value="invoicedate">Date From to To</option>
 
 													<!-- <option value="phone">Contact Number</option>
 
@@ -218,7 +218,7 @@
 
 										<div class="form-group form-focus box" id='business'>
 
-											<input type="text" name="keyword3" class="form-control floating">
+											<input type="text" name="keyword2" class="form-control floating">
 
 											<label class="focus-label">Search</label>
 
@@ -230,7 +230,7 @@
 
 											<div class="form-group">
 
-												<select class="form-control" name="keyword2"> 
+												<select class="form-control" name="keyword"> 
 
 													<option desabled value="">Please select company</option>
 
@@ -260,39 +260,41 @@
 
 
 
-										
+							
 
-										<!-- <div class="form-group form-focus" id='business3' style="display: none;">
+										 <div class="form-group form-focus" id='business3' style="display: none;">
 
 											<div class="cal-icon">
 
-												<input class="form-control floating datetimepicker" type="text" name="keyword2" id="invoicedate">
+												<input class="form-control floating datetimepicker" type="text" name="keyword3" id="invoicedate" readonly>
 
 											</div>
 
 											<label class="focus-label">From</label>
 
 										</div>
- -->
+ 
 								
 
-										<!-- <div class="form-group form-focus" id='business4' style="display: none;">
+										<div class="form-group form-focus" id='business4' style="display: none;">
 
 											<div class="cal-icon">
 
-												<input class="form-control floating datetimepicker" type="text">
+												<input class="form-control floating datetimepicker" type="text" name="keyword4" id="invoicedate2" readonly>
 
 											</div>
 
-											<label class="focus-label">From</label>
+											<label class="focus-label">To</label>
 
-										</div> -->
+										</div>
 
 										
 
 									
 
 								</div>
+
+								
 
 								<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
 
@@ -616,12 +618,19 @@
 		<?php $this->load->view('common/footer');?>
 		<script type="text/javascript">
 
-$('#invoicedate').datetimepicker({
-	 defaultDate: new Date(),
-	   format: 'YYYY/MM/DD',
-	 ignoreReadonly: true,					
-});
+		$('#invoicedate').datetimepicker({
+			defaultDate: new Date(),
+			format: 'DD/MM/YYYY',
+			ignoreReadonly: true,					
+		});
 
+
+		
+		$('#invoicedate2').datetimepicker({
+			defaultDate: new Date(),
+			format: 'DD/MM/YYYY',
+			ignoreReadonly: true,					
+		});
 
 
 
@@ -668,14 +677,14 @@ $('#invoicedate').datetimepicker({
         $("#business2").show();
 		$("#business").hide();
 		$("#business3").hide();
-		//$("#business4").hide();
+		$("#business4").hide();
       }
       else if(this.value == 'status')
       {
         $("#business").show();
 		$("#business2").hide();
 		$("#business3").hide();
-		//$("#business4").hide();
+		$("#business4").hide();
       }
 
 	  else if(this.value == 'invoicedate')
@@ -683,7 +692,7 @@ $('#invoicedate').datetimepicker({
 		$("#business").hide();
 		$("#business2").hide();
 		$("#business3").show();
-	//	$("#business4").hide();
+		$("#business4").show();
 
       }
 

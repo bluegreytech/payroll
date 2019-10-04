@@ -150,7 +150,7 @@
 
 					<form method="post" action="<?php echo base_url();?>Adminmaster/adminlist">
 
-
+					<?php $AdminId=$this->session->userdata('AdminId');?>
 
 						<div class="row filter-row">
 
@@ -458,9 +458,9 @@
 
 							<td class="text-center">
 
-								<a  onClick="editadmin(<?php echo $adminlist->AdminId;?>)" data-toggle="modal" data-target="#edit_salary" role="button"><i class="fa fa-pencil m-r-5"></i></a>
+								<a  onClick="editadmin(<?php echo $adminlist->AdminId;?>)" data-toggle="modal" data-target="#edit_salary" role="button" title="Edit"><i class="fa fa-pencil m-r-5"></i></a>
 
-								<a  onclick="deletedata(<?php echo $adminlist->AdminId; ?>)"  data-toggle="modal" data-target="#delete_admin"><i class="fa fa-trash-o m-r-5"></i> </a>
+								<a  onclick="deletedata(<?php echo $adminlist->AdminId; ?>)"  data-toggle="modal" data-target="#delete_admin" title="Delete"><i class="fa fa-trash-o m-r-5"></i> </a>
 
 
 
@@ -824,7 +824,7 @@
 
 							<div class="modal-header">
 
-								<h5 class="modal-title">Edit Master Admin</h5>
+								<h5 class="modal-title">Edit Master Admin </h5>
 
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 
@@ -917,17 +917,7 @@
 
 
 
-											<!-- <div class="form-group">
-
-												<label>Birth Date</label>
-
-												<div class="cal-icon">
-
-													<input class="form-control datetimepicker" type="text" name="DateofBirth" id="DateofBirth" readonly>
-
-												</div>
-
-											</div> -->
+										
 
 
 

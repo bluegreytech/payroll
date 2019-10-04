@@ -354,17 +354,17 @@
 
 										<td class="text-center">
 
-											<a href="<?php echo base_url();?>Company/editcompany/<?php echo $comp->companyid;?>" role="button">
+											<a href="<?php echo base_url();?>Company/editcompany/<?php echo $comp->companyid;?>" role="button" title="Edit">
 
 													<i class="fa fa-pencil m-r-5"></i> </a>
 
-											<a  onclick="deletedata(<?php echo $comp->companyid; ?>)" data-toggle="modal" data-target="#delete_client"><i class="fa fa-trash-o m-r-5"></i> </a>
+											<a  onclick="deletedata(<?php echo $comp->companyid; ?>)" data-toggle="modal" data-target="#delete_client" title="Delete"><i class="fa fa-trash-o m-r-5"></i> </a>
 
-										    <a  href="<?php echo base_url();?>Company/company_notification_expired/<?php echo $comp->companyid;?>" role="button">
+										    <a  href="<?php echo base_url();?>Company/company_notification_expired/<?php echo $comp->companyid;?>" role="button"  title="Notification">
 
 											<i class="fa fa-bell-o" aria-hidden="true"></i></a>
 
-											<a  href="<?php echo base_url();?>Leave/leavelist" role="button">
+											<a  href="<?php echo base_url();?>Leave/leavelist" role="button" title="Show Leaves Types">
 
 													<i class="fa fa-calendar-check-o" aria-hidden="true"></i></a>				
 

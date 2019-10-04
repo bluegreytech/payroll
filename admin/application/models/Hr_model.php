@@ -7,42 +7,16 @@
 
 
 class Hr_model extends CI_Model
-
-
-
  {
-
-
-
 	function insertdata()
-
-
-
 	{		
 
-
-
 			$this->db->select('*');
-
-
-
 			$this->db->where('EmailAddress',$this->input->post('EmailAddress'));
-
-
-
 			$query=$this->db->get('tblhr');
-
-
-
 			if($query->num_rows() > 0)
-
-
-
 			{
-
 					return 3;
-
-
 			}
 
 
@@ -147,7 +121,7 @@ class Hr_model extends CI_Model
 			'IsActive'=>$IsActive,
 			'CreatedOn'=>date('Y-m-d')
 			);
-			//print_r($data);die;
+		//	echo "<pre>";print_r($data);die;
 			$this->db->insert('tblhr',$data);
 			//return 1;
 			$insert_id = $this->db->insert_id();
@@ -180,7 +154,7 @@ class Hr_model extends CI_Model
 					$companyname =$rows->companyname;
 					$comemailaddress = $rows->comemailaddress;
 					$base_url=base_url();
-					$login_link=  '<a href="'.base_url_hr('Login').'">Click Here</a>';
+				//	$login_link=  '<a href="'.base_url_hr('Login').'">Click Here</a>';
 					$currentyear=date('Y');
 					$email_message=str_replace('{break}','<br/>',$email_message);
 					$email_message=str_replace('{base_url}',$base_url,$email_message);
@@ -190,22 +164,39 @@ class Hr_model extends CI_Model
 					$email_message=str_replace('{Password}',$code,$email_message);
 					$email_message=str_replace('{companyname}',$companyname,$email_message);
 					$email_message=str_replace('{comemailaddress}',$comemailaddress,$email_message);
-					$email_message=str_replace('{login_link}',$login_link,$email_message);
+				//	$email_message=str_replace('{login_link}',$login_link,$email_message);
 					$str=$email_message; //die;
+					
 					$email_config = Array(
+
 						'protocol'  => 'smtp',
+
 						'smtp_host' => 'relay-hosting.secureserver.net',
+
 						'smtp_port' => '465',
+
 						'smtp_user' => 'binny@bluegreytech.co.in',
+
 						'smtp_pass' => 'Binny@123',
+
 						'mailtype'  => 'html',
+
 						'starttls'  => true,
+
 						'newline'   => "\r\n",
+
 						'charset'=>'utf-8',
+
 						'header'=> 'MIME-Version: 1.0',
+
 						'header'=> 'Content-type:text/html;charset=UTF-8',
+
 						);
-					$this->load->library('email', $email_config);
+
+		
+
+						$this->load->library('email', $email_config);
+
 					$body =$str;	
 					$this->email->from('binny@bluegreytech.co.in');
 					$this->email->to($EmailAddress);		
@@ -328,6 +319,35 @@ class Hr_model extends CI_Model
 			{
 				$this->db->like('Contact',$keyword);
 			} 
+
+			$query = $this->db->get();
+			if($query->num_rows() > 0)
+			 {
+				return $query->result();
+			 }        
+
+	}
+
+	function searchbyname($option,$keyword3)
+	{
+			$where = array('t1.Is_deleted' =>'0');
+			$keyword = str_replace('-', ' ', $keyword3);
+			$this->db->select('t1.*,t2.companyname');
+			$this->db->from('tblhr as t1');
+			$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
+			$this->db->where($where);
+			if($option == 'FullName')
+			{
+				$this->db->like('FullName',$keyword);
+			}
+			else if($option == 'EmailAddress')
+			{
+				$this->db->like('EmailAddress',$keyword);
+			}
+			else if($option == 'Contact')
+			{
+				$this->db->like('Contact',$keyword);
+			}
 
 			$query = $this->db->get();
 			if($query->num_rows() > 0)

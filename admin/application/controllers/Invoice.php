@@ -34,15 +34,20 @@ class Invoice extends CI_Controller
 		{	
 			$option=$this->input->post('option');
 			$keyword=$this->input->post('keyword');
+			$keyword2=$this->input->post('keyword2');
 			$keyword3=$this->input->post('keyword3');
-			echo $keyword3;
-			if($option!='' && $option!='$keyword3')
-			{
-				$data['invoiceData'] = $this->Invoice_model->searchbystatus($option,$keyword3);
-			}
-			else if($option!='' && $option!='$keyword')
-			{
+			$keyword4=$this->input->post('keyword4');
+			if($option!='' && $keyword!='')
+			{	$option=$this->input->post('option');
 				$data['invoiceData'] = $this->Invoice_model->search($option,$keyword);
+			}
+			else if($option!='' && $keyword2!='')
+			{	$option=$this->input->post('option');
+				$data['invoiceData'] = $this->Invoice_model->searchbystatus($option,$keyword2);
+			}	
+			else if($option!='' && $keyword3!='' && $keyword4!='')
+			{	$option=$this->input->post('option');
+				$data['invoiceData'] = $this->Invoice_model->searchbydate($option,$keyword3,$keyword4);
 			}	
 			else
 			{

@@ -35,76 +35,34 @@ class Hr extends CI_Controller
 
 
 	function index()
-
-
-
 	{	
-
-
-
 		if(!check_admin_authentication()){ 
-
-
-
 			redirect(base_url('Login'));
-
-
-
 		}
-
-
 
 		if($_POST!='')
-
-
-
 		{
-
-
-
 			$option=$this->input->post('option');
-
-
-
-			$keyword=$this->input->post('keyword2');	
-
-
-
-			$data['hrData'] = $this->Hr_model->search($option,$keyword);
-
-
-
-		}	
-
-
-
-		else
-
-
-
-		{
-
-
-
-			$data['hrData']=$this->Hr_model->hr_list();
-
-
-
-		}
-
-
-
+			$keyword2=$this->input->post('keyword2');
+			$keyword3=$this->input->post('keyword3');
+			//$keyword4=$this->input->post('keyword4');	
+			if($option!='' && $keyword2!='')
+			{	$option=$this->input->post('option');
+				$data['hrData'] = $this->Hr_model->search($option,$keyword2);
+			}
+			else if($option!='' && $keyword3!='')
+			{	$option=$this->input->post('option');
+				$data['hrData'] = $this->Hr_model->searchbyname($option,$keyword3);
+			}		
+			else
+			{
+				$data['hrData']=$this->Hr_model->hr_list();
+			}
 		$data['companyData']=$this->Hr_model->list_company();
-
-
-
 		//echo "<pre>";print_r($data['companyData']);die;
-
-
-
 		$this->load->view('hr/hrlist',$data);
 
-
+	}
 
 	}
 
@@ -173,17 +131,12 @@ class Hr extends CI_Controller
 
 
 	public function addhr()
-
 	{
-
 		if(!check_admin_authentication()){ 
-
 			redirect(base_url('Login'));
-
 		}
 
 		$data['hr_id']=$this->input->post('companyid');
-
 		$data['companyid']=$this->input->post('companyid');
 
 		$data['FullName']=$this->input->post('FullName');
@@ -209,69 +162,34 @@ class Hr extends CI_Controller
 		$data['companyname']=$this->input->post('companyname');	
 
 		 if($_POST){
-
 			if($this->input->post('hr_id')!='')
-
 			{	
 
 				$result=$this->Hr_model->updatehr();	
 
 				if($result==1)
-
 				{
-
 					$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
-
 					redirect('Hr');
-
 				}
-
 				else
-
 				{
-
 					$this->session->set_flashdata('success', 'Record was not Updated!');
-
 					redirect('Hr');
-
 				}
-
 			}
-
 			else
-
 			{	
-
 				$result=$this->Hr_model->insertdata();
-
 				if($result==1)
-
 				{
-
 					$this->session->set_flashdata('success', 'Record has been Inserted Succesfully!');
-
 					redirect('Hr');
-
 				}
-
-				else if($result==2)
-
-				{
-
-					$this->session->set_flashdata('error', 'Record was not Inserted!');
-
-					redirect('Hr');
-
-				}	
-
 				else if($result==3)
-
 				{
-
 					$this->session->set_flashdata('warning', 'This email address already registered!');
-
 					redirect('Hr');
-
 				}	
 
 

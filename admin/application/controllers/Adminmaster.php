@@ -99,21 +99,13 @@ class Adminmaster extends CI_Controller
 		}
 
 		 if($_POST){
-
 			if($this->input->post('AdminId')!='')
-
 			{	
-
 				$result=$this->Adminmaster_model->updateadmin();	
-
 				if($result==1)
-
 				{
-
 					$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
-
 					redirect('adminmaster/adminlist');
-
 				}
 
 				else
