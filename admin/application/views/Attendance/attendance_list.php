@@ -76,7 +76,11 @@
 <div class="row">
     <div class="col-lg-12">
 		<div class="table-responsive">
-			<table class="table table-nowrap display nowrap"  id='example'>
+			<?php
+			if(!empty($result)){
+				?>
+			
+			<table class="table table-nowrap display nowrap">
 				<thead>
 					<tr>
 						<th>Employee</th>
@@ -177,6 +181,53 @@
 					<?php }  } ?>
 				</tbody>
 			</table>
+			<?php
+		}else if(!empty($result1)){
+			?>
+		
+
+			<table class="table table-striped custom-table mb-0 datatable">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Date </th>
+											<th>Punch In</th>
+											<th>Punch Out</th>
+											<th>Production</th>
+											<th>Attendance status</th>
+											
+										</tr>
+									</thead>
+									<tbody>
+										<?php
+										$i=1;
+										foreach($result1 as $val){
+											$time_out  = date("g:i a", strtotime( $val->time_out));
+											$time_in  = date("g:i a", strtotime( $val->time_in));
+											 $diff = (strtotime($val->time_out) - strtotime($val->time_in));
+                                      $total = $diff/60;
+                                     
+                                     
+											?>
+										
+										<tr>
+											<td><?php echo $i ?></td>
+											<td><?php echo $val->attendance_date?></td>
+											<td><?php echo $time_in?></td>
+											<td><?php echo $time_out?></td>
+											<td><?php echo sprintf("%2dhrs", floor($total/60), $total%60); ?></td>
+											<td><?php echo $val->attendance_status?></td>
+											
+										</tr>
+										<?php
+										$i++;
+									}
+									?>
+									</tbody>
+								</table>
+								<?php
+							}
+							?>
 		</div>
     </div>
 </div>

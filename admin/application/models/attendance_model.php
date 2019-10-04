@@ -54,7 +54,7 @@ class Attendance_model extends CI_Model
 			return $query->result();
 		}
    	}
-   	function searchemployee(){
+   	function searchemployee($id){
    		$empname = $this->input->post('empname');
    		$attmonth = $this->input->post('attmonth');
    		if($empname!='' && $attmonth!='')
@@ -81,15 +81,15 @@ class Attendance_model extends CI_Model
 		       	}
 		        
 		       }
-		     
-		        $str3=" FROM tblattendance att LEFT JOIN tblemp U ON U.emp_id = att.emp_id WHERE CONCAT(U.first_name,' ',U.last_name) LIKE '%$empname%' AND attendance_month LIKE '%$attmonth%' GROUP BY U.first_name";
-		        //echo $str1.''.$str2.''.$str3;
+
+		        $str3=" FROM tblattendance att LEFT JOIN tblemp U ON U.emp_id = att.emp_id WHERE U.first_name LIKE '%$empname%' AND attendance_month LIKE '%$attmonth%' GROUP BY U.first_name";
+
 		    	$query=$this->db->query($str1.''.$str2.''.$str3);	
-		    	//echo $this->db->last_query();
+                // echo $this->db->last_query();
 		    	return $query->result();
 			
 			}else if($empname=='' && $attmonth!=''){
-
+              
              	$totalmonth=cal_days_in_month(CAL_GREGORIAN,date('m',strtotime($this->input->post('attmonth'))),date('Y',strtotime($this->input->post('attmonth')))); 
 		     
 		
@@ -111,14 +111,14 @@ class Attendance_model extends CI_Model
 			        
 			       }
 		     
-		       $str3=" FROM tblattendance att LEFT JOIN tblemp U ON U.emp_id = att.emp_id WHERE attendance_month LIKE '%$attmonth%' and  GROUP BY U.first_name";
+		       $str3=" FROM tblattendance att LEFT JOIN tblemp U ON U.emp_id = att.emp_id LEFT JOIN tblcompany C ON C.companyid = att.company_id WHERE attendance_month LIKE '%$attmonth%'   GROUP BY U.first_name";
 		      //  echo $str1.''.$str2.''.$str3; die;
 		    $query=$this->db->query($str1.''.$str2.''.$str3);	
-		    echo $this->db->last_query();
+           // echo $this->db->last_query();
 		    return $query->result();
 			}else if($empname!='' && $attmonth==''){
-              
-		   	   $str1="SELECT att.attendance_id as attendanceid,CONCAT(U.first_name, ' ', U.last_name) as firstlast,U.ProfileImage as ProfileImage,";
+                 
+		   	   /*$str1="SELECT att.attendance_id as attendanceid,CONCAT(U.first_name, ' ', U.last_name) as firstlast,U.ProfileImage as ProfileImage,";
 		        for($month=1;$month<=12;$month++){ 
 		        	 	if($month<=9){
                            $mn ='0'.$month;
@@ -148,13 +148,25 @@ class Attendance_model extends CI_Model
 			       }
 			        
 		       }
-		        $str3=" FROM tblattendance att LEFT JOIN tblemp U ON U.emp_id = att.emp_id WHERE CONCAT(U.first_name,' ',U.last_name) LIKE '%$empname%' AND YEAR(attendance_month) = YEAR(CURDATE()) GROUP BY U.first_name";
+		        $str3=" FROM tblattendance att LEFT JOIN tblemp U ON U.emp_id = att.emp_id WHERE CONCAT(U.first_name,' ',U.last_name) LIKE '%$empname%' AND YEAR(attendance_month) = YEAR(CURDATE())  and  att.company_id = $id  GROUP BY U.first_name";
 		        	//echo $str1.'<br>'.$str2.''.$str3."</br>";
 		       
 		    	$query=$this->db->query($str1.''.$str2.''.$str3);	
 		    	echo $this->db->last_query();
+		    	return $query->result();*/
+
+                $str3="SELECT attendance_id,time_in,time_out,attendance_status,attendance_date FROM tblattendance att LEFT JOIN tblemp E ON att.emp_id = E.emp_id WHERE CONCAT( E.first_name, ' ', E.last_name) LIKE '%$empname%'";
+               
+$query=$this->db->query($str3);
+//echo $this->db->last_query();
 		    	return $query->result();
-		    	
+		    	// $this->db->select('attendance_id,time_in,time_out,attendance_status,attendance_date');
+		    	// $this->db->from('tblattendance');
+		    	// $this->db->join('tblemp', 'tblemp.emp_id = tblattendance.emp_id');
+		    	// $this->db->like(CONCAT(U.first_name,' ',U.last_name) , '%$empname%');
+		    	// $query=$this->db->get();
+		    	// return $query->result();
+
 			}
 			
    	}

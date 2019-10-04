@@ -1056,7 +1056,59 @@ function statusdata(){
 
 }
 
+function statusdata_type(){
 
+	if(!check_admin_authentication())
+
+		{ 
+
+			redirect(base_url());
+
+		}
+
+		$action=$this->input->post('status');
+
+		
+
+		$id=$this->input->post('id');
+
+	
+
+		if ($action == "Active") {
+
+
+
+			$data = array("IsActive" => "Inactive");
+
+			update_record('tblcompanytype', $data, 'companytypeid', $id);
+
+
+
+			$res = array('status' => 'done', 'msg' => ACTIVE);
+
+			echo json_encode($res);
+
+			die ;
+
+		}else if ($action == "Inactive") {
+
+			
+
+				$data = array("IsActive" => "Active");
+
+				update_record('tblcompanytype', $data, 'companytypeid', $id);
+
+			
+
+			$res = array('status' => 'done', 'msg' => ACTIVE);
+
+			echo json_encode($res);
+
+			die ;
+
+		}
+
+}
 
 	
 
