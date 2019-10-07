@@ -53,7 +53,7 @@
 								<ul style="display: none;">
 								<li><a href="<?php echo base_url();?>holiday/holidaylist">List of Holidays</a></li>
 									<li><a href="<?php echo base_url();?>leave/leavelist">List of Leave Type</a></li>
-									<li><a href="#">List of Leaves<span class="badge badge-pill bg-primary float-right">1</span></a></li>
+									<li><a href="<?php echo base_url();?>leave/empleavelist">List of Leaves<span class="badge badge-pill bg-primary float-right">1</span></a></li>
 								</ul>
 							</li>
 

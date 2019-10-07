@@ -488,10 +488,8 @@
 		$CI->db->select('holidaydate');
 		$CI->db->from('tblcmpholiday');
 		$CI->db->like('holidaydate',date($attendancemonth));
-		$CI->db->where('is_deleted',"0");
-	
-		$query = $CI->db->get();
-		//echo $CI->db->last_query();die;		
+		$CI->db->where('is_deleted',"0");	
+		$query = $CI->db->get();		
 		if($query->num_rows() > 0)
 		{
 			return $query->result_array();
@@ -817,9 +815,7 @@
 		$CI->db->from('tblcompany');
 		$CI->db->where('IsActive',"Active");
 		$CI->db->where('companyid',$id);
-		$query = $CI->db->get();
-		//echo $CI->db->last_query();die;
-		//echo "<pre>";print_r($query);die;
+		$query = $CI->db->get();	
 		return $query->row()->companyname;
 	}
 	function get_companytype_name($id)
@@ -831,6 +827,16 @@
 		$CI->db->where('companytypeid',$id);
 		$query = $CI->db->get();
 		return $query->row()->companytype;
+	}
+	function get_leavetype_name($id)
+	{
+		$CI =& get_instance();
+		$CI->db->select('leave_name');
+		$CI->db->from('tblcmpleave');
+		$CI->db->where('status',"Active");
+		$CI->db->where('leave_id',$id);
+		$query = $CI->db->get();
+		return $query->row()->leave_name;
 	}
 	
 	function get_country_iso($country)
@@ -1334,5 +1340,28 @@
 	 		return $days;
 	}
 
+function sumTime($timein, $timeout) {
+	 $start = date('H:i',strtotime($timein));
+	 $end   = date('H:i',strtotime($timeout));
+ 
+    // calculate amount of hours per working day
+    $diff  = strtotime($end) - strtotime($start);
+  $hours = $diff / 3600; 
+     return $hours;
+    // $settings = array(
+    //     "start" => $start,
+    //     "end"   => $end,
+    //     "diff"  => $diff,
+    //     "hrs"   => $hours
+    // );
 
+    // return $settings;
+// $h = date('H', strtotime($timeout));
+// $m = date('i', strtotime($timeout));
+// $s = date('s', strtotime($timeout));
+// $tmp = $h." hour ".$m." min ".$s." second";
+// $sumHour = $timein." + ".$tmp;
+// echo $newTime = date('H:i:s', strtotime($sumHour));
+// return $newTime;
+}; 
 ?>

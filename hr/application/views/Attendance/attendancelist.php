@@ -139,14 +139,12 @@
 							<img src="<?php echo base_url();?>upload/no_image/user_no_image.png" alt="" class="avatar avatar-xs">
 							<?php echo ucfirst($row->firstlast);?>
 
-							<?php
-							}
-							?>
+							<?php } ?>
 							</h2>
 						</td>
 						<?php for($i=1;$i<=$totalmonth;$i++){ 
 						    $attid=$row->{'abc'.$i};
-							  ?>
+					    ?>
 						<td><a href="javascript:void(0);" <?php if($attid!='0'){ ?>  onclick='editatt(<?php echo $attid; ?>)'<?php } ?>>
 							<?php
 							   if($attid!='0'){
@@ -219,7 +217,7 @@
 											<div class="cal-icon">
 									  			<input type="text" class="form-control" name="attendancemonth" id="attendancemonth">
 											</div>											
-										</div>									
+										</div>										
 									</div>
 									<div class="col-sm-6">
 										<div class="form-group">
@@ -330,6 +328,7 @@ $("#attendancemonth").datetimepicker({
        		  viewMode: 'months',       		 
               format: 'YYYY-MM',
           	  maxDate: today,
+
 				icons: {
 				time:'fa fa-clock-o',
 				date:'fa fa-calendar',
@@ -385,11 +384,12 @@ function myDateFormatter (dobdate) {
   return dArr[2]+ "/" +dArr[1]+ "/" +dArr[0]; //ex out: "18/01/10"
        
     }; 
-
+ //var today = new Date();
 $("#attmonth").datetimepicker({
        		  viewMode: 'months',       		 
               format: 'YYYY-MM',
           	  maxDate: today,
+          	//  defaultDate: today,
 				icons: {
 				time:'fa fa-clock-o',
 				date:'fa fa-calendar',
@@ -401,6 +401,6 @@ $("#attmonth").datetimepicker({
 				clear:'fa fa-delete',
 				close:'fa fa-times'
 				},
-    	}).val('<?php echo ($attmonth!='0000-00')&&($attmonth!='')  ? date('Y-m', strtotime($attmonth)) : ''; ?>');
+    	}).val('<?php echo ($attmonth!='0000-00')&&($attmonth!='')  ? date('Y-m', strtotime($attmonth)) : date('Y-m'); ?>');
 
 </script>

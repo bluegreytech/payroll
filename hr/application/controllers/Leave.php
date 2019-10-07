@@ -6,9 +6,8 @@ class Leave extends CI_Controller
 	public function __construct() {
         parent::__construct();
 	    $this->load->model('leave_model');
+	    $this->load->model('attendance_model');
 	}
-	
-	
 
 	public function leavelist()
 	{
@@ -19,13 +18,10 @@ class Leave extends CI_Controller
 			$data=array();
 			$data['activeTab']="leavelist";	
 			$this->load->library("form_validation");
-			$this->form_validation->set_rules('leavename', 'leave Name', 'required');
-		
+			$this->form_validation->set_rules('leavename', 'leave Name', 'required');		
 			$this->form_validation->set_rules('leavedays', 'leave Days', 'required');
 		   
 		   
-		   
-		
 		if($this->form_validation->run() == FALSE){			
 			if(validation_errors())
 			{
@@ -48,13 +44,13 @@ class Leave extends CI_Controller
 
 				if($this->input->post("leave_id")!="")
 				{	
-					//echo "dsfdf if";die;
+					echo "dsfdf if";die;
 					$this->leave_model->leave_update();
 					$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
 					redirect('leave/leavelist');
 				}
 				else
-				{  //echo "jhjhg";die;
+				{  echo "jhjhg";die;
 					$this->leave_model->leave_insert();
 					$this->session->set_flashdata('success', 'Record has been Inserted Succesfully!');
 					redirect('leave/leavelist');
@@ -102,25 +98,134 @@ class Leave extends CI_Controller
 			redirect(base_url());
 		}
 		$action=$this->input->post('status');
-		$id=$this->input->post('id');
-		if ($action == "Active") {
+	    $changestatus=$this->input->post('changestatus');
+		$id=$this->input->post('id'); 
 
-			$data = array("status" => "Inactive");
-			update_record('tblcmpleave', $data, 'leave_id', $id);
-
-			$res = array('status' => 'done', 'msg' => ACTIVE);
+			$data = array("leavestatus" => $changestatus);
+			update_record('tblempleave', $data, 'empleave_id', $id);			
+		    $res = array('status' => 'done');
 			echo json_encode($res);
 			die ;
-		}else if ($action == "Inactive") {
+		// if($action == "Active") {
+
+		// 	$data = array("status" => "Inactive");
+		// 	update_record('tblcmpleave', $data, 'leave_id', $id);
+
+		// 	$res = array('status' => 'done', 'msg' => ACTIVE);
+		// 	echo json_encode($res);
+		// 	die ;
+		// }else if($action == "Inactive") {
 			
-				$data = array("status" => "Active");
-				update_record('tblcmpleave', $data, 'leave_id', $id);
+		// 		$data = array("status" => "Active");
+		// 		update_record('tblcmpleave', $data, 'leave_id', $id);
 			
-			$res = array('status' => 'done', 'msg' => ACTIVE);
-			echo json_encode($res);
-			die ;
-		}
+		// 	$res = array('status' => 'done', 'msg' => ACTIVE);
+		// 	echo json_encode($res);
+		// 	die ;
+		// }
 	
+	}
+
+	function empleavelist(){
+		//echo "jhjhg";die;
+		if(!check_admin_authentication()){ 
+			redirect(base_url());
+		}   
+			$data=array();
+			$data['activeTab']="leavelist";	
+			
+		 $data['result']=$this->leave_model->empleavelist();
+		//echo "<pre>";print_r($data['result']);die;
+		$this->load->view('Employee/leaves_employee',$data);
+	}
+
+	function addempleave(){
+		//echo "jhjhg";die;
+		if(!check_admin_authentication()){ 
+			redirect(base_url());
+		}   
+			$data=array();
+			$data['activeTab']="empleavelist";	
+			$this->load->library("form_validation");
+			$this->form_validation->set_rules('typeofleave', 'Type of leave ', 'required');		
+			$this->form_validation->set_rules('noofdays', 'leave Days', 'required');
+		   
+		   
+		if($this->form_validation->run() == FALSE){			
+			if(validation_errors())
+			{
+				$data["error"] = validation_errors();
+				echo "<pre>";print_r($data["error"]);die;
+			}else{
+				$data["error"] = "";
+			}
+           	$data['redirect_page']="empleavelist";
+			$data['empleave_id']=$this->input->post('empleave_id');	
+			$data['emp_id']=$this->input->post('emp_id');				
+			$data['typeofleave']=$this->input->post('typeofleave');
+			$data['leavetimein']=$this->input->post('leavetimein');
+			$data['leavetimeout']=$this->input->post('leavetimeout');
+			$data['leavefrom']=$this->input->post('leavefrom');
+			$data['leavedays']=$this->input->post('leavedays');			
+			$data['leaveto']=$this->input->post('leaveto');
+			$data['noofdays']=$this->input->post('noofdays');
+			$data['remainingleave']=$this->input->post('remainingleave');
+			$data['leavereason']=$this->input->post('leavereason');
+			
+			$data['option']='';
+			$data['keyword']='';	
+			}
+			else
+			{
+
+				if($this->input->post("empleave_id")!="")
+				{	
+					//echo "dsfdf if";die;
+					$this->leave_model->empleave_update();
+					$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
+					redirect('leave/empleavelist');
+				}
+				else
+				{   //echo "jh jhg";die;
+					$this->leave_model->empleave_insert();
+					$this->session->set_flashdata('success', 'Record has been Inserted Succesfully!');
+					redirect('leave/empleavelist');
+				}				
+			}
+		
+		 $data['leavelist']=$this->leave_model->leavelist();
+		 $data['emplist']=$this->attendance_model->emplist();
+		$this->load->view('Employee/add_empleave',$data);
+	}
+    
+    function edit_empleave($empleave_id){
+		if(!check_admin_authentication()){ 
+			redirect(base_url());
+		}else{
+			$data=array();
+			$data['activeTab']="editempleave";	
+			$result=$this->leave_model->getleavedata($empleave_id);	
+			//echo "<pre>";print_r($result);die;
+			$data['emp_id']=$result['emp_id'];
+			$data['leavedays']=$result['leavedays'];			
+			$data['empleave_id']=$result['empleave_id'];
+			$data['typeofleave']=$result['typeofleave'];
+			$data['leavefrom']=$result['leavefrom'];
+			$data['leaveto']=$result['leaveto'];
+			$data['leavetimein']=$result['leavetimein'];
+			$data['leavetimeout']=$result['leavetimeout'];
+			$data['noofdays']=$result['noofdays'];
+			$data['leavereason']=$result['leavereason'];
+			$data['leavestatus']=$result['leavestatus'];
+			//$data['firstlast']=$result['first_name'].' '.$result['last_name'];
+			$data['leaveto']=$result['leaveto'];
+			$data['redirect_page']="empleavelist";		
+			//echo "<pre>";print_r($data);die;
+		}
+		 $data['leavelist']=$this->leave_model->leavelist();
+		
+		$data['emplist']=$this->attendance_model->emplist();
+		$this->load->view('Employee/add_empleave',$data);
 	}
 
 	

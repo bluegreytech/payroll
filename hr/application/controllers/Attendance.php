@@ -34,8 +34,7 @@ class Attendance extends CI_Controller
 			$this->load->library("form_validation");
 			$this->form_validation->set_rules('attendancemonth', 'attendancemonth', 'required');
 		
-		    
-		
+		  		
 		if($this->form_validation->run() == FALSE){			
 			if(validation_errors())
 			{
