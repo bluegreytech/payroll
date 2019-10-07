@@ -988,27 +988,17 @@
 
 															<div class="form-group">
 
-																<label class="col-form-label">IBAN Number <span class="text-danger">*</span></label>
+																<label class="col-form-label">IFSC Code <span class="text-danger">*</span></label>
 
-																<input class="form-control" minlength="14" maxlength="20" type="text" name="Ibannumber" value="<?php echo $Ibannumber; ?>" placeholder="Enter IBAN number">
-
-															</div>
-
-												</div>
-
-
-
-												<div class="col-md-6">
-
-															<div class="form-group">
-
-																<label class="col-form-label">SWIFT Code<span class="text-danger">*</span></label>
-
-																<input class="form-control" minlength="05" maxlength="05" type="text" name="Swiftcode" value="<?php echo $Swiftcode; ?>" placeholder="Enter SWIFT code">
+																<input class="form-control" minlength="6" maxlength="20" type="text" name="Ifsccode" value="<?php echo $Ifsccode; ?>" placeholder="Enter IBAN number">
 
 															</div>
 
 												</div>
+
+
+
+												
 
 		
 

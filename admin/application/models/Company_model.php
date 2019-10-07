@@ -1,20 +1,45 @@
 <?php
-
-
-
-
-
-
-
 class Company_model extends CI_Model
-
 {
 
-	function get_docfile()
-
+	function get_id()
 	{	
 
-		$insert_id='1';
+		$insert_id='2';
+		$this->db->select('t1.*,t2.*');
+		$this->db->from('tblcompanynotification as t1');
+		$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
+		$this->db->where('t1.Companynotificationid','2');
+	//	$this->db->join('tblcomnotdocument as t2', 't1.Companynotificationid = t2.Companynotificationid', 'LEFT');
+		$smtp2 = $this->db->get();
+		$res = $smtp2->result();
+		return $res;
+		// foreach($smtp2->result() as $rows) {
+		// 	//echo $Documentfile = $rows->Documentfile;
+		// 	echo $companyid= $rows->companyid;
+		// }
+		
+
+		// $this->db->select('t1.*,t2.*');
+		// $this->db->from('tblcompanynotification as t1');
+		// $this->db->join('tblcomnotdocument as t2', 't1.Companynotificationid = t2.Companynotificationid', 'LEFT');
+		// $this->db->where('t1.Companynotificationid',2);
+		// $smtp3 = $this->db->get();	
+		// foreach($smtp3->result() as $rows) 
+		// {
+		// 	// echo $Documentfile = $rows->Documentfile;
+		// 	// $atch=base_url().'upload/company/Document/'.$Documentfile;	
+		// 	// $this->email->attach($atch);
+		// }
+	}
+
+
+
+
+	function get_docfile()
+	{	
+
+			$insert_id='1';
 
 			$this->db->select('t1.*,t2.*');
 
@@ -27,25 +52,10 @@ class Company_model extends CI_Model
 			$smtp2 = $this->db->get();	
 
 			foreach($smtp2->result() as $rows) {
-
-		
-
 				$Documentfile = $rows->Documentfile;
-
-				
-
 			}
 
-			//die;
-
-
-
 		
-
-		
-
-		
-
 		$email_message='hiiiiiiii testing';
 
 		$str=$email_message; 
@@ -123,39 +133,26 @@ class Company_model extends CI_Model
 
 
 	public function send_company_notification()
-
 	{
 
 		$companyid=implode(',',$this->input->post('companyid'));	
-
 		$Enddate=$this->input->post('Enddate');
 
 
 
 		$bdate = str_replace('/', '-', $Enddate );
-
 		$birth = date("Y-m-d", strtotime($bdate));
-
 		$data=array( 
-
 		'companyid'=>$companyid,
-
 		'Enddate'=>$birth,
-
 		'Isactive'=>'Active',
-
 		'Createdby'=>1,
-
 		'Createdon'=>date("Y-m-d h:i:s")
-
 		);
 
 		$this->db->insert('tblcompanynotification',$data);
-
 		$insert_id = $this->db->insert_id();
-
 		$data = array();
-
 		$user_image='';
 
 
@@ -292,7 +289,7 @@ class Company_model extends CI_Model
 
 		 } 
 
-
+		 return 1;
 
 		if($insert_id!=''){
 
@@ -1451,33 +1448,16 @@ class Company_model extends CI_Model
 					);
 
 				$this->db->insert('tblcompanycompliances',$data2);	
-
-
-
 				$Accountnumber=$this->input->post('Accountnumber');
-
 				$Branch=$this->input->post('Branch');	
-
 				$Bankname=$this->input->post('Bankname');
-
-				$Ibannumber=$this->input->post('Ibannumber');
-
-				$Swiftcode=$this->input->post('Swiftcode');
-
+				$Ifsccode=$this->input->post('Ifsccode');
 				$data4=array( 
-
 					'companyid'=>$insert_id,
-
 					'Accountnumber'=>$Accountnumber,
-
 					'Branch'=>$Branch,
-
 					'Bankname'=>$Bankname,
-
-					'Ibannumber'=>$Ibannumber,
-
-					'Swiftcode'=>$Swiftcode
-
+					'Ifsccode'=>$Ifsccode
 					);
 
 				$this->db->insert('tblcompanybankdetail',$data4);	
@@ -1901,21 +1881,11 @@ class Company_model extends CI_Model
 
 
 	function update_company()
-
 	{	
-
-
-
-
-
 		$companyid=$this->input->post('companyid');
-
 		$companycomplianceid=$this->input->post('companycomplianceid');
-
 		$Companyshiftid=$this->input->post('Companyshiftid');
-
 		$Bankdetailid=$this->input->post('Bankdetailid');
-
 		//echo "<pre>";print_r($_FILES);die;
 
 		$user_image='';
@@ -2177,41 +2147,23 @@ class Company_model extends CI_Model
 				
 
 				if($Bankdetailid!='')
-
 				{
-
 					$Accountnumber=$this->input->post('Accountnumber');
-
 					$Branch=$this->input->post('Branch');	
-
 					$Bankname=$this->input->post('Bankname');
+					$Ifsccode=$this->input->post('Ifsccode');
 
-					$Ibannumber=$this->input->post('Ibannumber');
-
-					$Swiftcode=$this->input->post('Swiftcode');
 
 				$data4=array( 
-
 					'Accountnumber'=>$Accountnumber,
-
 					'Branch'=>$Branch,
-
 					'Bankname'=>$Bankname,
-
-					'Ibannumber'=>$Ibannumber,
-
-					'Swiftcode'=>$Swiftcode
-
+					'Ifsccode'=>$Ifsccode
 					);
-
 				//	print_r($data4);
-
 					$this->db->where("Bankdetailid",$Bankdetailid);
-
 					$this->db->update('tblcompanybankdetail',$data4);
-
 					return 1;
-
 				}
 
 	}
