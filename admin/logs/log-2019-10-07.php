@@ -29,3 +29,31 @@ ERROR - 2019-10-07 14:33:27 --> Query error: Unknown column 't1.isdelete' in 'wh
 FROM `tblcompany` as `t1`
 LEFT JOIN `tblcompanytype` as `t2` ON `t1`.`companytypeid` = `t2`.`companytypeid`
 WHERE `t1`.`isdelete` = '0'
+ERROR - 2019-10-07 14:36:52 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-07 14:36:52 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-07 14:36:52 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-07 14:36:52 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-07 14:36:55 --> Query error: Unknown column 't1.isdelete' in 'where clause' - Invalid query: SELECT `t1`.*, `t2`.`companytype`
+FROM `tblcompany` as `t1`
+LEFT JOIN `tblcompanytype` as `t2` ON `t1`.`companytypeid` = `t2`.`companytypeid`
+WHERE `t1`.`isdelete` = '0'
+AND `t1`.`isdelete` = '0'
+ORDER BY `companyid` DESC
+ERROR - 2019-10-07 14:37:32 --> Query error: Unknown column 't1.isdelete' in 'where clause' - Invalid query: SELECT `t1`.*, `t2`.`companytype`
+FROM `tblcompany` as `t1`
+LEFT JOIN `tblcompanytype` as `t2` ON `t1`.`companytypeid` = `t2`.`companytypeid`
+WHERE `t1`.`isdelete` = '0'
+AND `t1`.`isdelete` = '0'
+ORDER BY `companyid` DESC
+ERROR - 2019-10-07 14:37:46 --> Query error: Unknown column 't1.isdelete' in 'where clause' - Invalid query: SELECT `t1`.*, `t2`.`companytype`
+FROM `tblcompany` as `t1`
+LEFT JOIN `tblcompanytype` as `t2` ON `t1`.`companytypeid` = `t2`.`companytypeid`
+WHERE `t1`.`isdelete` = '0'
+AND `t1`.`isdelete` = '0'
+ORDER BY `companyid` DESC
+ERROR - 2019-10-07 14:37:58 --> Query error: Unknown column 't1.isdelete' in 'where clause' - Invalid query: SELECT `t1`.*, `t2`.`companytype`
+FROM `tblcompany` as `t1`
+LEFT JOIN `tblcompanytype` as `t2` ON `t1`.`companytypeid` = `t2`.`companytypeid`
+WHERE `t1`.`isdelete` = '0'
+AND `t1`.`isdelete` = '0'
+ORDER BY `companyid` DESC
