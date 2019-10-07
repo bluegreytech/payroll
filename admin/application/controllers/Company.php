@@ -114,12 +114,10 @@ class Company extends CI_Controller
 
 	public function Sendnotification()
 
-	{ 
-
+	{
 		if($_POST)
 
-		{
-
+		{		
 			$result=$this->Company_model->send_company_notification();
 
 			if($result==1)

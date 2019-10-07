@@ -1,127 +1,53 @@
 <?php
-
-
-
-
-
-
-
 class Company_model extends CI_Model
-
 {
-
 	function get_docfile()
-
-	{	
-
+	{
 		$insert_id='1';
-
 			$this->db->select('t1.*,t2.*');
-
 			$this->db->from('tblcompanynotification as t1');
-
 			$this->db->join('tblcomnotdocument as t2', 't1.Companynotificationid = t2.Companynotificationid', 'LEFT');
-
 			$this->db->where('t1.Companynotificationid',3);
-
 			$smtp2 = $this->db->get();	
-
 			foreach($smtp2->result() as $rows) {
-
-		
-
 				$Documentfile = $rows->Documentfile;
-
-				
-
 			}
 
-			//die;
-
-
-
-		
-
-		
-
-		
-
 		$email_message='hiiiiiiii testing';
-
 		$str=$email_message; 
-
 		$config['protocol']='smtp';
-
 		$config['smtp_host']='ssl://smtp.googlemail.com';
-
 		$config['smtp_port']='465';
-
 		$config['smtp_user']='bluegreyindia@gmail.com';
-
 		$config['smtp_pass']='Test@123';
-
 		$config['charset']='utf-8';
-
 		$config['newline']="\r\n";
-
-		$config['mailtype'] = 'html';								
-
+		$config['mailtype'] = 'html';
 		$this->email->initialize($config);
-
-		$body =$str;	
-
+		$body =$str;
 		$this->email->from('bluegreyindia@gmail.com');
-
-		$this->email->to('bluegreyindia@gmail.com');		
-
+		$this->email->to('bluegreyindia@gmail.com');
 		$this->email->subject('Important notification to company');
-
 		$this->email->message($body);
-
 		$this->db->select('t1.*,t2.*');
-
 		$this->db->from('tblcompanynotification as t1');
-
-		$this->db->join('tblcomnotdocument as t2', 't1.Companynotificationid = t2.Companynotificationid', 'LEFT');
-
+		$this->db->join('tblcomnotdocument as t2','t1.Companynotificationid = t2.Companynotificationid', 'LEFT');
 		$this->db->where('t1.Companynotificationid',1);
-
-		$smtp3 = $this->db->get();	
-
-		foreach($smtp3->result() as $rows) {
-
+		$smtp3 = $this->db->get();
+		foreach($smtp3->result() as $rows){
 			echo $Documentfile = $rows->Documentfile;
-
-			$atch=base_url().'upload/company/Document/'.$Documentfile;	
-
+			$atch=base_url().'upload/company/Document/'.$Documentfile;
 			$this->email->attach($atch);
-
 		}
-
-		//die;	
-
 		if($this->email->send())
-
 		{
-
 			return 1;
-
 		}else
-
 		{
-
 			return 2;
-
 		}
 
 	}
-
-
-
-
-
-
-
 	public function send_company_notification()
 
 	{
@@ -584,7 +510,7 @@ class Company_model extends CI_Model
 
 	{
 
-		$where = array('isdelete' =>'0');
+		$where = array('Is_deleted' =>'0');
 
 		$this->db->select('*');
 
@@ -612,7 +538,7 @@ class Company_model extends CI_Model
 
 		$this->db->where('isactive!=','0');
 
-		$this->db->or_where('isdelete','0');
+		$this->db->or_where('Is_deleted','0');
 
 		$r=$this->db->get();
 
@@ -666,7 +592,7 @@ class Company_model extends CI_Model
 
 	{
 
-		    $where = array('t1.isdelete' =>'0');
+		    $where = array('t1.Is_deleted' =>'0');
 
 			$this->db->select('t1.*,t2.companytype');
 

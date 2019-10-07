@@ -360,3 +360,9 @@ ERROR - 2019-10-07 14:05:03 --> 404 Page Not Found: Default/assets
 ERROR - 2019-10-07 14:05:05 --> 404 Page Not Found: Default/images
 ERROR - 2019-10-07 14:06:03 --> 404 Page Not Found: Default/assets
 ERROR - 2019-10-07 14:06:47 --> 404 Page Not Found: Default/images
+ERROR - 2019-10-07 14:14:12 --> 404 Page Not Found: Default/images
+ERROR - 2019-10-07 14:16:31 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-07 14:16:37 --> 404 Page Not Found: Default/images
+ERROR - 2019-10-07 14:17:15 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-07 14:18:10 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-07 14:19:35 --> 404 Page Not Found: Assets/img

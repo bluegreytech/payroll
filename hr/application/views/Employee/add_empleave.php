@@ -273,20 +273,23 @@ $(document).ready(function() {
 		var timeDiff = Math.abs((dateSecond.getTime()) - dateFirst.getTime());
 		var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
 		total=diffDays+1;
-
-		//console.log(diffDays+1);
 		$('#noofdays').val(total);
     });
 
-     $('#timeout').focusout(function(){  
-			var timein = $('#timein').val();
-			var timeout = $('#timeout').val();
-			alert(timein);
-			alert(timeout);
-		    var diff =  new Date(timeout) - new Date( timein);  
+  //    $('#timeout').focusout(function(){  
+	 //    var dateFirst = new Date(myDateFormatter(fromDate));
+		// var dateSecond = new Date(myDateFormatter(toDate));  
+		// alert(dateFirst);  
+		// alert(dateSecond);  
+		// // time difference
+		// var timeDiff = Math.abs((dateSecond.getTime()) - dateFirst.getTime());
+		// var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+		// total=diffDays+1;
+		// $('#noofdays').val(total);
+		//    // var diff =  new Date(timeout) - new Date( timein);  
 
-			alert(diff);
-		});
+		// 	alert(diff);
+		// });
 });
 	
 	
