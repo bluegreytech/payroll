@@ -7,9 +7,21 @@
 ?>
 
 
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+		<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.0/css/buttons.dataTables.min.css">
 
+	
+  <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
 
+		<!-- External -->
 
+		<!-- <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.5/css/fixedHeader.bootstrap.min.css">
+
+		<link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.5/css/fixedHeader.bootstrap.min.css">
+
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+
+		<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css"> -->
 
 
 			<!-- Page Wrapper -->
@@ -104,75 +116,6 @@
 
 
 
-					<!-- Search Filter -->
-
-					<!-- <div class="row filter-row">
-
-						<div class="col-sm-6 col-md-3"> 
-
-							<div class="form-group form-focus select-focus">
-
-								<select class="select floating"> 
-
-									<option>Select Client</option>
-
-									<option>Global Technologies</option>
-
-									<option>Delta Infotech</option>
-
-								</select>
-
-								<label class="focus-label">Client</label>
-
-							</div>
-
-						</div>
-
-						<div class="col-sm-6 col-md-3">  
-
-							<div class="form-group form-focus">
-
-								<div class="cal-icon">
-
-									<input class="form-control floating datetimepicker" type="text">
-
-								</div>
-
-								<label class="focus-label">From</label>
-
-							</div>
-
-						</div>
-
-
-
-						<div class="col-sm-6 col-md-3">  
-
-							<div class="form-group form-focus">
-
-								<div class="cal-icon">
-
-									<input class="form-control floating datetimepicker" type="text">
-
-								</div>
-
-								<label class="focus-label">To</label>
-
-							</div>
-
-						</div>
-
-
-
-						<div class="col-sm-6 col-md-3">  
-
-							<a href="#" class="btn btn-success btn-block"> Search </a>  
-
-						</div>     
-
-                    </div> -->
-
-
 
 						<!-- Search Filter -->
 
@@ -191,21 +134,10 @@
 										<div class="form-group form-focus select-focus">
 
 											<select class="select floating" name="option" id="purpose"> 
-
 												<option value=""> -- Select -- </option>
-
 												<option value="companyname">Company Name</option>
-
 												<option value="status">Paymeny Status</option>
-
 												<option value="invoicedate">Date From to To</option>
-
-													<!-- <option value="phone">Contact Number</option>
-
-												<option value="department">Department</option>
-
-												<option value="desgination">Designation</option> -->
-
 											</select>
 
 										</div>
@@ -339,8 +271,9 @@
 						<div class="col-md-12">
 
 							<div class="table-responsive">
+								<table  id="example" class="display nowrap" style="width:100%">
 
-								<table class="table table-striped custom-table mb-0 datatable">
+								<!-- <table class="table table-striped custom-table mb-0 datatable"> -->
 
 									<thead>
 
@@ -396,26 +329,26 @@
 
 										<td><?php echo $compInvoice->netamount ;?></td>		
 
-										<!-- <td>		
-
-											<?php //if($compInvoice->status=='Paid'){ 
-
-												//echo "<span class='badge badge-success-border'>$compInvoice->status</span>";
-
-												//}?>
-
-											<?php //if($compInvoice->status=='Pending'){
-
-													//echo "<span class='badge badge-danger-border'>$compInvoice->status</span>";
-
-													//}?>
-
-										</td> -->
-
 										<td>		
-											<?php echo $compInvoice->status;?>
+
+											<?php if($compInvoice->status=='Paid'){ 
+
+												echo "<span class='badge badge-success-border'>$compInvoice->status</span>";
+
+												}?>
+
+											<?php if($compInvoice->status=='Pending'){
+
+													echo "<span class='badge badge-danger-border'>$compInvoice->status</span>";
+
+													}?>
 
 										</td>
+
+										<!-- <td>		
+											<?php echo $compInvoice->status;?>
+
+										</td> -->
 
 										<td class="text-right">
 
@@ -616,7 +549,109 @@
 		<div class="sidebar-overlay" data-reff=""></div>
 
 		<?php $this->load->view('common/footer');?>
-		<script type="text/javascript">
+
+		
+		<!-- External -->
+
+
+
+		<!-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+		 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>	 -->
+
+		<!-- <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>	 -->
+
+		<!-- <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>		 -->
+
+		<!-- <script src="https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>		 -->
+
+		<!-- <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>		 -->
+
+		<!-- <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>		
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+
+		<script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+
+		<script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script> -->
+
+
+		<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+		<script src="https://cdn.datatables.net/buttons/1.6.0/js/dataTables.buttons.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+		<script src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.html5.min.js"></script>
+		<script src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.colVis.min.js"></script>
+		
+
+
+
+
+
+
+
+		<!-- Custom JS -->
+
+		
+
+
+
+<th>Due Date</th>
+
+<th>Amount</th>
+
+<th>Status</th>
+
+		<script>
+
+$(document).ready(function() {
+    $('#example').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+          
+            {
+                extend: 'excelHtml5',
+                exportOptions: {
+                    columns: [ 0,1,2,3,4,5]
+                }
+            },
+            {
+                extend: 'pdfHtml5',
+                exportOptions: {
+                    columns: [ 0,1,2,3,4,5]
+                }
+            },
+            'colvis'
+        ]
+    } );
+} );
+
+		$(function() { 
+			setTimeout(function() {
+		$('#errorMessage').fadeOut('fast');
+		}, 10000);  
+		});
+
+
+		$(function() { 
+			setTimeout(function() {
+		$('#successMessage').fadeOut('fast');
+		}, 10000);  
+		});
+
+
+		$(function() { 
+			setTimeout(function() {
+		$('#warningMessage').fadeOut('fast');
+		}, 10000);  
+
+		});
+		
 
 		$('#invoicedate').datetimepicker({
 			defaultDate: new Date(),

@@ -1,11 +1,6 @@
 ﻿<?php 
-
-
-
 	 $this->load->view('common/header.php');
 	 $this->load->view('common/sidebar.php');
-
-
 
 ?>
 
@@ -266,7 +261,7 @@
 
 												?>
 
-												<a href="<?php echo base_url();?>Company/profile/<?php echo $comp->companyid;?>" title="show company profile" class="avatar"><img src="<?php echo base_url();?>upload/company/<?php echo $comp->companyimage;?>" ></a>
+												<a href="<?php echo base_url();?>Company/profile/<?php echo $comp->companyid;?>" title="show company profile" class="avatar"><img src="<?php echo base_url();?>upload/company/<?php echo $comp->companyimage;?>"></a>
 
 												<a href="<?php echo base_url();?>Company/profile/<?php echo $comp->companyid;?>" title="show company profile"><?php echo $comp->companyname ;?> </a>
 

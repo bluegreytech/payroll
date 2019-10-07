@@ -74,13 +74,16 @@
 
 		<link rel="stylesheet" href="<?php echo base_url(); ?>default/css/fullcalendar.min.css">
 
-
+		<!-- External -->
+		<link rel="stylesheet" href="<?php echo base_url(); ?>default/css/bootstrap-select.css" />
 
 		<!-- Tagsinput CSS -->
 
 		<link rel="stylesheet" href="<?php echo base_url(); ?>default/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css">
 
+		<script src="<?php echo base_url(); ?>default/ckeditor/ckeditor.js" type="text/javascript"></script>
 
+	
 
         <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
 
@@ -94,7 +97,9 @@
 
 		<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css"> -->
 
-
+		
+		
+		
 
 </head>
 

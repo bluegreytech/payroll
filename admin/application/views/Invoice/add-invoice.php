@@ -307,28 +307,9 @@
 
 									
 
-									<!-- <div class="col-sm-6 col-md-3">
-
-										<div class="form-group">
-
-											<label>Tax option</label>
-
-											<select class="form-control" name="taxoption">
-												<option value="" disabled>Select tax option</option>
-												<option value="GST">GST</option>
-												<option value="CGST">CGST</option>
-											</select>
-
-										</div>
-
-									</div> -->
-
-
-
-
+								
 
 								</div>
-
 
 
 								<div class="row">
@@ -440,19 +421,31 @@
 
 										</div>
 
-
-
-										
-
-
-
 									</div>
-
-
 
 								</div>
 
 
+								<!-- <div class="row">
+											<div class="col-md-12">
+												<div class="form-group">
+													<label>Other Information</label>
+													<textarea class="form-control" rows="4"></textarea>
+												</div>
+											</div>
+								</div> -->
+
+								<div class="row">
+									<div class="col-md-12">
+									<div class="form-group">
+									<label>Other Information</label>
+									<textarea id="editor1" rows="5" class="form-control"  name="Otherinformation" placeholder="Other Information"> <?php echo $Otherinformation?></textarea>
+					                  <script>
+					                    CKEDITOR.replace('editor1');
+					                  </script>
+								</div>
+									</div>
+								</div>
 
 								<div class="submit-section">
 
@@ -634,9 +627,7 @@ function gethr(companyid) {
 			$('#EmailAddress').val(response.EmailAddress);
 
 			$("option[id=hr_id][value=" + response.hr_id=='#hr_id' + "]").attr('selected', 'selected');
-
          }
-
       });	
 
 }
@@ -682,10 +673,13 @@ $(document).ready(function()
 								},		
 
 						addtax: {
-
 							required: true,
-
-								},		
+								},
+						Otherinformation: {
+							required: true,
+								},
+								
+										
 
 					},
 
@@ -716,12 +710,12 @@ $(document).ready(function()
 						},
 
 						addtax: {
-
 							required: "Please select payment option",
-
 								},
 
-					
+						Otherinformation: {
+							required: "Please select payment option",
+								},
 
 
 

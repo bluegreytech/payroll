@@ -16,14 +16,17 @@ class Company extends CI_Controller
 
 	}
 
+	public function getcompanyid(){
+		$result=$this->Company_model->get_id();	
+		echo "<br>";print_r($result);die;
+	//	$this->load->view('Company/sendnotification',$data);
+
+	}
 
 
 	public function getfile(){
-
 		$result=$this->Company_model->get_docfile();	
-
 		echo "<br>";print_r($result);die;
-
 		$this->load->view('Company/sendnotification',$data);
 
 	}
@@ -31,17 +34,11 @@ class Company extends CI_Controller
 
 
 	public function profile($companyid)
-
 	{	
-
 		if(!check_admin_authentication()){ 
-
 			redirect(base_url('Login'));
-
 		}
-
 		$data=array();
-
 		$result=$this->Company_model->get_companyprofile($companyid);	
 
 		//echo "<br>";print_r($result);die;
@@ -115,35 +112,24 @@ class Company extends CI_Controller
 	public function Sendnotification()
 
 	{
+		
 		if($_POST)
+		{
 
-		{		
 			$result=$this->Company_model->send_company_notification();
-
 			if($result==1)
-
 			{
-
 				$this->session->set_flashdata('success', 'Notification has been send Successfully!');
-
 				redirect('Company/Sendnotification');
-
 			}
-
 			else if($result==2)
-
 			{
-
 				$this->session->set_flashdata('error', 'Your was not Inserted!');
-
 				redirect('Company/Sendnotification');
-
 			}	
 
 		}
-
 		$data['companyData']=$this->Company_model->list_company();
-
         $this->load->view('Company/sendnotification',$data);
 
 	}
@@ -626,9 +612,9 @@ class Company extends CI_Controller
 
 		$data['Bankname']=$result['Bankname'];
 
-		$data['Ibannumber']=$result['Ibannumber'];
+		$data['Ifsccode']=$result['Ifsccode'];
 
-		$data['Swiftcode']=$result['Swiftcode'];
+	
 
 		
 

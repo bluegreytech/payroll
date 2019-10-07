@@ -65,7 +65,6 @@ class Invoice extends CI_Controller
 
 
 	public function createinvoice()
-
 	{
 
 			$data=array();
@@ -201,42 +200,26 @@ class Invoice extends CI_Controller
 		$data=array();
 
 		$result=$this->Invoice_model->get_invoice($Companyinvoiceid);	
-
 		$data['Companyinvoiceid']=$result['Companyinvoiceid'];
-
 		$data['companyid']=$result['companyid'];
-
 		$data['hr_id']=$result['hr_id'];
-
 		$data['hr_type']=$result['hr_type'];
-
 		$data['FullName']=$result['FullName'];
-
 		$data['EmailAddress']=$result['EmailAddress'];
-
 		$data['paymentopt']=$result['paymentopt'];
-
 		$data['invoicedate']=$result['invoicedate'];
-
 		$data['duedate']=$result['duedate'];
-
 		$data['amount']=$result['amount'];
-
 		$data['totalamount']=$result['totalamount'];
-
 		$data['addtax']=$result['addtax'];
-
 		$data['taxamount']=$result['taxamount'];
-
 		$data['cgstamount']=$result['cgstamount'];
 		$data['netamount']=$result['netamount'];
+		$data['Otherinformation']=$result['Otherinformation'];
 
 		
-
 		$data['hrData']=$this->Invoice_model->list_hr();
-
 	    $data['companyData']=$this->Invoice_model->list_company();
-
 		$this->load->view('Invoice/add-invoice',$data);
 
 	}
@@ -271,73 +254,76 @@ class Invoice extends CI_Controller
 
 	}
 
+	public function sendinvoiceemail($companyid)
+	{
+		//echo $companyid;die;
+		$result=$this->Invoice_model->add_email($companyid);
+		//echo "<br>";print_r($result);die;
+		if($result==1)
+		{
+			$this->session->set_flashdata('success', 'Email send Successfuly!');	
+			redirect('Invoice');
+		}
+		else if($result==2)
+		{
+			$this->session->set_flashdata('error', 'Email funaction was not working!');
+			redirect('Invoice');
+		}
+	//	$this->load->view('Invoice/invoice-view');
+	}
 
 
 	public function invoice_view($Companyinvoiceid)
-
 	{
-
+		// if($_POST)
+		// {
+		// 	if($this->input->post('companyid')=='')
+		// 	{		echo "fgdfg";die;	
+		// 		$result=$this->Invoice_model->add_email();
+		// 	}
+		// }
 		$data=array();
 
-		$AdminId=$this->session->userdata('AdminId');
+				$AdminId=$this->session->userdata('AdminId');
+				$result=$this->Invoice_model->get_companyinvoice($Companyinvoiceid);	
+			//	echo "<br>";print_r($result);die;
+				$data['Companyinvoiceid']=$result['Companyinvoiceid'];
+				$data['invoicedate']=$result['invoicedate'];
+				$data['duedate']=$result['duedate'];
+				$data['totalamount']=$result['totalamount'];
+				$data['taxamount']=$result['taxamount'];
+				$data['netamount']=$result['netamount'];
+				$data['status']=$result['status'];
+				$data['companyid']=$result['companyid'];
+				$data['companyname']=$result['companyname'];
+				$data['comemailaddress']=$result['comemailaddress'];
+				$data['comcontactnumber']=$result['comcontactnumber'];
+				$data['gstnumber']=$result['gstnumber'];
+				$data['digitalsignaturedate']=$result['digitalsignaturedate'];
+				$data['companyimage']=$result['companyimage'];
+				$data['companyimage']= $result['companyimage'];
+				$data['companyaddress']=$result['companyaddress'];
+				$data['companycity']=$result['companycity'];
+				$data['pincode']=$result['pincode'];
+				$data['isactive']=$result['isactive'];
+				$data['hr_id']=$result['hr_id'];
+				$data['FullName']=$result['FullName'];
+				$data['EmailAddress']=$result['EmailAddress'];
+				$data['Bankdetailid']=$result['Bankdetailid'];
+				$data['Accountnumber']=$result['Accountnumber'];
+				$data['Branch']=$result['Branch'];
+				$data['Bankname']=$result['Bankname'];
+				$data['Ifsccode']=$result['Ifsccode'];
+				$data['addtax']=$result['addtax'];
+				$data['taxamount']=$result['taxamount'];
+				$data['cgstamount']=$result['cgstamount'];
+				$data['netamount']=$result['netamount'];
+				$data['Otherinformation']=$result['Otherinformation'];
+				$data['Address']=$result['Address'];
+		
+			
+				
 
-		$result=$this->Invoice_model->get_companyinvoice($Companyinvoiceid);	
-
-	//	echo "<br>";print_r($result);die;
-
-		$data['Companyinvoiceid']=$result['Companyinvoiceid'];
-
-		$data['invoicedate']=$result['invoicedate'];
-
-		$data['duedate']=$result['duedate'];
-
-		$data['totalamount']=$result['totalamount'];
-
-		$data['taxamount']=$result['taxamount'];
-
-		$data['netamount']=$result['netamount'];
-
-		$data['status']=$result['status'];
-
-		$data['companyid']=$result['companyid'];
-
-		$data['companyname']=$result['companyname'];
-
-		$data['comemailaddress']=$result['comemailaddress'];
-
-		$data['comcontactnumber']=$result['comcontactnumber'];
-
-		$data['gstnumber']=$result['gstnumber'];
-
-		$data['digitalsignaturedate']=$result['digitalsignaturedate'];
-
-		$data['companyimage']=$result['companyimage'];
-
-		$data['companyimage']= $result['companyimage'];
-
-		$data['companyaddress']=$result['companyaddress'];
-
-		$data['companycity']=$result['companycity'];
-
-		$data['pincode']=$result['pincode'];
-
-		$data['isactive']=$result['isactive'];
-
-		$data['hr_id']=$result['hr_id'];
-
-		$data['FullName']=$result['FullName'];
-		$data['EmailAddress']=$result['EmailAddress'];
-		$data['Bankdetailid']=$result['Bankdetailid'];
-		$data['Accountnumber']=$result['Accountnumber'];
-		$data['Branch']=$result['Branch'];
-		$data['Bankname']=$result['Bankname'];
-		$data['Ibannumber']=$result['Ibannumber'];
-		$data['Swiftcode']=$result['Swiftcode'];
-		$data['addtax']=$result['addtax'];
-		$data['taxamount']=$result['taxamount'];
-		$data['cgstamount']=$result['cgstamount'];
-		$data['netamount']=$result['netamount'];
-		$data['Address']=$result['Address'];
 		$this->load->view('Invoice/invoice-view',$data);
 
 	}
@@ -396,27 +382,16 @@ class Invoice extends CI_Controller
 					);
 
 			$this->db->where("Companyinvoiceid",$Companyinvoiceid);
-
 			$result=$this->db->update('tblcompanyinvoice',$data);
-
 			if($result)
-
 			{
-
 				$this->session->set_flashdata('success', 'Invoice has been deleted!');
-
 				redirect('Company');
-
 			}
-
 			else
-
 			{
-
 				$this->session->set_flashdata('error', 'Invoice was not delete!');
-
 				redirect('Company');
-
 			}
 
 

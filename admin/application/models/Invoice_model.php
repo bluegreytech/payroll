@@ -74,35 +74,93 @@ class Invoice_model extends CI_Model
 
 	}
 
+	function add_email($companyid)
+	{
+			//echo $companyid;die;
+			$this->db->select('t1.*');
+			$this->db->from('tblcompany as t1');
+			$this->db->where('t1.companyid',$companyid);
+			// $r=$this->db->get();
+			// $res = $r->result();
+			// return $res;
+			$smtp2 = $this->db->get();	
+			foreach($smtp2->result() as $rows) {
+			echo	$companyid = $rows->companyid;
+			echo	$companyname = $rows->companyname;
+			echo	$comemailaddress = $rows->comemailaddress;
+			
+			}
 
+
+
+				// $email_template=$this->db->query("select * from ".$this->db->dbprefix('tblemail_template')." where task='Company verification'");
+
+				// $email_temp=$email_template->row();
+
+				// $email_address_from=$email_temp->from_address;
+
+				// $email_address_reply=$email_temp->reply_address;
+
+				// $email_subject=$email_temp->subject;        
+
+				// $email_message=$email_temp->message;
+
+				//$email_message=$Notificationdescription;
+
+				$str='Testing'; 
+				// $email_config = Array(
+				// 	'protocol'  => 'smtp',
+				// 	'smtp_host' => 'relay-hosting.secureserver.net',
+				// 	'smtp_port' => '465',
+				// 	'smtp_user' => 'mitesh@bluegreytech.co.in',
+				// 	'smtp_pass' => 'Test@123',
+				// 	'mailtype'  => 'html',
+				// 	'starttls'  => true,
+				// 	'newline'   => "\r\n",
+				// 	'charset'=>'utf-8',
+				// 	'header'=> 'MIME-Version: 1.0',
+				// 	'header'=> 'Content-type:text/html;charset=UTF-8',
+				// 	);
+				// $this->load->library('email', $email_config);   
+
+				$config['protocol']='smtp';
+				$config['smtp_host']='ssl://smtp.googlemail.com';
+				$config['smtp_port']='465';
+				$config['smtp_user']='bluegreyindia@gmail.com';
+				$config['smtp_pass']='Test@123';
+				$config['charset']='utf-8';
+				$config['newline']="\r\n";
+				$config['mailtype'] = 'html';								
+				$this->email->initialize($config);
+			
+				$body =$str;	
+				$this->email->from('bluegreyindia@gmail.com');
+				$this->email->to($comemailaddress);		
+				$this->email->subject('Invoice send to company');
+				$this->email->message($body);
+				if($this->email->send())
+				{
+					return 1;
+				}else
+				{
+					return 2;
+				}
+
+	}
 
 	function add_invoice()
-
 	{	
-
 			$companyid=$this->input->post('companyid');
-
 			$hr_id=$this->input->post('hr_id');
-
 			$paymentopt=$this->input->post('paymentopt');
-
 			
-
 			$invoicedate=$this->input->post('invoicedate');
-
 			$indate = str_replace('/', '-', $invoicedate );
-
 			$invdate = date("Y-m-d", strtotime($indate));
 
-
-
 			$duedate=$this->input->post('duedate');
-
 			$ddate = str_replace('/', '-', $duedate);
-
 			$dueedate = date("Y-m-d", strtotime($ddate));
-
-			
 
 			$amount=$this->input->post('amount');	
 			$totalamount=$this->input->post('totalamount');	
@@ -110,6 +168,8 @@ class Invoice_model extends CI_Model
 			$taxamount=$this->input->post('taxamount');
 			$cgstamount=$this->input->post('cgstamount');
 			$netamount=$this->input->post('netamount');
+			$Otherinformation=$this->input->post('Otherinformation');
+			
 			$data=array( 
 			'companyid'=>$companyid,
 			'hr_id'=>$hr_id,
@@ -122,6 +182,7 @@ class Invoice_model extends CI_Model
 			'taxamount'=>$taxamount,
 			'cgstamount'=>$cgstamount,
 			'netamount'=>$netamount,
+			'Otherinformation'=>$Otherinformation,
 			'status'=>'Pending',
 			'Isactive'=>'Aactive'
 			);
@@ -140,25 +201,16 @@ class Invoice_model extends CI_Model
 
 
 	public function update_invoice()
-
 	{
-
 		$Companyinvoiceid=$this->input->post('Companyinvoiceid');
-
 		$invoicedate=$this->input->post('invoicedate');
 
 		$indate = str_replace('/', '-', $invoicedate );
-
 		$invdate = date("Y-m-d", strtotime($indate));
 
-
-
 		$duedate=$this->input->post('duedate');
-
 		$ddate = str_replace('/', '-', $duedate);
-
 		$dueedate = date("Y-m-d", strtotime($ddate));
-
 		$data=array(
 			'companyid'=>$this->input->post('companyid'),
 			'hr_id'=>$this->input->post('hr_id'),
@@ -170,15 +222,13 @@ class Invoice_model extends CI_Model
 			'addtax'=>$this->input->post('addtax'),
 			'taxamount'=>$this->input->post('taxamount'),
 			'cgstamount'=>$this->input->post('cgstamount'),
-			'netamount'=>$this->input->post('netamount')
+			'netamount'=>$this->input->post('netamount'),
+			'Otherinformation'=>$this->input->post('Otherinformation')
 				);
 
 			//print_r($data);die;
-
 			$this->db->where("Companyinvoiceid",$Companyinvoiceid);
-
 			$this->db->update('tblcompanyinvoice',$data);	
-
 			return 1;	 	
 
 		
@@ -192,27 +242,16 @@ class Invoice_model extends CI_Model
 
 
 	public function get_companyinvoice($Companyinvoiceid)
-
 	{
-
 		$AdminId=$this->session->userdata('AdminId');
-
 		$this->db->select('t1.*,t2.*,t3.*,t4.*,t5.*');
-
 		$this->db->from('tblcompanyinvoice as t1');
-
 		$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
-
 		$this->db->join('tblhr as t3', 't1.hr_id = t3.hr_id', 'LEFT');
-
 		$this->db->join('tblcompanybankdetail as t4', 't2.companyid = t4.companyid', 'LEFT');
-
 		$this->db->join('tbladmin as t5', $AdminId.'= t5.AdminId', 'LEFT');
-
 		$this->db->where('t1.Companyinvoiceid',$Companyinvoiceid);
-
 		$query=$this->db->get();
-
 		return $query->row_array();
 
 	}
