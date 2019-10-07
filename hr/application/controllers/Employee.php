@@ -9,8 +9,7 @@ class Employee extends CI_Controller
 	}
 	
 	public function emplist()
-	{ 
-		
+	{ 		
 		if(!check_admin_authentication()){ 
 			redirect(base_url());
 		}
@@ -18,13 +17,10 @@ class Employee extends CI_Controller
 		$data['option']='';
 		$data['keyword']='';
 		$data['redirect_page']='emplist';
-
-		 $data['result']=$this->employee_model->emplist();
-
+		$data['result']=$this->employee_model->emplist();
 		$this->load->view('Employee/emplist',$data);
 	}
 	function addemp(){
-
 		if(!check_admin_authentication()){ 
 			redirect(base_url());
 		}   
@@ -219,7 +215,7 @@ class Employee extends CI_Controller
 		}
 	
 	}
-	public	function searchemp(){
+	function searchemp(){
 		if(!check_admin_authentication()){ 
 			redirect(base_url());
 		}   
@@ -243,7 +239,7 @@ class Employee extends CI_Controller
 		//echo "<pre>";print_r($data['result']);die;
 		$this->load->view('Employee/emplist',$data);
 	}
-	 function email_check() {
+	function email_check() {
 		$query = $this->db->query("select email from " . $this->db->dbprefix('tblemp') . " where email= '".$this->input->post('email')."'");
 		//echo $this->db->last_query();die;
 		if ($query->num_rows() > 0) {
@@ -253,7 +249,7 @@ class Employee extends CI_Controller
 		}
 	}
 
-	 function empcode_check() {
+	function empcode_check() {
 		$query = $this->db->query("select employee_code from " . $this->db->dbprefix('tblemp') . " where employee_code= '".$this->input->post('employee_code')."'");
 		//echo $this->db->last_query();die;
 		if ($query->num_rows() > 0) {
@@ -262,4 +258,7 @@ class Employee extends CI_Controller
 			echo 0;die;
 		}
 	}
+
+	
+
 }

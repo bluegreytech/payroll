@@ -7142,6 +7142,9 @@ ul.comment-list li ul.children {
     color: #ff0000 !important;
 }
 
+input.form-control.timing {
+	background: transparent;
+}
 /* .multiselect-container {
         width: 100% !important;
     }*/

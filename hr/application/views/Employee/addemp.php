@@ -57,13 +57,13 @@
 									</div>
 									<div class="form-group">
 										<label>Designation<span class="text-danger">*</span></label>
-										<input class=" form-control" type="text" name="desgination" id="desgination" Placeholder="Designation" value="<?php echo $desgination ;?>">
+										<input class=" form-control" type="text" name="desgination" id="desgination" Placeholder="Designation" value="<?php echo $desgination;?>">
 									</div>
 									
 									<div class="form-group">
 										<label>First Name<span class="text-danger">*</span></label>
 										<input type="hidden" name="hr_id" id="hr_id">	
-										<input class="form-control" type="text" name="FirstName" Placeholder="First Name" id="First_Name" value="<?php echo $first_name ;?>" >
+										<input class="form-control" type="text" name="FirstName" Placeholder="First Name" id="First_Name" value="<?php echo $first_name ;?>">
 									</div>
 									<div class="form-group">
 										<label>Last Name<span class="text-danger">*</span></label>
@@ -713,10 +713,29 @@ function readURLdcox(input) {
              reader.readAsDataURL(input.files[0]);
             }
 }		
-$('[name="aadharcard"]').keyup(function() {
-  var value = $(this).val();
-  value = value.replace(/\D/g, "").split(/(?:([\d]{4}))/g).filter(s => s.length > 0).join("-");
-  $(this).val(value);
+$('[name="aadharcard"]').keypress(function(e) {
+  // var value = $(this).val();
+  // value = value.replace(/\D/g, "").split(/(?:([\d]{4}))/g).filter(s => s.length > 0).join("-");
+  // $(this).val(value);
+
+   	if(e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+      return false;
+    }
+    var curchr = this.value.length;
+    var curval = $(this).val();
+    //alert(curval)
+    if (curchr == 3 && curval.indexOf("(") <= -1) {
+     // $(this).val("(" + curval + ")" + "-");
+    } else
+    //  if (curchr == 4 && curval.indexOf("(") > -1) {
+    //   $(this).val(curval + ")-");
+    // } else
+     if (curchr == 5 && curval.indexOf(")") > -1) {
+      $(this).val(curval + "-");
+    } else if (curchr == 9) {
+      $(this).val(curval + "-");
+      $(this).attr('maxlength', '14');
+    }
 });		        
 </script>
     
