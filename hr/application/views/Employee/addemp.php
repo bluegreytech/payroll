@@ -230,7 +230,7 @@
 													<label>Upload Document <span class="text-danger">*</span></label>
 													<input type="hidden" class="form-control" name="pre_bank_detail" id="pre_bank_detail" value="<?php echo $bankdetail;?>">
 													<input type="file" class="form-control" name="bank_detail" id="bank_detail" onchange="readURLdcox(this);">
-													<span class="form-text text-muted">Recommended image size is 40px x 40px</span>
+													<!-- <span class="form-text text-muted">Recommended image size is 40px x 40px</span> -->
 												</div>
 											</div>
 											<div class="col-md-6">
@@ -248,7 +248,7 @@
 														<?php  }else{  ?>
 
 														<a target="_blank" href="<?php echo base_url()?>upload/empdetail/<?php echo $bankdetail;?>"><img id="blahdocx" src="<?php echo base_url()?>upload/empdetail/<?php echo $bankdetail;?>" class="img-thumbnail border-0" style="display: block;  width: 100px; height: 100px;"></a>
-														<?php } ?>
+													<?php } ?>
 
 												<?php } else{ ?>
 
@@ -501,7 +501,7 @@ $(document).ready(function()
 	$.validator.addMethod('filesize', function (value, element, param) {
 	return this.optional(element) || (element.files[0].size <= param)
 	} ,'File size must be equal to or less then 2MB');
-	  jQuery.validator.addMethod("pan", function(value, element)
+	jQuery.validator.addMethod("pan", function(value, element)
     {
         return this.optional(element) || /^[A-Z]{5}\d{4}[A-Z]{1}$/.test(value);
     }, "Please enter a valid PAN");  
@@ -714,28 +714,30 @@ function readURLdcox(input) {
             }
 }		
 $('[name="aadharcard"]').keypress(function(e) {
-  // var value = $(this).val();
-  // value = value.replace(/\D/g, "").split(/(?:([\d]{4}))/g).filter(s => s.length > 0).join("-");
-  // $(this).val(value);
+   var value = $(this).val();
+   value = value.replace(/\D/g, "").split(/(?:([\d]{4}))/g).filter(s => s.length > 0).join("-");
+   $(this).val(value);
 
-   	if(e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
-      return false;
-    }
-    var curchr = this.value.length;
-    var curval = $(this).val();
-    //alert(curval)
-    if (curchr == 3 && curval.indexOf("(") <= -1) {
-     // $(this).val("(" + curval + ")" + "-");
-    } else
-    //  if (curchr == 4 && curval.indexOf("(") > -1) {
-    //   $(this).val(curval + ")-");
+   	// if(e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+    //   return false;
+    // }
+    // var curchr = this.value.length;
+    // var curval = $(this).val();
+    // //alert(curval)
+    // if (curchr == 3 && curval.indexOf("(") <= -1) {
+    //  // $(this).val("(" + curval + ")" + "-");
     // } else
-     if (curchr == 5 && curval.indexOf(")") > -1) {
-      $(this).val(curval + "-");
-    } else if (curchr == 9) {
-      $(this).val(curval + "-");
-      $(this).attr('maxlength', '14');
-    }
-});		        
+    // //  if (curchr == 4 && curval.indexOf("(") > -1) {
+    // //   $(this).val(curval + ")-");
+    // // } else
+    //  if (curchr == 5 && curval.indexOf(")") > -1) {
+    //   $(this).val(curval + "-");
+    // } else if (curchr == 9) {
+    //   $(this).val(curval + "-");
+    //   $(this).attr('maxlength', '14');
+    // }
+});	
+
+ 	        
 </script>
     

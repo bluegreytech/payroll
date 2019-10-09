@@ -70,15 +70,26 @@
 		<!-- /Search Filter -->
 
 		<div class="row">
+
+							
+					
 			<div class="col-md-12">
+               	
 				<div class="table-responsive">
-					<table class="table table-striped custom-table datatable" >
+                     <!-- 	<div class="col-sm-12 col-md-12 text-right">
+               				<div class="btn-group btn-group-sm ">
+								<button class="btn btn-white"><i class="fa fa-file-pdf-o fa-lg"></i> PDF</button>
+								<button class="btn btn-white" onclick="salaryslip()"><i class="fa fa-print fa-lg"></i> Print</button>
+							</div>
+						</div> -->
+					<!-- <table  class="table table-striped custom-table datatable"> -->
+					   <table id="example" class=" display table table-striped  custom-table">
 						<thead>
 						<tr>
 							<th>No</th>
 							<th>Full Name</th>
 							<th>Email Address</th>
-							<th>Contact Number</th>
+							<th>Contact No.</th>
 							<th>Join Date</th>
 							<th>Status</th>		
 							<th class="text-right">Action</th>
@@ -96,7 +107,7 @@
 							<td><?php echo $i;?></td>
 						<td>
 						<h2 class="table-avatar">
-							<?php 
+							<?php 	
 							
 							 if(($row->ProfileImage!='' && file_exists(base_path().'/upload/emp/'.$row->ProfileImage))){  ?>
 								
@@ -149,9 +160,6 @@
 		<!--Start Add Hr Modal -->
 		
 		<!-- End Add Hr Modal -->
-
-
-
 
 	<div class="modal custom-modal fade" id="delete_approve" role="dialog">
 		<div class="modal-dialog modal-dialog-centered">
@@ -211,6 +219,80 @@
 
 <?php $this->load->view('common/footer');?>
 <script>
+	$(document).ready(function() {
+	 $('#example').DataTable( {
+		aaSorting: [[0, 'asc']],
+		searching: false,
+		dom: 'Blfrtip',
+		responsive: true,
+
+  // buttons: [
+  //       'copy', 'excel', 'pdf','print'
+  //   ]
+ buttons: [
+ {
+	extend: 'copyHtml5',
+	 download: 'open',
+	exportOptions: {
+	columns: [0,1,2,3,4,5]
+	}
+ },
+ {
+	extend: 'excelHtml5',
+	exportOptions: {
+	columns: [0,1,2,3,4,5]
+	}
+ },
+ {
+	extend: 'csvHtml5',
+	 download: 'open',
+
+	exportOptions: {
+	columns: [0,1,2,3,4,5]
+	},
+	
+ },
+ {
+	extend: 'pdfHtml5',
+	 download: 'open',
+	 title: "List of Employee",
+	  orientation: 'landscape', 
+	  pageSize: 'A4',
+	
+	exportOptions: {
+	columns: [0,1,2,3,4,5],
+	
+	},
+	
+        customize : function(doc){ 
+			doc.content[1].margin = [ 100, 0, 100, 0 ];
+			doc.defaultStyle.fontSize = 10; //2, 3, 4,etc
+            doc.styles.tableHeader.fontSize = 12; //2, 3, 4, etc
+			doc.defaultStyle.alignment = 'center';
+			doc.styles.tableHeader.alignment = 'center';
+			doc.content[1].table.widths = [ '5%',  '15%', '30%', '14%', 
+                                                           '14%', '14%', '14%', '14%'];
+           doc.content[1].table.heights = [ '5%',  '15%', '30%', '14%', 
+                                                           '14%', '14%', '14%', '14%'];
+       },
+ },
+  {
+	extend: 'print',
+	exportOptions: {
+	columns: [0,1,2,3,4,5]
+	}
+ },
+ //'colvis'
+ ]
+
+ });
+  var styles ={
+	 	"margin-bottom": '0.5em',
+       float: "right"	
+	 };
+	  $("div#example_wrapper").find($(".dt-buttons")).css(styles);
+
+} );
 
 	// $('#DateofBirth').datetimepicker({
 	// 			  	 format: 'DD/MM/YYYY',
@@ -236,25 +318,7 @@ $(function() {
   $('#warningMessage').fadeOut('fast');
 }, 10000);  
 });
-$(document).ready(function() {
-    $('#example').DataTable( {
-        dom: 'Bfrtip',
-        buttons: [
-            {
-                extend: 'excelHtml5',
-                title: 'Data export'
-            },
-            {
-                extend: 'pdfHtml5',
-                title: 'Data export'
-            },
-			{
-                extend: 'print',
-                title: 'Data export'
-            },
-        ]
-    } );
-} );
+
 
 $(function() { 
     setTimeout(function() {

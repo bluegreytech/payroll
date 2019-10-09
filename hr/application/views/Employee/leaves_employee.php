@@ -287,7 +287,7 @@
 
 <script type="text/javascript">
 	function statusdata(id,status,value){  
-		alert(status);		
+		//alert(status);		
   
     $('#approve_leave').modal('show');
 
@@ -316,9 +316,6 @@
             }
             })
         });
-    
-   
-
 }
 </script>
     

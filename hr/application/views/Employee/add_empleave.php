@@ -2,7 +2,7 @@
 	 $this->load->view('common/header');
 	 $this->load->view('common/sidebar');
 ?>
-			<!-- Page Wrapper -->
+<!-- Page Wrapper -->
  <div class="page-wrapper">			
    <div class="content container-fluid">
 		<div class="row">
@@ -76,7 +76,7 @@
 								<div class="form-group" id="timein" style="display:none;">
 									<label>Time in  <span class="text-danger">*</span></label>
 									<div class="clock-icon">
-									<input class="form-control" type="text" name="leavetimein" id="leavetimein" readonly="" >
+									<input class="form-control" type="text" name="leavetimein" id="leavetimein" readonly="">
 									</div>
 								</div>
 								<div class="form-group"  id="timeout" style="display:none;">
@@ -213,13 +213,9 @@ $(document).ready(function()
 	var leavedays = $('#leavedays').val();
 	
 	if(leavedays=='halfday'){
-
-
 		//alert(leavedays);
 		$('#timein').css('display','block');
 		$('#timeout').css('display','block');
-       
-
 
 	}else if(leavedays=='earlyleave'){
     	$('#timein').css('display','block');
