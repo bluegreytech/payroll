@@ -1,35 +1,18 @@
 <?php
-
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 class Invoice extends CI_Controller 
-
 {
-
 	public function __construct() {
-
         parent::__construct();
-
 	    $this->load->model('Invoice_model');
-
 	}
 
 
-
-	
-
-
-
 	public function index()
-
 	{
-
 		if(!check_admin_authentication()){ 
-
 			redirect(base_url('Login'));
-
 		}
-
 		if($_POST!='')
 		{	
 			$option=$this->input->post('option');
@@ -92,6 +75,8 @@ class Invoice extends CI_Controller
 			
 
 			$data['netamount']=$this->input->post('netamount');
+			$data['Otherinformation']=$this->input->post('Otherinformation');
+			
 
 		if($_POST)
 
@@ -178,13 +163,9 @@ class Invoice extends CI_Controller
 
 
 	} 
-
 		$data['companyData']=$this->Invoice_model->list_company();
-
 		$data['hrData']=$this->Invoice_model->list_hr();
-
 	//	echo "<pre>";print_r($data['hrData']);die;
-
 		$this->load->view('Invoice/add-invoice',$data);
 
 	}
@@ -194,11 +175,9 @@ class Invoice extends CI_Controller
 
 
 	public function edit_invoice($Companyinvoiceid)
-
 	{
 
 		$data=array();
-
 		$result=$this->Invoice_model->get_invoice($Companyinvoiceid);	
 		$data['Companyinvoiceid']=$result['Companyinvoiceid'];
 		$data['companyid']=$result['companyid'];
@@ -227,64 +206,28 @@ class Invoice extends CI_Controller
 
 
 	public function getedithr($companyid)
-
 	{
-
 		$data=array();
-
 		$result=$this->Invoice_model->getdatahr($companyid);	
-
 		$data['hr_id']=$result['hr_id'];
-
 		$data['companyid']=$result['companyid'];
-
 		$data['hr_type']=$result['hr_type'];	
-
 		$data['FullName']=$result['FullName'];	
-
 		$data['EmailAddress']=$result['EmailAddress'];
-
 		$data['DateofBirth']=$result['DateofBirth'];
-
 		$data['Contact']=$result['Contact'];
-
 		$data['DateofBirth']= $result['DateofBirth'];
-
 		echo json_encode($data);
 
 	}
 
-	public function sendinvoiceemail($companyid)
-	{
-		//echo $companyid;die;
-		$result=$this->Invoice_model->add_email($companyid);
-		//echo "<br>";print_r($result);die;
-		if($result==1)
-		{
-			$this->session->set_flashdata('success', 'Email send Successfuly!');	
-			redirect('Invoice');
-		}
-		else if($result==2)
-		{
-			$this->session->set_flashdata('error', 'Email funaction was not working!');
-			redirect('Invoice');
-		}
-	//	$this->load->view('Invoice/invoice-view');
-	}
+	
 
 
 	public function invoice_view($Companyinvoiceid)
 	{
-		// if($_POST)
-		// {
-		// 	if($this->input->post('companyid')=='')
-		// 	{		echo "fgdfg";die;	
-		// 		$result=$this->Invoice_model->add_email();
-		// 	}
-		// }
 		$data=array();
-
-				$AdminId=$this->session->userdata('AdminId');
+				//$AdminId=$this->session->userdata('AdminId');
 				$result=$this->Invoice_model->get_companyinvoice($Companyinvoiceid);	
 			//	echo "<br>";print_r($result);die;
 				$data['Companyinvoiceid']=$result['Companyinvoiceid'];
@@ -320,67 +263,249 @@ class Invoice extends CI_Controller
 				$data['netamount']=$result['netamount'];
 				$data['Otherinformation']=$result['Otherinformation'];
 				$data['Address']=$result['Address'];
-		
-			
-				
-
 		$this->load->view('Invoice/invoice-view',$data);
-
 	}
 
+	// public function sendinvoiceemail($companyid)
+	// {
+		
+	// 	$result=$this->Invoice_model->add_email($companyid);
+	// 	//echo "<br>";print_r($result);die;
+	// 	if($result==1)
+	// 	{
+	// 		$this->session->set_flashdata('success', 'Email send Successfuly!');	
+	// 		redirect('Invoice');
+	// 	}
+	// 	else if($result==2)
+	// 	{
+	// 		$this->session->set_flashdata('error', 'Email funaction was not working!');
+	// 		redirect('Invoice');
+	// 	}
+	// //	$this->load->view('Invoice/invoice-view');
+	// }
 
-
-
-
-	public function gethr()
+	public function sendinvoice($Companyinvoiceid)
 	{
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+			}
+				$data=array();
+				$result=$this->Invoice_model->get_companyinvoice($Companyinvoiceid);	
+				//echo "<br>";print_r($result);die;
+				if($result)
+				{
+					$this->session->set_flashdata('success', 'Email send Successfuly!');	
+					redirect('Invoice/pdf/'.$Companyinvoiceid);
+					//redirect('Invoice');
+				}
+				else
+				{
+					$this->session->set_flashdata('error', 'Email funaction was not working!');
+					redirect('Invoice');
+				}
+				$this->load->view('Invoice/invoice-view2',$data);
+	}
 
+	public function pdf($Companyinvoiceid)
+	{
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+			}
+			//	$data=array();
+				$result=$this->Invoice_model->get_companyinvoice($Companyinvoiceid);	
+			//	echo "<br>";print_r($result);die;
+			
+				$this->load->view('Invoice/invoice-view2',$result);
+				$html = $this->output->get_output();
+				$this->load->library('dompdf_gen');
+				$this->dompdf->load_html($html);
+				$this->dompdf->render();
+				$this->dompdf->stream("jjj.pdf");	
+	}
+
+	public function quotation_list()
+	{
+		$data['qutationData']=$this->Invoice_model->list_quotation();
+		$this->load->view('Quotation/quotationlist',$data);
+	}
+
+	public function add_quotation()
+	{	$data=array();
+	
+		$data['quotationid']=$this->input->post('quotationid');
+		$data['companytypeid']=$this->input->post('companytypeid');
+		$data['companytype']=$this->input->post('companytype');
+		$data['companyname']=$this->input->post('companyname');
+		$data['companyemail']=$this->input->post('companyemail');
+		$data['comcontactnumber']=$this->input->post('comcontactnumber');
+		$data['quotationdate']=$this->input->post('quotationdate');
+		$data['companyaddress']=$this->input->post('companyaddress');
+		$data['otherinformation']=$this->input->post('otherinformation');
+		$data['totalamount']=$this->input->post('totalamount');
+		$data['quotationdetailid']=$this->input->post('quotationdetailid');
+		if($_POST){	
+			if($this->input->post('quotationid')==''){			
+				$result=$this->Invoice_model->add_quotation();	
+				if($result==1)
+				{
+					$this->session->set_flashdata('success', 'Your data has been Inserted Successfully!');
+					redirect('Invoice/quotation_list');
+				}
+				else
+				{
+					$this->session->set_flashdata('error', 'Your data was not Insert!');
+					redirect('Invoice/quotation_list');
+				}
+			}
+			else
+			{
+				$result=$this->Invoice_model->update_quotation();
+				if($result==1)
+				{
+					$this->session->set_flashdata('success', 'Record has been Updated Successfully!');
+					redirect('Invoice/quotation_list');
+				}
+				else
+				{
+					$this->session->set_flashdata('error', 'Your data was not Insert!');
+					redirect('Invoice/quotation_list');
+				}
+
+			}
+	} 
+		$data['companytypeData']=$this->Invoice_model->list_companytype();
+		//$data['companyData'] = $this->Invoice_model->list_company();
+		$this->load->view('Quotation/quotation',$data);
+	}
+
+	function editquotation($quotationid)
+	{
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
 		$data=array();
+		$result=$this->Invoice_model->get_quotation($quotationid);	
+		//echo "<br>";print_r($result);die;
+		$data['quotationid']=$result['quotationid'];
+		$data['companytypeid']=$result['companytypeid'];
+		$data['companytype']=$result['companytype'];
+		$data['companyname']=$result['companyname'];
+		$data['companyemail']=$result['companyemail'];
+		$data['comcontactnumber']=$result['comcontactnumber'];
+		$data['quotationdate']=$result['quotationdate'];
+		$data['companyaddress']=$result['companyaddress'];
+		$data['otherinformation']=$result['otherinformation'];
+		$data['totalamount']=$result['totalamount'];
+		$data['quotationdetailid']=$result['quotationdetailid'];
+		$data['companytypeData']=$this->Invoice_model->list_companytype();
 
-		$result=$this->Invoice_model->getdatahr($this->input->post('companyid'));	
-
-		$data['hr_id']=$result['hr_id'];
-
-		$data['companyid']=$result['companyid'];
-
-		$data['hr_type']=$result['hr_type'];	
-
-		$data['FullName']=$result['FullName'];	
-
-		$data['EmailAddress']=$result['EmailAddress'];
-
-		$data['DateofBirth']=$result['DateofBirth'];
-
-		$data['Contact']=$result['Contact'];
-
-		$data['DateofBirth']= $result['DateofBirth'];
-
-		echo json_encode($data);
+		$data['quotationdetailData']=$this->Invoice_model->list_quotationdetail($quotationid);
+		//echo "<pre>";print_r($data['quotationdetailData']);die;
+		$this->load->view('Quotation/quotation',$data);
 
 	}
+
+	function delete_quotation(){
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
+			$quotationid=$this->input->post('quotationid');
+			$data=array(
+				'isdelete'=>'1',
+				'isactive'=>'Inactive'
+				);
+			$this->db->where("quotationid",$quotationid);
+			$result=$this->db->update('tblquotation',$data);
+			if($result)
+			{
+				$this->session->set_flashdata('success', 'Qutation was delete successfully!');
+				redirect('Invoice/qutation_list');
+			}
+			else
+			{
+				$this->session->set_flashdata('error', 'Qutation was not delete!');
+				redirect('Invoice/qutation_list');
+			}
+
+	}
+
+
+	function delete_quotaiondetail(){
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
+			$quotationdetailid=$this->input->post('quotationdetailid');
+			$data=array(
+				'isdelete'=>'1',
+				'isactive'=>'Inactive'
+				);
+			$this->db->where("quotationdetailid",$quotationdetailid);
+			$result=$this->db->update('tblquotationdetail',$data);
+			if($result)
+			{
+				$this->session->set_flashdata('success', 'Qutation was delete successfully!');
+				redirect('Invoice/qutation_list');
+			}
+			else
+			{
+				$this->session->set_flashdata('error', 'Qutation was not delete!');
+				redirect('Invoice/qutation_list');
+			}
+
+	}
+
+
+	public function quotation_view($quotationid)
+	{
+		$data=array();
+		$result=$this->Invoice_model->get_companyquotation($quotationid);	
+		//echo "<br>";print_r($result);die;
+		$data['quotationid']=$result['quotationid'];
+		$data['companytypeid']=$result['companytypeid'];
+		$data['companytype']=$result['companytype'];
+		$data['companyname']=$result['companyname'];
+		$data['companyemail']=$result['companyemail'];
+		$data['comcontactnumber']=$result['comcontactnumber'];
+		$data['quotationdate']=$result['quotationdate'];
+		$data['companyaddress']=$result['companyaddress'];
+		$data['otherinformation']=$result['otherinformation'];
+		
+		$data['quotationtData']=$this->Invoice_model->list_companyquotation($quotationid);
+		//echo "<br>";print_r($data['quotationtData']);die;
+		$this->load->view('Quotation/quotation-view',$data);
+	}
+
+
+
 
 	
 
 
+	public function gethr()
+	{
+		$data=array();
+		$result=$this->Invoice_model->getdatahr($this->input->post('companyid'));	
+		$data['hr_id']=$result['hr_id'];
+		$data['companyid']=$result['companyid'];
+		$data['hr_type']=$result['hr_type'];	
+		$data['FullName']=$result['FullName'];	
+		$data['EmailAddress']=$result['EmailAddress'];
+		$data['DateofBirth']=$result['DateofBirth'];
+		$data['Contact']=$result['Contact'];
+		$data['DateofBirth']= $result['DateofBirth'];
+		echo json_encode($data);
+	}
 
-	function delete_invoice(){
-
+	function delete_invoice()
+	{
 		if(!check_admin_authentication()){ 
-
 			redirect(base_url('Login'));
-
 		}
-
 			$Companyinvoiceid=$this->input->post('Companyinvoiceid');
-
 			$data=array(
-
 				'isdelete'=>'1',
-
 				'isactive'=>'Inactive'
-
 					);
-
 			$this->db->where("Companyinvoiceid",$Companyinvoiceid);
 			$result=$this->db->update('tblcompanyinvoice',$data);
 			if($result)
@@ -393,12 +518,6 @@ class Invoice extends CI_Controller
 				$this->session->set_flashdata('error', 'Invoice was not delete!');
 				redirect('Company');
 			}
-
-
-
-	
-
-
 
 	}
 

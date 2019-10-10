@@ -714,67 +714,17 @@ $(function() {
 
 
 function deletedata(companyid){  
-
-
-
 			$('#delete_client').modal('show')
-
-
-
 				$('#yes_btn').click(function(){
-
-
-
-				
-
-
-
 						Url="<?php echo base_url();?>"
-
-
-
 						$.ajax({
-
-
-
 						url: Url+'/Company/delete_company/',
-
-
-
 						type: "post",
-
-
-
 						data: {companyid:companyid} ,
-
-
-
 						success: function (response) {             
-
-
-
 					// document.location.href = url+'adminmaster/adminlist/';          
-
-
-
 					},
-
-
-
 					})
-
-
-
 				});
-
-
-
 		}			
-
-
-
-
-
-
-
 </script>

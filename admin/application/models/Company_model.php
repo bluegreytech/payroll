@@ -621,24 +621,6 @@ class Company_model extends CI_Model
 
 
 
-	// function list_shift()
-
-	// {
-
-	// 	$this->db->select('*');
-
-	// 	$this->db->from('tblshift');	
-
-	// 	$this->db->where('Isdelete','0');
-
-	// 	$r=$this->db->get();
-
-	// 	$res = $r->result();
-
-	// 	return $res;
-
-	// }
-
 
 
 	function list_state(){
@@ -688,12 +670,10 @@ class Company_model extends CI_Model
 
 
 	function search($option,$keyword)
-
 	{
 
 		$where = array('t1.isdelete' =>'0');
-
-			$keyword = str_replace('-', ' ', $keyword);
+		$keyword = str_replace('-', ' ', $keyword);
 
 			$this->db->select('t1.*,t2.companytype');
 
@@ -1719,31 +1699,17 @@ class Company_model extends CI_Model
 
 
 	function get_company($companyid)
-
 	{
-
 		$this->db->select('t1.*,t2.*,t3.*,t4.*,t5.*,t6.*');
-
 		$this->db->from('tblcompany as t1');
-
 		$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
-
 		$this->db->join('tblcompanycompliances as t3','t1.companyid = t3.companyid', 'LEFT');
-
 		$this->db->join('tblstate as t4', 't1.stateid = t4.stateid', 'LEFT');
-
 		$this->db->join('tblcompanyshift as t5', $companyid.'= t5.companyid', 'LEFT');
-
 		$this->db->join('tblcompanybankdetail as t6', $companyid.'= t6.companyid', 'LEFT');
-
 		$this->db->where('t1.companyid',$companyid);
-
 		$query=$this->db->get();
-
 		return $query->row_array();
-
-
-
 	}
 
 
@@ -1781,19 +1747,12 @@ class Company_model extends CI_Model
 
 
 	function get_compliance($complianceid)
-
 	{
-
 		$query=$this->db->select('*')
-
 			->from('tblcompliances')
-
 			->where('complianceid',$complianceid)
-
 			->get();
-
 			return $query->row_array();
-
 	}
 
 
@@ -1861,21 +1820,13 @@ class Company_model extends CI_Model
 
 
 	function list_companyshift($companyid)
-
 	{
-
 		$this->db->select('*');
-
 		$this->db->from('tblcompanyshift');	
-
 		$this->db->where('companyid',$companyid);
-
 		$r=$this->db->get();
-
 		$res = $r->result();
-
 		return $res;
-
 	}
 
 
@@ -1889,18 +1840,11 @@ class Company_model extends CI_Model
 		//echo "<pre>";print_r($_FILES);die;
 
 		$user_image='';
-
 		//$image_settings=image_setting();
-
-		 if(isset($_FILES['companyimage']) &&  $_FILES['companyimage']['name']!='')
-
+		if(isset($_FILES['companyimage']) &&  $_FILES['companyimage']['name']!='')
 		{
-
 			$this->load->library('upload');
-
-			$rand=rand(0,100000); 
-
-			 
+			$rand=rand(0,100000);  
 
 		   $_FILES['userfile']['name']     =   $_FILES['companyimage']['name'];
 
@@ -1923,45 +1867,27 @@ class Company_model extends CI_Model
 
 
 			$this->upload->initialize($config);
-
-
-
 			 if (!$this->upload->do_upload())
-
 			 {
-
 			   $error =  $this->upload->display_errors();
-
 			   echo "<pre>";print_r($error);die;
-
 			 } 
 
-				$picture = $this->upload->data();	   
-
+			 $picture = $this->upload->data();	   
 			 $this->load->library('image_lib');		   
-
 			 $this->image_lib->clear();
-
 			 $gd_var='gd2';
 
 
 
 			 $this->image_lib->initialize(array(
-
 			   'image_library' => $gd_var,
-
 			   'source_image' => base_path().'upload/company_orig/'.$picture['file_name'],
-
 			   'new_image' => base_path().'upload/company/'.$picture['file_name'],
-
 			   'maintain_ratio' => FALSE,
-
 			   'quality' => '100%',
-
 			   'width' => 300,
-
 			   'height' => 300
-
 			));
 
 		   
@@ -1969,57 +1895,31 @@ class Company_model extends CI_Model
 		   
 
 		   if(!$this->image_lib->resize())
-
 		   {
-
 			   $error = $this->image_lib->display_errors();
-
 		   }
 
 		   
 
 		   $user_image=$picture['file_name'];
-
-	   
-
 		   if($this->input->post('pre_profile_image')!='')
-
 			   {
-
 				   if(file_exists(base_path().'upload/company/'.$this->input->post('pre_profile_image')))
-
 				   {
-
 					   $link=base_path().'upload/company/'.$this->input->post('pre_profile_image');
-
 					   unlink($link);
-
 				   }
-
-				   
-
 				   if(file_exists(base_path().'upload/company_orig/'.$this->input->post('pre_profile_image')))
-
 				   {
-
 					   $link2=base_path().'upload/company_orig/'.$this->input->post('pre_profile_image');
-
 					   unlink($link2);
-
 				   }
-
 			   }
-
 		   } else {
-
 			   if($this->input->post('pre_profile_image')!='')
-
 			   {
-
 				   $user_image=$this->input->post('pre_profile_image');
-
 			   }
-
 		   }
 
 		   //print_r($user_image);die;
@@ -2029,123 +1929,63 @@ class Company_model extends CI_Model
 		   $birth = date("Y-m-d", strtotime($bdate));
 
 		$data=array(
-
 			'companyid'=>$this->input->post('companyid'),
-
 			'companytypeid'=>$this->input->post('companytypeid'),
-
 			'companyname'=>$this->input->post('companyname'),
-
 			'comemailaddress'=>$this->input->post('comemailaddress'),
-
 			'comcontactnumber'=>$this->input->post('comcontactnumber'),
-
 			'gstnumber'=>$this->input->post('gstnumber'),
-
 			'digitalsignaturedate'=>$birth,
-
 			'companyimage'=>$user_image,
-
 			'companyaddress'=>$this->input->post('companyaddress'),
-
 			'stateid'=>$this->input->post('stateid'),
-
 			'companycity'=>$this->input->post('companycity'),
-
 			'pincode'=>$this->input->post('pincode'),
-
 			'isactive'=>$this->input->post('isactive'),
-
 				);
 
 			//print_r($data);die;
-
 			$this->db->where("companyid",$companyid);
-
 			$this->db->update('tblcompany',$data);	
-
 			if($companycomplianceid!='')
-
 			{
-
 				$complianceid=implode(',',$this->input->post('complianceid'));
-
 				$data2=array( 
-
 					'companycomplianceid'=>$companycomplianceid,
-
 					'companyid'=>$companyid,
-
 					'complianceid'=>$complianceid,
-
 					'isactive'=>$this->input->post('isactive'),
-
 					'createdby'=>1,
-
 					'createdon'=>date("Y-m-d h:i:s")
-
 					);
-
 				$this->db->where("companycomplianceid",$companycomplianceid);
-
 				$this->db->update('tblcompanycompliances',$data2);	
-
 			} 
 
 		
 
 				$data3 = array();
-
-				//$Shiftnames = explode(',',$this->input->post('Shiftname'));
-
-
-
-				//$Shiftnames = count($this->input->post('Shiftname'));
-
-				 $Shiftnames = count(array_filter($this->input->post('Shiftname')));
-
+				$Shiftnames = count(array_filter($this->input->post('Shiftname')));
 				for($i=0; $i<$Shiftnames; $i++)
-
 				 {
-
-					 $Shifthours=$this->input->post('Shifthours');
-
-					 $Shiftname=$this->input->post('Shiftname');
-
+					$Shifthours=$this->input->post('Shifthours');
+					$Shiftname=$this->input->post('Shiftname');
 					$Shiftintime=$this->input->post('Shiftintime');
-
 					$Shiftouttime=$this->input->post('Shiftouttime');
-
 					$data3=array( 
-
 					'Companyshiftid'=>$Companyshiftid[$i],
-
 					'companyid'=>$companyid,
-
 					'Shifthours'=>$Shifthours,
-
 					'Shiftname'=>isset($Shiftname[$i]) ? $Shiftname[$i] : '0',
-
 					'Shiftintime'=>isset($Shiftintime[$i]) ? $Shiftintime[$i] : '0',
-
 					'Shiftouttime'=>isset($Shiftouttime[$i]) ? $Shiftouttime[$i] : '0',
-
 					);
-
 					//echo "<pre>";print_r($data3);
-
 					$this->db->where("Companyshiftid",$Companyshiftid[$i]);
-
 					$this->db->update('tblcompanyshift',$data3);	
-
 				 }	
 
-				
-
-			
-
-				
-
+		
 				if($Bankdetailid!='')
 				{
 					$Accountnumber=$this->input->post('Accountnumber');
@@ -2175,55 +2015,29 @@ class Company_model extends CI_Model
 
 
 	function update_companytype()
-
 	{
 
 		$companytypeid=$this->input->post('companytypeid');
-
 		$data=array(
-
 			'companytypeid'=>$this->input->post('companytypeid'),
-
 			'companytype'=>$this->input->post('companytype'),
-
 			'IsActive'=>$this->input->post('IsActive')
-
 				);
-
 			//print_r($data);die;
-
 			$this->db->where("companytypeid",$companytypeid);
-
 			$this->db->update('tblcompanytype',$data);	
-
 			return 1;
-
-
-
 	}
 
 
-
-
-
-
-
 	function update_compliance()
-
 	{	
-
 		$complianceid=$this->input->post('complianceid');
-
 		$data=array(
-
 			'complianceid'=>$this->input->post('complianceid'),
-
 			'compliancename'=>$this->input->post('compliancename'),
-
 			'compliancepercentage'=>$this->input->post('compliancepercentage'),
-
 			'isactive'=>$this->input->post('isactive')
-
 				);
 
 			//print_r($data);die;

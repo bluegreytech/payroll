@@ -1,9 +1,6 @@
 ﻿<?php 
-
 	 $this->load->view('common/header.php');
-
 	 $this->load->view('common/sidebar.php');
-
 ?>	
 
 
@@ -11,9 +8,7 @@
 <script>
 
 	function m1()
-
 	{
-
 		var a=document.getElementById("txt1").value;
 		var b=document.getElementById("txt2").value;
 		var c=document.getElementById("txt3").value;
@@ -27,8 +22,6 @@
 
 		var h= +z;
 		document.getElementById("total").value=h;
-
-		
 
 		var x=t+h;
 		document.getElementById("nettotal").value=x;
@@ -424,17 +417,6 @@
 									</div>
 
 								</div>
-
-
-								<!-- <div class="row">
-											<div class="col-md-12">
-												<div class="form-group">
-													<label>Other Information</label>
-													<textarea class="form-control" rows="4"></textarea>
-												</div>
-											</div>
-								</div> -->
-
 								<div class="row">
 									<div class="col-md-12">
 									<div class="form-group">
@@ -446,11 +428,8 @@
 								</div>
 									</div>
 								</div>
-
 								<div class="submit-section">
-
 									<input type="submit" name="submit" class="btn btn-primary account-btn" value="Save">
-
 								</div>
 
 							</form>
@@ -550,36 +529,21 @@ window.onload=gethr1;
 
 
 				$('#duedate').datetimepicker({
-
 					 defaultDate: new Date(),
-
 				  	 format: 'DD/MM/YYYY',
-
 					 ignoreReadonly: true,					
-
 				}).val('<?php echo  ($duedate!='0000-00-00')&&($duedate!='')  ? date('d/m/Y', strtotime($duedate)) : ''; ?>');
 
 
-
 				$("#txt2").on("input", function(evt) {
-
 				var self = $(this);
-
 				self.val(self.val().replace(/[^\d].+/, ""));
-
 				if ((evt.which < 48 || evt.which > 57)) 
-
 				{
-
 					evt.preventDefault();
-
 				}
-
 				});
 
-
-
-				
 
 				$("#txt3").on("input", function(evt) {
 				var self = $(this);

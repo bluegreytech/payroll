@@ -588,6 +588,8 @@
 		<script src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.html5.min.js"></script>
 		<script src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.colVis.min.js"></script>
 		
+    <script src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.print.min.js"></script>
+
 
 
 
@@ -611,19 +613,26 @@
 
 $(document).ready(function() {
     $('#example').DataTable( {
+		bSort: false,
+		searching: false,
         dom: 'Bfrtip',
         buttons: [
-          
             {
                 extend: 'excelHtml5',
                 exportOptions: {
-                    columns: [ 0,1,2,3,4,5]
+                    columns: [0,1,2,3,4,5]
                 }
             },
             {
                 extend: 'pdfHtml5',
                 exportOptions: {
-                    columns: [ 0,1,2,3,4,5]
+                    columns: [0,1,2,3,4,5]
+                }
+            },
+			{
+                extend: 'print',
+                exportOptions: {
+                    columns: [0,1,2,3,4,5]
                 }
             },
             'colvis'
