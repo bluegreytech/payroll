@@ -9,6 +9,7 @@
 		
 		<!-- Favicon -->
         <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url(); ?>default/assets/img/favicon.png">
+      
 		
 		<!-- Bootstrap CSS -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>default/css/bootstrap.min.css">
@@ -32,8 +33,11 @@
 		<link rel="stylesheet" href="<?php echo base_url(); ?>default/css/bootstrap-datetimepicker.min.css">
 
 		<!-- Datatable CSS -->
-		<link rel="stylesheet" href="<?php echo base_url(); ?>default/css/dataTables.bootstrap4.min.css">
-
+		<link rel="stylesheet" href="<?php echo base_url(); ?>default/css/dataTables.bootstrap4.min.css"> 
+     <!--   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"> -->
+      <!--   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"> -->
+       <link rel="stylesheet" href="<?php echo base_url(); ?>default/css/buttons.bootstrap4.min.css">
+      <!--   <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.0/css/buttons.bootstrap4.min.css"> --> 
 		<!-- Calendar CSS -->
 		<link rel="stylesheet" href="<?php echo base_url(); ?>default/css/fullcalendar.min.css">
 		
@@ -44,15 +48,9 @@
 		<!-- External -->
 		<link rel="stylesheet" href="<?php echo base_url(); ?>default/css/bootstrap-select.css" />
 	
-		<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css"> -->
-		<!-- <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.5/css/fixedHeader.bootstrap.min.css">
-		<link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.5/css/fixedHeader.bootstrap.min.css">
-
-		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
-		<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css">
-		 -->
-
-
+	
+	
+		
 </head>
 
 <?php

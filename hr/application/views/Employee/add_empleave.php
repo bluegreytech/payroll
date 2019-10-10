@@ -2,7 +2,7 @@
 	 $this->load->view('common/header');
 	 $this->load->view('common/sidebar');
 ?>
-			<!-- Page Wrapper -->
+<!-- Page Wrapper -->
  <div class="page-wrapper">			
    <div class="content container-fluid">
 		<div class="row">
@@ -76,7 +76,7 @@
 								<div class="form-group" id="timein" style="display:none;">
 									<label>Time in  <span class="text-danger">*</span></label>
 									<div class="clock-icon">
-									<input class="form-control" type="text" name="leavetimein" id="leavetimein" readonly="" >
+									<input class="form-control" type="text" name="leavetimein" id="leavetimein" readonly="">
 									</div>
 								</div>
 								<div class="form-group"  id="timeout" style="display:none;">
@@ -213,13 +213,9 @@ $(document).ready(function()
 	var leavedays = $('#leavedays').val();
 	
 	if(leavedays=='halfday'){
-
-
 		//alert(leavedays);
 		$('#timein').css('display','block');
 		$('#timeout').css('display','block');
-       
-
 
 	}else if(leavedays=='earlyleave'){
     	$('#timein').css('display','block');
@@ -273,20 +269,23 @@ $(document).ready(function() {
 		var timeDiff = Math.abs((dateSecond.getTime()) - dateFirst.getTime());
 		var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
 		total=diffDays+1;
-
-		//console.log(diffDays+1);
 		$('#noofdays').val(total);
     });
 
-     $('#timeout').focusout(function(){  
-			var timein = $('#timein').val();
-			var timeout = $('#timeout').val();
-			alert(timein);
-			alert(timeout);
-		    var diff =  new Date(timeout) - new Date( timein);  
+  //    $('#timeout').focusout(function(){  
+	 //    var dateFirst = new Date(myDateFormatter(fromDate));
+		// var dateSecond = new Date(myDateFormatter(toDate));  
+		// alert(dateFirst);  
+		// alert(dateSecond);  
+		// // time difference
+		// var timeDiff = Math.abs((dateSecond.getTime()) - dateFirst.getTime());
+		// var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+		// total=diffDays+1;
+		// $('#noofdays').val(total);
+		//    // var diff =  new Date(timeout) - new Date( timein);  
 
-			alert(diff);
-		});
+		// 	alert(diff);
+		// });
 });
 	
 	

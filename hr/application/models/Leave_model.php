@@ -6,8 +6,21 @@ class Leave_model extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('tblcmpleave');
-		$this->db->where('Is_deleted','0');
-		$this->db->where('company_id',$this->session->userdata('companyid'));
+		$this->db->where('Is_deleted','0');		
+		$this->db->where('companyid',$this->session->userdata('companyid'));
+		$this->db->order_by('leave_id','Desc');
+		$query=$this->db->get();
+		$res=$query->result();
+		return $res;
+	}
+
+	function showempleavelist()
+	{
+		$this->db->select('*');
+		$this->db->from('tblcmpleave');
+		$this->db->where('Is_deleted','0');	
+		$this->db->where('status','Active');		
+		$this->db->where('companyid',$this->session->userdata('companyid'));
 		$this->db->order_by('leave_id','Desc');
 		$query=$this->db->get();
 		$res=$query->result();

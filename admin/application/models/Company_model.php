@@ -1,5 +1,6 @@
 <?php
 class Company_model extends CI_Model
+
 {
 
 	function get_id()
@@ -36,6 +37,7 @@ class Company_model extends CI_Model
 
 
 
+
 	function get_docfile()
 	{	
 
@@ -53,6 +55,7 @@ class Company_model extends CI_Model
 
 			foreach($smtp2->result() as $rows) {
 				$Documentfile = $rows->Documentfile;
+
 			}
 
 		
@@ -581,7 +584,7 @@ class Company_model extends CI_Model
 
 	{
 
-		$where = array('isdelete' =>'0');
+		$where = array('Is_deleted' =>'0');
 
 		$this->db->select('*');
 
@@ -609,7 +612,7 @@ class Company_model extends CI_Model
 
 		$this->db->where('isactive!=','0');
 
-		$this->db->or_where('isdelete','0');
+		$this->db->or_where('Is_deleted','0');
 
 		$r=$this->db->get();
 
@@ -645,7 +648,7 @@ class Company_model extends CI_Model
 
 	{
 
-		    $where = array('t1.isdelete' =>'0');
+		    $where = array('t1.Is_deleted' =>'0');
 
 			$this->db->select('t1.*,t2.companytype');
 

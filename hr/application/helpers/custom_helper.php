@@ -836,7 +836,8 @@
 		$CI->db->where('status',"Active");
 		$CI->db->where('leave_id',$id);
 		$query = $CI->db->get();
-		return $query->row()->leave_name;
+		echo $query->row()->leave_name;
+		//return $query->row()->leave_name;
 	}
 	
 	function get_country_iso($country)

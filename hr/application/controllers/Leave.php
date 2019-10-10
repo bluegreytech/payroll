@@ -92,6 +92,33 @@ class Leave extends CI_Controller
 		echo json_encode($data);
 	}
 
+	function leave_status(){
+		//echo "hjhgj";die;
+		if(!check_admin_authentication())
+		{ 
+			redirect(base_url());
+		}
+		$action=$this->input->post('status');
+			$id=$this->input->post('id'); 
+		if($action == "Active") {
+
+			$data = array("status" => "Inactive");
+			update_record('tblcmpleave', $data, 'leave_id', $id);
+
+			$res = array('status' => 'done');
+			echo json_encode($res);
+			die ;
+		}else if($action == "Inactive") {
+			
+				$data = array("status" => "Active");
+				update_record('tblcmpleave', $data, 'leave_id', $id);
+			
+			$res = array('status' => 'done');
+			echo json_encode($res);
+			die ;
+		}
+	}
+
 	function statusdata(){
 		if(!check_admin_authentication())
 		{ 
@@ -193,7 +220,7 @@ class Leave extends CI_Controller
 				}				
 			}
 		
-		 $data['leavelist']=$this->leave_model->leavelist();
+		 $data['leavelist']=$this->leave_model->showempleavelist();
 		 $data['emplist']=$this->attendance_model->emplist();
 		$this->load->view('Employee/add_empleave',$data);
 	}
@@ -222,7 +249,7 @@ class Leave extends CI_Controller
 			$data['redirect_page']="empleavelist";		
 			//echo "<pre>";print_r($data);die;
 		}
-		 $data['leavelist']=$this->leave_model->leavelist();
+		 $data['leavelist']=$this->leave_model->showempleavelist();
 		
 		$data['emplist']=$this->attendance_model->emplist();
 		$this->load->view('Employee/add_empleave',$data);

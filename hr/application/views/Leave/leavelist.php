@@ -282,7 +282,7 @@ function statusdata(id,status){
            
                 url="<?php echo base_url();?>"
                 $.ajax({
-                url: url+"/leave/statusdata/",
+                url: url+"leave/leave_status/",
                 type: "post",
                 data: {id:id,status:status} ,
                 success: function (response) {  
