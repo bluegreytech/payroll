@@ -27,7 +27,21 @@
 
                 <div class="content container-fluid">
 
-
+					<?php if(($this->session->flashdata('error'))){ ?>
+					<div class="alert alert-danger" id="errorMessage">
+					<strong> <?php echo $this->session->flashdata('error'); ?></strong> 
+					</div>
+					<?php } ?>
+					<?php if(($this->session->flashdata('success'))){ ?>
+					<div class="alert alert-success" id="successMessage">
+					<strong> <?php echo $this->session->flashdata('success'); ?></strong> 
+					</div>
+					<?php } ?>
+					<?php if(($this->session->flashdata('warning'))){ ?>
+					<div class="alert alert-warning" id="warningMessage">
+					<strong> <?php echo $this->session->flashdata('warning'); ?></strong> 
+					</div>
+					<?php } ?>
 
 				
 
@@ -47,9 +61,7 @@
 							
 
 								<div class="btn-group btn-group-sm">
-									<!-- <form methos="post" action="<?php //echo base_url();?>Invoice/invoice_view/<?php //echo $companyid;?>"> -->
 										<a href="<?php echo base_url();?>Invoice/sendinvoice/<?php echo $Companyinvoiceid;?>"><button class="btn btn-white">Send Email</button></a>	
-									<!-- </form> -->
 								</div>
 							
 								<div class="btn-group btn-group-sm">
@@ -112,7 +124,7 @@
 
 														<div class="invoice-details">
 
-															<h3 class="text-uppercase">#P<?php echo date('Ym')?>-<?php echo $Companyinvoiceid;?></h3>
+															<h3 class="text-uppercase">#P<?php echo date('Ym')?>-<?php echo $invoicebillid;?></h3>
 
 															<ul class="list-unstyled">
 
@@ -370,6 +382,24 @@
     </body>
 
 	<script type="text/javascript">
+
+		$(function() { 
+		setTimeout(function() {
+		$('#errorMessage').fadeOut('fast');
+		}, 10000);  
+		});
+
+		$(function() { 
+		setTimeout(function() {
+		$('#successMessage').fadeOut('fast');
+		}, 10000);  
+		});
+
+		$(function() { 
+		setTimeout(function() {
+		$('#warningMessage').fadeOut('fast');
+		}, 10000);  
+		});
 
         $("body").on("click", "#btnExport", function () {
 

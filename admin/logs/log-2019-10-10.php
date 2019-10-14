@@ -687,3 +687,6 @@ ERROR - 2019-10-10 14:24:22 --> 404 Page Not Found: Assets/img
 ERROR - 2019-10-10 14:24:22 --> 404 Page Not Found: Assets/img
 ERROR - 2019-10-10 14:24:22 --> 404 Page Not Found: Assets/img
 ERROR - 2019-10-10 14:24:22 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-10 14:29:33 --> Query error: Unknown column 'Is_deleted' in 'where clause' - Invalid query: SELECT *
+FROM `tblcompany`
+WHERE `Is_deleted` != '1'

@@ -102,7 +102,7 @@
 									<div class="col-sm-6 col-md-3">
 										<div class="form-group">
 											<label>Contact Number <span class="text-danger">*</span></label>
-												<input class="form-control" type="text" name="comcontactnumber"  value="<?php echo $comcontactnumber;?>" placeholder="Enter contact number">
+												<input class="form-control" type="text" name="comcontactnumber" id="comcontactnumber" value="<?php echo $comcontactnumber;?>" placeholder="Enter contact number">
 										</div>
 									</div>
 									<div class="col-sm-6 col-md-3">
@@ -131,7 +131,7 @@
 													<thead>
 														<tr>
 															<!-- <th style="width: 20px">#</th> -->
-															<th class="col-sm-2">Particuler </th>
+															<th class="col-sm-2">Particular </th>
 															<th class="col-md-6">Rate (Rs.)</th>
 															<!-- <th style="width:100px;">Unit Cost</th>
 															<th style="width:80px;">Qty</th>
@@ -163,7 +163,7 @@
 													</tbody>
 												</table>
 											</div>
-											<div class="table-responsive">
+											<!-- <div class="table-responsive">
 												<table class="table table-hover table-white">
 													<tbody>
 														<tr>
@@ -176,7 +176,7 @@
 														</tr>
 													</tbody>
 												</table>                               
-											</div>
+											</div> -->
 											<div class="row">
 												<div class="col-md-12">
 												<div class="form-group">
@@ -247,7 +247,7 @@
 													</tbody>
 												</table>
 											</div>
-											<div class="table-responsive">
+											<!-- <div class="table-responsive">
 												<table class="table table-hover table-white">
 													<tbody>
 														<tr>
@@ -256,11 +256,11 @@
 															<td></td>
 															<td></td>
 															<td colspan="5" style="text-align: right; font-weight: bold">Total</td>
-															<td style="text-align: right; padding-right: 30px;width: 230px"><input class="form-control" name="totalamount" type="text" value="<?php echo $totalamount;;?>"  id="total" onChange="m1()" readonly></td>
+															<td style="text-align: right; padding-right: 30px;width: 230px"><input class="form-control" name="totalamount" type="text" value="<?php// echo $totalamount;;?>"  id="total" onChange="m1()" readonly></td>
 														</tr>
 													</tbody>
 												</table>                               
-											</div>
+											</div> -->
 											<div class="row">
 												<div class="col-md-12">
 												<div class="form-group">
@@ -350,14 +350,14 @@
 		}, 10000);  
 		});
 
-		// $("#totalamount").on("input", function(evt) {
-		// var self = $(this);
-		// self.val(self.val().replace(/[^\d].+/, ""));
-		// if ((evt.which < 48 || evt.which > 57)) 
-		// {
-		// 	evt.preventDefault();
-		// }
-		// });
+		$("#comcontactnumber").on("input", function(evt) {
+		var self = $(this);
+		self.val(self.val().replace(/[^\d].+/, ""));
+		if ((evt.which < 48 || evt.which > 57)) 
+		{
+			evt.preventDefault();
+		}
+		});
 
 
 		$("#txt").on("input", function(evt) {

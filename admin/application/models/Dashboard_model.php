@@ -58,7 +58,7 @@ class Dashboard_model extends CI_Model
 
 		$this->db->from('tblcompany');
 
-		$this->db->where('Is_deleted!=','1');
+		$this->db->where('isdelete!=','1');
 
 		$r = $this->db->get();
 

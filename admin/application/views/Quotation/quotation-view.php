@@ -9,6 +9,23 @@
 			
 			<!-- Page Content -->
 			<div class="content container-fluid">
+
+					<?php if(($this->session->flashdata('error'))){ ?>
+					<div class="alert alert-danger" id="errorMessage">
+					<strong> <?php echo $this->session->flashdata('error'); ?></strong> 
+					</div>
+					<?php } ?>
+					<?php if(($this->session->flashdata('success'))){ ?>
+					<div class="alert alert-success" id="successMessage">
+					<strong> <?php echo $this->session->flashdata('success'); ?></strong> 
+					</div>
+					<?php } ?>
+					<?php if(($this->session->flashdata('warning'))){ ?>
+					<div class="alert alert-warning" id="warningMessage">
+					<strong> <?php echo $this->session->flashdata('warning'); ?></strong> 
+					</div>
+					<?php } ?>
+
 			
 				<!-- Page Title -->
 				<div class="row">
@@ -16,13 +33,21 @@
 						<h4 class="page-title">Quotation</h4>
 					</div>
 					<div class="col-sm-7 col-8 text-right m-b-30">
+						
+						<div class="btn-group btn-group-sm">
+							<a href="<?php echo base_url();?>Invoice/sendquotation/<?php echo $quotationid;?>"><button class="btn btn-white">Send Email</button></a>	
+						</div>
 						<div class="btn-group btn-group-sm">
 							<button class="btn btn-white" id="btnExport">Generate PDF</button>
-							<!-- <button class="btn btn-white"><i class="fa fa-print fa-lg"></i> Print</button> -->
+						</div>
+						<div class="btn-group btn-group-sm">
+									<a href="<?php echo base_url();?>Invoice/quotation_list" class="btn add-btn"> Back to Quotation List</a>	
 						</div>
 					</div>
 				</div>
 				<!-- /Page Title -->
+
+				
 				
 				<div class="row" id="tblCustomers">
 					<div class="col-md-12">
@@ -38,7 +63,7 @@
 									</div>
 									<div class="col-sm-6 m-b-20">
 										<div class="invoice-details">
-										<h3 class="text-uppercase">Ref.No-<?php echo $quotationid;?></h3>
+										<h3 class="text-uppercase">Ref.No-<?php echo $billid;?></h3>
 										<ul class="list-unstyled">
 											<li>Created Date: <span><?php $originalDate = $quotationdate;
 											echo $newDate = date("M d, Y", strtotime($originalDate));?></span></li>
@@ -70,7 +95,7 @@
 											<tr>
 												<th>Sr. No</th>
 												<th>Work</th>
-												<th class="d-none d-sm-table-cell">Particuler</th>
+												<th class="d-none d-sm-table-cell">Particular </th>
 												<th>Rate (Rs.)</th>
 											</tr>
 										</thead>
@@ -96,7 +121,24 @@
 											
 										</tbody>
 									</table>
+									
 								</div>
+
+								<!-- <div class="table-responsive">
+												<table class="table table-hover table-white">
+													<tbody>
+														<tr>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td colspan="5" style="text-align: right; font-weight: bold">Total</td>
+															<td style="text-align: right; padding-right: 30px;width: 230px"><input class="form-control" name="totalamount" type="text" value="<?php //echo $totalamount;;?>"  id="total" onChange="m1()" readonly></td>
+														</tr>
+													</tbody>
+												</table>                               
+								</div> -->
+
 								<div>
 									<div class="row invoice-payment">
 										
@@ -175,6 +217,23 @@
     </body>
 
 	<script type="text/javascript">
+		$(function() { 
+		setTimeout(function() {
+		$('#errorMessage').fadeOut('fast');
+		}, 10000);  
+		});
+
+		$(function() { 
+		setTimeout(function() {
+		$('#successMessage').fadeOut('fast');
+		}, 10000);  
+		});
+
+		$(function() { 
+		setTimeout(function() {
+		$('#warningMessage').fadeOut('fast');
+		}, 10000);  
+		});
 
         $("body").on("click", "#btnExport", function () {
 
@@ -203,6 +262,7 @@
             });
 
         });
+
 
 
 

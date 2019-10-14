@@ -974,7 +974,7 @@
 
 																<label class="col-form-label">IFSC Code <span class="text-danger">*</span></label>
 
-																<input class="form-control" minlength="6" maxlength="20" type="text" name="Ifsccode" value="<?php echo $Ifsccode; ?>" placeholder="Enter IBAN number">
+																<input class="form-control" minlength="6" maxlength="20" type="text" name="Ifsccode" value="<?php echo $Ifsccode; ?>" placeholder="Enter IFSC code">
 
 															</div>
 
@@ -1541,7 +1541,7 @@ $(document).ready(function()
 
 							},
 
-							Ibannumber:{
+							Ifsccode:{
 
 									required: true,
 
@@ -1667,9 +1667,9 @@ $(document).ready(function()
 
 										},	
 
-							Ibannumber: {
+							Ifsccode: {
 
-									required: "Please enter bank iban number",
+									required: "Please enter bank ifsc code",
 
 										},
 

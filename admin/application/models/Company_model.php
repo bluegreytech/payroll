@@ -581,19 +581,14 @@ class Company_model extends CI_Model
 
 
 	function list_complianceto()
-
 	{
-
-		$where = array('Is_deleted' =>'0');
-
+		$where = array('isdelete' =>'0');
 		$this->db->select('*');
-
 		$this->db->from('tblcompliances');
 		$this->db->where($where);
 		$r=$this->db->get();
 		$res = $r->result();
 		return $res;
-
 	}
 
 
@@ -612,7 +607,7 @@ class Company_model extends CI_Model
 
 		$this->db->where('isactive!=','0');
 
-		$this->db->or_where('Is_deleted','0');
+		$this->db->or_where('isdelete','0');
 
 		$r=$this->db->get();
 
@@ -648,7 +643,7 @@ class Company_model extends CI_Model
 
 	{
 
-		    $where = array('t1.Is_deleted' =>'0');
+		    $where = array('t1.isdelete' =>'0');
 
 			$this->db->select('t1.*,t2.companytype');
 

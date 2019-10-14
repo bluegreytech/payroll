@@ -173,7 +173,7 @@
 
 														<div class="invoice-details">
 
-															<h3 class="text-uppercase">#P<?php echo date('Ym')?>-<?php echo $Companyinvoiceid;?></h3>
+															<h3 class="text-uppercase">#P<?php echo date('Ym')?>-<?php echo $invoicebillid;?></h3>
 
 															<ul class="list-unstyled">
 
