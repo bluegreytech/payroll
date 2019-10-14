@@ -252,3 +252,62 @@ ERROR - 2019-10-14 13:01:45 --> 404 Page Not Found: Default/assets
 ERROR - 2019-10-14 13:03:17 --> 404 Page Not Found: Default/assets
 ERROR - 2019-10-14 13:11:20 --> 404 Page Not Found: Default/assets
 ERROR - 2019-10-14 14:15:07 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 11:27:40 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-14 11:28:10 --> 404 Page Not Found: Home/assets
+ERROR - 2019-10-14 11:28:10 --> 404 Page Not Found: Home/assets
+ERROR - 2019-10-14 11:28:10 --> 404 Page Not Found: Home/assets
+ERROR - 2019-10-14 11:28:10 --> 404 Page Not Found: Home/assets
+ERROR - 2019-10-14 11:28:11 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 11:28:36 --> 404 Page Not Found: Home/search.html
+ERROR - 2019-10-14 11:29:06 --> Severity: Notice --> Undefined property: stdClass::$isactive C:\xampp\htdocs\payroll\hr\application\views\Company\companytypelist.php 60
+ERROR - 2019-10-14 11:29:06 --> Severity: Notice --> Undefined property: stdClass::$isactive C:\xampp\htdocs\payroll\hr\application\views\Company\companytypelist.php 60
+ERROR - 2019-10-14 11:29:06 --> Severity: Notice --> Undefined property: stdClass::$isactive C:\xampp\htdocs\payroll\hr\application\views\Company\companytypelist.php 60
+ERROR - 2019-10-14 11:29:06 --> Severity: Notice --> Undefined property: stdClass::$isactive C:\xampp\htdocs\payroll\hr\application\views\Company\companytypelist.php 60
+ERROR - 2019-10-14 11:29:06 --> Severity: Notice --> Undefined property: stdClass::$isactive C:\xampp\htdocs\payroll\hr\application\views\Company\companytypelist.php 60
+ERROR - 2019-10-14 11:29:06 --> Severity: Notice --> Undefined property: stdClass::$isactive C:\xampp\htdocs\payroll\hr\application\views\Company\companytypelist.php 60
+ERROR - 2019-10-14 11:57:09 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 11:57:10 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 11:57:10 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 11:57:10 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 11:57:10 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-14 11:57:10 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-10-14 11:57:10 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-14 12:04:17 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-14 12:04:17 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-14 12:04:17 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-14 12:04:17 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-14 12:04:17 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-14 12:04:17 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-14 12:04:17 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 12:04:17 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 12:04:18 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 12:04:21 --> 404 Page Not Found: Adminmaster/adminlist
+ERROR - 2019-10-14 12:04:45 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-14 12:04:48 --> 404 Page Not Found: Home/assets
+ERROR - 2019-10-14 12:04:48 --> 404 Page Not Found: Home/assets
+ERROR - 2019-10-14 12:04:48 --> 404 Page Not Found: Home/assets
+ERROR - 2019-10-14 12:04:48 --> 404 Page Not Found: Home/assets
+ERROR - 2019-10-14 12:04:51 --> 404 Page Not Found: Adminmaster/adminlist
+ERROR - 2019-10-14 12:42:53 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 12:42:55 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 12:42:55 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 12:42:55 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-10-14 12:42:55 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 12:42:55 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 12:42:55 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-14 12:42:55 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-14 12:50:12 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 12:50:12 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 12:50:12 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-10-14 12:50:12 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 12:50:12 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 12:50:12 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-14 12:50:12 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-14 12:53:58 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-14 12:53:58 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-14 12:53:58 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 12:53:58 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 12:53:58 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-10-14 12:53:58 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 12:53:58 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 12:53:58 --> 404 Page Not Found: Default/assets
