@@ -117,41 +117,7 @@ class Attendance_model extends CI_Model
 		      //  echo $str1.''.$str2.''.$str3; die;
 		    $query=$this->db->query($str1.''.$str2.''.$str3);	
 			}
-			// else if($empname!='' && $attmonth==''){             
-		 //   	   $str1="SELECT att.attendance_id as attendanceid,CONCAT(U.first_name, ' ', U.last_name) as firstlast,U.ProfileImage as ProfileImage,";
-		 //   	   $mn= array();
-		 //   	   $str2='';
-			//      	$monthdate=array();
-		 //        for($month=1;$month<=12;$month++){ 
-		 //        	 	if($month<=9){
-   //                         $mn ='0'.$month;
-		 //        	 	}else{
-		 //        	 		 $mn =$month;
-		 //        	 	}		        	 
-		 //        	 $totalmonth=cal_days_in_month(CAL_GREGORIAN,date($mn),date('Y')); 		        	
-		 //      	  for($i=1;$i<=$totalmonth;$i++){
-		 //      	  if($i<$mn){
-		 //      	  	 $str2.=",";
-	  //              }		      	     
-			//        	if($i<=9){			       		
-			//        		 $monthdate= date('Y'.'-'.$mn.'-'.'0'.$i);
-			//        		 $str2.="SUM(IF(DATE(att.attendance_date) ='$monthdate',att.attendance_id,0)) AS 'abc$i'";
-			//        	}else{
-			//        		 $monthdate= date('Y'.'-'.$mn.'-'.$i);
-			//        		 $str2.="SUM(IF(DATE(att.attendance_date) ='$monthdate',att.attendance_id,0)) AS 'abc$i'";
-			//        	} 
-			//        	if($i<$totalmonth){
-	  //                   $str2.=",";
-			//        	}			       	
-			//        }
-		 //       }		       
-		 //        $str3=" FROM tblattendance att LEFT JOIN tblemp U ON U.emp_id = att.emp_id WHERE CONCAT(U.first_name,' ',U.last_name) LIKE '%$empname%' AND YEAR(attendance_month) = YEAR(CURDATE()) GROUP BY U.first_name";
-		        
-		 //    	$query=$this->db->query($str1.''.$str2.''.$str3);	
-			// }
-			
-			
-			
+		
 			    
 			 if($query->num_rows() > 0)
 			 { 

@@ -76,7 +76,7 @@
 <div class="row">
     <div class="col-lg-12">
 		<div class="table-responsive">
-			<table class="table table-nowrap display nowrap"  id='example'>
+			<table id="example" class="display table table-striped custom-table mb-0">
 				<thead>
 					<tr>
 						<th>Employee</th>
@@ -265,10 +265,10 @@
 <?php $this->load->view('common/footer');?>
 <script>
 	$(document).ready(function() {
-    $('#example').DataTable( {
-        "scrollX": true,
-        "searching": false
-    } );
+    // $('#example').DataTable( {
+    //     "scrollX": true,
+    //     "searching": false
+    // } );
 } );
 	$(function() { 
     setTimeout(function() {
@@ -402,5 +402,100 @@ $("#attmonth").datetimepicker({
 				close:'fa fa-times'
 				},
     	}).val('<?php echo ($attmonth!='0000-00')&&($attmonth!='')  ? date('Y-m', strtotime($attmonth)) : date('Y-m'); ?>');
+
+$(document).ready(function() {
+	 $('#example').DataTable( {
+		aaSorting: [[0, 'asc']],
+		searching: false,
+		"scrollX": true,
+		dom: 'Blfrtip',
+		responsive: true,
+	 buttons: [
+	 {
+		extend: 'copyHtml5',
+		download: 'open',
+		text:'<i class="fa fa-files-o"></i> Copy',
+		// exportOptions: {
+		// columns: [0,1,2,3,4,5]
+		// }
+	 },
+	 {
+		extend: 'excelHtml5',
+		text:'<i class="fa fa-file-excel-o"></i> Excel',
+		// exportOptions: {
+		// columns: [0,1,2,3,4,5]
+		// }
+	 },
+	 {
+		extend: 'csvHtml5',
+		download: 'open',
+	    text:'<i class="fa fa-file-text-o"></i> CSV',
+		// exportOptions: {
+		// columns: [0,1,2,3,4,5]
+		// },
+		
+	 },
+	 {
+		extend: 'pdfHtml5',
+		 //download: 'open',
+		 text:'<i class="fa fa-file-pdf-o"></i> PDF',
+		 title: "List of Attendance",
+		 filename:"List_of_Attendance",
+		  orientation: 'landscape', 
+		  pageSize: 'A3',
+		
+		// exportOptions: {
+		// columns: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30],
+		
+		// },
+		
+	        customize : function(doc){ 
+				doc.content[1].margin = [ 5, 0, 100, 5 ];
+				doc.defaultStyle.fontSize = 10; //2, 3, 4,etc
+	            doc.styles.tableHeader.fontSize = 12; //2, 3, 4, etc
+				// doc.defaultStyle.alignment = 'center';
+				// doc.styles.tableHeader.alignment = 'center';
+				  doc.styles.table = {
+                                  alignment: 'center',
+                                  width: 'auto',
+                              }
+				// doc.styles['table'] =  width:100% ;
+				//doc.content[1].table.widths=(optWidth + 60).toString() + "px";
+				 // doc.content[1].table.widths = [ '30%','2%', '2%', '2%', 
+	    //                                                         '2%', '2%','2%','2%', '2%','2%','2%', '2%','2%','2%', '2%','2%','2%', '2%','2%','2%','2%','2%', '2%','2%','2%','2%','2%', '2%','2%','2%'];
+	         
+	       },
+	 },
+	  {
+		extend: 'print',
+		orientation: 'landscape', 
+		pageSize: 'A4',
+		text:'<i class="fa fa-print"></i> Print',
+		// exportOptions: {
+		// 	columns: [0,1,2,3,4,5],
+			 		
+		// },
+		 // customize: function (win) {
+		 // 		//	win.defaultStyle.font = 'Times New Roman';
+	  //               $(win.document.body).find('table').addClass('display').css('font-size', '12pt','font-family','Times New Roman');
+	  //               $(win.document.body).find('tr:nth-child(odd) td').each(function(index){
+	  //                   $(this).css('background-color','#D0D0D0');
+	  //               });
+	  //               $(win.document.body).find('h1').css('text-align','center');
+	  //           }
+		
+
+	 },
+	 //'colvis'
+	 ]
+
+ });
+  var styles ={
+	   "margin-bottom": '0.5em',
+       float: "right"	
+	 };
+	  $("div#example_wrapper").find($(".dt-buttons")).css(styles);
+
+} );
 
 </script>

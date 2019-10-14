@@ -158,11 +158,16 @@ class Leave extends CI_Controller
 		if(!check_admin_authentication()){ 
 			redirect(base_url());
 		}   
-			$data=array();
-			$data['activeTab']="leavelist";	
+		$data=array();
+		$data['activeTab']="leavelist";	
+		$data['empname']=$this->input->post('empname');
+		$data['fromdate']=$this->input->post('fromdate');
+		$data['todate']=$this->input->post('todate');
+		$data['leave_type']=$this->input->post('leave_type');
+		$data['leave_status']=$this->input->post('leave_status');
 			
-		 $data['result']=$this->leave_model->empleavelist();
-		//echo "<pre>";print_r($data['result']);die;
+		$data['result']=$this->leave_model->empleavelist();
+	
 		$this->load->view('Employee/leaves_employee',$data);
 	}
 
@@ -253,6 +258,37 @@ class Leave extends CI_Controller
 		
 		$data['emplist']=$this->attendance_model->emplist();
 		$this->load->view('Employee/add_empleave',$data);
+	}
+
+	function searchempleave(){
+		//echo "jhjhg";die;
+		if(!check_admin_authentication()){ 
+			redirect(base_url());
+		}   
+		$data=array();
+		$data['activeTab']="searchempleave";	
+			
+		if($this->input->post("search")!=''){
+			//echo "<pre>";print_r($_POST);die;
+		 	$data['empname']=$this->input->post('empname');
+			$data['fromdate']=$this->input->post('fromdate');
+			$data['todate']=$this->input->post('todate');
+			$data['leave_type']=$this->input->post('leave_type');
+			$data['leave_status']=$this->input->post('leave_status');			
+			$data['result'] =$this->leave_model->searchempleave();
+		}else{
+		    $data['empname']='';
+			$data['fromdate']='';
+			$data['todate']='';	
+			$data['leave_type']='';
+			$data['leave_status']='';			
+          	$data['result']=$this->leave_model->empleavelist();
+		}
+		$data['leavelist']=$this->leave_model->showempleavelist();	
+		$data['redirect_page']="leavelist";
+		//echo "<pre>";print_r($data['leavelist']);die;
+		$this->load->view('Employee/leaves_employee',$data);
+
 	}
 
 	

@@ -171,5 +171,60 @@ class Leave_model extends CI_Model
 		//die;
 		return $res;
 	}
-
+    function searchempleave()
+	{
+			//echo "<pre>";print_r($_POST);die;	
+			$empname=$this->input->post('empname');
+			$fromdate=$this->input->post('fromdate');
+			$todate=$this->input->post('todate');
+			$leave_type=$this->input->post('leave_type');
+			$leave_status=$this->input->post('leave_status');			
+			//$keyword = str_replace('-', ' ', $keyword);			
+			$this->db->select('*');
+			$this->db->from('tblempleave el');	
+			$this->db->join('tblemp as em','em.emp_id=el.emp_id' );	
+			//$this->db->join('tblcmpleave as cl','cl.leave_id=el.typeofleave' );	
+			$this->db->where('em.Is_deleted','0');
+			// echo $leave_type;die;
+			
+			if($empname!=='' && $leave_type !== '' && $leavestatus!=='')
+			{	
+				echo "jhjhg";die;			 
+				$this->db->like('CONCAT(first_name," ",last_name)',$empname);
+				$this->db->like('el.typeofleave',$leave_type);
+				$this->db->like('el.leavestatus',$leave_status);
+				//$this->db->like('cl.leave_type',$leave_type);
+			}			
+			else if($leave_type !== '' && $leave_type!==NULL)
+			{   //echo $leave_type;
+				///echo "elsegfgf";die;
+				$this->db->like('el.typeofleave',$leave_type);
+			}
+			else if($leave_status !== '')
+			{ 	//echo $leave_status;
+				//echo "else   gfgf";die;
+				$this->db->like('el.leavestatus',$leave_status);
+			}
+			// else if($todate == 'leaveto')
+			// {
+			// 	$this->db->like('leaveto',$keyword);
+			// }
+			// else if($leave_type == 'leavestatus')
+			// {
+			// 	$this->db->where('leavestatus',$keyword);
+			// }  
+			// else if($leave_status == 'typeofleave')
+			// {
+			// 	$this->db->where('typeofleave',$keyword);
+			// }  
+			// echo $this->db->last_query();die;
+			$query = $this->db->get();
+			if($query->num_rows() > 0)
+			{ 
+				//echo $this->db->last_query();die;
+				//echo "<pre>";print_r($query->result());die;
+			
+				return $query->result();
+			}  
+	}
 }

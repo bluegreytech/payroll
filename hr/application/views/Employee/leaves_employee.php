@@ -52,31 +52,33 @@
 					<!-- /Leave Statistics -->
 					
 					<!-- Search Filter -->
-					<!-- <div class="row filter-row">
+				<form method="post" action="<?php echo base_url();?>leave/searchempleave" id="frm_search">
+					<div class="row filter-row">
 					   <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
 							<div class="form-group form-focus">
-								<input type="text" class="form-control floating">
+								<input type="text" class="form-control floating" name="empname">
 								<label class="focus-label">Employee Name</label>
 							</div>
 					   </div>
 					   <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
 							<div class="form-group form-focus select-focus">
-								<select class="select floating"> 
-									<option> -- Select -- </option>
-									<option>Casual Leave</option>
-									<option>Medical Leave</option>
-									<option>Loss of Pay</option>
+								<select class="select floating" name="leave_type" id="leave_type"> 
+								<option selected="" value="" disabled="">Please select</option>
+									<?php if(!empty($leavelist)){ 
+										foreach($leavelist as $row){ ?>
+                                        <option value="<?php echo $row->leave_id; ?>"><?php echo ucfirst($row->leave_name);?></option>
+									<?php } } ?>
 								</select>
 								<label class="focus-label">Leave Type</label>
 							</div>
 					   </div>
 					   <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12"> 
 							<div class="form-group form-focus select-focus">
-								<select class="select floating"> 
-									<option> -- Select -- </option>
-									<option> Pending </option>
-									<option> Approved </option>
-									<option> Rejected </option>
+								<select class="select floating" name="leave_status" id="leave_status"> 
+									<option selected="" value="" disabled="">Please select</option>
+									<option value="Pending">Pending </option>
+									<option value="Approve">Approved </option>
+									<option value="Rejected">Rejected </option>
 								</select>
 								<label class="focus-label">Leave Status</label>
 							</div>
@@ -84,7 +86,7 @@
 					   <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
 							<div class="form-group form-focus">
 								<div class="cal-icon">
-									<input class="form-control floating datetimepicker" type="text">
+									<input class="form-control floating datetimepicker" type="text" name="fromdate" id="fromdate">
 								</div>
 								<label class="focus-label">From</label>
 							</div>
@@ -92,21 +94,21 @@
 					   <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
 							<div class="form-group form-focus">
 								<div class="cal-icon">
-									<input class="form-control floating datetimepicker" type="text">
+									<input class="form-control floating datetimepicker" type="text" name="todate" id="todate">
 								</div>
 								<label class="focus-label">To</label>
 							</div>
 						</div>
 					   <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
-							<a href="#" class="btn btn-success btn-block"> Search </a>  
+							<input type="submit" class="btn btn-success btn-block" value="Search" name="search">  
 					   </div>     
-                    </div> -->
-					<!-- /Search Filter -->
-					
+                    </div>
+                </form>
+					<!-- /Search Filter -->					
 					<div class="row">
 						<div class="col-md-12">
 							<div class="table-responsive">
-								<table class="table table-striped custom-table mb-0 datatable">
+								<table id="example" class="display table table-striped custom-table mb-0">
 									<thead>
 										<tr>
 											<th>Employee</th>
@@ -290,7 +292,6 @@
 		//alert(status);		
   
     $('#approve_leave').modal('show');
-
     if(value=="Pending"){
     	$('#statustxt').text('pending');
     }else if(value=="Approve"){
@@ -299,16 +300,13 @@
     	$('#statustxt').text("rejected");
     }
    
-        $('#ok_btn').click(function(){
-           
+        $('#ok_btn').click(function(){           
                 url="<?php echo base_url();?>"
                 $.ajax({
                 url: url+"/leave/statusdata/",
                 type: "post",
                 data: {id:id,status:status,changestatus:value} ,
-                success: function (response) {  
-                	//return false;
-                //console.log(response);           
+                success: function (response) {                  
                 document.location.href = url+'leave/empleavelist';
             },
             error: function(jqXHR, textStatus, errorThrown) {
@@ -317,5 +315,92 @@
             })
         });
 }
+$(document).ready(function() {
+	 $('#example').DataTable( {
+		aaSorting: [[0, 'asc']],
+		searching: false,
+		dom: 'Blfrtip',
+		responsive: true,
+	 buttons: [
+	 {
+		extend: 'copyHtml5',
+		download: 'open',
+		text:'<i class="fa fa-files-o"></i> Copy',
+		exportOptions: {
+		columns: [0,1,2,3,4,5]
+		}
+	 },
+	 {
+		extend: 'excelHtml5',
+		text:'<i class="fa fa-file-excel-o"></i> Excel',
+		exportOptions: {
+		columns: [0,1,2,3,4,5]
+		}
+	 },
+	 {
+		extend: 'csvHtml5',
+		download: 'open',
+	    text:'<i class="fa fa-file-text-o"></i> CSV',
+		exportOptions: {
+		columns: [0,1,2,3,4,5]
+		},
+		
+	 },
+	 {
+		extend: 'pdfHtml5',
+		// download: 'open',
+		 text:'<i class="fa fa-file-pdf-o"></i> PDF',
+		 title: "List of Employee Leave",
+		  filename:"List_of_Employee_leave",
+		  orientation: 'landscape', 
+		  pageSize: 'A4',
+		
+		exportOptions: {
+		columns: [0,1,2,3,4,5],
+		
+		},
+		
+	        customize : function(doc){ 
+				doc.content[1].margin = [ 5, 0, 100, 5 ];
+				doc.defaultStyle.fontSize = 10; //2, 3, 4,etc
+	            doc.styles.tableHeader.fontSize = 12; //2, 3, 4, etc
+				doc.defaultStyle.alignment = 'center';
+				doc.styles.tableHeader.alignment = 'center';
+				doc.content[1].table.widths = [ '25%','20%', '20%', '20%', 
+	                                                           '10%', '20%'];
+	         
+	       },
+	 },
+	  {
+		extend: 'print',
+		orientation: 'landscape', 
+		pageSize: 'A4',
+		text:'<i class="fa fa-print"></i> Print',
+		exportOptions: {
+			columns: [0,1,2,3,4,5],
+			 		
+		},
+		 // customize: function (win) {
+		 // 		//	win.defaultStyle.font = 'Times New Roman';
+	  //               $(win.document.body).find('table').addClass('display').css('font-size', '12pt','font-family','Times New Roman');
+	  //               $(win.document.body).find('tr:nth-child(odd) td').each(function(index){
+	  //                   $(this).css('background-color','#D0D0D0');
+	  //               });
+	  //               $(win.document.body).find('h1').css('text-align','center');
+	  //           }
+		
+
+	 },
+	 //'colvis'
+	 ]
+
+ });
+  var styles ={
+	   "margin-bottom": '0.5em',
+       float: "right"	
+	 };
+	  $("div#example_wrapper").find($(".dt-buttons")).css(styles);
+
+} );
 </script>
     
