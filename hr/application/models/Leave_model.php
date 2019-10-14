@@ -187,24 +187,45 @@ class Leave_model extends CI_Model
 			$this->db->where('em.Is_deleted','0');
 			// echo $leave_type;die;
 			
-			if($empname!=='' && $leave_type !== '' && $leavestatus!=='')
+			if($empname !=='' && $leave_type!=='' && $leave_status!=='' && $fromdate!== '' && $todate!=='')
 			{	
-				echo "jhjhg";die;			 
+			  	//echo "hghh". $empname;die;			 
 				$this->db->like('CONCAT(first_name," ",last_name)',$empname);
 				$this->db->like('el.typeofleave',$leave_type);
 				$this->db->like('el.leavestatus',$leave_status);
+				$this->db->where('date BETWEEN "'. date('Y-m-d', strtotime($start_date)). '" and "'. date('Y-m-d', strtotime($end_date)).'"');
 				//$this->db->like('cl.leave_type',$leave_type);
+			}
+			else if($empname !=='' && $empname!==NULL)
+			{   
+			   // echo "kjkjhk".$empname;die;	
+				$this->db->like('CONCAT(first_name," ",last_name)',$empname);
 			}			
 			else if($leave_type !== '' && $leave_type!==NULL)
-			{   //echo $leave_type;
-				///echo "elsegfgf";die;
+			{  
 				$this->db->like('el.typeofleave',$leave_type);
 			}
-			else if($leave_status !== '')
-			{ 	//echo $leave_status;
-				//echo "else   gfgf";die;
+			else if($leave_status !== ''&& $leave_status!==NULL)
+			{ 	
 				$this->db->like('el.leavestatus',$leave_status);
 			}
+			else if($fromdate !== '' && $fromdate!==NULL)
+			{ 
+				//echo "ghjhgj";die;
+				$fromdate = $this->input->post('fromdate');
+				$fdate = str_replace('/', '-', $fromdate );
+				$fdate = date("Y-m-d", strtotime($fdate));	
+				$this->db->like('el.leavefrom',$fdate);
+
+			}else if($todate !== '' && $todate!==NULL)
+			{ 
+				//echo "gfgfdg";die;
+				$todate = $this->input->post('todate');
+				$tdate = str_replace('/','-',$todate);
+				$tdate = date("Y-m-d", strtotime($tdate));	
+				$this->db->like('el.leaveto',$tdate);
+			}
+
 			// else if($todate == 'leaveto')
 			// {
 			// 	$this->db->like('leaveto',$keyword);
