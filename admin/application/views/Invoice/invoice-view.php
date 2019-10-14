@@ -1,9 +1,6 @@
-﻿<?php 
-
+﻿<?php
 	 $this->load->view('common/header.php');
-
 	 $this->load->view('common/sidebar.php');
-
 ?>
 
 
@@ -49,22 +46,18 @@
 							<div class="col-sm-6 col-8 text-right m-b-30">
 							
 
-									<div class="btn-group btn-group-sm">
+								<div class="btn-group btn-group-sm">
 									<!-- <form methos="post" action="<?php //echo base_url();?>Invoice/invoice_view/<?php //echo $companyid;?>"> -->
-										<a href="<?php echo base_url();?>Invoice/sendinvoiceemail/<?php echo $companyid;?>"><button class="btn btn-white" >Send Email</button></a>	
+										<a href="<?php echo base_url();?>Invoice/sendinvoice/<?php echo $Companyinvoiceid;?>"><button class="btn btn-white">Send Email</button></a>	
 									<!-- </form> -->
-									</div>
+								</div>
 							
 								<div class="btn-group btn-group-sm">
-
 									<button class="btn btn-white" id="btnExport">Generate PDF</button>	
-
 								</div>
 
 								<div class="btn-group btn-group-sm">
-
 									<a href="<?php echo base_url();?>Invoice" class="btn add-btn"> Back to Invoice List</a>	
-
 								</div>
 
 							</div>
@@ -101,37 +94,7 @@
 
 													<div class="col-sm-6 m-b-20">
 
-													
-
-														<?php 
-
-															if($companyimage!='')
-
-															{
-
-																?>
-
-																<img src="<?php echo base_url();?>upload/company/<?php echo $companyimage;?>" class="inv-logo">
-
-																<?php
-
-
-
-															}
-
-															else
-
-															{
-
-																?>
-
-																<img src="<?php echo base_url();?>upload/default/avtar.jpg" class="inv-logo">
-
-																<?php
-
-															}
-
-															?>
+														<img src="<?php echo base_url();?>default/img/Company/companylogo/logo.jpg" class="inv-logo" alt="Logo">
 
 														<h5><strong>Invoice From:</strong></h5>
 
@@ -396,11 +359,9 @@
 
 	
 
-		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
-
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+		<!-- Custom PDF JS -->
+		<script src="<?php echo base_url(); ?>default/js/pdfjs/html2canvas.min.js"></script>
+		<script src="<?php echo base_url(); ?>default/js/pdfjs/pdfmake.min.js"></script>
 
 	
 

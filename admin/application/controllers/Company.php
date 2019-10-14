@@ -441,196 +441,75 @@ class Company extends CI_Controller
 
 
 	function delete_company(){
-
-
-
 		if(!check_admin_authentication()){ 
-
-
-
 			redirect(base_url('Login'));
-
-
-
 		}
-
-
-
 			$companyid=$this->input->post('companyid');
-
-
-
 			$data=array(
-
-
-
 				'isdelete'=>'1',
-
-
-
 				'isactive'=>'Inactive'
-
-
-
-					);
-
-
-
+				);
 			$this->db->where("companyid",$companyid);
-
-
-
 			$result=$this->db->update('tblcompany',$data);
-
-
-
 			if($result)
-
-
-
 			{
-
-
-
 				$this->session->set_flashdata('success', 'Company was delete successfully!');
-
-
-
 				redirect('Company');
-
-
-
 			}
-
-
-
 			else
-
-
-
 			{
-
-
-
 				$this->session->set_flashdata('error', 'Company was not delete!');
-
-
-
 				redirect('Company');
-
-
-
 			}
-
-
-
-	
-
-
 
 	}
 
 
 
-
-
-
-
-
-
-
-
 	function editcompany($companyid)
-
 	{
-
 		if(!check_admin_authentication()){ 
-
 			redirect(base_url('Login'));
-
 		}
-
 		$data=array();
-
 		$result=$this->Company_model->get_company($companyid);	
-
 		//echo "<br>";print_r($result);die;
-
 		$data['companyid']=$result['companyid'];
-
 		$data['companytypeid']=$result['companytypeid'];
-
 		$data['companytype']=$result['companytype'];
-
 		$data['companyname']=$result['companyname'];
-
 		$data['comemailaddress']=$result['comemailaddress'];
-
 		$data['comcontactnumber']=$result['comcontactnumber'];
-
 		$data['gstnumber']=$result['gstnumber'];
-
 		$data['digitalsignaturedate']=$result['digitalsignaturedate'];
-
 		$data['companyimage']=$result['companyimage'];
-
 		$data['companyaddress']=$result['companyaddress'];
-
 		$data['stateid']=$result['stateid'];
-
 		$data['statename']=$result['statename'];
-
 		$data['companycity']=$result['companycity'];
-
 		$data['pincode']=$result['pincode'];
-
 		$data['isactive']=$result['isactive'];
-
 		$data['companycomplianceid']=$result['companycomplianceid'];
-
 		$data['complianceid']=$result['complianceid'];
 
-
-
 		$data['Companyshiftid']=$result['Companyshiftid'];
-
 		$data['Shifthours']=$result['Shifthours'];
-
 		$data['Shiftname']=$result['Shiftname'];
-
 		$data['Shiftintime']=$result['Shiftintime'];
-
 		$data['Shiftouttime']=$result['Shiftouttime'];
 
-
-
 		$data['Bankdetailid']=$result['Bankdetailid'];
-
 		$data['Accountnumber']=$result['Accountnumber'];
-
 		$data['Branch']=$result['Branch'];
-
 		$data['Bankname']=$result['Bankname'];
-
 		$data['Ifsccode']=$result['Ifsccode'];
 
-	
-
-		
-
 		$data['shiftData']=$this->Company_model->list_companyshift($companyid);
-
 		$data['stateData']=$this->Company_model->list_state();
-
 		$data['complianceData']=$this->Company_model->list_compliance();
-
 		$data['companytypeData']=$this->Company_model->list_companytype();
-
 			//echo "<pre>";print_r($data['shiftData']);die;
-
 		$this->load->view('Company/companyadd',$data);	
-
-
 
 	}
 
@@ -709,7 +588,6 @@ class Company extends CI_Controller
 		} 
 
 		$data['companytypeData']=$this->Company_model->list_companytype();
-
 		$this->load->view('Company/companytypelist',$data);	
 
 

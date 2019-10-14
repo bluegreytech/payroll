@@ -329,21 +329,6 @@
 
 
 										<div class="col-md-6">
-
-										<!-- <div class="form-group">
-
-														<label>Licence Expired Date <span class="text-danger">*</span></label>
-
-														<div class="cal-icon">
-
-															<input  class="form-control datetimepicker" type="text" name="digitalsignaturedate" id="digitalsignaturedate" value="<?php // echo $digitalsignaturedate; ?>" readonly>
-
-														</div>
-
-													</div>-->
-
-									
-
 												<div class="form-group">
 													<label>Licence Expired Date  <span class="text-danger">*</span></label>
 													<div class="cal-icon">
@@ -351,7 +336,6 @@
 														value="<?php echo $digitalsignaturedate; ?>">
 													</div>
 												</div>
-
 										</div> 
 
 

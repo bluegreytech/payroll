@@ -18,7 +18,7 @@
 
 		<!-- Favicon -->
 
-        <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url(); ?>default/img/favicon.png">
+        <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url(); ?>default/img/Company/companylogo/logo.jpg">
 
 
 
