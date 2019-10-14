@@ -528,9 +528,13 @@ $(document).ready(function()
 						},
 						FirstName:{
 							required: true,
+							maxlength:35,
+							minlength:5
 						},
 						LastName:{
 							required: true,
+							maxlength:35,
+							minlength:5
 						},
 						EmailAddress:{
 							required:true,
@@ -538,8 +542,7 @@ $(document).ready(function()
 							email_check:function(){
 								emailcheck='<?php echo $email; ?>';
 								if(emailcheck==''){
-									return true;
-								
+									return true;								
 								}
 							}, 
 
