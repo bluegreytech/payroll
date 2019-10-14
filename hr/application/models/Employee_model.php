@@ -23,7 +23,6 @@ class Employee_model extends CI_Model
 			$this->db->from('tblemp');	
 			$this->db->where('Is_deleted','0');
 			
-			
 			if($option == 'first_name')
 			{
 				 

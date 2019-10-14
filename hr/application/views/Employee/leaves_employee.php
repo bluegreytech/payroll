@@ -54,13 +54,13 @@
 					<!-- Search Filter -->
 				<form method="post" action="<?php echo base_url();?>leave/searchempleave" id="frm_search">
 					<div class="row filter-row">
-					   <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+					    <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
 							<div class="form-group form-focus">
 								<input type="text" class="form-control floating" name="empname">
 								<label class="focus-label">Employee Name</label>
 							</div>
-					   </div>
-					   <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+					    </div>
+					    <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
 							<div class="form-group form-focus select-focus">
 								<select class="select floating" name="leave_type" id="leave_type"> 
 								<option selected="" value="" disabled="">Please select</option>
@@ -71,8 +71,8 @@
 								</select>
 								<label class="focus-label">Leave Type</label>
 							</div>
-					   </div>
-					   <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12"> 
+					    </div>
+					    <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12"> 
 							<div class="form-group form-focus select-focus">
 								<select class="select floating" name="leave_status" id="leave_status"> 
 									<option selected="" value="" disabled="">Please select</option>
@@ -82,8 +82,8 @@
 								</select>
 								<label class="focus-label">Leave Status</label>
 							</div>
-					   </div>
-					   <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+					    </div>
+					    <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
 							<div class="form-group form-focus">
 								<div class="cal-icon">
 									<input class="form-control floating datetimepicker" type="text" name="fromdate" id="fromdate">
@@ -91,7 +91,7 @@
 								<label class="focus-label">From</label>
 							</div>
 						</div>
-					   <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+					    <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
 							<div class="form-group form-focus">
 								<div class="cal-icon">
 									<input class="form-control floating datetimepicker" type="text" name="todate" id="todate">
@@ -99,9 +99,9 @@
 								<label class="focus-label">To</label>
 							</div>
 						</div>
-					   <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+					    <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
 							<input type="submit" class="btn btn-success btn-block" value="Search" name="search">  
-					   </div>     
+					    </div>     
                     </div>
                 </form>
 					<!-- /Search Filter -->					

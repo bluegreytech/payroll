@@ -252,3 +252,16 @@ ERROR - 2019-10-14 13:01:45 --> 404 Page Not Found: Default/assets
 ERROR - 2019-10-14 13:03:17 --> 404 Page Not Found: Default/assets
 ERROR - 2019-10-14 13:11:20 --> 404 Page Not Found: Default/assets
 ERROR - 2019-10-14 14:15:07 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 14:22:52 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 14:47:14 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 14:54:00 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 14:57:19 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 14:59:30 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 15:01:25 --> Severity: Notice --> Undefined variable: leavestatus C:\xampp\htdocs\payroll\hr\application\models\Leave_model.php 190
+ERROR - 2019-10-14 15:01:43 --> Severity: Notice --> Undefined variable: leavestatus C:\xampp\htdocs\payroll\hr\application\models\Leave_model.php 190
+ERROR - 2019-10-14 15:02:16 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 15:06:13 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 15:07:03 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 15:10:10 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 15:13:57 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 15:17:30 --> 404 Page Not Found: Default/assets
