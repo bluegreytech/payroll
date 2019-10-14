@@ -4,53 +4,29 @@
 
 ?>
 
-
-
 			<!-- Page Wrapper -->
-
-
 
             <div class="page-wrapper">
 
-
-
 			<input type="hidden" name="RoleId" value="<?php echo $roleid=$this->session->userdata('RoleId');?>">
 
-
-
 				<!-- Page Content -->
-
-
-
                 <div class="content container-fluid">
 
 
 				<?php if(($this->session->flashdata('error'))){ ?>
-
 				<div class="alert alert-danger" id="errorMessage">
-
 				<strong> <?php echo $this->session->flashdata('error'); ?></strong> 
-
 				</div>
-
 				<?php } ?>
-
 				<?php if(($this->session->flashdata('success'))){ ?>
-
 						<div class="alert alert-success" id="successMessage">
-
 						<strong> <?php echo $this->session->flashdata('success'); ?></strong> 
-
 						</div>
-
 				<?php } ?>
-
 				<?php if(($this->session->flashdata('warning'))){ ?>
-
 				<div class="alert alert-warning" id="warningMessage">
-
 				<strong> <?php echo $this->session->flashdata('warning'); ?></strong> 
-
 				</div>
 
 				<?php } ?>
@@ -73,117 +49,105 @@
 							</div>
 					</div>
 
-
-
-					
-
-
-
 					<!-- /Page Title -->
 
 
 
 
 
-						<!-- Search Filter -->
+					<!-- Search Filter -->
 
-						<form method="post" action="<?php echo base_url();?>Invoice">
-
-						<div class="row filter-row">
-
-						
-
-							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
-
-									<div class="form-group form-focus select-focus">
-
-										<select class="select floating" name="option" id="purpose"> 
-
-											<option value=""> -- Select -- </option>
-
-											<option value="companytype">Company Type</option>
-
-											<option value="companyname">Company Name</option>
-
-											<option value="comemailaddress">Email Address</option>
-
-											<option value="comcontactnumber">Contact Number</option>
-
-											<option value="emailverifystatus">Verification Status</option>
-
-										</select>
-
-										<!-- <label class="focus-label">Role</label> -->
-
-									</div>
-
-							</div>
-
-							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12" >  
-
-									<div class="form-group form-focus box" id='business'>
-
-										<input type="text" name="keyword2" class="form-control floating">
-
-										<label class="focus-label">Search</label>
-
-									</div>
+				<form method="post" action="<?php echo base_url();?>Invoice/quotation_list">
+							<div class="row filter-row">
 
 
 
-									<div class="form-group form-focus box2" id='business2' style="display: none;">
+								<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
 
-										<div class="form-group">
+										<div class="form-group form-focus select-focus">
 
-											<select class="form-control" name="keyword2"> 
-
-												<!-- <option desabled value="">Please select company</option>
-
-												<?php
-
-												// if($companyData){
-
-												// 	foreach($companyData as $comp)
-
-												// 	{
-
-												?>
-
-													<option value="<?php// echo $comp->companyname; ?>"><?php //echo $comp->companyname;?></option>
-
-												<?php
-
-												// }}
-
-												?> -->
-
+											<select class="select floating" name="option" id="purpose"> 
+												<option value=""> -- Select -- </option>
+												<option value="companytype">Company type</option>
+												<option value="companyname">Company Name</option>
+												<option value="companyemail">Email Address</option>
+												<option value="comcontactnumber">Contact Number</option>
+												<option value="quotationdate">Date From to To</option>
 											</select>
 
 										</div>
 
-									</div>
+								</div>
 
-							</div>
 
-							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
 
-								<input type="submit" value="Search" class="btn btn-success btn-block">
+								<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+
+										<div class="form-group form-focus box" id='business'>
+											<input type="text" name="keyword2" class="form-control floating">
+											<label class="focus-label">Search</label>
+										</div>
+
+										 <div class="form-group form-focus box" id='business5' style="display: none;">
+											<input type="text" name="keyword3" class="form-control floating">
+											<label class="focus-label">Search</label>
+										</div>
+
+										<div class="form-group form-focus box" id='business6' style="display: none;">
+											<input type="text" name="keyword4" class="form-control floating">
+											<label class="focus-label">Search</label>
+										</div>
+
+										<div class="form-group form-focus box2" id='business2' style="display: none;">
+											<div class="form-group">
+												<select class="form-control" name="keyword"> 
+													<option desabled value="">Please select company type</option>
+													<?php
+													if($companytypeData){
+														foreach($companytypeData as $comp)
+														{
+													?>
+														<option value="<?php echo $comp->companytype; ?>"><?php echo $comp->companytype;?></option>
+													<?php
+													}}
+													?>
+												</select>
+											</div>
+										</div>
+
+
+										<div class="form-group form-focus" id='business3' style="display: none;">
+											<div class="cal-icon">
+												<input class="form-control floating datetimepicker" type="text" name="keyword5" id="keyword5" readonly>
+											</div>
+											<label class="focus-label">From</label>
+										</div>
+ 
+								
+										<div class="form-group form-focus" id='business4' style="display: none;">
+											<div class="cal-icon">
+												<input class="form-control floating datetimepicker" type="text" name="keyword6" id="keyword6" readonly>
+											</div>
+											<label class="focus-label">To</label>
+										</div>
+
+												
+								</div>
+
+								
+
+								<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+									<input type="submit" value="Search" class="btn btn-success btn-block">
+								</div>    
+
+								<div class="col-md-3"> 
+									<a href="<?php echo base_url()?>Invoice/quotation_list" class="btn btn-info"><i class="fa fa-refresh"></i></a> 
+								</div> 
 
 							</div> 
+				</form>
 
-							<div class="col-md-3"> 
-								<a href="<?php echo base_url()?>Invoice/quotation_list" class="btn btn-info"><i class="fa fa-refresh"></i></a> 
-							</div> 
-
-							    
-
-						</div> 
-
-					</form>
-
-					
-
-					<!-- Search Filter -->
+				<!-- /Search Filter -->
 
 
 
@@ -246,41 +210,9 @@
 					</div>
 
 
-
-
-
-
-
-
-
-
-
                 </div>
 
-
-
 				<!-- /Page Content -->
-
-
-
-			
-
-
-
-			
-
-
-
-				
-
-
-
-				
-
-
-
-				
-
 
 
 				<!-- Delete Client Modal -->
@@ -338,37 +270,70 @@
 </html>
 
 <script>
+
 $(document).ready(function(){
-
-    $('#purpose').on('change', function() {
-
-      if(this.value == 'companyname')
-
-      {
-
-        $("#business2").show();
-
-		$("#business").hide();
-
-		$(".box").hide();
-
-      }
-
-      else
-
-      {
-
-        $("#business2").hide();
-
-		$("#business").show();
-
-		$(".box2").hide();
-
-      }
-
-    });
-
+$('#purpose').on('change', function() {
+  if(this.value == 'companytype')
+  {
+	$("#business2").show();
+	$("#business").hide();
+	$("#business3").hide();
+	$("#business4").hide();
+	$("#business5").hide();
+	$("#business6").hide();
+  }
+  else if(this.value == 'companyname')
+  {
+	$("#business").show();
+	$("#business2").hide();
+	$("#business3").hide();
+	$("#business4").hide();
+	$("#business5").hide();
+	$("#business6").hide();
+  }
+  else if(this.value == 'companyemail')
+  {
+	$("#business").hide();
+	$("#business2").hide();
+	$("#business3").hide();
+	$("#business4").hide();
+	$("#business5").show();
+	$("#business6").hide();
+  }
+  else if(this.value == 'comcontactnumber')
+  {
+	$("#business").hide();
+	$("#business2").hide();
+	$("#business3").hide();
+	$("#business4").hide();
+	$("#business5").hide();
+	$("#business6").show();
+  }
+  else if(this.value == 'quotationdate')
+  {
+	$("#business").hide();
+	$("#business2").hide();
+	$("#business3").show();
+	$("#business4").show();
+	$("#business5").hide();
+	$("#business6").hide();
+  }
 });
+});
+
+$('#keyword5').datetimepicker({
+				defaultDate: new Date(),
+				format: 'DD/MM/YYYY',
+				ignoreReadonly: true,					
+});
+
+$('#keyword6').datetimepicker({
+				defaultDate: new Date(),
+				format: 'DD/MM/YYYY',
+				ignoreReadonly: true,					
+});
+
+
 $(function() { 
     setTimeout(function() {
   $('#errorMessage').fadeOut('fast');

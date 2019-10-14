@@ -318,7 +318,7 @@ class Company extends CI_Controller
 
 			$data['Bankname']=$this->input->post('Bankname');
 
-			$data['Ibannumber']=$this->input->post('Ibannumber');
+			$data['Ifsccode']=$this->input->post('Ifsccode');
 
 			$data['Swiftcode']=$this->input->post('Swiftcode');
 

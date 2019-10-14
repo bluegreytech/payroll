@@ -34,62 +34,20 @@
 
                 <div class="content container-fluid">
 
-				<?php if(($this->session->flashdata('error'))){ ?>
-
-
-
+						<?php if(($this->session->flashdata('error'))){ ?>
 						<div class="alert alert-danger" id="errorMessage">
-
-
-
 						<strong> <?php echo $this->session->flashdata('error'); ?></strong> 
-
-
-
 						</div>
-
-
-
 						<?php } ?>
-
-
-
 						<?php if(($this->session->flashdata('success'))){ ?>
-
-
-
 								<div class="alert alert-success" id="successMessage">
-
-
-
 								<strong> <?php echo $this->session->flashdata('success'); ?></strong> 
-
-
-
 								</div>
-
-
-
 						<?php } ?>
-
-
-
 						<?php if(($this->session->flashdata('warning'))){ ?>
-
-
-
 						<div class="alert alert-warning" id="warningMessage">
-
-
-
 						<strong> <?php echo $this->session->flashdata('warning'); ?></strong> 
-
-
-
 						</div>
-
-
-
 						<?php } ?>
 
 
@@ -117,14 +75,9 @@
 
 
 
-						<!-- Search Filter -->
-
-
+					<!-- Search Filter -->
 
 						<form method="post" action="<?php echo base_url();?>Invoice">
-
-
-
 							<div class="row filter-row">
 
 
@@ -146,7 +99,7 @@
 
 
 
-							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+								<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
 
 										<div class="form-group form-focus box" id='business'>
 
@@ -241,20 +194,7 @@
 								</div> 
 
 							</div> 
-
-
-
-							</form>
-
-
-
-
-
-
-
-
-
-
+						</form>
 
 					<!-- /Search Filter -->
 
