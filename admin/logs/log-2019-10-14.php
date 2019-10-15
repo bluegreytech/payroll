@@ -262,3 +262,173 @@ ERROR - 2019-10-14 12:55:51 --> 404 Page Not Found: Adminmaster/default
 ERROR - 2019-10-14 12:56:38 --> 404 Page Not Found: Adminmaster/default
 ERROR - 2019-10-14 12:57:00 --> 404 Page Not Found: Adminmaster/default
 ERROR - 2019-10-14 12:57:39 --> 404 Page Not Found: Adminmaster/default
+ERROR - 2019-10-14 13:12:56 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-14 13:13:11 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 39
+ERROR - 2019-10-14 13:13:11 --> Severity: Notice --> Undefined variable: session C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 66
+ERROR - 2019-10-14 13:13:21 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 39
+ERROR - 2019-10-14 13:13:22 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-14 13:13:22 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-14 13:13:22 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-14 13:13:22 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-14 13:14:49 --> 404 Page Not Found: Invoice/invoice_view2
+ERROR - 2019-10-14 13:19:25 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 13:19:25 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 13:19:25 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-10-14 13:19:25 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 13:19:25 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 13:19:25 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-14 13:19:25 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-14 13:29:30 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-14 13:29:30 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-14 13:29:30 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-14 13:29:30 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-14 13:29:31 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-14 13:29:31 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-14 13:29:31 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-14 13:29:31 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-14 13:29:32 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-14 13:29:32 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-14 13:29:32 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-14 13:29:32 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-14 13:33:26 --> Severity: 4096 --> Object of class CI_Loader could not be converted to string C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 259
+ERROR - 2019-10-14 13:38:53 --> Severity: Notice --> Undefined variable: Companyinvoiceid C:\xampp\htdocs\payroll\admin\application\views\Invoice\invoice-view.php 64
+ERROR - 2019-10-14 13:38:53 --> Severity: Notice --> Undefined variable: Address C:\xampp\htdocs\payroll\admin\application\views\Invoice\invoice-view.php 115
+ERROR - 2019-10-14 13:38:53 --> Severity: Notice --> Undefined variable: gstnumber C:\xampp\htdocs\payroll\admin\application\views\Invoice\invoice-view.php 117
+ERROR - 2019-10-14 13:38:53 --> Severity: Notice --> Undefined variable: invoicebillid C:\xampp\htdocs\payroll\admin\application\views\Invoice\invoice-view.php 127
+ERROR - 2019-10-14 13:38:53 --> Severity: Notice --> Undefined variable: invoicedate C:\xampp\htdocs\payroll\admin\application\views\Invoice\invoice-view.php 133
+ERROR - 2019-10-14 13:38:53 --> Severity: Notice --> Undefined variable: duedate C:\xampp\htdocs\payroll\admin\application\views\Invoice\invoice-view.php 137
+ERROR - 2019-10-14 13:38:53 --> Severity: Notice --> Undefined variable: companyname C:\xampp\htdocs\payroll\admin\application\views\Invoice\invoice-view.php 157
+ERROR - 2019-10-14 13:38:53 --> Severity: Notice --> Undefined variable: companyaddress C:\xampp\htdocs\payroll\admin\application\views\Invoice\invoice-view.php 159
+ERROR - 2019-10-14 13:38:53 --> Severity: Notice --> Undefined variable: companycity C:\xampp\htdocs\payroll\admin\application\views\Invoice\invoice-view.php 161
+ERROR - 2019-10-14 13:38:53 --> Severity: Notice --> Undefined variable: comcontactnumber C:\xampp\htdocs\payroll\admin\application\views\Invoice\invoice-view.php 163
+ERROR - 2019-10-14 13:38:53 --> Severity: Notice --> Undefined variable: netamount C:\xampp\htdocs\payroll\admin\application\views\Invoice\invoice-view.php 177
+ERROR - 2019-10-14 13:38:53 --> Severity: Notice --> Undefined variable: Bankname C:\xampp\htdocs\payroll\admin\application\views\Invoice\invoice-view.php 179
+ERROR - 2019-10-14 13:38:53 --> Severity: Notice --> Undefined variable: Ifsccode C:\xampp\htdocs\payroll\admin\application\views\Invoice\invoice-view.php 184
+ERROR - 2019-10-14 13:38:53 --> Severity: Notice --> Undefined variable: totalamount C:\xampp\htdocs\payroll\admin\application\views\Invoice\invoice-view.php 222
+ERROR - 2019-10-14 13:38:53 --> Severity: Notice --> Undefined variable: addtax C:\xampp\htdocs\payroll\admin\application\views\Invoice\invoice-view.php 230
+ERROR - 2019-10-14 13:38:53 --> Severity: Notice --> Undefined variable: taxamount C:\xampp\htdocs\payroll\admin\application\views\Invoice\invoice-view.php 237
+ERROR - 2019-10-14 13:38:53 --> Severity: Notice --> Undefined variable: cgstamount C:\xampp\htdocs\payroll\admin\application\views\Invoice\invoice-view.php 244
+ERROR - 2019-10-14 13:38:53 --> Severity: Notice --> Undefined variable: netamount C:\xampp\htdocs\payroll\admin\application\views\Invoice\invoice-view.php 252
+ERROR - 2019-10-14 13:38:53 --> Severity: Notice --> Undefined variable: Otherinformation C:\xampp\htdocs\payroll\admin\application\views\Invoice\invoice-view.php 264
+ERROR - 2019-10-14 13:39:12 --> Severity: Notice --> Undefined variable: Address C:\xampp\htdocs\payroll\admin\application\views\Invoice\invoice-view2.php 163
+ERROR - 2019-10-14 13:39:12 --> Severity: Notice --> Undefined variable: gstnumber C:\xampp\htdocs\payroll\admin\application\views\Invoice\invoice-view2.php 165
+ERROR - 2019-10-14 13:39:12 --> Severity: Notice --> Undefined variable: invoicebillid C:\xampp\htdocs\payroll\admin\application\views\Invoice\invoice-view2.php 176
+ERROR - 2019-10-14 13:39:12 --> Severity: Notice --> Undefined variable: invoicedate C:\xampp\htdocs\payroll\admin\application\views\Invoice\invoice-view2.php 182
+ERROR - 2019-10-14 13:39:12 --> Severity: Notice --> Undefined variable: duedate C:\xampp\htdocs\payroll\admin\application\views\Invoice\invoice-view2.php 186
+ERROR - 2019-10-14 13:39:12 --> Severity: Notice --> Undefined variable: companyname C:\xampp\htdocs\payroll\admin\application\views\Invoice\invoice-view2.php 206
+ERROR - 2019-10-14 13:39:12 --> Severity: Notice --> Undefined variable: companyaddress C:\xampp\htdocs\payroll\admin\application\views\Invoice\invoice-view2.php 208
+ERROR - 2019-10-14 13:39:12 --> Severity: Notice --> Undefined variable: companycity C:\xampp\htdocs\payroll\admin\application\views\Invoice\invoice-view2.php 210
+ERROR - 2019-10-14 13:39:12 --> Severity: Notice --> Undefined variable: comcontactnumber C:\xampp\htdocs\payroll\admin\application\views\Invoice\invoice-view2.php 212
+ERROR - 2019-10-14 13:39:12 --> Severity: Notice --> Undefined variable: netamount C:\xampp\htdocs\payroll\admin\application\views\Invoice\invoice-view2.php 223
+ERROR - 2019-10-14 13:39:12 --> Severity: Notice --> Undefined variable: Bankname C:\xampp\htdocs\payroll\admin\application\views\Invoice\invoice-view2.php 224
+ERROR - 2019-10-14 13:39:12 --> Severity: Notice --> Undefined variable: Ifsccode C:\xampp\htdocs\payroll\admin\application\views\Invoice\invoice-view2.php 225
+ERROR - 2019-10-14 13:39:12 --> Severity: Notice --> Undefined variable: totalamount C:\xampp\htdocs\payroll\admin\application\views\Invoice\invoice-view2.php 260
+ERROR - 2019-10-14 13:39:12 --> Severity: Notice --> Undefined variable: addtax C:\xampp\htdocs\payroll\admin\application\views\Invoice\invoice-view2.php 268
+ERROR - 2019-10-14 13:39:12 --> Severity: Notice --> Undefined variable: taxamount C:\xampp\htdocs\payroll\admin\application\views\Invoice\invoice-view2.php 275
+ERROR - 2019-10-14 13:39:12 --> Severity: Notice --> Undefined variable: cgstamount C:\xampp\htdocs\payroll\admin\application\views\Invoice\invoice-view2.php 282
+ERROR - 2019-10-14 13:39:12 --> Severity: Notice --> Undefined variable: netamount C:\xampp\htdocs\payroll\admin\application\views\Invoice\invoice-view2.php 290
+ERROR - 2019-10-14 13:40:15 --> Severity: Notice --> Array to string conversion C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 253
+ERROR - 2019-10-14 13:40:15 --> Severity: Notice --> Undefined variable: Array C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 253
+ERROR - 2019-10-14 13:41:19 --> Severity: Notice --> Undefined variable: result C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 254
+ERROR - 2019-10-14 13:41:19 --> Severity: Notice --> Undefined variable: result C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 255
+ERROR - 2019-10-14 13:41:19 --> Severity: Notice --> Undefined variable: result C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 256
+ERROR - 2019-10-14 13:41:19 --> Severity: Notice --> Undefined variable: result C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 257
+ERROR - 2019-10-14 13:41:19 --> Severity: Notice --> Undefined variable: result C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 258
+ERROR - 2019-10-14 13:41:19 --> Severity: Notice --> Undefined variable: result C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 259
+ERROR - 2019-10-14 13:41:19 --> Severity: Notice --> Undefined variable: result C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 260
+ERROR - 2019-10-14 13:41:19 --> Severity: Notice --> Undefined variable: result C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 261
+ERROR - 2019-10-14 13:41:19 --> Severity: Notice --> Undefined variable: result C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 262
+ERROR - 2019-10-14 13:41:19 --> Severity: Notice --> Undefined variable: result C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 263
+ERROR - 2019-10-14 13:41:19 --> Severity: Notice --> Undefined variable: result C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 264
+ERROR - 2019-10-14 13:41:19 --> Severity: Notice --> Undefined variable: result C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 265
+ERROR - 2019-10-14 13:41:19 --> Severity: Notice --> Undefined variable: result C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 266
+ERROR - 2019-10-14 13:41:19 --> Severity: Notice --> Undefined variable: result C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 267
+ERROR - 2019-10-14 13:41:19 --> Severity: Notice --> Undefined variable: result C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 268
+ERROR - 2019-10-14 13:41:19 --> Severity: Notice --> Undefined variable: result C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 269
+ERROR - 2019-10-14 13:41:19 --> Severity: Notice --> Undefined variable: result C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 270
+ERROR - 2019-10-14 13:41:19 --> Severity: Notice --> Undefined variable: result C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 271
+ERROR - 2019-10-14 13:41:19 --> Severity: Notice --> Undefined variable: result C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 272
+ERROR - 2019-10-14 13:41:19 --> Severity: Notice --> Undefined variable: result C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 273
+ERROR - 2019-10-14 13:41:19 --> Severity: Notice --> Undefined variable: result C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 274
+ERROR - 2019-10-14 13:41:19 --> Severity: Notice --> Undefined variable: result C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 275
+ERROR - 2019-10-14 13:41:19 --> Severity: Notice --> Undefined variable: result C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 276
+ERROR - 2019-10-14 13:41:19 --> Severity: Notice --> Undefined variable: result C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 277
+ERROR - 2019-10-14 13:41:19 --> Severity: Notice --> Undefined variable: result C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 278
+ERROR - 2019-10-14 13:41:19 --> Severity: Notice --> Undefined variable: result C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 279
+ERROR - 2019-10-14 13:41:19 --> Severity: Notice --> Undefined variable: result C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 280
+ERROR - 2019-10-14 13:41:19 --> Severity: Notice --> Undefined variable: result C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 281
+ERROR - 2019-10-14 13:41:19 --> Severity: Notice --> Undefined variable: result C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 282
+ERROR - 2019-10-14 13:41:19 --> Severity: Notice --> Undefined variable: result C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 283
+ERROR - 2019-10-14 13:41:19 --> Severity: Notice --> Undefined variable: result C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 284
+ERROR - 2019-10-14 13:41:19 --> Severity: Notice --> Undefined variable: result C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 285
+ERROR - 2019-10-14 13:41:19 --> Severity: Notice --> Undefined variable: result C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 286
+ERROR - 2019-10-14 13:41:19 --> Severity: Notice --> Undefined variable: result C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 287
+ERROR - 2019-10-14 13:41:19 --> Severity: Notice --> Undefined variable: result C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 290
+ERROR - 2019-10-14 13:41:19 --> Severity: Notice --> Undefined variable: result C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 291
+ERROR - 2019-10-14 13:41:19 --> Severity: Notice --> Undefined variable: result C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 292
+ERROR - 2019-10-14 13:41:19 --> Severity: Notice --> Undefined variable: result C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 293
+ERROR - 2019-10-14 13:41:19 --> Severity: Notice --> Undefined variable: result C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 297
+ERROR - 2019-10-14 13:50:21 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 13:50:21 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-10-14 13:50:21 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 13:50:21 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 13:50:21 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 13:50:21 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 13:50:22 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-14 13:50:22 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-14 13:50:45 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-14 13:50:45 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-14 13:50:45 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 13:50:45 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 13:50:46 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-10-14 13:50:47 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 13:50:47 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 13:50:48 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 13:56:53 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-14 13:56:53 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-14 13:56:53 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 13:56:53 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 13:56:53 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-10-14 13:56:56 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 13:56:56 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 13:56:56 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 14:06:43 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-14 14:06:43 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-14 14:06:44 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 14:06:44 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-10-14 14:06:44 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 14:06:45 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 14:06:46 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 14:06:46 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 14:28:51 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 14:28:51 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 14:28:51 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-10-14 14:28:51 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 14:28:51 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 14:28:51 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-14 14:28:51 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-14 14:28:51 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 14:44:34 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-14 14:44:34 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-14 14:44:35 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 14:44:35 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 14:44:35 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-10-14 14:44:37 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 14:44:37 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 14:44:38 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 14:50:30 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-14 14:50:30 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-14 14:50:32 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 14:50:32 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 14:50:32 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-10-14 14:50:32 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 14:50:33 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 14:50:33 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 14:51:47 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 14:51:47 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 14:51:47 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-10-14 14:51:47 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 14:51:47 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-14 14:51:47 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-14 14:51:48 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 14:51:48 --> 404 Page Not Found: Default/js
