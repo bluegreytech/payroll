@@ -248,7 +248,10 @@ class Invoice extends CI_Controller
 		if(!check_admin_authentication()){ 
 			redirect(base_url('Login'));
 			}
+			$data=array();
 				$result=$this->Invoice_model->get_companyinvoice($Companyinvoiceid);
+				  $this->load->view('Invoice/invoice-view',$result); 
+				  die;
 				$Companyinvoiceid=$result['Companyinvoiceid'];
 				$comemailaddress=$result['comemailaddress'];
 				$companyname = str_replace(' ', '-', $result['companyname']);
@@ -256,8 +259,9 @@ class Invoice extends CI_Controller
 
 				//$this->dompdf->stream($companyname.".pdf");
                 $file_name=$companyname.'.pdf';
-				$this->load->view('Invoice/invoice-view2',$result);
+			    $this->load->view('Invoice/invoice-view2',$result); 
 				$html = $this->output->get_output();
+		      echo "<pre>";print_r($html);die;
 				$this->load->library('dompdf_gen');
 				$this->dompdf->load_html($html);
 				$this->dompdf->render();
