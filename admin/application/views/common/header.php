@@ -56,7 +56,7 @@
 		<!-- External -->
 		<link rel="stylesheet" href="<?php echo base_url(); ?>default/css/bootstrap-select.css" />
 
-		<script src="<?php //echo base_url(); ?>default/ckeditor/ckeditor.js" type="text/javascript"></script>	
+		<script src="<?php echo base_url(); ?>default/ckeditor/ckeditor.js" type="text/javascript"></script>	
 
 </head>
 

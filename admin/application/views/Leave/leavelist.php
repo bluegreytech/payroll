@@ -227,7 +227,7 @@
 										<tr>
 
 											<th>No</th>
-
+											<th>Company</th>
 											<th>Leave Type</th>
 
 											<th>Leave Days</th>
@@ -257,7 +257,7 @@
 										<tr>
 
 											<td><?php echo $i;?></td>
-
+											<td><?php echo ucfirst($row->companyname);?></td>
 											<td><?php echo ucfirst($row->leave_name);?></td>
 
 											<td><?php echo ucfirst($row->leavedays);?></td>
