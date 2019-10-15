@@ -1242,8 +1242,8 @@
 	 {
 		extend: 'pdfHtml5',
 		text:'<i class="fa fa-file-pdf-o"></i> PDF',
-		title: "List of Employee",
-		filename:"List_of_Employee",
+		title: "List of Admin",
+		filename:"List_of_Admin",
 		orientation: 'landscape', 
 		pageSize: 'A4',		
 		exportOptions: {
@@ -1257,8 +1257,7 @@
 	            doc.styles.tableHeader.fontSize = 12; //2, 3, 4, etc
 				doc.defaultStyle.alignment = 'center';
 				doc.styles.tableHeader.alignment = 'center';
-
-			//	 doc.content[1].table.widths = [ '5%',  '35%', '30%', '14%','14%', '14%'];
+				doc.content[1].table.widths = [ '5%',  '35%', '30%', '14%','14%', '14%'];
 	         
 	       },
 	 },

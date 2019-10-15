@@ -1,15 +1,6 @@
 ﻿<?php 
-
-
-
 	 $this->load->view('common/header.php');
-
-
-
 	 $this->load->view('common/sidebar.php');
-
-
-
 ?>
 
 
@@ -241,195 +232,70 @@
 
 
 					<div class="row">
-
-
-
 						<div class="col-md-12">
-
-
-
 							<div class="table-responsive">
 
+								 <!-- <table class="table table-striped custom-table datatable" class="display" style="width:100%"> -->
 
-
-								<!-- <table class="display" style="width:100%" id="example"> -->
-
-
-
-								 <table class="table table-striped custom-table datatable" class="display" style="width:100%">
-
-
-
+								<table id="example" class="display table table-striped custom-table" style="width:100%">
 									<thead>
-
-
-
 										<tr>
-
-
-
 											<th>No</th>
-
 											<th>Name</th>
-
 											<th>Contact Number</th>
-
 											<th>Email Address</th>
-
 											<th>From Company</th>
-
 											<th>Department</th>
-
 											<th>Designation</th>
-
 											<!-- <th class="text-right">Action</th> -->
-
-
-
-											
-
-
-
 										</tr>
-
-
-
 									</thead>
-
-
-
 									<tbody>
-
-									<?php
-
-										$i=1;
-
-										if($employeeData){                             
-
-										foreach($employeeData as $empData)
-
-										{
-
-									?>
-
-
-
+										<?php
+											$i=1;
+											if($employeeData){                             
+											foreach($employeeData as $empData)
+											{
+										?>
+										
 										<tr>
 
-										<td><?php echo $i;?></td>
-
-										<td>
-
-											<span  class="table-avatar">
-
-											<?php 
-
-											if($empData->ProfileImage!='')
-
-											{
-
-												?>
-
-												<a href="<?php echo base_url();?>Employee/profile/<?php echo $empData->emp_id;?>" title="show employee profile" class="avatar"><img src="http://payroll.bluegreytech.co.in/hr/upload/emp/<?php echo $empData->ProfileImage;?>"></a>
-
-												<a href="<?php echo base_url();?>Employee/profile/<?php echo $empData->emp_id;?>" title="show employee profile"><?php echo $empData->first_name;?></a>
-
-												<?php
-
-
-
-											}
-
-											else
-
-											{
-
-												?>
-
-												<a href="<?php echo base_url();?>Employee/profile/<?php echo $empData->emp_id;?>" title="show employee profile" class="avatar"><img src="<?php echo base_url();?>upload/default/avtar.jpg"></a>
-
-												<a href="<?php echo base_url();?>Employee/profile/<?php echo $empData->emp_id;?>" title="show employee profile"><?php echo $empData->first_name;?></a>
-
-												<?php
-
-											}
-
-											?>
-
-											</h2>
-
+											<td><?php echo $i;?></td>
+											<td>
+													<span  class="table-avatar">
+													<?php 
+													if($empData->ProfileImage!='')
+													{
+														?>
+														<a href="<?php echo base_url();?>Employee/profile/<?php echo $empData->emp_id;?>" title="show employee profile" class="avatar"><img src="http://payroll.bluegreytech.co.in/hr/upload/emp/<?php echo $empData->ProfileImage;?>"></a>
+														<a href="<?php echo base_url();?>Employee/profile/<?php echo $empData->emp_id;?>" title="show employee profile"><?php echo $empData->first_name;?></a>
+														<?php
+													}
+													else
+													{
+														?>
+														<a href="<?php echo base_url();?>Employee/profile/<?php echo $empData->emp_id;?>" title="show employee profile" class="avatar"><img src="<?php echo base_url();?>upload/default/avtar.jpg"></a>
+														<a href="<?php echo base_url();?>Employee/profile/<?php echo $empData->emp_id;?>" title="show employee profile"><?php echo $empData->first_name;?></a>
+														<?php
+													}
+													?>
+													</h2>
 											</td>
-
-										<td><?php echo $empData->phone ;?></td>
-
-										<td><?php echo $empData->email ;?></td>
-
-										<td><?php echo $empData->companyname ;?></td>
-
-										<td><?php echo $empData->department ;?></td>
-
-										<td><?php echo $empData->desgination ;?></td>
-
-
-
-											<td class="text-right">
-
-													<!-- <a class="dropdown-item" href="<?php //echo base_url();?><?php //echo $empData->emp_id;?>" role="button">Show Profile </a> -->
-
-														<!-- <a class="dropdown-item" onclick="deletedata(<?php// echo $empData->emp_id; ?>)" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o m-r-5"></i> Delete</a> -->
-
-											</td>
-
-
-
-											
-
-
-
-										
-
-
-
-
-
-
+											<td><?php echo $empData->phone ;?></td>
+											<td><?php echo $empData->email ;?></td>
+											<td><?php echo $empData->companyname ;?></td>
+											<td><?php echo $empData->department ;?></td>
+											<td><?php echo $empData->desgination ;?></td>
 
 										</tr>
-
-
-
 										<?php
-
-
-
 										$i++;
-
-
-
 											} }
-
-
-
 										?>     
-
-
-
 									</tbody>
-
-
-
 								</table>
-
-
-
 							</div>
-
-
-
 						</div>
-
-
-
 					</div>
 
 
@@ -598,7 +464,85 @@
 
 		<?php $this->load->view('common/footer');?>
 
+		<script>
+	$(document).ready(function() {
+	 $('#example').DataTable( {
+		aaSorting: [[0, 'asc']],
+		searching: false,
+		dom: 'Blfrtip',
+		responsive: true,
+	 buttons: [
+	 {
+		extend: 'copyHtml5',
+		download: 'open',
+		text:'<i class="fa fa-files-o"></i> Copy',
+		exportOptions: {
+		columns: [0,1,2,3,4,5,6]
+		}
+	 },
+	 {
+		extend: 'excelHtml5',
+		text:'<i class="fa fa-file-excel-o"></i> Excel',
+		exportOptions: {
+		columns: [0,1,2,3,4,5,6]
+		}
+	 },
+	 {
+		extend: 'csvHtml5',
+		download: 'open',
+	    text:'<i class="fa fa-file-text-o"></i> CSV',
+		exportOptions: {
+		columns: [0,1,2,3,4,5,6]
+		},
+		
+	 },
+	 {
+		extend: 'pdfHtml5',
+		text:'<i class="fa fa-file-pdf-o"></i> PDF',
+		title: "List of Hr",
+		filename:"List_of_Employee",
+		orientation: 'landscape', 
+		pageSize: 'A4',		
+		exportOptions: {
+		columns: [0,1,2,3,4,5,6],
+		
+		},
+		
+	        customize : function(doc){ 
+				doc.content[1].margin = [ 50, 0, 100, 0 ];
+				doc.defaultStyle.fontSize = 10; //2, 3, 4,etc
+	            doc.styles.tableHeader.fontSize = 12; //2, 3, 4, etc
+				doc.defaultStyle.alignment = 'center';
+				doc.styles.tableHeader.alignment = 'center';
+				doc.content[1].table.widths = [ '3%', '12%','15%','25%','20%','17%','15%'];
+	         
+	       },
+	 },
+	  {
+		extend: 'print',
+		orientation: 'landscape', 
+		pageSize: 'A4',
+		text:'<i class="fa fa-print"></i> Print',
+		exportOptions: {
+			columns: [0,1,2,3,4,5,6],
+			 		
+		},
+		 
+		
 
+	 },
+	 ]
+
+ });
+  var styles ={
+	   "margin-bottom": '0.5em',
+       float: "right"	
+	 };
+	  $("div#example_wrapper").find($(".dt-buttons")).css(styles);
+
+} );
+
+</script>
 
 		
 
