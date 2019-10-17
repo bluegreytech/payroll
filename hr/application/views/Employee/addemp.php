@@ -357,7 +357,34 @@
 												</div>
 											</div> -->
 											
+									</div>
+									<div class="col-md-12">
+										<hr>
+									    <h3 class="card-title">Employee Leave Detail </h3>
+									     <div class="row">
+									   
+                                                <table class="table table-striped table-nowrap custom-table ">
+													<!-- <thead>
+														<tr>
+															<th>Invoice ID</th>
+															<th>Client</th>
+															<th>Due Date</th>
+															<th>Total</th>
+															<th>Status</th>
+														</tr>
+													</thead> -->
+													<tbody>
+														<?php if(!empty($leavelist)){
+											    	 foreach($leavelist as $leaverow){ //echo "<pre>";print_r($leaverow); ?>   
+														<tr>
+															<td width="20px"><?php echo $leaverow->leave_name; ?></td>			
+															<td width="20%"><input type="text" name="leavename[]" id="<?php echo "leave_id".$leaverow->leave_id;?>" class="form-control" ></td>
+														</tr>
+														 <?php  } } ?>
+													</tbody>
+												</table>
 										</div>
+									</div>
 									</div>
 									<div class="submit-section">
 								<hr>

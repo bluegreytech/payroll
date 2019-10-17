@@ -25,9 +25,7 @@ class Leave_model extends CI_Model
 		$query=$this->db->get();
 		$res=$query->result();
 		return $res;
-	}
-
-	
+	}	
 
     function leave_insert()
 	{
@@ -36,7 +34,7 @@ class Leave_model extends CI_Model
 		'leavedays' => trim($this->input->post('leavedays')),		
 		'leave_name'=>trim($this->input->post('leavename')),
 		'status'=>trim($this->input->post('leavestatus')),
-		'company_id' =>$this->session->userdata('companyid'),
+		'companyid' =>$this->session->userdata('companyid'),
 		'created_date'=>date('Y-m-d')		
 		);
 		//echo "<pre>";print_r($data);die;
@@ -45,13 +43,17 @@ class Leave_model extends CI_Model
 			
 	}
 
-	function getleavedata($empleave_id){
+	function getleavedata($leave_id){		
+		$this->db->select("*");
+		$this->db->from("tblcmpleave");
+		$this->db->where("Is_deleted",'0');
+		$this->db->where("leave_id",$leave_id);
+		$query=$this->db->get();	
+		return $query->row_array();
 
-		// $this->db->select("*,el.emp_id as empid");
-		// $this->db->from("tblempleave as el");
-		// $this->db->join("tblemp as em",'el.emp_id=em.emp_id');
-		// $this->db->where("el.Is_deleted",'0');
-		// $this->db->where("el.empleave_id",$empleave_id);
+	}
+
+	function getempleavedata($empleave_id){
 		$this->db->select("*");
 		$this->db->from("tblempleave");
 		$this->db->where("Is_deleted",'0');
@@ -63,32 +65,44 @@ class Leave_model extends CI_Model
 	 function leave_update()
 	{		
 			
-            $data = array(
-			'leavedays' => trim($this->input->post('leavedays')),		
-			'status'=>trim($this->input->post('leavestatus')),
-			'leave_name'=>$this->input->post('leavename'),
-			'company_id' =>$this->session->userdata('companyid'),
-			'update_date'=>date('Y-m-d')		
-			);
-			//echo "<pre>";print_r($data);die;	
-			//echo $this->input->post('holidayid'); die;
-            $this->db->where('leave_id',$this->input->post('leave_id'));       
-            $res=$this->db->update('tblcmpleave',$data);	
-			return $res;
+        $data = array(
+		'leavedays' => trim($this->input->post('leavedays')),		
+		'status'=>trim($this->input->post('leavestatus')),
+		'leave_name'=>$this->input->post('leavename'),
+		'companyid' =>$this->session->userdata('companyid'),
+		'update_date'=>date('Y-m-d')		
+		);
+		//echo "<pre>";print_r($data);die;	
+		//echo $this->input->post('holidayid'); die;
+        $this->db->where('leave_id',$this->input->post('leave_id'));       
+        $res=$this->db->update('tblcmpleave',$data);	
+		return $res;
 	
 	}
 
 	function empleave_insert(){
-           // echo "<pre>";print_r($_POST);die;
-			$leaveto = $this->input->post('leaveto');
-			$date = str_replace('/', '-', $leaveto );
-			$leavetodt = date("Y-m-d", strtotime($date));
-
+         // echo "<pre>";print_r($_POST);die;
+		    $leaveslot='';
+		    $leaveto='';
+			$leaveto = $this->input->post('leaveto');			
+			$todate = str_replace('/', '-', $leaveto );
+			$leavetodt = date("Y-m-d", strtotime($todate));
 		   	$leavefrom = $this->input->post('leavefrom');
-			$date = str_replace('/', '-', $leavefrom );
-			$leavefromdt = date("Y-m-d", strtotime($date));
+			$fromdate = str_replace('/', '-', $leavefrom );
+			$leavefromdt = date("Y-m-d", strtotime($fromdate));
 			$empcount=$this->input->post('employename');
-		
+			$typeofleave=$this->input->post('typeofleave'); 
+			if($this->input->post('leavedays')=='halfday'){
+				$leaveslot=$this->input->post('leavetime');
+				 $leaveto = $this->input->post('leavefrom');
+				$date = str_replace('/', '-', $leaveto );
+				$leavetodt = date("Y-m-d", strtotime($date));
+         
+			}
+			//echo $leavetimein=$this->input->post('leavetimein');
+			//echo $leavetimeout=$this->input->post('leavetimeout');
+
+		  //echo  $leaveslot;
         	for($j=0;$j<count($empcount);$j++){
                 $empid=$this->input->post('employename')[$j] ?$this->input->post('employename')[$j]:'';
                 $emp_id=get_one_record('tblemp','emp_id',$empid);               
@@ -102,11 +116,13 @@ class Leave_model extends CI_Model
 					'emp_id' =>$this->input->post('employename')[$j]?$this->input->post('employename')[$j]:'',        
 					'leaveto' =>$leavetodt,
 					'leavefrom' =>$leavefromdt,
-					'noofdays' => trim($this->input->post('noofdays')),	
-					'typeofleave' => trim($this->input->post('typeofleave')),
-					'leavetimein'=>date('H:i:s',strtotime($this->input->post('leavetimein'))),					
-					'leavetimeout'=>date('H:i:s',strtotime($this->input->post('leavetimeout'))),
+					'noofdays' =>trim($this->input->post('noofdays')),	
+					'typeofleave' =>trim($this->input->post('typeofleave')),
+					'leavedays'=>$this->input->post('leavedays'),
+					'leavetimein'=>$this->input->post('leavetimein') ? date('H:i:s',strtotime($this->input->post('leavetimein'))):'',				
+					'leavetimeout'=>$this->input->post('leavetimeout')?date('H:i:s',strtotime($this->input->post('leavetimeout'))):'',
 					'leavereason'=>trim($this->input->post('leavereason')),
+					'leaveslot'=>trim($leaveslot ? $leaveslot :''),
 					'company_id' =>$this->session->userdata('companyid'),
 					'leavestatus' =>'Approve',
 					'created_date'=>date('Y-m-d')		
@@ -132,15 +148,25 @@ class Leave_model extends CI_Model
 	}
     
     function empleave_update(){
-         //  echo "<pre>";print_r($_POST);die;
-			$leaveto = $this->input->post('leaveto');
-			$date = str_replace('/', '-', $leaveto );
-			$leavetodt = date("Y-m-d", strtotime($date));
-			
+          	// echo "<pre>";print_r($_POST);die;
+    	 	$leaveslot='';    	 	
+		    $leaveto='';
+			$leaveto = $this->input->post('leaveto');			
+			$todate = str_replace('/', '-', $leaveto );
+			$leavetodt = date("Y-m-d", strtotime($todate));
 		   	$leavefrom = $this->input->post('leavefrom');
-			$date = str_replace('/', '-', $leavefrom );
-			$leavefromdt = date("Y-m-d", strtotime($date));
+			$fromdate = str_replace('/', '-', $leavefrom );
+			$leavefromdt = date("Y-m-d", strtotime($fromdate));
+
 			$empcount=$this->input->post('employename');
+			if($this->input->post('leavedays')=='halfday'){
+				$leaveslot=$this->input->post('leavetime');
+				 $leaveto = $this->input->post('leavefrom');
+				$date = str_replace('/', '-', $leaveto );
+				$leavetodt = date("Y-m-d", strtotime($date));         
+			}
+			// echo $leavetimein=$this->input->post('leavetimein');
+			// echo $leavetimeout=$this->input->post('leavetimeout');
 		
         	for($j=0;$j<count($empcount);$j++){
                 $empid=$this->input->post('employename')[$j] ?$this->input->post('employename')[$j]:'';
@@ -155,16 +181,17 @@ class Leave_model extends CI_Model
 					'emp_id' =>$this->input->post('employename')[$j]?$this->input->post('employename')[$j]:'',        
 					'leaveto' =>$leavetodt,
 					'leavefrom' =>$leavefromdt,
-					'noofdays' => trim($this->input->post('noofdays')),	
-					'typeofleave' => trim($this->input->post('typeofleave')),				
-					'leavetimein'=>date('H:i:s',strtotime($this->input->post('leavetimein'))),					
-					'leavetimeout'=>date('H:i:s',strtotime($this->input->post('leavetimeout'))),
+					'noofdays' =>trim($this->input->post('noofdays')),	
+					'typeofleave' =>trim($this->input->post('typeofleave')),				
+					'leavetimein'=>$this->input->post('leavetimein')?date('H:i:s',strtotime($this->input->post('leavetimein'))):'',				
+					'leavetimeout'=>$this->input->post('leavetimeout')?date('H:i:s',strtotime($this->input->post('leavetimeout'))):'',
 					'leavereason'=>trim($this->input->post('leavereason')),
+					'leaveslot'=>trim($leaveslot ? $leaveslot :''),
 					'company_id' =>$this->session->userdata('companyid'),
 					'leavestatus' =>'Approve',
 					'created_date'=>date('Y-m-d')		
 				);
-				//echo "<pre>";print_r($data);
+				//echo "<pre>";print_r($data); die;
 				$this->db->where('empleave_id',$this->input->post('empleave_id'));
         		$res=$this->db->update('tblempleave',$data);	
 			}
@@ -186,60 +213,103 @@ class Leave_model extends CI_Model
 			//$this->db->join('tblcmpleave as cl','cl.leave_id=el.typeofleave' );	
 			$this->db->where('em.Is_deleted','0');
 			// echo $leave_type;die;
-			
+
+			$fromdate = $this->input->post('fromdate');
+			$fdate = str_replace('/', '-', $fromdate );
+			$fdate = date("Y-m-d", strtotime($fdate));
+
+			$todate = $this->input->post('todate');
+			$tdate = str_replace('/','-',$todate);
+			$tdate = date("Y-m-d", strtotime($tdate));	
+			//echo "<pre>";print_r($_POST);die;
 			if($empname !=='' && $leave_type!=='' && $leave_status!=='' && $fromdate!== '' && $todate!=='')
 			{	
+				echo "<pre>";print_r($_POST);die;
 			  	//echo "hghh". $empname;die;			 
 				$this->db->like('CONCAT(first_name," ",last_name)',$empname);
 				$this->db->like('el.typeofleave',$leave_type);
 				$this->db->like('el.leavestatus',$leave_status);
-				$this->db->where('date BETWEEN "'. date('Y-m-d', strtotime($start_date)). '" and "'. date('Y-m-d', strtotime($end_date)).'"');
+				$this->db->where('el.leavefrom >= ',$fdate);
+				$this->db->where('el.leaveto <= ',$tdate);
 				//$this->db->like('cl.leave_type',$leave_type);
 			}
-			else if($empname !=='' && $empname!==NULL)
-			{   
-			   // echo "kjkjhk".$empname;die;	
+			else if($empname !=='' && $empname!==NULL && $leave_type==NULL && $leave_status==NULL && $fromdate==NULL && $todate==NULL)
+			{ 
+				//echo "hjkjk 1";die; 
 				$this->db->like('CONCAT(first_name," ",last_name)',$empname);
 			}			
-			else if($leave_type !== '' && $leave_type!==NULL)
-			{  
+			else if($leave_type !== '' && $leave_type!==NULL && $leave_status=='' && $fromdate== '' && $todate=='' && $empname =='' )
+			{ 
+				//echo "hjkjk 2";die; 
 				$this->db->like('el.typeofleave',$leave_type);
 			}
-			else if($leave_status !== ''&& $leave_status!==NULL)
-			{ 	
-				$this->db->like('el.leavestatus',$leave_status);
+			else if($leave_status !== '' && $leave_status!==NULL && $empname=='' && $leave_type=='' && $fromdate== '' && $todate=='' )
+			{
+				//echo "hjkjk 3";die; 
+				$this->db->where('el.leavestatus',$leave_status);
 			}
-			else if($fromdate !== '' && $fromdate!==NULL)
-			{ 
-				//echo "ghjhgj";die;
-				$fromdate = $this->input->post('fromdate');
-				$fdate = str_replace('/', '-', $fromdate );
-				$fdate = date("Y-m-d", strtotime($fdate));	
+			else if($fromdate !== '' && $fromdate!==NULL && $leave_status=='' && $empname =='' && $leave_type==''  && $todate=='')
+			{	
+				//echo "hjkjk 4";die; 			
 				$this->db->like('el.leavefrom',$fdate);
 
-			}else if($todate !== '' && $todate!==NULL)
-			{ 
-				//echo "gfgfdg";die;
-				$todate = $this->input->post('todate');
-				$tdate = str_replace('/','-',$todate);
-				$tdate = date("Y-m-d", strtotime($tdate));	
+			}else if($todate !== '' && $todate!==NULL && $leave_status=='' && $empname =='' && $leave_type==''  && $fromdate=='' )
+			{			
+				//echo "hjkjk 5";die; 
 				$this->db->like('el.leaveto',$tdate);
+			}else if($todate !== '' && $todate!==NULL && $fromdate !== '' && $fromdate!==NULL){
+              	$this->db->where('el.leavefrom >= ',$fdate);
+				$this->db->where('el.leaveto <= ',$tdate);
+			}
+			else if($empname !=='' && $empname!==NULL && $leave_type!==NULL){
+				//echo "hjkjk 6";die; 
+              	$this->db->like('CONCAT(first_name," ",last_name)',$empname);
+				$this->db->like('el.typeofleave',$leave_type);
+				
+			}else if($empname !=='' && $empname!==NULL && $leave_status!==NULL){
+			 // echo "hjkjk 7";die; 
+              	$this->db->like('CONCAT(first_name," ",last_name)',$empname);
+				$this->db->like('el.leavestatus',$leave_status);
+				
+			}
+			else if($empname !=='' && $empname!==NULL && $fromdate !== '' && $fromdate!==NULL){
+			// echo "hjkjk 8";die; 
+              	$this->db->like('CONCAT(first_name," ",last_name)',$empname);
+				$this->db->like('el.leavefrom',$fdate);
+				
+			}
+			else if($empname !=='' && $empname!==NULL && $todate !== '' && $todate!==NULL){			
+              	$this->db->like('CONCAT(first_name," ",last_name)',$empname);
+				$this->db->like('el.leaveto',$tdate);				
+			}
+			else if($leave_type !== '' && $leave_type!==NULL && $leave_status!==NULL){	
+			    //echo "hjh";die;		
+              	$this->db->like('el.typeofleave',$leave_type);
+				$this->db->where('el.leavestatus',$leave_status);			
+			}
+			else if($leave_type !== '' && $leave_type!==NULL && $fromdate!==''&& $fromdate!==NULL){	
+			//	echo $fromdate;die;		
+              	$this->db->like('el.typeofleave',$leave_type);
+				$this->db->like('el.leavefrom',$fdate);			
+			}
+			else if($leave_type !== '' && $leave_type!==NULL && $todate!==NULL && $todate!==''){	
+					//  echo "hkjh";die;
+              	$this->db->like('el.typeofleave',$leave_type);
+				$this->db->like('el.leaveto',$tdate);	
+			}
+			else if($leave_status !== '' && $leave_status!==NULL && $todate!==NULL && $todate!==''){	
+				    //echo "hkjh 1";die;
+              	$this->db->like('el.leavestatus',$leave_status);
+				$this->db->like('el.leaveto',$tdate);	
+			}else if($leave_status !== '' && $leave_status!==NULL && $fromdate!==NULL && $fromdate!==''){	
+				 // echo "hkjh gfgfg 2";die;
+              	$this->db->like('el.leavestatus',$leave_status);
+				$this->db->like('el.leavefrom',$fdate);		
 			}
 
-			// else if($todate == 'leaveto')
-			// {
-			// 	$this->db->like('leaveto',$keyword);
-			// }
-			// else if($leave_type == 'leavestatus')
-			// {
-			// 	$this->db->where('leavestatus',$keyword);
-			// }  
-			// else if($leave_status == 'typeofleave')
-			// {
-			// 	$this->db->where('typeofleave',$keyword);
-			// }  
-			// echo $this->db->last_query();die;
+			
 			$query = $this->db->get();
+			//echo $this->db->last_query();die;
 			if($query->num_rows() > 0)
 			{ 
 				//echo $this->db->last_query();die;

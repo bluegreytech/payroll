@@ -53,8 +53,19 @@
 									  	<option value="fullday" <?php if($leavedays=='fullday'){ echo "selected"; }?>>Full Day</option>	
 									  	<option value="earlyleave" <?php if($leavedays=='earlyleave'){ echo "selected"; }?>>Early Leave</option>								
 									</select>
+									<p id="errorleave" style="display:none; color:red;">Chosse valid leave option</p>
 								</div>
-								<div class="form-group">
+								<div class="form-group" id="leavetym" style="display:none;">
+									<label>Leave Time<span class="text-danger">*</span></label>
+									<select class="form-control" name='leavetime' id='leavetime'>
+										<option selected="" value="" disabled="">Please select</option>
+									  	<option value="firsthalf" <?php if($leaveslot=='firsthalf'){ echo "selected"; } ?> >First Half</option>
+									  	<option value="secondhalf" <?php if($leaveslot=='secondhalf'){ echo "selected"; } ?> >Second Half</option>	
+									  						
+									</select>
+								</div>
+								
+								<div class="form-group" >
 									<label>From <span class="text-danger">*</span></label>
 									<div class="cal-icon">
 									<input class="form-control" type="text" name="leavefrom" id="leavefrom" readonly="">
@@ -67,26 +78,26 @@
                                     </div> -->
 										
 								</div>
-								<div class="form-group">
+								<div class="form-group" id="dateto">
 									<label>To <span class="text-danger">*</span></label>
 									<div class="cal-icon">
 									<input class="form-control" type="text" name="leaveto" id="leaveto" readonly="">
 									</div>
 								</div>
 								<div class="form-group" id="timein" style="display:none;">
-									<label>Time in  <span class="text-danger">*</span></label>
+									<label>Time out  <span class="text-danger">*</span></label>
 									<div class="clock-icon">
 									<input class="form-control" type="text" name="leavetimein" id="leavetimein" readonly="">
 									</div>
 								</div>
 								<div class="form-group"  id="timeout" style="display:none;">
-									<label>Time out  <span class="text-danger">*</span></label>
+									<label>Time in <span class="text-danger">*</span></label>
 									<div class="cal-icon">
 									<input class="form-control" type="text" name="leavetimeout" id="leavetimeout" readonly="">
 									</div>
 								</div>
-								<div class="form-group">
-									<label>Number of days <span class="text-danger">*</span></label>
+								<div class="form-group" id="totaldays">
+									<label id="labeltotaldays">Number of days <span class="text-danger">*</span></label>
 									<input class="form-control" type="text" name="noofdays" id="noofdays"  readonly="" value="<?php echo $noofdays; ?>">
 								</div>
 							
@@ -96,7 +107,7 @@
 								</div>
 									<div class="submit-section">
 									<hr>
-									<button class="btn btn-primary submit-btn" name="Save" type="submit"><?php echo ($empleave_id!='')?'Update':'Submit' ?></button>
+									<button class="btn btn-primary submit-btn" name="Save" type="submit" id="btnsave"><?php echo ($empleave_id!='')?'Update':'Submit' ?></button>
 									<button type="button" name="cancel" class="btn btn-secondary submit-btn" onClick="location.href='<?php echo base_url(); ?>leave/<?php echo 
 									$redirect_page; ?>'">Cancel
 									</button>
@@ -163,17 +174,19 @@ $(document).ready(function()
     $('#leavetimein').datetimepicker({					
 				   format: "hh:mm:ss A",			
 					ignoreReadonly: true,
-	}).val('<?php echo ($leavetimein!='00:00:00')&&($leavetimein!='')  ? date('h:i:s A', strtotime($leavetimein)) : ''; ?>');
+	}).val('<?php echo ($leavetimein!='00:00:00')&&($leavetimein!='')  ? date('h:i:s A', strtotime($leavetimein)) :''; ?>');
 
    $('#leavetimeout').datetimepicker({					
 				format: "hh:mm:ss A",			
-				ignoreReadonly: true,					
-					
-	}).val('<?php echo ($leavetimeout!='00:00:00')&&($leavetimeout!='')  ? date('h:i:s A', strtotime($leavetimeout)) : ''; ?>');
+				ignoreReadonly: true,
+	}).val('<?php echo ($leavetimeout!='00:00:00')&&($leavetimeout!='')  ? date('h:i:s A', strtotime($leavetimeout)) :''; ?>');
 
-
+//$.validator.setDefaults({ ignore: ":hidden:not(select)" });
 	$("#frm_addleave").validate(
 	{
+		ignore: ':hidden:not("#leavetime")',
+		ignore: "input[type='text']:hidden"	,
+		 //for all select
 			rules: {
 				'employename[]':{
 					required:true,						
@@ -192,7 +205,10 @@ $(document).ready(function()
 				},
 				noofdays:{
 					required: true,
-				},						
+				},
+				leavetime:{
+					required:true,
+				}						
 			
 			},
 		
@@ -211,56 +227,82 @@ $(document).ready(function()
 	$("#leavedays").change(function () {
 	var end = this.value;
 	var leavedays = $('#leavedays').val();
-	
-	if(leavedays=='halfday'){
-		//alert(leavedays);
-		$('#timein').css('display','block');
-		$('#timeout').css('display','block');
+	if(leavedays=='halfday'){		
+		$('#dateto').css('display','none');
+	   $('#leavetym').css('display','block');
+		var leavefrom = $('#leavefrom').val();
 
-	}else if(leavedays=='earlyleave'){
-    	$('#timein').css('display','block');
-		$('#timeout').css('display','block');
-      
-	} 
-	else{
-	
+		
+		if(leavefrom!==''){
+			 //callformdate();
+			total="0.5";	    
+			$('#noofdays').val(total);
+		}	
+	    $("#labeltotaldays").empty();
+       	$('#labeltotaldays').append('<label>Number of days<span class="text-danger">*</span></label>');
 		$('#timein').css('display','none');
 		$('#timeout').css('display','none');
-	}
-  
+		
+	}else if(leavedays=='earlyleave'){ 
+		$('#dateto').css('display','none');   	
+       	$('#leavetym').css('display','none');
+       	$('#leavehours').css('display','block');
+       	$('#errorleave').css('display','none');
+       	$("#labeltotaldays").empty();
+       	$('#labeltotaldays').append('<label>Number of Hours<span class="text-danger">*</span></label>');
+       	$('#timein').css('display','block');
+		$('#timeout').css('display','block');
+	}else{
+		$('#totaldays').show();
+		$('#dateto').css('display','block');
+	    var leavefrom = $('#leavefrom').val();
+		
+		
+	   	if(leavefrom!=''){
+	   	 var leaveto = $('#leaveto').val('');		
+		 	$('#noofdays').val('');
+		}
+	    $("#labeltotaldays").empty();
+		$('#labeltotaldays').append('<label>Number of days<span class="text-danger">*</span></label>');	    
+		 $('#leavetym').css('display','none');
+		 $('#leavehours').css('display','none');
+		 $('#errorleave').css('display','none');
+		 //$('#btnsave').prop('disabled','false');
+	}  
 	});
-
 });	
  
    
   var leavedays = $("select#leavedays option:selected").attr('value');
-  //alert(leavedays);
-  if(leavedays=='halfday'){
-		//alert(leavedays);
+  
+  if(leavedays=='halfday'){	
+  		$('#dateto').css('display','none');	
+  		 $('#leavetym').css('display','block');
 		$('#timein').css('display','block');
 		$('#timeout').css('display','block');
-       
-		
-
+		$("#labeltotaldays").empty();
+       	$('#labeltotaldays').append('<label>Number of days<span class="text-danger">*</span></label>');
+		$('#timein').css('display','none');
+		$('#timeout').css('display','none');		
 	}else if(leavedays=='earlyleave'){
-
-    	$('#timein').css('display','block');
-		$('#timeout').css('display','block');
-       
-	} 
-	else{
-		//alert(leavedays);
+    	
+		$('#dateto').css('display','none');   	
+       	$('#leavetym').css('display','none');
+       	$('#leavehours').css('display','block');
+       	$('#errorleave').css('display','none');
+       	$("#labeltotaldays").empty();
+       	$('#labeltotaldays').append('<label>Number of Hours<span class="text-danger">*</span></label>');
+       	$('#timein').css('display','block');
+		$('#timeout').css('display','block');    
+	}else{		
 		$('#timein').css('display','none');
 		$('#timeout').css('display','none');
-
-	
-
 	}
 
 
 $(document).ready(function() {
    	$('#leaveto').focusout(function(){  
-
+        total='';
 		var fromDate = $('#leavefrom').val(); 			
 		var toDate = $('#leaveto').val();
 		var dateFirst = new Date(myDateFormatter(fromDate));
@@ -268,25 +310,36 @@ $(document).ready(function() {
 		// time difference
 		var timeDiff = Math.abs((dateSecond.getTime()) - dateFirst.getTime());
 		var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-		total=diffDays+1;
-		$('#noofdays').val(total);
-    });
 
-  //    $('#timeout').focusout(function(){  
-	 //    var dateFirst = new Date(myDateFormatter(fromDate));
-		// var dateSecond = new Date(myDateFormatter(toDate));  
-		// alert(dateFirst);  
-		// alert(dateSecond);  
-		// // time difference
-		// var timeDiff = Math.abs((dateSecond.getTime()) - dateFirst.getTime());
-		// var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-		// total=diffDays+1;
-		// $('#noofdays').val(total);
-		//    // var diff =  new Date(timeout) - new Date( timein);  
+		leaveday=$("select#leavedays option:selected").attr('value');	 
+		if(leaveday=="halfday"){			
+			total="0.5";
+		}else{			
+			$('#errorleave').css('display','none');			
+			total=diffDays+1;
+		}	
+		$('#noofdays').val(total);		
+    });  
 
-		// 	alert(diff);
-		// });
+     	$('#leavefrom').focusout(function(){  
+        total='';
+		leaveday=$("select#leavedays option:selected").attr('value');
+	   
+		if(leaveday=="halfday"){			
+			total="0.5";
+		}else{			
+			$('#errorleave').css('display','none');			
+			//total=diffDays+1;
+		}	
+		$('#noofdays').val(total);		
+    });  
+    $('#leavetimeout').focusout(function(){  
+
+       	 calculate();	
+    });  
 });
+ 	
+//leaveday=$("select#leavedays option:selected").attr('value');
 	
 	
 	
@@ -295,8 +348,33 @@ function myDateFormatter (dobdate) {
 //console.log(dArr);
   return dArr[1]+ "/" +dArr[0]+ "/" +dArr[2]; //ex out: "18/01/10"       
 };
+   	function calculate() {
+   		//alert($("#leavetimeout").val());
+   		var timeout = $("#leavetimeout").val();
+   		var timein = $("#leavetimein").val();
+   		stime = ConvertToSeconds(timeout);
+		etime = ConvertToSeconds(timein);
+		diff = Math.abs( etime - stime ) ;
+		hours=secondsTohhmmss(diff);
+		
+         $("#noofdays").val(hours);
 
+         //console.log( 'time difference is : ' + secondsTohhmmss(hours) );
+    }
 
+	function ConvertToSeconds(time) {
+		var splitTime = time.split(":");
+		return splitTime[0] * 3600 + splitTime[1] * 60;
+	}
+
+    // $(".Time1,.Time2").change(calculate);
+     
+function secondsTohhmmss(secs) {
+    var hours = parseInt(secs / 3600);
+    var seconds = parseInt(secs % 3600);
+    var minutes = parseInt(seconds / 60) ;
+    return hours+ "." +minutes + " hours";
+  }
 	
 	       
 </script>

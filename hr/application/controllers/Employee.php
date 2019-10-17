@@ -5,7 +5,8 @@ class Employee extends CI_Controller
 {
 	public function __construct() {
         parent::__construct();
-		 $this->load->model('employee_model');
+		$this->load->model('employee_model');
+		$this->load->model('leave_model');
 	}
 	
 	public function emplist()
@@ -95,7 +96,7 @@ class Employee extends CI_Controller
 			$data['keyword']='';	
 		}
 		else
-		{
+		{	
 
 				if($this->input->post("emp_id")!="")
 				{	
@@ -113,7 +114,7 @@ class Employee extends CI_Controller
 				}
 		}
 		
-		// $data['result']=$this->hr_model->hrlist();
+		 $data['leavelist']=$this->leave_model->showempleavelist();
 		 $this->load->view('Employee/addemp',$data);
 		//echo "<pre>";print_r($data['result']);die;
 	}
