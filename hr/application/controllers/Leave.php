@@ -44,13 +44,13 @@ class Leave extends CI_Controller
 
 				if($this->input->post("leave_id")!="")
 				{	
-					echo "dsfdf if";die;
+					//echo "dsfdf if";die;
 					$this->leave_model->leave_update();
 					$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
 					redirect('leave/leavelist');
 				}
 				else
-				{  echo "jhjhg";die;
+				{  //echo "jhjhg";die;
 					$this->leave_model->leave_insert();
 					$this->session->set_flashdata('success', 'Record has been Inserted Succesfully!');
 					redirect('leave/leavelist');
@@ -88,7 +88,7 @@ class Leave extends CI_Controller
 		$data['leavedays']=$result['leavedays'];
 		$data['leavename']=$result['leave_name'];
 		$data['leavestatus']=$result['status'];
-		
+		//echo "<pre>";print_r($data);die;
 		echo json_encode($data);
 	}
 
@@ -167,7 +167,7 @@ class Leave extends CI_Controller
 		$data['leave_status']=$this->input->post('leave_status');
 			
 		$data['result']=$this->leave_model->empleavelist();
-	
+	    $data['leavelist']=$this->leave_model->showempleavelist();	
 		$this->load->view('Employee/leaves_employee',$data);
 	}
 
@@ -236,7 +236,7 @@ class Leave extends CI_Controller
 		}else{
 			$data=array();
 			$data['activeTab']="editempleave";	
-			$result=$this->leave_model->getleavedata($empleave_id);	
+			$result=$this->leave_model->getempleavedata($empleave_id);	
 			//echo "<pre>";print_r($result);die;
 			$data['emp_id']=$result['emp_id'];
 			$data['leavedays']=$result['leavedays'];			
@@ -249,12 +249,14 @@ class Leave extends CI_Controller
 			$data['noofdays']=$result['noofdays'];
 			$data['leavereason']=$result['leavereason'];
 			$data['leavestatus']=$result['leavestatus'];
+			$data['leaveslot']=$result['leaveslot'];
+			
 			//$data['firstlast']=$result['first_name'].' '.$result['last_name'];
 			$data['leaveto']=$result['leaveto'];
 			$data['redirect_page']="empleavelist";		
-			//echo "<pre>";print_r($data);die;
+				//echo "<pre>";print_r($data);die;
 		}
-		 $data['leavelist']=$this->leave_model->showempleavelist();
+		$data['leavelist']=$this->leave_model->showempleavelist();
 		
 		$data['emplist']=$this->attendance_model->emplist();
 		$this->load->view('Employee/add_empleave',$data);

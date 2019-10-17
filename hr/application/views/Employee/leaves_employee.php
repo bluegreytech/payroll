@@ -17,8 +17,9 @@
 							<h4 class="page-title">Leaves</h4>
 						</div>
 						<div class="col-sm-4 col-6 text-right m-b-30">
-							<a href="<?php echo base_url()?>leave/addempleave" class="btn add-btn" ><i class="fa fa-plus"></i> Add Leave</a>
+							<a href="<?php echo base_url()?>leave/addempleave" class="btn add-btn" ><i class="fa fa-plus"></i> Add Leave</a>						
 						</div>
+						
 					</div>
 					<!-- /Page Title -->
 					
@@ -56,17 +57,17 @@
 					<div class="row filter-row">
 					    <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
 							<div class="form-group form-focus">
-								<input type="text" class="form-control floating" name="empname">
+								<input type="text" class="form-control floating" name="empname" value="<?php echo $empname; ?>">
 								<label class="focus-label">Employee Name</label>
 							</div>
 					    </div>
 					    <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
 							<div class="form-group form-focus select-focus">
-								<select class="select floating" name="leave_type" id="leave_type"> 
+								<select class="form-control floating" name="leave_type" id="leave_type"> 
 								<option selected="" value="" disabled="">Please select</option>
 									<?php if(!empty($leavelist)){ 
 										foreach($leavelist as $row){ ?>
-                                        <option value="<?php echo $row->leave_id; ?>"><?php echo ucfirst($row->leave_name);?></option>
+                                        <option value="<?php echo $row->leave_id; ?>" <?php if($row->leave_id == $leave_type){ echo "selected"; } ?> ><?php echo ucfirst($row->leave_name);?></option>
 									<?php } } ?>
 								</select>
 								<label class="focus-label">Leave Type</label>
@@ -74,11 +75,11 @@
 					    </div>
 					    <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12"> 
 							<div class="form-group form-focus select-focus">
-								<select class="select floating" name="leave_status" id="leave_status"> 
+								<select class="form-control floating" name="leave_status" id="leave_status">
 									<option selected="" value="" disabled="">Please select</option>
-									<option value="Pending">Pending </option>
-									<option value="Approve">Approved </option>
-									<option value="Rejected">Rejected </option>
+									<option value="Pending" <?php if($leave_status=='Pending'){ echo "selected"; } ?> >Pending </option>
+									<option value="Approve" <?php if($leave_status=='Approve'){ echo "selected"; } ?>>Approved </option>
+									<option value="Rejected" <?php if($leave_status=='Rejected'){ echo "selected"; } ?>>Rejected </option>
 								</select>
 								<label class="focus-label">Leave Status</label>
 							</div>
@@ -86,7 +87,7 @@
 					    <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
 							<div class="form-group form-focus">
 								<div class="cal-icon">
-									<input class="form-control floating datetimepicker" type="text" name="fromdate" id="fromdate">
+									<input class="form-control floating" type="text" name="fromdate" id="fromdate">
 								</div>
 								<label class="focus-label">From</label>
 							</div>
@@ -94,14 +95,19 @@
 					    <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
 							<div class="form-group form-focus">
 								<div class="cal-icon">
-									<input class="form-control floating datetimepicker" type="text" name="todate" id="todate">
+									<input class="form-control floating" type="text" name="todate" id="todate">
 								</div>
 								<label class="focus-label">To</label>
 							</div>
 						</div>
 					    <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
-							<input type="submit" class="btn btn-success btn-block" value="Search" name="search">  
-					    </div>     
+							<button type="submit" class="btn btn-primary btn-md" value="Search" name="search"><i class="fa fa-search"></i></button>
+							<a href="<?php echo base_url()?>leave/empleavelist" class="btn btn-dark btn-circle btn-md"><i class="fa fa-refresh"></i></a>
+
+					    </div>  
+						<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+						
+						</div>    
                     </div>
                 </form>
 					<!-- /Search Filter -->					
@@ -178,21 +184,9 @@
 													}else{
 														 echo $row->noofdays.' '.'Days'; 
 													}
-											     }
-                                               
-												
-											//if ($row->leavetimein < "9" && $row->leavetimein < "10"  ) {
-											// 		echo "First Half";
-											// } else
-										
-											// if ($row->leavetimein >= "12" && $row->leavetimein< "2") {
-											// echo "Second Half";
-											// }else{
-											// 	 echo $row->noofdays.' '.'Days';
-											// }
-											
+											     }                                              
 											?></td>
-											<td><?php $reason=substr( $row->leavereason, 0,25);
+											<td><?php $reason=substr($row->leavereason,0,25);
 											echo ucfirst($reason).'....'; ?></td>
 											<td class="text-center">
 												<div class="dropdown action-label">
@@ -316,6 +310,25 @@
         });
 }
 $(document).ready(function() {
+ //alert('<?php echo $fromdate; ?>');
+  	$('#fromdate').datetimepicker({
+            "allowInputToggle": true,
+            "showClose": true,
+            "showClear": true,
+            "showTodayButton": true,
+            ignoreReadonly: true,		
+            "format": "DD/MM/YYYY",
+        }).val('<?php echo ($fromdate!='0000-00-00') && ($fromdate!='')  ? $fromdate: ''; ?>');  
+  
+	$('#todate').datetimepicker({					
+		  	format: 'DD/MM/YYYY',					
+			ignoreReadonly: true,
+			"allowInputToggle": true,
+            "showClose": true,
+            "showClear": true,
+            "showTodayButton": true,
+	}).val('<?php echo ($todate!='0000-00-00')&&($todate!='')  ? $todate : ''; ?>');
+
 	 $('#example').DataTable( {
 		aaSorting: [[0, 'asc']],
 		searching: false,
@@ -349,27 +362,24 @@ $(document).ready(function() {
 	 {
 		extend: 'pdfHtml5',
 		// download: 'open',
-		 text:'<i class="fa fa-file-pdf-o"></i> PDF',
-		 title: "List of Employee Leave",
-		  filename:"List_of_Employee_leave",
-		  orientation: 'landscape', 
-		  pageSize: 'A4',
-		
+		text:'<i class="fa fa-file-pdf-o"></i> PDF',
+		title: "List of Employee Leave",
+		filename:"List_of_Employee_leave",
+		orientation: 'landscape', 
+		pageSize: 'A4',		
 		exportOptions: {
 		columns: [0,1,2,3,4,5],
 		
-		},
-		
-	        customize : function(doc){ 
-				doc.content[1].margin = [ 5, 0, 100, 5 ];
-				doc.defaultStyle.fontSize = 10; //2, 3, 4,etc
-	            doc.styles.tableHeader.fontSize = 12; //2, 3, 4, etc
-				doc.defaultStyle.alignment = 'center';
-				doc.styles.tableHeader.alignment = 'center';
-				doc.content[1].table.widths = [ '25%','20%', '20%', '20%', 
-	                                                           '10%', '20%'];
-	         
-	       },
+		},	
+        customize : function(doc){ 
+			doc.content[1].margin = [ 5, 0, 100, 5 ];
+			doc.defaultStyle.fontSize = 10; //2, 3, 4,etc
+            doc.styles.tableHeader.fontSize = 12; //2, 3, 4, etc
+			doc.defaultStyle.alignment = 'center';
+			doc.styles.tableHeader.alignment = 'center';
+			doc.content[1].table.widths = [ '25%','20%', '20%', '20%', 
+                                                           '10%', '20%'];	         
+       	},
 	 },
 	  {
 		extend: 'print',
@@ -377,8 +387,7 @@ $(document).ready(function() {
 		pageSize: 'A4',
 		text:'<i class="fa fa-print"></i> Print',
 		exportOptions: {
-			columns: [0,1,2,3,4,5],
-			 		
+			columns: [0,1,2,3,4,5],			 		
 		},
 		 // customize: function (win) {
 		 // 		//	win.defaultStyle.font = 'Times New Roman';
@@ -393,14 +402,12 @@ $(document).ready(function() {
 	 },
 	 //'colvis'
 	 ]
-
  });
-  var styles ={
+  var styles={
 	   "margin-bottom": '0.5em',
        float: "right"	
 	 };
 	  $("div#example_wrapper").find($(".dt-buttons")).css(styles);
-
 } );
 </script>
     

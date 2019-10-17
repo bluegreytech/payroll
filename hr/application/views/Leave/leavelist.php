@@ -43,7 +43,7 @@
 										<tr>
 											<td><?php echo $i;?></td>
 											<td><?php echo ucfirst($row->leave_name);?></td>
-											<td><?php echo ucfirst($row->leavedays);?></td>
+											<td><?php echo ucfirst($row->leavedays).' '.'Days';?></td>
 											<td>	
 												<div class="action-label">
 												<a class="btn btn-white btn-sm btn-rounded" href="javascript:void(0);"  onclick="statusdata('<?php echo $row->leave_id; ?>','<?php echo $row->status ;?>')">
@@ -52,7 +52,7 @@
 												</div>
 											</td>
 											<td class="text-center"> 
-												<a  href="javascript:void(0)" onclick="editdata('<?php echo $row->leave_id; ?>')" data-toggle="modal" data-target="#add_leavetype"><i class="fa fa-pencil fa-lg"></i></a>
+												<a  href="javascript:void(0)" onclick="editdata('<?php echo $row->leave_id; ?>')"><i class="fa fa-pencil fa-lg"></i></a>
 								
 												<a  href="javascript:void(0)" data-toggle="modal" data-target="#delete_holiday" onclick="deletedata('<?php echo $row->leave_id; ?>')"><i class="fa fa-trash-o fa-lg"></i></a></td>
 										</tr>
@@ -73,7 +73,7 @@
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title">Add Leave Type</h5>
+				<h5 class="modal-title" id="addtxt">Add Leave Type  </h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -248,20 +248,24 @@ function deletedata(id){
 }
 
 function editdata(leave_id)
-{
+{ 
+
+	if(leave_id){
+		$('#addtxt').text("Edit Leave Type");
+	}
+	$('#add_leavetype').modal('show');
 	url="<?php echo base_url();?>"
-	//alert(hr_id);
+	
 	$.ajax({
          url: url+'leave/editleave',
          type: 'post',
 		 data:{id:leave_id},
          success:function(response){
-			var response = JSON.parse(response);
-            console.log(response);
+			var response = JSON.parse(response);		
+       		 //    console.log(response);        
             $('#leave_id').val(response.leave_id);
 			$('#leavename').val(response.leavename);
-			$('#leavedays').val(response.leavedays);
-			
+			$('#leavedays').val(response.leavedays);			
 			$("#leavestatus [value=" + response.leavestatus + "]").attr('selected', 'true');
          }
       });	

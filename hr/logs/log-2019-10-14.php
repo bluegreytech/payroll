@@ -265,3 +265,52 @@ ERROR - 2019-10-14 15:07:03 --> 404 Page Not Found: Default/assets
 ERROR - 2019-10-14 15:10:10 --> 404 Page Not Found: Default/assets
 ERROR - 2019-10-14 15:13:57 --> 404 Page Not Found: Default/assets
 ERROR - 2019-10-14 15:17:30 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 15:51:39 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 15:58:21 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 16:00:12 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 16:06:15 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 16:06:31 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 16:06:52 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'LIKE '%2019-10-03%' ESCAPE '!'
+AND  `el`.`leaveto` >= LIKE '%2019-10-10%' ESCAPE' at line 8 - Invalid query: SELECT *
+FROM `tblempleave` `el`
+JOIN `tblemp` as `em` ON `em`.`emp_id`=`el`.`emp_id`
+WHERE `em`.`Is_deleted` = '0'
+AND  CONCAT(first_name," ",last_name) LIKE '%Shilpa parasad%' ESCAPE '!'
+AND  `el`.`typeofleave` LIKE '%2%' ESCAPE '!'
+AND  `el`.`leavestatus` LIKE '%Rejected%' ESCAPE '!'
+AND  `el`.`leavefrom` <= LIKE '%2019-10-03%' ESCAPE '!'
+AND  `el`.`leaveto` >= LIKE '%2019-10-10%' ESCAPE '!'
+ERROR - 2019-10-14 16:08:48 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 16:12:30 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 16:51:37 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 16:52:19 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 16:52:25 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 16:55:53 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 16:56:45 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 16:57:11 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 16:57:38 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 17:09:10 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 17:09:18 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 17:14:37 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 17:16:21 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 17:17:11 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 17:17:25 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 17:17:49 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 17:18:14 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 17:19:14 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 17:22:18 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 17:23:41 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 17:30:11 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 17:31:09 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 17:33:04 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 17:35:05 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 17:35:33 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 17:36:18 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 17:36:38 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 17:37:00 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 17:42:18 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 17:43:02 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 17:44:22 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 17:48:19 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 17:50:07 --> 404 Page Not Found: Default/assets
+ERROR - 2019-10-14 17:50:50 --> 404 Page Not Found: Default/assets

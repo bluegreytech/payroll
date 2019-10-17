@@ -41,3 +41,30 @@ ERROR - 2019-10-14 09:57:17 --> Severity: error --> Exception: Too few arguments
 ERROR - 2019-10-14 10:02:44 --> Severity: error --> Exception: Too few arguments to function Invoice::getedithr(), 0 passed in C:\xampp\htdocs\payroll\admin\system\core\CodeIgniter.php on line 1063 and exactly 1 expected C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 149
 ERROR - 2019-10-14 10:03:05 --> Severity: error --> Exception: Too few arguments to function Invoice::getedithr(), 0 passed in C:\xampp\htdocs\payroll\admin\system\core\CodeIgniter.php on line 1063 and exactly 1 expected C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 149
 ERROR - 2019-10-14 10:03:13 --> Severity: error --> Exception: Too few arguments to function Invoice::getedithr(), 0 passed in C:\xampp\htdocs\payroll\admin\system\core\CodeIgniter.php on line 1063 and exactly 1 expected C:\xampp\htdocs\payroll\admin\application\controllers\Invoice.php 149
+ERROR - 2019-10-14 15:27:16 --> Query error: Unknown column 't1.isdelete' in 'where clause' - Invalid query: SELECT `t1`.*, `t2`.`companytype`
+FROM `tblcompany` as `t1`
+LEFT JOIN `tblcompanytype` as `t2` ON `t1`.`companytypeid` = `t2`.`companytypeid`
+WHERE `t1`.`isdelete` = '0'
+ERROR - 2019-10-14 15:27:20 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-14 15:27:40 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 39
+ERROR - 2019-10-14 15:27:40 --> Severity: Notice --> Undefined variable: session C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 66
+ERROR - 2019-10-14 15:27:45 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 39
+ERROR - 2019-10-14 15:27:45 --> Severity: Notice --> Undefined variable: session C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 59
+ERROR - 2019-10-14 15:28:01 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 39
+ERROR - 2019-10-14 15:28:01 --> Severity: Notice --> Undefined variable: session C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 66
+ERROR - 2019-10-14 15:28:05 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 39
+ERROR - 2019-10-14 15:28:05 --> Query error: Unknown column 'isdelete' in 'where clause' - Invalid query: SELECT *
+FROM `tblcompany`
+WHERE `isdelete` != '1'
+ERROR - 2019-10-14 15:28:50 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 15:28:50 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 15:28:50 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-14 15:28:50 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-14 15:28:50 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 15:28:50 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-10-14 15:29:00 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 15:29:00 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-10-14 15:29:00 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-14 15:29:00 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-14 15:29:00 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-14 15:29:00 --> 404 Page Not Found: Default/js
