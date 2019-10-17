@@ -17,7 +17,7 @@
 
 
 		<!-- Favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url(); ?>default/img/Company/companylogo/logo.jpg">
+        <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url(); ?>default/img/Company/companylogo/favicon.png">
 
 		<!-- Bootstrap CSS -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>default/css/bootstrap.min.css">

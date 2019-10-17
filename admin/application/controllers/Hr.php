@@ -7,30 +7,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 class Hr extends CI_Controller 
-
-
-
 { 
-
-
-
 	public function __construct() {
-
-
-
         parent::__construct();
-
-
-
 		$this->load->model('Hr_model');
-
-
-
 	}
-
-
-
-
 
 
 
@@ -68,22 +49,14 @@ class Hr extends CI_Controller
 
 
 
-
-
 	public function profile($hr_id)
-
 	{	
-
 		if(!check_admin_authentication()){ 
-
 			redirect(base_url('Login'));
-
 		}
 
 		$data=array();
-
 		$result=$this->Hr_model->get_hrprofile($hr_id);	
-
 		//echo "<br>";print_r($result);die;
 
 		$data['hr_id']=$result['hr_id'];
@@ -131,12 +104,17 @@ class Hr extends CI_Controller
 
 
 	public function addhr()
+
 	{
+
 		if(!check_admin_authentication()){ 
+
 			redirect(base_url('Login'));
+
 		}
 
 		$data['hr_id']=$this->input->post('companyid');
+
 		$data['companyid']=$this->input->post('companyid');
 
 		$data['FullName']=$this->input->post('FullName');
@@ -162,34 +140,58 @@ class Hr extends CI_Controller
 		$data['companyname']=$this->input->post('companyname');	
 
 		 if($_POST){
+
 			if($this->input->post('hr_id')!='')
+
 			{	
 
 				$result=$this->Hr_model->updatehr();	
 
 				if($result==1)
+
 				{
+
 					$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
+
 					redirect('Hr');
+
 				}
+
 				else
+
 				{
+
 					$this->session->set_flashdata('success', 'Record was not Updated!');
+
 					redirect('Hr');
+
 				}
+
 			}
+
 			else
+
 			{	
+
 				$result=$this->Hr_model->insertdata();
+
 				if($result==1)
+
 				{
+
 					$this->session->set_flashdata('success', 'Record has been Inserted Succesfully!');
+
 					redirect('Hr');
+
 				}
 				else if($result==3)
+
 				{
+
 					$this->session->set_flashdata('warning', 'This email address already registered!');
+
 					redirect('Hr');
+
 				}	
 
 

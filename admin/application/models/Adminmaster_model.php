@@ -505,10 +505,13 @@ class Adminmaster_model extends CI_Model
 
 
 	function updateadmin()
+
 	{    
-		$LoginId=$this->session->userdata('AdminId');
+
 		$AdminId=$this->input->post('AdminId');
+
 		//echo "<pre>";print_r($_FILES);die;
+
 		$user_image='';
 
 		//$image_settings=image_setting();
@@ -682,8 +685,7 @@ class Adminmaster_model extends CI_Model
 			'City'=>$this->input->post('City'),
 
 			'IsActive'=>$this->input->post('IsActive')
-			
-			
+
 				);
 
 			 //print_r($data);die;

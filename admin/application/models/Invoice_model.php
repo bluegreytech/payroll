@@ -137,7 +137,7 @@ class Invoice_model extends CI_Model
 			
 			$n=10000000;
 			$resetdate1=date("01-04-Y");
-			$resetdate2=date("m-d-Y");
+			$resetdate2=date("d-m-Y");
 				if($resetdate1==$resetdate2)
 				{
 					for($i = 1; $i<$n; $i++) 
@@ -163,7 +163,7 @@ class Invoice_model extends CI_Model
 						$Otherinformation=$this->input->post('Otherinformation');
 						
 						$data=array( 
-						'invoicebillid'=>$invoicebillid,
+						'invoicebillid'=>$i,
 						'companyid'=>$companyid,
 						'hr_id'=>$hr_id,
 						'paymentopt'=>$paymentopt,
@@ -179,11 +179,13 @@ class Invoice_model extends CI_Model
 						'status'=>'Pending',
 						'Isactive'=>'Aactive'
 						);
-						// print_r($data);
-						// die;
+						print_r($data);
+						echo "aaa";
+						die;
 						$this->db->insert('tblcompanyinvoice',$data);
-						return 1;
+						
 					}
+					return 1;
 				}
 				else
 				{
@@ -228,8 +230,9 @@ class Invoice_model extends CI_Model
 						'status'=>'Pending',
 						'Isactive'=>'Aactive'
 						);
-						// print_r($data);
-						// die;
+						print_r($data);
+						echo "bbb";
+						die;
 						$this->db->insert('tblcompanyinvoice',$data);
 						return 1;
 					}
@@ -245,10 +248,9 @@ class Invoice_model extends CI_Model
 		foreach($smtp2->result() as $rows)
 		{
 			$billid = $rows->billid;
-			//$createddate = $rows->createddate;	
 			$n=10000000;
 			$resetdate1=date("01-04-Y");
-			$resetdate2=date("m-d-Y");
+			$resetdate2=date("d-m-Y");
 				if($resetdate1==$resetdate2)
 				{
 					for($i = 1; $i<$n; $i++) 
@@ -278,7 +280,6 @@ class Invoice_model extends CI_Model
 						);
 
 						// print_r($data);
-						// echo "111111";
 						// die;
 						$this->db->insert('tblquotation',$data);
 						//return 1;	
@@ -335,7 +336,6 @@ class Invoice_model extends CI_Model
 						);
 
 						// print_r($data);
-						// echo "22222";
 						// die;
 						$this->db->insert('tblquotation',$data);
 						//return 1;	

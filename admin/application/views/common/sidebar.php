@@ -52,7 +52,8 @@
 									<li><a href="<?php echo base_url();?>company/companytype"><span>Type Company </span></a></li>
 									<li><a href="<?php echo base_url();?>company/compliance"><span>Compliance </span></a></li>
 									<li><a href="<?php echo base_url();?>company"><span>Company</span></a></li>
-									<li><a href="<?php echo base_url();?>company/Sendnotification"><span>Send Notification</span></a></li>
+									<!-- <li><a href="<?php //echo base_url();?>company/Sendnotification"><span>Send Notification</span></a></li> -->
+									<li><a href="<?php echo base_url();?>company/companynotification_list"><span>Notification</span></a></li>
 									<li><a href="<?php echo base_url();?>invoice">Invoice Report </a></li>
 									<li><a href="<?php echo base_url();?>leave/leavelist">Leave Type</a></li>
 								</ul>

@@ -137,16 +137,18 @@ class Company_model extends CI_Model
 
 	public function send_company_notification()
 	{
+		$companyid=implode(',',$this->input->post('companyid'));
+		$Documenttitle=$this->input->post('Documenttitle');
+		$Notificationdescription=$this->input->post('Notificationdescription');	
 
-		$companyid=implode(',',$this->input->post('companyid'));	
 		$Enddate=$this->input->post('Enddate');
-
-
-
 		$bdate = str_replace('/', '-', $Enddate );
 		$birth = date("Y-m-d", strtotime($bdate));
+
 		$data=array( 
 		'companyid'=>$companyid,
+		'Documenttitle'=>$Documenttitle,
+		'Notificationdescription'=>$Notificationdescription,
 		'Enddate'=>$birth,
 		'Isactive'=>'Active',
 		'Createdby'=>1,
@@ -161,39 +163,23 @@ class Company_model extends CI_Model
 
 
 		$cpt = count($_FILES['Documentfile']['name']);
-
 		for($i=0; $i<$cpt; $i++)
-
 		{ 
 
 			if(isset($_FILES['Documentfile']) &&  $_FILES['Documentfile']['name']!='')
-
 			{      
-
 				$this->load->library('upload');
-
 				$rand=rand(0,100000); 
-
 				$_FILES['userfile']['name']     =   $_FILES['Documentfile']['name'][$i];
-
 				$_FILES['userfile']['type']     =   $_FILES['Documentfile']['type'][$i];
-
 				$_FILES['userfile']['tmp_name'] =   $_FILES['Documentfile']['tmp_name'][$i];
-
 				$_FILES['userfile']['error']    =   $_FILES['Documentfile']['error'][$i];
-
 				$_FILES['userfile']['size']     =   $_FILES['Documentfile']['size'][$i];
-
 				$config['file_name'] = $rand.'Document';			
-
 				$config['upload_path'] = base_path().'upload/company_orig/Document_orig/';		
-
 				$config['allowed_types'] = 'jpg|jpeg|png|pdf|doc|docx';  
-
 				$this->upload->initialize($config);
-
 				if (!$this->upload->do_upload())
-
 				{
 
 					$error =  $this->upload->display_errors();
@@ -203,41 +189,22 @@ class Company_model extends CI_Model
 				} 
 
 				$picture = $this->upload->data();	   
-
 				$this->load->library('image_lib');		   
-
 				$this->image_lib->clear();
-
 				$gd_var='gd2';
-
-
-
 			 	$this->image_lib->initialize(array(
-
 					'image_library' => $gd_var,
-
 					'source_image' => base_path().'upload/company_orig/Document_orig/'.$picture['file_name'],
-
 					'new_image' => base_path().'upload/company/Document/'.$picture['file_name'],
-
 					'maintain_ratio' => FALSE,
-
 					'quality' => '100%',
-
 					'width' => 300,
-
 					'height' => 300
-
 				));
-
 				if(!$this->image_lib->resize())
-
 				{
-
 					$error = $this->image_lib->display_errors();
-
 				}
-
 		  		$user_image=$picture['file_name'];
 
 			}
@@ -245,153 +212,68 @@ class Company_model extends CI_Model
 	
 
 		if($user_image!='')
-
 		{
-
 			$Documentfile[$i]=$user_image;
-
 		}
-
 		else
-
 		{
-
 			$Documentfile[$i]='';
-
 		}
 
-
-
-		$Documenttitle=$this->input->post('Documenttitle');
-
-		$Notificationdescription=$this->input->post('Notificationdescription');
 
 		$data2=array( 
-
 			'Companynotificationid'=>$insert_id,
-
-			'Documenttitle'=>$Documenttitle,
-
-			'Notificationdescription'=>$Notificationdescription,
-
 			'Documentfile'=>$Documentfile[$i],
-
 			'Isactive'=>'Active',
-
 			'Createdby'=>1,
-
 			'Createdon'=>date("Y-m-d h:i:s")
-
 			);
-
 			//print_r($data2); die;
-
 			$this->db->insert('tblcomnotdocument',$data2);	
-
 			$insert_idss = $this->db->insert_id();
 
 		 } 
-
 		 return 1;
 
 		if($insert_id!=''){
-
 			$this->db->select('t1.*,t2.*,t3.*');
-
 			$this->db->from('tblcompanynotification as t1');
-
 			$this->db->join('tblcomnotdocument as t2', 't1.Companynotificationid = t2.Companynotificationid', 'LEFT');
-
 			$this->db->join('tblcompany as t3', 't1.companyid = t3.companyid', 'LEFT');
-
 			$this->db->where('t1.Companynotificationid',$insert_id);
 
 			$smtp2 = $this->db->get();	
-
 			foreach($smtp2->result() as $rows) {
-
 				$Companynotificationid = $rows->Companynotificationid;
-
 				$companyid = $rows->companyid;
-
 				$Enddate = $rows->Enddate;
-
 				$Companydocumentid = $rows->Companydocumentid;
-
 				$companyname = $rows->companyname;
-
 				$comemailaddress = $rows->comemailaddress;
-
 				$Documenttitle = $rows->Documenttitle;
-
 				$Notificationdescription = $rows->Notificationdescription;
-
 				$companyimage = $rows->companyimage;		
 
 			}
 
 
-
-				// $email_template=$this->db->query("select * from ".$this->db->dbprefix('tblemail_template')." where task='Company verification'");
-
-				// $email_temp=$email_template->row();
-
-				// $email_address_from=$email_temp->from_address;
-
-				// $email_address_reply=$email_temp->reply_address;
-
-				// $email_subject=$email_temp->subject;        
-
-				// $email_message=$email_temp->message;
-
-
-
-			
-
-				
-
 				$email_message=$Notificationdescription;
-
 				$str=$email_message; 
 				$email_config = Array(
-
-					'protocol'  => 'smtp',
-
-					'smtp_host' => 'relay-hosting.secureserver.net',
-
-					'smtp_port' => '465',
-
-					'smtp_user' => 'binny@bluegreytech.co.in',
-
-					'smtp_pass' => 'Binny@123',
-
-					'mailtype'  => 'html',
-
-					'starttls'  => true,
-
-					'newline'   => "\r\n",
-
-					'charset'=>'utf-8',
-
-					'header'=> 'MIME-Version: 1.0',
-
-					'header'=> 'Content-type:text/html;charset=UTF-8',
-
-					);
-
-	
-
-				$this->load->library('email', $email_config);   
-
-
+                    'protocol'  => 'smtp',
+                    'smtp_host' => 'relay-hosting.secureserver.net',
+                    'smtp_port' => '465',
+                    'smtp_user' => 'binny@bluegrey.co.in',
+                    'smtp_pass' => 'Binny@123',
+                    'mailtype'  => 'html',
+                    'starttls'  => true,
+                    'newline'   => "\r\n"
+                    );
+				$this->load->library('email', $email_config); 
 				$body =$str;	
-
 				$this->email->from('bluegreyindia@gmail.com');
-
 				$this->email->to($comemailaddress);		
-
 				$this->email->subject('Important notification to company');
-
 				$this->email->message($body);
 
 				$this->db->select('t1.*,t2.*,t3.*');
@@ -404,37 +286,22 @@ class Company_model extends CI_Model
 				
 
 				foreach($smtp3->result() as $rows) {
-
 					$Documentfile = $rows->Documentfile;
-
 					$atch=base_url().'upload/company_orig/Document_orig/'.$Documentfile;	
-
 					$this->email->attach($atch);
-
 				}	
 
 				if($this->email->send())
-
 				{
-
 					return 1;
-
 				}else
-
 				{
-
 					return 2;
-
 				}
-
 		}
-
 		else
-
 		{
-
 			return 2;
-
 		}
 
 	}
@@ -445,71 +312,188 @@ class Company_model extends CI_Model
 
 	
 
-	function list_company_notification($companyid)
+	// function list_company_notification($companyid)
+	// {
 
+	// 	$where = array('t1.companyid' =>$companyid, 't1.isactive' =>'Active');
+
+	// 	$this->db->select('t1.*,t2.*,t3.*,t4.*,t5.*');
+
+	// 	$this->db->from('tblcompany as t1');
+
+	// 	$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
+
+	// 	$this->db->join('tblcompanycompliances as t3', 't1.companyid = '.$companyid, 'LEFT');
+
+	// 	$this->db->join('tblstate as t4', 't1.stateid = t4.stateid', 'LEFT');
+
+	// 	$this->db->join('tblcompanynotification as t5', 't1.companyid = t5.companyid', 'LEFT');
+
+	// 	$this->db->where($where);
+
+	// 	$query=$this->db->get();
+
+	// 	// $res = $query->result_array();
+
+	// 	// echo "<pre>";print_r($res);die;
+
+	// 	$array=array();
+
+	// 	foreach($query->result() as $rows) {
+
+	// 		$companyid = $rows->companyid;
+
+	// 		$companyname = $rows->companyname;
+
+	// 		$comemailaddress = $rows->comemailaddress;	
+
+	// 		$Companynotificationid = $rows->Companynotificationid;	
+
+	// 		$Enddate = $rows->Enddate;				
+
+	// 		$today = date('Y-m-d');
+
+	// 		$datetime1 = date_create($today);
+
+	// 		$datetime2 = date_create($Enddate);
+
+	// 		$interval = date_diff($datetime1, $datetime2);
+
+	// 		$dd= $interval->format('%R%a');
+
+	// 		if($dd=='0')
+	// 		{
+
+	// 			$data=array(
+
+	// 				'companyid'=>$companyid,
+
+	// 				'Companynotificationid'=>$Companynotificationid,
+
+	// 				'Enddate'=>null
+
+	// 					);
+
+	// 				//print_r($data);die;
+
+	// 				$this->db->where("Companynotificationid",$Companynotificationid);
+	// 				$res=$this->db->update('tblcompanynotification',$data);
+	// 				if($res)
+	// 				{
+	// 					return 1;
+	// 				}else
+	// 				{
+	// 					return 2;
+	// 				}
+
+	// 		}
+
+				
+
+	// 	}
+
+	// 	//die;
+
+	// 	//return $res;
+
+	// }
+
+
+
+	// function list_company_notification($Companynotificationid)
+	// {
+
+	// 	$where = array('t1.Companynotificationid' =>$Companynotificationid);
+
+	// 	$this->db->select('t1.*');
+	// 	$this->db->from('tblcompanynotification as t1');
+
+	// 	//$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
+	// 	// $this->db->join('tblcompanycompliances as t3', 't1.companyid = '.$companyid, 'LEFT');
+	// 	// $this->db->join('tblstate as t4', 't1.stateid = t4.stateid', 'LEFT');
+	// 	// $this->db->join('tblcompanynotification as t5', 't1.companyid = t5.companyid', 'LEFT');
+
+	// 	$this->db->where($where);
+	// 	$query=$this->db->get();
+
+	// 	// $res = $query->result_array();
+	// 	// echo "<pre>";print_r($res);die;
+
+	// 	$array=array();
+	// 	foreach($query->result() as $rows) {
+
+	// 		// $companyid = $rows->companyid;
+	// 		// $companyname = $rows->companyname;
+	// 		// $comemailaddress = $rows->comemailaddress;	
+
+	// 		$Companynotificationid = $rows->Companynotificationid;	
+	// 		$Enddate = $rows->Enddate;				
+	// 		$today = date('Y-m-d');
+	// 		$datetime1 = date_create($today);
+	// 		$datetime2 = date_create($Enddate);
+	// 		$interval = date_diff($datetime1, $datetime2);
+	// 		$dd= $interval->format('%R%a');
+	// 		if($dd=='0')
+	// 		{
+	// 			$data=array(
+	// 				'companyid'=>$companyid,
+	// 				'Companynotificationid'=>$Companynotificationid,
+	// 				'Enddate'=>null
+	// 					);
+
+	// 				//print_r($data);die;
+
+	// 				$this->db->where("Companynotificationid",$Companynotificationid);
+	// 				$res=$this->db->update('tblcompanynotification',$data);
+	// 				if($res)
+	// 				{
+	// 					return 1;
+	// 				}else
+	// 				{
+	// 					return 2;
+	// 				}
+
+	// 		}
+	// 		else
+	// 		{
+	// 			return 2;
+	// 		}
+
+			
+	// 	}
+
+	// }
+
+
+	function list_company_notification($Companynotificationid)
 	{
 
-		$where = array('t1.companyid' =>$companyid, 't1.isactive' =>'Active');
+		$where = array('t1.Companynotificationid' =>$Companynotificationid);
 
-		$this->db->select('t1.*,t2.*,t3.*,t4.*,t5.*');
-
-		$this->db->from('tblcompany as t1');
-
-		$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
-
-		$this->db->join('tblcompanycompliances as t3', 't1.companyid = '.$companyid, 'LEFT');
-
-		$this->db->join('tblstate as t4', 't1.stateid = t4.stateid', 'LEFT');
-
-		$this->db->join('tblcompanynotification as t5', 't1.companyid = t5.companyid', 'LEFT');
-
+		$this->db->select('t1.*');
+		$this->db->from('tblcompanynotification as t1');
 		$this->db->where($where);
-
 		$query=$this->db->get();
 
 		// $res = $query->result_array();
-
 		// echo "<pre>";print_r($res);die;
 
 		$array=array();
-
 		foreach($query->result() as $rows) {
-
-			$companyid = $rows->companyid;
-
-			$companyname = $rows->companyname;
-
-			$comemailaddress = $rows->comemailaddress;	
-
 			$Companynotificationid = $rows->Companynotificationid;	
-
 			$Enddate = $rows->Enddate;				
-
 			$today = date('Y-m-d');
-
 			$datetime1 = date_create($today);
-
 			$datetime2 = date_create($Enddate);
-
-			$interval = date_diff($datetime1, $datetime2);
-
-			$dd= $interval->format('%R%a');
-
-			if($dd=='0')
+		
+			if($datetime2<=$datetime1)
 			{
-
 				$data=array(
-
-					'companyid'=>$companyid,
-
 					'Companynotificationid'=>$Companynotificationid,
-
-					'Enddate'=>null
-
-						);
+					'Status'=>'Expired'
+					);
 
 					//print_r($data);die;
-
 					$this->db->where("Companynotificationid",$Companynotificationid);
 					$res=$this->db->update('tblcompanynotification',$data);
 					if($res)
@@ -521,22 +505,15 @@ class Company_model extends CI_Model
 					}
 
 			}
+			else
+			{
+				return 2;
+			}
 
-				
-
+			
 		}
 
-		//die;
-
-		//return $res;
-
 	}
-
-
-
-
-
-
 
 
 
@@ -637,41 +614,116 @@ class Company_model extends CI_Model
 
 	}
 
-
-
-	function list_company()
-
+	function list_companynotification()
 	{
-
-		    $where = array('t1.isdelete' =>'0');
-
-			$this->db->select('t1.*,t2.companytype');
-
-			$this->db->from('tblcompany as t1');
-
-			$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
-
+			//$where = array('t1.Isdelete' =>'0','t1.Enddate!=' =>'NULL');
+			$where = array('t1.Isdelete' =>'0');
+			$this->db->select('t1.*,t2.*');
+			$this->db->from('tblcompanynotification as t1');
+			$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
+			//$this->db->join('tblcomnotdocument as t3', 't1.Companynotificationid = t3.Companynotificationid', 'LEFT');
+			//$this->db->join('tblcompany as t3', 't1.companyid = t3.companyid', 'LEFT');
 			$this->db->where($where);
-
+			$this->db->order_by('Companynotificationid','desc');
 			$r=$this->db->get();
-
+		
 			$res = $r->result();
-
 			return $res;
-
 	}
 
 
+	function search_company_notification($option,$keyword)
+	{
+		//$where = array('t1.Is_deleted' =>'0');
+		$keyword2 = str_replace('-', ' ', $keyword);
+		$this->db->select('t1.*,t2.companyname');
+		$this->db->from('tblcompanynotification as t1');
+		$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
+		//$this->db->where($where);
+		if($option == 'companyname')
+		{
+			$this->db->like('companyname',$keyword2);
+		}
+		$query = $this->db->get();
+		if($query->num_rows() > 0)
+		{
+		return $query->result();
+		}        
+	}
 
+	
+	function search_title_notification($option,$keyword2)
+	{
+		//$where = array('t1.Is_deleted' =>'0');
+		$keyword = str_replace('-', ' ', $keyword2);
+		$this->db->select('t1.*,t2.companyname');
+		$this->db->from('tblcompanynotification as t1');
+		$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
+		//$this->db->where($where);
+		if($option == 'Documenttitle')
+		{
+			$this->db->like('Documenttitle',$keyword);
+		}
+		$query = $this->db->get();
+		if($query->num_rows() > 0)
+		{
+		return $query->result();
+		}        
+	}
 
+	
+	function search_status_notification($option,$keyword3)
+	{
+		//$where = array('t1.Is_deleted' =>'0');
+		$keyword = str_replace('-', ' ', $keyword3);
+		$this->db->select('t1.*,t2.companyname');
+		$this->db->from('tblcompanynotification as t1');
+		$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
+		//$this->db->where($where);
+		if($option == 'Status')
+		{
+			$this->db->like('Status',$keyword);
+		}
+		$query = $this->db->get();
+		if($query->num_rows() > 0)
+		{
+		return $query->result();
+		}        
+	}
 
+	
+	function search_createdate_notification($option,$keyword4,$keyword5)
+	{
+		$keywordstaone = str_replace('/', '-', $keyword4);
+		$keywordstatwo = str_replace('/', '-', $keyword5);
+		$this->db->select('t1.*,t2.companyname');
+		$this->db->from('tblcompanynotification as t1');
+		$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
+		$this->db->where('t1.Enddate BETWEEN "'. date('Y-m-d', strtotime($keywordstaone)). '" and "'. date('Y-m-d', strtotime($keywordstatwo)).'"');	
+		$query = $this->db->get();
+		if($query->num_rows() > 0)
+		{
+		return $query->result();
+		}        
+	}
+
+	function list_company()
+	{
+		    $where = array('t1.isdelete' =>'0');
+			$this->db->select('t1.*,t2.companytype');
+			$this->db->from('tblcompany as t1');
+			$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
+			$this->db->where($where);
+			$r=$this->db->get();
+			$res = $r->result();
+			return $res;
+	}
 
 
 	function search($option,$keyword)
 	{
-
-		$where = array('t1.isdelete' =>'0');
-		$keyword = str_replace('-', ' ', $keyword);
+			$where = array('t1.isdelete' =>'0');
+			$keyword = str_replace('-', ' ', $keyword);
 
 			$this->db->select('t1.*,t2.companytype');
 
@@ -1101,7 +1153,6 @@ class Company_model extends CI_Model
 
 
 	function add_company()
-
 	{	
 
 		$this->db->select('*');
@@ -1289,26 +1340,24 @@ class Company_model extends CI_Model
 			$companytypeid=$this->input->post('companytypeid');
 
 			$companyname=$this->input->post('companyname');
+			$companycode=strtoupper($this->input->post('companycode'));
 
 			$comemailaddress=$this->input->post('comemailaddress');
 
 			$comcontactnumber=$this->input->post('comcontactnumber');
-
+			$comcontactnumber2=$this->input->post('comcontactnumber2');
+			$comlandlinenumber=$this->input->post('comlandlinenumber');
+			
+			
 			$gstnumber=$this->input->post('gstnumber');	
-
 			$companylogo=$this->input->post('companylogo');
-
 			$digitalsignaturedate=$this->input->post('digitalsignaturedate');
 			$bdate = str_replace('/', '-', $digitalsignaturedate );
 			$birth = date("Y-m-d", strtotime($bdate));
 			$companyaddress=$this->input->post('companyaddress');
-
 			$stateid=$this->input->post('stateid');
-
 			$companycity=$this->input->post('companycity');
-
 			$pincode=$this->input->post('pincode');	
-
 			$isactive=$this->input->post('isactive');
 
 			
@@ -1318,10 +1367,13 @@ class Company_model extends CI_Model
 			'companytypeid'=>$companytypeid,
 
 			'companyname'=>$companyname,
+			'companycode'=>$companycode,
 
 			'comemailaddress'=>$comemailaddress,
 
 			'comcontactnumber'=>$comcontactnumber,
+			'comcontactnumber2'=>$comcontactnumber2,
+			'comlandlinenumber'=>$comlandlinenumber,
 
 			'gstnumber'=>$gstnumber, 
 
@@ -1345,7 +1397,7 @@ class Company_model extends CI_Model
 
 			);
 
-			// print_r($data); die;
+			//print_r($data); die;
 
 			$this->db->insert('tblcompany',$data);
 
@@ -1691,11 +1743,6 @@ class Company_model extends CI_Model
 	}
 
 
-
-
-
-
-
 	function get_company($companyid)
 	{
 		$this->db->select('t1.*,t2.*,t3.*,t4.*,t5.*,t6.*');
@@ -1711,36 +1758,39 @@ class Company_model extends CI_Model
 	}
 
 
+	function get_companynotification($Companynotificationid)
+	{
+		$this->db->select('t1.*,t1.companyid,t2.companyname,t3.*');
+		$this->db->from('tblcompanynotification as t1');
+		$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
+		$this->db->join('tblcomnotdocument as t3', 't1.Companynotificationid = t3.Companynotificationid', 'LEFT');
+		$this->db->where('t1.Companynotificationid',$Companynotificationid);
+		$query=$this->db->get();
+		//echo $this->db->last_query();
+		//die;
+		return $query->row_array();
+	}
 
-
-
-
-
-
+	 function list_companydocument_noti($Companynotificationid)
+	{
+		$this->db->select('t1.*,t3.*');
+		$this->db->from('tblcompanynotification as t1');
+		$this->db->join('tblcomnotdocument as t3', $Companynotificationid.'= t3.Companynotificationid', 'LEFT');
+		$this->db->where('t1.Companynotificationid',$Companynotificationid);
+		$query=$this->db->get();
+		return $query->row_array();
+	}
 
 	function get_companytype($companytypeid)
-
 	{
 
 		$query=$this->db->select('*')
-
 			->from('tblcompanytype')
-
 			->where('companytypeid',$companytypeid)
-
 			->get();
-
 			return $query->row_array();
 
 	}
-
-
-
-
-
-
-
-	
 
 
 
@@ -1754,65 +1804,34 @@ class Company_model extends CI_Model
 	}
 
 
-
-
-
-
-
 	 function getcompliance($row)
-
 	 {
 
 		$query=$this->db->select('complianceid as compliance_id')
-
 			->from('tblcompliances')
-
 			->where('complianceid',$row)
-
 			->get();
-
 			return $query->row_array();
 
 	 }
 
 
-
-
-
-
-
 	function add_compliance()
-
 	{	
-
 			$compliancename=$this->input->post('compliancename');
-
 			$compliancepercentage=$this->input->post('compliancepercentage');
-
 			$isactive=$this->input->post('isactive');
-
 			$data=array( 
-
 			'compliancename'=>$compliancename,
-
 			'compliancepercentage'=>$compliancepercentage,
-
 			'isactive'=>$isactive,
-
 			'createdby'=>1,
-
 			'createdon'=>date("Y-m-d h:i:s")
-
 			);
-
 			// print_r($data);
-
 			// die;
-
 			$res=$this->db->insert('tblcompliances',$data);	
-
 			return $res;
-
 	}
 
 
@@ -1930,8 +1949,11 @@ class Company_model extends CI_Model
 			'companyid'=>$this->input->post('companyid'),
 			'companytypeid'=>$this->input->post('companytypeid'),
 			'companyname'=>$this->input->post('companyname'),
+			'companycode'=>$this->input->post('companycode'),
 			'comemailaddress'=>$this->input->post('comemailaddress'),
 			'comcontactnumber'=>$this->input->post('comcontactnumber'),
+			'comcontactnumber2'=>$this->input->post('comcontactnumber2'),
+			'comlandlinenumber'=>$this->input->post('comlandlinenumber'),
 			'gstnumber'=>$this->input->post('gstnumber'),
 			'digitalsignaturedate'=>$birth,
 			'companyimage'=>$user_image,
@@ -2004,6 +2026,30 @@ class Company_model extends CI_Model
 					return 1;
 				}
 
+	}
+
+
+	function update_companynotification()
+	{	
+		$Companynotificationid=$this->input->post('Companynotificationid');
+		$companyid=implode(',',$this->input->post('companyid'));
+
+		$Enddate=$this->input->post('Enddate');
+		$bdate = str_replace('/', '-', $Enddate );
+		$birth = date("Y-m-d", strtotime($bdate));
+
+		$data=array(
+			'Companynotificationid'=>$this->input->post('Companynotificationid'),
+			'companyid'=>$companyid,
+			'Documenttitle'=>$this->input->post('Documenttitle'),
+			'Notificationdescription'=>$this->input->post('Notificationdescription'),
+			'Enddate'=>$birth
+				);
+
+			//print_r($data);die;
+			$this->db->where("Companynotificationid",$Companynotificationid);
+			$this->db->update('tblcompanynotification',$data);	
+			return 1;
 	}
 
 

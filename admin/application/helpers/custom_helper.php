@@ -21,7 +21,6 @@
 	 */
 
 	function base_path()
-
 	{		
 
 		$CI =& get_instance();
@@ -31,7 +30,6 @@
 	}
 
 	
-
 
 	function base_path_hr()
 	{		
@@ -44,6 +42,9 @@
 
 	
 
+	
+
+	// --------------------------------------------------------------------
 
 
 
@@ -71,7 +72,6 @@
 
 	}
 
-
 	function base_url_hr()
 
 	{		
@@ -81,7 +81,6 @@
 		return $base_url_hr = $CI->config->slash_item('base_url_hr');		
 
 	}
-
 
 	
 
@@ -242,20 +241,6 @@
 	 */
 
 	 
-
-function checkattedancestatus($id)
-	{
-		$CI =& get_instance();
-		$CI->db->select('attendance_status');
-		$CI->db->from('tblattendance');		
-		$CI->db->where('attendance_id',$id);
-		$query = $CI->db->get();
-		//echo $CI->db->last_query();die;
-		//echo "<pre>";print_r($query);die;
-		return $query->row()->attendance_status;
-	}
-
-
 
 	function check_admin_authentication()
 

@@ -208,22 +208,6 @@ class Invoice extends CI_Controller
 		$this->load->view('Invoice/invoice-view',$data);
 	}
 
-	// public function sendinvoiceemail($companyid)
-	// {
-	// 	$result=$this->Invoice_model->add_email($companyid);
-	// 	//echo "<br>";print_r($result);die;
-	// 	if($result==1)
-	// 	{
-	// 		$this->session->set_flashdata('success', 'Email send Successfuly!');	
-	// 		redirect('Invoice');
-	// 	}
-	// 	else if($result==2)
-	// 	{
-	// 		$this->session->set_flashdata('error', 'Email funaction was not working!');
-	// 		redirect('Invoice');
-	// 	}
-	// //	$this->load->view('Invoice/invoice-view');
-	// }
 
 	public function sendinvoice($Companyinvoiceid)
 	{
@@ -248,36 +232,24 @@ class Invoice extends CI_Controller
 		if(!check_admin_authentication()){ 
 			redirect(base_url('Login'));
 			}
-			$data=array();
+			
 				$result=$this->Invoice_model->get_companyinvoice($Companyinvoiceid);
-				  $this->load->view('Invoice/invoice-view',$result); 
-				  die;
 				$Companyinvoiceid=$result['Companyinvoiceid'];
 				$comemailaddress=$result['comemailaddress'];
 				$companyname = str_replace(' ', '-', $result['companyname']);
 				$Otherinformation=$result['Otherinformation'];
 
-				//$this->dompdf->stream($companyname.".pdf");
                 $file_name=$companyname.'.pdf';
 			    $this->load->view('Invoice/invoice-view2',$result); 
 				$html = $this->output->get_output();
-		      echo "<pre>";print_r($html);die;
+				// die;
+				//print_r($result);die;
 				$this->load->library('dompdf_gen');
 				$this->dompdf->load_html($html);
 				$this->dompdf->render();
 				$file=$this->dompdf->output();
 				file_put_contents($file_name,$file);
 					
-
-				//$this->load->view('Invoice/invoice-view2',$result);
-				// $html = $this->output->get_output();
-				// $this->load->library('dompdf_gen'); 
-				// $this->dompdf->loadHtml($html);
-				// $this->dompdf->setPaper('A4', 'landscape');
-				// $this->dompdf->render();
-				// $atch=$this->dompdf->stream($companyname.".pdf", array("Attachment"=>0));
-
-
 				$email_template=$this->db->query("select * from ".$this->db->dbprefix('tblemail_template')." where task='Send Company Invoice'");
 				$email_temp=$email_template->row();
 				$email_address_from=$email_temp->from_address;
@@ -294,7 +266,7 @@ class Invoice extends CI_Controller
 				$email_message=str_replace('{Otherinformation}',$Otherinformation,$email_message);
 
 				$str=$email_message; //die;
-				print_r($str);die;
+				//print_r($str);die;
 				$config['protocol']='smtp';
 				$config['smtp_host']='ssl://smtp.googlemail.com';
 				$config['smtp_port']='465';
@@ -340,6 +312,7 @@ class Invoice extends CI_Controller
 				{
 					redirect('Invoice/pdfquotation'.$quotationid);
 				}
+				$data['quotationtData']=$this->Invoice_model->list_companyquotation($quotationid);
 				$this->load->view('Quotation/quotation_view',$data);
 	}
 
@@ -354,25 +327,18 @@ class Invoice extends CI_Controller
 				$companyname = str_replace(' ', '-', $result['companyname']);
 				$otherinformation=$result['otherinformation'];
 
-                $file_name=$companyname.'.pdf';
+				$file_name=$companyname.'.pdf';
+				$result['quotationtData']=$this->Invoice_model->list_companyquotation($quotationid);
 				$this->load->view('Quotation/quotation-view2',$result);
 				$html = $this->output->get_output();
+				// die;
+				//print_r($result);die;
 				$this->load->library('dompdf_gen');
 				$this->dompdf->load_html($html);
 				$this->dompdf->render();
 				$file=$this->dompdf->output();
 				file_put_contents($file_name,$file);
 					
-
-				//$this->load->view('Invoice/invoice-view2',$result);
-				// $html = $this->output->get_output();
-				// $this->load->library('dompdf_gen'); 
-				// $this->dompdf->loadHtml($html);
-				// $this->dompdf->setPaper('A4', 'landscape');
-				// $this->dompdf->render();
-				// $atch=$this->dompdf->stream($companyname.".pdf", array("Attachment"=>0));
-		
-
 				$email_template=$this->db->query("select * from ".$this->db->dbprefix('tblemail_template')." where task='Send Company Quotation'");
 				$email_temp=$email_template->row();
 				$email_address_from=$email_temp->from_address;
@@ -388,7 +354,7 @@ class Invoice extends CI_Controller
 				$email_message=str_replace('{companyname}',$companyname,$email_message);
 				$email_message=str_replace('{otherinformation}',$otherinformation,$email_message);
 				$str=$email_message; //die;
-				print_r($str);die;
+				//print_r($str);die;
 				$config['protocol']='smtp';
 				$config['smtp_host']='ssl://smtp.googlemail.com';
 				$config['smtp_port']='465';

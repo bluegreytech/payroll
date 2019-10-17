@@ -355,7 +355,7 @@
 
 											<a  onclick="deletedata(<?php echo $comp->companyid; ?>)" data-toggle="modal" data-target="#delete_client" title="Delete"><i class="fa fa-trash-o m-r-5"></i> </a>
 
-										    <a  href="<?php echo base_url();?>Company/company_notification_expired/<?php echo $comp->companyid;?>" role="button"  title="Notification">
+										    <a  href="<?php echo base_url();?>Company/companynotification_list" role="button"  title="Notification List">
 
 											<i class="fa fa-bell-o" aria-hidden="true"></i></a>
 

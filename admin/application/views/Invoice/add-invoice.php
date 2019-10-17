@@ -428,10 +428,14 @@
 								</div>
 									</div>
 								</div>
-								<div class="submit-section">
+								<!-- <div class="submit-section">
 									<input type="submit" name="submit" class="btn btn-primary account-btn" value="Save">
-								</div>
+								</div> -->
 
+								<div class="submit-section">
+									<button class="btn btn-primary submit-btn">Submit</button>
+
+								</div>
 							</form>
 
 						</div>
@@ -611,12 +615,12 @@ $(document).ready(function()
 		{
 
 				rules: {
-
 						companyid: {
-
 							required: true,
-
 								},
+						paymentopt: {
+							required: true,
+							},
 
 						invoicedate: {
 
@@ -654,6 +658,10 @@ $(document).ready(function()
 							required: "Please select company",
 
 						},
+						paymentopt: {
+							required: "Please select payment option",
+
+							},
 
 						invoicedate: {
 
@@ -674,12 +682,12 @@ $(document).ready(function()
 						},
 
 						addtax: {
-							required: "Please select payment option",
+							required: "Please enter tax",
 								},
 
-						Otherinformation: {
-							required: "Please select payment option",
-								},
+						// Otherinformation: {
+						// 	required: "Please select payment option",
+						// 		},
 
 
 

@@ -99,13 +99,21 @@ class Adminmaster extends CI_Controller
 		}
 
 		 if($_POST){
+
 			if($this->input->post('AdminId')!='')
+
 			{	
+
 				$result=$this->Adminmaster_model->updateadmin();	
+
 				if($result==1)
+
 				{
+
 					$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
+
 					redirect('adminmaster/adminlist');
+
 				}
 
 				else
@@ -592,30 +600,12 @@ class Adminmaster extends CI_Controller
 				else if($result==3)
 				{
 					$AdminId=$data['AdminId']; 
-					$this->session->set_flashdata('warning','Your email function was working!');  
+					$this->session->set_flashdata('warning','Your email function not working!');  
 					redirect('Adminmaster/change_password');
 				}
 
 				
-				
-
-				// $result=$this->Adminmaster_model->changepass($AdminId);
-				// if($result==1)
-				// {   
-				// 	 $this->session->set_flashdata('success', 'Your password has been changed Successfully!');
-				// 	 redirect('Adminmaster/change_password');
-				// }
-				// else
-				// { 
-				// 	$result=$this->Adminmaster_model->changepass($AdminId);
-				// 	if($result==2)
-				// 	{
-				// 		$AdminId=$data['AdminId']; 
-				// 		$this->session->set_flashdata('error','Your old password was not match please try again!');  
-				// 		redirect('Adminmaster/change_password');
-				// 	}
-
-				// }
+			
 
 			}
 

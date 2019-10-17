@@ -82,7 +82,7 @@
 
 							<div class="col-sm-7 col-7 text-right m-b-30">
 
-							<a href="<?php echo base_url();?>Company" class="btn add-btn"> Back to Company List</a>	
+							<a href="<?php echo base_url();?>Company" class="btn add-btn"> Back to List of Company </a>	
 
 							</div>
 
@@ -288,6 +288,18 @@
 
 											<div class="form-group">
 
+												<label class="col-form-label">Company Code <span class="text-danger">*</span></label>
+
+												<input class="form-control" type="text" minlength="2" maxlength="5" name="companycode" placeholder="Enter company code like this : BG" value="<?php echo $companycode; ?>"  style="text-transform:uppercase">
+
+											</div>
+
+										</div>
+
+										<div class="col-md-6">
+
+											<div class="form-group">
+
 												<label class="col-form-label">Email Address</label><span class="text-danger">*</span></label>
 
 												<input class="form-control" minlength="2" maxlength="50" type="email" name="comemailaddress" placeholder="Enter email address" value="<?php echo $comemailaddress; ?>">
@@ -298,15 +310,44 @@
 
 
 
+
 										<div class="col-md-6">
 
 											<div class="form-group">
 
-												<label class="col-form-label">Contact Number <span class="text-danger">*</span></label>
+												<label class="col-form-label">Company Phone Number <span class="text-danger">*</span></label>
 
 												<input class="form-control" minlength="10" maxlength="10" type="text" name="comcontactnumber" id="comcontactnumber" placeholder="Enter contact number"  
 
 												value="<?php echo $comcontactnumber; ?>">
+
+											</div>
+
+										</div>
+
+										<div class="col-md-6">
+
+											<div class="form-group">
+
+												<label class="col-form-label">Company Phone Number Other </label>
+
+												<input class="form-control" minlength="10" maxlength="10" type="text" name="comcontactnumber2" id="comcontactnumber2" placeholder="Enter contact number"  
+
+												value="<?php echo $comcontactnumber2; ?>">
+
+											</div>
+
+										</div>
+
+										<div class="col-md-6">
+
+											<div class="form-group">
+
+												<label class="col-form-label">Company Landline Number <span class="text-danger">*</span></label>
+
+												<input class="form-control" minlength="10" maxlength="10" type="text" name="comlandlinenumber" id="comlandlinenumber" placeholder="Enter contact number"  
+
+												value="<?php echo $comlandlinenumber; ?>">
 
 											</div>
 
@@ -1039,47 +1080,30 @@
 											<?php  
 
 											if($companyid!='')
-
 											{
-
 												$comid=$complianceid;
-
 												$compliance_idarr = explode(",",$complianceid);
-
 											}
 
 											  	
 
 												foreach($complianceData as $compdata)
-
 												 {
-
 													if($companyid!='')
-
 													{  
-
 												 		$comid=$compdata->complianceid;
-
 														$checkedStatus = "";		
-
 													}
-
 											?>
 
 												<tr>
 
 													<td><?php echo $compdata->compliancename;?></td>
-
 													<td><?php echo $compdata->compliancepercentage;?></td>
-
 													<td class="text-center">
-
 														<input type="checkbox" name="complianceid[]"   value="<?php echo $compdata->complianceid; ?>" 
-
 														 <?php 	if($companyid!='')
-
 																{	if(in_array($comid,$compliance_idarr)) { echo "checked"; }}?> >
-
 													</td>
 
 												</tr>
@@ -1212,34 +1236,13 @@
 
 <script type="text/javascript">
 
-				// $('#digitalsignaturedate').datetimepicker({
-
-				//   	// format: 'DD/MM/YYYY',
-
-				// 	  format: 'YYYY/MM/DD',
-
-				// 	 ignoreReadonly: true,
-
-				// }).val('<?php //echo  ($digitalsignaturedate!='0000-00-00')  ? date('Y/m/d', strtotime($digitalsignaturedate)) : ''; ?>');
-
-
+	
 				$('#digitalsignaturedate').datetimepicker({
 					// defaultDate: new Date(),
 				  	 format: 'DD/MM/YYYY',
 					 ignoreReadonly: true,					
 				}).val('<?php echo  ($digitalsignaturedate!='0000-00-00')&&($digitalsignaturedate!='')  ? date('d/m/Y', strtotime($digitalsignaturedate)) : ''; ?>');
 
-
-			
-
-
-			
-
-</script>
-
-
-
-<script>
 
 $(document).ready(function(){
 
@@ -1345,71 +1348,53 @@ function readURL(input) {
 
 		});
 
+		$("#comlandlinenumber").on("input", function(evt) {
+		var self = $(this);
+		self.val(self.val().replace(/[^\d].+/, ""));
+		if ((evt.which < 48 || evt.which > 57)) 
+		{
+			evt.preventDefault();
+		}});  
 
+		$("#comcontactnumber2").on("input", function(evt) {
+		var self = $(this);
+		self.val(self.val().replace(/[^\d].+/, ""));
+		if ((evt.which < 48 || evt.which > 57)) 
+		{
+			evt.preventDefault();
+		}});
 
 		$("#comcontactnumber").on("input", function(evt) {
-
 		var self = $(this);
-
 		self.val(self.val().replace(/[^\d].+/, ""));
-
 		if ((evt.which < 48 || evt.which > 57)) 
-
 		{
-
 			evt.preventDefault();
-
-		}
-
-		});
+		}});
 
 		$("#gstnumber").on("input", function(evt) {
-
 		var self = $(this);
-
 		self.val(self.val().replace(/[^\d].+/, ""));
-
 		if ((evt.which < 48 || evt.which > 57)) 
-
 		{
-
 		evt.preventDefault();
-
-		}
-
-		});
+		}});
 
 		$("#pincode").on("input", function(evt) {
-
 		var self = $(this);
-
 		self.val(self.val().replace(/[^\d].+/, ""));
-
 		if ((evt.which < 48 || evt.which > 57)) 
-
 		{
-
 			evt.preventDefault();
-
-		}
-
-		});
+		}});
 
 		$("#Accountnumber").on("input", function(evt) {
-
 		var self = $(this);
-
 		self.val(self.val().replace(/[^\d].+/, ""));
-
 		if ((evt.which < 48 || evt.which > 57)) 
-
 		{
-
 			evt.preventDefault();
-
-		}
-
-		});
+		}});
 
 		$.validator.addMethod('filesize', function (value, element, param) {
 
@@ -1438,9 +1423,10 @@ $(document).ready(function()
 										},
 
 							companyname: {
-
 									required: true,
-
+										},
+							companycode: {
+									required: true,
 										},
 
 							comemailaddress: {
@@ -1453,6 +1439,9 @@ $(document).ready(function()
 
 									required: true,
 
+										},
+							comlandlinenumber: {
+									required: true,
 										},
 
 							gstnumber: {
@@ -1566,10 +1555,11 @@ $(document).ready(function()
 										},
 
 							companyname: {
-
 									required: "Please enter a company name",
-
-										},	
+										},
+							companycode: {
+									required: "Please enter a company code",
+										},		
 
 							comemailaddress: {
 
@@ -1580,6 +1570,11 @@ $(document).ready(function()
 							comcontactnumber: {
 
 									required: "Please enter a company contact number",
+
+										},	
+							comlandlinenumber: {
+
+									required: "Please enter a company landline number",
 
 										},	
 

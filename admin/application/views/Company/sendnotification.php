@@ -62,7 +62,7 @@
 
 							<div class="col-sm-7 col-7 text-right m-b-30">
 
-							<a href="<?php echo base_url();?>Company" class="btn add-btn">Back to Company List</a>
+							<a href="<?php echo base_url();?>Company/companynotification_list" class="btn add-btn">Back to List of Company Notification</a>
 
 							</div>
 
@@ -79,22 +79,32 @@
 								<div class="dash-widget clearfix card-box">						
 
 								<form method="post" enctype="multipart/form-data"  id="form_valid" action="<?php echo base_url();?>Company/Sendnotification">
-
+								<!-- <input type="hidden" class="form-control" name="Companynotificationid" value="<?php //echo $Companynotificationid;?>"> -->
 								<div class="row">
 
 										<div class="col-md-6">
 										
 											<div class="form-group">
+											
 												<label>Type of Company<span class="text-danger">*</span>
 												</label>
 												
 												<select  class=" form-control selectpicker" multiple data-live-search="true" data-actions-box="true" multiple name="companyid[]">
 													<!-- <option disabled="" value="">Please select</option> -->	
-													<?php if(!empty($companyData)){
-														foreach($companyData as $company) { 
-														//echo "<pre>";print_r($row); ?>
+													<?php 
 													
-														<option value="<?php echo $company->companyid; ?>"><?php echo ucfirst($company->companyname);?></option>
+			
+													
+													if(!empty($companyData)){
+														foreach($companyData as $company) { 
+															
+
+														 ?>
+													
+											<option value="<?php echo $company->companyid; ?>"><?php echo $company->companyname;?></option>
+
+										
+											
 														<?php  } } ?>
 												</select>
 											</div>
@@ -105,10 +115,6 @@
 
 										<div class="col-md-6">
 
-												
-
-
-
 												<div class="form-group">
 
 													<label>Notification End Date <span class="text-danger">*</span></label>
@@ -116,9 +122,7 @@
 													<div class="cal-icon">
 
 														<input  class="form-control datetimepicker" type="text" id="Enddate" name="Enddate"
-
 														 readonly>
-
 													</div>
 
 												</div>
@@ -131,7 +135,7 @@
 
 													<label class="col-form-label">Document Title  <span class="text-danger">*</span></label>
 
-													<input class="form-control"  maxlength="200" name="Documenttitle">
+													<input class="form-control"  maxlength="200" name="Documenttitle" >
 
 												</div>
 
@@ -239,25 +243,16 @@
 
 <script type="text/javascript">
 
-							
-
+						
 				$('#Enddate').datetimepicker({
-
 					 defaultDate: new Date(),
-
 				  	 format: 'DD/MM/YYYY',
-
 					 ignoreReadonly: true,					
-
 				});
 
+			
 
 
-</script>
-
-
-
-<script>
 
 $(function() { 
 

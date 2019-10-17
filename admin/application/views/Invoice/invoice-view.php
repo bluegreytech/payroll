@@ -59,17 +59,16 @@
 						
 							<div class="col-sm-6 col-8 text-right m-b-30">
 							
-
 								<div class="btn-group btn-group-sm">
-										<a href="<?php echo base_url();?>Invoice/sendinvoice/<?php echo $Companyinvoiceid;?>"><button class="btn btn-white">Send Email</button></a>	
+									<a href="<?php echo base_url();?>Invoice/sendinvoice/<?php echo $Companyinvoiceid;?>" class="btn add-btn">Send Email</a>	
 								</div>
 							
 								<div class="btn-group btn-group-sm">
-									<button class="btn btn-white" id="btnExport">Generate PDF</button>	
+									<a class="btn add-btn" id="btnExport">Generate PDF</a>	
 								</div>
 
 								<div class="btn-group btn-group-sm">
-									<a href="<?php echo base_url();?>Invoice" class="btn add-btn"> Back to Invoice List</a>	
+									<a href="<?php echo base_url();?>Invoice" class="btn add-btn">Back to Invoice List</a>	
 								</div>
 
 							</div>
@@ -101,7 +100,7 @@
 									<div class="card">
 
 											<div class="card-body">
-												<center><h2>Payroll System</h2></center>
+												<!-- <center><h2>Payroll System</h2></center> -->
 												<div class="row">
 
 													<div class="col-sm-6 m-b-20">
@@ -178,9 +177,9 @@
 
 															<li>Bank name: <span><?php echo $Bankname; ?></span></li>
 
-															<!-- <li>City: <span><?php //echo $Bankname; ?></span></li> -->
+															<li>Account Number: <span><?php echo $Accountnumber; ?></span></li>
 
-															<!-- <li>Address: <span><?php //echo $Bankname; ?></span></li> -->
+															<li>Branch: <span><?php echo $Branch; ?></span></li>
 															<li>IFSC code: <span><?php echo $Ifsccode; ?></span></li>
 
 														</ul>
@@ -421,7 +420,7 @@
 
                     };
 
-                    pdfMake.createPdf(docDefinition).download('invoice.pdf');
+                    pdfMake.createPdf(docDefinition).download('Company_invoice.pdf');
 
                 }
 

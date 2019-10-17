@@ -224,7 +224,7 @@
 
 												<div class="action-label">
 
-												<a class="btn btn-white btn-sm btn-rounded" href="javascript:void(0)" onclick="statusdata('<?php echo $comp->companytypeid; ?>','<?php echo $comp->IsActive ;?>')">
+												<a class="btn btn-white btn-sm btn-rounded">
 
 												<?php if($comp->IsActive=='Active')
 
@@ -264,9 +264,9 @@
 
 											<td class="text-center">
 
-												<a  onClick="editcompanytype(<?php echo $comp->companytypeid;?>)" data-toggle="modal" data-target="#edit_holiday" title="Edit"><i class="fa fa-pencil m-r-5"></i> </a>
+												<a  onClick="editcompanytype(<?php echo $comp->companytypeid;?>)" data-toggle="modal" data-target="#edit_holiday"><i class="fa fa-pencil m-r-5"></i> </a>
 
-												<a   onclick="deletedata(<?php echo $comp->companytypeid; ?>)" data-toggle="modal" data-target="#delete_holiday" title="Delete"><i class="fa fa-trash-o m-r-5"></i> </a>			
+												<a   onclick="deletedata(<?php echo $comp->companytypeid; ?>)" data-toggle="modal" data-target="#delete_holiday"><i class="fa fa-trash-o m-r-5"></i> </a>			
 
 											</td>
 
@@ -797,49 +797,7 @@
 </html>
 
 
-<div class="modal custom-modal fade" id="status_approve" role="dialog">
 
-		<div class="modal-dialog modal-dialog-centered">
-
-			<div class="modal-content">
-
-				<div class="modal-body">
-
-					<div class="form-header">
-
-						<h3>Status</h3>
-
-						<p>Are you sure, you want to <span id="statustxt"></span> selected record?</p>
-
-					</div>
-
-					<div class="modal-btn delete-action">
-
-						<div class="row">
-
-							<div class="col-6">
-
-								<a href="javascript:void(0);" id="ok_btn" class="btn btn-primary continue-btn">Ok</a>
-
-							</div>
-
-							<div class="col-6">
-
-								<a href="javascript:void(0);" data-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
-
-							</div>
-
-						</div>
-
-					</div>
-
-				</div>
-
-			</div>
-
-		</div>
-
-	</div>
 
 
 
@@ -1127,7 +1085,7 @@
 					var response = JSON.parse(response);
 
 
-            
+
 					    console.log(response);
 
 
@@ -1223,72 +1181,5 @@
 		}			
 
 
-function statusdata(id,status){  
-
-  
-
-    $('#status_approve').modal('show');
-
-
-
-    if(status=="Inactive"){
-
-    	 $('#statustxt').text('Active');
-
-    	}else{
-
-    		 $('#statustxt').text("Inactive");
-
-    	}
-
-   
-
-        $('#ok_btn').click(function(){
-
-
-
-                url="<?php echo base_url();?>"
-
-                $.ajax({
-
-                url: url+"/Company/statusdata_type/",
-
-                type: "post",
-
-                data: {id:id,status:status} ,
-
-                success: function (response) { 
-
-
-
-                //console.log(response);           
-
-                document.location.href = url+'Company/companytype';                  
-
-
-
-            },
-
-            error: function(jqXHR, textStatus, errorThrown) {
-
-                 console.log(textStatus, errorThrown);
-
-            }
-
-            })
-
-           
-
-
-
-        });
-
-    
-
-   
-
-
-
-}
 
 </script>

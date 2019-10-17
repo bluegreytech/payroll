@@ -50,6 +50,8 @@ class Company extends CI_Controller
 		$data['companytype']=$result['companytype'];
 
 		$data['companyname']=$result['companyname'];
+		$data['companycode']=$result['companycode'];
+		
 
 		$data['comemailaddress']=$result['comemailaddress'];
 
@@ -110,56 +112,189 @@ class Company extends CI_Controller
 
 
 	public function Sendnotification()
-
 	{
-		
+		// $data['Companynotificationid']=$this->input->post('Companynotificationid');
+		// $data['companyid']=$this->input->post('companyid');
+		// $data['companyname']=$this->input->post('companyname');
+		// $data['Documenttitle']=$this->input->post('Documenttitle');
+		// $data['Notificationdescription']=$this->input->post('Notificationdescription');
+		// $data['Enddate']=$this->input->post('Enddate');
+		// $data['Companydocumentid']=$this->input->post('Companydocumentid');
+		// $data['Documentfile']=$this->input->post('Documentfile');
 		if($_POST)
 		{
-
-			$result=$this->Company_model->send_company_notification();
-			if($result==1)
+			if($this->input->post('Companynotificationid')=='')
 			{
-				$this->session->set_flashdata('success', 'Notification has been send Successfully!');
-				redirect('Company/Sendnotification');
+				$result=$this->Company_model->send_company_notification();
+				if($result==1)
+				{
+					$this->session->set_flashdata('success', 'Notification has been send Successfully!');
+					redirect('Company/Sendnotification');
+				}
+				else if($result==2)
+				{
+					$this->session->set_flashdata('error', 'Your was not Inserted!');
+					redirect('Company/Sendnotification');
+				}	
 			}
-			else if($result==2)
-			{
-				$this->session->set_flashdata('error', 'Your was not Inserted!');
-				redirect('Company/Sendnotification');
-			}	
-
+			// else
+			// {
+			// 	$result=$this->Company_model->update_companynotification();
+			// 		if($result==1)
+			// 		{
+			// 			$this->session->set_flashdata('success', 'Record has been Updated Successfully!');
+			// 			redirect('Company/companynotification_list');
+			// 		}
+			// 		// else if($result==2)
+			// 		// {
+			// 		// 	$this->session->set_flashdata('warning', 'Your data has been Inserted Successfully and Your email function was not work!');
+			// 		// 	redirect('Company/companynotification_list');
+			// 		// }
+			// 		else if($result==2)
+			// 		{
+			// 			$this->session->set_flashdata('error', 'Your data was not Insert!');
+			// 			redirect('Company/companynotification_list');
+			// 		}
+			// }
 		}
 		$data['companyData']=$this->Company_model->list_company();
         $this->load->view('Company/sendnotification',$data);
 
 	}
 
+	// public function companynotification_list()
+	// {	
+	// 	$data['notificationData']=$this->Company_model->list_companynotification();
+	// 	//print_r($data['notificationData']);die;
+	// 	$data['companyData']=$this->Company_model->list_company();
+    //     $this->load->view('Company/notificationlist',$data);
+
+	// }
 
 
-	public function company_notification_expired($companyid)
+	function companynotification_list()
 	{	
-		$result=$this->Company_model->list_company_notification($companyid);
-		//echo "<pre>";print_r($result);die;
-		if($result==1)
-		{
-			$this->session->set_flashdata('success', 'Notification has been expired Successfully!');
-			redirect('Company');
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
 		}
-		// else if($result==2)
-		// {
-		// 	$this->session->set_flashdata('error', 'Notification has been Available!');
-		// 	redirect('Company');
-		// }	
-		// else if($result==3)
-		// {
-		// 	$this->session->set_flashdata('warning', 'Notification was not Available!');
-		// 	redirect('Company');
-		// }	
+
+		if($_POST!='')
+		{
+			$option=$this->input->post('option');
+			$keyword=$this->input->post('keyword');
+			$keyword2=$this->input->post('keyword2');
+			$keyword3=$this->input->post('keyword3');
+		echo	$keyword4=$this->input->post('keyword4');
+		echo	$keyword5=$this->input->post('keyword5');	
+			if($option!='' && $keyword!='')
+			{	$option=$this->input->post('option');
+				$data['notificationData'] = $this->Company_model->search_company_notification($option,$keyword);
+			}
+			else if($option!='' && $keyword2!='')
+			{	$option=$this->input->post('option');
+				$data['notificationData'] = $this->Company_model->search_title_notification($option,$keyword2);
+			}
+			else if($option!='' && $keyword3!='')
+			{	$option=$this->input->post('option');
+				$data['notificationData'] = $this->Company_model->search_status_notification($option,$keyword3);
+			}
+			else if($option!='' && $keyword4!='' && $keyword5!='')
+			{	$option=$this->input->post('option');
+				$data['notificationData'] = $this->Company_model->search_createdate_notification($option,$keyword4,$keyword5);
+			}		
+			else
+			{
+				$data['notificationData']=$this->Company_model->list_companynotification();
+			}
+			$data['companyData']=$this->Company_model->list_company();
+		//echo "<pre>";print_r($data['companyData']);die;
+		    $this->load->view('Company/notificationlist',$data);
+
+	}
 
 	}
 
 
+	function delete_companynotification(){
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
+			$Companynotificationid=$this->input->post('Companynotificationid');
+			$data=array(
+				'Isdelete'=>'1',
+				'Isactive'=>'Inactive'
+				);
+			$this->db->where("Companynotificationid",$Companynotificationid);
+			$result=$this->db->update('tblcompanynotification',$data);
+			if($result)
+			{
+				$this->session->set_flashdata('success', 'Company notification was delete successfully!');
+				redirect('Company/companynotification_list');
+			}
+			else
+			{
+				$this->session->set_flashdata('error', 'Company notification was not delete!');
+				redirect('Company/companynotification_list');
+			}
 
+	}
+
+
+	function editcompanynotification($Companynotificationid)
+	{
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
+		$data=array();
+		$result=$this->Company_model->get_companynotification($Companynotificationid);	
+		//echo "<br>";print_r($result);die;
+		
+		$data['Companynotificationid']=$result['Companynotificationid'];
+		$data['companyid']=$result['companyid'];
+		$data['companyname']=$result['companyname'];
+		$data['Documenttitle']=$result['Documenttitle'];
+		$data['Notificationdescription']=$result['Notificationdescription'];
+		$data['Enddate']=$result['Enddate'];
+		
+		//$data['documentData']=$this->Company_model->list_companydocument_noti($Companynotificationid);
+		//echo "<pre>";print_r($data['documentData']);die;
+
+		$data['companyData']=$this->Company_model->list_company();
+		$this->load->view('Company/sendnotification',$data);	
+
+	}
+
+
+	// public function company_notification_expired($companyid)
+	// {	
+	// 	$result=$this->Company_model->list_company_notification($companyid);
+	// 	//echo "<pre>";print_r($result);die;
+	// 	if($result==1)
+	// 	{
+	// 		$this->session->set_flashdata('success', 'Notification has been expired Successfully!');
+	// 		redirect('Company');
+	// 	}
+	
+	// }
+
+
+	public function company_notification_expired($Companynotificationid)
+	{	
+		$result=$this->Company_model->list_company_notification($Companynotificationid);
+		//echo "<pre>";print_r($result);die;
+		if($result==1)
+		{
+			$this->session->set_flashdata('error', 'Notification has been expired!');
+			redirect('Company/companynotification_list');
+		}
+		if($result==2)
+		{
+			$this->session->set_flashdata('success', 'Notification Available!');
+			redirect('Company/companynotification_list');
+		}
+		
+
+	}
 
 
 
@@ -215,223 +350,118 @@ class Company extends CI_Controller
 
 
 	public function index()
-
 	{   
-
 		if(!check_admin_authentication()){ 
-
 			redirect(base_url('Login'));
-
 		}
-
 		if($_POST!='')
-
 		{
-
 			$option=$this->input->post('option');
-
 			$keyword=$this->input->post('keyword2');	
-
 			$data['companyData'] = $this->Company_model->search($option,$keyword);
-
 		}	
-
 		else
-
 		{
-
 			$data['companyData']=$this->Company_model->list_company();
-
 		} 
-
 		$this->load->view('Company/companylist',$data);			
-
 	}
 
 
 
 
-
-
-
-
-
-
-
 	function companyadd()
-
 	{
-
 		if(!check_admin_authentication()){ 
-
 			redirect(base_url('Login'));
-
 		}
 
-		$data=array();
-
+			$data=array();
 			$data['companyid']=$this->input->post('companyid');
-
 			$data['companytypeid']=$this->input->post('companytypeid');
-
 			$data['companyname']=$this->input->post('companyname');
-
+			$data['companycode']=$this->input->post('companycode');
 			$data['comemailaddress']=$this->input->post('comemailaddress');
-
 			$data['comcontactnumber']=$this->input->post('comcontactnumber');
-
+			$data['comcontactnumber2']=$this->input->post('comcontactnumber2');
+			$data['comlandlinenumber']=$this->input->post('comlandlinenumber');
 			$data['gstnumber']=$this->input->post('gstnumber');
-
 			$data['digitalsignaturedate']=$this->input->post('digitalsignaturedate');
-
 			$data['companyimage']=$this->input->post('companyimage');
-
 			$data['companyaddress']=$this->input->post('companyaddress');
-
 			$data['stateid']=$this->input->post('stateid');
-
 			$data['companycity']=$this->input->post('companycity');	
-
 			$data['pincode']=$this->input->post('pincode');		
-
 			$data['isactive']=$this->input->post('isactive');
-
 			$data['companycomplianceid']=$this->input->post('companycomplianceid');
-
 			$data['Companyshiftid']=$this->input->post('Companyshiftid');
 
-
-
 			$data['Shiftname']=$this->input->post('Shiftname');
-
 			$data['Shiftintime']=$this->input->post('Shiftintime');
-
 			$data['Shiftouttime']=$this->input->post('Shiftouttime');
 
-	
-
 			$data['Bankdetailid']=$this->input->post('Bankdetailid');
-
 			$data['Accountnumber']=$this->input->post('Accountnumber');
-
 			$data['Branch']=$this->input->post('Branch');
-
 			$data['Bankname']=$this->input->post('Bankname');
-
 			$data['Ifsccode']=$this->input->post('Ifsccode');
-
 			$data['Swiftcode']=$this->input->post('Swiftcode');
 
-			
-
+		
 			if($_POST){	
-
 				if($this->input->post('companyid')==''){			
-
 					$result=$this->Company_model->add_company();	
-
 					if($result==1)
-
 					{
-
 						$this->session->set_flashdata('success', 'Your data has been Inserted Successfully!');
-
 						redirect('Company');
-
 					}
-
 					else if($result==2)
-
 					{
-
 						$this->session->set_flashdata('warning', 'Your data has been Inserted Successfully and Your email function was not work!');
-
 						redirect('Company');
 
 					}
-
 					else if($result==3)
-
 					{
-
 						//$this->session->set_flashdata('error', 'Your data was not Insert!');
-
 						$this->session->set_flashdata('warning', 'This email address already registered!');
-
 						redirect('Company');
-
 					}
-
 					else if($result==4)
-
 					{
-
 						$this->session->set_flashdata('warning', 'This GST number already registered!');
-
 						redirect('Company');
-
 					}
-
 				}
-
 				else
-
 				{
-
 					$result=$this->Company_model->update_company();
-
 					if($result==1)
-
 					{
-
 						$this->session->set_flashdata('success', 'Record has been Updated Successfully!');
-
 						redirect('Company');
-
 					}
-
 					else if($result==2)
-
 					{
-
 						$this->session->set_flashdata('warning', 'Your data has been Inserted Successfully and Your email function was not work!');
-
 						redirect('Company');
-
 					}
-
 					else if($result==3)
-
 					{
-
 						$this->session->set_flashdata('error', 'Your data was not Insert!');
-
 						redirect('Company');
-
 					}
-
-
-
 				}
-
-
 
 		} 
 
 	//	$data['shiftData']=$this->Company_model->list_shift();
-
 		$data['stateData']=$this->Company_model->list_state();
-
 		$data['complianceData']=$this->Company_model->list_complianceto();
-
 		$data['companytypeData']=$this->Company_model->list_companyto();
-
 		//print_r($data['shiftData']);die;
-
 		$this->load->view('Company/companyadd',$data);	
-
-
-
 	}
 
 
@@ -478,8 +508,12 @@ class Company extends CI_Controller
 		$data['companytypeid']=$result['companytypeid'];
 		$data['companytype']=$result['companytype'];
 		$data['companyname']=$result['companyname'];
+		$data['companycode']=$result['companycode'];
+		
 		$data['comemailaddress']=$result['comemailaddress'];
 		$data['comcontactnumber']=$result['comcontactnumber'];
+		$data['comcontactnumber2']=$result['comcontactnumber2'];
+		$data['comlandlinenumber']=$result['comlandlinenumber'];
 		$data['gstnumber']=$result['gstnumber'];
 		$data['digitalsignaturedate']=$result['digitalsignaturedate'];
 		$data['companyimage']=$result['companyimage'];
@@ -515,20 +549,7 @@ class Company extends CI_Controller
 
 
 
-
-
-
-
-	
-
-
-
-
-
-
-
 	function companytype()
-
 	{	
 
 		if(!check_admin_authentication()){ 

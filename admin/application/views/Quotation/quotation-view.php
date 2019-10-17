@@ -34,12 +34,15 @@
 					</div>
 					<div class="col-sm-7 col-8 text-right m-b-30">
 						
+						
 						<div class="btn-group btn-group-sm">
-							<a href="<?php echo base_url();?>Invoice/sendquotation/<?php echo $quotationid;?>"><button class="btn btn-white">Send Email</button></a>	
+							<a href="<?php echo base_url();?>Invoice/sendquotation/<?php echo $quotationid;?>" class="btn add-btn">Send Email</a>
 						</div>
+
 						<div class="btn-group btn-group-sm">
-							<button class="btn btn-white" id="btnExport">Generate PDF</button>
+									<a class="btn add-btn" id="btnExport"> Generate PDF</a>	
 						</div>
+
 						<div class="btn-group btn-group-sm">
 									<a href="<?php echo base_url();?>Invoice/quotation_list" class="btn add-btn"> Back to Quotation List</a>	
 						</div>
@@ -53,7 +56,7 @@
 					<div class="col-md-12">
 						<div class="card">
 							<div class="card-body">
-							<center><h2>Payroll System</h2></center>
+							<!-- <center><h2>Payroll System</h2></center> -->
 								<div class="row">
 									<div class="col-sm-6 m-b-20">
 										<img src="<?php echo base_url();?>default/img/Company/companylogo/logo.jpg" class="inv-logo" alt="Logo">

@@ -14,9 +14,17 @@ class Login extends CI_Controller {
 
 
 	public function __construct()
+
+
 	{
+
+
       	parent::__construct();
+
+
 		$this->load->model('Login_model'); 
+
+
     }
 
 
@@ -27,7 +35,8 @@ class Login extends CI_Controller {
     {
 			if($this->input->post('logins'))
 			{  
-					$_SESSION['EmailAddress'] = (isset($_POST['EmailAddress'])!='')?$_POST['EmailAddress']:"";
+
+				$_SESSION['EmailAddress'] = (isset($_POST['EmailAddress'])!='')?$_POST['EmailAddress']:"";
 					$EmailAddress = $this->input->post('EmailAddress');
 					$Password = md5($this->input->post('Password'));
 					$IsActive = 1;
@@ -41,6 +50,7 @@ class Login extends CI_Controller {
 						{
 							if($IsActive == $log->IsActive)
 							{
+
 									$session= array(
 										'AdminId'=> $log->AdminId,
 										'FirstName'=> $log->FirstName,
@@ -49,26 +59,73 @@ class Login extends CI_Controller {
 										'EmailAddress'=> $log->EmailAddress,
 										'ProfileImage'=>$log->ProfileImage,		
 									);
-
 									$this->session->set_userdata($session);
 									$this->session->set_flashdata('success','User Login successfully!');
 									redirect('Dashboard');
+
+
+								
+
+
 							}
+
+
 							else
+
+
 							{
+
+
 									$this->session->set_userdata($session);
+
+
 									$this->session->set_flashdata('warning','You are not activate please contact to admin!');
+
+
 									redirect('Login');	
+
+
 							}
+
+
 						}
+
+
 						else
+
+
 						{
+
+
 							$this->session->set_userdata($session);
+
+
 							$this->session->set_flashdata('error', 'Invalid Username or Password!');
+
+
 							redirect('Login');	
+
+
 						} 
+
+
+					
+
+
+					
+
+
+					
+
+
 				}
+
+
 				$this->load->view('common/login');
+
+
+			
+
 
     }
 
@@ -101,8 +158,6 @@ class Login extends CI_Controller {
 
 
 	function resetpassword($ResetPasswordCode='')
-
-
 	{
 
 
@@ -239,116 +294,40 @@ class Login extends CI_Controller {
 
 
 	public function forgotpassword()
-
-
 	{
-
-
 		//echo $_POST['EmailAddress'];die;
-
-
 			// $this->form_validation->set_rules('EmailAddress', 'Email', 'required|valid_email');
-
-
 			// if($this->form_validation->run() == FALSE)
-
-
 			// {			
-
-
 			// 	if(validation_errors())
-
-
 			// 	{ 
-
-
 			// 		echo json_encode(array("status"=>"error","msg"=>validation_errors()));
-
-
 			// 	}
-
-
 			// }
-
-
 			// else
-
-
 			// { 
-
-
 		if($_POST)
-
-
 		{
-
-
 				$chk_mail=$this->Login_model->forgotpass_check();
-
-
 				if($chk_mail==1)
-
-
 				{	
-
-
 					$this->session->set_flashdata('error','Your email address was not register!');  
-
-
 				}
-
-
 				else if($chk_mail==2)
-
-
 				{
-
-
 					$this->session->set_flashdata('error','Your are not activated please contact to Admin!');	 
-
-
 				}
-
-
 				else if($chk_mail==3)
-
-
 				{
-
-
 					$this->session->set_flashdata('success','Please check your email address!');
-
-
 				}
-
-
 				else if($chk_mail==4)
-
-
 				{
-
-
 					$this->session->set_flashdata('error','Email function is not working!');  
-
-
 				}
-
-
-			
-
-
 		//	}
-
-
-			
-
-
 			}
-
-
 			$this->load->view('common/forgot_password');
-
-
 	}
 
 

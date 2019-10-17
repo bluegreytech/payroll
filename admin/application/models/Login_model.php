@@ -199,204 +199,75 @@ class Login_model extends CI_Model
 
 
 		function updatePassword($AdminId)
-
-
-
 		{
-
-
-
 			$ResetPasswordCode=$this->input->post('ResetPasswordCode');
-
-
-
 			$this->db->select('*');				
-
-
-
 			$this->db->where('AdminId',$AdminId);
-
-
-
 			$this->db->where('ResetPasswordCode',$ResetPasswordCode);
-
-
-
 			$this->db->from('tbladmin');
-
-
 
 			$query = $this->db->get();
 
-
-
 			if($query->num_rows()>0)
-
-
-
 			{
-
-
-
 			    $data=array('Password'=>md5(trim($this->input->post('Password'))),'ResetPasswordCode'=>'');
-
-
-
 				$this->db->where(array('AdminId'=>$this->input->post('AdminId'),'ResetPasswordCode'=>trim($this->input->post('ResetPasswordCode'))));
-
-
-
 				$d=$this->db->update('tbladmin',$data);
-
-
-
 				return 1;
 
-
-
 								$this->db->select('*');
-
-
-
 								$this->db->where('AdminId',$AdminId);
-
-
-
 								$smtp2 = $this->db->get('tbladmin');	
-
-
-
 								foreach($smtp2->result() as $rows) {
-
-
-
 									$AdminId = $rows->AdminId;
-
-
-
 									$FirstName = $rows->FirstName;
-
-
-
 									$LastName = $rows->LastName;
-
-
-
 									$EmailAddress = $rows->EmailAddress;
-
-
-
 								}
 
 
-
-
-
-
-
 								$email_template=$this->db->query("select * from ".$this->db->dbprefix('tblemail_template')." where task='Reset Password to admin'");
-
-
-
 								$email_temp=$email_template->row();
-
-
-
 								$email_address_from=$email_temp->from_address;
-
-
-
 								$email_address_reply=$email_temp->reply_address;
-
-
-
 								$email_subject=$email_temp->subject;        
-
-
-
 								$email_message=$email_temp->message;
-
-
-
-								
-
-
-
 								$username =$rows->FirstName.' '.$LastName;
-
-
-
 								$EmailAddress = $rows->EmailAddress;
-
-
-
-					   
-
-
-
 								$base_url=base_url();
-
-
-
+								$login_link= '<a href="'.base_url('Login').'">Click Here</a>';
+							
 								$currentyear=date('Y');
-
-
-
 								$email_message=str_replace('{break}','<br/>',$email_message);
-
-
-
 								$email_message=str_replace('{base_url}',$base_url,$email_message);
-
-
-
 								$email_message=str_replace('{year}',$currentyear,$email_message);
-
-
-
 								$email_message=str_replace('{username}',$username,$email_message);
-
-
-
 								$email_message=str_replace('{EmailAddress}',$EmailAddress,$email_message);
-
-
-
+								$email_message=str_replace('{login_link}',$login_link,$email_message);
 								$str=$email_message; //die;
-
-
-
-
-
-
-
 							
 
-					$email_config = Array(
-						'protocol'  => 'smtp',
-						'smtp_host' => 'relay-hosting.secureserver.net',
-						'smtp_port' => '465',
-						'smtp_user' => 'mitesh@bluegreytech.co.in',
-						'smtp_pass' => 'Mitesh@123',
-						'mailtype'  => 'html',
-						'starttls'  => true,
-						'newline'   => "\r\n",
-						'charset'=>'utf-8',
-						'header'=> 'MIME-Version: 1.0',
-						'header'=> 'Content-type:text/html;charset=UTF-8',
-						);
-						$this->load->library('email', $email_config);
-					$body =$str;	
+								$email_config = Array(
+									'protocol'  => 'smtp',
+									'smtp_host' => 'relay-hosting.secureserver.net',
+									'smtp_port' => '465',
+									'smtp_user' => 'binny@bluegreytech.co.in',
+									'smtp_pass' => 'Binny@123',
+									'mailtype'  => 'html',
+									'starttls'  => true,
+									'newline'   => "\r\n",
+									'charset'=>'utf-8',
+									'header'=> 'MIME-Version: 1.0',
+									'header'=> 'Content-type:text/html;charset=UTF-8',
+									);
 
-
-
-					$this->email->from('mitesh@bluegreytech.co.in');
-					$this->email->to($EmailAddress);		
-					$this->email->subject('Reset Password Admin To Payroll System');
-					$this->email->message($body);
-
-
-
+				
+								$this->load->library('email', $email_config);
+								$body =$str;	
+								$this->email->from('mitesh@bluegreytech.co.in');
+								$this->email->to($EmailAddress);		
+								$this->email->subject('Reset Password Admin To Payroll System');
+								$this->email->message($body);
 								if($this->email->send())
 								{
 									return 1;
@@ -405,11 +276,11 @@ class Login_model extends CI_Model
 									return 4;
 								}
 
-
 			}else
 			{
 			  return 2;
 			}
+
 		  }
 
 
@@ -424,7 +295,7 @@ class Login_model extends CI_Model
 			$email = trim($this->input->post('EmailAddress'));
 			$rnd=randomCode();
 			$query = $this->db->get_where('tbladmin',array('EmailAddress'=>$email));
-			//	echo $this->db->last_query(); die;
+		//	echo $this->db->last_query(); die;
 			if($query->num_rows()>0)
 			{
 				$row = $query->row();
@@ -446,6 +317,7 @@ class Login_model extends CI_Model
 								$this->db->select('*');
 								$this->db->where('AdminId',$row->AdminId);
 								$smtp2 = $this->db->get('tbladmin');	
+
 								foreach($smtp2->result() as $rows) {
 									$AdminId = $rows->AdminId;
 									$FirstName = $rows->FirstName;
@@ -453,7 +325,6 @@ class Login_model extends CI_Model
 									$EmailAddress = $rows->EmailAddress;
 									$ResetPasswordCode = $rows->ResetPasswordCode;
 								}
-
 
 
 								$email_template=$this->db->query("select * from ".$this->db->dbprefix('tblemail_template')." where task='Forgot Password by admin'");
@@ -472,9 +343,11 @@ class Login_model extends CI_Model
 								$email_message=str_replace('{base_url}',$base_url,$email_message);
 								$email_message=str_replace('{year}',$currentyear,$email_message);
 								$email_message=str_replace('{username}',$username,$email_message);
-								//$email_message=str_replace('{EmailAddress}',$EmailAddress,$email_message);
+								$email_message=str_replace('{EmailAddress}',$EmailAddress,$email_message);
 								$email_message=str_replace('{forgot_link}',$forgot_link,$email_message);
 								$str=$email_message; //die;
+
+
 								$email_config = Array(
 									'protocol'  => 'smtp',
 									'smtp_host' => 'relay-hosting.secureserver.net',
@@ -488,6 +361,8 @@ class Login_model extends CI_Model
 									'header'=> 'MIME-Version: 1.0',
 									'header'=> 'Content-type:text/html;charset=UTF-8',
 									);
+
+				
 								$this->load->library('email', $email_config);
 								$body =$str;
 								$this->email->from('binny@bluegreytech.co.in');
@@ -501,12 +376,8 @@ class Login_model extends CI_Model
 								{
 									return 4;
 								}
-
-
 							}
-
 					}
-
 			}
 			else
 			{

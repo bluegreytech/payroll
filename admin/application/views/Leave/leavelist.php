@@ -34,21 +34,21 @@
 
 				<!-- Page Title -->
 
-			<div class="row">
+	<div class="row">
 
+		<div class="col-sm-5 col-5">
 
-				<div class="col-sm-4 col-5">
-					<h4 class="page-title">Leave Type</h4>
-				</div>
+			<h4 class="page-title">Leave Type</h4>
 
-				<div class="col-sm-8 col-7 text-right m-b-30">
-					<a href="<?php echo base_url();?>company" class="btn add-btn">Back to List of Company</a>
-				</div>
-			</div>
+		</div>
 
-	
+		<!-- <div class="col-sm-7 col-7 text-right m-b-30">
 
+		<a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_holiday"><i class="fa fa-plus"></i> Add Holiday</a>
 
+		</div> -->
+
+	</div>
 
 	<!-- /Page Title -->
 
@@ -227,7 +227,7 @@
 										<tr>
 
 											<th>No</th>
-											<th>Company</th>
+
 											<th>Leave Type</th>
 
 											<th>Leave Days</th>
@@ -257,7 +257,7 @@
 										<tr>
 
 											<td><?php echo $i;?></td>
-											<td><?php echo ucfirst($row->companyname);?></td>
+
 											<td><?php echo ucfirst($row->leave_name);?></td>
 
 											<td><?php echo ucfirst($row->leavedays);?></td>

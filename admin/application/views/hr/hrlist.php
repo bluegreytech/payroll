@@ -1,6 +1,15 @@
 ﻿<?php 
+
+
+
 	 $this->load->view('common/header.php');
+
+
+
 	 $this->load->view('common/sidebar.php');
+
+
+
 ?>
 
 
@@ -158,17 +167,49 @@
 
 
 							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+
+
+
 									<div class="form-group form-focus select-focus">
+
+
+
 										<select class="select floating" name="option" id="purpose"> 
+
+
+
 											<option value=""> -- Select -- </option>
+
+
+
 											<option value="companyname">Company Name</option>
+
+
+
 											<option value="FullName">Hr Name</option>
+
+
+
 											<option value="EmailAddress">Email Address</option>
+
+
+
 											<option value="Contact">Contact Number</option>
+
+
 
 										</select>
 
+
+
+										<!-- <label class="focus-label">Role</label> -->
+
+
+
 									</div>
+
+
+
 							</div>
 
 
@@ -229,70 +270,161 @@
 
 							<div class="table-responsive">
 
-								 <!-- <table class="table table-striped custom-table datatable" class="display" style="width:100%"> -->
 
-								<table id="example" class="display table table-striped custom-table" style="width:100%">
+
+								<!-- <table class="display" style="width:100%" id="example"> -->
+
+
+
+								 <table class="table table-striped custom-table datatable" class="display" style="width:100%">
+
+
 
 									<thead>
+
+
+
 										<tr>
+
+
+
 											<th>No</th>
+
+
+
 											<th>Name</th>
+
+
+
 											<th>Email Address</th>
+
+
+
 											<th>Contact Number</th>
+
+
+
 											<th>In Company</th>
+
                                             <th>Status</th>
+
 											<?php
+
+
+
 											if($this->session->userdata('RoleId')==1 || $this->session->userdata('RoleId')==2){
+
+
+
 											?>		
+
+
+
 												<th class="text-right">Action</th>
+
+
+
 											<?php
+
+
+
 											}
+
+
+
 											?>		
+
+
+
 										</tr>
 
 
 
 									</thead>
+
 									<tbody>
+
 									<?php
+
 										$i=1;
+
 										if($hrData){                             
+
 										foreach($hrData as $hr)
+
 										{
+
 									?>
+
 										<tr>
+
 										<td><?php echo $i;?></td>
+
 											<td>
+
 												<h2 class="table-avatar">
+
 												<?php 
+
 												if($hr->ProfileImage!='')
+
 												{
+
 													?>
+
 													<a href="<?php echo base_url();?>Hr/profile/<?php echo $hr->hr_id;?>" title="show hr profile" class="avatar"><img src="<?php echo base_url_hr();?>upload/hr/<?php echo $hr->ProfileImage;?>"></a>
+
 													<a href="<?php echo base_url();?>Hr/profile/<?php echo $hr->hr_id;?>" title="show hr profile"><?php echo $hr->FullName;?> 
+
 												<?php
+
 												}
+
 												else
+
 												{
+
 													?>
+
 												<a href="<?php echo base_url();?>Hr/profile/<?php echo $hr->hr_id;?>" title="show hr profile" class="avatar"><img src="<?php echo base_url();?>upload/default/avtar.jpg"></a>
+
 												<a href="<?php echo base_url();?>Hr/profile/<?php echo $hr->hr_id;?>" title="show hr profile"><?php echo $hr->FullName;?> 
+
 													<?php
+
 												}
+
 												?>
+
 												</h2>
+
 											</td>
+
 											<td><?php echo $hr->EmailAddress ;?></td>
+
+
+
 											<td><?php echo $hr->Contact ;?></td>
+
+
+
 											<td><?php echo $hr->companyname ;?></td>
+
+
+
 							                <td>
 
-							 					<div class="action-label">
-													<a class="btn btn-white btn-sm btn-rounded" href="javascript:void(0);"  onclick="statusdata('<?php echo $hr->hr_id; ?>','<?php echo $hr->IsActive ;?>')">
-														<i class="fa fa-dot-circle-o <?php if($hr->IsActive=='Active'){echo "text-success";}else{ echo "text-danger";}?>"></i><?php echo $hr->IsActive ;?>
-													</a>
-												</div>
-											</td>
+							<div class="action-label">
+
+							<a class="btn btn-white btn-sm btn-rounded" href="javascript:void(0);"  onclick="statusdata('<?php echo $hr->hr_id; ?>','<?php echo $hr->IsActive ;?>')">
+
+								<i class="fa fa-dot-circle-o <?php if($hr->IsActive=='Active'){echo "text-success";}else{ echo "text-danger";}?>"></i><?php echo $hr->IsActive ;?>
+
+							</a>
+
+						</div>
+
+							</td>
 
 
 
@@ -303,21 +435,47 @@
 											?>
 
 											<td class="text-center">
-														<a  onClick="edithrs(<?php echo $hr->hr_id;?>)" data-toggle="modal" data-target="#edit_salary" role="button"  title="Edit">
+
+														<a  onClick="edithrs(<?php echo $hr->hr_id;?>)" data-toggle="modal" data-target="#edit_salary" role="button">
+
 														<i class="fa fa-pencil m-r-5"></i></a>
-														<a  onclick="deletedata(<?php echo $hr->hr_id; ?>)"  data-toggle="modal" data-target="#delete_admin" title="Delete"><i class="fa fa-trash-o m-r-5"></i> </a>
+
+														<a  onclick="deletedata(<?php echo $hr->hr_id; ?>)"  data-toggle="modal" data-target="#delete_admin"><i class="fa fa-trash-o m-r-5"></i> </a>
+
 											</td>
+
 											<?php
+
 											}
+
 											?>
+
 										</tr>
+
 										<?php
+
 										$i++;
+
 											} }
+
+
+
 										?>     
+
+
+
 									</tbody>
+
+
+
 								</table>
+
+
+
 							</div>
+
+
+
 						</div>
 
 
@@ -1312,85 +1470,7 @@
 
 		<?php $this->load->view('common/footer');?>
 
-		<script>
-	$(document).ready(function() {
-	 $('#example').DataTable( {
-		aaSorting: [[0, 'asc']],
-		searching: false,
-		dom: 'Blfrtip',
-		responsive: true,
-	 buttons: [
-	 {
-		extend: 'copyHtml5',
-		download: 'open',
-		text:'<i class="fa fa-files-o"></i> Copy',
-		exportOptions: {
-		columns: [0,1,2,3,4,5]
-		}
-	 },
-	 {
-		extend: 'excelHtml5',
-		text:'<i class="fa fa-file-excel-o"></i> Excel',
-		exportOptions: {
-		columns: [0,1,2,3,4,5]
-		}
-	 },
-	 {
-		extend: 'csvHtml5',
-		download: 'open',
-	    text:'<i class="fa fa-file-text-o"></i> CSV',
-		exportOptions: {
-		columns: [0,1,2,3,4,5]
-		},
-		
-	 },
-	 {
-		extend: 'pdfHtml5',
-		text:'<i class="fa fa-file-pdf-o"></i> PDF',
-		title: "List of Hr",
-		filename:"List_of_Hr",
-		orientation: 'landscape', 
-		pageSize: 'A4',		
-		exportOptions: {
-		columns: [0,1,2,3,4,5],
-		
-		},
-		
-	        customize : function(doc){ 
-				doc.content[1].margin = [ 50, 0, 100, 0 ];
-				doc.defaultStyle.fontSize = 10; //2, 3, 4,etc
-	            doc.styles.tableHeader.fontSize = 12; //2, 3, 4, etc
-				doc.defaultStyle.alignment = 'center';
-				doc.styles.tableHeader.alignment = 'center';
-				doc.content[1].table.widths = [ '5%',  '35%', '30%', '14%','14%', '14%'];
-	         
-	       },
-	 },
-	  {
-		extend: 'print',
-		orientation: 'landscape', 
-		pageSize: 'A4',
-		text:'<i class="fa fa-print"></i> Print',
-		exportOptions: {
-			columns: [0,1,2,3,4,5],
-			 		
-		},
-		 
-		
 
-	 },
-	 ]
-
- });
-  var styles ={
-	   "margin-bottom": '0.5em',
-       float: "right"	
-	 };
-	  $("div#example_wrapper").find($(".dt-buttons")).css(styles);
-
-} );
-
-</script>
 
 
 
@@ -1478,6 +1558,51 @@ $('#DateofBirth2').datetimepicker({
 
 				}).val('#DateofBirth');	
 
+
+
+$(document).ready(function() {
+
+    $('#example').DataTable( {
+
+        dom: 'Bfrtip',
+
+        buttons: [
+
+            {
+
+                extend: 'excelHtml5',
+
+                title: 'Data export'
+
+            },
+
+            {
+
+                extend: 'pdfHtml5',
+
+                title: 'Data export'
+
+            },
+
+			{
+
+                extend: 'print',
+
+                title: 'Data export'
+
+            },
+
+
+
+        ]
+
+
+
+    } );
+
+
+
+} );
 
 
 
@@ -1800,7 +1925,7 @@ $(document).ready(function()
 									},
 
 
-						FullName: {
+					FullName: {
 
 
 
@@ -1935,7 +2060,7 @@ $(document).ready(function()
 									
 									},
 
-						FullName: {
+					FullName: {
 
 
 
@@ -1948,7 +2073,6 @@ $(document).ready(function()
 
 
 						
-
 
 
 						EmailAddress: {
@@ -2118,7 +2242,7 @@ $(document).ready(function()
 
 
 
-				
+						
 
 
 
@@ -2241,29 +2365,13 @@ $(document).ready(function()
 
 
 
-								},
-
-
-
-						LastName: {
-
-
-
-							required: "Please enter a last name",
-
-
-
-								pattern : "Enter only characters and numbers and \"space , \" -",
-
-
-
-								minlength: "Please enter at least 2 and maximum 50 letters!",
-
-
+								
 
 								},
 
 
+
+					
 
 						EmailAddress: {
 
@@ -2479,7 +2587,7 @@ function edithrs(hr_id)
 
 			if(response.ProfileImage!=''){
               
-$('#blah1').attr('src', 'http://localhost/payroll/hr/upload/hr/'+response.ProfileImage);
+$('#blah1').attr('src', '/home/et635dt5xqj1/public_html/payroll.bluegreytech.co.in/hr/upload/hr'+response.ProfileImage);
 				$('#pre_profile_image').val(response.ProfileImage);
 				
 
