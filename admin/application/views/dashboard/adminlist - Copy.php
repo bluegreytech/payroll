@@ -272,94 +272,176 @@
 
 							<div class="table-responsive">
 
-								 <!-- <table class="table table-striped custom-table datatable" class="display" style="width:100%"> -->
 
-								 <table id="example" class="display table table-striped custom-table" style="width:100%">
+
+								<!-- <table class="display" style="width:100%" id="example"> -->
+
+
+
+								 <table class="table table-striped custom-table datatable" class="display" style="width:100%">
 
 									<thead>
+
 										<tr>
+
 											<th>No</th>
+
 											<th>Name</th>
+
 											<th>Email Address</th>
+
 											<th>Contact Number</th>
+
 											<th>Type Role</th>
+
 											<th>Status</th>
+
 											<?php 
 
 											if($this->session->userdata('RoleId')==1)
+
 											{
+
 											?>
+
 											<th class="text-right">Action</th>
+
 											<?php 
+
 											}
+
 											?>
+
 										</tr>
+
 									</thead>
+
 									<tbody>
+
 									<?php
+
 										$i=1;
+
 										if($adminmasterData){                             
+
 										foreach($adminmasterData as $adminlist)
+
 										{
+
 									?>
 
 										<tr>
+
 										<td><?php echo $i;?></td>
+
+											
+
 										<td>
+
 											<span  class="table-avatar">
+
 											<?php 
+
 											if($adminlist->ProfileImage!='')
+
 											{
+
 												?>
+
 												<a class="avatar"><img src="<?php echo base_url();?>upload/admin/<?php echo $adminlist->ProfileImage;?>"></a>
+
 												<?php echo $adminlist->FirstName;?> <?php echo $adminlist->LastName;?>
+
+												<?php
+
+
+
+											}
+
+											else
+
+											{
+
+												?>
+
+												<a class="avatar"><img src="<?php echo base_url();?>upload/default/avtar.jpg"></a>
+
+												<?php echo $adminlist->FirstName;?> <?php echo $adminlist->LastName;?>
+
 												<?php
 
 											}
-											else
-											{
-												?>
-												<a class="avatar"><img src="<?php echo base_url();?>upload/default/avtar.jpg"></a>
-												<?php echo $adminlist->FirstName;?> <?php echo $adminlist->LastName;?>
-												<?php
-											}
+
 											?>
+
 											</h2>
+
 											</td>
 
 
 
 											<td><?php echo $adminlist->EmailAddress ;?></td>
+
 											<td><?php echo $adminlist->PhoneNumber ;?></td>
+
 											<td>
+
 											<?php 
 
 											if($adminlist->RoleId=='1')
+
 											{
+
 												echo "<span class='btn btn-white btn-sm btn-rounded'>Super Admin<span>";
+
 											}
+
 											else
+
 											{
+
 												echo "<span class='btn btn-white btn-sm btn-rounded'>Admin<span>";
+
 											}
+
 											?></td>
+
+
+
                                             <td>
 
 							<div class="action-label">
+
 							<a class="btn btn-white btn-sm btn-rounded" href="javascript:void(0);"  onclick="statusdata('<?php echo $adminlist->AdminId; ?>','<?php echo $adminlist->IsActive ;?>')">
+
 								<?php if($adminlist->IsActive=='1')
+
 								{
+
 									?>
+
                    <i class="fa fa-dot-circle-o text-success"></i>Active
+
 									<?php
+
 								}else
+
 								{
+
 									?>
+
 									<i class="fa fa-dot-circle-o text-danger"></i>Inactive
+
 									<?php
+
 								}
+
 								?>
+
+								
+
 							</a>
+
 						</div>
 
 							</td>
@@ -1204,98 +1286,50 @@
 
 
 		<div class="sidebar-overlay" data-reff=""></div>
+
+
+
 		<?php $this->load->view('common/footer');?>
 
 
-<script>
-	$(document).ready(function() {
-	 $('#example').DataTable( {
-		aaSorting: [[0, 'asc']],
-		searching: false,
-		dom: 'Blfrtip',
-		responsive: true,
-	 buttons: [
-	 {
-		extend: 'copyHtml5',
-		download: 'open',
-		text:'<i class="fa fa-files-o"></i> Copy',
-		exportOptions: {
-		columns: [0,1,2,3,4,5]
-		}
-	 },
-	 {
-		extend: 'excelHtml5',
-		text:'<i class="fa fa-file-excel-o"></i> Excel',
-		exportOptions: {
-		columns: [0,1,2,3,4,5]
-		}
-	 },
-	 {
-		extend: 'csvHtml5',
-		download: 'open',
-	    text:'<i class="fa fa-file-text-o"></i> CSV',
-		exportOptions: {
-		columns: [0,1,2,3,4,5]
-		},
-		
-	 },
-	 {
-		extend: 'pdfHtml5',
-		text:'<i class="fa fa-file-pdf-o"></i> PDF',
-		title: "List of Admin",
-		filename:"List_of_Admin",
-		orientation: 'landscape', 
-		pageSize: 'A4',		
-		exportOptions: {
-		columns: [0,1,2,3,4,5],
-		
-		},
-		
-	        customize : function(doc){ 
-				doc.content[1].margin = [ 50, 0, 100, 0 ];
-				doc.defaultStyle.fontSize = 10; //2, 3, 4,etc
-	            doc.styles.tableHeader.fontSize = 12; //2, 3, 4, etc
-				doc.defaultStyle.alignment = 'center';
-				doc.styles.tableHeader.alignment = 'center';
-				doc.content[1].table.widths = [ '5%',  '35%', '30%', '14%','14%', '14%'];
-	         
-	       },
-	 },
-	  {
-		extend: 'print',
-		orientation: 'landscape', 
-		pageSize: 'A4',
-		text:'<i class="fa fa-print"></i> Print',
-		exportOptions: {
-			columns: [0,1,2,3,4,5],
-			 		
-		},
-		 
-		
 
-	 },
-	 ]
-
- });
-  var styles ={
-	   "margin-bottom": '0.5em',
-       float: "right"	
-	 };
-	  $("div#example_wrapper").find($(".dt-buttons")).css(styles);
-
-} );
-
-</script>
 
 
 										
 
 
 
-	
+		<!-- External -->
 
 
-		
+
+		<!-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+		<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>	
+
+		<script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>	
+
+		<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>		
+
+		<script src="https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>		
+
+		<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>		
+
+		<script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>		
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+
+		<script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+
+		<script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script> -->
+
+
+
+		<!-- Custom JS -->
 
 
 
@@ -1360,6 +1394,26 @@
 
 
 <script>
+
+$(document).ready(function() {
+
+    $('#example').DataTable( {
+
+        dom: 'Bfrtip',
+
+        buttons: [
+
+            'copy', 'csv', 'excel', 'pdf', 'print'
+
+        ]
+
+    } );
+
+} );
+
+</script>
+
+<script type="text/javascript">
 
 				$('#DateofBirth2').datetimepicker({
 

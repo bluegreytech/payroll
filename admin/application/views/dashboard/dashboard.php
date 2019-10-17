@@ -596,7 +596,7 @@
 
 
 
-									<a href="#">View all invoices</a>
+									<a href="<?php echo base_url();?>Invoice">View all invoices</a>
 
 
 
@@ -1504,7 +1504,7 @@
 
 
 
-									<a href="clients.php">View all clients</a>
+									<a href="<?php echo base_url();?>Company">View all clients</a>
 
 
 

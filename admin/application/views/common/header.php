@@ -17,112 +17,61 @@
 
 
 		<!-- Favicon -->
-
         <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url(); ?>default/img/Company/companylogo/logo.jpg">
 
-
-
 		<!-- Bootstrap CSS -->
-
         <link rel="stylesheet" href="<?php echo base_url(); ?>default/css/bootstrap.min.css">
 
-
-
 		<!-- Fontawesome CSS -->
-
         <link rel="stylesheet" href="<?php echo base_url(); ?>default/css/font-awesome.min.css">
 
-		
-
 		<!-- Lineawesome CSS -->
-
         <link rel="stylesheet" href="<?php echo base_url(); ?>default/css/line-awesome.min.css">
 
-
-
 		<!-- Chart CSS -->
-
 		<link rel="stylesheet" href="<?php echo base_url(); ?>default/plugins/morris/morris.css">
 
-
-
 		<!-- Main CSS -->
-
         <link rel="stylesheet" href="<?php echo base_url(); ?>default/css/style.css">
 
-
-
         <!-- Select2 CSS -->
-
 		<link rel="stylesheet" href="<?php echo base_url(); ?>default/css/select2.min.css">
 
-
-
 		<!-- Datetimepicker CSS -->
-
 		<link rel="stylesheet" href="<?php echo base_url(); ?>default/css/bootstrap-datetimepicker.min.css">
 
-
-
 		<!-- Datatable CSS -->
-
 		<link rel="stylesheet" href="<?php echo base_url(); ?>default/css/dataTables.bootstrap4.min.css">
-
-
-
+		<link rel="stylesheet" href="<?php echo base_url(); ?>default/css/buttons.bootstrap4.min.css">
+		
 		<!-- Calendar CSS -->
-
 		<link rel="stylesheet" href="<?php echo base_url(); ?>default/css/fullcalendar.min.css">
+
+	
+		<!-- Tagsinput CSS -->
+		<link rel="stylesheet" href="<?php echo base_url(); ?>default/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css">
+
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 		<!-- External -->
 		<link rel="stylesheet" href="<?php echo base_url(); ?>default/css/bootstrap-select.css" />
 
-		<!-- Tagsinput CSS -->
-
-		<link rel="stylesheet" href="<?php echo base_url(); ?>default/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css">
-
-		<script src="<?php echo base_url(); ?>default/ckeditor/ckeditor.js" type="text/javascript"></script>
-
-	
-
-        <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
-
-		<!-- External -->
-
-		<!-- <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.5/css/fixedHeader.bootstrap.min.css">
-
-		<link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.5/css/fixedHeader.bootstrap.min.css">
-
-		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
-
-		<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css"> -->
-
-		
-		
-		
+		<script src="<?php //echo base_url(); ?>default/ckeditor/ckeditor.js" type="text/javascript"></script>	
 
 </head>
 
 
 
 <?php
-
           if($this->session->userdata('EmailAddress'))
 
           {
 
 		 	$AdminId=$this->session->userdata('AdminId');
-
 			$RoleId=$this->session->userdata('RoleId');
-
 			$FirstName=$this->session->userdata('FirstName');
-
 			$LastName=$this->session->userdata('LastName');
-
 			$ProfileImage=$this->session->userdata('ProfileImage');
-
-
-
   ?>
 
 

@@ -154,8 +154,8 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="table-responsive">
-								<!-- <table class="display" style="width:100%" id="example"> -->
-								 <table class="table table-striped custom-table datatable" class="display" style="width:100%">
+								 <!-- <table class="table table-striped custom-table datatable" class="display" style="width:100%"> -->
+								 <table id="example" class="display table table-striped custom-table" style="width:100%">
 									<thead>
 										<tr>
 											<th>No</th>
@@ -266,6 +266,85 @@
 		<div class="sidebar-overlay" data-reff=""></div>
 
         <?php $this->load->view('common/footer');?>
+		<script>
+	$(document).ready(function() {
+	 $('#example').DataTable( {
+		aaSorting: [[0, 'asc']],
+		searching: false,
+		dom: 'Blfrtip',
+		responsive: true,
+	 buttons: [
+	 {
+		extend: 'copyHtml5',
+		download: 'open',
+		text:'<i class="fa fa-files-o"></i> Copy',
+		exportOptions: {
+		columns: [0,1,2,3,4,5]
+		}
+	 },
+	 {
+		extend: 'excelHtml5',
+		text:'<i class="fa fa-file-excel-o"></i> Excel',
+		exportOptions: {
+		columns: [0,1,2,3,4,5]
+		}
+	 },
+	 {
+		extend: 'csvHtml5',
+		download: 'open',
+	    text:'<i class="fa fa-file-text-o"></i> CSV',
+		exportOptions: {
+		columns: [0,1,2,3,4,5]
+		},
+		
+	 },
+	 {
+		extend: 'pdfHtml5',
+		text:'<i class="fa fa-file-pdf-o"></i> PDF',
+		title: "List of Company Quotation",
+		filename:"List_of_Company_Quotation",
+		orientation: 'landscape', 
+		pageSize: 'A4',		
+		exportOptions: {
+		columns: [0,1,2,3,4,5],
+		
+		},
+		
+	        customize : function(doc){ 
+				doc.content[1].margin = [ 50, 0, 100, 0 ];
+				doc.defaultStyle.fontSize = 10; //2, 3, 4,etc
+	            doc.styles.tableHeader.fontSize = 12; //2, 3, 4, etc
+				doc.defaultStyle.alignment = 'center';
+				doc.styles.tableHeader.alignment = 'center';
+				doc.content[1].table.widths = [ '5%',  '35%', '30%', '14%','14%', '14%'];
+	         
+	       },
+	 },
+	  {
+		extend: 'print',
+		orientation: 'landscape', 
+		pageSize: 'A4',
+		text:'<i class="fa fa-print"></i> Print',
+		exportOptions: {
+			columns: [0,1,2,3,4,5],
+			 		
+		},
+		 
+		
+
+	 },
+	 ]
+
+ });
+  var styles ={
+	   "margin-bottom": '0.5em',
+       float: "right"	
+	 };
+	  $("div#example_wrapper").find($(".dt-buttons")).css(styles);
+
+} );
+
+</script>
     </body>
 </html>
 
