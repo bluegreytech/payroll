@@ -84,23 +84,22 @@
 
 								<?php
 
-								if($Enddate!='')
+								// if($Enddate!='')
 
-								{
+								// {
 
 									
 
 								?>		
 
-								<div class="row">
+								<!-- <div class="row"> -->
 
-								<input type="hidden" class="form-control" name="Companydocumentid" value="<?php echo $Companydocumentid;?>">
-
-								<input type="hidden" class="form-control" name="Companynotificationid" value="<?php echo $Companynotificationid;?>">
+										<!-- <input type="hidden" class="form-control" name="Companydocumentid" value="<?php //echo $Companydocumentid;?>">
+										<input type="hidden" class="form-control" name="Companynotificationid" value="<?php// echo $Companynotificationid;?>"> -->
 
 								
 
-										<div class="col-md-6">
+										<!-- <div class="col-md-6">
 
 												<div class="form-group">
 
@@ -110,7 +109,7 @@
 
 															value="<?php														
 
-																echo date('Y-m-d',strtotime($Enddate));												
+																//echo date('Y-m-d',strtotime($Enddate));												
 
 															?>" disabled>
 
@@ -124,25 +123,18 @@
 
 													<label class="col-form-label">Document Title  <span class="text-danger">*</span></label>
 
-													<input class="form-control"  maxlength="200" name="Documenttitle" value="<?php echo $Documenttitle; ?>" readOnly>
+													<input class="form-control"  maxlength="200" name="Documenttitle" value="<?php //echo $Documenttitle; ?>" readOnly>
 
 												</div>
 
 										</div>
-
-
-
-								
-
-
-
 										<div class="col-md-12">	
 
 											<div class="form-group">
 
 												<label>Notification Description</label>
 
-												<textarea id="editor1" readOnly rows="5" class="form-control" name="Documenttitle"><?php echo $Documenttitle; ?>
+												<textarea id="editor1" readOnly rows="5" class="form-control" name="Documenttitle"><?php //echo $Documenttitle; ?>
 
 												</textarea>
 
@@ -154,26 +146,26 @@
 
 											</div>		
 
-										</div>
+										</div> -->
 
 										<?php
 
-								if($documentData){
-									foreach($documentData as $doc)
-									{
+								// if($documentData){
+								// 	foreach($documentData as $doc)
+								// 	{
 								?>
 
-										<div class="col-md-6">
+										<!-- <div class="col-md-6">
 
 											<div class="form-group">
 
 												<label class="col-form-label">Important Document <span class="text-danger">*</span></label>
 
-												<br><a href="<?php echo base_url();?>upload/company_orig/Document_orig/<?php echo $doc->Documentfile; ?>" target="_blank"><?php echo $doc->Documentfile; ?></a>
+												<br><a href="<?php// echo base_url();?>upload/company_orig/Document_orig/<?php// echo $doc->Documentfile; ?>" target="_blank"><?php echo $doc->Documentfile; ?></a>
 
 											</div>
 
-										</div>
+										</div> -->
 
 									
 
@@ -181,23 +173,23 @@
 
 										<?php
 
-								}}
+							//	}}
 
 								?>	    	
 
-								</div>	
+								<!-- </div>	 -->
 
 										
 
 								<?php
 
-								}
+								//}
 
 								?>
 
 
 
-								<br><br>
+								
 
 								<form method="post" enctype="multipart/form-data"  id="form_valid" action="<?php echo base_url();?>Company/companyadd">
 

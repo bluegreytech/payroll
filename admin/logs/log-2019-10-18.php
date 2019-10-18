@@ -34,3 +34,11 @@ ERROR - 2019-10-18 08:25:59 --> 404 Page Not Found: Default/images
 ERROR - 2019-10-18 08:27:47 --> 404 Page Not Found: Default/images
 ERROR - 2019-10-18 08:27:58 --> 404 Page Not Found: Default/images
 ERROR - 2019-10-18 08:29:40 --> 404 Page Not Found: Default/images
+ERROR - 2019-10-18 08:44:31 --> Severity: Notice --> Undefined variable: doc C:\xampp\htdocs\payroll\admin\application\views\Company\profile.php 164
+ERROR - 2019-10-18 08:44:31 --> Severity: Notice --> Trying to get property 'Documentfile' of non-object C:\xampp\htdocs\payroll\admin\application\views\Company\profile.php 164
+ERROR - 2019-10-18 08:44:52 --> Severity: Notice --> Undefined variable: doc C:\xampp\htdocs\payroll\admin\application\views\Company\profile.php 164
+ERROR - 2019-10-18 08:44:52 --> Severity: Notice --> Trying to get property 'Documentfile' of non-object C:\xampp\htdocs\payroll\admin\application\views\Company\profile.php 164
+ERROR - 2019-10-18 08:44:56 --> Severity: Notice --> Undefined variable: doc C:\xampp\htdocs\payroll\admin\application\views\Company\profile.php 164
+ERROR - 2019-10-18 08:44:56 --> Severity: Notice --> Trying to get property 'Documentfile' of non-object C:\xampp\htdocs\payroll\admin\application\views\Company\profile.php 164
+ERROR - 2019-10-18 08:44:59 --> Severity: Notice --> Undefined variable: doc C:\xampp\htdocs\payroll\admin\application\views\Company\profile.php 164
+ERROR - 2019-10-18 08:44:59 --> Severity: Notice --> Trying to get property 'Documentfile' of non-object C:\xampp\htdocs\payroll\admin\application\views\Company\profile.php 164
