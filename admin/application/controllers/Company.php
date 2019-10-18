@@ -84,7 +84,7 @@ class Company extends CI_Controller
 			redirect(base_url('Login'));
 		}
 		$data['notificationData']=$this->Company_model->list_companynotification_detail($Companynotificationid);
-	 		echo "<pre>";print_r($data['notificationData']);die;
+	 	//echo "<pre>";print_r($data['notificationData']);die;
 		 $this->load->view('Company/notificationdetail',$data);	
 	}
 

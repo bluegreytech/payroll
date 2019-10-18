@@ -579,36 +579,60 @@
 
 													<select class="form-control" name="Shifthours"  id="purpose1"> 
 
+														
+
 													<?php	
+
 													if($Companyshiftid!='')		
-													{		
-														if($Shifthours=='8')
+
+													{		if($Shifthours=='8')
+
 															{
 
 																?>
+
 																<option value="8" selected>08 Hours</option>
+
 																<option value="16" >16 Hours</option>
+
 																<option value="24">24 Hours</option>
+
 																<?php
 
 															}
+
+
+
 															else if($Shifthours=='16')
+
 															{
+
 																?>
+
 																<option value="8">08 Hours</option>
+
 																<option value="16" selected>16 Hours</option>
+
 																<option value="24">24 Hours</option>
+
 																<?php
 
 															}
 
 															else if($Shifthours=='24')
+
 															{
+
 																?>
+
 															<option value="8">08 Hours</option>
+
 															<option value="16">16 Hours</option>
+
 															<option value="24" selected>24 Hours</option>
+
 																<?php
+
 															}
 
 														}
@@ -669,37 +693,37 @@
 
 
 
-												<!-- <div class="col-md-6">
+												<div class="col-md-6">
+
 															<div class="form-group">
+
 																<label class="col-form-label">Shift In Time <span class="text-danger">*</span></label>
+
 																<input class="form-control" type="time"
-																 name="Shiftintime[]" placeholder="Enter shift in time number">		
+
+																 name="Shiftintime[]" placeholder="Enter shift in time number">
+
+																
+
 															</div>
-												</div> -->
-												<div class="col-md-6">
-													<label>Shift In Time<span class="text-danger">*</span>
-													</label>
-													<div class="clock-icon">
-														<input type="text" class="form-control" name="Shiftintime[]" id="Shiftintime1" readonly>
-													</div>
+
 												</div>
 
 
-												<!-- <div class="col-md-6">
+
+												<div class="col-md-6">
+
 															<div class="form-group">
-																<label class="col-form-label"> Shift Out Time <span class="text-danger">*</span></label>
-																<input class="form-control" type="time" 
-																name="Shiftouttime[]"   placeholder="Enter shift out time number">
-															</div>
-												</div>		 -->
 
-												<div class="col-md-6">
-													<label>Shift Out Time <span class="text-danger">*</span>
-													</label>
-													<div class="clock-icon">
-														<input type="text" class="form-control" name="Shiftouttime[]" id="Shiftouttime1" readonly>
-													</div>
-												</div>
+																<label class="col-form-label"> Shift Out Time <span class="text-danger">*</span></label>
+
+																<input class="form-control" type="time" 
+
+																name="Shiftouttime[]"   placeholder="Enter shift out time number">
+
+															</div>
+
+												</div>		
 
 											</div>
 
@@ -735,7 +759,7 @@
 
 
 
-												<!-- <div class="col-md-6">
+												<div class="col-md-6">
 
 															<div class="form-group">
 
@@ -749,19 +773,11 @@
 
 															</div>
 
-												</div> -->
-
-												<div class="col-md-6">
-													<label>Shift In Time<span class="text-danger">*</span>
-													</label>
-													<div class="clock-icon">
-														<input type="text" class="form-control" name="Shiftintime[]" id="Shiftintime2" readonly>
-													</div>
 												</div>
 
 
 
-												<!-- <div class="col-md-6">
+												<div class="col-md-6">
 
 															<div class="form-group">
 
@@ -773,15 +789,7 @@
 
 															</div>
 
-												</div>		 -->
-
-												<div class="col-md-6">
-													<label>Shift Out Time <span class="text-danger">*</span>
-													</label>
-													<div class="clock-icon">
-														<input type="text" class="form-control" name="Shiftouttime[]" id="Shiftouttime2" readonly>
-													</div>
-												</div>
+												</div>		
 
 											</div>
 
@@ -817,7 +825,7 @@
 
 
 
-												<!-- <div class="col-md-6">
+												<div class="col-md-6">
 
 															<div class="form-group">
 
@@ -829,17 +837,11 @@
 
 															</div>
 
-												</div> -->
-
-												<div class="col-md-6">
-													<label>Shift In Time<span class="text-danger">*</span>
-													</label>
-													<div class="clock-icon">
-														<input type="text" class="form-control" name="Shiftintime[]" id="Shiftintime3" readonly>
-													</div>
 												</div>
 
-												<!-- <div class="col-md-6">
+
+
+												<div class="col-md-6">
 
 															<div class="form-group">
 
@@ -849,15 +851,7 @@
 
 															</div>
 
-												</div>		 -->
-
-												<div class="col-md-6">
-													<label>Shift Out Time <span class="text-danger">*</span>
-													</label>
-													<div class="clock-icon">
-														<input type="text" class="form-control" name="Shiftouttime[]" id="Shiftouttime3" readonly>
-													</div>
-												</div>
+												</div>		
 
 											</div>
 
@@ -880,9 +874,14 @@
 									<?php 
 
 									if($Companyshiftid!=''){
+
 										$i=1;
+
+										//echo "<pre>";print_r($shiftData);
+
 										foreach($shiftData as $shift)
-										{ 
+
+										{  // echo "<pre>fgfg";print_r($shift);
 
 										?>
 
@@ -895,42 +894,48 @@
 												<div class="row">
 
 													<div class="col-md-12">
+
 																<div class="form-group">
+
 																<input type="hidden" class="form-control" name="Companyshiftid[]" value="<?php echo $shift->Companyshiftid;?>">
+
 																	<label class="col-form-label">Shift Name <span class="text-danger">*</span></label>
+
 																	<input class="form-control" minlength="02" maxlength="20" type="text" name="Shiftname[]" value="<?php echo $shift->Shiftname;?>"  placeholder="Enter shift name">
+
 																</div>
+
 													</div>
 
-													<!-- <div class="col-md-6">
+
+
+													<div class="col-md-6">
+
 																<div class="form-group">
+
 																	<label class="col-form-label">Shift In Time <span class="text-danger">*</span></label>
-																	<input class="form-control" type="time" name="Shiftintime[]" value="<?php// echo $shift->Shiftintime;?>"   placeholder="Enter shift in time number">
-																</div>
-													</div> -->
 
-													<div class="col-md-6">
-														<label>Shift In Time<span class="text-danger">*</span>
-														</label>
-														<div class="clock-icon">
-															<input type="text" class="form-control" name="Shiftintime[]" value="<?php echo $shift->Shiftintime;?>" id="Shiftintime<?php echo $i;?>" readonly>
-														</div>
+																	<input class="form-control" type="time" name="Shiftintime[]" value="<?php echo $shift->Shiftintime;?>"   placeholder="Enter shift in time number">
+
+																	
+
+																</div>
+
 													</div>
 
-													<!-- <div class="col-md-6">
+
+
+													<div class="col-md-6">
+
 																<div class="form-group">
-																	<label class="col-form-label"> Shift Out Time <span class="text-danger">*</span></label>
-																	<input class="form-control" type="time" name="Shiftouttime[]" value="<?php// echo $shift->Shiftouttime;?>"  placeholder="Enter shift out time number">
-																</div>
-													</div>		 -->
 
-													<div class="col-md-6">
-														<label>Shift In Time<span class="text-danger">*</span>
-														</label>
-														<div class="clock-icon">
-															<input type="text" class="form-control" name="Shiftouttime[]" value="<?php echo $shift->Shiftouttime;?>" id="Shiftouttime<?php echo $i;?>" readonly>
-														</div>
-													</div>
+																	<label class="col-form-label"> Shift Out Time <span class="text-danger">*</span></label>
+
+																	<input class="form-control" type="time" name="Shiftouttime[]" value="<?php echo $shift->Shiftouttime;?>"  placeholder="Enter shift out time number">
+
+																</div>
+
+													</div>		
 
 												</div>
 
@@ -1230,110 +1235,7 @@
 
 
 <script type="text/javascript">
-$(function() {
-    $('#Shiftintime1').datetimepicker({
-		format: 'LT',
-		icons: {
-	    time:'fa fa-clock-o',
-	    date:'fa fa-calendar',
-	    up:'fa fa-chevron-up',
-	    down:'fa fa-chevron-down',
-	    previous:'fa fa-chevron-left',
-	    next:'fa fa-chevron-right',
-	    today:'fa fa-calendar-check-o',
-	    clear:'fa fa-delete',
-	    close:'fa fa-times'
- 	 },
- 	  ignoreReadonly: true,
 
-    });
-      $('#Shiftouttime1').datetimepicker({
-		format: 'LT',
-		icons: {
-	    time:'fa fa-clock-o',
-	    date:'fa fa-calendar',
-	    up:'fa fa-chevron-up',
-	    down:'fa fa-chevron-down',
-	    previous:'fa fa-chevron-left',
-	    next:'fa fa-chevron-right',
-	    today:'fa fa-calendar-check-o',
-	    clear:'fa fa-delete',
-	    close:'fa fa-times'
- 	 },
- 	  ignoreReadonly: true,
-
-    });
-  });
-
-  $(function() {
-    $('#Shiftintime2').datetimepicker({
-		format: 'LT',
-		icons: {
-	    time:'fa fa-clock-o',
-	    date:'fa fa-calendar',
-	    up:'fa fa-chevron-up',
-	    down:'fa fa-chevron-down',
-	    previous:'fa fa-chevron-left',
-	    next:'fa fa-chevron-right',
-	    today:'fa fa-calendar-check-o',
-	    clear:'fa fa-delete',
-	    close:'fa fa-times'
- 	 },
- 	  ignoreReadonly: true,
-
-    });
-      $('#Shiftouttime2').datetimepicker({
-		format: 'LT',
-		icons: {
-	    time:'fa fa-clock-o',
-	    date:'fa fa-calendar',
-	    up:'fa fa-chevron-up',
-	    down:'fa fa-chevron-down',
-	    previous:'fa fa-chevron-left',
-	    next:'fa fa-chevron-right',
-	    today:'fa fa-calendar-check-o',
-	    clear:'fa fa-delete',
-	    close:'fa fa-times'
- 	 },
- 	  ignoreReadonly: true,
-
-    });
-  });
-
-  $(function() {
-    $('#Shiftintime3').datetimepicker({
-		format: 'LT',
-		icons: {
-	    time:'fa fa-clock-o',
-	    date:'fa fa-calendar',
-	    up:'fa fa-chevron-up',
-	    down:'fa fa-chevron-down',
-	    previous:'fa fa-chevron-left',
-	    next:'fa fa-chevron-right',
-	    today:'fa fa-calendar-check-o',
-	    clear:'fa fa-delete',
-	    close:'fa fa-times'
- 	 },
- 	  ignoreReadonly: true,
-
-    });
-      $('#Shiftouttime3').datetimepicker({
-		format: 'LT',
-		icons: {
-	    time:'fa fa-clock-o',
-	    date:'fa fa-calendar',
-	    up:'fa fa-chevron-up',
-	    down:'fa fa-chevron-down',
-	    previous:'fa fa-chevron-left',
-	    next:'fa fa-chevron-right',
-	    today:'fa fa-calendar-check-o',
-	    clear:'fa fa-delete',
-	    close:'fa fa-times'
- 	 },
- 	  ignoreReadonly: true,
-
-    });
-  });
 	
 				$('#digitalsignaturedate').datetimepicker({
 					// defaultDate: new Date(),

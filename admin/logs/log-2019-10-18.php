@@ -25,3 +25,12 @@ ERROR - 2019-10-18 07:42:44 --> Severity: Warning --> Invalid argument supplied 
 ERROR - 2019-10-18 07:43:40 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\payroll\admin\application\views\Company\notificationdetail.php 126
 ERROR - 2019-10-18 07:44:33 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\payroll\admin\application\views\Company\notificationdetail.php 126
 ERROR - 2019-10-18 08:02:59 --> Severity: Notice --> Undefined property: stdClass::$companytype C:\xampp\htdocs\payroll\admin\application\views\Company\notificationdetail.php 135
+ERROR - 2019-10-18 08:16:36 --> 404 Page Not Found: Default/images
+ERROR - 2019-10-18 08:16:48 --> 404 Page Not Found: Default/images
+ERROR - 2019-10-18 08:17:12 --> 404 Page Not Found: Default/images
+ERROR - 2019-10-18 08:23:56 --> 404 Page Not Found: Default/images
+ERROR - 2019-10-18 08:24:55 --> 404 Page Not Found: Default/images
+ERROR - 2019-10-18 08:25:59 --> 404 Page Not Found: Default/images
+ERROR - 2019-10-18 08:27:47 --> 404 Page Not Found: Default/images
+ERROR - 2019-10-18 08:27:58 --> 404 Page Not Found: Default/images
+ERROR - 2019-10-18 08:29:40 --> 404 Page Not Found: Default/images
