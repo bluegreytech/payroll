@@ -272,8 +272,6 @@
 													<?php
 												}
 												?>
-
-												<a  href="<?php echo base_url();?>Company/notification_detail/<?php echo $notifi->Companynotificationid;?>"  title="View"><i class="fa fa-eye m-r-5"></i></a>
 											</td>
 										</tr>
 										

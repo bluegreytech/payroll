@@ -912,6 +912,33 @@
 
 	}
 
+	function get_company_records($table)
+
+	{
+
+	 	$CI =& get_instance();
+
+		//$query = $CI->db->get($table);
+
+		$query = $CI->db->get_where($table,array('isactive'=>'Active'));
+
+		if($query->num_rows() > 0)
+
+		{
+
+			return $query->result();
+
+		}
+
+		else
+
+		{
+
+			return 0;
+
+		}
+
+	}
 
 
 

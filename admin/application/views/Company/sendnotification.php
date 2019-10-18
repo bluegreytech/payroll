@@ -180,8 +180,8 @@
 												<input class="form-control" type="file" name="Documentfile[]" placeholder="Upload document file" multiple="multiple">
 
 											</div>
-
-										</div>	
+											<h6>Uplopad only jpg,jpeg,png,pdf,doc,docx,ppt,pptx,xls,xlsx,bmp file</h6>
+										</div>		
 
 									</div>
 
@@ -308,14 +308,14 @@ $(document).ready(function()
 
 						rules: {
 
-							'companyname[]':{
-							required: true,
-									},
-							companyid: {
+							// 'companyname[]':{
+							// required: true,
+							// 		},
+							// companyid: {
 
-									required: true,
+							// 		required: true,
 
-										},
+							// 			},
 
 							Documenttitle: {
 
@@ -323,7 +323,7 @@ $(document).ready(function()
 
 										},
 
-							Notificationdescription: {
+							'Notificationdescription': {
 
 									required: true,
 
@@ -333,7 +333,11 @@ $(document).ready(function()
 
 									required: true,
 
-										}
+										},
+							Documentfile: {
+								//required: true,
+								extension:'bmp|jpg|jpeg|png|pdf|doc|docx|ppt|pptx|xls|xlsx'
+								},
 
 							},
 
@@ -341,11 +345,11 @@ $(document).ready(function()
 
 							
 
-							companyid: {
+							// companyid: {
 
-									required: "Please select company",
+							// 		required: "Please select company",
 
-										},
+							// 			},
 
 							Documenttitle: {
 
@@ -353,7 +357,7 @@ $(document).ready(function()
 
 										},	
 
-						    Notificationdescription: {
+						    'Notificationdescription': {
 
 									required: "Please enter a notification message",
 
@@ -364,8 +368,10 @@ $(document).ready(function()
 									required: "Please upload a file",
 
 										},	
+							Documentfile: {
+									required: "Please upload a valid file",
+								},	
 
-								
 
 					}					
 
