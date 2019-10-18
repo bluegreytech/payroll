@@ -260,7 +260,7 @@
 																	<tbody>
 																		<tr>
 																			<th>Other Information</th>
-																			<center><td><?php echo $Otherinformation; ?></td></center>
+																			<center><td style="text-align: left;"><?php echo $Otherinformation; ?></td></center>
 																		</tr>
 																	</tbody>
 

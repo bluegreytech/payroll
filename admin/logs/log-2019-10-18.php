@@ -42,3 +42,42 @@ ERROR - 2019-10-18 08:44:56 --> Severity: Notice --> Undefined variable: doc C:\
 ERROR - 2019-10-18 08:44:56 --> Severity: Notice --> Trying to get property 'Documentfile' of non-object C:\xampp\htdocs\payroll\admin\application\views\Company\profile.php 164
 ERROR - 2019-10-18 08:44:59 --> Severity: Notice --> Undefined variable: doc C:\xampp\htdocs\payroll\admin\application\views\Company\profile.php 164
 ERROR - 2019-10-18 08:44:59 --> Severity: Notice --> Trying to get property 'Documentfile' of non-object C:\xampp\htdocs\payroll\admin\application\views\Company\profile.php 164
+ERROR - 2019-10-18 09:19:21 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-18 11:45:27 --> Query error: Unknown column 'quotationid' in 'order clause' - Invalid query: SELECT *
+FROM `tblcompanytype`
+WHERE `Is_deleted` = '0'
+ORDER BY `quotationid` DESC
+ERROR - 2019-10-18 13:12:05 --> Severity: Warning --> implode(): Invalid arguments passed C:\xampp\htdocs\payroll\admin\application\models\Company_model.php 159
+ERROR - 2019-10-18 13:12:05 --> Query error: Column 'companyid' cannot be null - Invalid query: INSERT INTO `tblcompanynotification` (`companyid`, `Documenttitle`, `Notificationdescription`, `Enddate`, `Isactive`, `Createdby`, `Createdon`) VALUES (NULL, 'ghg-up', '', '2019-10-18', 'Active', 1, '2019-10-18 01:12:05')
+ERROR - 2019-10-18 13:13:40 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-18 13:22:10 --> Severity: Notice --> Undefined variable: keyword5 C:\xampp\htdocs\payroll\admin\application\controllers\Employee.php 47
+ERROR - 2019-10-18 13:22:10 --> Severity: Notice --> Undefined variable: keyword6 C:\xampp\htdocs\payroll\admin\application\controllers\Employee.php 52
+ERROR - 2019-10-18 13:22:43 --> Severity: Notice --> Undefined variable: keyword5 C:\xampp\htdocs\payroll\admin\application\controllers\Employee.php 47
+ERROR - 2019-10-18 13:22:50 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-18 13:22:50 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-10-18 13:22:50 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-18 13:22:50 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-18 13:22:50 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-18 13:22:50 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-18 13:22:50 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-18 13:23:15 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-18 13:23:15 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-18 13:23:16 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-18 13:23:16 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-10-18 13:23:16 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-18 13:23:16 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-18 13:23:16 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-18 13:38:13 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-18 13:38:14 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 48
+ERROR - 2019-10-18 13:38:15 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-18 13:38:15 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-18 13:38:15 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-18 13:38:15 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-18 13:48:47 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-18 13:48:47 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-18 13:48:47 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-18 13:48:48 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-18 13:48:48 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-10-18 13:48:49 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-18 13:48:49 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-18 13:48:49 --> 404 Page Not Found: Default/js

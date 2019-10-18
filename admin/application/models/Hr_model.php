@@ -271,6 +271,7 @@ class Hr_model extends CI_Model
 		// $this->db->where('t1.IsActive','Active');
 		// $this->db->or_where('t1.Is_deleted','0');
 		$this->db->where($where);
+		$this->db->order_by('hr_id','desc');
 		$r=$this->db->get();
 		$res = $r->result();
 		return $res;

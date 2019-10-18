@@ -73,11 +73,7 @@
 
 							<div class="col-sm-7 col-7 text-right m-b-30">
 
-							<a href="<?php echo base_url();?>Company/companyadd" class="btn add-btn"><i class="fa fa-plus">
-
-
-
-</i> Add Company</a>
+							<a href="<?php echo base_url();?>Company/companynotification_list" class="btn add-btn"> Back to Notification of Company</a>
 
 							</div>
 

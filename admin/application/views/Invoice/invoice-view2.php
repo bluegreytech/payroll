@@ -197,7 +197,7 @@ echo $newDate = date("M d, Y", strtotime($originalDate));?></span></p>
 																						<h5 style="font-size: 0.875rem;line-height: 18px;margin:10px 0px;"><span>Other Information</span></h5>
 																					</td>
 																					<td align="right">
-																						<h5 style="font-weight: 500;font-size: 0.875rem;line-height: 18px;margin:10px 0px;"><span><?php echo $Otherinformation; ?> <span></h5>
+																						<h5 style="text-align:left;font-weight: 500;font-size: 0.875rem;line-height: 18px;margin:10px 0px;"><span><?php echo $Otherinformation; ?> <span></h5>
 																					</td>
 																				</tr>
 																			</table>

@@ -176,7 +176,7 @@
 
 
 
-											<option value="FirstName">Admin Name</option>
+											<option value="FirstName">Admin First Name</option>
 
 
 
