@@ -78,10 +78,10 @@ echo $newDate = date("M d, Y", strtotime($originalDate));?></span></p>
 																				<tr>
 																					<td align="left" width="60%">
 																						<h3 style="text-transform: uppercase;font-size: .9375rem;margin:10px 0px;">Invoice to:</h3>
-																						<p style="font-weight: 500;font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 10px;"><?php echo $companyname; ?></p>
-																						<p style="font-weight: 500;font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 10px;"><?php echo $companyaddress; ?></p>
-																						<p style="font-weight: 500;font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 10px;"><?php echo $companycity; ?></p>
-																						<p style="font-weight: 500;font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 10px;"><?php echo $comcontactnumber; ?></p>
+																						<p style="font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 10px;"><?php echo $companyname; ?></p>
+																						<p style="font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 10px;"><?php echo $companyaddress; ?></p>
+																						<p style="font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 10px;"><?php echo $companycity; ?></p>
+																						<p style="font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 10px;"><?php echo $comcontactnumber; ?></p>
 																					</td>
 																					<td align="left" width="40%">
 																						<h3 style="text-transform: uppercase;font-size: .9375rem;margin:10px 0px;">Payment Details:</h3>

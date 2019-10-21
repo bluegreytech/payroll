@@ -280,7 +280,7 @@ class Adminmaster_model extends CI_Model
 
 
 
-							$email_template=$this->db->query("select * from ".$this->db->dbprefix('tblemail_template')." where task='Admin registration'");
+				$email_template=$this->db->query("select * from ".$this->db->dbprefix('tblemail_template')." where task='Admin registration'");
 
                             $email_temp=$email_template->row();
 

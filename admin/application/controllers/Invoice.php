@@ -267,6 +267,21 @@ class Invoice extends CI_Controller
 
 				$str=$email_message; //die;
 				//print_r($str);die;
+				// $email_config = Array(
+				// 	'protocol'  => 'smtp',
+				// 	'smtp_host' => 'relay-hosting.secureserver.net',
+				// 	'smtp_port' => '465',
+				// 	'smtp_user' => 'binny@bluegreytech.co.in',
+				// 	'smtp_pass' => 'Binny@123',
+				// 	'mailtype'  => 'html',
+				// 	'starttls'  => true,
+				// 	'newline'   => "\r\n",
+				// 	'charset'=>'utf-8',
+				// 	'header'=> 'MIME-Version: 1.0',
+				// 	'header'=> 'Content-type:text/html;charset=UTF-8',
+				// 	);
+				// $this->load->library('email', $email_config);
+
 				$config['protocol']='smtp';
 				$config['smtp_host']='ssl://smtp.googlemail.com';
 				$config['smtp_port']='465';
@@ -276,9 +291,8 @@ class Invoice extends CI_Controller
 				$config['newline']="\r\n";
 				$config['mailtype'] = 'html';								
 				$this->email->initialize($config);
-			
-				$body =$str;	
-				$this->email->from('bluegreyindia@gmail.com');
+				$body =$str;
+				$this->email->from('binny@bluegreytech.co.in'); 
 				$this->email->to($comemailaddress);		
 				$this->email->subject('Invoice send to company');
 				$this->email->message($body);
@@ -331,10 +345,11 @@ class Invoice extends CI_Controller
 				$result['quotationtData']=$this->Invoice_model->list_companyquotation($quotationid);
 				$this->load->view('Quotation/quotation-view2',$result);
 				$html = $this->output->get_output();
-				// die;
-				//print_r($result);die;
+				
+				print_r($html);die;
 				$this->load->library('dompdf_gen');
 				$this->dompdf->load_html($html);
+			//	print_r($this->dompdf->load_html($html));die;
 				$this->dompdf->render();
 				$file=$this->dompdf->output();
 				file_put_contents($file_name,$file);
@@ -355,6 +370,21 @@ class Invoice extends CI_Controller
 				$email_message=str_replace('{otherinformation}',$otherinformation,$email_message);
 				$str=$email_message; //die;
 				//print_r($str);die;
+				// $email_config = Array(
+				// 	'protocol'  => 'smtp',
+				// 	'smtp_host' => 'relay-hosting.secureserver.net',
+				// 	'smtp_port' => '465',
+				// 	'smtp_user' => 'binny@bluegreytech.co.in',
+				// 	'smtp_pass' => 'Binny@123',
+				// 	'mailtype'  => 'html',
+				// 	'starttls'  => true,
+				// 	'newline'   => "\r\n",
+				// 	'charset'=>'utf-8',
+				// 	'header'=> 'MIME-Version: 1.0',
+				// 	'header'=> 'Content-type:text/html;charset=UTF-8',
+				// 	);
+				// $this->load->library('email', $email_config);
+
 				$config['protocol']='smtp';
 				$config['smtp_host']='ssl://smtp.googlemail.com';
 				$config['smtp_port']='465';
@@ -364,9 +394,9 @@ class Invoice extends CI_Controller
 				$config['newline']="\r\n";
 				$config['mailtype'] = 'html';								
 				$this->email->initialize($config);
-			
-				$body =$str;	
-				$this->email->from('bluegreyindia@gmail.com');
+				
+				$body =$str;
+				$this->email->from('binny@bluegreytech.co.in'); 
 				$this->email->to($companyemail);		
 				$this->email->subject('Quotation send to company');
 				$this->email->message($body);

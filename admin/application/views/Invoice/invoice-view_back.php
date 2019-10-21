@@ -59,16 +59,17 @@
 						
 							<div class="col-sm-6 col-8 text-right m-b-30">
 							
+
 								<div class="btn-group btn-group-sm">
-									<a href="<?php echo base_url();?>Invoice/sendinvoice/<?php echo $Companyinvoiceid;?>" class="btn add-btn">Send Email</a>	
+										<a href="<?php echo base_url();?>Invoice/sendinvoice/<?php echo $Companyinvoiceid;?>"><button class="btn btn-white">Send Email</button></a>	
 								</div>
 							
 								<div class="btn-group btn-group-sm">
-									<a class="btn add-btn" id="btnExport">Generate PDF</a>	
+									<button class="btn btn-white" id="btnExport">Generate PDF</button>	
 								</div>
 
 								<div class="btn-group btn-group-sm">
-									<a href="<?php echo base_url();?>Invoice" class="btn add-btn">Back to Invoice List</a>	
+									<a href="<?php echo base_url();?>Invoice" class="btn add-btn"> Back to Invoice List</a>	
 								</div>
 
 							</div>
@@ -100,7 +101,7 @@
 									<div class="card">
 
 											<div class="card-body">
-												<!-- <center><h2>Payroll System</h2></center> -->
+												<center><h2>Payroll System</h2></center>
 												<div class="row">
 
 													<div class="col-sm-6 m-b-20">

@@ -2,21 +2,7 @@
 	 $this->load->view('common/header.php');
 	 $this->load->view('common/sidebar.php');
 ?>
-<script>
 
-function m1()
-{
-		var a=document.getElementById("txt1").value;
-		//var b=document.getElementById("txt2").value;
-		//var c=document.getElementById("txt3").value;
-
-		var h=a;
-		//alert(h);
-		document.getElementById("total").value=h;
-	
-}
-
-</script>	
 
 				<!-- Page Wrapper -->
 				<div class="page-wrapper">
@@ -127,9 +113,8 @@ function m1()
 												<td><?php echo $i;?></td>
 												<td><?php echo $companytype ;?></td>
 												<td class="d-none d-sm-table-cell"><?php echo $quot->quotationdetail;?></td>
-												<td>
-													<?php echo $quot->quotationrate; ?>
-												</td>	
+												<td><?php echo $quot->quotationrate;?></td>
+												
 											</tr>
 											
 										<?php
@@ -151,7 +136,7 @@ function m1()
 															<td></td>
 															<td></td>
 															<td colspan="5" style="text-align: right; font-weight: bold">Total</td>
-															<td style="text-align: right; padding-right: 30px;width: 230px"><input class="form-control" type="text" id="total" onChange="m1()"></td>
+															<td style="text-align: right; padding-right: 30px;width: 230px"><input class="form-control" name="totalamount" type="text" value="<?php //echo $totalamount;;?>"  id="total" onChange="m1()" readonly></td>
 														</tr>
 													</tbody>
 												</table>                               

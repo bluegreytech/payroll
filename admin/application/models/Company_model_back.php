@@ -1,61 +1,37 @@
 <?php
 class Company_model extends CI_Model
+
 {
 
 	function get_id()
 	{	
 
-		$insert_id=1;
-		$cmpnotification=get_one_record('tblcompanynotification','Companynotificationid',$insert_id);
-		$this->db->select('*');
-		$this->db->from('tblcomnotdocument');	
-		$this->db->where('Companynotificationid',$insert_id);
-		$documentdata=$this->db->get();	
-		$documentdata->result();
+		$insert_id='2';
+		$this->db->select('t1.*,t2.*');
+		$this->db->from('tblcompanynotification as t1');
+		$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
+		$this->db->where('t1.Companynotificationid','2');
+	//	$this->db->join('tblcomnotdocument as t2', 't1.Companynotificationid = t2.Companynotificationid', 'LEFT');
+		$smtp2 = $this->db->get();
+		$res = $smtp2->result();
+		return $res;
+		// foreach($smtp2->result() as $rows) {
+		// 	//echo $Documentfile = $rows->Documentfile;
+		// 	echo $companyid= $rows->companyid;
+		// }
 		
-	    
-			// echo "<pre>";print_r($docarr);die;
-			$companyid=explode(",",$cmpnotification->companyid);
-			$companyarr=array();
-			foreach($companyid as $cnpid)
-			{  
-				$companydata=get_one_record('tblcompany','companyid',$cnpid);
-				$companyarr[]=$companydata->comemailaddress;
-			
-			}
-			$emailto=implode(",",$companyarr);
 
-			$str='Test'; 
-			$config['protocol']='smtp';
-			$config['smtp_host']='ssl://smtp.googlemail.com';
-			$config['smtp_port']='465';
-			$config['smtp_user']='bluegreyindia@gmail.com';
-			$config['smtp_pass']='Test@123';
-			$config['charset']='utf-8';
-			$config['newline']="\r\n";
-			$config['mailtype'] = 'html';								
-			$this->email->initialize($config);
-			$body =$str;	
-			$this->email->from('bluegreyindia@gmail.com');
-			$this->email->to($emailto);		
-			$this->email->subject('Important notification to company');
-			$this->email->message($body);
-			foreach($documentdata->result() as $docrow){		
-				$atch=base_url().'upload/company_orig/Document_orig/'.$docrow->Documentfile;	
-				$this->email->attach($atch);
-			
-			}
-			
-	  		if($this->email->send())
-			{
-				//return 1;
-			}else
-			{
-				return 2;
-			}
-			
-		    
-	
+		// $this->db->select('t1.*,t2.*');
+		// $this->db->from('tblcompanynotification as t1');
+		// $this->db->join('tblcomnotdocument as t2', 't1.Companynotificationid = t2.Companynotificationid', 'LEFT');
+		// $this->db->where('t1.Companynotificationid',2);
+		// $smtp3 = $this->db->get();	
+		// foreach($smtp3->result() as $rows) 
+		// {
+		// 	// echo $Documentfile = $rows->Documentfile;
+		// 	// $atch=base_url().'upload/company/Document/'.$Documentfile;	
+		// 	// $this->email->attach($atch);
+		// }
 	}
 
 
@@ -154,6 +130,11 @@ class Company_model extends CI_Model
 	}
 
 
+
+
+
+
+
 	public function send_company_notification()
 	{
 		$companyid=implode(',',$this->input->post('companyid'));
@@ -182,23 +163,39 @@ class Company_model extends CI_Model
 
 
 		$cpt = count($_FILES['Documentfile']['name']);
+
 		for($i=0; $i<$cpt; $i++)
+
 		{ 
 
 			if(isset($_FILES['Documentfile']) &&  $_FILES['Documentfile']['name']!='')
+
 			{      
+
 				$this->load->library('upload');
+
 				$rand=rand(0,100000); 
+
 				$_FILES['userfile']['name']     =   $_FILES['Documentfile']['name'][$i];
+
 				$_FILES['userfile']['type']     =   $_FILES['Documentfile']['type'][$i];
+
 				$_FILES['userfile']['tmp_name'] =   $_FILES['Documentfile']['tmp_name'][$i];
+
 				$_FILES['userfile']['error']    =   $_FILES['Documentfile']['error'][$i];
+
 				$_FILES['userfile']['size']     =   $_FILES['Documentfile']['size'][$i];
+
 				$config['file_name'] = $rand.'Document';			
+
 				$config['upload_path'] = base_path().'upload/company_orig/Document_orig/';		
-				$config['allowed_types'] = 'bmp|jpg|jpeg|png|pdf|doc|docx|ppt|pptx|xls|xlsx';  
+
+				$config['allowed_types'] = 'jpg|jpeg|png|pdf|doc|docx';  
+
 				$this->upload->initialize($config);
+
 				if (!$this->upload->do_upload())
+
 				{
 
 					$error =  $this->upload->display_errors();
@@ -208,22 +205,41 @@ class Company_model extends CI_Model
 				} 
 
 				$picture = $this->upload->data();	   
+
 				$this->load->library('image_lib');		   
+
 				$this->image_lib->clear();
+
 				$gd_var='gd2';
+
+
+
 			 	$this->image_lib->initialize(array(
+
 					'image_library' => $gd_var,
+
 					'source_image' => base_path().'upload/company_orig/Document_orig/'.$picture['file_name'],
+
 					'new_image' => base_path().'upload/company/Document/'.$picture['file_name'],
+
 					'maintain_ratio' => FALSE,
+
 					'quality' => '100%',
+
 					'width' => 300,
+
 					'height' => 300
+
 				));
+
 				if(!$this->image_lib->resize())
+
 				{
+
 					$error = $this->image_lib->display_errors();
+
 				}
+
 		  		$user_image=$picture['file_name'];
 
 			}
@@ -231,16 +247,27 @@ class Company_model extends CI_Model
 	
 
 		if($user_image!='')
+
 		{
+
 			$Documentfile[$i]=$user_image;
-		}
-		else
-		{
-			$Documentfile[$i]='';
+
 		}
 
+		else
+
+		{
+
+			$Documentfile[$i]='';
+
+		}
+
+
+
+	
 
 		$data2=array( 
+
 			'Companynotificationid'=>$insert_id,
 			'Documentfile'=>$Documentfile[$i],
 			'Isactive'=>'Active',
@@ -252,138 +279,225 @@ class Company_model extends CI_Model
 			$insert_idss = $this->db->insert_id();
 
 		 } 
-		 //return 1;
 
-		if($insert_id!='')
-		{
-			$cmpnotification=get_one_record('tblcompanynotification','Companynotificationid',$insert_id);
-			$this->db->select('*');
-			$this->db->from('tblcomnotdocument');	
-			$this->db->where('Companynotificationid',$insert_id);
-			$documentdata=$this->db->get();	
-			$documentdata->result();
-		
-	    
-			// echo "<pre>";print_r($docarr);die;
-			$companyid=explode(",",$cmpnotification->companyid);
-			$companyarr=array();
-			foreach($companyid as $cnpid)
-			{  
-				$companydata=get_one_record('tblcompany','companyid',$cnpid);
-				$companyarr[]=$companydata->comemailaddress;
-			
+		 return 1;
+
+		if($insert_id!=''){
+
+			$this->db->select('t1.*,t2.*,t3.*');
+
+			$this->db->from('tblcompanynotification as t1');
+
+			$this->db->join('tblcomnotdocument as t2', 't1.Companynotificationid = t2.Companynotificationid', 'LEFT');
+
+			$this->db->join('tblcompany as t3', 't1.companyid = t3.companyid', 'LEFT');
+
+			$this->db->where('t1.Companynotificationid',$insert_id);
+
+			$smtp2 = $this->db->get();	
+
+			foreach($smtp2->result() as $rows) {
+
+				$Companynotificationid = $rows->Companynotificationid;
+
+				$companyid = $rows->companyid;
+
+				$Enddate = $rows->Enddate;
+
+				$Companydocumentid = $rows->Companydocumentid;
+
+				$companyname = $rows->companyname;
+
+				$comemailaddress = $rows->comemailaddress;
+
+				$Documenttitle = $rows->Documenttitle;
+
+				$Notificationdescription = $rows->Notificationdescription;
+
+				$companyimage = $rows->companyimage;		
+
 			}
-			$emailto=implode(",",$companyarr);
 
 
 
-					$email_template=$this->db->query("select * from ".$this->db->dbprefix('tblemail_template')." where task='Send notification to Company'");	
+				// $email_template=$this->db->query("select * from ".$this->db->dbprefix('tblemail_template')." where task='Company verification'");
 
-					$email_temp=$email_template->row();
-					$email_address_from=$email_temp->from_address;
-					$email_address_reply=$email_temp->reply_address;
-					$email_subject=$email_temp->subject;        
-					$email_message=$email_temp->message;
-                   
-					$base_url=base_url();
-					$login_link=  '<a href="'.site_url('Login').'">Click Here</a>';	
-                    $currentyear=date('Y');
-                    $email_message=str_replace('{break}','<br/>',$email_message);
-                  //  $email_message=str_replace('{base_url}',$base_url,$email_message);
-                    $email_message=str_replace('{year}',$currentyear,$email_message);
-                  //  $email_message=str_replace('{username}',$username,$email_message);
-					$email_message=str_replace('{emailto}',$emailto,$email_message);
-					$email_message=str_replace('{Notificationdescription}',$Notificationdescription,$email_message);
-					$email_message=str_replace('{login_link}',$login_link,$email_message);
-					$str=$email_message; //die;
+				// $email_temp=$email_template->row();
+
+				// $email_address_from=$email_temp->from_address;
+
+				// $email_address_reply=$email_temp->reply_address;
+
+				// $email_subject=$email_temp->subject;        
+
+				// $email_message=$email_temp->message;
+
+
+
 			
-					$email_config = Array(
-						'protocol'  => 'smtp',
-						'smtp_host' => 'relay-hosting.secureserver.net',
-						'smtp_port' => '465',
-						'smtp_user' => 'binny@bluegreytech.co.in',
-						'smtp_pass' => 'Binny@123',
-						'mailtype'  => 'html',
-						'starttls'  => true,
-						'newline'   => "\r\n",
-						'charset'=>'utf-8',
-						'header'=> 'MIME-Version: 1.0',
-						'header'=> 'Content-type:text/html;charset=UTF-8',
-						);
+
+				
+
+				$email_message=$Notificationdescription;
+
+				$str=$email_message; 
+				$email_config = Array(
+
+					'protocol'  => 'smtp',
+
+					'smtp_host' => 'relay-hosting.secureserver.net',
+
+					'smtp_port' => '465',
+
+					'smtp_user' => 'binny@bluegreytech.co.in',
+
+					'smtp_pass' => 'Binny@123',
+
+					'mailtype'  => 'html',
+
+					'starttls'  => true,
+
+					'newline'   => "\r\n",
+
+					'charset'=>'utf-8',
+
+					'header'=> 'MIME-Version: 1.0',
+
+					'header'=> 'Content-type:text/html;charset=UTF-8',
+
+					);
 
 	
-					$this->load->library('email', $email_config);
-					$body =$str;
-					$this->email->from('binny@bluegreytech.co.in'); 
-					$this->email->to($emailto);		
-					$this->email->subject('Important notification to company');
-					$this->email->message($body);
-					foreach($documentdata->result() as $docrow){		
-						$atch=base_url().'upload/company_orig/Document_orig/'.$docrow->Documentfile;	
-						$this->email->attach($atch);
-					
-					}
-					//print_r($this->email->message($body));die;
-					if($this->email->send())
-					{
-						return 1;
-					}else
-					{
-						return 2;
-					}
-			
-		}
-		else
-		{
-			return 2;
+
+				$this->load->library('email', $email_config);   
+
+
+				$body =$str;	
+
+				$this->email->from('bluegreyindia@gmail.com');
+
+				$this->email->to($comemailaddress);		
+
+				$this->email->subject('Important notification to company');
+
+				$this->email->message($body);
+
+				$this->db->select('t1.*,t2.*,t3.*');
+				$this->db->from('tblcompanynotification as t1');
+				$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
+				$this->db->join('tblcomnotdocument as t3', 't1.Companynotificationid = t3.Companynotificationid', 'LEFT');
+				$this->db->where('t1.Companynotificationid',$insert_id);
+				$smtp3 = $this->db->get();	
+
+				
+
+				foreach($smtp3->result() as $rows) {
+
+					$Documentfile = $rows->Documentfile;
+
+					$atch=base_url().'upload/company_orig/Document_orig/'.$Documentfile;	
+
+					$this->email->attach($atch);
+
+				}	
+
+				if($this->email->send())
+
+				{
+
+					return 1;
+
+				}else
+
+				{
+
+					return 2;
+
+				}
+
 		}
 
-		
-		
+		else
+
+		{
+
+			return 2;
+
+		}
 
 	}
 
 
 
-	
-
-
-
 
 
 	
 
+	function list_company_notification($companyid)
 
-
-	function list_company_notification($Companynotificationid)
 	{
 
-		$where = array('t1.Companynotificationid' =>$Companynotificationid);
+		$where = array('t1.companyid' =>$companyid, 't1.isactive' =>'Active');
 
-		$this->db->select('t1.*');
-		$this->db->from('tblcompanynotification as t1');
+		$this->db->select('t1.*,t2.*,t3.*,t4.*,t5.*');
+
+		$this->db->from('tblcompany as t1');
+
+		$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
+
+		$this->db->join('tblcompanycompliances as t3', 't1.companyid = '.$companyid, 'LEFT');
+
+		$this->db->join('tblstate as t4', 't1.stateid = t4.stateid', 'LEFT');
+
+		$this->db->join('tblcompanynotification as t5', 't1.companyid = t5.companyid', 'LEFT');
+
 		$this->db->where($where);
+
 		$query=$this->db->get();
 
 		// $res = $query->result_array();
+
 		// echo "<pre>";print_r($res);die;
 
 		$array=array();
+
 		foreach($query->result() as $rows) {
+
+			$companyid = $rows->companyid;
+
+			$companyname = $rows->companyname;
+
+			$comemailaddress = $rows->comemailaddress;	
+
 			$Companynotificationid = $rows->Companynotificationid;	
+
 			$Enddate = $rows->Enddate;				
+
 			$today = date('Y-m-d');
+
 			$datetime1 = date_create($today);
+
 			$datetime2 = date_create($Enddate);
-		
-			if($datetime2<=$datetime1)
+
+			$interval = date_diff($datetime1, $datetime2);
+
+			$dd= $interval->format('%R%a');
+
+			if($dd=='0')
 			{
+
 				$data=array(
+
+					'companyid'=>$companyid,
+
 					'Companynotificationid'=>$Companynotificationid,
-					'Status'=>'Expired'
-					);
+
+					'Enddate'=>null
+
+						);
 
 					//print_r($data);die;
+
 					$this->db->where("Companynotificationid",$Companynotificationid);
 					$res=$this->db->update('tblcompanynotification',$data);
 					if($res)
@@ -395,15 +509,22 @@ class Company_model extends CI_Model
 					}
 
 			}
-			else
-			{
-				return 2;
-			}
 
-			
+				
+
 		}
 
+		//die;
+
+		//return $res;
+
 	}
+
+
+
+
+
+
 
 
 
@@ -484,51 +605,31 @@ class Company_model extends CI_Model
 
 	}
 
+
+
+
+
 	function list_state(){
+
 		$r=$this->db->select('*')
+
 					->from('tblstate')
+
 					->where('statename','Gujarat')
+
 					->get();
+
 		$res = $r->result();
+
 		return $res;
-	}
 
-	function list_companynotification_detail($Companynotificationid)
-	{
-
-			$this->db->select('t1.Companynotificationid,t1.companyid');
-			$this->db->from('tblcompanynotification as t1');
-			$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
-			$this->db->where('t1.Companynotificationid',$Companynotificationid);
-			$smtp2 = $this->db->get();
-			foreach($smtp2->result() as $rows)
-			{
-				$companyid= $rows->companyid;
-				$userid=explode(",",$rows->companyid);
-				foreach($userid as $usid)
-				{
-					$this->db->select('t1.*');
-					$this->db->from('tblcompany as t1');
-					$this->db->where_in('t1.companyid',$usid);
-					$query = $this->db->get();
-					$result = array();
-					foreach ($query->result() as $rows)
-					{
-					   $result[] = $rows;
-					}
-					return $result; 
-				}
-				
-		
-			}
-			
-			
 	}
 
 	function list_companynotification()
 	{
+			//$where = array('t1.Isdelete' =>'0','t1.Enddate!=' =>'NULL');
 			$where = array('t1.Isdelete' =>'0');
-			$this->db->select('t1.*,t2.companyname');
+			$this->db->select('t1.*,t2.*');
 			$this->db->from('tblcompanynotification as t1');
 			$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
 			//$this->db->join('tblcomnotdocument as t3', 't1.Companynotificationid = t3.Companynotificationid', 'LEFT');
@@ -539,82 +640,6 @@ class Company_model extends CI_Model
 		
 			$res = $r->result();
 			return $res;
-	}
-
-
-	function search_company_notification($option,$keyword)
-	{
-		$where = array('t1.Isdelete' =>'0');
-		$keyword2 = str_replace('-', ' ', $keyword);
-		$this->db->select('t1.*,t2.companyname');
-		$this->db->from('tblcompanynotification as t1');
-		$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
-		$this->db->where($where);
-		if($option == 'companyname')
-		{
-			$this->db->like('companyname',$keyword2);
-		}
-		$query = $this->db->get();
-		if($query->num_rows() > 0)
-		{
-		return $query->result();
-		}        
-	}
-
-	
-	function search_title_notification($option,$keyword2)
-	{
-		$where = array('t1.Isdelete' =>'0');
-		$keyword = str_replace('-', ' ', $keyword2);
-		$this->db->select('t1.*,t2.companyname');
-		$this->db->from('tblcompanynotification as t1');
-		$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
-		$this->db->where($where);
-		if($option == 'Documenttitle')
-		{
-			$this->db->like('Documenttitle',$keyword);
-		}
-		$query = $this->db->get();
-		if($query->num_rows() > 0)
-		{
-		return $query->result();
-		}        
-	}
-
-	
-	function search_status_notification($option,$keyword3)
-	{
-		$where = array('t1.Isdelete' =>'0');
-		$keyword = str_replace('-', ' ', $keyword3);
-		$this->db->select('t1.*,t2.companyname');
-		$this->db->from('tblcompanynotification as t1');
-		$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
-		$this->db->where($where);
-		if($option == 'Status')
-		{
-			$this->db->like('Status',$keyword);
-		}
-		$query = $this->db->get();
-		if($query->num_rows() > 0)
-		{
-		return $query->result();
-		}        
-	}
-
-	
-	function search_createdate_notification($option,$keyword4,$keyword5)
-	{
-		$keywordstaone = str_replace('/', '-', $keyword4);
-		$keywordstatwo = str_replace('/', '-', $keyword5);
-		$this->db->select('t1.*,t2.companyname');
-		$this->db->from('tblcompanynotification as t1');
-		$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
-		$this->db->where('t1.Enddate BETWEEN "'. date('Y-m-d', strtotime($keywordstaone)). '" and "'. date('Y-m-d', strtotime($keywordstatwo)).'"');	
-		$query = $this->db->get();
-		if($query->num_rows() > 0)
-		{
-		return $query->result();
-		}        
 	}
 
 	function list_company()
@@ -742,67 +767,143 @@ class Company_model extends CI_Model
 
 
 				$today = date('Y-m-d');
+
 				$datetime1 = date_create($today);
+
 				$datetime2 = date_create($digitalsignaturedate);
+
 				$interval = date_diff($datetime1, $datetime2);
+
 				echo $dd= $interval->format('%R%a');echo "<br>";
+
 				$dd=$interval->format('%R%a');
+
 				if($dd=='+15' || $dd=='+10')
+
 				{
+
+
+
 					$email_template=$this->db->query("select * from ".$this->db->dbprefix('tblemail_template')." where task='Company licence notification'");
+
 					$email_temp=$email_template->row();
+
 					$email_address_from=$email_temp->from_address;
+
 					$email_address_reply=$email_temp->reply_address;
+
 					$email_subject=$email_temp->subject;        
+
 					$email_message=$email_temp->message;	
+
 					$companyname =$rows->companyname;
+
 					$comemailaddress = $rows->comemailaddress;
 
+
+
 					$base_url=base_url();
+
 					$currentyear=date('Y');
+
 					$email_message=str_replace('{break}','<br/>',$email_message);
+
 					$email_message=str_replace('{base_url}',$base_url,$email_message);
+
 					$email_message=str_replace('{year}',$currentyear,$email_message);
+
 					$email_message=str_replace('{companyname}',$companyname,$email_message);
+
 					$email_message=str_replace('{digitalsignaturedate}',$digitalsignaturedate,$email_message);
+
 					$str=$email_message; //die;
 
+
+
 					$email_config = Array(
+
 						'protocol'  => 'smtp',
+
 						'smtp_host' => 'relay-hosting.secureserver.net',
+
 						'smtp_port' => '465',
+
 						'smtp_user' => 'binny@bluegreytech.co.in',
+
 						'smtp_pass' => 'Binny@123',
+
 						'mailtype'  => 'html',
+
 						'starttls'  => true,
+
 						'newline'   => "\r\n",
+
 						'charset'=>'utf-8',
+
 						'header'=> 'MIME-Version: 1.0',
+
 						'header'=> 'Content-type:text/html;charset=UTF-8',
+
 						);
 
 		
 
 					$this->load->library('email', $email_config);   
+
 					$body =$str;	
+
 					$this->email->from('binny@bluegreytech.co.in');
+
 					$this->email->to($comemailaddress);		
+
 					$this->email->subject('Your company licence will be expire notification');
+
 					$this->email->message($body);
+
 					if($this->email->send())
+
 					{
+
 						//return true;
 
 					}else
 
 					{
+
+
+
 					//	return false;
 
+
+
 					}
+
+
+
 				}
+
+
+
+						
+
+
+
+						
+
+
+
 			}
+
+
+
 			//die;
+
+
+
 			//return $res;
+
+
+
 		}
 
 
@@ -1796,8 +1897,6 @@ class Company_model extends CI_Model
 			'companycity'=>$this->input->post('companycity'),
 			'pincode'=>$this->input->post('pincode'),
 			'isactive'=>$this->input->post('isactive'),
-			'updatedby'=>1,
-			'updatedon'=>date("Y-m-d h:i:s")
 				);
 
 			//print_r($data);die;
@@ -1811,8 +1910,8 @@ class Company_model extends CI_Model
 					'companyid'=>$companyid,
 					'complianceid'=>$complianceid,
 					'isactive'=>$this->input->post('isactive'),
-					'updatedby'=>1,
-					'updatedon'=>date("Y-m-d h:i:s")
+					'createdby'=>1,
+					'createdon'=>date("Y-m-d h:i:s")
 					);
 				$this->db->where("companycomplianceid",$companycomplianceid);
 				$this->db->update('tblcompanycompliances',$data2);	

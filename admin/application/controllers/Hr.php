@@ -7,13 +7,51 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 class Hr extends CI_Controller 
+
+
+
 { 
+
+
+
 	public function __construct() {
+
+
+
         parent::__construct();
+
+
+
 		$this->load->model('Hr_model');
+
+
+
 	}
 
 
+
+
+
+
+
+	// function index()
+	// {	
+	// 	if(!check_admin_authentication()){ 
+	// 		redirect(base_url('Login'));
+	// 	}
+	// 	if($_POST!='')
+	// 	{
+	// 		$option=$this->input->post('option');
+	// 		$keyword=$this->input->post('keyword2');	
+	// 		$data['hrData'] = $this->Hr_model->search($option,$keyword);
+	// 	}	
+	// 	else
+	// 	{
+	// 		$data['hrData']=$this->Hr_model->hr_list();
+	// 	}
+	// 	$data['companyData']=$this->Hr_model->list_company();
+	// 	$this->load->view('hr/hrlist',$data);
+	// }
 
 	function index()
 	{	
@@ -50,13 +88,19 @@ class Hr extends CI_Controller
 
 
 	public function profile($hr_id)
+
 	{	
+
 		if(!check_admin_authentication()){ 
+
 			redirect(base_url('Login'));
+
 		}
 
 		$data=array();
+
 		$result=$this->Hr_model->get_hrprofile($hr_id);	
+
 		//echo "<br>";print_r($result);die;
 
 		$data['hr_id']=$result['hr_id'];

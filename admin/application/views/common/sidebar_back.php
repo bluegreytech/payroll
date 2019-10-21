@@ -52,8 +52,8 @@
 									<li><a href="<?php echo base_url();?>company/companytype"><span>Type Company </span></a></li>
 									<li><a href="<?php echo base_url();?>company/compliance"><span>Compliance </span></a></li>
 									<li><a href="<?php echo base_url();?>company"><span>Company</span></a></li>
-									<!-- <li><a href="<?php //echo base_url();?>company/Sendnotification"><span>Send Notification</span></a></li> -->
-									<li><a href="<?php echo base_url();?>company/companynotification_list"><span>Notification</span></a></li>
+									<li><a href="<?php echo base_url();?>company/Sendnotification"><span>Send Notification</span></a></li>
+									<li><a href="<?php echo base_url();?>company/companynotification_list"><span>Company notification List</span></a></li>
 									<li><a href="<?php echo base_url();?>invoice">Invoice Report </a></li>
 									<li><a href="<?php echo base_url();?>leave/leavelist">Leave Type</a></li>
 								</ul>
@@ -62,7 +62,7 @@
 
 
 							<li class="submenu">
-								<a href="<?php echo base_url();?>Dashboard"><i class="fa fa-building-o" aria-hidden="true"></i><span> Quotation</span> <span class="menu-arrow"></span></a>
+								<a href="<?php echo base_url();?>Dashboard"><i class="fa fa-building-o" aria-hidden="true"></i><span>Company Quotation</span> <span class="menu-arrow"></span></a>
 								<ul style="display: none;">
 									<li><a href="<?php echo base_url();?>invoice/quotation_list">List of Company Quotation</a></li>
 								</ul>
@@ -100,7 +100,7 @@
 								<ul style="display: none;">
 
 								<li><a href="<?php echo base_url();?>employee">List of Employees</a></li>
-                                <!-- <li><a href="<?php// echo base_url();?>Attendance">Employee Attendance</a></li> -->
+                                <li><a href="<?php echo base_url();?>Attendance">Employee Attendance</a></li>
 								<!-- <li><a href="<?php //echo base_url();?>employeesalary">Employee Salary </a></li> -->
 
 								</ul>

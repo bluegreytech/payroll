@@ -1,18 +1,14 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<style>
-	body{
-		font-family: 'verdana';
-	}
-</style>
+
 </head>
 <body>
-	<table width="100%">
+	<table style="width:100%">
 		<tr>
-			<td align="center" valign="top" width="100%">
+			<td align="center" valign="top">
 				<!-- Main -->
-				<table width="100%">
+				<table>
 					<tr>
 						<td>
 							<!-- Header -->
@@ -20,9 +16,9 @@
 								
 								<!-- Logo -->
 								<tr>
-									<!-- <td style="width:100%;text-align:center">
+									<td style="width:100%;text-align:center">
 										<h1 style="font-size: 1.875rem;  font-weight: 600;color: #000;padding: 10px 0px;margin:0;">Payroll System</h1>	
-								  </td> -->
+								  </td>
 								</tr>
 								<tr>
 									<td style="padding-bottom:30px;background-color: #fff;">
@@ -68,11 +64,11 @@
 																				<tr>
 																					<td align="left" width="100%">
 																						<h3 style="text-transform: uppercase;font-size: .9375rem;margin:10px 0px;">QUOTATION TO:</h3>
-																						<p style="font-weight:500;font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 10px;"><?php echo $companyname; ?></p>
-																						<p style="font-weight:500;font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 10px;"><?php echo $companyaddress; ?></p>
-																						<p style="font-weight:500;font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 10px;"><?php echo $companyemail; ?></p>
-																						<p style="font-weight:500;font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 10px;"><?php echo $comcontactnumber; ?></p>
-																						<p style="font-weight:500;font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 30px;"></p>
+																						<p style="font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 10px;"><?php echo $companyname; ?></p>
+																						<p style="font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 10px;"><?php echo $companyaddress; ?></p>
+																						<p style="font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 10px;"><?php echo $companyemail; ?></p>
+																						<p style="font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 10px;"><?php echo $comcontactnumber; ?></p>
+																						<p style="font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 30px;"></p>
 																					</td>
 																				</tr>
 																			</table>
