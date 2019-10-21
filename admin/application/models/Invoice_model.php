@@ -136,10 +136,15 @@ class Invoice_model extends CI_Model
 			$invoicebillid = $rows->invoicebillid;
 			
 			$n=10000000;
-			$resetdate1=date("01-04-Y");
-			$resetdate2=date("d-m-Y");
-				if($resetdate1==$resetdate2)
+			date_default_timezone_set('Asia/Kolkata');
+			$resetdate1=date("21-10-Y h");
+			$resetdate2=date("d-m-Y 6");
+				if($resetdate1>=$resetdate2)
 				{
+					echo $resetdate1;
+					echo $resetdate2;
+					die;
+
 					for($i = 1; $i<$n; $i++) 
 					{
 						$companyid=$this->input->post('companyid');
@@ -179,13 +184,15 @@ class Invoice_model extends CI_Model
 						'status'=>'Pending',
 						'Isactive'=>'Aactive'
 						);
-						// print_r($data);
-						// echo "aaa";
-						// die;
+						print_r($data);
+						echo "aaa";
+						die;
 						$this->db->insert('tblcompanyinvoice',$data);
 						
 					}
 					return 1;
+
+					
 				}
 				else
 				{
@@ -230,9 +237,9 @@ class Invoice_model extends CI_Model
 						'status'=>'Pending',
 						'Isactive'=>'Aactive'
 						);
-						// print_r($data);
-						// echo "bbb";
-						// die;
+						print_r($data);
+						echo "bbb";
+						die;
 						$this->db->insert('tblcompanyinvoice',$data);
 						return 1;
 					}
@@ -508,14 +515,15 @@ class Invoice_model extends CI_Model
 
 	public function get_companyinvoice($Companyinvoiceid)
 	{
-		
-		$this->db->select('t1.*,t2.*,t3.*,t4.*');
-		$this->db->from('tblcompanyinvoice as t1');
-		$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
-		$this->db->join('tblhr as t3', 't1.hr_id = t3.hr_id', 'LEFT');
-		$this->db->join('tblcompanybankdetail as t4', 't2.companyid = t4.companyid', 'LEFT');
-		//$this->db->join('tbladmin as t5', $AdminId.'= t5.AdminId', 'LEFT');
-		$this->db->where('t1.Companyinvoiceid',$Companyinvoiceid);
+		//$RoleId=$this->session->userdata('RoleId');
+		$this->db->select('compinvoice.*,comp.*,hr.*,bankcompany.*,adminbank.*');
+		$this->db->from('tblcompanyinvoice as compinvoice');
+		$this->db->join('tblcompany as comp', 'compinvoice.companyid = comp.companyid', 'LEFT');
+		$this->db->join('tblhr as hr', 'compinvoice.hr_id = hr.hr_id', 'LEFT');
+		$this->db->join('tblcompanybankdetail as bankcompany', 'comp.companyid = bankcompany.companyid', 'LEFT');
+		$this->db->join('tblsitesetting as adminbank','RoleId= adminbank.RoleId', 'LEFT');
+		//$this->db->join('tbladmin as admin', $AdminId.'= adminbank.AdminId', 'LEFT');
+		$this->db->where('compinvoice.Companyinvoiceid',$Companyinvoiceid);
 		$query=$this->db->get();
 		return $query->row_array();
 

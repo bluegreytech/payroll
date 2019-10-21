@@ -417,6 +417,7 @@ class Company extends CI_Controller
 	//	$data['shiftData']=$this->Company_model->list_shift();
 		$data['stateData']=$this->Company_model->list_state();
 		$data['complianceData']=$this->Company_model->list_complianceto();
+		$data['deductionData']=$this->Company_model->list_compliancededuction();
 		$data['companytypeData']=$this->Company_model->list_companyto();
 		//print_r($data['shiftData']);die;
 		$this->load->view('Company/companyadd',$data);	
@@ -584,74 +585,42 @@ class Company extends CI_Controller
 
 
 	public function compliance()
-
 	{
-
 		if(!check_admin_authentication()){ 
-
 			redirect(base_url('Login'));
-
 		}
-
-
 
 		$data=array();
 
 			$data['complianceid']=$this->input->post('complianceid');
-
+			$data['compliancetypeid']=$this->input->post('compliancetypeid');
 			$data['compliancename']=$this->input->post('compliancename');
-
 			$data['compliancepercentage']=$this->input->post('compliancepercentage');	
-
 			$data['isactive']=$this->input->post('isactive');
 
 			if($_POST){
-
 				if($this->input->post('complianceid')==''){
-
 					$result=$this->Company_model->add_compliance();	
-
 					if($result)
-
 					{
-
 						$this->session->set_flashdata('success', 'Record has been Inserted Succesfully!');
-
 						redirect('Company/compliance');
-
 					}
 
 				}
-
 				else
-
 				{
-
 					$result=$this->Company_model->update_compliance();
-
 					if($result)
-
 					{
-
 						$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
-
 						redirect('Company/compliance');
-
 					} 
-
-
-
 				}
-
-
-
 		} 
 
 		$data['complianceData']=$this->Company_model->list_compliance();
-
 		$this->load->view('compliance/compliance',$data);	
-
-
 
 	}
 
@@ -808,29 +777,19 @@ class Company extends CI_Controller
 
 
 	function editcompliance()
-
 	{
-
 		if(!check_admin_authentication()){ 
-
 			redirect(base_url('Login'));
-
 		}
 
 		$data=array();
-
 		$result=$this->Company_model->get_compliance($this->input->post('complianceid'));	
-
 		//echo "<br>";print_r($result);die;
-
 		$data['complianceid']=$result['complianceid'];
-
+		$data['compliancetypeid']=$result['compliancetypeid'];
 		$data['compliancename']=$result['compliancename'];
-
 		$data['compliancepercentage']=$result['compliancepercentage'];
-
 		$data['isactive']=$result['isactive'];
-
 		echo json_encode($data);
 
 		//$this->load->view('Company/companytypelist',$data);		

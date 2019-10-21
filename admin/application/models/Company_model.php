@@ -422,34 +422,20 @@ class Company_model extends CI_Model
 
 
 	function list_companyto()
-
 	{
-
 		$where = array('IsActive' =>'Active', 'Is_deleted' =>'0');
-
 		$this->db->select('*');
-
 		$this->db->from('tblcompanytype');
-
 		$this->db->where($where);
-
 		$r=$this->db->get();
-
 		$res = $r->result();
-
 		return $res;
-
 	}
-
-
-
-
-
 
 
 	function list_complianceto()
 	{
-		$where = array('isdelete' =>'0');
+		$where = array('isdelete' =>'0','compliancetypeid'=>'1');
 		$this->db->select('*');
 		$this->db->from('tblcompliances');
 		$this->db->where($where);
@@ -458,28 +444,31 @@ class Company_model extends CI_Model
 		return $res;
 	}
 
-
+	function list_compliancededuction()
+	{
+		$where = array('isdelete' =>'0','compliancetypeid'=>'2');
+		$this->db->select('*');
+		$this->db->from('tblcompliances');
+		$this->db->where($where);
+		$r=$this->db->get();
+		$res = $r->result();
+		return $res;
+	}
+	
 
 
 
 
 
 	function list_compliance()
-
 	{
-
 		$this->db->select('*');
-
 		$this->db->from('tblcompliances');
-
 		$this->db->where('isactive!=','0');
-
 		$this->db->or_where('isdelete','0');
-
+		$this->db->order_by('complianceid','desc');
 		$r=$this->db->get();
-
 		$res = $r->result();
-
 		return $res;
 
 	}
@@ -988,19 +977,12 @@ class Company_model extends CI_Model
 
 	function add_company()
 	{	
-
 		$this->db->select('*');
-
 		$this->db->where('comemailaddress',$this->input->post('comemailaddress'));
-
 		$query=$this->db->get('tblcompany');
-
 		if($query->num_rows() > 0)
-
 		{
-
 				return 3;
-
 		}
 
 
@@ -1197,92 +1179,50 @@ class Company_model extends CI_Model
 			
 
 			$data=array( 
-
 			'companytypeid'=>$companytypeid,
-
 			'companyname'=>$companyname,
 			'companycode'=>$companycode,
-
 			'comemailaddress'=>$comemailaddress,
-
 			'comcontactnumber'=>$comcontactnumber,
 			'comcontactnumber2'=>$comcontactnumber2,
 			'comlandlinenumber'=>$comlandlinenumber,
-
 			'gstnumber'=>$gstnumber, 
-
 			'digitalsignaturedate'=>$birth,
-
 			'companyaddress'=>$companyaddress,
-
 			'stateid'=>$stateid,
-
 			'companycity'=>$companycity,
-
 			'pincode'=>$pincode,
-
 			'verificationcode'=>$code,
-
 			'isactive'=>$isactive,
-
 			'createdby'=>1,
-
 			'createdon'=>date("Y-m-d h:i:s")
-
 			);
 
 			//print_r($data); die;
 
 			$this->db->insert('tblcompany',$data);
-
 			$insert_id = $this->db->insert_id();
-
-				
-
 			$Shifthours=$this->input->post('Shifthours');
-
 			$Shiftname=$this->input->post('Shiftname');
-
 			$Shiftintime=$this->input->post('Shiftintime');
-
 			$Shiftouttime=$this->input->post('Shiftouttime');
 
 			$data3 = array();
-
 			//$Shiftnames = count($this->input->post('Shiftname'));
-
-                   $Shiftnames = count(array_filter($this->input->post('Shiftname')));
-
-       
-
-			
-
-
+        	$Shiftnames = count(array_filter($this->input->post('Shiftname')));
 
 			for($i=0; $i<$Shiftnames; $i++)
-
 			 {
-
 				if($Shiftname!='' || $Shiftname!=null || $Shiftname!='0')
-
 				{	
-
 					$data3=array( 
-
 					'companyid'=>$insert_id,
-
 					'Shifthours'=>$Shifthours,
-
 					'Shiftname'=>isset($Shiftname[$i]) ? $Shiftname[$i] : '0',
-
 					'Shiftintime'=>isset($Shiftintime[$i]) ? $Shiftintime[$i] : '0',
-
 					'Shiftouttime'=>isset($Shiftouttime[$i]) ? $Shiftouttime[$i] : '0',
-
 					);
-
 					 //echo "<pre>";print_r($data3);
-
 					$this->db->insert('tblcompanyshift',$data3);	
 
 				}
@@ -1291,24 +1231,15 @@ class Company_model extends CI_Model
 
 												 	
 
-				
-
-				
-
 				$complianceid=implode(',',$this->input->post('complianceid'));
-
+				$compliancedeductionid=implode(',',$this->input->post('compliancedeductionid'));die;
 				$data2=array( 
-
 					'companyid'=>$insert_id,
-
 					'complianceid'=>$complianceid,
-
+					'compliancedeductionid'=>$compliancedeductionid,
 					'isactive'=>$isactive,
-
 					'createdby'=>1,
-
 					'createdon'=>date("Y-m-d h:i:s")
-
 					);
 
 				$this->db->insert('tblcompanycompliances',$data2);	
@@ -1323,10 +1254,8 @@ class Company_model extends CI_Model
 					'Bankname'=>$Bankname,
 					'Ifsccode'=>$Ifsccode
 					);
-
 				$this->db->insert('tblcompanybankdetail',$data4);	
-
-			//	return 1;
+				return 1;
 
 	
 
@@ -1652,10 +1581,12 @@ class Company_model extends CI_Model
 
 	function add_compliance()
 	{	
+			$compliancetypeid=$this->input->post('compliancetypeid');
 			$compliancename=$this->input->post('compliancename');
 			$compliancepercentage=$this->input->post('compliancepercentage');
 			$isactive=$this->input->post('isactive');
 			$data=array( 
+			'compliancetypeid'=>$compliancetypeid,
 			'compliancename'=>$compliancename,
 			'compliancepercentage'=>$compliancepercentage,
 			'isactive'=>$isactive,
@@ -1915,17 +1846,14 @@ class Company_model extends CI_Model
 		$complianceid=$this->input->post('complianceid');
 		$data=array(
 			'complianceid'=>$this->input->post('complianceid'),
+			'compliancetypeid'=>$this->input->post('compliancetypeid'),
 			'compliancename'=>$this->input->post('compliancename'),
 			'compliancepercentage'=>$this->input->post('compliancepercentage'),
 			'isactive'=>$this->input->post('isactive')
 				);
-
 			//print_r($data);die;
-
 			$this->db->where("complianceid",$complianceid);
-
 			$this->db->update('tblcompliances',$data);	
-
 			return 1;	      
 
 	}

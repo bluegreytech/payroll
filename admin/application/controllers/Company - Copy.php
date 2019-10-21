@@ -5,18 +5,15 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Company extends CI_Controller 
-
 {
 
 	public function __construct() {
-
         parent::__construct();
-
 		$this->load->model('Company_model');
 
 	}
 
-	public function getcompanyid(){
+	public function Companynotificationid(){
 		$result=$this->Company_model->get_id();	
 		echo "<br>";print_r($result);die;
 	//	$this->load->view('Company/sendnotification',$data);
@@ -44,81 +41,64 @@ class Company extends CI_Controller
 		//echo "<br>";print_r($result);die;
 
 		$data['companyid']=$result['companyid'];
-
 		$data['companytypeid']=$result['companytypeid'];
-
 		$data['companytype']=$result['companytype'];
-
 		$data['companyname']=$result['companyname'];
 		$data['companycode']=$result['companycode'];
-		
-
 		$data['comemailaddress']=$result['comemailaddress'];
-
 		$data['comcontactnumber']=$result['comcontactnumber'];
-
 		$data['gstnumber']=$result['gstnumber'];
-
 		$data['digitalsignaturedate']=$result['digitalsignaturedate'];
-
 		$data['companyimage']= $result['companyimage'];
-
 		$data['companyaddress']=$result['companyaddress'];
-
 		$data['stateid']=$result['stateid'];
-
 		$data['statename']=$result['statename'];
-
 		$data['companycity']=$result['companycity'];
-
 		$data['pincode']=$result['pincode'];
-
 		$data['isactive']=$result['isactive'];
-
 		$data['companycomplianceid']=$result['companycomplianceid'];
-
 		$data['complianceid']=$result['complianceid'];
-
 		$data['Companynotificationid']=$result['Companynotificationid'];
-
 		$data['Enddate']=$result['Enddate'];
-
 		$data['Companydocumentid']=$result['Companydocumentid'];
-
 		$data['Documenttitle']=$result['Documenttitle'];
-
 		$data['Notificationdescription']=$result['Notificationdescription'];
-
 		$data['Documentfile']=$result['Documentfile'];
 
 		
 
 		$data['stateData']=$this->Company_model->list_state();
-
 		$data['complianceData']=$this->Company_model->list_compliance();
-
 		$data['companytypeData']=$this->Company_model->list_companytype();
-
 		$data['documentData']=$this->Company_model->list_companydocument($companyid);
-
 		//	echo "<pre>";print_r($data['complianceData']);die;
-
 		$this->load->view('Company/profile',$data);	
 
 
 
 	}
 
-
+	public function notification_detail($Companynotificationid)
+	{
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
+		$data['notificationData']=$this->Company_model->list_companynotification_detail($Companynotificationid);
+	 	//echo "<pre>";print_r($data['notificationData']);die;
+		 $this->load->view('Company/notificationdetail',$data);	
+	}
 
 	public function Sendnotification()
 	{
-		$data['Companynotificationid']=$this->input->post('Companynotificationid');
-		$data['companyid']=$this->input->post('companyid');
-		$data['companyname']=$this->input->post('companyname');
-		$data['Documenttitle']=$this->input->post('Documenttitle');
-		$data['Notificationdescription']=$this->input->post('Notificationdescription');
-		$data['Enddate']=$this->input->post('Enddate');
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
+		// $data['Companynotificationid']=$this->input->post('Companynotificationid');
+		// $data['companyid']=$this->input->post('companyid');
+		// $data['companyname']=$this->input->post('companyname');
+		// $data['Documenttitle']=$this->input->post('Documenttitle');
+		// $data['Notificationdescription']=$this->input->post('Notificationdescription');
+		// $data['Enddate']=$this->input->post('Enddate');
 		// $data['Companydocumentid']=$this->input->post('Companydocumentid');
 		// $data['Documentfile']=$this->input->post('Documentfile');
 		if($_POST)
@@ -129,45 +109,79 @@ class Company extends CI_Controller
 				if($result==1)
 				{
 					$this->session->set_flashdata('success', 'Notification has been send Successfully!');
-					redirect('Company/Sendnotification');
+					redirect('Company/companynotification_list');
 				}
 				else if($result==2)
 				{
-					$this->session->set_flashdata('error', 'Your was not Inserted!');
-					redirect('Company/Sendnotification');
+					$this->session->set_flashdata('error', 'Record has been inserted Successfully but Email function not work!');
+					redirect('Company/companynotification_list');
 				}	
 			}
-			else
-			{
-				$result=$this->Company_model->update_companynotification();
-					if($result==1)
-					{
-						$this->session->set_flashdata('success', 'Record has been Updated Successfully!');
-						redirect('Company/companynotification_list');
-					}
-					// else if($result==2)
-					// {
-					// 	$this->session->set_flashdata('warning', 'Your data has been Inserted Successfully and Your email function was not work!');
-					// 	redirect('Company/companynotification_list');
-					// }
-					else if($result==2)
-					{
-						$this->session->set_flashdata('error', 'Your data was not Insert!');
-						redirect('Company/companynotification_list');
-					}
-			}
+			// else
+			// {
+			// 	$result=$this->Company_model->update_companynotification();
+			// 		if($result==1)
+			// 		{
+			// 			$this->session->set_flashdata('success', 'Record has been Updated Successfully!');
+			// 			redirect('Company/companynotification_list');
+			// 		}
+			// 		// else if($result==2)
+			// 		// {
+			// 		// 	$this->session->set_flashdata('warning', 'Your data has been Inserted Successfully and Your email function was not work!');
+			// 		// 	redirect('Company/companynotification_list');
+			// 		// }
+			// 		else if($result==2)
+			// 		{
+			// 			$this->session->set_flashdata('error', 'Your data was not Insert!');
+			// 			redirect('Company/companynotification_list');
+			// 		}
+			// }
 		}
 		$data['companyData']=$this->Company_model->list_company();
         $this->load->view('Company/sendnotification',$data);
 
 	}
 
-	public function companynotification_list()
+
+	function companynotification_list()
 	{	
-		$data['notificationData']=$this->Company_model->list_companynotification();
-		//print_r($data['notificationData']);die;
-		$data['companyData']=$this->Company_model->list_company();
-        $this->load->view('Company/notificationlist',$data);
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
+
+		if($_POST!='')
+		{
+			$option=$this->input->post('option');
+			$keyword=$this->input->post('keyword');
+			$keyword2=$this->input->post('keyword2');
+			$keyword3=$this->input->post('keyword3');
+			$keyword4=$this->input->post('keyword4');
+			$keyword5=$this->input->post('keyword5');	
+			if($option!='' && $keyword!='')
+			{	$option=$this->input->post('option');
+				$data['notificationData'] = $this->Company_model->search_company_notification($option,$keyword);
+			}
+			else if($option!='' && $keyword2!='')
+			{	$option=$this->input->post('option');
+				$data['notificationData'] = $this->Company_model->search_title_notification($option,$keyword2);
+			}
+			else if($option!='' && $keyword3!='')
+			{	$option=$this->input->post('option');
+				$data['notificationData'] = $this->Company_model->search_status_notification($option,$keyword3);
+			}
+			else if($option!='' && $keyword4!='' && $keyword5!='')
+			{	$option=$this->input->post('option');
+				$data['notificationData'] = $this->Company_model->search_createdate_notification($option,$keyword4,$keyword5);
+			}		
+			else
+			{
+				$data['notificationData']=$this->Company_model->list_companynotification();
+			}
+			$data['companyData']=$this->Company_model->list_company();
+		 	//echo "<pre>";print_r($data['notificationData']);die;
+		    $this->load->view('Company/notificationlist',$data);
+
+	}
 
 	}
 
@@ -212,10 +226,7 @@ class Company extends CI_Controller
 		$data['Documenttitle']=$result['Documenttitle'];
 		$data['Notificationdescription']=$result['Notificationdescription'];
 		$data['Enddate']=$result['Enddate'];
-		
-		//$data['documentData']=$this->Company_model->list_companydocument_noti($Companynotificationid);
 		//echo "<pre>";print_r($data['documentData']);die;
-
 		$data['companyData']=$this->Company_model->list_company();
 		$this->load->view('Company/sendnotification',$data);	
 
@@ -225,30 +236,23 @@ class Company extends CI_Controller
 
 
 
-	public function company_notification_expired($companyid)
+	public function company_notification_expired($Companynotificationid)
 	{	
-		$result=$this->Company_model->list_company_notification($companyid);
+		$result=$this->Company_model->list_company_notification($Companynotificationid);
 		//echo "<pre>";print_r($result);die;
 		if($result==1)
 		{
-			$this->session->set_flashdata('success', 'Notification has been expired Successfully!');
-			redirect('Company');
+			$this->session->set_flashdata('error', 'Notification has been expired!');
+			redirect('Company/companynotification_list');
 		}
-		// else if($result==2)
-		// {
-		// 	$this->session->set_flashdata('error', 'Notification has been Available!');
-		// 	redirect('Company');
-		// }	
-		// else if($result==3)
-		// {
-		// 	$this->session->set_flashdata('warning', 'Notification was not Available!');
-		// 	redirect('Company');
-		// }	
+		if($result==2)
+		{
+			$this->session->set_flashdata('success', 'Notification Available!');
+			redirect('Company/companynotification_list');
+		}
+		
 
 	}
-
-
-
 
 
 

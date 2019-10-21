@@ -106,9 +106,16 @@
 								</ul>
 
 							</li>
-
-
-
+							<?php
+							if($this->session->userdata('RoleId')==1){
+							?>	
+							<li class="active">
+								<a href="<?php echo base_url();?>Adminmaster/site_setting"><i class="la la-cog"></i> <span>Company setting</span> </a>
+								
+							</li>
+							<?php
+								}
+							?>
 						    <!-- <li class="submenu">
 
 								<a href="<?php //echo base_url();?>Dashboard"><i class="fa fa-calendar-check-o"></i> <span>Leave</span> <span class="menu-arrow"></span></a>

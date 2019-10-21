@@ -1535,21 +1535,21 @@
         
 
     //get one record
-
     function get_one_record($table,$primaryfield,$id)
-
 	{	
-
 		$CI =& get_instance();
-
 		$query = $CI->db->get_where($table,array($primaryfield=>$id));
-
 		//echo $CI->db->last_query();die;
-
 		return $query->row();
-
 	}
 
+	// function get_one_record_bank($table,$primaryfield)
+	// {	
+	// 	$CI =& get_instance();
+	// 	$query = $CI->db->get_where($table,array($primaryfield=>$id));
+	// 	//echo $CI->db->last_query();die;
+	// 	return $query->row();
+	// }
 		
 
 		

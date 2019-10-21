@@ -7,12 +7,6 @@ class Invoice extends CI_Controller
 	    $this->load->model('Invoice_model');
 	}
 
-	public function test()
-	{
-		$date=new DateTime('21/10/2019');
-		echo $date->format('h:i a d/m/Y');
-	}
-
 
 	public function index()
 	{

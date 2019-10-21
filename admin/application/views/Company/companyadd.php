@@ -974,8 +974,6 @@
 
 												</div>
 
-
-
 												<div class="col-md-6">
 
 															<div class="form-group">
@@ -987,8 +985,6 @@
 															</div>
 
 												</div>
-
-
 
 												<div class="col-md-6">
 
@@ -1002,8 +998,6 @@
 
 												</div>
 
-
-
 												<div class="col-md-6">
 
 															<div class="form-group">
@@ -1016,16 +1010,8 @@
 
 												</div>
 
-
-
-												
-
-		
-
 											</div>
-
 										</div>
-
 									</fieldset>
 
 
@@ -1033,160 +1019,150 @@
 								</div>
 
 
+								<br>
+								<legend>Earnings</legend>
+								<div class="table-responsive m-t-15">
 
-									<div class="table-responsive m-t-15">
+									<table class="table table-striped custom-table">
 
-
-
-										<table class="table table-striped custom-table">
-
-
-
-											<thead>
-
-
-
-												<tr>
-
-
-
-													<th>Type of Compliance</th>
+										<thead>
+											<tr>
+												<th>Type of Compliance</th>
+												<th >Percentage of Compliance</th>
+												<th class="text-center">Add on Compliance</th>
+											</tr>
+										</thead>
 
 
 
-													<th >Percentage of Compliance</th>
+										<tbody>
+										<?php  
+										if($companyid!='')
+										{
+											$comid=$complianceid;
+											$compliance_idarr = explode(",",$complianceid);
+										}
 
+										
+											foreach($complianceData as $compdata)
+												{
+												if($companyid!='')
+												{  
+													$comid=$compdata->complianceid;
+													$checkedStatus = "";		
+												}
+										?>
 
+											<tr>
 
-													<th class="text-center">Add on Compliance</th>
+												<td><?php echo $compdata->compliancename;?></td>
+												<td><?php echo $compdata->compliancepercentage;?></td>
+												<td class="text-center">
+													<input type="checkbox" name="complianceid[]"   value="<?php echo $compdata->complianceid; ?>" 
+														<?php 	if($companyid!='')
+															{	if(in_array($comid,$compliance_idarr)) { echo "checked"; }}?> >
+												</td>
 
+											</tr>
 
+										<?php
 
-												</tr>
-
-
-
-											</thead>
-
-
-
-											<tbody>
-
-											<?php  
-
-											if($companyid!='')
-											{
-												$comid=$complianceid;
-												$compliance_idarr = explode(",",$complianceid);
 											}
 
-											  	
+										?>
 
-												foreach($complianceData as $compdata)
-												 {
-													if($companyid!='')
-													{  
-												 		$comid=$compdata->complianceid;
-														$checkedStatus = "";		
-													}
-											?>
+										</tbody>
 
-												<tr>
-
-													<td><?php echo $compdata->compliancename;?></td>
-													<td><?php echo $compdata->compliancepercentage;?></td>
-													<td class="text-center">
-														<input type="checkbox" name="complianceid[]"   value="<?php echo $compdata->complianceid; ?>" 
-														 <?php 	if($companyid!='')
-																{	if(in_array($comid,$compliance_idarr)) { echo "checked"; }}?> >
-													</td>
-
-												</tr>
-
-											<?php
-
-												}
-
-											?>
-
-											</tbody>
-
-										</table>
+									</table>
 
 
 
-									</div>
+								</div>
 
 
+								<br>
+								<legend>Deduction</legend>
+								<div class="table-responsive m-t-15">
+
+									<table class="table table-striped custom-table">
+
+										<thead>
+											<tr>
+												<th>Type of Compliance</th>
+												<th >Percentage of Compliance</th>
+												<th class="text-center">Add on Compliance</th>
+											</tr>
+										</thead>
+
+
+
+										<tbody>
+										<?php  
+										// if($companyid!='')
+										// {
+										// 	$comid=$complianceid;
+										// 	$compliance_idarr = explode(",",$complianceid);
+										// }
+
+										
+											foreach($deductionData as $deducdata)
+												{
+													// if($companyid!='')
+													// {  
+													// 	$comid=$deducdata->complianceid;
+													// 	$checkedStatus = "";		
+													// }
+										?>
+
+											<tr>
+
+												<td><?php echo $deducdata->compliancename;?></td>
+												<td><?php echo $deducdata->compliancepercentage;?></td>
+												<!-- <td class="text-center">
+													<input type="checkbox" name="complianceid[]"   value="<?php //echo $deducdata->complianceid; ?>" 
+														<?php 	//if($companyid!='')
+															//{	if(in_array($comid,$compliance_idarr)) { echo "checked"; }}?> >
+												</td> -->
+
+												<td class="text-center">
+													<input type="checkbox" name="compliancedeductionid[]"   value="<?php echo $deducdata->complianceid; ?>">
+												</td>
+
+											</tr>
+
+										<?php
+
+											}
+
+										?>
+
+										</tbody>
+
+									</table>
+
+
+
+								</div>
 
 									
 
 
 
 									<div class="submit-section">
-
-
-
 									<?php 
-
-
-
 										if($companyid)
-
-
-
 										{
-
-
-
 											?>
-
-
-
 												<button class="btn btn-primary submit-btn">Update</button>
-
-
-
 											<?php
-
-
-
 										}	
-
-
-
 										else
-
-
-
 										{
-
-
-
 											?>
-
-
-
 												<button class="btn btn-primary submit-btn">Submit</button>
-
-
-
 											<?php
-
-
-
 										}
-
-
-
 									?>
-
-
-
-									
-
-
-
 									</div>
 
 
