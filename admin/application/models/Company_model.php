@@ -1232,7 +1232,7 @@ class Company_model extends CI_Model
 												 	
 
 				$complianceid=implode(',',$this->input->post('complianceid'));
-				$compliancedeductionid=implode(',',$this->input->post('compliancedeductionid'));die;
+				$compliancedeductionid=implode(',',$this->input->post('compliancedeductionid'));
 				$data2=array( 
 					'companyid'=>$insert_id,
 					'complianceid'=>$complianceid,
@@ -1737,9 +1737,11 @@ class Company_model extends CI_Model
 			if($companycomplianceid!='')
 			{
 				$complianceid=implode(',',$this->input->post('complianceid'));
+				$compliancedeductionid=implode(',',$this->input->post('compliancedeductionid'));
 				$data2=array( 
 					'companycomplianceid'=>$companycomplianceid,
 					'companyid'=>$companyid,
+					'compliancedeductionid'=>$compliancedeductionid,
 					'complianceid'=>$complianceid,
 					'isactive'=>$this->input->post('isactive'),
 					'updatedby'=>1,

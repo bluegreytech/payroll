@@ -203,7 +203,7 @@
 													<thead>
 														<tr>
 															<!-- <th style="width: 20px">#</th> -->
-															<th class="col-sm-2">Particuler </th>
+															<th class="col-sm-2">Particular </th>
 															<th class="col-md-6">Rate (Rs.)</th>
 															<!-- <th style="width:100px;">Unit Cost</th>
 															<th style="width:80px;">Qty</th>

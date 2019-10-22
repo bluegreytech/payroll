@@ -352,6 +352,8 @@ class Company extends CI_Controller
 			$data['pincode']=$this->input->post('pincode');		
 			$data['isactive']=$this->input->post('isactive');
 			$data['companycomplianceid']=$this->input->post('companycomplianceid');
+			$data['compliancedeductionid']=$this->input->post('compliancedeductionid');
+			
 			$data['Companyshiftid']=$this->input->post('Companyshiftid');
 
 			$data['Shiftname']=$this->input->post('Shiftname');
@@ -484,6 +486,7 @@ class Company extends CI_Controller
 		$data['isactive']=$result['isactive'];
 		$data['companycomplianceid']=$result['companycomplianceid'];
 		$data['complianceid']=$result['complianceid'];
+		$data['compliancedeductionid']=$result['compliancedeductionid'];
 
 		$data['Companyshiftid']=$result['Companyshiftid'];
 		$data['Shifthours']=$result['Shifthours'];
@@ -499,8 +502,12 @@ class Company extends CI_Controller
 
 		$data['shiftData']=$this->Company_model->list_companyshift($companyid);
 		$data['stateData']=$this->Company_model->list_state();
-		$data['complianceData']=$this->Company_model->list_compliance();
 		$data['companytypeData']=$this->Company_model->list_companytype();
+
+		$data['complianceData']=$this->Company_model->list_complianceto();
+		$data['deductionData']=$this->Company_model->list_compliancededuction();
+		//$data['deductionData']=$this->Company_model->list_compliancededuction();
+		//	$data['complianceData']=$this->Company_model->list_compliance();
 			//echo "<pre>";print_r($data['shiftData']);die;
 		$this->load->view('Company/companyadd',$data);	
 

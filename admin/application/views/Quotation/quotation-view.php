@@ -173,10 +173,10 @@ function m1()
 																<td>Yours sincerely,</td>
 															</tr>
 															<tr>
-																<th>Prashant Parmar</th>
+																<th><?php echo $Adminname;?></th>
 															</tr>
 															<tr>
-																<th>M 9099912602</th>
+																<th>M <?php echo $Mobilenumber;?></th>
 															</tr>
 														</tbody>
 													</table>

@@ -452,11 +452,12 @@ class Invoice_model extends CI_Model
 
 	public function get_companyquotation($quotationid)
 	{
-		$this->db->select('t1.*,t3.*');
-		$this->db->from('tblquotation as t1');
+		$this->db->select('quotation.*,comptype.*,adminbank.*');
+		$this->db->from('tblquotation as quotation');
 		//$this->db->join('tblquotationdetail as t2', 't1.quotationid = t2.quotationid', 'LEFT');
-		$this->db->join('tblcompanytype as t3', 't1.companytypeid = t3.companytypeid', 'LEFT');
-		$this->db->where('t1.quotationid',$quotationid);
+		$this->db->join('tblcompanytype as comptype', 'quotation.companytypeid = comptype.companytypeid', 'LEFT');
+		$this->db->join('tblsitesetting as adminbank','RoleId= adminbank.RoleId', 'LEFT');
+		$this->db->where('quotation.quotationid',$quotationid);
 		$query=$this->db->get();
 			// echo $this->db->last_query();
 			// 	echo "<pre>";print_r($query->result());die;

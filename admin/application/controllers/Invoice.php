@@ -647,6 +647,12 @@ class Invoice extends CI_Controller
 		$data['companyaddress']=$result['companyaddress'];
 		$data['otherinformation']=$result['otherinformation'];
 		$data['totalamount']=$result['totalamount'];
+
+		$data['Adminname']=$result['Adminname'];
+		$data['Emailaddress']=$result['Emailaddress'];
+		$data['Mobilenumber']=$result['Mobilenumber'];
+		$data['Officeaddress']=$result['Officeaddress'];
+		$data['Gstnumber']=$result['Gstnumber'];
 		
 		$data['quotationtData']=$this->Invoice_model->list_companyquotation($quotationid);
 		//echo "<br>";print_r($data['quotationtData']);die;

@@ -1,15 +1,6 @@
 ﻿<?php 
-
-
-
 	 $this->load->view('common/header.php');
-
-
-
 	 $this->load->view('common/sidebar.php');
-
-
-
 ?>
 
 
@@ -19,73 +10,35 @@
 
 
             <div class="page-wrapper">
-
-
-
-			
-
-
-
 				<!-- Page Content -->
-
-
-
                 <div class="content container-fluid">
-
-
-
-				
-
-
 
 					<!-- Page Title -->
 
 
 
 					<div class="row">
-
 							<div class="col-sm-5 col-5">
-
 							<h4 class="page-title">
-
 							<?php 
-
 							if($companyid)
-
 							{
-
 								?>
-
 								Edit Company
-
 								<?php
-
 							}	
-
 							else
-
 							{
-
 								?>
-
 								Add Company
-
 								<?php
-
 							}
-
 							?>
-
 							</h4>
-
 							</div>
-
 							<div class="col-sm-7 col-7 text-right m-b-30">
-
 							<a href="<?php echo base_url();?>Company" class="btn add-btn"> Back to List of Company </a>	
-
 							</div>
-
 						</div>
 
 
@@ -97,68 +50,20 @@
 
 
 					<?php if(($this->session->flashdata('error'))){ ?>
-
-
-
 							<div class="alert alert-danger" id="errorMessage">
-
-
-
 							<strong> <?php echo $this->session->flashdata('error'); ?></strong> 
-
-
-
 							</div>
-
-
-
 							<?php } ?>
-
-
-
 							<?php if(($this->session->flashdata('success'))){ ?>
-
-
-
 									<div class="alert alert-success" id="successMessage">
-
-
-
 									<strong> <?php echo $this->session->flashdata('success'); ?></strong> 
-
-
-
 									</div>
-
-
-
 							<?php } ?>
-
-
-
 							<?php if(($this->session->flashdata('warning'))){ ?>
-
-
-
 							<div class="alert alert-warning" id="warningMessage">
-
-
-
 							<strong> <?php echo $this->session->flashdata('warning'); ?></strong> 
-
-
-
 							</div>
-
-
-
 							<?php } ?>
-
-
-
-
-
-
 
                 </div>
 
@@ -169,23 +74,14 @@
 						
 
 							<div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
-
 								<div class="dash-widget clearfix card-box">		
 
 
-
 							<div class="modal-body">
-
-
-
 								<form method="post" id="form_valid" action="<?php echo base_url();?>Company/companyadd" enctype="multipart/form-data">
-
 								<input type="hidden" class="form-control" name="companyid" value="<?php echo $companyid;?>">
-
 								<input type="hidden" class="form-control" name="companycomplianceid" value="<?php echo $companycomplianceid;?>">
-
 								<input type="hidden" class="form-control" name="Companyshiftid" value="<?php echo $Companyshiftid;?>">
-
 								<input type="hidden" class="form-control" name="Bankdetailid" value="<?php echo $Bankdetailid;?>">
 
 
@@ -1098,35 +994,35 @@
 
 										<tbody>
 										<?php  
-										// if($companyid!='')
-										// {
-										// 	$comid=$complianceid;
-										// 	$compliance_idarr = explode(",",$complianceid);
-										// }
+										if($companyid!='')
+										{
+											$comiddeduc=$compliancedeductionid;
+											$compliance_iddedu = explode(",",$compliancedeductionid);
+										}
 
 										
 											foreach($deductionData as $deducdata)
 												{
-													// if($companyid!='')
-													// {  
-													// 	$comid=$deducdata->complianceid;
-													// 	$checkedStatus = "";		
-													// }
+													if($companyid!='')
+													{  
+														$comiddeduc=$deducdata->complianceid;
+														$checkedStatus = "";		
+													}
 										?>
 
 											<tr>
 
 												<td><?php echo $deducdata->compliancename;?></td>
 												<td><?php echo $deducdata->compliancepercentage;?></td>
-												<!-- <td class="text-center">
-													<input type="checkbox" name="complianceid[]"   value="<?php //echo $deducdata->complianceid; ?>" 
-														<?php 	//if($companyid!='')
-															//{	if(in_array($comid,$compliance_idarr)) { echo "checked"; }}?> >
-												</td> -->
-
 												<td class="text-center">
-													<input type="checkbox" name="compliancedeductionid[]"   value="<?php echo $deducdata->complianceid; ?>">
+													<input type="checkbox" name="compliancedeductionid[]"   value="<?php echo $deducdata->complianceid; ?>" 
+														<?php 	if($companyid!='')
+															{	if(in_array($comiddeduc,$compliance_iddedu)) { echo "checked"; }}?> >
 												</td>
+
+												<!-- <td class="text-center">
+													<input type="checkbox" name="compliancedeductionid[]"   value="<?php //echo $deducdata->complianceid; ?>">
+												</td> -->
 
 											</tr>
 

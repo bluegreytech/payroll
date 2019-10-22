@@ -165,8 +165,8 @@
 																		<td align="left" width="100%">
 																			<p style="font-weight: 500;font-size: 0.875rem;line-height: 18px;"><strong>Thanking you,</strong></p>
 																			<p style="font-weight: 500;font-size: 0.875rem;line-height: 18px;">Yours sincerely,</p>
-																			<p style="font-weight: 500;font-size: 0.875rem;line-height: 18px;"><strong>Prashant Parmar</strong></p>
-																			<p style="font-weight: 500;font-size: 0.875rem;line-height: 18px;"><strong>M 9099912602</strong></p>
+																			<p style="font-weight: 500;font-size: 0.875rem;line-height: 18px;"><strong><?php echo $Adminname;?></strong></p>
+																			<p style="font-weight: 500;font-size: 0.875rem;line-height: 18px;"><strong>M <?php echo $Mobilenumber;?></strong></p>
 																		</td>
 																	</tr>
 																</table>
