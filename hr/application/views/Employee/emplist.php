@@ -76,14 +76,8 @@
 			<div class="col-md-12">
                	
 				<div class="table-responsive">
-                     <!-- 	<div class="col-sm-12 col-md-12 text-right">
-               				<div class="btn-group btn-group-sm ">
-								<button class="btn btn-white"><i class="fa fa-file-pdf-o fa-lg"></i> PDF</button>
-								<button class="btn btn-white" onclick="salaryslip()"><i class="fa fa-print fa-lg"></i> Print</button>
-							</div>
-						</div> -->
-					<!-- <table  class="table table-striped custom-table datatable"> -->
-					   <table id="example" class=" display table table-striped  custom-table" style="width:100%">
+                   
+					   <table id="example" class="display table table-striped custom-table" style="width:100%">
 						<thead>
 						<tr>
 							<th>No</th>
@@ -220,7 +214,7 @@
 <?php $this->load->view('common/footer');?>
 <script>
 $(document).ready(function() {
-	 $('#example').DataTable( {
+	$('#example').DataTable( {
 		aaSorting: [[0, 'asc']],
 		searching: false,
 		dom: 'Blfrtip',
@@ -345,11 +339,9 @@ $(document).ready(function()
 		$("#frm_hr").validate(
 		{
 				rules: {
-
 					FullName: {
 						required: true,
-							},
-					
+							},					
 					EmailAddress: {
 						required: true,
 							},		
@@ -369,9 +361,9 @@ $(document).ready(function()
 						required: true,
 						digits: true,
 							},
-					City: {
+					City:{
 						required: true,
-							},
+					    },
 				
 				},
 

@@ -9,7 +9,7 @@ class Employee_model extends CI_Model
 		$this->db->select('*');
 		$this->db->from('tblemp');
 		$this->db->where('Is_deleted','0');
-		//$this->db->where('hr_type!=','1');
+		$this->db->where('companyid',$this->session->userdata('companyid'));
 		$query=$this->db->get();
 		$res=$query->result();
 		return $res;
@@ -22,6 +22,7 @@ class Employee_model extends CI_Model
 			$this->db->select('*');
 			$this->db->from('tblemp');	
 			$this->db->where('Is_deleted','0');
+			$this->db->where('companyid',$this->session->userdata('companyid'));
 			
 			if($option == 'first_name')
 			{

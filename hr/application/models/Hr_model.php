@@ -9,6 +9,7 @@ class Hr_model extends CI_Model
 		$this->db->from('tblhr');
 		$this->db->where('Is_deleted','0');
 		$this->db->where('hr_type!=','1');
+		$this->db->where('companyid',$this->session->userdata('companyid'));
 		$this->db->order_by('hr_id','Desc');
 		$query=$this->db->get();
 		$res=$query->result();
@@ -25,6 +26,7 @@ class Hr_model extends CI_Model
 			$this->db->from('tblhr');	
 			$this->db->where('Is_deleted','0');
 			$this->db->where('hr_type!=','1');
+			$this->db->where('companyid',$this->session->userdata('companyid'));
 			
 			if($option == 'FullName')
 			{

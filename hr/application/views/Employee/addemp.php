@@ -22,7 +22,7 @@
 					<div class="row">
 						<div class="col-md-12">
 								<form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>employee/addemp" id="frm_emp">
-							<div class="profile-img-wrap edit-img">
+									<div class="profile-img-wrap edit-img">
 									<?php  
 
 									 if(($ProfileImage!='' && file_exists(base_path().'/upload/emp/'.$ProfileImage))){ ?>

@@ -57,9 +57,11 @@
 				<br>
 				<div class="card-box mb-0">
 					<div class="row">
-						<h4 class="page-title">Compliances</h4>
+						
 
 						<div class="col-md-12">
+							<h4 class="page-title">Deductions </h4>
+							
 							  <div class="table-responsive m-t-15">
 										<table class="table table-striped custom-table">
 											<thead>
@@ -72,12 +74,50 @@
 											<?php 
 											   // echo "<pre>";print_r($com_compliances);die;            
 												foreach($com_compliances as $compdata)
-												 { //echo "<pre>";print_r($compdata['compliancename']); 
+												 { 
+												 //echo "<pre>";print_r($compdata['compliancename']); 
 
 											?>
 												<tr>
 													<td><?php echo $compdata['compliancename'];?></td>
 													<td><?php echo $compdata['compliancepercentage'] ?></td>
+													
+												</tr>
+											<?php
+												}
+											?>
+											</tbody>
+										</table>
+									</div>
+									
+						</div>
+					</div>
+					<div class="row">
+						
+
+						<div class="col-md-12">
+								<hr>
+								<h4 class="page-title">Earnings </h4>
+						
+							  <div class="table-responsive m-t-15">
+										<table class="table table-striped custom-table">
+											<thead>
+												<tr>
+													<th>Type of Compliance</th>
+													<th>Percentage of Compliance</th>
+												</tr>
+											</thead>
+											<tbody>
+											<?php 
+											   // echo "<pre>";print_r($com_compliances);die;            
+												foreach($com_compliancesdeduction as $compdeducdata)
+												 { 
+												// echo "<pre>";print_r($compdeducdata); 
+
+											?>
+												<tr>
+													<td><?php echo $compdeducdata['compliancename'];?></td>
+													<td><?php echo $compdeducdata['compliancepercentage'] ?></td>
 													
 												</tr>
 											<?php

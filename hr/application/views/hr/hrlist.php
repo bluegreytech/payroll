@@ -71,7 +71,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="table-responsive">
-					<table class="table table-striped custom-table datatable" >
+					<table id="example" class="display table table-striped custom-table " style="width:100%">
 						<thead>
 						<tr>
 							<th>No.</th>
@@ -345,24 +345,95 @@ $(function() {
 }, 10000);  
 });
 $(document).ready(function() {
-    $('#example').DataTable( {
-        dom: 'Bfrtip',
-        buttons: [
-            {
-                extend: 'excelHtml5',
-                title: 'Data export'
-            },
-            {
-                extend: 'pdfHtml5',
-                title: 'Data export'
-            },
-			{
-                extend: 'print',
-                title: 'Data export'
-            },
-        ]
-    } );
+   	$('#example').DataTable( {
+		aaSorting: [[0, 'asc']],
+		searching: false,
+		dom: 'Blfrtip',
+		responsive: true,
+	 buttons: [
+	 {
+		extend: 'copyHtml5',
+		download: 'open',
+		text:'<i class="fa fa-files-o"></i> Copy',
+		exportOptions: {
+		columns: [0,1,2,3,4]
+		}
+	 },
+	 {
+		extend: 'excelHtml5',
+		title:'List_of_Hr',
+		text:'<i class="fa fa-file-excel-o"></i> Excel',
+		exportOptions: {
+		columns: [0,1,2,3,4]
+		}
+	 },
+	 {
+		extend: 'csvHtml5',
+		title:"List_of_Hr",
+		download: 'open',
+	    text:'<i class="fa fa-file-text-o"></i> CSV',
+		exportOptions: {
+		columns: [0,1,2,3,4]
+		},
+		
+	 },
+	 {
+		extend: 'pdfHtml5',
+		//download: 'open',
+		text:'<i class="fa fa-file-pdf-o"></i> PDF',
+		title: "List of Hr",
+		filename:"List_of_Hr",
+		orientation: 'landscape', 
+		pageSize: 'A4',		
+		exportOptions: {
+		columns: [0,1,2,3,4],
+		
+		},
+		
+	        customize : function(doc){ 
+				doc.content[1].margin = [ 50, 0, 100, 0 ];
+				doc.defaultStyle.fontSize = 10; //2, 3, 4,etc
+	            doc.styles.tableHeader.fontSize = 12; //2, 3, 4, etc
+				doc.defaultStyle.alignment = 'center';
+				doc.styles.tableHeader.alignment = 'center';
+
+				 doc.content[1].table.widths = ['5%',  '35%', '30%', '20%', 
+	                                                           '14%', ];
+	         
+	       },
+	 },
+	  {
+		extend: 'print',
+		title:'List_of_Hr',
+		orientation: 'landscape', 
+		pageSize: 'A4',
+		text:'<i class="fa fa-print"></i> Print',
+		exportOptions: {
+			columns: [0,1,2,3,4],			 		
+		},
+		 // customize: function (win) {
+		 // 		//	win.defaultStyle.font = 'Times New Roman';
+	  //               $(win.document.body).find('table').addClass('display').css('font-size', '12pt','font-family','Times New Roman');
+	  //               $(win.document.body).find('tr:nth-child(odd) td').each(function(index){
+	  //                   $(this).css('background-color','#D0D0D0');
+	  //               });
+	  //               $(win.document.body).find('h1').css('text-align','center');
+	  //           }
+		
+
+	 },
+	 //'colvis'
+	 ]
+
+ });
+  var styles ={
+	   "margin-bottom": '0.5em',
+       float: "right"	
+	 };
+	  $("div#example_wrapper").find($(".dt-buttons")).css(styles);
+
 } );
+
 
 $(function() { 
     setTimeout(function() {

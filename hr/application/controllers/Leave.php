@@ -203,7 +203,7 @@ class Leave extends CI_Controller
 			$data['noofdays']=$this->input->post('noofdays');
 			$data['remainingleave']=$this->input->post('remainingleave');
 			$data['leavereason']=$this->input->post('leavereason');
-			
+			$data['leaveslot']=$this->input->post('leavetime');			
 			$data['option']='';
 			$data['keyword']='';	
 			}
@@ -254,14 +254,13 @@ class Leave extends CI_Controller
 			//$data['firstlast']=$result['first_name'].' '.$result['last_name'];
 			$data['leaveto']=$result['leaveto'];
 			$data['redirect_page']="empleavelist";		
-				//echo "<pre>";print_r($data);die;
+		//echo "<pre>";print_r($data);die;
 		}
 		$data['leavelist']=$this->leave_model->showempleavelist();
 		
 		$data['emplist']=$this->attendance_model->emplist();
 		$this->load->view('Employee/add_empleave',$data);
 	}
-
 	function searchempleave(){
 		//echo "jhjhg";die;
 		if(!check_admin_authentication()){ 
@@ -292,7 +291,18 @@ class Leave extends CI_Controller
 		$this->load->view('Employee/leaves_employee',$data);
 
 	}
+	function delete_empleave(){
+		if(!check_admin_authentication())
+		{ 
+			redirect(base_url());
+		}
+		
+		$data= array('Is_deleted' =>'1');
+		$id=$this->input->post('id');
+		$this->db->where("empleave_id",$id);
+		$res=$this->db->update('tblempleave',$data);
+		echo json_encode($res);
+		die;
+	}
 
-	
-	
 }

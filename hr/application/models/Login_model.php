@@ -12,10 +12,9 @@ class Login_model extends CI_Model
         {
           $data=array('Password'=>md5(trim($this->input->post('Password'))),'PasswordResetCode'=>'');
             $this->db->where(array('hr_id'=>$this->input->post('hr_id'),'PasswordResetCode'=>trim($this->input->post('code'))));
-           // print_r($data);die;
+          // print_r($data);die;
             $d=$this->db->update('tblhr',$data);
-            return $d;
-          
+            return $d;          
         }else
         {
           return '';

@@ -14,6 +14,11 @@
 		$CI =& get_instance();
 		return $base_path = $CI->config->slash_item('base_path');		
 	}
+	function adminbase_path()
+	{		
+		$CI =& get_instance();
+		return $base_path = $CI->config->slash_item('adminbase_path');		
+	}
 	
 	
 	// --------------------------------------------------------------------
@@ -29,6 +34,11 @@
 	{		
 		$CI =& get_instance();
 		return $base_path = $CI->config->slash_item('base_url_site');		
+	}
+	function adminfront_base_url()
+	{		
+		$CI =& get_instance();
+		return $base_path = $CI->config->slash_item('adminbase_url_site');		
 	}
 	
 	// --------------------------------------------------------------------
