@@ -1,0 +1,11 @@
+ERROR - 2019-10-23 13:31:40 --> 404 Page Not Found: Home/assets
+ERROR - 2019-10-23 13:31:40 --> 404 Page Not Found: Home/assets
+ERROR - 2019-10-23 13:31:40 --> 404 Page Not Found: Home/assets
+ERROR - 2019-10-23 13:31:40 --> 404 Page Not Found: Home/assets
+ERROR - 2019-10-23 14:01:49 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-23 14:01:49 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-23 14:01:49 --> 404 Page Not Found: Default/plugins
+ERROR - 2019-10-23 14:01:49 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-23 14:01:49 --> 404 Page Not Found: Default/js
+ERROR - 2019-10-23 14:01:49 --> 404 Page Not Found: Default/css
+ERROR - 2019-10-23 14:01:49 --> 404 Page Not Found: Default/css

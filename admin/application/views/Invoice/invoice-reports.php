@@ -68,7 +68,7 @@
 
 
 
-								<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+								<div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12">  
 
 										<div class="form-group form-focus select-focus">
 
@@ -85,7 +85,7 @@
 
 
 
-								<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+								<div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12">  
 
 										<div class="form-group form-focus box" id='business'>
 
