@@ -97,7 +97,7 @@
 
 						<!-- Search Filter -->
 
-						<form method="post" action="<?php echo base_url();?>Company">
+						<form method="post" action="<?php echo base_url();?>Company/searchcompany">
 
 						<div class="row filter-row">
 
@@ -111,15 +111,15 @@
 
 											<option value=""> -- Select -- </option>
 
-											<option value="companytype">Company Type</option>
+											<option value="companytype" <?php if($option=='companytype'){echo 'selected';} ?>>Company Type</option>
 
-											<option value="companyname">Company Name</option>
+											<option value="companyname" <?php if($option=='companyname'){echo 'selected';} ?>>Company Name</option>
 
-											<option value="comemailaddress">Email Address</option>
+											<option value="comemailaddress" <?php if($option=='comemailaddress'){echo 'selected';} ?>>Email Address</option>
 
-											<option value="comcontactnumber">Contact Number</option>
+											<option value="comcontactnumber" <?php if($option=='comcontactnumber'){echo 'selected';} ?>>Contact Number</option>
 
-											<option value="emailverifystatus">Verification Status</option>
+											<option value="emailverifystatus" <?php if($option=='emailverifystatus'){echo 'selected';} ?>>Verification Status</option>
 
 										</select>
 
@@ -129,17 +129,14 @@
 
 							</div>
 
-							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12" >  
+							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12" >  
 
-									<div class="form-group form-focus box" id='business'>
-
-										<input type="text" name="keyword2" class="form-control floating">
-
+									<div class="form-group form-focus box" id='business1'>
+										<input type="text" name="keyword1" value="<?php echo $keyword1;?>" class="form-control floating">
 										<label class="focus-label">Search</label>
-
 									</div>
 
-
+								
 
 									<div class="form-group form-focus box2" id='business2' style="display: none;">
 
@@ -160,6 +157,7 @@
 												?>
 
 													<option value="<?php echo $comp->companyname; ?>"><?php echo $comp->companyname;?></option>
+													
 
 												<?php
 
@@ -329,7 +327,7 @@
 
 													<i class="fa fa-dot-circle-o 
 
-												<?php if($comp->emailverifystatus==null){ echo "text-danger";}?>"></i>Pending
+												<?php if($comp->emailverifystatus=='Pending'){ echo "text-danger";}?>"></i>Pending
 
 												<?php
 
@@ -682,36 +680,20 @@
 
 <script>
 
-
-
 $(document).ready(function(){
-
     $('#purpose').on('change', function() {
-
       if(this.value == 'companyname')
-
       {
-
-        $("#business2").show();
-
-		$("#business").hide();
-
-		$(".box").hide();
-
+        $("#business1").hide();
+		$("#business2").show();
+	
       }
-
-      else
-
+      else if(this.value == 'companytype')
       {
-
-        $("#business2").hide();
-
-		$("#business").show();
-
-		$(".box2").hide();
-
+        $("#business1").show();
+		$("#business2").hide();
+		
       }
-
     });
 
 });

@@ -148,7 +148,7 @@
 
 
 
-					<form method="post" action="<?php echo base_url();?>Adminmaster/adminlist">
+					<form method="post" action="<?php echo base_url();?>Adminmaster/searchadmin">
 
 					<?php $AdminId=$this->session->userdata('AdminId');?>
 
@@ -176,15 +176,15 @@
 
 
 
-											<option value="FirstName">Admin First Name</option>
+											<option value="FirstName" <?php if($option=='FirstName'){echo 'selected';} ?>>Admin Name</option>
 
 
 
-											<option value="EmailAddress">Email Address</option>
+											<option value="EmailAddress" <?php if($option=='EmailAddress'){echo 'selected';} ?>>Email Address</option>
 
 
 
-											<option value="PhoneNumber">Contact Number</option>
+											<option value="PhoneNumber" <?php if($option=='PhoneNumber'){echo 'selected';} ?>>Contact Number</option>
 
 
 
@@ -192,7 +192,7 @@
 
 
 
-										<!-- <label class="focus-label">Role</label> -->
+								
 
 
 
@@ -204,7 +204,7 @@
 
 
 
-							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+							<div class="col-sm-8 col-md-5 col-lg-4 col-xl-3 col-12">  
 
 
 
@@ -212,7 +212,7 @@
 
 
 
-										<input type="text" name="keyword2" class="form-control floating">
+										<input type="text" name="keyword2" value="<?php echo $keyword2;?>" class="form-control floating">
 
 
 
@@ -232,7 +232,7 @@
 
 
 
-								<input type="submit" value="Search" class="btn btn-success btn-block">
+								<input type="submit" value="Search" name="search" class="btn btn-success btn-block">
 
 
 

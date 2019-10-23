@@ -426,14 +426,9 @@ class Adminmaster_model extends CI_Model
 
 
 
-	function search($option,$keyword)
-
+	function search($option,$keyword2)
 	{
-
-			$keyword = str_replace('-', ' ', $keyword);
-
-			// $this->db->select('AdminId,RoleId,CONCAT(FirstName ,LastName) AS FirstName,EmailAddress,DateofBirth,PhoneNumber,ProfileImage,Gender,Address,PinCode,CountryId,StateId,City,IsActive');
-
+			$keyword2 = str_replace('-', ' ', $keyword2);
 			$this->db->select('*');
 
 			$this->db->from('tbladmin');
@@ -441,46 +436,26 @@ class Adminmaster_model extends CI_Model
 			$this->db->where('RoleId="1" AND RoleId="2"');
 
 			$this->db->or_where('IsDelete!=',1);
-
 				if($option == 'FirstName')
-
 				{
-
-					$this->db->like('FirstName',$keyword);
-
+					$this->db->like('CONCAT(FirstName," ",LastName)',$keyword2);
 				}
-
 				else if($option == 'EmailAddress')
-
 				{
-
-						$this->db->like('EmailAddress',$keyword);
-
+					$this->db->like('EmailAddress',$keyword2);
 				}
-
 				else if($option == 'PhoneNumber')
-
 				{
-
-					$this->db->like('PhoneNumber',$keyword);
-
+					$this->db->like('PhoneNumber',$keyword2);
 				} 
-
 			   	$this->db->order_by('AdminId','desc');
-
 			    $query = $this->db->get();
-
 				// echo $this->db->last_query();
-
 				// echo "<pre>";print_r($query->result());die;
-
-			 if($query->num_rows() > 0)
-
-			 {
-
-				return $query->result();
-
-			 }        
+				if($query->num_rows() > 0)
+				{
+					return $query->result();
+				}        
 
 		}
 

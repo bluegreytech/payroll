@@ -119,16 +119,16 @@
 										//print_r($notificationData);die;
 										if($notificationData)
 										{                             
-											foreach($notificationData as $comp)
+											foreach($notificationData as $key =>$comp)
 											{
 									?>
 
 										<tr>
 
 											<td><?php echo $i;?></td>
-											<td><?php echo $comp->companyname ;?></td>
-											<td><?php echo $comp->comemailaddress ;?></td>
-											<td><?php echo $comp->comcontactnumber ;?></td>
+											<td><?php echo $comp[0]->companyname ;?></td>
+											<td><?php echo $comp[0]->comemailaddress ;?></td>
+											<td><?php echo $comp[0]->comcontactnumber ;?></td>
 
 										</tr>
 										<?php

@@ -84,7 +84,7 @@ class Company extends CI_Controller
 			redirect(base_url('Login'));
 		}
 		$data['notificationData']=$this->Company_model->list_companynotification_detail($Companynotificationid);
-	 	//echo "<pre>";print_r($data['notificationData']);die;
+		 //echo "<pre>";print_r($data['notificationData']);die;
 		 $this->load->view('Company/notificationdetail',$data);	
 	}
 
@@ -143,46 +143,97 @@ class Company extends CI_Controller
 	}
 
 
+
+
+
 	function companynotification_list()
-	{	
+	{
 		if(!check_admin_authentication()){ 
 			redirect(base_url('Login'));
 		}
-
-		if($_POST!='')
-		{
-			$option=$this->input->post('option');
-			$keyword=$this->input->post('keyword');
-			$keyword2=$this->input->post('keyword2');
-			$keyword3=$this->input->post('keyword3');
-			$keyword4=$this->input->post('keyword4');
-			$keyword5=$this->input->post('keyword5');	
-			if($option!='' && $keyword!='')
-			{	$option=$this->input->post('option');
-				$data['notificationData'] = $this->Company_model->search_company_notification($option,$keyword);
-			}
-			else if($option!='' && $keyword2!='')
-			{	$option=$this->input->post('option');
-				$data['notificationData'] = $this->Company_model->search_title_notification($option,$keyword2);
-			}
-			else if($option!='' && $keyword3!='')
-			{	$option=$this->input->post('option');
-				$data['notificationData'] = $this->Company_model->search_status_notification($option,$keyword3);
-			}
-			else if($option!='' && $keyword4!='' && $keyword5!='')
-			{	$option=$this->input->post('option');
-				$data['notificationData'] = $this->Company_model->search_createdate_notification($option,$keyword4,$keyword5);
-			}		
-			else
-			{
-				$data['notificationData']=$this->Company_model->list_companynotification();
-			}
-			$data['companyData']=$this->Company_model->list_company();
-		 	//echo "<pre>";print_r($data['notificationData']);die;
-		    $this->load->view('Company/notificationlist',$data);
-
+		$data=array();
+		$data['option']='';
+		$data['keyword1']='';
+		$data['keyword2']='';
+		$data['keyword3']='';
+		$data['keyword4']='';
+	
+		$data['redirect_page']='Company/companynotification_list';
+		$data['companyData']=$this->Company_model->list_company();
+		$data['notificationData']=$this->Company_model->list_companynotification();
+		$this->load->view('Company/notificationlist',$data);
 	}
 
+
+	
+	public function searchnotification()
+	{   
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
+		$data=array();
+		$data['activeTab']="searchnotification";	
+		if($_POST!='')
+		{
+				$option=$this->input->post('option');
+				$keyword1=$this->input->post('keyword1');
+				$keyword2=$this->input->post('keyword2');
+				$keyword3=$this->input->post('keyword3');
+				$keyword4=$this->input->post('keyword4');
+				if($option!='' && $keyword1!='')
+				{
+					$data['option']=$this->input->post('option');
+					$data['keyword1']=$this->input->post('keyword1');
+					$data['keyword2']=$this->input->post('keyword2');
+					$data['keyword3']=$this->input->post('keyword3');
+					$data['keyword4']=$this->input->post('keyword4');
+					$option=$data['option'];
+					$keyword1=$data['keyword1'];
+					$keyword2=$data['keyword2'];
+					$keyword3=$data['keyword3'];
+					$keyword4=$data['keyword4'];
+					$data['notificationData'] = $this->Company_model->search_notification($option,$keyword1);
+				}
+				else if($option!='' && $keyword2!='')
+				{
+					$data['option']=$this->input->post('option');
+					$data['keyword1']=$this->input->post('keyword1');
+					$data['keyword2']=$this->input->post('keyword2');
+					$data['keyword3']=$this->input->post('keyword3');
+					$data['keyword4']=$this->input->post('keyword4');
+					$option=$data['option'];
+					$keyword1=$data['keyword1'];
+					$keyword2=$data['keyword2'];
+					$keyword3=$data['keyword3'];
+					$keyword4=$data['keyword4'];
+					$data['notificationData'] = $this->Company_model->search_company_notification($option,$keyword2);
+				}
+				else if($option!='' && $keyword3!='' && $keyword4!='')
+				{
+					$data['option']=$this->input->post('option');
+					$data['keyword1']=$this->input->post('keyword1');
+					$data['keyword2']=$this->input->post('keyword2');
+					$data['keyword3']=$this->input->post('keyword3');
+					$data['keyword4']=$this->input->post('keyword4');
+					$option=$data['option'];
+					$keyword1=$data['keyword1'];
+					$keyword2=$data['keyword2'];
+					$keyword3=$data['keyword3'];
+					$keyword4=$data['keyword4'];
+					$data['notificationData'] = $this->Company_model->search_createdate_notification($option,$keyword3,$keyword4);
+				}
+				else
+				{
+					$data['option']='';
+					$data['keyword1']='';
+					$data['keyword2']='';
+					$data['keyword3']='';
+					$data['keyword4']='';
+					$data['notificationData']=$this->Company_model->list_companynotification();
+				}	
+				$data['redirect_page']='Company/companynotification_list';
+				$this->load->view('Company/notificationlist',$data);
+		}		
 	}
 
 
@@ -307,22 +358,95 @@ class Company extends CI_Controller
 
 
 
-	public function index()
+	// public function index()
+	// {   
+	// 	if(!check_admin_authentication()){ 
+	// 		redirect(base_url('Login'));
+	// 	}
+	// 	if($_POST!='')
+	// 	{
+	// 			$option=$this->input->post('option');
+	// 			$keyword1=$this->input->post('keyword1');
+	// 			$keyword2=$this->input->post('keyword2');
+				
+	// 		if($option!='' && $keyword1!='')
+	// 		{	
+	// 			$option=$this->input->post('option');
+	// 			$data['companyData'] = $this->Company_model->search($option,$keyword1);
+	// 		}
+	// 		else if($option!='' && $keyword2!='')
+	// 		{	
+	// 			$option=$this->input->post('option');
+	// 			$data['companyData'] = $this->Company_model->search_companytype($option,$keyword2);
+	// 		}		
+	// 		else
+	// 		{
+	// 			$data['companyData']=$this->Company_model->list_company();
+	// 		} 
+	// 		$this->load->view('Company/companylist',$data);	
+	// 	}		
+	// }
+
+
+	function index()
+	{
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
+		$data=array();
+		$data['option']='';
+		$data['keyword1']='';
+		$data['keyword2']='';
+	
+		$data['redirect_page']='Company';
+		$data['companyData']=$this->Company_model->list_company();
+		$this->load->view('Company/companylist',$data);	
+	}
+
+	public function searchcompany()
 	{   
 		if(!check_admin_authentication()){ 
 			redirect(base_url('Login'));
 		}
+		$data=array();
+		$data['activeTab']="searchcompany";	
 		if($_POST!='')
 		{
-			$option=$this->input->post('option');
-			$keyword=$this->input->post('keyword2');	
-			$data['companyData'] = $this->Company_model->search($option,$keyword);
-		}	
-		else
-		{
-			$data['companyData']=$this->Company_model->list_company();
-		} 
-		$this->load->view('Company/companylist',$data);			
+				$option=$this->input->post('option');
+				$keyword1=$this->input->post('keyword1');
+				$keyword2=$this->input->post('keyword2');
+			if($option!='' && $keyword2!='')
+			{	
+				$data['option']=$this->input->post('option');
+				$data['keyword1']=$this->input->post('keyword1');
+				$data['keyword2']=$this->input->post('keyword2');
+				
+					$option=$data['option'];
+					$keyword1=$data['keyword1'];
+					$keyword2=$data['keyword2'];
+				
+				$data['companyData'] = $this->Company_model->search_companytype($option,$keyword2);
+			}
+			else if($option!='' && $keyword1!='')
+			{	
+				$data['option']=$this->input->post('option');
+				$data['keyword1']=$this->input->post('keyword1');
+				$data['keyword2']=$this->input->post('keyword2');
+					$option=$data['option'];
+					$keyword1=$data['keyword1'];
+					$keyword2=$data['keyword2'];
+				$data['companyData'] = $this->Company_model->search($option,$keyword1);
+			}		
+			else
+			{
+				$data['option']='';
+				$data['keyword1']='';
+				$data['keyword2']='';
+				$data['companyData']=$this->Company_model->list_company();
+			} 
+			$data['redirect_page']="Company";
+			$this->load->view('Company/companylist',$data);	
+		}		
 	}
 
 

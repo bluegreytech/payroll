@@ -531,10 +531,10 @@ class Company_model extends CI_Model
 	}
 
 
-	function search_company_notification($option,$keyword2)
+	function search_company_notification($option,$keyword)
 	{
 		$where = array('t1.Isdelete' =>'0');
-		$keyword2 = str_replace('-', ' ', $keyword2);
+		$keyword2 = str_replace('-', ' ', $keyword);
 		$this->db->select('t1.*,t2.companyname');
 		$this->db->from('tblcompanynotification as t1');
 		$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
@@ -551,10 +551,10 @@ class Company_model extends CI_Model
 	}
 
 	
-	function search_notification($option,$keyword1)
+	function search_title_notification($option,$keyword2)
 	{
 		$where = array('t1.Isdelete' =>'0');
-		$keyword = str_replace('-', ' ', $keyword1);
+		$keyword = str_replace('-', ' ', $keyword2);
 		$this->db->select('t1.*,t2.companyname');
 		$this->db->from('tblcompanynotification as t1');
 		$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
@@ -563,7 +563,23 @@ class Company_model extends CI_Model
 		{
 			$this->db->like('Documenttitle',$keyword);
 		}
-		else if($option == 'Status')
+		$query = $this->db->get();
+		if($query->num_rows() > 0)
+		{
+		return $query->result();
+		}        
+	}
+
+	
+	function search_status_notification($option,$keyword3)
+	{
+		$where = array('t1.Isdelete' =>'0');
+		$keyword = str_replace('-', ' ', $keyword3);
+		$this->db->select('t1.*,t2.companyname');
+		$this->db->from('tblcompanynotification as t1');
+		$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
+		$this->db->where($where);
+		if($option == 'Status')
 		{
 			$this->db->like('Status',$keyword);
 		}
@@ -575,13 +591,10 @@ class Company_model extends CI_Model
 	}
 
 	
-	
-
-	
-	function search_createdate_notification($option,$keyword3,$keyword4)
+	function search_createdate_notification($option,$keyword4,$keyword5)
 	{
-		$keywordstaone = str_replace('/', '-', $keyword3);
-		$keywordstatwo = str_replace('/', '-', $keyword4);
+		$keywordstaone = str_replace('/', '-', $keyword4);
+		$keywordstatwo = str_replace('/', '-', $keyword5);
 		$this->db->select('t1.*,t2.companyname');
 		$this->db->from('tblcompanynotification as t1');
 		$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');

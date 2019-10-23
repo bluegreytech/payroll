@@ -154,7 +154,7 @@
 
 
 
-					<form method="post" action="<?php echo base_url();?>Hr/searchhr">
+					<form method="post" action="<?php echo base_url();?>Hr">
 
 
 
@@ -182,19 +182,19 @@
 
 
 
-											<option value="companyname" <?php if($option=='companyname'){echo 'selected';} ?>>Company Name</option>
+											<option value="companyname">Company Name</option>
 
 
 
-											<option value="FullName" <?php if($option=='FullName'){echo 'selected';} ?>>Hr Name</option>
+											<option value="FullName">Hr Name</option>
 
 
 
-											<option value="EmailAddress" <?php if($option=='EmailAddress'){echo 'selected';} ?>>Email Address</option>
+											<option value="EmailAddress">Email Address</option>
 
 
 
-											<option value="Contact" <?php if($option=='Contact'){echo 'selected';} ?>>Contact Number</option>
+											<option value="Contact">Contact Number</option>
 
 
 
@@ -214,9 +214,9 @@
 
 
 
-							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12" >  
+							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12" >  
 									<div class="form-group form-focus box" id='business'>
-										<input type="text" name="keyword1"  value="<?php echo $keyword1;?>"  class="form-control floating">
+										<input type="text" name="keyword3" class="form-control floating">
 										<label class="focus-label">Search</label>
 									</div>
 

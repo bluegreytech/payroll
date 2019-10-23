@@ -57,69 +57,50 @@ class Adminmaster extends CI_Controller
 	
 
 
-
 	function adminlist()
-
 	{
-
 		if(!check_admin_authentication()){ 
-
 			redirect(base_url('Login'));
-
 		}
-
-		if($_POST!='')
-
-		{
-
-			$option=$this->input->post('option');
-
-			$keyword=$this->input->post('keyword2');	
-
-			$data['adminmasterData'] = $this->Adminmaster_model->search($option,$keyword);
-
-		}	
-
-		else
-
-		{
-
-			$data['adminmasterData']=$this->Adminmaster_model->getuser();
-
-		}
-
+		$data=array();
+		$data['option']='';
+		$data['keyword2']='';
+		$data['redirect_page']='adminlist';
+		$data['adminmasterData']=$this->Adminmaster_model->getuser();
 		$this->load->view('dashboard/adminlist',$data);
-
-
-
 	}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	function searchadmin(){
+		if(!check_admin_authentication()){ 
+			redirect(base_url());
+		}   
+		$data=array();
+		$data['activeTab']="searchadmin";	
+		if($this->input->post("search")!='')
+		{
+		 	$data['option']=$this->input->post('option');
+		 	$data['keyword2']=$this->input->post('keyword2');	
+		 	$option=$data['option'];
+          	$keyword2=$data['keyword2'];
+			
+			$data['adminmasterData'] = $this->Adminmaster_model->search($option,$keyword2);
+		}else{
+		 	$data['option']='';
+          	$data['keyword2']='';
+          	$data['adminmasterData']=$this->Adminmaster_model->getuser();
+		}
+		 	
+		$data['redirect_page']="adminlist";
+		//echo "<pre>";print_r($data['result']);die;
+		$this->load->view('dashboard/adminlist',$data);
+	}
 
 
 	public function addadmin()
-
 	{	
-
 		if(!check_admin_authentication()){ 
-
 			redirect(base_url('Login'));
-
 		}
 
 		 if($_POST){

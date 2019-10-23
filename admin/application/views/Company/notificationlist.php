@@ -93,7 +93,7 @@
 
 						<!-- Search Filter -->
 
-						<form method="post" action="<?php echo base_url();?>Company/companynotification_list">
+						<form method="post" action="<?php echo base_url();?>Company/searchnotification">
 
 						<div class="row filter-row">
 
@@ -103,37 +103,33 @@
 									<div class="form-group form-focus select-focus">
 										<select class="select floating" name="option" id="purpose"> 
 											<option value=""> -- Select -- </option>
-											<!-- <option value="companytype">Company Type</option> -->
-											<option value="companyname">Company Name</option>
-											<option value="Documenttitle">Notification Title</option>
-											<option value="Status">Notification Status</option>
-											<option value="Enddate">End Date</option>
+											<option value="companyname" <?php if($option=='companyname'){echo 'selected';} ?>>Company Name</option>
+											<option value="Documenttitle" <?php if($option=='Documenttitle'){echo 'selected';} ?>>Notification Title</option>
+											<option value="Status" <?php if($option=='Status'){echo 'selected';} ?>>Notification Status</option>
+											<option value="Enddate" <?php if($option=='Enddate'){echo 'selected';} ?>>End Date</option>
 										</select>
 									</div>
 							</div>
 
 							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12" >  
 
-									<div class="form-group form-focus box" id='business'>
-										<input type="text" name="keyword2" class="form-control floating">
+									<div class="form-group form-focus box" id='business1'>
+										<input type="text" name="keyword1" value="<?php echo $keyword1;?>" class="form-control floating">
 										<label class="focus-label">Search</label>
 									</div>
 
-									<div class="form-group form-focus box" id='business3' style="display: none;">
-										<input type="text" name="keyword3" class="form-control floating">
-										<label class="focus-label">Search</label>
-									</div>
+								
 
-									<div class="form-group form-focus" id='business4' style="display: none;">
+									<div class="form-group form-focus" id='business3' style="display: none;">
 											<div class="cal-icon">
-												<input class="form-control floating datetimepicker" type="text" name="keyword4" id="createdate1" readonly>
+												<input class="form-control floating datetimepicker" type="text" name="keyword3" id="createdate1" readonly>
 											</div>
 											<label class="focus-label">From</label>
 									</div>
 
-									<div class="form-group form-focus" id='business5' style="display: none;">
+									<div class="form-group form-focus" id='business4' style="display: none;">
 											<div class="cal-icon">
-												<input class="form-control floating datetimepicker" type="text" name="keyword5" id="createdate2" readonly>
+												<input class="form-control floating datetimepicker" type="text" name="keyword4" id="createdate2" readonly>
 											</div>
 											<label class="focus-label">To</label>
 									</div>
@@ -143,7 +139,7 @@
 
 										<div class="form-group">
 
-											<select class="form-control" name="keyword"> 
+											<select class="form-control" name="keyword2"> 
 
 												<option desabled value="">Please select company</option>
 
@@ -588,33 +584,39 @@ $('#createdate1').datetimepicker({
 			ignoreReadonly: true,					
 		});
 
+
 $(document).ready(function(){
 
     $('#purpose').on('change', function() {
 
-      if(this.value == 'companyname')
+      if(this.value == 'Documenttitle')
       {
-		$("#business").hide();
-		$("#business2").show();
-      }
-	  if(this.value == 'Documenttitle')
-      {
-		$("#business").show();
+		$("#business1").show();
 		$("#business2").hide();
+		$("#business3").hide();
+		$("#business4").hide();
+      }
+	  if(this.value == 'companyname')
+      {
+		$("#business1").hide();
+		$("#business2").show();
+		$("#business3").hide();
+		$("#business4").hide();
       }
       else if(this.value == 'Status')
       {
-		$("#business").hide();
+		$("#business1").show();
         $("#business2").hide();
-		$("#business3").show();
+		$("#business3").hide();
+		$("#business4").hide();
       }
 	  else if(this.value == 'Enddate')
       {
-		$("#business").hide();
+		$("#business1").hide();
         $("#business2").hide();
-		$("#business3").hide();
+		$("#business3").show();
 		$("#business4").show();
-		$("#business5").show();
+		
       }
     });
 

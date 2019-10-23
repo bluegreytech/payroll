@@ -276,33 +276,33 @@ class Invoice extends CI_Controller
 				$email_message=str_replace('{year}',$currentyear,$email_message);
 				$email_message=str_replace('{companyname}',$companyname,$email_message);
 				$email_message=str_replace('{Otherinformation}',$Otherinformation,$email_message);
+				$str=$email_message;
+			
+				$email_config = Array(
+					'protocol'  => 'smtp',
+					'smtp_host' => 'relay-hosting.secureserver.net',
+					'smtp_port' => '465',
+					'smtp_user' => 'binny@bluegreytech.co.in',
+					'smtp_pass' => 'Binny@123',
+					'mailtype'  => 'html',
+					'starttls'  => true,
+					'newline'   => "\r\n",
+					'charset'=>'utf-8',
+					'header'=> 'MIME-Version: 1.0',
+					'header'=> 'Content-type:text/html;charset=UTF-8',
+					);
+				$this->load->library('email', $email_config);
 
-				$str=$email_message; //die;
-				//print_r($str);die;
-				// $email_config = Array(
-				// 	'protocol'  => 'smtp',
-				// 	'smtp_host' => 'relay-hosting.secureserver.net',
-				// 	'smtp_port' => '465',
-				// 	'smtp_user' => 'binny@bluegreytech.co.in',
-				// 	'smtp_pass' => 'Binny@123',
-				// 	'mailtype'  => 'html',
-				// 	'starttls'  => true,
-				// 	'newline'   => "\r\n",
-				// 	'charset'=>'utf-8',
-				// 	'header'=> 'MIME-Version: 1.0',
-				// 	'header'=> 'Content-type:text/html;charset=UTF-8',
-				// 	);
-				// $this->load->library('email', $email_config);
+				// $config['protocol']='smtp';
+				// $config['smtp_host']='ssl://smtp.googlemail.com';
+				// $config['smtp_port']='465';
+				// $config['smtp_user']='bluegreyindia@gmail.com';
+				// $config['smtp_pass']='Test@123';
+				// $config['charset']='utf-8';
+				// $config['newline']="\r\n";
+				// $config['mailtype'] = 'html';								
+				// $this->email->initialize($config);
 
-				$config['protocol']='smtp';
-				$config['smtp_host']='ssl://smtp.googlemail.com';
-				$config['smtp_port']='465';
-				$config['smtp_user']='bluegreyindia@gmail.com';
-				$config['smtp_pass']='Test@123';
-				$config['charset']='utf-8';
-				$config['newline']="\r\n";
-				$config['mailtype'] = 'html';								
-				$this->email->initialize($config);
 				$body =$str;
 				$this->email->from('binny@bluegreytech.co.in'); 
 				$this->email->to($comemailaddress);		
@@ -357,11 +357,8 @@ class Invoice extends CI_Controller
 				$result['quotationtData']=$this->Invoice_model->list_companyquotation($quotationid);
 				$this->load->view('Quotation/quotation-view2',$result);
 				$html = $this->output->get_output();
-				
-				//print_r($html);die;
 				$this->load->library('dompdf_gen');
 				$this->dompdf->load_html($html);
-			//	print_r($this->dompdf->load_html($html));die;
 				$this->dompdf->render();
 				$file=$this->dompdf->output();
 				file_put_contents($file_name,$file);
@@ -380,32 +377,32 @@ class Invoice extends CI_Controller
 				$email_message=str_replace('{year}',$currentyear,$email_message);
 				$email_message=str_replace('{companyname}',$companyname,$email_message);
 				$email_message=str_replace('{otherinformation}',$otherinformation,$email_message);
-				$str=$email_message; //die;
-				//print_r($str);die;
-				// $email_config = Array(
-				// 	'protocol'  => 'smtp',
-				// 	'smtp_host' => 'relay-hosting.secureserver.net',
-				// 	'smtp_port' => '465',
-				// 	'smtp_user' => 'binny@bluegreytech.co.in',
-				// 	'smtp_pass' => 'Binny@123',
-				// 	'mailtype'  => 'html',
-				// 	'starttls'  => true,
-				// 	'newline'   => "\r\n",
-				// 	'charset'=>'utf-8',
-				// 	'header'=> 'MIME-Version: 1.0',
-				// 	'header'=> 'Content-type:text/html;charset=UTF-8',
-				// 	);
-				// $this->load->library('email', $email_config);
+				$str=$email_message; 
+				
+				$email_config = Array(
+					'protocol'  => 'smtp',
+					'smtp_host' => 'relay-hosting.secureserver.net',
+					'smtp_port' => '465',
+					'smtp_user' => 'binny@bluegreytech.co.in',
+					'smtp_pass' => 'Binny@123',
+					'mailtype'  => 'html',
+					'starttls'  => true,
+					'newline'   => "\r\n",
+					'charset'=>'utf-8',
+					'header'=> 'MIME-Version: 1.0',
+					'header'=> 'Content-type:text/html;charset=UTF-8',
+					);
+				$this->load->library('email', $email_config);
 
-				$config['protocol']='smtp';
-				$config['smtp_host']='ssl://smtp.googlemail.com';
-				$config['smtp_port']='465';
-				$config['smtp_user']='bluegreyindia@gmail.com';
-				$config['smtp_pass']='Test@123';
-				$config['charset']='utf-8';
-				$config['newline']="\r\n";
-				$config['mailtype'] = 'html';								
-				$this->email->initialize($config);
+				// $config['protocol']='smtp';
+				// $config['smtp_host']='ssl://smtp.googlemail.com';
+				// $config['smtp_port']='465';
+				// $config['smtp_user']='bluegreyindia@gmail.com';
+				// $config['smtp_pass']='Test@123';
+				// $config['charset']='utf-8';
+				// $config['newline']="\r\n";
+				// $config['mailtype'] = 'html';								
+				// $this->email->initialize($config);
 				
 				$body =$str;
 				$this->email->from('binny@bluegreytech.co.in'); 
@@ -424,84 +421,78 @@ class Invoice extends CI_Controller
 				}
 	}
 
-// 	public function index()
-// 	{
-// 		if(!check_admin_authentication()){ 
-// 			redirect(base_url('Login'));
-// 		}
-// 		if($_POST!='')
-// 		{	
-// 			$option=$this->input->post('option');
-// 			$keyword=$this->input->post('keyword');
-// 			$keyword2=$this->input->post('keyword2');
-// 			$keyword3=$this->input->post('keyword3');
-// 			$keyword4=$this->input->post('keyword4');
-// 			if($option!='' && $keyword!='')
-// 			{	$option=$this->input->post('option');
-// 				$data['invoiceData'] = $this->Invoice_model->search($option,$keyword);
-// 			}
-// 			else if($option!='' && $keyword2!='')
-// 			{	$option=$this->input->post('option');
-// 				$data['invoiceData'] = $this->Invoice_model->searchbystatus($option,$keyword2);
-// 			}	
-// 			else if($option!='' && $keyword3!='' && $keyword4!='')
-// 			{	$option=$this->input->post('option');
-// 				$data['invoiceData'] = $this->Invoice_model->searchbydate($option,$keyword3,$keyword4);
-// 			}	
-// 			else
-// 			{
-// 				$data['invoiceData']=$this->Invoice_model->list_companyinvoice();
-// 			}
-// 		$data['companyData'] = $this->Invoice_model->list_company();
 
-// 			//echo "<pre>";	print_r($data['invoiceData']);die;
-// 		$this->load->view('Invoice/invoice-reports',$data);
+	
 
-// 	}
 
-// }
-
-	public function quotation_list()
+	function quotation_list()
 	{
 		if(!check_admin_authentication()){ 
-				redirect(base_url('Login'));
+			redirect(base_url('Login'));
 		}
+		$data=array();
+		$data['option']='';
+		$data['keyword1']='';
+		$data['keyword2']='';
+		$data['keyword3']='';
+	
+		$data['redirect_page']='Invoice/quotation_list';
+		$data['qutationData']=$this->Invoice_model->list_quotation();
+		$data['companytypeData'] = $this->Invoice_model->list_companytype();
+		$this->load->view('Quotation/quotationlist',$data);
+	}
+
+
+	
+	public function searchquotation()
+	{   
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
+		$data=array();
+		$data['activeTab']="searchquotation";	
 		if($_POST!='')
 		{
-			$option=$this->input->post('option');
-			$keyword=$this->input->post('keyword');
-			$keyword2=$this->input->post('keyword2');
-			$keyword3=$this->input->post('keyword3');
-			$keyword4=$this->input->post('keyword4');
-			$keyword5=$this->input->post('keyword5');
-			$keyword6=$this->input->post('keyword6');
-			if($option!='' && $keyword!='')
-			{	$option=$this->input->post('option');
-				$data['qutationData'] = $this->Invoice_model->searchquot_com_type($option,$keyword);
-			}
-			else if($option!='' && $keyword2!='')
-			{	$option=$this->input->post('option');
-				$data['qutationData'] = $this->Invoice_model->searchby_quo_comp($option,$keyword2);
-			}
-			else if($option!='' && $keyword3!='')
-			{	$option=$this->input->post('option');
-				$data['qutationData'] = $this->Invoice_model->searchby_quo_email($option,$keyword3);
-			}	
-			else if($option!='' && $keyword4!='')
-			{	$option=$this->input->post('option');
-				$data['qutationData'] = $this->Invoice_model->searchby_quo_cont($option,$keyword4);
-			}	
-			else if($option!='' && $keyword5!='' && $keyword6!='')
-			{	$option=$this->input->post('option');
-				$data['qutationData'] = $this->Invoice_model->searchby_quo_date($option,$keyword5,$keyword6);
-			}	
-			else
-			{
-				$data['qutationData']=$this->Invoice_model->list_quotation();
-			}	
+				$option=$this->input->post('option');
+				$keyword1=$this->input->post('keyword1');
+				$keyword2=$this->input->post('keyword2');
+				$keyword3=$this->input->post('keyword3');
+				if($option!='' && $keyword1!='')
+				{
+					$data['option']=$this->input->post('option');
+					$data['keyword1']=$this->input->post('keyword1');
+					$data['keyword2']=$this->input->post('keyword2');
+					$data['keyword3']=$this->input->post('keyword3');
+					$option=$data['option'];
+					$keyword1=$data['keyword1'];
+					$keyword2=$data['keyword2'];
+					$keyword3=$data['keyword3'];
+					$data['qutationData'] = $this->Invoice_model->searchquot_com($option,$keyword1);
+				}
+				else if($option!='' && $keyword2!='' && $keyword3!='')
+				{
+					$data['option']=$this->input->post('option');
+					$data['keyword1']=$this->input->post('keyword1');
+					$data['keyword2']=$this->input->post('keyword2');
+					$data['keyword3']=$this->input->post('keyword3');
+					$option=$data['option'];
+					$keyword1=$data['keyword1'];
+					$keyword2=$data['keyword2'];
+					$keyword3=$data['keyword3'];
+					$data['qutationData'] = $this->Invoice_model->searchby_quo_date($option,$keyword2,$keyword3);
+				}
+				else
+				{
+					$data['option']='';
+					$data['keyword1']='';
+					$data['keyword2']='';
+					$data['keyword3']='';
+					$data['qutationData']=$this->Invoice_model->list_quotation();
+				}	
+				$data['redirect_page']='Invoice/quotation_list';
 			$data['companytypeData'] = $this->Invoice_model->list_companytype();
 			$this->load->view('Quotation/quotationlist',$data);
-		}
+		}		
 	}
 
 	public function add_quotation()

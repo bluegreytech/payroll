@@ -1,50 +1,17 @@
 ﻿<?php 
-
-
-
 	 $this->load->view('common/header.php');
-
-
-
 	 $this->load->view('common/sidebar.php');
-
-
-
 ?>
 
 
 
-
-
-
-
 			<!-- Page Wrapper -->
-
-
-
             <div class="page-wrapper">
 
-
-
-			
-
-
-
 				<!-- Page Content -->
-
-
-
                 <div class="content container-fluid">
 
-
-
-				
-
-
-
 					<!-- Page Title -->
-
-
 
 					<div class="row">
 
@@ -184,7 +151,7 @@
 
 											<th>Percentage </th>
 
-
+											<th>Compliance Type</th>
 
 											<th>Status </th>
 
@@ -235,7 +202,21 @@
 											<td><?php echo $comp->compliancename;?></td>
 
 											<td><?php echo $comp->compliancepercentage;?>%</td>
+											<td>		
 
+											<?php if($comp->compliancetypeid=='1'){ 
+
+												echo "<span class='badge badge-success-border'>Earnings</span>";
+
+												}?>
+
+											<?php if($comp->compliancetypeid=='2'){
+
+													echo "<span class='badge badge-danger-border'>Deduction</span>";
+
+													}?>
+
+										</td>
 											<td>	
 
 													<div class="action-label">

@@ -20,8 +20,8 @@ class Employee_model extends CI_Model
 		return $res;	
 	}
 
-
-	function search($option,$keyword2)
+	
+	function search_list_name($option,$keyword2)
 	{
 			$where = array('t1.Is_deleted' =>'0');
 			$keyword = str_replace('-', ' ', $keyword2);
@@ -45,8 +45,8 @@ class Employee_model extends CI_Model
 	}
 
 	
-
-	function search_list_name($option,$keyword1)
+	
+	function search($option,$keyword1)
 	{
 			$where = array('t1.Is_deleted' =>'0');
 			$keyword = str_replace('-', ' ', $keyword1);
@@ -58,100 +58,22 @@ class Employee_model extends CI_Model
 			{
 				$this->db->like('first_name',$keyword);
 			}
-		
-			$this->db->order_by('emp_id','desc');
-
-			$query = $this->db->get();
-			if($query->num_rows() > 0)
-			{
-				return $query->result();
-			}        
-
-	}
-
-
-	function search_list_email($option,$keyword3)
-	{
-			$where = array('t1.Is_deleted' =>'0');
-			$keyword = str_replace('-', ' ', $keyword3);
-			$this->db->select('t1.*,t2.companyname');
-			$this->db->from('tblemp as t1');
-			$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
-			$this->db->where($where);
-			if($option == 'email')
+			else if($option == 'email')
 			{
 				$this->db->like('email',$keyword);
 			}
-		
-			$this->db->order_by('emp_id','desc');
-
-			$query = $this->db->get();
-			if($query->num_rows() > 0)
-			{
-				return $query->result();
-			}        
-
-	}
-
-	function search_list_phone($option,$keyword4)
-	{
-			$where = array('t1.Is_deleted' =>'0');
-			$keyword = str_replace('-', ' ', $keyword4);
-			$this->db->select('t1.*,t2.companyname');
-			$this->db->from('tblemp as t1');
-			$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
-			$this->db->where($where);
-			if($option == 'phone')
+			else if($option == 'phone')
 			{
 				$this->db->like('phone',$keyword);
 			}
-		
-			$this->db->order_by('emp_id','desc');
-
-			$query = $this->db->get();
-			if($query->num_rows() > 0)
-			{
-				return $query->result();
-			}        
-
-	}
-
-	function search_list_department($option,$keyword5)
-	{
-			$where = array('t1.Is_deleted' =>'0');
-			$keyword = str_replace('-', ' ', $keyword5);
-			$this->db->select('t1.*,t2.companyname');
-			$this->db->from('tblemp as t1');
-			$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
-			$this->db->where($where);
-			if($option == 'department')
+			else if($option == 'department')
 			{
 				$this->db->like('department',$keyword);
-			}
-		
-			$this->db->order_by('emp_id','desc');
-
-			$query = $this->db->get();
-			if($query->num_rows() > 0)
-			{
-				return $query->result();
-			}        
-
-	}
-
-	
-	function search_list_desgination($option,$keyword6)
-	{
-			$where = array('t1.Is_deleted' =>'0');
-			$keyword = str_replace('-', ' ', $keyword6);
-			$this->db->select('t1.*,t2.companyname');
-			$this->db->from('tblemp as t1');
-			$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
-			$this->db->where($where);
-			if($option == 'desgination')
+			} 
+			else if($option == 'desgination')
 			{
 				$this->db->like('desgination',$keyword);
-			}
+			} 
 		
 			$this->db->order_by('emp_id','desc');
 
@@ -162,8 +84,14 @@ class Employee_model extends CI_Model
 			}        
 
 	}
+
+
 	
-	
+
+
+
+
+
 
 		function list_company()
 

@@ -264,10 +264,10 @@ class Hr_model extends CI_Model
 
 	}
 
-	function search($option,$keyword1)
+	function search($option,$keyword)
 	{
 			$where = array('t1.Is_deleted' =>'0');
-			$keyword = str_replace('-', ' ', $keyword1);
+			$keyword = str_replace('-', ' ', $keyword);
 			$this->db->select('t1.*,t2.companyname');
 			$this->db->from('tblhr as t1');
 			$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
@@ -297,18 +297,27 @@ class Hr_model extends CI_Model
 
 	}
 
-	function searchbyname($option,$keyword2)
+	function searchbyname($option,$keyword3)
 	{
 			$where = array('t1.Is_deleted' =>'0');
-			$keyword = str_replace('-', ' ', $keyword2);
+			$keyword = str_replace('-', ' ', $keyword3);
 			$this->db->select('t1.*,t2.companyname');
 			$this->db->from('tblhr as t1');
 			$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
 			$this->db->where($where);
-			if($option == 'companyname')
+			if($option == 'FullName')
 			{
-				$this->db->like('companyname',$keyword);
+				$this->db->like('FullName',$keyword);
 			}
+			else if($option == 'EmailAddress')
+			{
+				$this->db->like('EmailAddress',$keyword);
+			}
+			else if($option == 'Contact')
+			{
+				$this->db->like('Contact',$keyword);
+			}
+
 			$query = $this->db->get();
 			if($query->num_rows() > 0)
 			 {

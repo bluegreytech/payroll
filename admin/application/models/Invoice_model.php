@@ -591,66 +591,33 @@ class Invoice_model extends CI_Model
 		}
 
 
-	function searchquot_com_type($option,$keyword)
+	function searchquot_com($option,$keyword1)
 	{
 			$where=array('t1.isdelete'=>'0');
-			$keyword = str_replace('-', ' ', $keyword);
-			$this->db->select('t1.*,t2.*');
-			$this->db->from('tblquotation as t1');
-			$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
-
-			$this->db->where($where);
-				if($option == 'companytype')
-				{
-					$this->db->like('companytype',$keyword);
-				}
-			    $query = $this->db->get();
-				// echo $this->db->last_query();
-				// echo "<pre>";print_r($query->result());die;
-				if($query->num_rows() > 0)
-				{
-					return $query->result();
-				}        
-
-	}
-
-	function searchby_quo_comp($option,$keyword2)
-	{
-			$where=array('t1.isdelete'=>'0');
-			$keyword = str_replace('-', ' ', $keyword2);
+			$keyword = str_replace('-', ' ', $keyword1);
 			$this->db->select('t1.*,t2.*');
 			$this->db->from('tblquotation as t1');
 			$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
 			$this->db->where($where);
-			if($option == 'companyname')
+			if($option == 'companytype')
 			{
-			$this->db->like('companyname',$keyword);
+				$this->db->like('companytype',$keyword);
 			}
+			else if($option == 'companyname')
+			{
+				$this->db->like('companyname',$keyword);
+			}
+			else if($option == 'companyemail')
+			{
+				$this->db->like('companyemail',$keyword);
+			}
+			else if($option == 'comcontactnumber')
+			{
+				$this->db->like('comcontactnumber',$keyword);
+			} 
 			
 			$query = $this->db->get();
-			// echo $this->db->last_query();
-			// echo "<pre>";print_r($query->result());die;
-			if($query->num_rows() > 0)
-			{
-				return $query->result();
-			}        
 
-	}
-
-	function searchby_quo_email($option,$keyword3)
-	{
-			$where=array('t1.isdelete'=>'0');
-			$keyword = str_replace('-', ' ', $keyword3);
-			$this->db->select('t1.*,t2.*');
-			$this->db->from('tblquotation as t1');
-			$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
-			$this->db->where($where);
-			if($option == 'companyemail')
-			{
-			$this->db->like('companyemail',$keyword);
-			}
-			
-			$query = $this->db->get();
 			// echo $this->db->last_query();
 			// echo "<pre>";print_r($query->result());die;
 			if($query->num_rows() > 0)
@@ -661,34 +628,11 @@ class Invoice_model extends CI_Model
 	}
 
 	
-	function searchby_quo_cont($option,$keyword4)
-	{
-			
-			$where=array('t1.isdelete'=>'0');
-			$keyword = str_replace('-', ' ', $keyword4);
-			$this->db->select('t1.*,t2.*');
-			$this->db->from('tblquotation as t1');
-			$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
-			$this->db->where($where);
-			if($option == 'comcontactnumber')
-			{
-			$this->db->like('comcontactnumber',$keyword);
-			}
-			
-			$query = $this->db->get();
-			// echo $this->db->last_query();
-			// echo "<pre>";print_r($query->result());die;
-			if($query->num_rows() > 0)
-			{
-				return $query->result();
-			}        
 
-	}
-
-	function searchby_quo_date($option,$keyword5,$keyword6)
+	function searchby_quo_date($option,$keyword2,$keyword3)
 		{
-			$keywordinvone = str_replace('/', '-', $keyword5);
-			$keywordinvtwo = str_replace('/', '-', $keyword6);
+			$keywordinvone = str_replace('/', '-', $keyword2);
+			$keywordinvtwo = str_replace('/', '-', $keyword3);
 			$this->db->select('t1.*,t2.*');
 			$this->db->from('tblquotation as t1');
 			$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');

@@ -10,61 +10,73 @@ class Employee extends CI_Controller
 		$this->load->model('Employee_model');
 	}
 
-	
 
-	public function index()
+
+	function index()
 	{
 		if(!check_admin_authentication()){ 
 			redirect(base_url('Login'));
 		}
-		if($_POST!='')
-		{
-			$option=$this->input->post('option');
-			$keyword1=$this->input->post('keyword1');
-			$keyword2=$this->input->post('keyword2');
-			$keyword3=$this->input->post('keyword3');
-			$keyword4=$this->input->post('keyword4');
-			$keyword5=$this->input->post('keyword5');
-			$keyword6=$this->input->post('keyword6');
-			if($option!='' && $keyword2!='')
-			{
-				$option=$this->input->post('option');
-				$data['employeeData']=$this->Employee_model->search($option,$keyword2);
-			}
-			else if($option!='' && $keyword1!='')
-			{
-				$option=$this->input->post('option');
-				$data['employeeData']=$this->Employee_model->search_list_name($option,$keyword1);
-			}
-			else if($option!='' && $keyword3!='')
-			{
-				$option=$this->input->post('option');
-				$data['employeeData']=$this->Employee_model->search_list_email($option,$keyword3);
-			}
-			else if($option!='' && $keyword4!='')
-			{
-				$option=$this->input->post('option');
-				$data['employeeData']=$this->Employee_model->search_list_phone($option,$keyword4);
-			}
-			else if($option!='' && $keyword5!='')
-			{
-				$option=$this->input->post('option');
-				$data['employeeData']=$this->Employee_model->search_list_department($option,$keyword5);
-			}
-			else if($option!='' && $keyword6!='')
-			{
-				$option=$this->input->post('option');
-				$data['employeeData']=$this->Employee_model->search_list_desgination($option,$keyword6);
-			}
-			else
-			{
-				$data['employeeData']=$this->Employee_model->emp_list();
-			}	
-			$data['companyData']=$this->Employee_model->list_company();
-			$this->load->view('Employee/employelist',$data);
-		}
+		$data=array();
+		$data['option']='';
+		$data['keyword1']='';
+		$data['keyword2']='';
+	
+		$data['redirect_page']='Employee';
+		$data['employeeData']=$this->Employee_model->emp_list();
+		$data['companyData']=$this->Employee_model->list_company();
+		$this->load->view('Employee/employelist',$data);
 	}
 
+
+	
+
+	
+
+	public function searchemp()
+	{   
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
+		$data=array();
+		$data['activeTab']="searchemp";	
+		if($_POST!='')
+		{
+				$option=$this->input->post('option');
+				$keyword1=$this->input->post('keyword1');
+				$keyword2=$this->input->post('keyword2');
+				if($option!='' && $keyword1!='')
+				{
+					$data['option']=$this->input->post('option');
+					$data['keyword1']=$this->input->post('keyword1');
+					$data['keyword2']=$this->input->post('keyword2');
+					$option=$data['option'];
+					$keyword1=$data['keyword1'];
+					$keyword2=$data['keyword2'];
+					$data['employeeData']=$this->Employee_model->search($option,$keyword1);
+				}
+				else if($option!='' && $keyword2!='')
+				{
+					$data['option']=$this->input->post('option');
+					$data['keyword1']=$this->input->post('keyword1');
+					$data['keyword2']=$this->input->post('keyword2');
+					$option=$data['option'];
+					$keyword1=$data['keyword1'];
+					$keyword2=$data['keyword2'];
+					$data['employeeData']=$this->Employee_model->search_list_name($option,$keyword2);
+				}
+				else
+				{
+					$data['option']='';
+					$data['keyword1']='';
+					$data['keyword2']='';
+					$data['employeeData']=$this->Employee_model->emp_list();
+				}	
+			$data['redirect_page']='Employee';
+			$data['companyData']=$this->Employee_model->list_company();
+			$this->load->view('Employee/employelist',$data);
+		}		
+	}
 
 
 
