@@ -1,15 +1,6 @@
 ﻿<?php 
-
-
-
 	 $this->load->view('common/header.php');
-
-
-
 	 $this->load->view('common/sidebar.php');
-
-
-
 ?>
 
 
@@ -19,73 +10,35 @@
 
 
             <div class="page-wrapper">
-
-
-
-			
-
-
-
 				<!-- Page Content -->
-
-
-
                 <div class="content container-fluid">
-
-
-
-				
-
-
 
 					<!-- Page Title -->
 
 
 
 					<div class="row">
-
 							<div class="col-sm-5 col-5">
-
 							<h4 class="page-title">
-
 							<?php 
-
 							if($companyid)
-
 							{
-
 								?>
-
 								Edit Company
-
 								<?php
-
 							}	
-
 							else
-
 							{
-
 								?>
-
 								Add Company
-
 								<?php
-
 							}
-
 							?>
-
 							</h4>
-
 							</div>
-
 							<div class="col-sm-7 col-7 text-right m-b-30">
-
 							<a href="<?php echo base_url();?>Company" class="btn add-btn"> Back to List of Company </a>	
-
 							</div>
-
 						</div>
 
 
@@ -97,68 +50,20 @@
 
 
 					<?php if(($this->session->flashdata('error'))){ ?>
-
-
-
 							<div class="alert alert-danger" id="errorMessage">
-
-
-
 							<strong> <?php echo $this->session->flashdata('error'); ?></strong> 
-
-
-
 							</div>
-
-
-
 							<?php } ?>
-
-
-
 							<?php if(($this->session->flashdata('success'))){ ?>
-
-
-
 									<div class="alert alert-success" id="successMessage">
-
-
-
 									<strong> <?php echo $this->session->flashdata('success'); ?></strong> 
-
-
-
 									</div>
-
-
-
 							<?php } ?>
-
-
-
 							<?php if(($this->session->flashdata('warning'))){ ?>
-
-
-
 							<div class="alert alert-warning" id="warningMessage">
-
-
-
 							<strong> <?php echo $this->session->flashdata('warning'); ?></strong> 
-
-
-
 							</div>
-
-
-
 							<?php } ?>
-
-
-
-
-
-
 
                 </div>
 
@@ -169,23 +74,14 @@
 						
 
 							<div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
-
 								<div class="dash-widget clearfix card-box">		
 
 
-
 							<div class="modal-body">
-
-
-
 								<form method="post" id="form_valid" action="<?php echo base_url();?>Company/companyadd" enctype="multipart/form-data">
-
 								<input type="hidden" class="form-control" name="companyid" value="<?php echo $companyid;?>">
-
 								<input type="hidden" class="form-control" name="companycomplianceid" value="<?php echo $companycomplianceid;?>">
-
 								<input type="hidden" class="form-control" name="Companyshiftid" value="<?php echo $Companyshiftid;?>">
-
 								<input type="hidden" class="form-control" name="Bankdetailid" value="<?php echo $Bankdetailid;?>">
 
 
@@ -579,60 +475,36 @@
 
 													<select class="form-control" name="Shifthours"  id="purpose1"> 
 
-														
-
 													<?php	
-
 													if($Companyshiftid!='')		
-
-													{		if($Shifthours=='8')
-
+													{		
+														if($Shifthours=='8')
 															{
 
 																?>
-
 																<option value="8" selected>08 Hours</option>
-
 																<option value="16" >16 Hours</option>
-
 																<option value="24">24 Hours</option>
-
 																<?php
 
 															}
-
-
-
 															else if($Shifthours=='16')
-
 															{
-
 																?>
-
 																<option value="8">08 Hours</option>
-
 																<option value="16" selected>16 Hours</option>
-
 																<option value="24">24 Hours</option>
-
 																<?php
 
 															}
 
 															else if($Shifthours=='24')
-
 															{
-
 																?>
-
 															<option value="8">08 Hours</option>
-
 															<option value="16">16 Hours</option>
-
 															<option value="24" selected>24 Hours</option>
-
 																<?php
-
 															}
 
 														}
@@ -693,37 +565,37 @@
 
 
 
-												<div class="col-md-6">
-
+												<!-- <div class="col-md-6">
 															<div class="form-group">
-
 																<label class="col-form-label">Shift In Time <span class="text-danger">*</span></label>
-
 																<input class="form-control" type="time"
-
-																 name="Shiftintime[]" placeholder="Enter shift in time number">
-
-																
-
+																 name="Shiftintime[]" placeholder="Enter shift in time number">		
 															</div>
-
+												</div> -->
+												<div class="col-md-6">
+													<label>Shift In Time<span class="text-danger">*</span>
+													</label>
+													<div class="clock-icon">
+														<input type="text" class="form-control" name="Shiftintime[]" id="Shiftintime1" readonly>
+													</div>
 												</div>
 
 
+												<!-- <div class="col-md-6">
+															<div class="form-group">
+																<label class="col-form-label"> Shift Out Time <span class="text-danger">*</span></label>
+																<input class="form-control" type="time" 
+																name="Shiftouttime[]"   placeholder="Enter shift out time number">
+															</div>
+												</div>		 -->
 
 												<div class="col-md-6">
-
-															<div class="form-group">
-
-																<label class="col-form-label"> Shift Out Time <span class="text-danger">*</span></label>
-
-																<input class="form-control" type="time" 
-
-																name="Shiftouttime[]"   placeholder="Enter shift out time number">
-
-															</div>
-
-												</div>		
+													<label>Shift Out Time <span class="text-danger">*</span>
+													</label>
+													<div class="clock-icon">
+														<input type="text" class="form-control" name="Shiftouttime[]" id="Shiftouttime1" readonly>
+													</div>
+												</div>
 
 											</div>
 
@@ -759,7 +631,7 @@
 
 
 
-												<div class="col-md-6">
+												<!-- <div class="col-md-6">
 
 															<div class="form-group">
 
@@ -773,11 +645,19 @@
 
 															</div>
 
+												</div> -->
+
+												<div class="col-md-6">
+													<label>Shift In Time<span class="text-danger">*</span>
+													</label>
+													<div class="clock-icon">
+														<input type="text" class="form-control" name="Shiftintime[]" id="Shiftintime2" readonly>
+													</div>
 												</div>
 
 
 
-												<div class="col-md-6">
+												<!-- <div class="col-md-6">
 
 															<div class="form-group">
 
@@ -789,7 +669,15 @@
 
 															</div>
 
-												</div>		
+												</div>		 -->
+
+												<div class="col-md-6">
+													<label>Shift Out Time <span class="text-danger">*</span>
+													</label>
+													<div class="clock-icon">
+														<input type="text" class="form-control" name="Shiftouttime[]" id="Shiftouttime2" readonly>
+													</div>
+												</div>
 
 											</div>
 
@@ -825,7 +713,7 @@
 
 
 
-												<div class="col-md-6">
+												<!-- <div class="col-md-6">
 
 															<div class="form-group">
 
@@ -837,11 +725,17 @@
 
 															</div>
 
-												</div>
-
-
+												</div> -->
 
 												<div class="col-md-6">
+													<label>Shift In Time<span class="text-danger">*</span>
+													</label>
+													<div class="clock-icon">
+														<input type="text" class="form-control" name="Shiftintime[]" id="Shiftintime3" readonly>
+													</div>
+												</div>
+
+												<!-- <div class="col-md-6">
 
 															<div class="form-group">
 
@@ -851,7 +745,15 @@
 
 															</div>
 
-												</div>		
+												</div>		 -->
+
+												<div class="col-md-6">
+													<label>Shift Out Time <span class="text-danger">*</span>
+													</label>
+													<div class="clock-icon">
+														<input type="text" class="form-control" name="Shiftouttime[]" id="Shiftouttime3" readonly>
+													</div>
+												</div>
 
 											</div>
 
@@ -874,14 +776,9 @@
 									<?php 
 
 									if($Companyshiftid!=''){
-
 										$i=1;
-
-										//echo "<pre>";print_r($shiftData);
-
 										foreach($shiftData as $shift)
-
-										{  // echo "<pre>fgfg";print_r($shift);
+										{ 
 
 										?>
 
@@ -894,48 +791,42 @@
 												<div class="row">
 
 													<div class="col-md-12">
-
 																<div class="form-group">
-
 																<input type="hidden" class="form-control" name="Companyshiftid[]" value="<?php echo $shift->Companyshiftid;?>">
-
 																	<label class="col-form-label">Shift Name <span class="text-danger">*</span></label>
-
 																	<input class="form-control" minlength="02" maxlength="20" type="text" name="Shiftname[]" value="<?php echo $shift->Shiftname;?>"  placeholder="Enter shift name">
-
 																</div>
-
 													</div>
 
-
-
-													<div class="col-md-6">
-
+													<!-- <div class="col-md-6">
 																<div class="form-group">
-
 																	<label class="col-form-label">Shift In Time <span class="text-danger">*</span></label>
-
-																	<input class="form-control" type="time" name="Shiftintime[]" value="<?php echo $shift->Shiftintime;?>"   placeholder="Enter shift in time number">
-
-																	
-
+																	<input class="form-control" type="time" name="Shiftintime[]" value="<?php// echo $shift->Shiftintime;?>"   placeholder="Enter shift in time number">
 																</div>
-
-													</div>
-
-
+													</div> -->
 
 													<div class="col-md-6">
+														<label>Shift In Time<span class="text-danger">*</span>
+														</label>
+														<div class="clock-icon">
+															<input type="text" class="form-control" name="Shiftintime[]" value="<?php echo $shift->Shiftintime;?>" id="Shiftintime<?php echo $i;?>" readonly>
+														</div>
+													</div>
 
+													<!-- <div class="col-md-6">
 																<div class="form-group">
-
 																	<label class="col-form-label"> Shift Out Time <span class="text-danger">*</span></label>
-
-																	<input class="form-control" type="time" name="Shiftouttime[]" value="<?php echo $shift->Shiftouttime;?>"  placeholder="Enter shift out time number">
-
+																	<input class="form-control" type="time" name="Shiftouttime[]" value="<?php// echo $shift->Shiftouttime;?>"  placeholder="Enter shift out time number">
 																</div>
+													</div>		 -->
 
-													</div>		
+													<div class="col-md-6">
+														<label>Shift In Time<span class="text-danger">*</span>
+														</label>
+														<div class="clock-icon">
+															<input type="text" class="form-control" name="Shiftouttime[]" value="<?php echo $shift->Shiftouttime;?>" id="Shiftouttime<?php echo $i;?>" readonly>
+														</div>
+													</div>
 
 												</div>
 
@@ -979,8 +870,6 @@
 
 												</div>
 
-
-
 												<div class="col-md-6">
 
 															<div class="form-group">
@@ -992,8 +881,6 @@
 															</div>
 
 												</div>
-
-
 
 												<div class="col-md-6">
 
@@ -1007,8 +894,6 @@
 
 												</div>
 
-
-
 												<div class="col-md-6">
 
 															<div class="form-group">
@@ -1021,16 +906,8 @@
 
 												</div>
 
-
-
-												
-
-		
-
 											</div>
-
 										</div>
-
 									</fieldset>
 
 
@@ -1038,160 +915,150 @@
 								</div>
 
 
+								<br>
+								<legend>Earnings</legend>
+								<div class="table-responsive m-t-15">
 
-									<div class="table-responsive m-t-15">
+									<table class="table table-striped custom-table">
 
-
-
-										<table class="table table-striped custom-table">
-
-
-
-											<thead>
-
-
-
-												<tr>
-
-
-
-													<th>Type of Compliance</th>
+										<thead>
+											<tr>
+												<th>Type of Compliance</th>
+												<th >Percentage of Compliance</th>
+												<th class="text-center">Add on Compliance</th>
+											</tr>
+										</thead>
 
 
 
-													<th >Percentage of Compliance</th>
+										<tbody>
+										<?php  
+										if($companyid!='')
+										{
+											$comid=$complianceid;
+											$compliance_idarr = explode(",",$complianceid);
+										}
 
+										
+											foreach($complianceData as $compdata)
+												{
+												if($companyid!='')
+												{  
+													$comid=$compdata->complianceid;
+													$checkedStatus = "";		
+												}
+										?>
 
+											<tr>
 
-													<th class="text-center">Add on Compliance</th>
+												<td><?php echo $compdata->compliancename;?></td>
+												<td><?php echo $compdata->compliancepercentage;?></td>
+												<td class="text-center">
+													<input type="checkbox" name="complianceid[]"   value="<?php echo $compdata->complianceid; ?>" 
+														<?php 	if($companyid!='')
+															{	if(in_array($comid,$compliance_idarr)) { echo "checked"; }}?> >
+												</td>
 
+											</tr>
 
+										<?php
 
-												</tr>
-
-
-
-											</thead>
-
-
-
-											<tbody>
-
-											<?php  
-
-											if($companyid!='')
-											{
-												$comid=$complianceid;
-												$compliance_idarr = explode(",",$complianceid);
 											}
 
-											  	
+										?>
 
-												foreach($complianceData as $compdata)
-												 {
+										</tbody>
+
+									</table>
+
+
+
+								</div>
+
+
+								<br>
+								<legend>Deduction</legend>
+								<div class="table-responsive m-t-15">
+
+									<table class="table table-striped custom-table">
+
+										<thead>
+											<tr>
+												<th>Type of Compliance</th>
+												<th >Percentage of Compliance</th>
+												<th class="text-center">Add on Compliance</th>
+											</tr>
+										</thead>
+
+
+
+										<tbody>
+										<?php  
+										if($companyid!='')
+										{
+											$comiddeduc=$compliancedeductionid;
+											$compliance_iddedu = explode(",",$compliancedeductionid);
+										}
+
+										
+											foreach($deductionData as $deducdata)
+												{
 													if($companyid!='')
 													{  
-												 		$comid=$compdata->complianceid;
+														$comiddeduc=$deducdata->complianceid;
 														$checkedStatus = "";		
 													}
-											?>
+										?>
 
-												<tr>
+											<tr>
 
-													<td><?php echo $compdata->compliancename;?></td>
-													<td><?php echo $compdata->compliancepercentage;?></td>
-													<td class="text-center">
-														<input type="checkbox" name="complianceid[]"   value="<?php echo $compdata->complianceid; ?>" 
-														 <?php 	if($companyid!='')
-																{	if(in_array($comid,$compliance_idarr)) { echo "checked"; }}?> >
-													</td>
+												<td><?php echo $deducdata->compliancename;?></td>
+												<td><?php echo $deducdata->compliancepercentage;?></td>
+												<td class="text-center">
+													<input type="checkbox" name="compliancedeductionid[]"   value="<?php echo $deducdata->complianceid; ?>" 
+														<?php 	if($companyid!='')
+															{	if(in_array($comiddeduc,$compliance_iddedu)) { echo "checked"; }}?> >
+												</td>
 
-												</tr>
+												<!-- <td class="text-center">
+													<input type="checkbox" name="compliancedeductionid[]"   value="<?php //echo $deducdata->complianceid; ?>">
+												</td> -->
 
-											<?php
+											</tr>
 
-												}
+										<?php
 
-											?>
+											}
 
-											</tbody>
+										?>
 
-										</table>
+										</tbody>
 
-
-
-									</div>
+									</table>
 
 
+
+								</div>
 
 									
 
 
 
 									<div class="submit-section">
-
-
-
 									<?php 
-
-
-
 										if($companyid)
-
-
-
 										{
-
-
-
 											?>
-
-
-
 												<button class="btn btn-primary submit-btn">Update</button>
-
-
-
 											<?php
-
-
-
 										}	
-
-
-
 										else
-
-
-
 										{
-
-
-
 											?>
-
-
-
 												<button class="btn btn-primary submit-btn">Submit</button>
-
-
-
 											<?php
-
-
-
 										}
-
-
-
 									?>
-
-
-
-									
-
-
-
 									</div>
 
 
@@ -1235,7 +1102,110 @@
 
 
 <script type="text/javascript">
+$(function() {
+    $('#Shiftintime1').datetimepicker({
+		format: 'LT',
+		icons: {
+	    time:'fa fa-clock-o',
+	    date:'fa fa-calendar',
+	    up:'fa fa-chevron-up',
+	    down:'fa fa-chevron-down',
+	    previous:'fa fa-chevron-left',
+	    next:'fa fa-chevron-right',
+	    today:'fa fa-calendar-check-o',
+	    clear:'fa fa-delete',
+	    close:'fa fa-times'
+ 	 },
+ 	  ignoreReadonly: true,
 
+    });
+      $('#Shiftouttime1').datetimepicker({
+		format: 'LT',
+		icons: {
+	    time:'fa fa-clock-o',
+	    date:'fa fa-calendar',
+	    up:'fa fa-chevron-up',
+	    down:'fa fa-chevron-down',
+	    previous:'fa fa-chevron-left',
+	    next:'fa fa-chevron-right',
+	    today:'fa fa-calendar-check-o',
+	    clear:'fa fa-delete',
+	    close:'fa fa-times'
+ 	 },
+ 	  ignoreReadonly: true,
+
+    });
+  });
+
+  $(function() {
+    $('#Shiftintime2').datetimepicker({
+		format: 'LT',
+		icons: {
+	    time:'fa fa-clock-o',
+	    date:'fa fa-calendar',
+	    up:'fa fa-chevron-up',
+	    down:'fa fa-chevron-down',
+	    previous:'fa fa-chevron-left',
+	    next:'fa fa-chevron-right',
+	    today:'fa fa-calendar-check-o',
+	    clear:'fa fa-delete',
+	    close:'fa fa-times'
+ 	 },
+ 	  ignoreReadonly: true,
+
+    });
+      $('#Shiftouttime2').datetimepicker({
+		format: 'LT',
+		icons: {
+	    time:'fa fa-clock-o',
+	    date:'fa fa-calendar',
+	    up:'fa fa-chevron-up',
+	    down:'fa fa-chevron-down',
+	    previous:'fa fa-chevron-left',
+	    next:'fa fa-chevron-right',
+	    today:'fa fa-calendar-check-o',
+	    clear:'fa fa-delete',
+	    close:'fa fa-times'
+ 	 },
+ 	  ignoreReadonly: true,
+
+    });
+  });
+
+  $(function() {
+    $('#Shiftintime3').datetimepicker({
+		format: 'LT',
+		icons: {
+	    time:'fa fa-clock-o',
+	    date:'fa fa-calendar',
+	    up:'fa fa-chevron-up',
+	    down:'fa fa-chevron-down',
+	    previous:'fa fa-chevron-left',
+	    next:'fa fa-chevron-right',
+	    today:'fa fa-calendar-check-o',
+	    clear:'fa fa-delete',
+	    close:'fa fa-times'
+ 	 },
+ 	  ignoreReadonly: true,
+
+    });
+      $('#Shiftouttime3').datetimepicker({
+		format: 'LT',
+		icons: {
+	    time:'fa fa-clock-o',
+	    date:'fa fa-calendar',
+	    up:'fa fa-chevron-up',
+	    down:'fa fa-chevron-down',
+	    previous:'fa fa-chevron-left',
+	    next:'fa fa-chevron-right',
+	    today:'fa fa-calendar-check-o',
+	    clear:'fa fa-delete',
+	    close:'fa fa-times'
+ 	 },
+ 	  ignoreReadonly: true,
+
+    });
+  });
 	
 				$('#digitalsignaturedate').datetimepicker({
 					// defaultDate: new Date(),

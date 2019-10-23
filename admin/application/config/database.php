@@ -156,6 +156,7 @@ $db['default'] = array(
 	'username' => 'root',
 	'password' => '',
 	'database' => 'payrolldb',
+
 	'dbdriver' => 'mysqli',
 
 	'dbprefix' => '',

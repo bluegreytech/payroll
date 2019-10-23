@@ -189,35 +189,21 @@ class Hr_model extends CI_Model
 					$email_message=str_replace('{comemailaddress}',$comemailaddress,$email_message);
 					$email_message=str_replace('{login_link}',$login_link,$email_message);
 					$str=$email_message; //die;
+
 					$email_config = Array(
-
 						'protocol'  => 'smtp',
-
 						'smtp_host' => 'relay-hosting.secureserver.net',
-
 						'smtp_port' => '465',
-
 						'smtp_user' => 'binny@bluegreytech.co.in',
-
 						'smtp_pass' => 'Binny@123',
-
 						'mailtype'  => 'html',
-
 						'starttls'  => true,
-
 						'newline'   => "\r\n",
-
 						'charset'=>'utf-8',
-
 						'header'=> 'MIME-Version: 1.0',
-
 						'header'=> 'Content-type:text/html;charset=UTF-8',
-
 						);
-
-		
-
-						$this->load->library('email', $email_config);
+					$this->load->library('email', $email_config);
 					$body =$str;	
 					$this->email->from('binny@bluegreytech.co.in');
 					$this->email->to($EmailAddress);		
@@ -271,6 +257,7 @@ class Hr_model extends CI_Model
 		// $this->db->where('t1.IsActive','Active');
 		// $this->db->or_where('t1.Is_deleted','0');
 		$this->db->where($where);
+		$this->db->order_by('hr_id','desc');
 		$r=$this->db->get();
 		$res = $r->result();
 		return $res;

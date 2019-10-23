@@ -485,21 +485,44 @@ class Adminmaster_model extends CI_Model
 		}
 
 
+		function getdatasite(){
+			$AdminId=$this->session->userdata('AdminId');
+			$this->db->select('site.*');
+			$this->db->from('tblsitesetting as site');
+			$this->db->where('site.SettingId',$AdminId);
+			$query=$this->db->get();
+			return $query->row_array();
+		}
 
+		function update_bank_detail()
+		{	
+			 $AdminId=$this->session->userdata('AdminId');
+			//echo $SettingId=$this->input->post('SettingId');die;
+			$data=array(
+				//'SettingId'=>$this->input->post('SettingId'),
+				'Accountnumber'=>$this->input->post('Accountnumber'),
+				'Branch'=>$this->input->post('Branch'),
+				'Bankname'=>$this->input->post('Bankname'),
+				'Ifsccode'=>$this->input->post('Ifsccode'),
 
+				'Adminname'=>$this->input->post('Adminname'),
+				'Emailaddress'=>$this->input->post('Emailaddress'),
+				'Mobilenumber'=>$this->input->post('Mobilenumber'),
+				'Officeaddress'=>$this->input->post('Officeaddress'),
+				'Gstnumber'=>$this->input->post('Gstnumber')
+					);
+				//print_r($data);die;
+				$this->db->where("AdminId",$AdminId);
+				$this->db->update('tblsitesetting',$data);
+				return 1;	
+		}
 
 	function getdata($id){
-
 		$query=$this->db->select('*')
-
 			->from('tbladmin')
-
 			->where('AdminId',$id)
-
 			->get();
-
 			return $query->row_array();
-
 	}
 
 

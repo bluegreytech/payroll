@@ -128,99 +128,254 @@ class Invoice_model extends CI_Model
 
 	function add_invoice()
 	{	
-			$companyid=$this->input->post('companyid');
-			$hr_id=$this->input->post('hr_id');
-			$paymentopt=$this->input->post('paymentopt');
+		$this->db->select_max('invoicebillid');
+		$this->db->from('tblcompanyinvoice');
+		$smtp2 = $this->db->get();	
+		foreach($smtp2->result() as $rows)
+		{
+			$invoicebillid = $rows->invoicebillid;
 			
-			$invoicedate=$this->input->post('invoicedate');
-			$indate = str_replace('/', '-', $invoicedate );
-			$invdate = date("Y-m-d", strtotime($indate));
+			$n=10000000;
+			date_default_timezone_set('Asia/Kolkata');
+			$resetdate1=date("21-10-Y h");
+			$resetdate2=date("d-m-Y 6");
+				if($resetdate1>=$resetdate2)
+				{
+					echo $resetdate1;
+					echo $resetdate2;
+					die;
 
-			$duedate=$this->input->post('duedate');
-			$ddate = str_replace('/', '-', $duedate);
-			$dueedate = date("Y-m-d", strtotime($ddate));
+					for($i = 1; $i<$n; $i++) 
+					{
+						$companyid=$this->input->post('companyid');
+						$hr_id=$this->input->post('hr_id');
+						$paymentopt=$this->input->post('paymentopt');
+						
+						$invoicedate=$this->input->post('invoicedate');
+						$indate = str_replace('/', '-', $invoicedate );
+						$invdate = date("Y-m-d", strtotime($indate));
 
-			$amount=$this->input->post('amount');	
-			$totalamount=$this->input->post('totalamount');	
-			$addtax=$this->input->post('addtax');	
-			$taxamount=$this->input->post('taxamount');
-			$cgstamount=$this->input->post('cgstamount');
-			$netamount=$this->input->post('netamount');
-			$Otherinformation=$this->input->post('Otherinformation');
-			
-			$data=array( 
-			'companyid'=>$companyid,
-			'hr_id'=>$hr_id,
-			'paymentopt'=>$paymentopt,
-			'invoicedate'=>$invdate,
-			'duedate'=>$dueedate,
-			'amount'=>$amount, 
-			'totalamount'=>$totalamount, 
-			'addtax'=>$addtax, 
-			'taxamount'=>$taxamount,
-			'cgstamount'=>$cgstamount,
-			'netamount'=>$netamount,
-			'Otherinformation'=>$Otherinformation,
-			'status'=>'Pending',
-			'Isactive'=>'Aactive'
-			);
-			// print_r($data);
-			// die;
-			$this->db->insert('tblcompanyinvoice',$data);
-			return 1;		
+						$duedate=$this->input->post('duedate');
+						$ddate = str_replace('/', '-', $duedate);
+						$dueedate = date("Y-m-d", strtotime($ddate));
+
+						$amount=$this->input->post('amount');	
+						$totalamount=$this->input->post('totalamount');	
+						$addtax=$this->input->post('addtax');	
+						$taxamount=$this->input->post('taxamount');
+						$cgstamount=$this->input->post('cgstamount');
+						$netamount=$this->input->post('netamount');
+						$Otherinformation=$this->input->post('Otherinformation');
+						
+						$data=array( 
+						'invoicebillid'=>$i,
+						'companyid'=>$companyid,
+						'hr_id'=>$hr_id,
+						'paymentopt'=>$paymentopt,
+						'invoicedate'=>$invdate,
+						'duedate'=>$dueedate,
+						'amount'=>$amount, 
+						'totalamount'=>$totalamount, 
+						'addtax'=>$addtax, 
+						'taxamount'=>$taxamount,
+						'cgstamount'=>$cgstamount,
+						'netamount'=>$netamount,
+						'Otherinformation'=>$Otherinformation,
+						'status'=>'Pending',
+						'Isactive'=>'Aactive'
+						);
+						print_r($data);
+						echo "aaa";
+						die;
+						$this->db->insert('tblcompanyinvoice',$data);
+						
+					}
+					return 1;
+
+					
+				}
+				else
+				{
+					for($i = 1; $i<$n; $i++) 
+					{
+						$i=$invoicebillid+1;
+						
+						$companyid=$this->input->post('companyid');
+						$hr_id=$this->input->post('hr_id');
+						$paymentopt=$this->input->post('paymentopt');
+						
+						$invoicedate=$this->input->post('invoicedate');
+						$indate = str_replace('/', '-', $invoicedate );
+						$invdate = date("Y-m-d", strtotime($indate));
+
+						$duedate=$this->input->post('duedate');
+						$ddate = str_replace('/', '-', $duedate);
+						$dueedate = date("Y-m-d", strtotime($ddate));
+
+						$amount=$this->input->post('amount');	
+						$totalamount=$this->input->post('totalamount');	
+						$addtax=$this->input->post('addtax');	
+						$taxamount=$this->input->post('taxamount');
+						$cgstamount=$this->input->post('cgstamount');
+						$netamount=$this->input->post('netamount');
+						$Otherinformation=$this->input->post('Otherinformation');
+						
+						$data=array( 
+						'invoicebillid'=>$i,
+						'companyid'=>$companyid,
+						'hr_id'=>$hr_id,
+						'paymentopt'=>$paymentopt,
+						'invoicedate'=>$invdate,
+						'duedate'=>$dueedate,
+						'amount'=>$amount, 
+						'totalamount'=>$totalamount, 
+						'addtax'=>$addtax, 
+						'taxamount'=>$taxamount,
+						'cgstamount'=>$cgstamount,
+						'netamount'=>$netamount,
+						'Otherinformation'=>$Otherinformation,
+						'status'=>'Pending',
+						'Isactive'=>'Aactive'
+						);
+						print_r($data);
+						echo "bbb";
+						die;
+						$this->db->insert('tblcompanyinvoice',$data);
+						return 1;
+					}
+				}
+		}		
 	}
 
 	function add_quotation()
 	{	
-			$companytypeid=$this->input->post('companytypeid');
-			$companyname=$this->input->post('companyname');	
-			$companyemail=$this->input->post('companyemail');
-			$comcontactnumber=$this->input->post('comcontactnumber');
-			
-			$quotationdate=$this->input->post('quotationdate');
-			$indate = str_replace('/', '-', $quotationdate );
-			$invdate = date("Y-m-d", strtotime($indate));
-			$companyaddress=$this->input->post('companyaddress');
-			$otherinformation=$this->input->post('otherinformation');
-			$totalamount=$this->input->post('totalamount');
-			
-			$data=array( 
-			'companytypeid'=>$companytypeid,
-			'companyname'=>$companyname,
-			'companyemail'=>$companyemail,
-			'comcontactnumber'=>$comcontactnumber,
-			'quotationdate'=>$invdate,
-			'companyaddress'=>$companyaddress,
-			'otherinformation'=>$otherinformation,
-			'totalamount'=>$totalamount
-			);
+		$this->db->select_max('billid');
+		$this->db->from('tblquotation');
+		$smtp2 = $this->db->get();	
+		foreach($smtp2->result() as $rows)
+		{
+			$billid = $rows->billid;
+			$n=10000000;
+			$resetdate1=date("01-04-Y");
+			$resetdate2=date("d-m-Y");
+				if($resetdate1==$resetdate2)
+				{
+					for($i = 1; $i<$n; $i++) 
+					{
+							
+						$companytypeid=$this->input->post('companytypeid');
+						$companyname=$this->input->post('companyname');	
+						$companyemail=$this->input->post('companyemail');
+						$comcontactnumber=$this->input->post('comcontactnumber');
+						$quotationdate=$this->input->post('quotationdate');
+						$indate = str_replace('/', '-', $quotationdate );
+						$invdate = date("Y-m-d", strtotime($indate));
+						$companyaddress=$this->input->post('companyaddress');
+						$otherinformation=$this->input->post('otherinformation');
+						$totalamount=$this->input->post('totalamount');
+				
+						$data=array( 
+						'billid'=>$i,
+						'companytypeid'=>$companytypeid,
+						'companyname'=>$companyname,
+						'companyemail'=>$companyemail,
+						'comcontactnumber'=>$comcontactnumber,
+						'quotationdate'=>$invdate,
+						'companyaddress'=>$companyaddress,
+						'otherinformation'=>$otherinformation,
+						'totalamount'=>$totalamount
+						);
 
-			// print_r($data);
-			// die;
-			$this->db->insert('tblquotation',$data);
-			//return 1;	
-			$insert_id = $this->db->insert_id();
-			
-			$quotationdetail=$this->input->post('quotationdetail');
-			$quotationrate=$this->input->post('quotationrate');
-			$data2 = array();
-            $quotationdetails = count(array_filter($this->input->post('quotationdetail')));
-			for($i=0; $i<$quotationdetails; $i++)
-			 {
-				if($quotationdetail!='' || $quotationdetail!=null || $quotationdetail!='0')
-				{	
-					$data2=array( 
-					'quotationid'=>$insert_id,
-					'quotationdetail'=>isset($quotationdetail[$i]) ? $quotationdetail[$i] : '0',
-					'quotationrate'=>isset($quotationrate[$i]) ? $quotationrate[$i] : '0',
-					);
-					// echo "<pre>";print_r($data2);
-					$this->db->insert('tblquotationdetail',$data2);	
+						// print_r($data);
+						// die;
+						$this->db->insert('tblquotation',$data);
+						//return 1;	
+						$insert_id = $this->db->insert_id();
+						$quotationdetail=$this->input->post('quotationdetail');
+						$quotationrate=$this->input->post('quotationrate');
+						$data2 = array();
+						$quotationdetails = count(array_filter($this->input->post('quotationdetail')));
+						for($i=0; $i<$quotationdetails; $i++)
+						{
+							if($quotationdetail!='' || $quotationdetail!=null || $quotationdetail!='0')
+							{	
+								$data2=array( 
+								'quotationid'=>$insert_id,
+								'quotationdetail'=>isset($quotationdetail[$i]) ? $quotationdetail[$i] : '0',
+								'quotationrate'=>isset($quotationrate[$i]) ? $quotationrate[$i] : '0',
+								);
+								// echo "<pre>";print_r($data2);
+								$this->db->insert('tblquotationdetail',$data2);	
 
+							}
+
+						}
+						return 1;	
+					}
 				}
+				else
+				{
+					for($i = 1; $i<$n; $i++) 
+					{
+						$i=$billid+1;
+						
+						$companytypeid=$this->input->post('companytypeid');
+						$companyname=$this->input->post('companyname');	
+						$companyemail=$this->input->post('companyemail');
+						$comcontactnumber=$this->input->post('comcontactnumber');
+						$quotationdate=$this->input->post('quotationdate');
+						$indate = str_replace('/', '-', $quotationdate );
+						$invdate = date("Y-m-d", strtotime($indate));
+						$companyaddress=$this->input->post('companyaddress');
+						$otherinformation=$this->input->post('otherinformation');
+						$totalamount=$this->input->post('totalamount');
+				
+						$data=array( 
+						'billid'=>$i,
+						'companytypeid'=>$companytypeid,
+						'companyname'=>$companyname,
+						'companyemail'=>$companyemail,
+						'comcontactnumber'=>$comcontactnumber,
+						'quotationdate'=>$invdate,
+						'companyaddress'=>$companyaddress,
+						'otherinformation'=>$otherinformation,
+						'totalamount'=>$totalamount
+						);
 
-			 }
-			return 1;	
+						// print_r($data);
+						// die;
+						$this->db->insert('tblquotation',$data);
+						//return 1;	
+						$insert_id = $this->db->insert_id();
+						$quotationdetail=$this->input->post('quotationdetail');
+						$quotationrate=$this->input->post('quotationrate');
+						$data2 = array();
+						$quotationdetails = count(array_filter($this->input->post('quotationdetail')));
+						for($i=0; $i<$quotationdetails; $i++)
+						{
+							if($quotationdetail!='' || $quotationdetail!=null || $quotationdetail!='0')
+							{	
+								$data2=array( 
+								'quotationid'=>$insert_id,
+								'quotationdetail'=>isset($quotationdetail[$i]) ? $quotationdetail[$i] : '0',
+								'quotationrate'=>isset($quotationrate[$i]) ? $quotationrate[$i] : '0',
+								);
+								// echo "<pre>";print_r($data2);
+								$this->db->insert('tblquotationdetail',$data2);	
+
+							}
+
+						}
+						return 1;
+					}
+				}
+			
+			
+		}
+			
+			
+			
+			
 
 	}
 	
@@ -265,7 +420,8 @@ class Invoice_model extends CI_Model
 			'quotationdate'=>$invdate,
 			'companyaddress'=>$this->input->post('companyaddress'),
 			'otherinformation'=>$this->input->post('otherinformation'),
-			'totalamount'=>$this->input->post('totalamount')
+			'totalamount'=>$this->input->post('totalamount'),
+			'updateddate'=>$this->input->post('Y-m-d h:h:i')
 				);
 			//print_r($data);die;
 			$this->db->where("quotationid",$quotationid);
@@ -296,11 +452,12 @@ class Invoice_model extends CI_Model
 
 	public function get_companyquotation($quotationid)
 	{
-		$this->db->select('t1.*,t3.*');
-		$this->db->from('tblquotation as t1');
+		$this->db->select('quotation.*,comptype.*,adminbank.*');
+		$this->db->from('tblquotation as quotation');
 		//$this->db->join('tblquotationdetail as t2', 't1.quotationid = t2.quotationid', 'LEFT');
-		$this->db->join('tblcompanytype as t3', 't1.companytypeid = t3.companytypeid', 'LEFT');
-		$this->db->where('t1.quotationid',$quotationid);
+		$this->db->join('tblcompanytype as comptype', 'quotation.companytypeid = comptype.companytypeid', 'LEFT');
+		$this->db->join('tblsitesetting as adminbank','RoleId= adminbank.RoleId', 'LEFT');
+		$this->db->where('quotation.quotationid',$quotationid);
 		$query=$this->db->get();
 			// echo $this->db->last_query();
 			// 	echo "<pre>";print_r($query->result());die;
@@ -359,14 +516,15 @@ class Invoice_model extends CI_Model
 
 	public function get_companyinvoice($Companyinvoiceid)
 	{
-		
-		$this->db->select('t1.*,t2.*,t3.*,t4.*');
-		$this->db->from('tblcompanyinvoice as t1');
-		$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
-		$this->db->join('tblhr as t3', 't1.hr_id = t3.hr_id', 'LEFT');
-		$this->db->join('tblcompanybankdetail as t4', 't2.companyid = t4.companyid', 'LEFT');
-		//$this->db->join('tbladmin as t5', $AdminId.'= t5.AdminId', 'LEFT');
-		$this->db->where('t1.Companyinvoiceid',$Companyinvoiceid);
+		//$RoleId=$this->session->userdata('RoleId');
+		$this->db->select('compinvoice.*,comp.*,hr.*,bankcompany.*,adminbank.*');
+		$this->db->from('tblcompanyinvoice as compinvoice');
+		$this->db->join('tblcompany as comp', 'compinvoice.companyid = comp.companyid', 'LEFT');
+		$this->db->join('tblhr as hr', 'compinvoice.hr_id = hr.hr_id', 'LEFT');
+		$this->db->join('tblcompanybankdetail as bankcompany', 'comp.companyid = bankcompany.companyid', 'LEFT');
+		$this->db->join('tblsitesetting as adminbank','RoleId= adminbank.RoleId', 'LEFT');
+		//$this->db->join('tbladmin as admin', $AdminId.'= adminbank.AdminId', 'LEFT');
+		$this->db->where('compinvoice.Companyinvoiceid',$Companyinvoiceid);
 		$query=$this->db->get();
 		return $query->row_array();
 
@@ -596,6 +754,7 @@ class Invoice_model extends CI_Model
 		$this->db->from('tblquotation as t1');
 		$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
 		$this->db->where('isdelete','0');
+		$this->db->order_by('quotationid','desc');
 		$r=$this->db->get();
 		$res = $r->result();
 		return $res;

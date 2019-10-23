@@ -90,7 +90,7 @@
 												<option value=""> -- Select -- </option>
 												<option value="companyname">Company Name</option>
 												<option value="status">Paymeny Status</option>
-												<option value="invoicedate">Date From to To</option>
+												<option value="invoicedate">Created Date From to To</option>
 											</select>
 
 										</div>

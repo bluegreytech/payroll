@@ -226,49 +226,33 @@
 									<tbody>
 
 									<?php
-
 										$i=1;
-
-										if($notificationData){                             
-
-										foreach($notificationData as $notifi)
-
-										{
-
+										if($notificationData)
+										{                             
+										  foreach($notificationData as $notifi)
+										  {
 									?>
 
 										<tr>
-
 											<td><?php echo $i;?></td>
 											<td><?php echo $notifi->companyname ;?></td>
 											<td><?php echo $notifi->Documenttitle ;?></td>
 											<td><?php $credate=$notifi->Createdon;
-											//	$cdate = str_replace('/', '-', $credate );
-												echo $birth = date("d-m-Y", strtotime($credate));?>
+												$cdate = str_replace('/', '-', $credate );
+												echo $birth = date("d-m-Y", strtotime($cdate));?>
 											</td>
 											<td><?php   $edate=$notifi->Enddate;
 												$endate = str_replace('/', '-', $edate );
 												echo $endates = date("d-m-Y", strtotime($endate));?>
 											</td>
-											
-
 											<td>		
-
-											<?php if($notifi->Status=='Available'){ 
-
-												echo "<span class='badge badge-success-border'>$notifi->Status</span>";
-
-												}?>
-
-											<?php if($notifi->Status=='Expired'){
-
-													echo "<span class='badge badge-danger-border'>$notifi->Status</span>";
-
+												<?php if($notifi->Status=='Available'){ 
+													echo "<span class='badge badge-success-border'>$notifi->Status</span>";
 													}?>
-
-										</td>
-
-
+												<?php if($notifi->Status=='Expired'){
+														echo "<span class='badge badge-danger-border'>$notifi->Status</span>";
+														}?>
+											</td>
 											<td class="text-center">
 
 												<!-- <a href="<?php //echo base_url();?>Company/editcompanynotification/<?php// echo $notifi->Companynotificationid;?>" role="button" title="Edit">
@@ -288,6 +272,8 @@
 													<?php
 												}
 												?>
+
+												<a  href="<?php echo base_url();?>Company/notification_detail/<?php echo $notifi->Companynotificationid;?>"  title="View"><i class="fa fa-eye m-r-5"></i></a>
 											</td>
 										</tr>
 										

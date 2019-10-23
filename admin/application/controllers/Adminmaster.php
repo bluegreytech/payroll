@@ -7,29 +7,53 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 class Adminmaster extends CI_Controller 
-
-
-
 { 
-
-
-
 	public function __construct() {
-
-
-
         parent::__construct();
-
-
-
 		$this->load->model('Adminmaster_model');
-
-
-
 	}
 
 
+	function site_setting()
+	{
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
 
+		$data=array();
+		$result=$this->Adminmaster_model->getdatasite($this->session->userdata('AdminId'));
+		//$result=get_one_record('tblsitesetting',$this->session->userdata('AdminId'));
+		$data['SettingId']=$result['SettingId'];
+		$data["Adminname"] 	= $result['Adminname'];
+		$data["Emailaddress"] 		= $result['Emailaddress'];
+		$data["Mobilenumber"] 		= $result['Mobilenumber'];				
+		$data["Officeaddress"]   = $result['Officeaddress'];			
+		$data['Gstnumber']=$result['Gstnumber'];
+		$data["Accountnumber"] 	= $result['Accountnumber'];
+		$data["Branch"] 		= $result['Branch'];				
+		$data["Bankname"]   = $result['Bankname'];			
+		$data['Ifsccode']=$result['Ifsccode'];
+		//$data['gstnumber']=$result->gstnumber;
+		if($_POST){	
+			
+				$result=$this->Adminmaster_model->update_bank_detail($this->session->userdata('AdminId'));
+				if($result==1)
+				{
+					$this->session->set_flashdata('success', 'Bank detail has been Updated Successfully!');
+					redirect('Adminmaster/site_setting');
+				}
+				
+				else if($result==2)
+				{
+					$this->session->set_flashdata('error', 'Your data was not Update!');
+					redirect('Adminmaster/site_setting');
+				}
+			
+
+	} 
+
+		$this->load->view('common/site_setting',$data);    
+	}
 	
 
 

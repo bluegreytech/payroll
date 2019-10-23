@@ -32,10 +32,13 @@
 																			<table border="0" cellspacing="0" cellpadding="0" style="width:100%">
 																				<tr>
 																					<td align="left" width="50%">
-																						<img src="<?php echo base_url(); ?>default/img/Company/companylogo/logo.jpg" style="width:100%">
+																						<img src="<?php echo base_path(); ?>default/img/Company/companylogo/logo.jpg" style="width:100%;height:200px;width:200px;>
 																						<h5 style="font-weight: 500;font-size: .9375rem;margin:10px 0px;"><strong>Invoice From:</strong></h5>
-																						<p style="font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 10px;"><?php echo $Address; ?></p>
-																						<p style="font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 10px;">GST No: <span style="font-weight:500;"> <?php echo $gstnumber;?></span></p>
+																						<p style="font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 10px;">Name: <span style="font-weight:500;"><?php echo $Adminname; ?></span></p>
+																						<p style="font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 10px;">Email: <span style="font-weight:500;"> <?php echo $Emailaddress;?></span></p>
+																						<p style="font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 10px;">Mobile:  <span style="font-weight:500;"><?php echo $Mobilenumber; ?></span></p>
+																						<p style="font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 10px;">Address:  <span style="font-weight:500;"><?php echo $Officeaddress;?></span></p>
+																						<p style="font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 10px;">GST Number:  <span style="font-weight:500;"><?php echo $Gstnumber;?></span></p>
 																					</td>
 																					<td align="right" width="50%" valign="top">
 																						<h3 style="text-transform: uppercase;color:#000;font-size: 1.5rem;margin:10px 0px;">#P<?php echo date('Ym')?>-<?php echo $invoicebillid;?></h3>
@@ -78,10 +81,10 @@ echo $newDate = date("M d, Y", strtotime($originalDate));?></span></p>
 																				<tr>
 																					<td align="left" width="60%">
 																						<h3 style="text-transform: uppercase;font-size: .9375rem;margin:10px 0px;">Invoice to:</h3>
-																						<p style="font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 10px;"><?php echo $companyname; ?></p>
-																						<p style="font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 10px;"><?php echo $companyaddress; ?></p>
-																						<p style="font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 10px;"><?php echo $companycity; ?></p>
-																						<p style="font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 10px;"><?php echo $comcontactnumber; ?></p>
+																						<p style="font-weight: 500;font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 10px;"><?php echo $companyname; ?></p>
+																						<p style="font-weight: 500;font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 10px;"><?php echo $companyaddress; ?></p>
+																						<p style="font-weight: 500;font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 10px;"><?php echo $companycity; ?></p>
+																						<p style="font-weight: 500;font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 10px;"><?php echo $comcontactnumber; ?></p>
 																					</td>
 																					<td align="left" width="40%">
 																						<h3 style="text-transform: uppercase;font-size: .9375rem;margin:10px 0px;">Payment Details:</h3>
@@ -197,7 +200,7 @@ echo $newDate = date("M d, Y", strtotime($originalDate));?></span></p>
 																						<h5 style="font-size: 0.875rem;line-height: 18px;margin:10px 0px;"><span>Other Information</span></h5>
 																					</td>
 																					<td align="right">
-																						<h5 style="font-weight: 500;font-size: 0.875rem;line-height: 18px;margin:10px 0px;"><span><?php echo $Otherinformation; ?> <span></h5>
+																						<h5 style="padding-left: 20px;text-align: left;font-weight: 500;font-size: 0.875rem;line-height: 18px;margin:10px 0px;"><span><?php echo $Otherinformation; ?> <span></h5>
 																					</td>
 																				</tr>
 																			</table>

@@ -1,14 +1,18 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-
+<style>
+	body{
+		font-family: 'verdana';
+	}
+</style>
 </head>
 <body>
-	<table style="width:100%">
+	<table width="100%">
 		<tr>
-			<td align="center" valign="top">
+			<td align="center" valign="top" width="100%">
 				<!-- Main -->
-				<table>
+				<table width="100%">
 					<tr>
 						<td>
 							<!-- Header -->
@@ -31,7 +35,7 @@
 																			<table border="0" cellspacing="0" cellpadding="0" style="width:100%">
 																				<tr>
 																					<td align="left" width="50%">
-																						<img src="<?php echo base_url();?>default/img/Company/companylogo/logo.jpg" style="width:100%">
+																						<img src="<?php echo base_path();?>default/img/Company/companylogo/logo.jpg" style="width:100%;height:200px;width:200px;>
 																					</td>
 																					<td align="right" width="50%" valign="top">
 																						<h3 style="text-transform: uppercase;color:#000;font-size: 1.5rem;margin:10px 0px;">Ref.No-<?php echo $billid;?></h3>
@@ -64,11 +68,11 @@
 																				<tr>
 																					<td align="left" width="100%">
 																						<h3 style="text-transform: uppercase;font-size: .9375rem;margin:10px 0px;">QUOTATION TO:</h3>
-																						<p style="font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 10px;"><?php echo $companyname; ?></p>
-																						<p style="font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 10px;"><?php echo $companyaddress; ?></p>
-																						<p style="font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 10px;"><?php echo $companyemail; ?></p>
-																						<p style="font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 10px;"><?php echo $comcontactnumber; ?></p>
-																						<p style="font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 30px;"></p>
+																						<p style="font-weight:500;font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 10px;"><?php echo $companyname; ?></p>
+																						<p style="font-weight:500;font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 10px;"><?php echo $companyaddress; ?></p>
+																						<p style="font-weight:500;font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 10px;"><?php echo $companyemail; ?></p>
+																						<p style="font-weight:500;font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 10px;"><?php echo $comcontactnumber; ?></p>
+																						<p style="font-weight:500;font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 30px;"></p>
 																					</td>
 																				</tr>
 																			</table>
@@ -135,16 +139,16 @@
 																?>
 																	<tr>
 																		<td align="left" width="10%">
-																			<h5 style="font-size: 0.875rem;margin:10px 0px;"><?php echo $i;?></h5>
+																			<h5 style="font-weight: 500;font-size: 0.875rem;margin:10px 0px;"><?php echo $i;?></h5>
 																		</td>
 																		<td align="left" width="25%">
-																			<h5 style="font-size: 0.875rem;margin:10px 0px;"><span><?php echo $companytype ;?></span></h5>
+																			<h5 style="font-weight: 500;font-size: 0.875rem;margin:10px 0px;"><span><?php echo $companytype ;?></span></h5>
 																		</td>
 																		<td align="left" width="60%">
-																			<h5 style="font-size: 0.875rem;margin:10px 0px;"><?php echo $quot->quotationdetail;?></h5>
+																			<h5 style="font-weight: 500;font-size: 0.875rem;margin:10px 0px;"><?php echo $quot->quotationdetail;?></h5>
 																		</td>
 																		<td align="left" width="5%">
-																			<h5 style="font-size: 0.875rem;margin:10px 0px;"><span><?php echo $quot->quotationrate;?></span></h5>
+																			<h5 style="font-weight: 500;font-size: 0.875rem;margin:10px 0px;"><span><?php echo $quot->quotationrate;?></span></h5>
 																		</td>
 																	</tr>
 																	<?php
@@ -160,9 +164,9 @@
 																	<tr>
 																		<td align="left" width="100%">
 																			<p style="font-weight: 500;font-size: 0.875rem;line-height: 18px;"><strong>Thanking you,</strong></p>
-																			<p style="font-size: 0.875rem;line-height: 18px;">Yours sincerely,</p>
-																			<p style="font-weight: 500;font-size: 0.875rem;line-height: 18px;"><strong>Prashant Parmar</strong></p>
-																			<p style="font-weight: 500;font-size: 0.875rem;line-height: 18px;"><strong>M 9099912602</strong></p>
+																			<p style="font-weight: 500;font-size: 0.875rem;line-height: 18px;">Yours sincerely,</p>
+																			<p style="font-weight: 500;font-size: 0.875rem;line-height: 18px;"><strong><?php echo $Adminname;?></strong></p>
+																			<p style="font-weight: 500;font-size: 0.875rem;line-height: 18px;"><strong>M <?php echo $Mobilenumber;?></strong></p>
 																		</td>
 																	</tr>
 																</table>

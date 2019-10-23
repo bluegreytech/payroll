@@ -85,7 +85,7 @@
 
 					<?php
 
-						$AdminId=$this->session->userdata('AdminId');
+						//$RoleId=$this->session->userdata('RoleId');
 
 					?>
 
@@ -111,9 +111,12 @@
 
 														<ul class="list-unstyled">
 
-															<li><?php echo $Address; ?></li>
+															<li><strong>Name:</strong>  <?php echo $Adminname; ?></li>
 
-															<li>GST No:  <?php echo $gstnumber;?></li>
+															<li><strong>Email: </strong> <?php echo $Emailaddress;?></li>
+															<li><strong>Mobile: </strong> <?php echo $Mobilenumber;?></li>
+															<li><strong>Address: </strong> <?php echo $Officeaddress;?></li>
+															<li><strong>GST Number: </strong> <?php echo $Gstnumber;?></li>
 
 														</ul>
 
@@ -161,7 +164,7 @@
 
 															<li> <?php echo $comcontactnumber; ?></li>
 
-														
+															<li><span><?php echo $comemailaddress; ?></span></li>
 
 														</ul>
 
@@ -173,14 +176,14 @@
 
 														<ul class="list-unstyled invoice-payment-details">
 
-															<li><h5>Total Due: <span class="text-right"><?php echo $netamount; ?></span></h5></li>
+															<li><h5><strong>Total Due:</strong> <span class="text-right"><?php echo $netamount; ?></span></h5></li>
 
-															<li>Bank name: <span><?php echo $Bankname; ?></span></li>
+															<li><strong>Bank name: </strong><span><?php echo $Bankname; ?></span></li>
 
-															<li>Account Number: <span><?php echo $Accountnumber; ?></span></li>
+															<li><strong>Account Number:</strong> <span><?php echo $Accountnumber; ?></span></li>
 
-															<li>Branch: <span><?php echo $Branch; ?></span></li>
-															<li>IFSC code: <span><?php echo $Ifsccode; ?></span></li>
+															<li><strong>Branch: </strong><span><?php echo $Branch; ?></span></li>
+															<li><strong>IFSC code:</strong> <span><?php echo $Ifsccode; ?></span></li>
 
 														</ul>
 

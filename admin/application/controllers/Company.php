@@ -5,18 +5,15 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Company extends CI_Controller 
-
 {
 
 	public function __construct() {
-
         parent::__construct();
-
 		$this->load->model('Company_model');
 
 	}
 
-	public function getcompanyid(){
+	public function Companynotificationid(){
 		$result=$this->Company_model->get_id();	
 		echo "<br>";print_r($result);die;
 	//	$this->load->view('Company/sendnotification',$data);
@@ -44,75 +41,58 @@ class Company extends CI_Controller
 		//echo "<br>";print_r($result);die;
 
 		$data['companyid']=$result['companyid'];
-
 		$data['companytypeid']=$result['companytypeid'];
-
 		$data['companytype']=$result['companytype'];
-
 		$data['companyname']=$result['companyname'];
 		$data['companycode']=$result['companycode'];
-		
-
 		$data['comemailaddress']=$result['comemailaddress'];
-
 		$data['comcontactnumber']=$result['comcontactnumber'];
-
 		$data['gstnumber']=$result['gstnumber'];
-
 		$data['digitalsignaturedate']=$result['digitalsignaturedate'];
-
 		$data['companyimage']= $result['companyimage'];
-
 		$data['companyaddress']=$result['companyaddress'];
-
 		$data['stateid']=$result['stateid'];
-
 		$data['statename']=$result['statename'];
-
 		$data['companycity']=$result['companycity'];
-
 		$data['pincode']=$result['pincode'];
-
 		$data['isactive']=$result['isactive'];
-
 		$data['companycomplianceid']=$result['companycomplianceid'];
-
 		$data['complianceid']=$result['complianceid'];
-
 		$data['Companynotificationid']=$result['Companynotificationid'];
-
 		$data['Enddate']=$result['Enddate'];
-
 		$data['Companydocumentid']=$result['Companydocumentid'];
-
 		$data['Documenttitle']=$result['Documenttitle'];
-
 		$data['Notificationdescription']=$result['Notificationdescription'];
-
 		$data['Documentfile']=$result['Documentfile'];
 
 		
 
 		$data['stateData']=$this->Company_model->list_state();
-
 		$data['complianceData']=$this->Company_model->list_compliance();
-
 		$data['companytypeData']=$this->Company_model->list_companytype();
-
 		$data['documentData']=$this->Company_model->list_companydocument($companyid);
-
 		//	echo "<pre>";print_r($data['complianceData']);die;
-
 		$this->load->view('Company/profile',$data);	
 
 
 
 	}
 
-
+	public function notification_detail($Companynotificationid)
+	{
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
+		$data['notificationData']=$this->Company_model->list_companynotification_detail($Companynotificationid);
+	 	//echo "<pre>";print_r($data['notificationData']);die;
+		 $this->load->view('Company/notificationdetail',$data);	
+	}
 
 	public function Sendnotification()
 	{
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
 		// $data['Companynotificationid']=$this->input->post('Companynotificationid');
 		// $data['companyid']=$this->input->post('companyid');
 		// $data['companyname']=$this->input->post('companyname');
@@ -129,12 +109,12 @@ class Company extends CI_Controller
 				if($result==1)
 				{
 					$this->session->set_flashdata('success', 'Notification has been send Successfully!');
-					redirect('Company/Sendnotification');
+					redirect('Company/companynotification_list');
 				}
 				else if($result==2)
 				{
-					$this->session->set_flashdata('error', 'Your was not Inserted!');
-					redirect('Company/Sendnotification');
+					$this->session->set_flashdata('error', 'Record has been inserted Successfully but Email function not work!');
+					redirect('Company/companynotification_list');
 				}	
 			}
 			// else
@@ -162,15 +142,6 @@ class Company extends CI_Controller
 
 	}
 
-	// public function companynotification_list()
-	// {	
-	// 	$data['notificationData']=$this->Company_model->list_companynotification();
-	// 	//print_r($data['notificationData']);die;
-	// 	$data['companyData']=$this->Company_model->list_company();
-    //     $this->load->view('Company/notificationlist',$data);
-
-	// }
-
 
 	function companynotification_list()
 	{	
@@ -184,8 +155,8 @@ class Company extends CI_Controller
 			$keyword=$this->input->post('keyword');
 			$keyword2=$this->input->post('keyword2');
 			$keyword3=$this->input->post('keyword3');
-		echo	$keyword4=$this->input->post('keyword4');
-		echo	$keyword5=$this->input->post('keyword5');	
+			$keyword4=$this->input->post('keyword4');
+			$keyword5=$this->input->post('keyword5');	
 			if($option!='' && $keyword!='')
 			{	$option=$this->input->post('option');
 				$data['notificationData'] = $this->Company_model->search_company_notification($option,$keyword);
@@ -207,7 +178,7 @@ class Company extends CI_Controller
 				$data['notificationData']=$this->Company_model->list_companynotification();
 			}
 			$data['companyData']=$this->Company_model->list_company();
-		//echo "<pre>";print_r($data['companyData']);die;
+		 	//echo "<pre>";print_r($data['notificationData']);die;
 		    $this->load->view('Company/notificationlist',$data);
 
 	}
@@ -255,27 +226,14 @@ class Company extends CI_Controller
 		$data['Documenttitle']=$result['Documenttitle'];
 		$data['Notificationdescription']=$result['Notificationdescription'];
 		$data['Enddate']=$result['Enddate'];
-		
-		//$data['documentData']=$this->Company_model->list_companydocument_noti($Companynotificationid);
 		//echo "<pre>";print_r($data['documentData']);die;
-
 		$data['companyData']=$this->Company_model->list_company();
 		$this->load->view('Company/sendnotification',$data);	
 
 	}
 
 
-	// public function company_notification_expired($companyid)
-	// {	
-	// 	$result=$this->Company_model->list_company_notification($companyid);
-	// 	//echo "<pre>";print_r($result);die;
-	// 	if($result==1)
-	// 	{
-	// 		$this->session->set_flashdata('success', 'Notification has been expired Successfully!');
-	// 		redirect('Company');
-	// 	}
-	
-	// }
+
 
 
 	public function company_notification_expired($Companynotificationid)
@@ -394,6 +352,8 @@ class Company extends CI_Controller
 			$data['pincode']=$this->input->post('pincode');		
 			$data['isactive']=$this->input->post('isactive');
 			$data['companycomplianceid']=$this->input->post('companycomplianceid');
+			$data['compliancedeductionid']=$this->input->post('compliancedeductionid');
+			
 			$data['Companyshiftid']=$this->input->post('Companyshiftid');
 
 			$data['Shiftname']=$this->input->post('Shiftname');
@@ -459,6 +419,7 @@ class Company extends CI_Controller
 	//	$data['shiftData']=$this->Company_model->list_shift();
 		$data['stateData']=$this->Company_model->list_state();
 		$data['complianceData']=$this->Company_model->list_complianceto();
+		$data['deductionData']=$this->Company_model->list_compliancededuction();
 		$data['companytypeData']=$this->Company_model->list_companyto();
 		//print_r($data['shiftData']);die;
 		$this->load->view('Company/companyadd',$data);	
@@ -525,6 +486,7 @@ class Company extends CI_Controller
 		$data['isactive']=$result['isactive'];
 		$data['companycomplianceid']=$result['companycomplianceid'];
 		$data['complianceid']=$result['complianceid'];
+		$data['compliancedeductionid']=$result['compliancedeductionid'];
 
 		$data['Companyshiftid']=$result['Companyshiftid'];
 		$data['Shifthours']=$result['Shifthours'];
@@ -540,8 +502,12 @@ class Company extends CI_Controller
 
 		$data['shiftData']=$this->Company_model->list_companyshift($companyid);
 		$data['stateData']=$this->Company_model->list_state();
-		$data['complianceData']=$this->Company_model->list_compliance();
 		$data['companytypeData']=$this->Company_model->list_companytype();
+
+		$data['complianceData']=$this->Company_model->list_complianceto();
+		$data['deductionData']=$this->Company_model->list_compliancededuction();
+		//$data['deductionData']=$this->Company_model->list_compliancededuction();
+		//	$data['complianceData']=$this->Company_model->list_compliance();
 			//echo "<pre>";print_r($data['shiftData']);die;
 		$this->load->view('Company/companyadd',$data);	
 
@@ -626,74 +592,42 @@ class Company extends CI_Controller
 
 
 	public function compliance()
-
 	{
-
 		if(!check_admin_authentication()){ 
-
 			redirect(base_url('Login'));
-
 		}
-
-
 
 		$data=array();
 
 			$data['complianceid']=$this->input->post('complianceid');
-
+			$data['compliancetypeid']=$this->input->post('compliancetypeid');
 			$data['compliancename']=$this->input->post('compliancename');
-
 			$data['compliancepercentage']=$this->input->post('compliancepercentage');	
-
 			$data['isactive']=$this->input->post('isactive');
 
 			if($_POST){
-
 				if($this->input->post('complianceid')==''){
-
 					$result=$this->Company_model->add_compliance();	
-
 					if($result)
-
 					{
-
 						$this->session->set_flashdata('success', 'Record has been Inserted Succesfully!');
-
 						redirect('Company/compliance');
-
 					}
 
 				}
-
 				else
-
 				{
-
 					$result=$this->Company_model->update_compliance();
-
 					if($result)
-
 					{
-
 						$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
-
 						redirect('Company/compliance');
-
 					} 
-
-
-
 				}
-
-
-
 		} 
 
 		$data['complianceData']=$this->Company_model->list_compliance();
-
 		$this->load->view('compliance/compliance',$data);	
-
-
 
 	}
 
@@ -850,29 +784,19 @@ class Company extends CI_Controller
 
 
 	function editcompliance()
-
 	{
-
 		if(!check_admin_authentication()){ 
-
 			redirect(base_url('Login'));
-
 		}
 
 		$data=array();
-
 		$result=$this->Company_model->get_compliance($this->input->post('complianceid'));	
-
 		//echo "<br>";print_r($result);die;
-
 		$data['complianceid']=$result['complianceid'];
-
+		$data['compliancetypeid']=$result['compliancetypeid'];
 		$data['compliancename']=$result['compliancename'];
-
 		$data['compliancepercentage']=$result['compliancepercentage'];
-
 		$data['isactive']=$result['isactive'];
-
 		echo json_encode($data);
 
 		//$this->load->view('Company/companytypelist',$data);		

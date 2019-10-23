@@ -154,45 +154,45 @@
 
 
 						<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12" >  
-
 									<div class="form-group form-focus box" id='business'>
-
-										<input type="text" name="keyword2" class="form-control floating">
-
+										<input type="text" name="keyword1" class="form-control floating">
 										<label class="focus-label">Search</label>
-
 									</div>
 
+									<div class="form-group form-focus box" id='business3' style="display: none;">
+										<input type="text" name="keyword3" class="form-control floating">
+										<label class="focus-label">Search</label>
+									</div>
 
+									<div class="form-group form-focus box" id='business4' style="display: none;">
+										<input type="text" name="keyword4" class="form-control floating">
+										<label class="focus-label">Search</label>
+									</div>
+
+									<div class="form-group form-focus box" id='business5' style="display: none;">
+										<input type="text" name="keyword5" class="form-control floating">
+										<label class="focus-label">Search</label>
+									</div>
+
+									<div class="form-group form-focus box" id='business6' style="display: none;">
+										<input type="text" name="keyword6" class="form-control floating">
+										<label class="focus-label">Search</label>
+									</div>
 
 									<div class="form-group form-focus box2" id='business2' style="display: none;">
-
 										<div class="form-group">
-
 											<select class="form-control" name="keyword2"> 
-
 												<option desabled value="">Please select company</option>
-
 												<?php
-
 												if($companyData){
-
 													foreach($companyData as $comp)
-
 													{
-
 												?>
-
 													<option value="<?php echo $comp->companyname; ?>"><?php echo $comp->companyname;?></option>
-
 												<?php
-
 												}}
-
 												?>
-
 											</select>
-
 										</div>
 
 									</div>
@@ -551,46 +551,72 @@
 
 
 </html>
-
-
-
-
-
-
+										
 
 <script>
 
 
-
 $(document).ready(function(){
 
-    $('#purpose').on('change', function() {
+$('#purpose').on('change', function() {
 
-      if(this.value == 'companyname')
+  if(this.value == 'first_name')
+  {
+	$("#business").show();
+	$("#business2").hide();
+	$("#business3").hide();
+	$("#business4").hide();
+	$("#business5").hide();
+	$("#business6").hide();
+  }
+  else if(this.value == 'companyname')
+  {
+	$("#business").hide();
+	$("#business2").show();
+	$("#business3").hide();
+	$("#business4").hide();
+	$("#business5").hide();
+	$("#business6").hide();
+  }
+  else if(this.value == 'email')
+  {
+	$("#business").hide();
+	$("#business2").hide();
+	$("#business3").show();
+	$("#business4").hide();
+	$("#business5").hide();
+	$("#business6").hide();
+  }
+  else if(this.value == 'phone')
+  {
+	$("#business").hide();
+	$("#business2").hide();
+	$("#business3").hide();
+	$("#business4").show();
+	$("#business5").hide();
+	$("#business6").hide();
+  }
+  else if(this.value == 'department')
+  {
+	$("#business").hide();
+	$("#business2").hide();
+	$("#business3").hide();
+	$("#business4").hide();
+	$("#business5").show();
+	$("#business6").hide();
+  }
+  else if(this.value == 'desgination')
+  {
+	$("#business").hide();
+	$("#business2").hide();
+	$("#business3").hide();
+	$("#business4").hide();
+	$("#business5").hide();
+	$("#business6").show();
+  }
+  
 
-      {
-
-        $("#business2").show();
-
-		$("#business").hide();
-
-		$(".box").hide();
-
-      }
-
-      else
-
-      {
-
-        $("#business2").hide();
-
-		$("#business").show();
-
-		$(".box2").hide();
-
-      }
-
-    });
+});
 
 });
 

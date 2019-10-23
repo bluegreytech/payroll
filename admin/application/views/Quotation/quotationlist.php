@@ -72,7 +72,7 @@
 												<option value="companyname">Company Name</option>
 												<option value="companyemail">Email Address</option>
 												<option value="comcontactnumber">Contact Number</option>
-												<option value="quotationdate">Date From to To</option>
+												<option value="quotationdate">Created Date From to To</option>
 											</select>
 
 										</div>
