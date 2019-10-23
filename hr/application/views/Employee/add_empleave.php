@@ -57,7 +57,7 @@
 								</div>
 								<div class="form-group" id="leavetym" style="display:none;">
 									<label>Leave Time<span class="text-danger">*</span></label>
-									<select class="form-control" name='leavetime' id='leavetime'>
+									<select class="form-control" name='leavetime' id='leavetime' style="display:none;">
 										<option selected="" value="" disabled="">Please select</option>
 									  	<option value="firsthalf" <?php if($leaveslot=='firsthalf'){ echo "selected"; } ?> >First Half</option>
 									  	<option value="secondhalf" <?php if($leaveslot=='secondhalf'){ echo "selected"; } ?> >Second Half</option>	
@@ -168,7 +168,7 @@ $(document).ready(function()
 		            "showClose": true,
 		            "showClear": true,
 		            "showTodayButton": true,
-	}).val('<?php echo ($leaveto!='0000-00-00')&&($leaveto!='')  ? date('d/m/Y', strtotime($leaveto)) : ''; ?>');
+	}).val('<?php echo ($leaveto!='0000-00-00')&&($leaveto!='')  ? date('d/m/Y', strtotime($leaveto)) : ''; ?>');	
 	
 		
     $('#leavetimein').datetimepicker({					
@@ -181,10 +181,10 @@ $(document).ready(function()
 				ignoreReadonly: true,
 	}).val('<?php echo ($leavetimeout!='00:00:00')&&($leavetimeout!='')  ? date('h:i:s A', strtotime($leavetimeout)) :''; ?>');
 
-//$.validator.setDefaults({ ignore: ":hidden:not(select)" });
+//$.validator.setDefaults({ ignore: ":hidden:not(select#leavetime)" });
 	$("#frm_addleave").validate(
 	{
-		ignore: ':hidden:not("#leavetime")',
+		
 		ignore: "input[type='text']:hidden"	,
 		 //for all select
 			rules: {
@@ -206,9 +206,9 @@ $(document).ready(function()
 				noofdays:{
 					required: true,
 				},
-				leavetime:{
-					required:true,
-				}						
+				// leavetime:{
+				// 	required:true,
+				// }						
 			
 			},
 		
@@ -229,12 +229,11 @@ $(document).ready(function()
 	var leavedays = $('#leavedays').val();
 	if(leavedays=='halfday'){		
 		$('#dateto').css('display','none');
-	   $('#leavetym').css('display','block');
-		var leavefrom = $('#leavefrom').val();
-
-		
+	   	$('#leavetym').css('display','block');
+	   	$('#leavetime').css('display','block');
+		var leavefrom = $('#leavefrom').val();		
 		if(leavefrom!==''){
-			 //callformdate();
+			//callformdate();
 			total="0.5";	    
 			$('#noofdays').val(total);
 		}	
@@ -246,6 +245,7 @@ $(document).ready(function()
 	}else if(leavedays=='earlyleave'){ 
 		$('#dateto').css('display','none');   	
        	$('#leavetym').css('display','none');
+        $('#leavetime').css('display','none');
        	$('#leavehours').css('display','block');
        	$('#errorleave').css('display','none');
        	$("#labeltotaldays").empty();
@@ -264,9 +264,12 @@ $(document).ready(function()
 		}
 	    $("#labeltotaldays").empty();
 		$('#labeltotaldays').append('<label>Number of days<span class="text-danger">*</span></label>');	    
-		 $('#leavetym').css('display','none');
-		 $('#leavehours').css('display','none');
-		 $('#errorleave').css('display','none');
+		$('#leavetym').css('display','none');
+		$('#leavetime').css('display','none');
+		$('#leavehours').css('display','none');
+		$('#errorleave').css('display','none');
+			$('#timein').css('display','none');
+		$('#timeout').css('display','none');
 		 //$('#btnsave').prop('disabled','false');
 	}  
 	});
@@ -278,6 +281,7 @@ $(document).ready(function()
   if(leavedays=='halfday'){	
   		$('#dateto').css('display','none');	
   		 $('#leavetym').css('display','block');
+  		  $('#leavetime').css('display','block');
 		$('#timein').css('display','block');
 		$('#timeout').css('display','block');
 		$("#labeltotaldays").empty();
@@ -320,14 +324,16 @@ $(document).ready(function() {
 		}	
 		$('#noofdays').val(total);		
     });  
-
+   
+        // leaveday=$("select#leavedays option:selected").attr('value');
+        // alert(leaveday);
      	$('#leavefrom').focusout(function(){  
         total='';
 		leaveday=$("select#leavedays option:selected").attr('value');
 	   
 		if(leaveday=="halfday"){			
 			total="0.5";
-		}else{			
+		}else if(leaveday=="earlyleave"){			
 			$('#errorleave').css('display','none');			
 			//total=diffDays+1;
 		}	

@@ -1,4 +1,4 @@
-﻿<?php 
+<?php 
 	 $this->load->view('common/header.php');
 	 $this->load->view('common/sidebar.php');
 ?>
@@ -12,7 +12,7 @@
 							<h4 class="page-title">Employee Salary</h4>
 						</div>
 						<div class="col-sm-8 col-7 text-right m-b-30">
-							<a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_salary"><i class="fa fa-plus"></i>Add Salary</a>
+							<a href="<?php echo base_url(); ?>employee/add_setsalary" class="btn add-btn" ><i class="fa fa-plus"></i>Add Salary</a>
 						</div>
 					</div>
 					<!-- /Page Title -->					

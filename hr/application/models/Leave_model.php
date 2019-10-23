@@ -82,6 +82,16 @@ class Leave_model extends CI_Model
 
 	function empleave_insert(){
          // echo "<pre>";print_r($_POST);die;
+      $query = $this->db->get_where('tblcompany',array('companyid'=>$this->session->userdata('companyid')));
+     // echo $this->db->last_query(); die;
+    if($query->num_rows()>0)
+    {
+      $row = $query->row();
+      //echo "<pre>";print_r($row->companyname);die;
+      
+    }  
+ 			$typeofleavedata=get_one_record('tblcmpleave','leave_id',$this->input->post('typeofleave')); 
+ 			//echo "<pre>";print_r($typeofleavedata->leave_name);die;
 		    $leaveslot='';
 		    $leaveto='';
 			$leaveto = $this->input->post('leaveto');			
@@ -94,10 +104,16 @@ class Leave_model extends CI_Model
 			$typeofleave=$this->input->post('typeofleave'); 
 			if($this->input->post('leavedays')=='halfday'){
 				$leaveslot=$this->input->post('leavetime');
-				 $leaveto = $this->input->post('leavefrom');
+				$leaveto = $this->input->post('leavefrom');
 				$date = str_replace('/', '-', $leaveto );
 				$leavetodt = date("Y-m-d", strtotime($date));
          
+			}elseif ($this->input->post('leavedays')=='earlyleave') {
+				
+				$leaveto = $this->input->post('leavefrom');
+				$date = str_replace('/', '-', $leaveto );
+				$leavetodt = date("Y-m-d", strtotime($date));
+				# code...
 			}
 			//echo $leavetimein=$this->input->post('leavetimein');
 			//echo $leavetimeout=$this->input->post('leavetimeout');
@@ -105,13 +121,13 @@ class Leave_model extends CI_Model
 		  //echo  $leaveslot;
         	for($j=0;$j<count($empcount);$j++){
                 $empid=$this->input->post('employename')[$j] ?$this->input->post('employename')[$j]:'';
-                $emp_id=get_one_record('tblemp','emp_id',$empid);               
+                $emp_id=get_one_record('tblemp','emp_id',$empid); 
+                //echo "<pre>";print_r($emp_id->first_name.''.$emp_id->last_name);die;              
                 $noofdays=$this->input->post('noofdays');
                 $totalannauleave=$emp_id->annualleave-$noofdays;
                 $updata = array('annualleave' => $totalannauleave);               
                 $this->db->where('emp_id',$empid);
                 $this->db->update('tblemp',$updata);
-
 				$data = array(
 					'emp_id' =>$this->input->post('employename')[$j]?$this->input->post('employename')[$j]:'',        
 					'leaveto' =>$leavetodt,
@@ -128,7 +144,77 @@ class Leave_model extends CI_Model
 					'created_date'=>date('Y-m-d')		
 				);
 				//echo "<pre>";print_r($data); die;
-        		$res=$this->db->insert('tblempleave',$data);	
+        	   $res=$this->db->insert('tblempleave',$data);	
+        		if($res){
+     				$email_template=$this->db->query("select * from ".$this->db->dbprefix('tblemail_template')." where task='Leave assign by employee'");
+					$email_temp=$email_template->row();
+					$email_address_from=$email_temp->from_address;
+					$email_address_reply=$email_temp->reply_address;
+					$email_subject=$email_temp->subject;        
+					$email_message=$email_temp->message;
+					$username =$emp_id->first_name.' '.$emp_id->last_name;					
+					$email = $emp_id->email;
+					$email_to=$email;
+					$reason=trim($this->input->post('leavereason'));
+                   
+                   	if($this->input->post('leavedays')=='fullday' ){
+                   		$noofdays=trim($this->input->post('noofdays')).' '."Day";
+                   	}elseif($this->input->post('leavedays')=='halfday'){
+						$noofdays=trim($this->input->post('noofdays')).' '."Day";
+                   	}else{
+						$noofdays=trim($this->input->post('noofdays'));
+                   	}
+                   	$typeofleave=$typeofleavedata->leave_name;	
+                   	$leavedays=trim($this->input->post('leavedays'));
+                   	$leavefrom=$leavefromdt;
+                    $leaveto=$leavetodt;
+                    $leavestatus='Approve';
+                    $companyname=$row->companyname;
+                    $base_url=base_url();
+                    $currentyear=date('Y');
+                   
+                    $email_message=str_replace('{break}','<br/>',$email_message);                 
+                    $email_message=str_replace('{base_url}',$base_url,$email_message);
+                    $email_message=str_replace('{year}',$currentyear,$email_message);
+                    $email_message=str_replace('{username}',$username,$email_message);
+					$email_message=str_replace('{reason}',$reason,$email_message);
+					$email_message=str_replace('{noofdays}',$noofdays,$email_message);
+					$email_message=str_replace('{typeofleave}',$typeofleave,$email_message);
+					$email_message=str_replace('{leavedays}',$leavedays,$email_message);
+					$email_message=str_replace('{leavefrom}',$leavefrom,$email_message);
+					$email_message=str_replace('{leaveto}',$leaveto,$email_message);
+					$email_message=str_replace('{leavestatus}',$leavestatus,$email_message);
+					$email_message=str_replace('{companyname}',$companyname,$email_message);
+                    
+                    $str=$email_message; //die;
+                    echo "<pre>";print_r($str);die;
+                    $email_config = Array(
+	                    'protocol'  => 'smtp',
+	                    'smtp_host' => 'relay-hosting.secureserver.net',
+	                    'smtp_port' => '465',
+	                    'smtp_user' => 'binny@bluegreytech.co.in',
+	                    'smtp_pass' => 'Binny@123',
+	                    'mailtype'  => 'html',
+	                    'starttls'  => true,
+	                    'newline'   => "\r\n",
+	                    'charset'=>'utf-8',
+	                    'header'=> 'MIME-Version: 1.0',
+	                    'header'=> 'Content-type:text/html;charset=UTF-8',
+                    );                        
+                     $this->load->library('email', $email_config);                   
+                     $this->email->from("siya@yopmail.com", "siya");
+                     $this->email->to('binny@bluegreytech.co.in');
+                     $this->email->subject($email_subject);
+                     $this->email->message($str);
+
+                    
+	                    if($this->email->send()){ 	                   
+	                       echo "send"; die;
+	                       return '1';
+	                    }else{
+	                    echo $this->email->print_debugger();die;
+	                    }
+        		}
 			}
 		//die;
 		return $res;
@@ -144,6 +230,7 @@ class Leave_model extends CI_Model
 		$this->db->order_by('el.empleave_id','Desc');
 		$query=$this->db->get();
 		$res=$query->result();
+		//echo $this->db->last_query();die;
 		return $res;
 	}
     
@@ -161,9 +248,14 @@ class Leave_model extends CI_Model
 			$empcount=$this->input->post('employename');
 			if($this->input->post('leavedays')=='halfday'){
 				$leaveslot=$this->input->post('leavetime');
-				 $leaveto = $this->input->post('leavefrom');
+				$leaveto = $this->input->post('leavefrom');
 				$date = str_replace('/', '-', $leaveto );
 				$leavetodt = date("Y-m-d", strtotime($date));         
+			}elseif($this->input->post('leavedays')=='earlyleave') {				
+				$leaveto = $this->input->post('leavefrom');
+				$date = str_replace('/', '-', $leaveto );
+				$leavetodt = date("Y-m-d", strtotime($date));
+				
 			}
 			// echo $leavetimein=$this->input->post('leavetimein');
 			// echo $leavetimeout=$this->input->post('leavetimeout');
@@ -182,7 +274,8 @@ class Leave_model extends CI_Model
 					'leaveto' =>$leavetodt,
 					'leavefrom' =>$leavefromdt,
 					'noofdays' =>trim($this->input->post('noofdays')),	
-					'typeofleave' =>trim($this->input->post('typeofleave')),				
+					'typeofleave' =>trim($this->input->post('typeofleave')),	
+					'leavedays'=>$this->input->post('leavedays'),			
 					'leavetimein'=>$this->input->post('leavetimein')?date('H:i:s',strtotime($this->input->post('leavetimein'))):'',				
 					'leavetimeout'=>$this->input->post('leavetimeout')?date('H:i:s',strtotime($this->input->post('leavetimeout'))):'',
 					'leavereason'=>trim($this->input->post('leavereason')),
@@ -211,7 +304,7 @@ class Leave_model extends CI_Model
 			$this->db->from('tblempleave el');	
 			$this->db->join('tblemp as em','em.emp_id=el.emp_id' );	
 			//$this->db->join('tblcmpleave as cl','cl.leave_id=el.typeofleave' );	
-			$this->db->where('em.Is_deleted','0');
+			$this->db->where('el.Is_deleted','0');
 			// echo $leave_type;die;
 
 			$fromdate = $this->input->post('fromdate');

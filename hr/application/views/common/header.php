@@ -97,8 +97,9 @@
 				
 				<!-- Header Title -->
                 <div class="page-title-box">
-                	<?php  $cmpdetail= getOneCompany($this->session->userdata('companyid'));
-                	 //echo "<pre>";print_r($cmpdetail->companyname);
+                	<?php // echo  $this->session->userdata('companyid');
+                	$cmpdetail= getOneCompany($this->session->userdata('companyid'));
+                	// echo "<pre>";print_r($cmpdetail);
                 	if(!empty($cmpdetail)){ ?>
                        <h3><?php echo strtoupper($cmpdetail->companyname); ?></h3>
                 	<?php }else{ ?>

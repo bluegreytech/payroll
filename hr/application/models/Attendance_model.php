@@ -7,7 +7,7 @@ class Attendance_model extends CI_Model
 	function attendancelist()
 	{
         
-     	
+     	$companyid=$this->session->userdata('companyid');
 	     $totalmonth=cal_days_in_month(CAL_GREGORIAN, date('m',strtotime('last month')),date('Y'));	
 		
 		     $str2='';
@@ -27,7 +27,7 @@ class Attendance_model extends CI_Model
 		       	}
 		        
 		       }
-		       $str3="FROM tblattendance att LEFT JOIN tblemp U ON U.emp_id = att.emp_id   WHERE YEAR(attendance_date) = YEAR(CURRENT_DATE - INTERVAL 1 MONTH)AND MONTH(attendance_date) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH) GROUP BY U.first_name ORDER BY  att.attendance_id DESC";
+		       $str3="FROM tblattendance att LEFT JOIN tblemp U ON U.emp_id = att.emp_id   WHERE YEAR(attendance_date) = YEAR(CURRENT_DATE - INTERVAL 1 MONTH)AND MONTH(attendance_date) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH) AND att.company_id=$companyid GROUP BY U.first_name ORDER BY  att.attendance_id DESC";
 		        $query=$this->db->query($str1.''.$str2.''.$str3);
 			//echo $this->db->last_query();die;
 			return $query->result();
@@ -46,7 +46,7 @@ class Attendance_model extends CI_Model
 
 	function search()
 	{
-			
+			$companyid=$this->session->userdata('companyid');
 			$empname=$this->input->post('empname');
 			$attmonth=$this->input->post('attmonth'); 
 			if($this->input->post('attmonth')!=''){
@@ -86,7 +86,7 @@ class Attendance_model extends CI_Model
 		        
 		       }
 		     
-		        $str3=" FROM tblattendance att LEFT JOIN tblemp U ON U.emp_id = att.emp_id WHERE CONCAT(U.first_name,' ',U.last_name) LIKE '%$empname%' AND attendance_month LIKE '%$attmonth%' GROUP BY U.first_name";
+		        $str3=" FROM tblattendance att LEFT JOIN tblemp U ON U.emp_id = att.emp_id WHERE att.company_id=$companyid AND CONCAT(U.first_name,' ',U.last_name) LIKE '%$empname%' AND attendance_month LIKE '%$attmonth%' GROUP BY U.first_name";
 		        //echo $str1.''.$str2.''.$str3;
 		    	$query=$this->db->query($str1.''.$str2.''.$str3);	
 			
@@ -113,7 +113,7 @@ class Attendance_model extends CI_Model
 			        
 			       }
 		     
-		       $str3=" FROM tblattendance att LEFT JOIN tblemp U ON U.emp_id = att.emp_id WHERE attendance_month LIKE '%$attmonth%' GROUP BY U.first_name";
+		       $str3=" FROM tblattendance att LEFT JOIN tblemp U ON U.emp_id = att.emp_id WHERE  att.company_id=$companyid AND attendance_month LIKE '%$attmonth%' GROUP BY U.first_name";
 		      //  echo $str1.''.$str2.''.$str3; die;
 		    $query=$this->db->query($str1.''.$str2.''.$str3);	
 			}

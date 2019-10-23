@@ -7,6 +7,8 @@ class Employee extends CI_Controller
         parent::__construct();
 		$this->load->model('employee_model');
 		$this->load->model('leave_model');
+		$this->load->model('attendance_model');
+		$this->load->model('Login_model');
 	}
 	
 	public function emplist()
@@ -260,6 +262,222 @@ class Employee extends CI_Controller
 		}
 	}
 
-	
+	function setsalary(){	
+		//echo "hggh";die;
+		if(!check_admin_authentication()){ 
+			redirect(base_url());
+		}   
+			$data=array();
+			$data['activeTab']="addhr";	
+			$this->load->library("form_validation");
+			$this->form_validation->set_rules('FirstName', 'FirstName', 'required');
+			$this->form_validation->set_rules('LastName', 'LastName', 'required');
+			$this->form_validation->set_rules('EmailAddress', 'EmailAddress', 'required');		
+			$this->form_validation->set_rules('marital_status', 'Marital Status', 'required');	
+			$this->form_validation->set_rules('department', 'Departmant', 'required');
+			$this->form_validation->set_rules('PhoneNumber', 'Mobileno', 'required');
+		    $this->form_validation->set_rules('dob', 'DateofBirth', 'required');
+		    $this->form_validation->set_rules('Gender', 'Gender', 'required');
+		    $this->form_validation->set_rules('pob', 'Place of Birth', 'required');
+		    $this->form_validation->set_rules('jod', 'Joining Date', 'required');
+		    $this->form_validation->set_rules('qualificationemp', 'Qualification Employee','required');
+		    $this->form_validation->set_rules('bloodgroup', 'Blood Group', 'required');
+		    $this->form_validation->set_rules('salary', 'salary', 'required');
+		    $this->form_validation->set_rules('salary_amount', 'salary amount', 'required');
+		    $this->form_validation->set_rules('probation_period_day', 'Probation Period Day', 'required');
+			$this->form_validation->set_rules('physically_challenged', 'Physically Challanged', 'required');
+			$this->form_validation->set_rules('probation_period_day', 'Probation Period Day', 'required');
+			$this->form_validation->set_rules('status', 'Status', 'required');
+			$this->form_validation->set_rules('probation_period_day', 'Probation Period Day', 'required');
+		    
+		
+		if($this->form_validation->run() == FALSE){			
+			if(validation_errors())
+			{
+				$data["error"] = validation_errors();
+				echo "<pre>";print_r($data["error"]);die;
+			}else{
+				$data["error"] = "";
+			}
+           	$data['redirect_page']="emplist";
+			$data['emp_id']=$this->input->post('emp_id');
+			$data['employee_code']=$this->input->post('employee_code');
+			$data['first_name']=$this->input->post('FirstName');
+			$data['last_name']=$this->input->post('LastName');
+			$data['department']=$this->input->post('department');
+			$data['desgination']=$this->input->post('desgination');
+			$data['department']=$this->input->post('department');
+			
+			$data['email']=$this->input->post('EmailAddress');
+			$data['Address']=$this->input->post('Address');
+			$data['ProfileImage']=$this->input->post('ProfileImage');
+			$data['phone']=$this->input->post('PhoneNumber');
+			$data['Dateofbirth']=$this->input->post('dob');
+			$data['gender']=$this->input->post('Gender');
+			$data['religion']=$this->input->post('religion');
+			$data['nationality']=$this->input->post('nationality');
+
+			$data['marital_status']=$this->input->post('marital_status');
+			$data['Placeofbirth']=$this->input->post('pob');
+			$data['joiningdate']=$this->input->post('jod');
+			$data['qualification_emp']=$this->input->post('qualificationemp');
+			$data['bloodgroup']=$this->input->post('bloodgroup');
+			$data['salary']=$this->input->post('salary');
+			$data['salaryamt']=$this->input->post('salary_amount');
+			$data['probation_period_day']=$this->input->post('probation_period_day');
+			$data['physically_challenged']=$this->input->post('physically_challenged');
+			$data['status']=$this->input->post('status');
+			$data['bankdetail']=$this->input->post('bank_detail');
+			$data['passport']=$this->input->post('passport');
+			$data['drivinglicense']=$this->input->post('driveinglicence');
+			$data['pancard']=$this->input->post('pancard');
+			$data['aadharcard']=$this->input->post('aadharcard');
+			$data['addressesproof']=$this->input->post('address_proof');
+			$data["pre_profile_image"] = $this->input->post('ProfileImage');
+			$data['option']='';
+			$data['keyword']='';	
+		}
+		else
+		{	
+
+				if($this->input->post("emp_id")!="")
+				{	
+					
+					$this->employee_model->emp_update();
+					$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
+					redirect('employee/emplist');
+					
+				}
+				else
+				{ 	
+					$this->employee_model->emp_insert();
+					$this->session->set_flashdata('success', 'Record has been Inserted Succesfully!');
+					redirect('employee/emplist');
+				}
+		}		
+		//$data['leavelist']=$this->leave_model->showempleavelist();
+		$this->load->view('Employee/emp_setsalary',$data);
+		//echo "<pre>";print_r($data['result']);die;	
+
+	}
+
+		function add_setsalary(){	
+		//echo "hggh";die;
+		if(!check_admin_authentication()){ 
+			redirect(base_url());
+		}   
+			$data=array();
+			$data['activeTab']="addhr";	
+			$this->load->library("form_validation");
+			$this->form_validation->set_rules('FirstName', 'FirstName', 'required');
+			$this->form_validation->set_rules('LastName', 'LastName', 'required');
+			$this->form_validation->set_rules('EmailAddress', 'EmailAddress', 'required');		
+			$this->form_validation->set_rules('marital_status', 'Marital Status', 'required');	
+			$this->form_validation->set_rules('department', 'Departmant', 'required');
+			$this->form_validation->set_rules('PhoneNumber', 'Mobileno', 'required');
+		    $this->form_validation->set_rules('dob', 'DateofBirth', 'required');
+		    $this->form_validation->set_rules('Gender', 'Gender', 'required');
+		    $this->form_validation->set_rules('pob', 'Place of Birth', 'required');
+		    $this->form_validation->set_rules('jod', 'Joining Date', 'required');
+		    $this->form_validation->set_rules('qualificationemp', 'Qualification Employee','required');
+		    $this->form_validation->set_rules('bloodgroup', 'Blood Group', 'required');
+		    $this->form_validation->set_rules('salary', 'salary', 'required');
+		    $this->form_validation->set_rules('salary_amount', 'salary amount', 'required');
+		    $this->form_validation->set_rules('probation_period_day', 'Probation Period Day', 'required');
+			$this->form_validation->set_rules('physically_challenged', 'Physically Challanged', 'required');
+			$this->form_validation->set_rules('probation_period_day', 'Probation Period Day', 'required');
+			$this->form_validation->set_rules('status', 'Status', 'required');
+			$this->form_validation->set_rules('probation_period_day', 'Probation Period Day', 'required');
+		    
+		
+		if($this->form_validation->run() == FALSE){			
+			if(validation_errors())
+			{
+				$data["error"] = validation_errors();
+				echo "<pre>";print_r($data["error"]);die;
+			}else{
+				$data["error"] = "";
+			}
+           	$data['redirect_page']="emplist";
+			$data['emp_id']=$this->input->post('emp_id');
+			$data['employee_code']=$this->input->post('employee_code');
+			$data['first_name']=$this->input->post('FirstName');
+			$data['last_name']=$this->input->post('LastName');
+			$data['department']=$this->input->post('department');
+			$data['desgination']=$this->input->post('desgination');
+			$data['department']=$this->input->post('department');
+			
+			$data['email']=$this->input->post('EmailAddress');
+			$data['Address']=$this->input->post('Address');
+			$data['ProfileImage']=$this->input->post('ProfileImage');
+			$data['phone']=$this->input->post('PhoneNumber');
+			$data['Dateofbirth']=$this->input->post('dob');
+			$data['gender']=$this->input->post('Gender');
+			$data['religion']=$this->input->post('religion');
+			$data['nationality']=$this->input->post('nationality');
+
+			$data['marital_status']=$this->input->post('marital_status');
+			$data['Placeofbirth']=$this->input->post('pob');
+			$data['joiningdate']=$this->input->post('jod');
+			$data['qualification_emp']=$this->input->post('qualificationemp');
+			$data['bloodgroup']=$this->input->post('bloodgroup');
+			$data['salary']=$this->input->post('salary');
+			$data['salaryamt']=$this->input->post('salary_amount');
+			$data['probation_period_day']=$this->input->post('probation_period_day');
+			$data['physically_challenged']=$this->input->post('physically_challenged');
+			$data['status']=$this->input->post('status');
+			$data['bankdetail']=$this->input->post('bank_detail');
+			$data['passport']=$this->input->post('passport');
+			$data['drivinglicense']=$this->input->post('driveinglicence');
+			$data['pancard']=$this->input->post('pancard');
+			$data['aadharcard']=$this->input->post('aadharcard');
+			$data['addressesproof']=$this->input->post('address_proof');
+			$data["pre_profile_image"] = $this->input->post('ProfileImage');
+			$data['option']='';
+			$data['keyword']='';	
+		}
+		else
+		{	
+
+				if($this->input->post("emp_id")!="")
+				{	
+					
+					$this->employee_model->emp_update();
+					$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
+					redirect('employee/emplist');
+					
+				}
+				else
+				{ 	
+					$this->employee_model->emp_insert();
+					$this->session->set_flashdata('success', 'Record has been Inserted Succesfully!');
+					redirect('employee/emplist');
+				}
+		}		
+		//$data['leavelist']=$this->leave_model->showempleavelist();
+		$data['emplist']=$this->attendance_model->emplist();
+	    $compliancedetail=get_one_record('tblcompanycompliances','companyid',$this->session->userdata('companyid'));
+	   
+			$complianceid = explode(',',$compliancedetail->complianceid);
+          $com_compliances= array();
+			foreach ($complianceid as $row){					
+				$data['companycompliances']=$this->Login_model->getcompliance($row);				
+				$com_compliances[]=$data['companycompliances'];
+			}
+			$data['com_compliances']=$com_compliances;
+
+			$compliancedeductionid = explode(',',$compliancedetail->compliancedeductionid);
+				$com_compliancesdeduction= array();
+				foreach ($compliancedeductionid as $row){					
+					$data['companydeduction']=$this->Login_model->getcompliance($row);				
+					$com_compliancesdeduction[]=$data['companydeduction'];
+				}
+				$data['com_compliancesdeduction']=$com_compliancesdeduction;
+			  	// echo "<pre>";print_r($compliancedetail);die;
+		
+		$this->load->view('Employee/add_setsalary',$data);
+		//echo "<pre>";print_r($data['result']);die;	
+
+	}
 
 }

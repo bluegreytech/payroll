@@ -14,7 +14,7 @@ class Home extends CI_Controller {
 	public function dashboard()
 	{ 
 		if(!check_admin_authentication()){
-			//  echo "jkjk";die;
+		
 			redirect(base_url());
 		}		
 	  
@@ -314,16 +314,20 @@ class Home extends CI_Controller {
 		    $compliancedetail=get_one_record('tblcompanycompliances','companyid',$this->session->userdata('companyid'));
 		   
 				$complianceid = explode(',',$compliancedetail->complianceid);
-              $com_compliances= array();
-				foreach ($complianceid as $row){
-					
-					$data['companycompliances']=$this->Login_model->getcompliance($row);
-				
+              	$com_compliances= array();
+				foreach ($complianceid as $row){					
+					$data['companycompliances']=$this->Login_model->getcompliance($row);				
 					$com_compliances[]=$data['companycompliances'];
 				}
 				$data['com_compliances']=$com_compliances;
-				//echo "<pre>";print_r($com_compliances);
-				//die;
+				$compliancedeductionid = explode(',',$compliancedetail->compliancedeductionid);
+				$com_compliancesdeduction= array();
+				foreach ($compliancedeductionid as $row){					
+					$data['companydeduction']=$this->Login_model->getcompliance($row);				
+					$com_compliancesdeduction[]=$data['companydeduction'];
+				}
+					$data['com_compliancesdeduction']=$com_compliancesdeduction;
+			  	// echo "<pre>";print_r($compliancedetail);die;
 				}
 		}else{
 			//echo "else fdf";die;

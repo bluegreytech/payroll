@@ -26,15 +26,14 @@
 									<li><a href="<?php echo base_url();?>company"><span>Company</span></a></li>
 								</ul>
 							</li>
-
 							<?php
 							}
-							?>	
-
+							?>
 							<li class="submenu">
 								<a href="<?php echo base_url();?>Dashboard"><i class="la la-user"></i> <span>Hr</span> <span class="menu-arrow"></span></a>
 								<ul style="display: none;">
-								<li><a href="<?php echo base_url();?>hr/hrlist"><span>List of Hr</span></a></li>
+								<li><a href="<?php echo base_url();?>hr/hrlist"><span>List of Hr</span></a>
+								</li>
 								</ul>
 							</li>
 
@@ -42,12 +41,9 @@
 								<a href="<?php echo base_url();?>Dashboard"><i class="la la-user"></i> <span>Employees</span> <span class="menu-arrow"></span></a>
 								<ul style="display: none;">
 								<li><a href="<?php echo base_url();?>employee/emplist">List of Employees</a></li>
-								<!-- <li><a href="<?php //echo base_url();?>employeesalary">Employee Salary </a></li> -->
+								<li><a href="<?php echo base_url();?>employee/setsalary">Employee Set Salary </a></li>
 								</ul>
 							</li>
-
-							
-
 							<li class="submenu">
 								<a href="<?php echo base_url();?>Dashboard"><i class="fa fa-calendar-check-o"></i> <span>Leave</span> <span class="menu-arrow"></span></a>
 								<ul style="display: none;">

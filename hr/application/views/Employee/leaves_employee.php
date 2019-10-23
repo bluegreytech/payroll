@@ -138,7 +138,7 @@
 
 
 									foreach($result as $row){ 
-									// echo "<pre>";print_r($row);
+									//echo "<pre>";print_r($row);
 									?>
 										<tr>
 											<td>
@@ -166,25 +166,32 @@
 											<td><?php  
 											     $timein=$row->leavetimein;
 											     $timeout=$row->leavetimeout;
+
+											     if($row->leavedays=='earlyleave'){
+													echo $row->noofdays; 
+											     }else{
+											     	 echo $row->noofdays.' '.'Days'; 
+											     }
+											    
 													
-											     if($timein=='' && $timeout==''){
-                                                    echo $row->noofdays.' '.'Days'; 
-											     }else{                                                   	
-													$timein = date('H:i',strtotime($row->leavetimein));
-													$timeout= date('H:i',strtotime($row->leavetimeout));
+											  //     if($timein=='' && $timeout==''){
+             //                                        echo $row->noofdays.' '.'Days'; 
+											  //    }else{                                                  	
+													// $timein = date('H:i',strtotime($row->leavetimein));
+													// $timeout= date('H:i',strtotime($row->leavetimeout));
 													
-													 $totalleave=sumTime($row->leavetimein,$row->leavetimeout);	 							     	 
-													if ($timein <= "09:00" && $totalleave =='4') {
-															echo "First Half";
-													}else if($timein >= "14" && $totalleave=='4' ){
-														echo "Second Half";
-													}else if($totalleave <= '2'){
+													//  $totalleave=sumTime($row->leavetimein,$row->leavetimeout);	 							     	 
+													// if ($timein <= "09:00" && $totalleave =='4') {
+													// 		echo "First Half";
+													// }else if($timein >= "14" && $totalleave=='4' ){
+													// 	echo "Second Half";
+													// }else if($totalleave <= '2'){
 														
-                                                        echo "Early leave";
-													}else{
-														 echo $row->noofdays.' '.'Days'; 
-													}
-											     }                                              
+             //                                            echo "Early leave";
+													// }else{
+													// 	 echo $row->noofdays.' '.'Days'; 
+													// }
+											  //    }                                              
 											?></td>
 											<td><?php $reason=substr($row->leavereason,0,25);
 											echo ucfirst($reason).'....'; ?></td>
@@ -257,7 +264,7 @@
 								<div class="modal-btn delete-action">
 									<div class="row">
 										<div class="col-6">
-											<a href="javascript:void(0);" class="btn btn-primary continue-btn">Delete</a>
+										<a href="javascript:void(0);"  id="yes_btn" class="btn btn-primary continue-btn">Ok</a>
 										</div>
 										<div class="col-6">
 											<a href="javascript:void(0);" data-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
@@ -330,7 +337,7 @@ $(document).ready(function() {
 	}).val('<?php echo ($todate!='0000-00-00')&&($todate!='')  ? $todate : ''; ?>');
 
 	 $('#example').DataTable( {
-		aaSorting: [[0, 'asc']],
+		aaSorting: [[0, 'desc']],
 		searching: false,
 		dom: 'Blfrtip',
 		responsive: true,
@@ -409,5 +416,34 @@ $(document).ready(function() {
 	 };
 	  $("div#example_wrapper").find($(".dt-buttons")).css(styles);
 } );
+
+function deletedata(id){  
+ 
+    $('#delete_approve').modal('show');
+   
+        $('#yes_btn').click(function(){        	
+                url="<?php echo base_url();?>"
+                $.ajax({
+                url:url+"/leave/delete_empleave/",
+                type:"post",
+                data:{id:id} ,
+                success: function (response) {  
+                //alert(response);
+                console.log(response);  
+                //return false;         
+                document.location.href = url+'leave/empleavelist';                  
+
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                 console.log(textStatus, errorThrown);
+            }
+            })
+           
+
+        });
+    
+   
+
+}
 </script>
     
