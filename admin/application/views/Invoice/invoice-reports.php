@@ -265,7 +265,7 @@
 
 												}?>
 
-											<?php if($compInvoice->status=='Pending'){
+											<?php if($compInvoice->status=='Unpaid'){
 
 													echo "<span class='badge badge-danger-border'>$compInvoice->status</span>";
 

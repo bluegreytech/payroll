@@ -94,160 +94,89 @@
 
 					<div class="row">
 
-
-
 						<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-
-
-
 							<div class="dash-widget clearfix card-box">
-
-
-
 								<span class="dash-widget-icon"><i class="fa fa-cubes"></i></span>
-
-
-
 								<div class="dash-widget-info">
-
-
-
 									<h3><?php echo $companyData;?></h3>
-
-
-
 									<a href="<?php echo base_url();?>Company" title="Go to Companies list"><span>Total Companies</span></a>
-
-
-
 								</div>
-
-
-
 							</div>
-
-
-
 						</div>
 
 
 
 						<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-
-
-
 							<div class="dash-widget clearfix card-box">
-
-
-
 								<span class="dash-widget-icon"><i class="fa fa-usd"></i></span>
-
-
-
 								<div class="dash-widget-info">
-
-
-
 									<h3><?php echo $hrData;?></h3>
-
-
-
 									<a href="<?php echo base_url();?>hr" title="Go to HR list"><span> Total HR</span></a>
-
-
-
 								</div>
-
-
-
 							</div>
-
-
-
 						</div>
 
-
-
 						<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-
-
-
 							<div class="dash-widget clearfix card-box">
-
-
-
 								<span class="dash-widget-icon"><i class="fa fa-diamond"></i></span>
-
-
-
 								<div class="dash-widget-info">
-
-
-
 									<h3><?php echo $adminData;?></h3>
-
-
-
 									<a href="<?php echo base_url();?>adminmaster/adminlist" title="Go to Admin list"><span>Total Admin</span></a>
-
-
-
 								</div>
-
-
-
 							</div>
-
-
-
 						</div>
 
 
 
 						<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-
-
-
 							<div class="dash-widget clearfix card-box">
-
-
-
 								<span class="dash-widget-icon"><i class="fa fa-user"></i></span>
-
-
-
 								<div class="dash-widget-info">
-
-
-
 									<h3><?php echo $empData;?></h3>
-
-
-
 									<a href="<?php echo base_url();?>employee" title="Go to Admin list"><span>Employees</span></a>
-
-
-
 								</div>
-
-
-
 							</div>
-
-
-
 						</div>
+
+
+
+					</div>
+					<br>
+					<div class="row">
+
+						<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+							<div class="dash-widget clearfix card-box">
+								<span class="dash-widget-icon"><i class="fa fa-cubes"></i></span>
+								<div class="dash-widget-info">
+									<h3><?php echo $invoiceTotal;?></h3>
+									<a href="<?php echo base_url();?>invoice" title="Go to Invoice list"><span>Total Invoice</span></a>
+								</div>
+							</div>
+						</div>
+
+
+
+						<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+							<div class="dash-widget clearfix card-box">
+								<span class="dash-widget-icon"><i class="fa fa-usd"></i></span>
+								<div class="dash-widget-info">
+									<h3><?php echo $qutationTotal;?></h3>
+									<a href="<?php echo base_url();?>invoice/quotation_list" title="Go to Quotation list"><span> Total Quotation</span></a>
+								</div>
+							</div>
+						</div>
+
+						
+
+
+						
 
 
 
 					</div>
 
 
-
 					<br>
-
-
-
 					<!-- <div class="row">
 
 
@@ -369,453 +298,124 @@
 
 
 					<div class="row">
-
-
-
 						<div class="col-md-6">
-
-
-
 							<div class="card card-table">
-
-
-
 								<div class="card-header">
-
-
-
 									<h3 class="card-title mb-0">Invoices</h3>
-
-
-
 								</div>
-
-
 
 								<div class="card-body">
-
-
-
 									<div class="table-responsive">
-
-
-
 										<table class="table table-striped table-nowrap custom-table mb-0">
-
-
-
 											<thead>
-
-
-
 												<tr>
-
-
-
 													<th>Invoice ID</th>
-
-
-
 													<th>Client</th>
-
-
-
 													<th>Due Date</th>
-
-
-
 													<th>Total</th>
-
-
-
 													<th>Status</th>
-
-
-
 												</tr>
-
-
-
 											</thead>
-
-
-
 											<tbody>
-
-
-
+											<?php
+												$i=1;
+												if($invoiceData){                             
+												foreach($invoiceData as $compInvoice)
+												{
+											?>
 												<tr>
-
-
-
-													<td><a href="invoice-view.php">#INV-0001</a></td>
-
-
-
+													<td><a href="<?php echo base_url();?>Invoice"><?php echo $compInvoice->invoicebillid;?></a></td>
 													<td>
-
-
-
-														<h2><a href="#">Global Technologies</a></h2>
-
-
-
+														<h2><a href="#"><?php echo $compInvoice->companyname ;?></a></h2>
 													</td>
+													<td><?php echo 	$invdate = date("d-m-Y", strtotime($compInvoice->invoicedate));?></td>
+													<!-- <td><?php	//echo 	$invdate = date("d-m-Y", strtotime($compInvoice->duedate));?></td> -->
 
+													<td><?php echo $compInvoice->netamount ;?></td>
+													<td>		
 
+													<?php if($compInvoice->status=='Paid'){ 
 
-													<td>11 Mar 2019</td>
+														echo "<span class='badge badge-success-border'>$compInvoice->status</span>";
 
+														}?>
 
+													<?php if($compInvoice->status=='Unpaid'){
 
-													<td>$380</td>
+															echo "<span class='badge badge-danger-border'>$compInvoice->status</span>";
 
+															}?>
 
-
-													<td>
-
-
-
-														<span class="badge badge-warning-border">Partially Paid</span>
-
-
-
-													</td>
-
-
-
+												</td>
 												</tr>
-
-
-
-												<tr>
-
-
-
-													<td><a href="invoice-view.php">#INV-0002</a></td>
-
-
-
-													<td>
-
-
-
-														<h2><a href="#">Delta Infotech</a></h2>
-
-
-
-													</td>
-
-
-
-													<td>8 Feb 2019</td>
-
-
-
-													<td>$500</td>
-
-
-
-													<td>
-
-
-
-														<span class="badge badge-success-border">Paid</span>
-
-
-
-													</td>
-
-
-
-												</tr>
-
-
-
-												<tr>
-
-
-
-													<td><a href="invoice-view.php">#INV-0003</a></td>
-
-
-
-													<td>
-
-
-
-														<h2><a href="#">Cream Inc</a></h2>
-
-
-
-													</td>
-
-
-
-													<td>23 Jan 2019</td>
-
-
-
-													<td>$60</td>
-
-
-
-													<td>
-
-
-
-														<span class="badge badge-danger-border">Unpaid</span>
-
-
-
-													</td>
-
-
-
-												</tr>
-
-
-
+											
+												
+											<?php
+										$i++;
+											} }
+											?>
 											</tbody>
-
-
-
 										</table>
-
-
-
 									</div>
-
-
-
 								</div>
-
-
-
 								<div class="card-footer">
-
-
-
 									<a href="<?php echo base_url();?>Invoice">View all invoices</a>
-
-
-
 								</div>
-
-
 
 							</div>
-
-
-
 						</div>
 
 
 
 						<div class="col-md-6">
-
-
-
 							<div class="card card-table">
-
-
-
 								<div class="card-header">
-
-
-
-									<h3 class="card-title mb-0">Payments</h3>
-
-
-
+									<h3 class="card-title mb-0">Quotation</h3>
 								</div>
-
-
-
 								<div class="card-body">
-
-
-
 									<div class="table-responsive">	
-
-
-
 										<table class="table table-striped custom-table table-nowrap mb-0">
-
-
-
 											<thead>
-
-
-
 												<tr>
-
-
-
 													<th>Invoice ID</th>
-
-
-
-													<th>Client</th>
-
-
-
-													<th>Payment Type</th>
-
-
-
-													<th>Paid Date</th>
-
-
-
-													<th>Paid Amount</th>
-
-
-
+													<th>Company Type</th>
+													<th>Company Name</th>
+													<th>Email Address</th>
+													<th>Contact Number</th>
+													<th>Quotation Date</th>
 												</tr>
-
-
-
 											</thead>
-
-
-
 											<tbody>
-
-
-
+											<?php
+												$i=1;
+												if($qutationData){                             
+												foreach($qutationData as $quota)
+												{
+											?>
 												<tr>
-
-
-
-													<td><a href="invoice-view.php">#INV-0001</a></td>
-
-
-
+													<td><a href="<?php echo base_url();?>Invoice/quotation_view/<?php echo $quota->quotationid;?>"><?php echo $quota->billid ?></a></td>
 													<td>
-
-
-
-														<h2><a href="#">Global Technologies</a></h2>
-
-
-
+														<h2><?php echo $quota->companytype ;?></h2>
 													</td>
-
-
-
-													<td>Paypal</td>
-
-
-
-													<td>11 Mar 2019</td>
-
-
-
-													<td>$380</td>
-
-
-
-												</tr>
-
-
-
-												<tr>
-
-
-
-													<td><a href="invoice-view.php">#INV-0002</a></td>
-
-
-
 													<td>
-
-
-
-														<h2><a href="#">Delta Infotech</a></h2>
-
-
-
+														<h2><?php echo $quota->companyname ;?></h2>
 													</td>
-
-
-
-													<td>Paypal</td>
-
-
-
-													<td>8 Feb 2019</td>
-
-
-
-													<td>$500</td>
-
-
-
+													<td><?php echo $quota->companyemail ;?></td>
+													<td><?php echo $quota->comcontactnumber ;?></td>
+													<td><?php echo 	$invdate = date("d-m-Y", strtotime($quota->quotationdate));?></td>
+												
 												</tr>
-
-
-
-												<tr>
-
-
-
-													<td><a href="invoice-view.php">#INV-0003</a></td>
-
-
-
-													<td>
-
-
-
-														<h2><a href="#">Cream Inc</a></h2>
-
-
-
-													</td>
-
-
-
-													<td>Paypal</td>
-
-
-
-													<td>23 Jan 2019</td>
-
-
-
-													<td>$60</td>
-
-
-
-												</tr>
-
-
-
+												<?php
+												$i++;
+													} }
+												?>     	
 											</tbody>
-
-
-
 										</table>
-
-
-
 									</div>
-
-
-
 								</div>
-
-
 
 								<div class="card-footer">
-
-
-
-									<a href="payments.php">#</a>
-
-
-
+									<a href="<?php echo base_url();?>invoice/quotation_list">View all Quotation</a>
 								</div>
 
 

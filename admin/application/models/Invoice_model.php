@@ -664,8 +664,8 @@ class Invoice_model extends CI_Model
 		$this->db->select('t1.*,t2.*');
 		$this->db->from('tblquotation as t1');
 		$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
-		$this->db->where('isdelete','0');
-		$this->db->order_by('quotationid','desc');
+		$this->db->where('t1.isdelete','0');
+		$this->db->order_by('t1.quotationid','desc');
 		$r=$this->db->get();
 		$res = $r->result();
 		return $res;
