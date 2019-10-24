@@ -316,7 +316,7 @@
 	            doc.styles.tableHeader.fontSize = 12; //2, 3, 4, etc
 				doc.defaultStyle.alignment = 'center';
 				doc.styles.tableHeader.alignment = 'center';
-				doc.content[1].table.widths = [ '5%',  '35%', '30%', '14%','14%', '14%'];
+				doc.content[1].table.widths = [ '5%',  '20%', '25%', '25%','14%', '14%'];
 	         
 	       },
 	 },
@@ -357,45 +357,36 @@ $('#purpose').on('change', function() {
 	$("#business1").show();
 	$("#business2").hide();
 	$("#business3").hide();
-	// $("#business4").hide();
-	// $("#business5").hide();
-	// $("#business6").hide();
+
   }
   else if(this.value == 'companyname')
   {
 	$("#business1").show();
 	$("#business2").hide();
 	$("#business3").hide();
-	// $("#business4").hide();
-	// $("#business5").hide();
-	// $("#business6").hide();
+	
+	
   }
   else if(this.value == 'companyemail')
   {
 	$("#business1").show();
 	$("#business2").hide();
 	$("#business3").hide();
-	// $("#business4").hide();
-	// $("#business5").show();
-	// $("#business6").hide();
+
   }
   else if(this.value == 'comcontactnumber')
   {
 	$("#business1").show();
 	$("#business2").hide();
 	$("#business3").hide();
-	// $("#business4").hide();
-	// $("#business5").hide();
-	// $("#business6").show();
+
   }
   else if(this.value == 'quotationdate')
   {
 	$("#business1").hide();
 	$("#business2").show();
 	$("#business3").show();
-	// $("#business4").show();
-	// $("#business5").hide();
-	// $("#business6").hide();
+
   }
 });
 });

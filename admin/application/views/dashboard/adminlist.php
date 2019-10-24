@@ -488,7 +488,7 @@
 
 								<form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>Adminmaster/addadmin" id="form_valid">
 
-								<div class="profile-img-wrap edit-img">
+									<div class="profile-img-wrap edit-img">
 
 											<img class="inline-block" src="<?php echo base_url(); ?>upload/default/avtar.jpg" alt="" id="blah">
 
@@ -500,7 +500,7 @@
 
 											</div>
 
-										</div>
+									</div>
 									<center><h6>Uplopad only jpeg,jpg,png,bmp image file</h6></center>
 									<div class="row"> 
 

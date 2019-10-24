@@ -173,7 +173,7 @@ class Company_model extends CI_Model
 		'Createdby'=>1,
 		'Createdon'=>date("Y-m-d h:i:s")
 		);
-
+		//print_r($data);die;
 		$this->db->insert('tblcompanynotification',$data);
 		$insert_id = $this->db->insert_id();
 		$data = array();
@@ -600,6 +600,7 @@ class Company_model extends CI_Model
 			$this->db->from('tblcompany as t1');
 			$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
 			$this->db->where($where);
+			$this->db->order_by('companyid','desc');
 			$r=$this->db->get();
 			$res = $r->result();
 			return $res;
@@ -1291,7 +1292,7 @@ class Company_model extends CI_Model
 					'Ifsccode'=>$Ifsccode
 					);
 				$this->db->insert('tblcompanybankdetail',$data4);	
-				return 1;
+				//return 1;
 
 	
 

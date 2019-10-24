@@ -358,34 +358,6 @@ class Company extends CI_Controller
 
 
 
-	// public function index()
-	// {   
-	// 	if(!check_admin_authentication()){ 
-	// 		redirect(base_url('Login'));
-	// 	}
-	// 	if($_POST!='')
-	// 	{
-	// 			$option=$this->input->post('option');
-	// 			$keyword1=$this->input->post('keyword1');
-	// 			$keyword2=$this->input->post('keyword2');
-				
-	// 		if($option!='' && $keyword1!='')
-	// 		{	
-	// 			$option=$this->input->post('option');
-	// 			$data['companyData'] = $this->Company_model->search($option,$keyword1);
-	// 		}
-	// 		else if($option!='' && $keyword2!='')
-	// 		{	
-	// 			$option=$this->input->post('option');
-	// 			$data['companyData'] = $this->Company_model->search_companytype($option,$keyword2);
-	// 		}		
-	// 		else
-	// 		{
-	// 			$data['companyData']=$this->Company_model->list_company();
-	// 		} 
-	// 		$this->load->view('Company/companylist',$data);	
-	// 	}		
-	// }
 
 
 	function index()

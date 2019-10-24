@@ -31,6 +31,7 @@
 		<script src="<?php echo base_url(); ?>default/js/jquery.dataTables.min.js"></script>
 		<script src="<?php echo base_url(); ?>default/js/dataTables.bootstrap4.min.js"></script>
 		<script src="<?php echo base_url(); ?>default/js/dataTables.buttons.min.js"></script>
+		<script src="<?php echo base_url(); ?>default/js/buttons.bootstrap4.min.js"></script>
         <script src="<?php echo base_url(); ?>default/js/jszip.min.js"></script>
         <script src="<?php echo base_url(); ?>default/js/pdfmake.min.js"></script>
         <script src="<?php echo base_url(); ?>default/js/vfs_fonts.js"></script>

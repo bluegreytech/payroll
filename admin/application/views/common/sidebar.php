@@ -62,7 +62,7 @@
 
 
 							<li class="submenu">
-								<a href="<?php echo base_url();?>Dashboard"><i class="fa fa-building-o" aria-hidden="true"></i><span> Quotation</span> <span class="menu-arrow"></span></a>
+								<a href="<?php echo base_url();?>Dashboard"><i class="fa fa-id-card-o" aria-hidden="true"></i><span> Quotation</span> <span class="menu-arrow"></span></a>
 								<ul style="display: none;">
 									<li><a href="<?php echo base_url();?>invoice/quotation_list">List of Company Quotation</a></li>
 								</ul>

@@ -124,8 +124,8 @@
 
 												</div>
 
-											</div>
-
+									</div>
+									<center><h6>Uplopad only jpeg,jpg,png,bmp image file</h6></center>
 
 
 									<div class="row">

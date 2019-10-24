@@ -83,21 +83,30 @@
 								<div class="row">
 
 										<div class="col-md-6">
-					
+										
 											<div class="form-group">
 											
 												<label>Type of Company<span class="text-danger">*</span>
 												</label>
 												
-												<select  class=" form-control selectpicker" multiple data-live-search="true" data-actions-box="true" multiple name="companyid[]" id="companyid">
+												<select  class=" form-control selectpicker" multiple data-live-search="true" data-actions-box="true" multiple name="companyid[]">
+													<!-- <option disabled="" value="">Please select</option> -->	
 													<?php 
+													
+			
+													
 													if(!empty($companyData)){
 														foreach($companyData as $company) { 
+															
+
 														 ?>
+													
 											<option value="<?php echo $company->companyid; ?>"><?php echo $company->companyname;?></option>
+
+										
+											
 														<?php  } } ?>
 												</select>
-
 											</div>
 
 										</div>
@@ -126,7 +135,7 @@
 
 													<label class="col-form-label">Document Title  <span class="text-danger">*</span></label>
 
-													<input class="form-control"  maxlength="200" name="Documenttitle">
+													<input class="form-control"  maxlength="200" name="Documenttitle" >
 
 												</div>
 
@@ -163,9 +172,13 @@
 									<div class="row">	
 
 										<div class="col-md-6">
+
 											<div class="form-group">
-												<label class="col-form-label">Upload File</label>
-												<input class="upload" type="file" name="Documentfile[]"  id="Documentfile" placeholder="Upload document file" multiple="multiple">
+
+												<label class="col-form-label">Upload File<span class="text-danger">*</span></label>
+
+												<input class="form-control" type="file" name="Documentfile[]" placeholder="Upload document file" multiple="multiple">
+
 											</div>
 											<h6>Uplopad only jpg,jpeg,png,pdf,doc,docx,ppt,pptx,xls,xlsx,bmp file</h6>
 										</div>		
@@ -237,11 +250,7 @@
 					 ignoreReadonly: true,					
 				});
 
-				$.validator.addMethod('filesize', function (value, element, param) {
-
-return this.optional(element) || (element.files[0].size <= param)
-
-} ,'File size must be equal to or less then 2MB');	
+			
 
 
 
@@ -294,49 +303,78 @@ $(document).ready(function()
 		noneSelectedText : 'Please Select',
 	});
 				$("#form_valid").validate(
+
 				{
 
 						rules: {
-							'companyid[]':{
-									required: true,
-											},
+
+							// 'companyname[]':{
+							// required: true,
+							// 		},
+							// companyid: {
+
+							// 		required: true,
+
+							// 			},
+
 							Documenttitle: {
+
 									required: true,
+
 										},
+
 							'Notificationdescription': {
+
 									required: true,
+
 										},
-							'Documentfile[]': {
-									//required: true,
-									extension:'bmp|jpg|jpeg|png|pdf|doc|docx|ppt|pptx|xls|xlsx',
-									filesize : 2000000,	
-									},
+
+							Documentname: {
+
+									required: true,
+
+										},
+							Documentfile: {
+								//required: true,
+								extension:'bmp|jpg|jpeg|png|pdf|doc|docx|ppt|pptx|xls|xlsx'
+								},
+
 							},
 
 						messages:{
-						
+
+							
+
+							// companyid: {
+
+							// 		required: "Please select company",
+
+							// 			},
+
 							Documenttitle: {
+
 									required: "Please enter a ducument title",
+
 										},	
-								errorPlacement: function (error, element) 
-								{
-									console.log('dd', element.attr("name"))
-									if (element.attr("name") == "companyid[]") {
-									error.appendTo("#companyiderror");
-									} else{
-									error.insertAfter(element)
-									}
-								},
-								'Notificationdescription': {
-								required: "Please enter a notification message",
+
+						    'Notificationdescription': {
+
+									required: "Please enter a notification message",
+
+										},	
+
+							Documentname: {
+
+									required: "Please upload a file",
+
+										},	
+							Documentfile: {
+									required: "Please upload a valid file",
 								},	
-								'Documentfile[]': {
-									extension: "Please upload a valid file",
-								},
 
 
-					},
-				
+					}					
+
 				});		
 
 		});	

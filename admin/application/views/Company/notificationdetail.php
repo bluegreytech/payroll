@@ -73,7 +73,7 @@
 
 							<div class="col-sm-7 col-7 text-right m-b-30">
 
-							<a href="<?php echo base_url();?>Company/companynotification_list" class="btn add-btn"> Back to Notification of Company</a>
+							<a href="<?php echo base_url();?>Company/companynotification_list" class="btn add-btn"> Back to List of Company Notification </a>
 
 							</div>
 
@@ -345,14 +345,14 @@
 		download: 'open',
 		text:'<i class="fa fa-files-o"></i> Copy',
 		exportOptions: {
-		columns: [0,1,2,3,4,5]
+		columns: [0,1,2,3]
 		}
 	 },
 	 {
 		extend: 'excelHtml5',
 		text:'<i class="fa fa-file-excel-o"></i> Excel',
 		exportOptions: {
-		columns: [0,1,2,3,4,5]
+		columns: [0,1,2,3]
 		}
 	 },
 	 {
@@ -360,7 +360,7 @@
 		download: 'open',
 	    text:'<i class="fa fa-file-text-o"></i> CSV',
 		exportOptions: {
-		columns: [0,1,2,3,4,5]
+		columns: [0,1,2,3]
 		},
 		
 	 },
@@ -372,7 +372,7 @@
 		orientation: 'landscape', 
 		pageSize: 'A4',		
 		exportOptions: {
-		columns: [0,1,2,3,4,5],
+		columns: [0,1,2,3],
 		
 		},
 		
@@ -382,7 +382,7 @@
 	            doc.styles.tableHeader.fontSize = 12; //2, 3, 4, etc
 				doc.defaultStyle.alignment = 'center';
 				doc.styles.tableHeader.alignment = 'center';
-				doc.content[1].table.widths = [ '5%',  '35%', '30%', '14%','14%', '14%'];
+				doc.content[1].table.widths = [ '5%',  '30%', '30%', '14%'];
 	         
 	       },
 	 },
@@ -392,7 +392,7 @@
 		pageSize: 'A4',
 		text:'<i class="fa fa-print"></i> Print',
 		exportOptions: {
-			columns: [0,1,2,3,4,5],
+			columns: [0,1,2,3],
 			 		
 		},
 		 
