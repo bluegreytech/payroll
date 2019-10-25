@@ -359,9 +359,7 @@
 
 											<a  href="<?php echo base_url();?>Leave/leavelist" role="button" title="Show Leaves Types">
 
-													<i class="fa fa-calendar-check-o" aria-hidden="true"></i></a>	
-
-														
+													<i class="fa fa-calendar-check-o" aria-hidden="true"></i></a>				
 
 										</td>
 

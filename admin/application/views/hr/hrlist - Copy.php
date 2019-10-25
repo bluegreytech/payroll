@@ -1,6 +1,15 @@
 ﻿<?php 
+
+
+
 	 $this->load->view('common/header.php');
+
+
+
 	 $this->load->view('common/sidebar.php');
+
+
+
 ?>
 
 
@@ -145,7 +154,7 @@
 
 
 
-					<form method="post" action="<?php echo base_url();?>Hr">
+					<form method="post" action="<?php echo base_url();?>Hr/searchhr">
 
 
 
@@ -157,14 +166,61 @@
 
 
 
-							
+							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+
+
+
+									<div class="form-group form-focus select-focus">
+
+
+
+										<select class="select floating" name="option" id="purpose"> 
+
+
+
+											<option value=""> -- Select -- </option>
+
+
+
+											<option value="companyname" <?php if($option=='companyname'){echo 'selected';} ?>>Company Name</option>
+
+
+
+											<option value="FullName" <?php if($option=='FullName'){echo 'selected';} ?>>Hr Name</option>
+
+
+
+											<option value="EmailAddress" <?php if($option=='EmailAddress'){echo 'selected';} ?>>Email Address</option>
+
+
+
+											<option value="Contact" <?php if($option=='Contact'){echo 'selected';} ?>>Contact Number</option>
+
+
+
+										</select>
+
+
+
+										<!-- <label class="focus-label">Role</label> -->
+
+
+
+									</div>
+
+
+
+							</div>
 
 
 
 							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12" >  
-									
+									<div class="form-group form-focus box" id='business'>
+										<input type="text" name="keyword1"  value="<?php echo $keyword1;?>"  class="form-control floating">
+										<label class="focus-label">Search</label>
+									</div>
 
-									<div class="form-group form-focus box2">
+									<div class="form-group form-focus box2" id='business2' style="display: none;">
 										<div class="form-group">
 											<select class="form-control" name="keyword2"> 
 												<option desabled value="">Please select company</option>
@@ -173,7 +229,7 @@
 													foreach($companyData as $comp)
 													{
 												?>
-													<option value="<?php echo $comp->companyid; ?>"><?php echo $comp->companyname;?></option>
+													<option value="<?php echo $comp->companyname; ?>"><?php echo $comp->companyname;?></option>
 												<?php
 												}}
 												?>
@@ -1585,7 +1641,22 @@ $('#DateofBirth2').datetimepicker({
 
 
 
-
+$(document).ready(function(){
+    $('#purpose').on('change', function() {
+      if(this.value == 'companyname')
+      {
+        $("#business2").show();
+		$("#business").hide();
+	
+      }
+      else
+      {
+        $("#business2").hide();
+		$("#business").show();
+	
+      }
+    });
+});
 
 
 

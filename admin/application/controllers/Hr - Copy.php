@@ -8,21 +8,71 @@ class Hr extends CI_Controller
 		$this->load->model('Hr_model');
 	}
 
+	
 
-	public function index()
-	{	
+	function index()
+	{
 		if(!check_admin_authentication()){ 
-			redirect(base_url());
-		}      
-		if($_POST!='')
-		{
-			$keyword2=$this->input->post('keyword2');	
-			$data['hrData'] = $this->Hr_model->searchbyname($keyword2);	
-		}	
+			redirect(base_url('Login'));
+		}
+		$data=array();
+		$data['option']='';
+		$data['keyword1']='';
+		$data['keyword2']='';
+	
+		$data['redirect_page']='Hr';
+		$data['hrData']=$this->Hr_model->hr_list();
 		$data['companyData']=$this->Hr_model->list_company();
 		$this->load->view('hr/hrlist',$data);
 	}
 
+	
+
+	public function searchhr()
+	{   
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
+		$data=array();
+		$data['activeTab']="searchhr";	
+		if($_POST!='')
+		{
+				$option=$this->input->post('option');
+				$keyword1=$this->input->post('keyword1');
+				$keyword2=$this->input->post('keyword2');
+			if($option!='' && $keyword1!='')
+			{	
+				$data['option']=$this->input->post('option');
+				$data['keyword1']=$this->input->post('keyword1');
+				$data['keyword2']=$this->input->post('keyword2');
+				
+					$option=$data['option'];
+					$keyword1=$data['keyword1'];
+					$keyword2=$data['keyword2'];
+					$data['hrData'] = $this->Hr_model->search($option,$keyword1);
+			}
+			else if($option!='' && $keyword2!='')
+			{	
+				$data['option']=$this->input->post('option');
+				$data['keyword1']=$this->input->post('keyword1');
+				$data['keyword2']=$this->input->post('keyword2');
+				$option=$data['option'];
+				$keyword1=$data['keyword1'];
+				$keyword2=$data['keyword2'];
+				$data['hrData'] = $this->Hr_model->searchbyname($option,$keyword2);
+			}		
+			else
+			{
+				$data['option']='';
+				$data['keyword1']='';
+				$data['keyword2']='';
+				$data['hrData']=$this->Hr_model->hr_list();
+			} 
+			$data['redirect_page']="Hr";
+			$data['companyData']=$this->Hr_model->list_company();
+			$this->load->view('hr/hrlist',$data);
+		}		
+	}
 
 
 

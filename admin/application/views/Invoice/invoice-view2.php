@@ -32,7 +32,7 @@
 																			<table border="0" cellspacing="0" cellpadding="0" style="width:100%">
 																				<tr>
 																					<td align="left" width="50%">
-																						<img src="<?php echo base_path(); ?>default/img/Company/companylogo/logo.jpg" style="width:100%;height:200px;width:200px;>
+																						<img src="<?php echo base_path(); ?>default/img/Company/companylogo/logo.jpg" style="width:100%;height:200px;width:200px;margin:20px 0 10px 0;">
 																						<h5 style="font-weight: 500;font-size: .9375rem;margin:10px 0px;"><strong>Invoice From:</strong></h5>
 																						<p style="font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 10px;">Name: <span style="font-weight:500;"><?php echo $Adminname; ?></span></p>
 																						<p style="font-size: .9375rem;color: #1f1f1f;margin:0;margin-bottom: 10px;">Email: <span style="font-weight:500;"> <?php echo $Emailaddress;?></span></p>

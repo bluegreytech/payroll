@@ -297,18 +297,13 @@ class Hr_model extends CI_Model
 
 	}
 
-	function searchbyname($option,$keyword2)
+	function searchbyname($keyword2)
 	{
-			$where = array('t1.Is_deleted' =>'0');
-			$keyword = str_replace('-', ' ', $keyword2);
+			$where=array('t2.companyid'=>$keyword2,'t1.Is_deleted'=>'0');
 			$this->db->select('t1.*,t2.companyname');
 			$this->db->from('tblhr as t1');
 			$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
 			$this->db->where($where);
-			if($option == 'companyname')
-			{
-				$this->db->like('companyname',$keyword);
-			}
 			$query = $this->db->get();
 			if($query->num_rows() > 0)
 			 {
@@ -317,40 +312,23 @@ class Hr_model extends CI_Model
 
 	}
 
-
-	// function search($option,$keyword)
-	// {
-	// 		$where = array('t1.Is_deleted' =>'0');
-	// 		$keyword = str_replace('-', ' ', $keyword);
-	// 		$this->db->select('t1.*,t2.companyname');
-	// 		$this->db->from('tblhr as t1');
-	// 		$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
-	// 		$this->db->where($where);
-	// 		if($option == 'FullName')
-	// 		{
-	// 			$this->db->like('FullName',$keyword);
-	// 		}
-	// 		else if($option == 'companyname')
-	// 		{
-	// 			$this->db->like('companyname',$keyword);
-	// 		}
-	// 		else if($option == 'EmailAddress')
-	// 		{
-	// 			$this->db->like('EmailAddress',$keyword);
-	// 		}
-	// 		else if($option == 'Contact')
-	// 		{
-	// 			$this->db->like('Contact',$keyword);
-	// 		} 
-
-	// 		$query = $this->db->get();
-	// 		if($query->num_rows() > 0)
-	// 		 {
-	// 			return $query->result();
-	// 		 }        
+	// function search($keyword)
+	// {  
+	// 	$where=array('t1.companyid'=>$keyword,'t2.Is_deleted'=>'0');
+	// 	$this->db->select('t1.*,t2.*');
+	// 	$this->db->from('tblcompany as t1');
+	// 	$this->db->join('tblcmpleave as t2','t1.companyid = t2.companyid', 'LEFT');
+	// 	$this->db->where($where);	
+	// 	$query = $this->db->get();	
+	// 	if($query->num_rows() > 0)
+	// 	{
+	// 		return $query->result();
+	// 	} 
 
 	// }
 
+
+	
 
 		function list_company(){
 
