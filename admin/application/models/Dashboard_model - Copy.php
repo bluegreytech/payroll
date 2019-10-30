@@ -2,6 +2,19 @@
 class Dashboard_model extends CI_Model
  {
 
+		
+	// function hr_list(){
+	// 	$this->db->select('UserId,RoleId,CONCAT(FirstName ,LastName) AS FirstName,EmailAddress,DateofBirth,PhoneNumber,ProfileImage,Gender,Address,PinCode,CountryId,StateId,City,IsActive');
+	// 	$this->db->from('tbluser');
+	// 	$this->db->where('RoleId',3);
+	// 	$r=$this->db->get();
+	// 	$res = $r->result();
+	// 	return $res;
+	// }
+
+	
+
+
 	function list_employee()
 	{
 		$this->db->select('*');
@@ -34,38 +47,6 @@ class Dashboard_model extends CI_Model
 	}
 
 
-	function list_company_count()
-	{
-	
-		$query =  $this->db->query("SELECT COUNT(companyid) as count,MONTHNAME(createdon) as month_name FROM tblcompany WHERE YEAR(createdon) = '" . date('Y') . "'
-		GROUP BY YEAR(createdon),MONTH(createdon)"); 
-   
-		$record = $query->result();
-		$data = [];
-   
-		foreach($record as $row)
-		{
-			$data['label'][] = $row->month_name;
-			$data['data'][] = (int) $row->count;
-		}
-		$data['chart_data'] = json_encode($data);
-		//die;
-		
-	}
-
-	function list_company_detail()
-	{
-		$this->db->select('*');
-		$this->db->from('tblcompany');
-		$this->db->where('isdelete','0');
-		$this->db->order_by('companyid','DESC');
-		$this->db->limit(5);
-		$query=$this->db->get();
-		$res=$query->result();
-		return $res;
-	}
-
-
 
 	function list_hr()
 	{
@@ -75,20 +56,6 @@ class Dashboard_model extends CI_Model
 		$r = $this->db->get();
 		return $query= $r->num_rows();
 	}
-
-	function list_hr_detail()
-	{
-		$this->db->select('hr.*,comp.*');
-		$this->db->from('tblhr as hr');
-		$this->db->join('tblcompany as comp', 'hr.companyid = comp.companyid', 'LEFT');
-		$this->db->where('Is_deleted','0');
-		$this->db->order_by('hr_id','DESC');
-		$this->db->limit(5);
-		$query=$this->db->get();
-		$res=$query->result();
-		return $res;
-	}
-
 
 
 

@@ -94,3 +94,4 @@ ERROR - 2019-10-25 12:04:46 --> 404 Page Not Found: Assets/img
 ERROR - 2019-10-25 12:04:46 --> 404 Page Not Found: Assets/img
 ERROR - 2019-10-25 12:04:46 --> 404 Page Not Found: Assets/img
 ERROR - 2019-10-25 12:04:46 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-25 14:21:54 --> 404 Page Not Found: Assets/img
