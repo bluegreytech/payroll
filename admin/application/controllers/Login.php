@@ -62,92 +62,35 @@ class Login extends CI_Controller {
 									$this->session->set_userdata($session);
 									$this->session->set_flashdata('success','User Login successfully!');
 									redirect('Dashboard');
-
-
-								
-
-
+					
 							}
-
-
 							else
-
-
 							{
-
-
 									$this->session->set_userdata($session);
-
-
 									$this->session->set_flashdata('warning','You are not activate please contact to admin!');
-
-
 									redirect('Login');	
-
-
 							}
-
 
 						}
-
-
 						else
-
-
 						{
-
-
 							$this->session->set_userdata($session);
-
-
 							$this->session->set_flashdata('error', 'Invalid Username or Password!');
-
-
 							redirect('Login');	
-
 
 						} 
 
-
-					
-
-
-					
-
-
-					
-
-
 				}
-
-
 				$this->load->view('common/login');
-
-
-			
-
 
     }
 
 
 
-
-
-	
-
-
 	public function logout()
-
-
 	{
-
-
 		$this->session->sess_destroy();
-
-
 		redirect('Login');
-
-
 	}
 
 
@@ -159,136 +102,40 @@ class Login extends CI_Controller {
 
 	function resetpassword($ResetPasswordCode='')
 	{
-
-
 			$AdminId=$this->Login_model->checkResetCode($ResetPasswordCode);
-
-
 			$data = array();
-
-
 			$data['AdminId']=$AdminId;
-
-
 			$data['ResetPasswordCode']=$ResetPasswordCode;
-
-
-			
-
-
 			if($AdminId!='')
-
-
 			{	
-
-
 				if($_POST)
-
-
 				{
-
-
 					if($this->input->post('AdminId')!='')
-
-
 					{
-
-
 							$up=$this->Login_model->updatePassword($AdminId);
-
-
 							if($up==1)
-
-
 							{
-
-
 								$this->session->set_flashdata('success','Your password change successfully!'); 
-
-
 								redirect('Login');
-
-
 							}
-
-
 							elseif($up==2)
-
-
 							{
-
-
 								$this->session->set_flashdata('error','Your link has been expired!'); 
-
-
 								redirect('Login/forgotpassword');
-
-
 							}
-
-
 					}
-
-
 					else
-
-
 					{
-
-
 						$this->session->set_flashdata('success','User login successfully'); 
-
-
 					}
-
-
-					
-
-
 				}
-
-
 				else
-
-
 				{
-
-
 					//$this->load->view('common/reset_password',$data);
-
-
 		    	}
-
-
-
-
-
 			}
-
-
 			$this->load->view('common/reset_password',$data);
-
-
 	}
-
-
-
-
-
-
-
-
-
-
-
-	
-
-
-
-
-
-
-
 
 
 

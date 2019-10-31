@@ -88,6 +88,7 @@ class Invoice_model extends CI_Model
 						}
 
 					   
+						$AdminIdlogin=$this->session->userdata('AdminId');
 
 						$companyid=$this->input->post('companyid');
 						$hr_id=$this->input->post('hr_id');
@@ -129,12 +130,21 @@ class Invoice_model extends CI_Model
 						// print_r($data);
 						// echo "aaa";
 						// die;
-						$this->db->insert('tblcompanyinvoice',$data);
-						return 1;
-
+						$res=$this->db->insert('tblcompanyinvoice',$data);
+						if($res)
+						{
+							$log_data = array(
+								'AdminId' =>$AdminIdlogin,
+								'Module' => 'Company Invoice',
+								'Activity' =>'Add'
+							);
+							$log = $this->db->insert('tblactivitylog',$log_data);
+							return 1;
+						}else
+						{
+							return 2;
+						}
 						
-						
-							
 					}die;
 							
 				}
@@ -146,6 +156,7 @@ class Invoice_model extends CI_Model
 						$k=$j[1]+1;
 						$mm=date('Ym'.'-'.$k);
 
+						$AdminIdlogin=$this->session->userdata('AdminId');
 						$companyid=$this->input->post('companyid');
 						$hr_id=$this->input->post('hr_id');
 						$paymentopt=$this->input->post('paymentopt');
@@ -186,8 +197,20 @@ class Invoice_model extends CI_Model
 						// print_r($data);
 						// echo "bbb";
 						// die;
-						$this->db->insert('tblcompanyinvoice',$data);
-						return 1;
+						$res=$this->db->insert('tblcompanyinvoice',$data);
+						if($res)
+						{
+							$log_data = array(
+								'AdminId' =>$AdminIdlogin,
+								'Module' => 'Company Invoice',
+								'Activity' =>'Add'
+							);
+							$log = $this->db->insert('tblactivitylog',$log_data);
+							return 1;
+						}else
+						{
+							return 2;
+						}
 
 					
 					
@@ -228,7 +251,8 @@ class Invoice_model extends CI_Model
 							$k=$j[1]+1;
 							$mm=date('Ym'.'-'.$k);
 						}
-							
+
+						$AdminIdlogin=$this->session->userdata('AdminId');
 						$companytypeid=$this->input->post('companytypeid');
 						$companyname=$this->input->post('companyname');	
 						$companyemail=$this->input->post('companyemail');
@@ -258,6 +282,17 @@ class Invoice_model extends CI_Model
 						$this->db->insert('tblquotation',$data);
 						//return 1;	
 						$insert_id = $this->db->insert_id();
+						if($insert_id)
+						{
+							$log_data = array(
+								'AdminId' => $AdminIdlogin,
+								'Module' => 'Company Quotation',
+								'Activity' =>'Add'
+			
+							);
+							$log = $this->db->insert('tblactivitylog',$log_data);
+						}
+
 						$quotationdetail=$this->input->post('quotationdetail');
 						$quotationrate=$this->input->post('quotationrate');
 						$data2 = array();
@@ -288,6 +323,7 @@ class Invoice_model extends CI_Model
 						$k=$j[1]+1;
 						$mm=date('Ym'.'-'.$k);
 						
+						$AdminIdlogin=$this->session->userdata('AdminId');
 						$companytypeid=$this->input->post('companytypeid');
 						$companyname=$this->input->post('companyname');	
 						$companyemail=$this->input->post('companyemail');
@@ -317,6 +353,17 @@ class Invoice_model extends CI_Model
 						$this->db->insert('tblquotation',$data);
 						//return 1;	
 						$insert_id = $this->db->insert_id();
+						if($insert_id)
+						{
+							$log_data = array(
+								'AdminId' => $AdminIdlogin,
+								'Module' => 'Company Quotation',
+								'Activity' =>'Add'
+			
+							);
+							$log = $this->db->insert('tblactivitylog',$log_data);
+						}
+
 						$quotationdetail=$this->input->post('quotationdetail');
 						$quotationrate=$this->input->post('quotationrate');
 						$data2 = array();
@@ -372,6 +419,7 @@ class Invoice_model extends CI_Model
 
 	function update_quotation()
 	{
+		$AdminIdlogin=$this->session->userdata('AdminId');
 		$quotationid=$this->input->post('quotationid');
 		$quotationdetailid=$this->input->post('quotationdetailid');
 
@@ -392,7 +440,16 @@ class Invoice_model extends CI_Model
 				);
 			//print_r($data);die;
 			$this->db->where("quotationid",$quotationid);
-			$this->db->update('tblquotation',$data);	
+			$res=$this->db->update('tblquotation',$data);	
+			if($res)
+			{
+				$log_data = array(
+					'AdminId' =>$AdminIdlogin,
+					'Module' => 'Company Quotation',
+					'Activity' =>'Update'
+				);
+				$log = $this->db->insert('tblactivitylog',$log_data);
+			}
 			//return 1;
 
 		
@@ -447,6 +504,7 @@ class Invoice_model extends CI_Model
 
 	public function update_invoice()
 	{
+		$AdminIdlogin=$this->session->userdata('AdminId');
 		$Companyinvoiceid=$this->input->post('Companyinvoiceid');
 		$invoicedate=$this->input->post('invoicedate');
 
@@ -473,8 +531,22 @@ class Invoice_model extends CI_Model
 
 			//print_r($data);die;
 			$this->db->where("Companyinvoiceid",$Companyinvoiceid);
-			$this->db->update('tblcompanyinvoice',$data);	
-			return 1;	 	
+			$res=$this->db->update('tblcompanyinvoice',$data);	
+			if($res)
+			{
+				$log_data = array(
+					'AdminId' => $AdminIdlogin,
+					'Module' => 'Company Invoice',
+					'Activity' =>'Update'
+				);
+				$log = $this->db->insert('tblactivitylog',$log_data);
+				return 1;	
+			}
+			else
+			{
+				return 3;	
+			}
+		 	
 
 		
 

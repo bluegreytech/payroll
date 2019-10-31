@@ -1,28 +1,16 @@
 <?php
-
-
-
-
-
-
-
 class Hr_model extends CI_Model
  {
 
-
-
 	function insertdata()
 	{		
-
-
-
-			$this->db->select('*');
-			$this->db->where('EmailAddress',$this->input->post('EmailAddress'));
-			$query=$this->db->get('tblhr');
-			if($query->num_rows() > 0)
-			{
-				return 3;
-			}
+		$this->db->select('*');
+		$this->db->where('EmailAddress',$this->input->post('EmailAddress'));
+		$query=$this->db->get('tblhr');
+		if($query->num_rows() > 0)
+		{
+			return 3;
+		}
 
 
 		 $hr_image='';
@@ -95,7 +83,7 @@ class Hr_model extends CI_Model
 		   }
 
 
-
+		    $AdminIdlogin=$this->session->userdata('AdminId');
 			$code=rand(12,123456789);
 			$companyid=$this->input->post('companyid');
 			$FullName=$this->input->post('FullName');
@@ -130,6 +118,17 @@ class Hr_model extends CI_Model
 			$this->db->insert('tblhr',$data);
 			//return 1;
 			$insert_id = $this->db->insert_id();
+			if($insert_id)
+			{
+				$log_data = array(
+					'AdminId' =>  $AdminIdlogin,
+					'Module' => 'Hr',
+					'Activity' =>'Add'
+
+				);
+				$log = $this->db->insert('tblactivitylog',$log_data);
+			}
+
 			if($insert_id!='')
 			{
 				$this->db->select('t1.*,t2.*,t3.*');
@@ -385,7 +384,6 @@ class Hr_model extends CI_Model
 
 
 	function updatehr()
-
 	{		     
 
 		$hr_id=$this->input->post('hr_id');
@@ -462,14 +460,10 @@ class Hr_model extends CI_Model
 			   }
 		   }
 
-
-			$DateofBirth=$this->input->post('DateofBirth');
-
-			$bdate = str_replace('/', '-', $DateofBirth );
-
-			$birth = date("Y-m-d", strtotime($bdate));
-
-
+		$AdminIdlogin=$this->session->userdata('AdminId');
+		$DateofBirth=$this->input->post('DateofBirth');
+		$bdate = str_replace('/', '-', $DateofBirth );
+		$birth = date("Y-m-d", strtotime($bdate));
 
 		$data=array(
 
@@ -505,9 +499,18 @@ class Hr_model extends CI_Model
 
 			$this->db->where("hr_id",$hr_id);
 
-			$this->db->update('tblhr',$data);	
-
-			return 1;
+			$res=$this->db->update('tblhr',$data);	
+			if($res)
+				{
+					$log_data = array(
+						'AdminId' => $AdminIdlogin,
+						'Module' => 'Hr',
+						'Activity' =>'Update'
+					);
+					$log = $this->db->insert('tblactivitylog',$log_data);
+					return 1;
+				}
+			
 
 		      
 

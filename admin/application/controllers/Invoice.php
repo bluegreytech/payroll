@@ -575,6 +575,7 @@ class Invoice extends CI_Controller
 		if(!check_admin_authentication()){ 
 			redirect(base_url('Login'));
 		}
+		    $AdminIdlogin=$this->session->userdata('AdminId');
 			$quotationid=$this->input->post('quotationid');
 			$data=array(
 				'isdelete'=>'1',
@@ -584,6 +585,13 @@ class Invoice extends CI_Controller
 			$result=$this->db->update('tblquotation',$data);
 			if($result)
 			{
+				$log_data = array(
+					'AdminId' => $AdminIdlogin,
+					'Module' => 'Company Quotation',
+					'Activity' =>'Delete'
+
+				);
+				$log = $this->db->insert('tblactivitylog',$log_data);
 				$this->session->set_flashdata('success', 'Qutation was delete successfully!');
 				redirect('Invoice/qutation_list');
 			}
@@ -676,6 +684,7 @@ class Invoice extends CI_Controller
 		if(!check_admin_authentication()){ 
 			redirect(base_url('Login'));
 		}
+			$AdminIdlogin=$this->session->userdata('AdminId');
 			$Companyinvoiceid=$this->input->post('Companyinvoiceid');
 			$data=array(
 				'isdelete'=>'1',
@@ -685,6 +694,12 @@ class Invoice extends CI_Controller
 			$result=$this->db->update('tblcompanyinvoice',$data);
 			if($result)
 			{
+				$log_data = array(
+					'AdminId' =>$AdminIdlogin,
+					'Module' => 'Company Invoice',
+					'Activity' =>'Delete'
+				);
+				$log = $this->db->insert('tblactivitylog',$log_data);
 				$this->session->set_flashdata('success', 'Invoice has been deleted!');
 				redirect('Company');
 			}

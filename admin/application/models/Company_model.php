@@ -156,7 +156,7 @@ class Company_model extends CI_Model
 
 	public function send_company_notification()
 	{
-		
+		$AdminIdlogin=$this->session->userdata('AdminId');
 		$companyid=implode(',',$this->input->post('companyid'));
 		$Documenttitle=$this->input->post('Documenttitle');
 		$Notificationdescription=$this->input->post('Notificationdescription');	
@@ -177,11 +177,20 @@ class Company_model extends CI_Model
 		//print_r($data);die;
 		$this->db->insert('tblcompanynotification',$data);
 		$insert_id = $this->db->insert_id();
+		if($insert_id)
+		{
+			$log_data = array(
+				'AdminId' => $AdminIdlogin,
+				'Module' => 'Send Company Notification',
+				'Activity' =>'Add'
+
+			);
+			$log = $this->db->insert('tblactivitylog',$log_data);
+
+		}
+
 		$data = array();
 		$user_image='';
-
-
-
 		$cpt = count($_FILES['Documentfile']['name']);
 		for($i=0; $i<$cpt; $i++)
 		{ 
@@ -310,10 +319,20 @@ class Company_model extends CI_Model
 						'charset'=>'utf-8',
 						'header'=> 'MIME-Version: 1.0',
 						'header'=> 'Content-type:text/html;charset=UTF-8',
-						);
-
-	
+					);
 					$this->load->library('email', $email_config);
+	
+				    // $config['protocol']='smtp';
+					// $config['smtp_host']='ssl://smtp.googlemail.com';
+					// $config['smtp_port']='465';
+					// $config['smtp_user']='bluegreyindia@gmail.com';
+					// $config['smtp_pass']='Test@123';
+					// $config['charset']='utf-8';
+					// $config['newline']="\r\n";
+					// $config['mailtype'] = 'html';								
+					// $this->email->initialize($config);
+
+					
 					$body =$str;
 					$this->email->from('binny@bluegreytech.co.in'); 
 					$this->email->to($emailto);		
@@ -324,7 +343,6 @@ class Company_model extends CI_Model
 						$this->email->attach($atch);
 					
 					}
-					//print_r($this->email->message($body));die;
 					if($this->email->send())
 					{
 						return 1;
@@ -1025,76 +1043,43 @@ class Company_model extends CI_Model
 
 
 		$this->db->select('*');
-
 		$this->db->where('gstnumber',$this->input->post('gstnumber'));
-
 		$query=$this->db->get('tblcompany');
-
 		if($query->num_rows() > 0)
-
 		{
-
 				return 4;
-
 		}
 
 
 
 		$user_image='';
-
 	//$image_settings=image_setting();
-
-	 if(isset($_FILES['companyimage']) &&  $_FILES['companyimage']['name']!='')
-
+	if(isset($_FILES['companyimage']) &&  $_FILES['companyimage']['name']!='')
 	{
-
-		$this->load->library('upload');
-
-		$rand=rand(0,100000); 
-
-		 
-
-	   $_FILES['userfile']['name']     =   $_FILES['companyimage']['name'];
-
-	   $_FILES['userfile']['type']     =   $_FILES['companyimage']['type'];
-
-	   $_FILES['userfile']['tmp_name'] =   $_FILES['companyimage']['tmp_name'];
-
-	   $_FILES['userfile']['error']    =   $_FILES['companyimage']['error'];
-
-	   $_FILES['userfile']['size']     =   $_FILES['companyimage']['size'];
-
-
-
-	   $config['file_name'] = $rand.'Company';			
-
-	   $config['upload_path'] = base_path().'upload/company_orig/';		
-
-	   $config['allowed_types'] = 'jpg|jpeg|gif|png|bmp';  
-
-
-
+	    $this->load->library('upload');
+	    $rand=rand(0,100000); 
+	    $_FILES['userfile']['name']     =   $_FILES['companyimage']['name'];
+	    $_FILES['userfile']['type']     =   $_FILES['companyimage']['type'];
+	    $_FILES['userfile']['tmp_name'] =   $_FILES['companyimage']['tmp_name'];
+	    $_FILES['userfile']['error']    =   $_FILES['companyimage']['error'];
+	    $_FILES['userfile']['size']     =   $_FILES['companyimage']['size'];
+	    $config['file_name'] = $rand.'Company';			
+	    $config['upload_path'] = base_path().'upload/company_orig/';		
+	    $config['allowed_types'] = 'jpg|jpeg|gif|png|bmp';  
 		$this->upload->initialize($config);
 
 
 
-		 if (!$this->upload->do_upload())
-
-		 {
-
+		if (!$this->upload->do_upload())
+		{
 		   $error =  $this->upload->display_errors();
-
 		   echo "<pre>";print_r($error);die;
-
-		 } 
+		} 
 
 		$picture = $this->upload->data();	   
-
-		 $this->load->library('image_lib');		   
-
-		 $this->image_lib->clear();
-
-		 $gd_var='gd2';
+		$this->load->library('image_lib');		   
+		$this->image_lib->clear();
+		$gd_var='gd2';
 
 
 
@@ -1234,11 +1219,20 @@ class Company_model extends CI_Model
 			'createdby'=>$AdminIdlogin,
 			'createdon'=>date("Y-m-d h:i:s")
 			);
-
 			//print_r($data); die;
-
 			$this->db->insert('tblcompany',$data);
 			$insert_id = $this->db->insert_id();
+			if($insert_id)
+			{
+				$log_data = array(
+					'AdminId' => $AdminIdlogin,
+					'Module' => 'Company',
+					'Activity' =>'Add'
+				);
+				$log = $this->db->insert('tblactivitylog',$log_data);
+			}
+			
+
 			$Shifthours=$this->input->post('Shifthours');
 			$Shiftname=$this->input->post('Shiftname');
 			$Shiftintime=$this->input->post('Shiftintime');
@@ -1524,7 +1518,18 @@ class Company_model extends CI_Model
 
 			// print_r($data); die;
 			$res=$this->db->insert('tblcompanytype',$data);	
-			return $res;
+			if($res)
+				{
+					$log_data = array(
+						'AdminId' =>$AdminIdlogin,
+						'Module' => 'Company Type',
+						'Activity' =>'Add'
+					);
+					$log = $this->db->insert('tblactivitylog',$log_data);
+					return $res;
+				}
+				
+			
 
 	}
 
@@ -1620,7 +1625,16 @@ class Company_model extends CI_Model
 			// print_r($data);
 			// die;
 			$res=$this->db->insert('tblcompliances',$data);	
-			return $res;
+			if($res)
+			{
+				$log_data = array(
+					'AdminId' => $AdminIdlogin,
+					'Module' => 'Compliance',
+					'Activity' =>'Add'
+				);
+				$log = $this->db->insert('tblactivitylog',$log_data);
+				return $res;
+			}	
 	}
 
 
@@ -1758,7 +1772,18 @@ class Company_model extends CI_Model
 
 			//print_r($data);die;
 			$this->db->where("companyid",$companyid);
-			$this->db->update('tblcompany',$data);	
+			$res=$this->db->update('tblcompany',$data);	
+			if($res)
+			{
+				$log_data = array(
+					'AdminId' => $AdminIdlogin,
+					'Module' => 'Company',
+					'Activity' =>'Update'
+				);
+				$log = $this->db->insert('tblactivitylog',$log_data);
+			}
+			
+
 			if($companycomplianceid!='')
 			{
 				$complianceid=implode(',',$this->input->post('complianceid'));
@@ -1864,8 +1889,19 @@ class Company_model extends CI_Model
 				);
 			//print_r($data);die;
 			$this->db->where("companytypeid",$companytypeid);
-			$this->db->update('tblcompanytype',$data);	
-			return 1;
+			$res=$this->db->update('tblcompanytype',$data);	
+			if($res)
+			{
+				$log_data = array(
+					'AdminId' => $AdminIdlogin,
+					'Module' => 'Company Type',
+					'Activity' =>'Update'
+				);
+				$log = $this->db->insert('tblactivitylog',$log_data);
+				return 1;
+			}
+		
+			
 	}
 
 
@@ -1883,8 +1919,18 @@ class Company_model extends CI_Model
 				);
 			//print_r($data);die;
 			$this->db->where("complianceid",$complianceid);
-			$this->db->update('tblcompliances',$data);	
-			return 1;	      
+			$res=$this->db->update('tblcompliances',$data);	
+			if($res)
+			{
+				$log_data = array(
+					'AdminId' => $AdminIdlogin,
+					'Module' => 'Compliance',
+					'Activity' =>'Update'
+				);
+				$log = $this->db->insert('tblactivitylog',$log_data);
+				return 1;
+			}	
+				      
 
 	}
 

@@ -139,56 +139,17 @@ class Login_model extends CI_Model
 
 
 		function checkResetCode($ResetPasswordCode)
-
-
-
 		{
-
-
-
 			$this->db->select('*');				
-
-
-
 			$this->db->where('ResetPasswordCode',$ResetPasswordCode);
-
-
-
 			$this->db->from('tbladmin');
-
-
-
 			$query = $this->db->get();
-
-
-
 			if($query->num_rows()>0)
-
-
-
 			{
-
-
-
 				return $query->row()->AdminId; 
-
-
-
-				
-
-
-
 			}else{
-
-
-
 				return 2;
-
-
-
 			}
-
-
 
 		}
 
@@ -205,14 +166,22 @@ class Login_model extends CI_Model
 			$this->db->where('AdminId',$AdminId);
 			$this->db->where('ResetPasswordCode',$ResetPasswordCode);
 			$this->db->from('tbladmin');
-
 			$query = $this->db->get();
-
 			if($query->num_rows()>0)
 			{
 			    $data=array('Password'=>md5(trim($this->input->post('Password'))),'ResetPasswordCode'=>'');
 				$this->db->where(array('AdminId'=>$this->input->post('AdminId'),'ResetPasswordCode'=>trim($this->input->post('ResetPasswordCode'))));
 				$d=$this->db->update('tbladmin',$data);
+				if($d)
+				{
+					$log_data = array(
+						'AdminId' => $AdminId,
+						'Module' => 'Admin',
+						'Activity' =>'Reset Password'
+					);
+					$log = $this->db->insert('tblactivitylog',$log_data);
+					//return 1;
+				}
 				//return 1;
 
 								$this->db->select('*');
@@ -313,7 +282,17 @@ class Login_model extends CI_Model
 									'ResetPasswordCode'=>$rnd,
 								);	
 								$this->db->where('AdminId',$row->AdminId);
-								$this->db->update('tbladmin',$ud);
+								$res=$this->db->update('tbladmin',$ud);
+								if($res)
+								{
+									$log_data = array(
+										'AdminId' => $row->AdminId,
+										'Module' => 'Admin',
+										'Activity' =>'Forgot Password'
+									);
+									$log = $this->db->insert('tblactivitylog',$log_data);
+									//return 3;
+								}
 								$this->db->select('*');
 								$this->db->where('AdminId',$row->AdminId);
 								$smtp2 = $this->db->get('tbladmin');	

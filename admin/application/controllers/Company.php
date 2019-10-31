@@ -241,6 +241,7 @@ class Company extends CI_Controller
 		if(!check_admin_authentication()){ 
 			redirect(base_url('Login'));
 		}
+			$AdminIdlogin=$this->session->userdata('AdminId');
 			$Companynotificationid=$this->input->post('Companynotificationid');
 			$data=array(
 				'Isdelete'=>'1',
@@ -250,6 +251,13 @@ class Company extends CI_Controller
 			$result=$this->db->update('tblcompanynotification',$data);
 			if($result)
 			{
+				$log_data = array(
+					'AdminId' => $AdminIdlogin,
+					'Module' => 'Company Notification',
+					'Activity' =>'Delete'
+
+				);
+				$log = $this->db->insert('tblactivitylog',$log_data);
 				$this->session->set_flashdata('success', 'Company notification was delete successfully!');
 				redirect('Company/companynotification_list');
 			}
@@ -531,6 +539,7 @@ class Company extends CI_Controller
 		if(!check_admin_authentication()){ 
 			redirect(base_url('Login'));
 		}
+			$AdminIdlogin=$this->session->userdata('AdminId');
 			$companyid=$this->input->post('companyid');
 			$data=array(
 				'isdelete'=>'1',
@@ -540,6 +549,13 @@ class Company extends CI_Controller
 			$result=$this->db->update('tblcompany',$data);
 			if($result)
 			{
+				$log_data = array(
+					'AdminId' => $AdminIdlogin,
+					'Module' => 'Company',
+					'Activity' =>'Delete'
+
+				);
+				$log = $this->db->insert('tblactivitylog',$log_data);
 				$this->session->set_flashdata('success', 'Company was delete successfully!');
 				redirect('Company');
 			}
@@ -631,25 +647,14 @@ class Company extends CI_Controller
 			if($_POST){
 
 				if($this->input->post('companytypeid')==''){			
-
 					$result=$this->Company_model->add_companytype();	
-
 					if($result)
-
 					{
-
 						$this->session->set_flashdata('success', 'Record has been Inserted Succesfully!');
-
 						redirect('Company/companytype');
-
 					}
-
-
-
 				}
-
 				else
-
 				{
 
 					$result=$this->Company_model->update_companytype();
@@ -734,45 +739,34 @@ class Company extends CI_Controller
 
 
 	function delete_compliance(){
-
 		if(!check_admin_authentication()){ 
-
 			redirect(base_url('Login'));
-
 		}
-
+		$AdminIdlogin=$this->session->userdata('AdminId');
 		$complianceid=$this->input->post('complianceid');
-
 		$data=array(
-
 			'IsDelete'=>1,
-
 			'IsActive'=>0
-
 				);
 
 		$this->db->where("complianceid",$complianceid);
-
 		$result=$this->db->update('tblcompliances',$data);
-
 		if($result)
-
 		{
+			$log_data = array(
+				'AdminId' => $AdminIdlogin,
+				'Module' => 'Compliance',
+				'Activity' =>'delete'
 
+			);
+			$log = $this->db->insert('tblactivitylog',$log_data);
 			$this->session->set_flashdata('success', 'Compliance was delete successfully!');
-
 			redirect('compliance');
-
 		}
-
 		else
-
 		{
-
 			$this->session->set_flashdata('error', 'Compliance was not delete!');
-
 			redirect('compliance');
-
 		}
 
 
@@ -790,49 +784,38 @@ class Company extends CI_Controller
 
 
 	function delete_companytype(){
-
 		if(!check_admin_authentication()){ 
-
 			redirect(base_url('Login'));
-
 		}
 
+		$AdminIdlogin=$this->session->userdata('AdminId');
 		$companytypeid=$this->input->post('companytypeid');
-
 		$data=array(
-
 			'Is_deleted'=>'1',
-
 			'IsActive'=>'Inactive'
-
 				);
 
 		$this->db->where("companytypeid",$companytypeid);
-
 		$result=$this->db->update('tblcompanytype',$data);
-
 		if($result)
-
 		{
+			
+			$log_data = array(
+				'AdminId' => $AdminIdlogin,
+				'Module' => 'Company Type',
+				'Activity' =>'Delete'
 
+			);
+			$log = $this->db->insert('tblactivitylog',$log_data);
 			$this->session->set_flashdata('success', 'Company type was delete successfully!');
-
 			redirect('Company/companytype');
-
+			
 		}
-
 		else
-
 		{
-
 			$this->session->set_flashdata('error', 'Company type was not delete!');
-
 			redirect('Company/companytype');
-
 		}
-
-
-
 
 
 	}

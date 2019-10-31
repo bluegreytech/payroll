@@ -243,59 +243,41 @@ class Adminmaster_model extends CI_Model
 			'CreatedOn'=>date('Y-m-d')
 
 			);
-
 			//print_r($data);die;
-
 			$this->db->insert('tbladmin',$data);
-
-			//return 1;
-
 			$insert_id = $this->db->insert_id();
+			if($insert_id)
+			{
+				$log_data = array(
+					'AdminId' => $AdminIdlogin,
+					'Module' => 'Admin',
+					'Activity' =>'Add'
 
+				);
+				$log = $this->db->insert('tblactivitylog',$log_data);
+			}
 
+			$this->db->select('*');
+			$this->db->where('AdminId',$insert_id);
+			$smtp2 = $this->db->get('tbladmin');	
+			foreach($smtp2->result() as $rows) {
+				$AdminId = $rows->AdminId;
+				$FirstName = $rows->FirstName;
+				$LastName = $rows->LastName;
+				$EmailAddress = $rows->EmailAddress;
+				$Password = $rows->Password;
+			}
 
-				$this->db->select('*');
-
-				$this->db->where('AdminId',$insert_id);
-
-				$smtp2 = $this->db->get('tbladmin');	
-
-				foreach($smtp2->result() as $rows) {
-
-					$AdminId = $rows->AdminId;
-
-					$FirstName = $rows->FirstName;
-
-					$LastName = $rows->LastName;
-
-					$EmailAddress = $rows->EmailAddress;
-
-					$Password = $rows->Password;
-
-				}
-
-
-
-
-
-				$email_template=$this->db->query("select * from ".$this->db->dbprefix('tblemail_template')." where task='Admin registration'");
+			$email_template=$this->db->query("select * from ".$this->db->dbprefix('tblemail_template')." where task='Admin registration'");
 
                             $email_temp=$email_template->row();
-
                             $email_address_from=$email_temp->from_address;
-
                             $email_address_reply=$email_temp->reply_address;
-
                             $email_subject=$email_temp->subject;        
-
 							$email_message=$email_temp->message;
 
-							
-
                             $username =$rows->FirstName.''.$LastName;
-
                             $Password = $rows->Password;
-
                             $EmailAddress = $rows->EmailAddress;
 
                            // $email_to= $EmailAddress;
@@ -303,94 +285,42 @@ class Adminmaster_model extends CI_Model
                    
 
                     $base_url=base_url();
-
                     $currentyear=date('Y');
-
-                   
-
                     $email_message=str_replace('{break}','<br/>',$email_message);
-
                     $email_message=str_replace('{base_url}',$base_url,$email_message);
-
                     $email_message=str_replace('{year}',$currentyear,$email_message);
-
                     $email_message=str_replace('{username}',$username,$email_message);
-
 					$email_message=str_replace('{EmailAddress}',$EmailAddress,$email_message);
-
 					$email_message=str_replace('{Password}',$code,$email_message);
-
 					$str=$email_message; //die;
 
-					
-
-				
-
-				
-
 					$email_config = Array(
-
 						'protocol'  => 'smtp',
-
 						'smtp_host' => 'relay-hosting.secureserver.net',
-
 						'smtp_port' => '465',
-
 						'smtp_user' => 'binny@bluegreytech.co.in',
-
 						'smtp_pass' => 'Binny@123',
-
 						'mailtype'  => 'html',
-
 						'starttls'  => true,
-
 						'newline'   => "\r\n",
-
 						'charset'=>'utf-8',
-
 						'header'=> 'MIME-Version: 1.0',
-
 						'header'=> 'Content-type:text/html;charset=UTF-8',
-
 						);
-
-		
-
 						$this->load->library('email', $email_config);
-
-					   
-
-
-
 					$body =$str;	
 
-
-
 					$this->email->from('binny@bluegreytech.co.in');
-
 					$this->email->to($EmailAddress);		
-
 					$this->email->subject('You are register complete');
-
 					$this->email->message($body);
-
                     if($this->email->send())
-
 					{	
-
 						return 1;
-
 					}else
-
 					{
-
 						return 2;
-
-					}	
-
-                  
-
-            
+					}	    
 
 	}
 
@@ -486,8 +416,18 @@ class Adminmaster_model extends CI_Model
 					);
 				//print_r($data);die;
 				$this->db->where("AdminId",$AdminId);
-				$this->db->update('tblsitesetting',$data);
-				return 1;	
+				$res=$this->db->update('tblsitesetting',$data);
+				if($res)
+				{
+					$log_data = array(
+						'AdminId' => $AdminId,
+						'Module' => 'Site Setting',
+						'Activity' =>'Update'
+					);
+					$log = $this->db->insert('tblactivitylog',$log_data);
+					return 1;	
+				}
+				
 		}
 
 	function getdata($id){
@@ -641,11 +581,8 @@ class Adminmaster_model extends CI_Model
 		   }
 
 
-
 		   $DateofBirth=$this->input->post('DateofBirth');
-
 		   $bdate = str_replace('/', '-', $DateofBirth );
-
 		   $birth = date("Y-m-d", strtotime($bdate));
 
 		$data=array(
@@ -667,8 +604,19 @@ class Adminmaster_model extends CI_Model
 
 			 //print_r($data);die;
 			$this->db->where("AdminId",$AdminId);
-			$this->db->update('tbladmin',$data);	
-			return 1;	      
+			$res=$this->db->update('tbladmin',$data);	
+			if($res)
+			{
+				$log_data = array(
+					'AdminId' => $AdminIdlogin,
+					'Module' => 'Admin',
+					'Activity' =>'Update'
+
+				);
+				$log = $this->db->insert('tblactivitylog',$log_data);
+				return 1;	
+			}
+			      
 
 	}
 
@@ -683,7 +631,6 @@ class Adminmaster_model extends CI_Model
 
 
 	function updatedata()
-
 	{
 
 		//echo "<pre>";print_r($_FILES);die;
@@ -829,12 +776,10 @@ class Adminmaster_model extends CI_Model
 			//print_r($user_image);die;
 
 
-
-			$DateofBirth=$this->input->post('DateofBirth');
-
-			$bdate = str_replace('/', '-', $DateofBirth );
-
-			$birth = date("Y-m-d", strtotime($bdate));
+		$AdminIdlogin=$this->session->userdata('AdminId');
+		$DateofBirth=$this->input->post('DateofBirth');
+		$bdate = str_replace('/', '-', $DateofBirth );
+		$birth = date("Y-m-d", strtotime($bdate));
 
 		$data=array(
 
@@ -857,21 +802,27 @@ class Adminmaster_model extends CI_Model
 				);
 
 			//echo "<pre>"; print_r($data);die;
-
 			$this->db->where("AdminId",$this->session->userdata('AdminId'));
-
-			$this->db->update('tbladmin',$data);	
-
-			//echo $this->db->last_query();die;
-
-			return 1;	      
+			$res=$this->db->update('tbladmin',$data);	
+			if($res)
+			{
+				$log_data = array(
+					'AdminId' => $AdminIdlogin,
+					'Module' => 'Admin Profile',
+					'Activity' =>'Update'
+				);
+				$log = $this->db->insert('tblactivitylog',$log_data);
+				return 1;
+			}
+				      
 
 	}
 
 
 
 	public function changepass($AdminId) 
-	{
+	{  
+		$AdminIdlogin=$this->session->userdata('AdminId');
 		$this->db->select('*');				
 		$this->db->where('AdminId',$AdminId);
 		$this->db->where('Password',md5($this->input->post('Password')));
@@ -885,6 +836,17 @@ class Adminmaster_model extends CI_Model
 
 			$this->db->where('AdminId',$AdminId);
 			$res = $this->db->update('tbladmin',$pass_data);
+			if($res)
+			{
+				$log_data = array(
+					'AdminId' => $AdminIdlogin,
+					'Module' => 'Admin',
+					'Activity' =>'Change Password'
+				);
+				$log = $this->db->insert('tblactivitylog',$log_data);
+			//	return 1;
+			}
+			
 					$this->db->select('*');
 					$this->db->where('AdminId',$AdminId);
 					$smtp2 = $this->db->get('tbladmin');	

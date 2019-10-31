@@ -202,45 +202,33 @@ class Hr extends CI_Controller
 
 
 	function deletehr(){
-
 		if(!check_admin_authentication()){ 
-
 			redirect(base_url('Login'));
-
 		}
-
+		$AdminIdlogin=$this->session->userdata('AdminId');
 		$hr_id=$this->input->post('hr_id');
-
 		$data=array(
-
 			'Is_deleted'=>'1',
-
 			'IsActive'=>'Inactive'
-
 				);
 
 		$this->db->where("hr_id",$hr_id);
-
 		$result=$this->db->update('tblhr',$data);
-
 		if($result)
-
 		{
-
+			$log_data = array(
+				'AdminId' => $AdminIdlogin,
+				'Module' => 'Hr',
+				'Activity' =>'Delete'
+			);
+			$log = $this->db->insert('tblactivitylog',$log_data);
 			$this->session->set_flashdata('success', 'Rocord has been deleted!');
-
 			redirect('hr');
-
 		}
-
 		else
-
 		{
-
 			$this->session->set_flashdata('error', 'Hr was not deleted!');
-
 			redirect('hr');
-
 		}
 
 

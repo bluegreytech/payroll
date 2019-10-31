@@ -73,9 +73,16 @@
 							if($this->session->userdata('RoleId')==1){
 							?>	
 							<li>
+								<a href="<?php echo base_url();?>Auditlog"><i class="la la-cog"></i> <span>Audit Log</span> </a>
+								
+							</li>
+
+							<li>
 								<a href="<?php echo base_url();?>Adminmaster/site_setting"><i class="la la-cog"></i> <span>Company setting</span> </a>
 								
 							</li>
+
+							
 							<?php
 								}
 							?>
