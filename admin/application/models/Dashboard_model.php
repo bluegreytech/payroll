@@ -1,7 +1,6 @@
 <?php
 class Dashboard_model extends CI_Model
  {
-
 	function list_employee()
 	{
 		$this->db->select('*');
@@ -10,8 +9,6 @@ class Dashboard_model extends CI_Model
 		$r = $this->db->get();
 		return $query= $r->num_rows();
 	}
-
-
 
 	function list_admin()
 	{
@@ -22,8 +19,6 @@ class Dashboard_model extends CI_Model
 		return $query= $r->num_rows();
 	}
 
-
-
 	function list_company()
 	{
 		$this->db->select('*');
@@ -32,23 +27,21 @@ class Dashboard_model extends CI_Model
 		$r = $this->db->get();
 		return $query= $r->num_rows();
 	}
-
-
+	
 	function list_company_count()
 	{
-	
 		$query =  $this->db->query("SELECT COUNT(companyid) as count,MONTHNAME(createdon) as month_name FROM tblcompany WHERE YEAR(createdon) = '" . date('Y') . "'
 		GROUP BY YEAR(createdon),MONTH(createdon)"); 
-   
 		$record = $query->result();
-		$data = [];
-   
-		foreach($record as $row)
-		{
-			$data['label'][] = $row->month_name;
-			$data['data'][] = (int) $row->count;
-		}
-		$data['chart_data'] = json_encode($data);
+		return $record;
+		
+		// $data = [];
+		// foreach($record as $row)
+		// {
+		// 	$data['label'][] = $row->month_name;
+		// 	$data['data'][] = (int) $row->count;
+		// }
+		// $data['chart_data'] = json_encode($data);
 		//die;
 		
 	}

@@ -31,6 +31,8 @@
 		<!-- Chart CSS -->
 		<link rel="stylesheet" href="<?php echo base_url(); ?>default/plugins/morris/morris.css">
 
+		<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
+
 		<!-- Main CSS -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>default/css/style.css">
 

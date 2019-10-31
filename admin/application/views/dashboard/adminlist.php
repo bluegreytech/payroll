@@ -757,7 +757,7 @@
 
 
 							<div class="modal-body">
-
+								
 								<form method="post" id="form_valid2" action="<?php echo base_url();?>Adminmaster/addadmin"  enctype="multipart/form-data">
 
 								<input type="hidden" class="form-control" name="AdminId" id="AdminId" value="<?php $AdminId?>">

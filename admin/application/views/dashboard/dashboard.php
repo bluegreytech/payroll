@@ -4,7 +4,7 @@
 ?>
 
 
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
 
 			
 
@@ -129,7 +129,7 @@
 								<span class="dash-widget-icon"><i class="fa fa-user"></i></span>
 								<div class="dash-widget-info">
 									<h3><?php echo $empData;?></h3>
-									<a href="<?php echo base_url();?>employee" title="Go to Admin list"><span>Employees</span></a>
+									<a href="<?php echo base_url();?>employee" title="Go to Employees list"><span>Employees</span></a>
 								</div>
 							</div>
 						</div>
@@ -162,20 +162,11 @@
 							</div>
 						</div>
 
-						
-
-
-						
-
-
-
 					</div>
 
 
 					<br>
 					<div class="row">
-
-
 
 						<div class="col-md-12">
 							<div class="row">
@@ -183,12 +174,12 @@
 								<div class="col-md-6 text-center">
 									<div class="card-box">
 										<h3 class="card-title">Monthly Registered Company</h3>
-										<!-- <div id="bar-charts"></div> -->
-										<div class="chart-container">
+										<div id="bar-chart"></div>
+										<!-- <div class="chart-container">
 											<div class="bar-chart-container">
 											<canvas id="bar-chart"></canvas>
 											</div>
-										</div>
+										</div> -->
 									</div>
 								</div>
 
@@ -216,6 +207,7 @@
 									<div class="card-box">
 										<h3 class="card-title">Overall Status</h3>
 										<div id="pie-charts"></div>
+										
 									</div>
 								</div>
 
@@ -542,40 +534,13 @@
 
 
 							</div>
-
-
-
 						</div>
-
-
-
 					</div>
-
-
-
 				</div>
-
-
-
 				<!-- /Page Content -->
 
-
-
-
-
-
-
             </div>
-
-
-
 			<!-- /Page Wrapper -->
-
-
-
-			
-
-
 
         </div>
 		<!-- /Main Wrapper -->
@@ -583,81 +548,98 @@
 		<!-- Sidebar Overlay -->
 		<div class="sidebar-overlay" data-reff=""></div>
 		<?php $this->load->view('common/footer');?>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+	
 <script>
-  $(function(){
-      //get the bar chart canvas
-      var cData = JSON.parse(`<?php echo $chart_data; ?>`);
-      var ctx = $("#bar-chart");
- 
-      //bar chart data
-      var data = {
-        labels: cData.label,
-        datasets: [
-          {
-            label: cData.label,
-            data: cData.data,
-            backgroundColor: [
-              "#DEB887",
-              "#A9A9A9",
-              "#DC143C",
-              "#F4A460",
-              "#2E8B57",
-              "#1D7A46",
-              "#CDA776",
-              "#CDA776",
-              "#989898",
-              "#CB252B",
-              "#E39371",
-            ],
-            borderColor: [
-              "#CDA776",
-              "#989898",
-              "#CB252B",
-              "#E39371",
-              "#1D7A46",
-              "#F4A460",
-              "#CDA776",
-              "#DEB887",
-              "#A9A9A9",
-              "#DC143C",
-              "#F4A460",
-              "#2E8B57",
-            ],
-            borderWidth: [1, 1, 1, 1, 1,1,1,1, 1, 1, 1,1,1]
-          }
-        ]
-      };
- 
-      var options = {
-        responsive: true,
-        title: {
-          display: true,
-          position: "top",
-        //  text: "Monthly Registered Users Count",
-          fontSize: 18,
-          fontColor: "#111"
-        },
-        legend: {
-          display: true,
-          position: "bottom",
-          labels: {
-            fontColor: "#333",
-            fontSize: 16
-          }
-        }
-      };
- 
-      //create bar Chart class object
-      var chart1 = new Chart(ctx, {
-        type: "bar",
-        data: data,
-        options: options
-      });
- 
-  });
+		Morris.Bar({
+		element: 'bar-chart',
+		data: [
+			<?php 
+			foreach($companyDataCount as $row)
+			{
+			?>
+				{ y: '<?php echo $row->month_name;?>', a:<?php echo  $row->count;?>},
+			<?php	
+			};
+			?>	
+		],
+		xkey: ['y'],
+		ykeys: ['a'],
+		labels: ['Total Company Registered'],
+		lineColors: ['#3ae1f2'],
+		lineWidth: '3px',
+		barColors: ['#3ae1f2'],
+		resize: true,
+		redraw: true
+	});
+
 </script>
 
+<script>
+	Morris.Line({
+		element: 'line-charts',
+		data: [
+			{ y: '2006', a: 50, b: 90 },
+			{ y: '2007', a: 75,  b: 65 },
+			{ y: '2008', a: 50,  b: 40 },
+			{ y: '2009', a: 75,  b: 65 },
+			{ y: '2010', a: 50,  b: 40 },
+			{ y: '2011', a: 75,  b: 65 },
+			{ y: '2012', a: 100, b: 50 }
+		],
+		xkey: 'y',
+		ykeys: ['a', 'b'],
+		labels: ['Total Sales', 'Total Revenue'],
+		lineColors: ['#3ae1f2','#0093a2'],
+		lineWidth: '3px',
+		resize: true,
+		redraw: true
+	});	
+</script>
+
+<script>
+	 Morris.Area({
+		element: 'area-charts',
+		data: [
+			{ y: '2006', a: 100, b: 90 },
+			{ y: '2007', a: 75,  b: 65 },
+			{ y: '2008', a: 50,  b: 40 },
+			{ y: '2009', a: 75,  b: 65 },
+			{ y: '2010', a: 50,  b: 40 },
+			{ y: '2011', a: 75,  b: 65 },
+			{ y: '2012', a: 100, b: 90 }
+		],
+		xkey: 'y',
+		ykeys: ['a', 'b'],
+		labels: ['Total Invoice', 'Pending Invoice'],
+		lineColors: ['#3ae1f2','#0093a2'],
+		lineWidth: '3px',
+		resize: true,
+		redraw: true
+    });
+</script>
+
+<script>
+	Morris.Donut({
+		element: 'pie-charts',
+		colors: [
+			'#3ae1f2',
+			'#0093a2',
+			'#f8878e',
+			'#aaa3db',
+			'#abb8db',
+		],
+		data: [
+			{label: "Company", value: <?php echo $companyData;?>},
+			{label: "Hr", value: <?php echo $hrData;?>},
+			{label: "Employee", value: <?php echo $empData;?>},
+			{label: "Company Invoice", value: <?php echo $invoiceTotal;?>},
+			{label: "Company Quotation", value: <?php echo $qutationTotal;?>},
+		],
+		resize: true,
+		redraw: true
+	});
+		
+</script>
     </body>
 </html>
 

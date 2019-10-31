@@ -156,6 +156,7 @@ class Company_model extends CI_Model
 
 	public function send_company_notification()
 	{
+		
 		$companyid=implode(',',$this->input->post('companyid'));
 		$Documenttitle=$this->input->post('Documenttitle');
 		$Notificationdescription=$this->input->post('Notificationdescription');	
@@ -239,12 +240,12 @@ class Company_model extends CI_Model
 			$Documentfile[$i]='';
 		}
 
-
+		$AdminIdlogin=$this->session->userdata('AdminId');
 		$data2=array( 
 			'Companynotificationid'=>$insert_id,
 			'Documentfile'=>$Documentfile[$i],
 			'Isactive'=>'Active',
-			'Createdby'=>1,
+			'Createdby'=>$AdminIdlogin,
 			'Createdon'=>date("Y-m-d h:i:s")
 			);
 			//print_r($data2); die;
@@ -409,14 +410,13 @@ class Company_model extends CI_Model
 
 	function list_companytype()
 	{
-
 		$this->db->select('*');
 		$this->db->from('tblcompanytype');
 		$this->db->where('Is_deleted','0');
+		$this->db->order_by('companytypeid','desc');
 		$r=$this->db->get();
 		$res = $r->result();
 		return $res;
-
 	}
 
 
@@ -1187,7 +1187,7 @@ class Company_model extends CI_Model
 	   }
 
 
-
+	   		$AdminIdlogin=$this->session->userdata('AdminId');
 			$code=rand(12,123456789);
 
 			$companytypeid=$this->input->post('companytypeid');
@@ -1231,7 +1231,7 @@ class Company_model extends CI_Model
 			'pincode'=>$pincode,
 			'verificationcode'=>$code,
 			'isactive'=>$isactive,
-			'createdby'=>1,
+			'createdby'=>$AdminIdlogin,
 			'createdon'=>date("Y-m-d h:i:s")
 			);
 
@@ -1507,37 +1507,23 @@ class Company_model extends CI_Model
 
 
 	function add_companytype()
-
 	{	
-
+			$AdminIdlogin=$this->session->userdata('AdminId');
 			$companytype=$this->input->post('companytype');
-
 			$isactive=$this->input->post('isactive');
-
 			$comcontactnumber=$this->input->post('comcontactnumber');
-
 			$gstnumber=$this->input->post('gstnumber');	
-
 			$isactive=$this->input->post('isactive');
 
 			$data=array( 
-
 			'companytype'=>$companytype,
-
 			'isactive'=>$isactive,
-
-			'createdby'=>1,
-
+			'createdby'=>$AdminIdlogin,
 			'createdon'=>date("Y-m-d h:i:s")
-
 			);
 
-			// print_r($data);
-
-			// die;
-
+			// print_r($data); die;
 			$res=$this->db->insert('tblcompanytype',$data);	
-
 			return $res;
 
 	}
@@ -1618,6 +1604,7 @@ class Company_model extends CI_Model
 
 	function add_compliance()
 	{	
+			$AdminIdlogin=$this->session->userdata('AdminId');
 			$compliancetypeid=$this->input->post('compliancetypeid');
 			$compliancename=$this->input->post('compliancename');
 			$compliancepercentage=$this->input->post('compliancepercentage');
@@ -1627,7 +1614,7 @@ class Company_model extends CI_Model
 			'compliancename'=>$compliancename,
 			'compliancepercentage'=>$compliancepercentage,
 			'isactive'=>$isactive,
-			'createdby'=>1,
+			'createdby'=>$AdminIdlogin,
 			'createdon'=>date("Y-m-d h:i:s")
 			);
 			// print_r($data);
@@ -1652,6 +1639,7 @@ class Company_model extends CI_Model
 
 	function update_company()
 	{	
+		$AdminIdlogin=$this->session->userdata('AdminId');
 		$companyid=$this->input->post('companyid');
 		$companycomplianceid=$this->input->post('companycomplianceid');
 		$Companyshiftid=$this->input->post('Companyshiftid');
@@ -1764,7 +1752,7 @@ class Company_model extends CI_Model
 			'companycity'=>$this->input->post('companycity'),
 			'pincode'=>$this->input->post('pincode'),
 			'isactive'=>$this->input->post('isactive'),
-			'updatedby'=>1,
+			'updatedby'=>$AdminIdlogin,
 			'updatedon'=>date("Y-m-d h:i:s")
 				);
 
@@ -1866,12 +1854,13 @@ class Company_model extends CI_Model
 
 	function update_companytype()
 	{
-
+		$AdminIdlogin=$this->session->userdata('AdminId');
 		$companytypeid=$this->input->post('companytypeid');
 		$data=array(
 			'companytypeid'=>$this->input->post('companytypeid'),
 			'companytype'=>$this->input->post('companytype'),
-			'IsActive'=>$this->input->post('IsActive')
+			'IsActive'=>$this->input->post('IsActive'),
+			'updatedby'=>$AdminIdlogin
 				);
 			//print_r($data);die;
 			$this->db->where("companytypeid",$companytypeid);
@@ -1882,13 +1871,15 @@ class Company_model extends CI_Model
 
 	function update_compliance()
 	{	
+		$AdminIdlogin=$this->session->userdata('AdminId');
 		$complianceid=$this->input->post('complianceid');
 		$data=array(
 			'complianceid'=>$this->input->post('complianceid'),
 			'compliancetypeid'=>$this->input->post('compliancetypeid'),
 			'compliancename'=>$this->input->post('compliancename'),
 			'compliancepercentage'=>$this->input->post('compliancepercentage'),
-			'isactive'=>$this->input->post('isactive')
+			'isactive'=>$this->input->post('isactive'),
+			'updatedby'=>$AdminIdlogin
 				);
 			//print_r($data);die;
 			$this->db->where("complianceid",$complianceid);

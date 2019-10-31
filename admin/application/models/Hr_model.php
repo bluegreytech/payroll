@@ -12,41 +12,23 @@ class Hr_model extends CI_Model
 
 
 	function insertdata()
-
-
-
 	{		
 
 
 
 			$this->db->select('*');
-
-
-
 			$this->db->where('EmailAddress',$this->input->post('EmailAddress'));
-
-
-
 			$query=$this->db->get('tblhr');
-
-
-
 			if($query->num_rows() > 0)
-
-
-
 			{
-
-					return 3;
-
-
+				return 3;
 			}
 
 
-		$hr_image='';
+		 $hr_image='';
 
 		 if(isset($_FILES['ProfileImage']) &&  $_FILES['ProfileImage']['name']!='')
-		{
+		 {
 			$this->load->library('upload');
 			$rand=rand(0,100000); 		 
 

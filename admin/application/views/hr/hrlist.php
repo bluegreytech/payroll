@@ -2482,7 +2482,7 @@ function edithrs(hr_id)
 
 	Url="<?php echo base_url() ?>";
 
-
+	HRUrl="<?php echo base_url_hr() ?>upload/hr/";
 
 	//alert(hr_id);
 
@@ -2550,7 +2550,7 @@ function edithrs(hr_id)
 
 			if(response.ProfileImage!=''){
               
-$('#blah1').attr('src', '/home/et635dt5xqj1/public_html/payroll.bluegreytech.co.in/hr/upload/hr'+response.ProfileImage);
+			$('#blah1').attr('src', HRUrl+response.ProfileImage);
 				$('#pre_profile_image').val(response.ProfileImage);
 				
 

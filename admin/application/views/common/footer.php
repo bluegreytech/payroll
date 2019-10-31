@@ -20,13 +20,17 @@
 		<script src="<?php echo base_url(); ?>default/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
 
 		<!-- Chart JS -->
-		<!-- <script src="<?php// echo base_url(); ?>default/plugins/morris/morris.min.js"></script>
-		<script src="<?php //echo base_url(); ?>default/plugins/raphael/raphael.min.js"></script> -->
+		<script src="<?php echo base_url(); ?>default/plugins/morris/morris.min.js"></script>
+		<script src="<?php echo base_url(); ?>default/plugins/raphael/raphael.min.js"></script>
 		<!-- <script src="<?php //echo base_url(); ?>default/js/chart.js"></script> -->
 
+	
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+
 		<!-- Custom JS -->
-		<script type="text/javascript" src="<?php echo base_url(); ?>default/js/app.js"></script>
-		<script type="text/javascript" src="<?php echo base_url(); ?>default/js/jquery.validate.min.js"></script>
+		<script src="<?php echo base_url(); ?>default/js/app.js"></script>
+		<script src="<?php echo base_url(); ?>default/js/jquery.validate.min.js"></script>
 		<script src="<?php echo base_url(); ?>default/js/additional-methods.min.js"></script>
 		<script src="<?php echo base_url(); ?>default/js/jquery.dataTables.min.js"></script>
 		<script src="<?php echo base_url(); ?>default/js/dataTables.bootstrap4.min.js"></script>

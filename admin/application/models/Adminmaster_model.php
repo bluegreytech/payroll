@@ -3,11 +3,9 @@
 
 
 class Adminmaster_model extends CI_Model
-
- {
+{
 
 	function insertdata()
-
 	{		
 
 			$this->db->select('*');
@@ -184,7 +182,7 @@ class Adminmaster_model extends CI_Model
 
 		}
 
-
+		    $AdminIdlogin=$this->session->userdata('AdminId');
 
 			$code=rand(12,123456789);
 
@@ -240,7 +238,7 @@ class Adminmaster_model extends CI_Model
 
 			'City'=>$City,
 
-			'IsActive'=>1,
+			'IsActive'=>$AdminIdlogin,
 
 			'CreatedOn'=>date('Y-m-d')
 
@@ -503,19 +501,13 @@ class Adminmaster_model extends CI_Model
 
 
 	function updateadmin()
-
 	{    
-
+		$AdminIdlogin=$this->session->userdata('AdminId');
 		$AdminId=$this->input->post('AdminId');
-
 		//echo "<pre>";print_r($_FILES);die;
-
 		$user_image='';
-
 		//$image_settings=image_setting();
-
-		 if(isset($_FILES['ProfileImage']) &&  $_FILES['ProfileImage']['name']!='')
-
+		if(isset($_FILES['ProfileImage']) &&  $_FILES['ProfileImage']['name']!='')
 		{
 
 			$this->load->library('upload');
@@ -657,41 +649,25 @@ class Adminmaster_model extends CI_Model
 		   $birth = date("Y-m-d", strtotime($bdate));
 
 		$data=array(
-
 			'AdminId'=>$this->input->post('AdminId'),
-
 			'RoleId'=>$this->input->post('RoleId'),
-
 			'FirstName'=>$this->input->post('FirstName'),
-
 			'LastName'=>$this->input->post('LastName'),
-
 			'EmailAddress'=>$this->input->post('EmailAddress'),
-
 			'DateofBirth'=>$birth,
-
 			'PhoneNumber'=>$this->input->post('PhoneNumber'),
-
 			'ProfileImage'=>$user_image,
-
 			'Gender'=>$this->input->post('Gender'),
-
 			'Address'=>$this->input->post('Address'),
-
 			'PinCode'=>$this->input->post('PinCode'),
-
 			'City'=>$this->input->post('City'),
-
-			'IsActive'=>$this->input->post('IsActive')
-
+			'IsActive'=>$this->input->post('IsActive'),
+			'UpdatedBy'=>$AdminIdlogin,
 				);
 
 			 //print_r($data);die;
-
 			$this->db->where("AdminId",$AdminId);
-
 			$this->db->update('tbladmin',$data);	
-
 			return 1;	      
 
 	}
