@@ -187,10 +187,10 @@
 										<tr>
 											<td><?php echo $i;?></td>
 											<td><?php echo $logs->FirstName.' '.$logs->LastName;?></td>
-											<td><?php echo $logs->Module ;?></td>
-											<td><?php echo $logs->Activity ;?></td>
+											<td><?php echo $logs->Module;?></td>
+											<td><?php echo $logs->Activity;?></td>
 											<td>
-												<?php echo 	$invdate = date("d-m-Y", strtotime($logs->CreatedOn));?>
+												<?php echo $invdate = date("d-m-Y H:i:s", strtotime($logs->CreatedOn));?>
 											</td>
 										</tr>
 									<?php

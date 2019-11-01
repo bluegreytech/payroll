@@ -407,11 +407,12 @@ class Adminmaster_model extends CI_Model
 				'Branch'=>$this->input->post('Branch'),
 				'Bankname'=>$this->input->post('Bankname'),
 				'Ifsccode'=>$this->input->post('Ifsccode'),
-
 				'Adminname'=>$this->input->post('Adminname'),
 				'Emailaddress'=>$this->input->post('Emailaddress'),
 				'Mobilenumber'=>$this->input->post('Mobilenumber'),
 				'Officeaddress'=>$this->input->post('Officeaddress'),
+				'WorkingDays'=>$this->input->post('WorkingDays'),
+				'WeekOff'=>$this->input->post('WeekOff'),
 				'Gstnumber'=>$this->input->post('Gstnumber')
 					);
 				//print_r($data);die;

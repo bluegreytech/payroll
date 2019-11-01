@@ -27,6 +27,7 @@
 									<label class="col-form-label">Full Name <span class="text-danger">*</span></label>
 									<input class="form-control" minlength="02" maxlength="50" type="text" name="Adminname" value="<?php echo $Adminname; ?>" placeholder="Enter full name">
 								</div>
+
 								<div class="form-group">
 									<label class="col-form-label">Email Address <span class="text-danger">*</span></label>
 									<input class="form-control" minlength="02" maxlength="40" type="email" name="Emailaddress" value="<?php echo $Emailaddress; ?>" placeholder="Enter email address">
@@ -35,9 +36,20 @@
 									<label class="col-form-label">Mobile Number <span class="text-danger">*</span></label>
 									<input class="form-control" minlength="02" maxlength="40" type="text" id="Mobilenumber" name="Mobilenumber" value="<?php echo $Mobilenumber; ?>" placeholder="Enter mobile number">
 								</div>
+
 								<div class="form-group">
 									<label class="col-form-label">Office Address <span class="text-danger">*</span></label>
 									<input class="form-control" minlength="02" maxlength="300" type="text" name="Officeaddress" value="<?php echo $Officeaddress; ?>" placeholder="Enter office address ">
+								</div>
+
+								<div class="form-group">
+									<label class="col-form-label">Working Days <span class="text-danger">*</span></label>
+									<input class="form-control" minlength="02" maxlength="300" type="text" name="WorkingDays" value="<?php echo $WorkingDays; ?>" placeholder="Enter office working days">
+								</div>
+
+								<div class="form-group">
+									<label class="col-form-label">Week Off Days <span class="text-danger">*</span></label>
+									<input class="form-control" minlength="02" maxlength="300" type="text" name="WeekOff" value="<?php echo $WeekOff; ?>" placeholder="Enter week off days">
 								</div>
 
 								<div class="form-group">
@@ -185,6 +197,12 @@ $(document).ready(function()
 						Officeaddress: {
 							required: true,
 								},
+						WorkingDays: {
+							required: true,
+								},
+						WeekOff: {
+							required: true,
+								},
 						Gstnumber: {
 							required: true,
 								},
@@ -214,6 +232,12 @@ $(document).ready(function()
 								},
 						Officeaddress: {
 							required: "Please enter a office address",
+								},
+						WorkingDays: {
+							required: "Please enter a office working days",
+								},
+						WeekOff: {
+							required: "Please enter a office week off days",
 								},
 						Gstnumber: {
 							required: "Please enter a gst number",

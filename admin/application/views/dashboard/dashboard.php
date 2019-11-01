@@ -92,7 +92,17 @@
 
 						<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
 							<div class="dash-widget clearfix card-box">
-								<span class="dash-widget-icon"><i class="fa fa-cubes"></i></span>
+								<span class="dash-widget-icon"><i class="fa fa-user-circle-o"></i></span>
+								<div class="dash-widget-info">
+									<h3><?php echo $adminData;?></h3>
+									<a href="<?php echo base_url();?>adminmaster/adminlist" title="Go to Admin list"><span>Total Admin</span></a>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+							<div class="dash-widget clearfix card-box">
+								<span class="dash-widget-icon"><i class="fa fa-building-o"></i></span>
 								<div class="dash-widget-info">
 									<h3><?php echo $companyData;?></h3>
 									<a href="<?php echo base_url();?>Company" title="Go to Companies list"><span>Total Companies</span></a>
@@ -100,11 +110,34 @@
 							</div>
 						</div>
 
-
+						<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+							<div class="dash-widget clearfix card-box">
+								<span class="dash-widget-icon"><i class="fa fa-id-card-o"></i></span>
+								<div class="dash-widget-info">
+									<h3><?php echo $invoiceTotal;?></h3>
+									<a href="<?php echo base_url();?>invoice" title="Go to Invoice list"><span>Total Invoice</span></a>
+								</div>
+							</div>
+						</div>
 
 						<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
 							<div class="dash-widget clearfix card-box">
-								<span class="dash-widget-icon"><i class="fa fa-usd"></i></span>
+								<span class="dash-widget-icon"><i class="fa fa-id-card-o"></i></span>
+								<div class="dash-widget-info">
+									<h3><?php echo $qutationTotal;?></h3>
+									<a href="<?php echo base_url();?>invoice/quotation_list" title="Go to Quotation list"><span> Total Quotation</span></a>
+								</div>
+							</div>
+						</div>
+
+
+					</div>
+					<br>
+					<div class="row">
+
+						<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+							<div class="dash-widget clearfix card-box">
+								<span class="dash-widget-icon"><i class="fa fa-user-o"></i></span>
 								<div class="dash-widget-info">
 									<h3><?php echo $hrData;?></h3>
 									<a href="<?php echo base_url();?>hr" title="Go to HR list"><span> Total HR</span></a>
@@ -114,19 +147,7 @@
 
 						<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
 							<div class="dash-widget clearfix card-box">
-								<span class="dash-widget-icon"><i class="fa fa-diamond"></i></span>
-								<div class="dash-widget-info">
-									<h3><?php echo $adminData;?></h3>
-									<a href="<?php echo base_url();?>adminmaster/adminlist" title="Go to Admin list"><span>Total Admin</span></a>
-								</div>
-							</div>
-						</div>
-
-
-
-						<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-							<div class="dash-widget clearfix card-box">
-								<span class="dash-widget-icon"><i class="fa fa-user"></i></span>
+								<span class="dash-widget-icon"><i class="fa fa-users"></i></span>
 								<div class="dash-widget-info">
 									<h3><?php echo $empData;?></h3>
 									<a href="<?php echo base_url();?>employee" title="Go to Employees list"><span>Employees</span></a>
@@ -134,34 +155,7 @@
 							</div>
 						</div>
 
-
-
-					</div>
-					<br>
-					<div class="row">
-
-						<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-							<div class="dash-widget clearfix card-box">
-								<span class="dash-widget-icon"><i class="fa fa-cubes"></i></span>
-								<div class="dash-widget-info">
-									<h3><?php echo $invoiceTotal;?></h3>
-									<a href="<?php echo base_url();?>invoice" title="Go to Invoice list"><span>Total Invoice</span></a>
-								</div>
-							</div>
-						</div>
-
-
-
-						<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-							<div class="dash-widget clearfix card-box">
-								<span class="dash-widget-icon"><i class="fa fa-usd"></i></span>
-								<div class="dash-widget-info">
-									<h3><?php echo $qutationTotal;?></h3>
-									<a href="<?php echo base_url();?>invoice/quotation_list" title="Go to Quotation list"><span> Total Quotation</span></a>
-								</div>
-							</div>
-						</div>
-
+					
 					</div>
 
 

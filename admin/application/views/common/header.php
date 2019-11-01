@@ -160,7 +160,7 @@
 
                     <a href="<?php echo base_url();?>Dashboard" class="logo">
 
-						<img src="<?php echo base_url(); ?>default/img/logo.png" width="40" height="40" alt="Payroll System">
+						<img src="<?php echo base_url(); ?>default/img/Company/companylogo/favicon.png" width="50px" height="50px" alt="Payroll System">
 
 					</a>
 

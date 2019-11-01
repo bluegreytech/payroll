@@ -5,7 +5,7 @@ class Auditlog_model extends CI_Model
 
 	function list_auditlog()
 	{
-		$this->db->select('audlog.*,admin.*');
+		$this->db->select('audlog.*,admin.FirstName,admin.LastName');
 		$this->db->from('tblactivitylog as audlog');
 		$this->db->join('tbladmin as admin', 'audlog.AdminId = admin.AdminId', 'LEFT');
 		$this->db->order_by('ActivityLogId','desc');
@@ -19,7 +19,7 @@ class Auditlog_model extends CI_Model
 	function search($option,$keyword1)
 	{
 			$keyword = str_replace('-', ' ', $keyword1);
-			$this->db->select('audlog.*,admin.*');
+			$this->db->select('audlog.*,admin.FirstName,admin.LastName');
 			$this->db->from('tblactivitylog as audlog');
 			$this->db->join('tbladmin as admin', 'audlog.AdminId = admin.AdminId', 'LEFT');
 			$this->db->order_by('ActivityLogId','desc');
@@ -49,7 +49,7 @@ class Auditlog_model extends CI_Model
 	{
 		$keywordinvone = str_replace('/', '-', $keyword2);
 		$keywordinvtwo = str_replace('/', '-', $keyword3);
-		$this->db->select('audlog.*,admin.*');
+		$this->db->select('audlog.*,admin.FirstName,admin.LastName');
 		$this->db->from('tblactivitylog as audlog');
 		$this->db->join('tbladmin as admin', 'audlog.AdminId = admin.AdminId', 'LEFT');	
 		$this->db->where('audlog.CreatedOn BETWEEN "'. date('Y-m-d', strtotime($keywordinvone)). '" and "'. date('Y-m-d', strtotime($keywordinvtwo)).'"');	

@@ -17,13 +17,13 @@
 					<div id="sidebar-menu" class="sidebar-menu">
 						<ul>
 							<li class="active"> 
-								<a href="<?php echo base_url();?>Dashboard"><i class="la la-dashboard"></i> <span>Dashboard</span></a>
+								<a href="<?php echo base_url();?>Dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
 							</li>
 							<?php
 							if($this->session->userdata('RoleId')==1 || $this->session->userdata('RoleId')==2){
 							?>	
 							<li class="submenu">
-								<a href="<?php echo base_url();?>Dashboard"><i class="fa fa-user-circle" aria-hidden="true"></i> <span>Admin</span> <span class="menu-arrow"></span></a>
+								<a href="<?php echo base_url();?>Dashboard"><i class="fa fa-user-circle-o" aria-hidden="true"></i> <span>Admin</span> <span class="menu-arrow"></span></a>
 								<ul style="display: none;">
 									<li><a href="<?php echo base_url();?>adminmaster/adminlist"><span>List of Admin</span></a></li>			
 								</ul>
@@ -73,12 +73,12 @@
 							if($this->session->userdata('RoleId')==1){
 							?>	
 							<li>
-								<a href="<?php echo base_url();?>Auditlog"><i class="la la-cog"></i> <span>Audit Log</span> </a>
+								<a href="<?php echo base_url();?>Auditlog"><i class="fa fa-eye"></i> <span>Audit Log</span> </a>
 								
 							</li>
 
 							<li>
-								<a href="<?php echo base_url();?>Adminmaster/site_setting"><i class="la la-cog"></i> <span>Company setting</span> </a>
+								<a href="<?php echo base_url();?>Adminmaster/site_setting"><i class="fa fa-cog"></i> <span>Company setting</span> </a>
 								
 							</li>
 

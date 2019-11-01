@@ -27,7 +27,9 @@ class Adminmaster extends CI_Controller
 		$data["Adminname"] 	= $result['Adminname'];
 		$data["Emailaddress"] 		= $result['Emailaddress'];
 		$data["Mobilenumber"] 		= $result['Mobilenumber'];				
-		$data["Officeaddress"]   = $result['Officeaddress'];			
+		$data["Officeaddress"]   = $result['Officeaddress'];
+		$data["WorkingDays"]   = $result['WorkingDays'];
+		$data["WeekOff"]   = $result['WeekOff'];				
 		$data['Gstnumber']=$result['Gstnumber'];
 		$data["Accountnumber"] 	= $result['Accountnumber'];
 		$data["Branch"] 		= $result['Branch'];				
