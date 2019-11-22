@@ -42,7 +42,7 @@ class Invoice extends CI_Controller
 			{
 				$data['invoiceData']=$this->Invoice_model->list_companyinvoice();
 			}
-		$data['companyData'] = $this->Invoice_model->list_company();
+			$data['companyData'] = $this->Invoice_model->list_company();
 
 			//echo "<pre>";	print_r($data['invoiceData']);die;
 		$this->load->view('Invoice/invoice-reports',$data);
@@ -184,7 +184,7 @@ class Invoice extends CI_Controller
 				$data['totalamount']=$result['totalamount'];
 				$data['taxamount']=$result['taxamount'];
 				$data['netamount']=$result['netamount'];
-				$data['status']=$result['status'];
+				$data['paystatus']=$result['paystatus'];
 				$data['companyid']=$result['companyid'];
 				$data['companyname']=$result['companyname'];
 				$data['comemailaddress']=$result['comemailaddress'];
@@ -588,7 +588,7 @@ class Invoice extends CI_Controller
 				$log_data = array(
 					'AdminId' => $AdminIdlogin,
 					'Module' => 'Company Quotation',
-					'Activity' =>'Delete'
+					'Activity' =>'Delete record id: '.$quotationid
 
 				);
 				$log = $this->db->insert('tblactivitylog',$log_data);
@@ -697,7 +697,7 @@ class Invoice extends CI_Controller
 				$log_data = array(
 					'AdminId' =>$AdminIdlogin,
 					'Module' => 'Company Invoice',
-					'Activity' =>'Delete'
+					'Activity' =>'Delete record id: '.$Companyinvoiceid
 				);
 				$log = $this->db->insert('tblactivitylog',$log_data);
 				$this->session->set_flashdata('success', 'Invoice has been deleted!');

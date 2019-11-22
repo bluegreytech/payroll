@@ -529,7 +529,7 @@
 
 
 
-								<form method="post" id="form_edit" >
+								<form method="post" id="form_edit">
 
 
 

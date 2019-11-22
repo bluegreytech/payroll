@@ -75,7 +75,7 @@
 											<select class="select floating" name="option" id="purpose"> 
 												<option value=""> -- Select -- </option>
 												<option value="companyname">Company Name</option>
-												<option value="status">Paymeny Status</option>
+												<option value="paystatus">Paymeny Status</option>
 												<option value="invoicedate">Created Date From to To</option>
 											</select>
 
@@ -259,24 +259,21 @@
 
 										<td>		
 
-											<?php if($compInvoice->status=='Paid'){ 
+											<?php if($compInvoice->paystatus=='Paid'){ 
 
-												echo "<span class='badge badge-success-border'>$compInvoice->status</span>";
+												echo "<span class='badge badge-success-border'>$compInvoice->paystatus</span>";
 
 												}?>
 
-											<?php if($compInvoice->status=='Unpaid'){
+											<?php if($compInvoice->paystatus=='Unpaid'){
 
-													echo "<span class='badge badge-danger-border'>$compInvoice->status</span>";
+													echo "<span class='badge badge-danger-border'>$compInvoice->paystatus</span>";
 
 													}?>
 
 										</td>
 
-										<!-- <td>		
-											<?php echo $compInvoice->status;?>
-
-										</td> -->
+									
 
 										<td class="text-right">
 
@@ -634,7 +631,7 @@
 		$("#business3").hide();
 		$("#business4").hide();
       }
-      else if(this.value == 'status')
+      else if(this.value == 'paystatus')
       {
         $("#business").show();
 		$("#business2").hide();

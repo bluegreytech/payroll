@@ -96,7 +96,7 @@
 
 											 if(($ProfileImage!='' )){ ?>
 
-												<img class="inline-block" src="http://localhost/payroll/hr/upload/emp/<?php echo $ProfileImage; ?>"  id="blah">
+												<img class="inline-block" src="<?php echo base_url_hr();?>upload/emp/<?php echo $ProfileImage; ?>"  id="blah">
 
 											<?php
 

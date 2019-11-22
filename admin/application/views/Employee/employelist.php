@@ -259,7 +259,7 @@
 													if($empData->ProfileImage!='')
 													{
 														?>
-														<a href="<?php echo base_url();?>Employee/profile/<?php echo $empData->emp_id;?>" title="show employee profile" class="avatar"><img src="http://payroll.bluegreytech.co.in/hr/upload/emp/<?php echo $empData->ProfileImage;?>"></a>
+														<a href="<?php echo base_url();?>Employee/profile/<?php echo $empData->emp_id;?>" title="show employee profile" class="avatar"><img src="<?php echo base_url_hr();?>upload/emp/<?php echo $empData->ProfileImage;?>"></a>
 														<a href="<?php echo base_url();?>Employee/profile/<?php echo $empData->emp_id;?>" title="show employee profile"><?php echo $empData->first_name;?></a>
 														<?php
 													}

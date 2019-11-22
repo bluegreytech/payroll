@@ -219,7 +219,7 @@ class Hr extends CI_Controller
 			$log_data = array(
 				'AdminId' => $AdminIdlogin,
 				'Module' => 'Hr',
-				'Activity' =>'Delete'
+				'Activity' =>'Delete record id: '.$hr_id
 			);
 			$log = $this->db->insert('tblactivitylog',$log_data);
 			$this->session->set_flashdata('success', 'Rocord has been deleted!');

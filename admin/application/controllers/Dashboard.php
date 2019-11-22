@@ -37,7 +37,6 @@ class Dashboard extends CI_Controller {
 		$data['invoiceTotal']=$this->Dashboard_model->list_companyinvoicetotal();
 		$data['qutationTotal']=$this->Dashboard_model->list_companyqutationtotal();
 		
-		
 		$data['companyDataCount']=$this->Dashboard_model->list_company_count();
 		//echo "<pre>";print_r($data['companyDataCount']);die;
 		$this->load->view('dashboard/dashboard',$data);		

@@ -466,46 +466,28 @@ class Hr_model extends CI_Model
 		$birth = date("Y-m-d", strtotime($bdate));
 
 		$data=array(
-
 			'hr_id'=>$this->input->post('hr_id'),
-
 			'companyid'=>$this->input->post('companyid'),
-
 			'FullName'=>$this->input->post('FullName'),
-
 			'EmailAddress'=>$this->input->post('EmailAddress'),
-
 			'DateofBirth'=>$birth, 
-
 			'Contact'=>$this->input->post('Contact'),
-
 			'ProfileImage'=>$hr_image,
-
 			'Gender'=>$this->input->post('Gender'),
-
 			'Address'=>$this->input->post('Address'),
-
 			'PinCode'=>$this->input->post('PinCode'),
-
 			'City'=>$this->input->post('City'),
-
 			'IsActive'=>$this->input->post('IsActive')
-
 				);
-
-
-
 			//print_r($data);die;
-
 			$this->db->where("hr_id",$hr_id);
-
 			$res=$this->db->update('tblhr',$data);	
 			if($res)
 				{
 					$log_data = array(
 						'AdminId' => $AdminIdlogin,
 						'Module' => 'Hr',
-						'Activity' =>'Update'
+						'Activity' =>'Update record id: '.$hr_id
 					);
 					$log = $this->db->insert('tblactivitylog',$log_data);
 					return 1;

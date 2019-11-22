@@ -2,6 +2,92 @@
 class Company_model extends CI_Model
 {
 
+	function list_employee($companyid)
+	{
+		$where=array('Is_deleted'=>'0','companyid'=>$companyid);
+		$this->db->select('*');
+		$this->db->from('tblemp');
+		$this->db->where($where);
+		$r = $this->db->get();
+		return $query= $r->num_rows();
+	}
+
+	function list_hr($companyid)
+	{
+		$where=array('Is_deleted'=>'0','companyid'=>$companyid);
+		$this->db->select('*');
+		$this->db->from('tblhr');
+		$this->db->where($where);
+		$r = $this->db->get();
+		return $query= $r->num_rows();
+	}
+
+	function list_emp_detail($companyid)
+	{
+		$where=array('emp.Is_deleted'=>'0','emp.companyid'=>$companyid);
+		$this->db->select('emp.*,comp.companyname');
+		$this->db->from('tblemp as emp');
+		$this->db->join('tblcompany as comp', 'emp.companyid = comp.companyid', 'LEFT');
+		$this->db->where($where);
+		$this->db->order_by('emp.emp_id','DESC');
+		$this->db->limit(5);
+		$query=$this->db->get();
+		$res=$query->result();
+		return $res;
+	}
+
+	function list_hr_detail($companyid)
+	{
+		$where=array('hr.Is_deleted'=>'0','hr.companyid'=>$companyid);
+		$this->db->select('hr.*,comp.*');
+		$this->db->from('tblhr as hr');
+		$this->db->join('tblcompany as comp', 'hr.companyid = comp.companyid', 'LEFT');
+		$this->db->where($where);
+		$this->db->order_by('hr_id','DESC');
+		$this->db->limit(5);
+		$query=$this->db->get();
+		$res=$query->result();
+		return $res;
+	}
+
+	function list_companyinvoice($companyid)
+	{
+		$where=array('compinvoice.isdelete'=>'0','compinvoice.companyid'=>$companyid);
+		$this->db->select('compinvoice.*,comp.*,hr.*');
+		$this->db->from('tblcompanyinvoice as compinvoice');
+		$this->db->join('tblcompany as comp', 'compinvoice.companyid = comp.companyid', 'LEFT');
+		$this->db->join('tblhr as hr', 'compinvoice.hr_id = hr.hr_id', 'LEFT');
+		$this->db->where($where);
+		$this->db->order_by('compinvoice.Companyinvoiceid','DESC');
+		$this->db->limit(5);
+		$query=$this->db->get();
+		$res=$query->result();
+		return $res;
+	}
+
+	function list_companyinvoicetotal($companyid)
+	{
+		$where=array('compinvoice.isdelete'=>'0','compinvoice.companyid'=>$companyid);
+		$this->db->select('compinvoice.*,comp.*,hr.*');
+		$this->db->from('tblcompanyinvoice as compinvoice');
+		$this->db->join('tblcompany as comp', 'compinvoice.companyid = comp.companyid', 'LEFT');
+		$this->db->join('tblhr as hr', 'compinvoice.hr_id = hr.hr_id', 'LEFT');
+		$this->db->where($where);
+		$r = $this->db->get();
+		return $query= $r->num_rows();
+	}
+
+
+	function list_cominvoice_count($companyid)
+	{
+		$query =  $this->db->query("SELECT COUNT(companyid) as count,MONTHNAME(createdon) as month_name FROM tblcompanyinvoice WHERE YEAR(createdon) = '" . date('Y') . "'
+		and companyid=$companyid GROUP BY YEAR(createdon),MONTH(createdon)"); 
+		$record = $query->result();
+		return $record;
+		
+		
+	}
+
 	function get_id()
 	{	
 
@@ -1778,7 +1864,7 @@ class Company_model extends CI_Model
 				$log_data = array(
 					'AdminId' => $AdminIdlogin,
 					'Module' => 'Company',
-					'Activity' =>'Update'
+					'Activity' =>'Update record id: '.$companyid
 				);
 				$log = $this->db->insert('tblactivitylog',$log_data);
 			}
@@ -1895,7 +1981,7 @@ class Company_model extends CI_Model
 				$log_data = array(
 					'AdminId' => $AdminIdlogin,
 					'Module' => 'Company Type',
-					'Activity' =>'Update'
+					'Activity' =>'Update record id: '.$companytypeid
 				);
 				$log = $this->db->insert('tblactivitylog',$log_data);
 				return 1;
@@ -1925,7 +2011,7 @@ class Company_model extends CI_Model
 				$log_data = array(
 					'AdminId' => $AdminIdlogin,
 					'Module' => 'Compliance',
-					'Activity' =>'Update'
+					'Activity' =>'Update record id: '.$complianceid
 				);
 				$log = $this->db->insert('tblactivitylog',$log_data);
 				return 1;
