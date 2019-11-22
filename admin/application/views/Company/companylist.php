@@ -354,13 +354,12 @@
 											<a  onclick="deletedata(<?php echo $comp->companyid; ?>)" data-toggle="modal" data-target="#delete_client" title="Delete"><i class="fa fa-trash-o m-r-5"></i> </a>
 
 										    <a  href="<?php echo base_url();?>Company/companynotification_list" role="button"  title="Notification List">
-
 											<i class="fa fa-bell-o" aria-hidden="true"></i></a>
 
 											<a  href="<?php echo base_url();?>Leave/leavelist" role="button" title="Show Leaves Types">
-
-													<i class="fa fa-calendar-check-o" aria-hidden="true"></i></a>	
-
+												<i class="fa fa-calendar-check-o" aria-hidden="true"></i></a>
+											<a  href="<?php echo base_url();?>Company/company_dashboard/<?php echo $comp->companyid;?>" role="button" title="Show Company Dashboard">
+												<i class="fa fa-tachometer" aria-hidden="true"></i></a>	
 														
 
 										</td>

@@ -204,7 +204,7 @@ class Adminmaster extends CI_Controller
 			$log_data = array(
 				'AdminId' => $AdminIdlogin,
 				'Module' => 'Admin',
-				'Activity' =>'Delete'
+				'Activity' =>'Delete record id: '.$AdminId
 
 			);
 			$log = $this->db->insert('tblactivitylog',$log_data);

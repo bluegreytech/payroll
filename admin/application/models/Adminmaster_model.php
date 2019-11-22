@@ -329,23 +329,14 @@ class Adminmaster_model extends CI_Model
 
 
 	function getuser(){
-
 		$r=$this->db->select('*')
-
-		// $r=$this->db->select('AdminId,RoleId,CONCAT(FirstName ,LastName) AS FirstName,EmailAddress,DateofBirth,PhoneNumber,ProfileImage,Gender,Address,PinCode,CountryId,StateId,City,IsActive')
-
 					->from('tbladmin')
-
 					->where_in('RoleId="1" AND RoleId="2"')
-
 					->or_where('IsDelete!=',1)
-
+					->order_by('AdminId','desc')
 					->get();
-
 		$res = $r->result();
-
 		return $res;
-
 	}
 
 
@@ -611,7 +602,7 @@ class Adminmaster_model extends CI_Model
 				$log_data = array(
 					'AdminId' => $AdminIdlogin,
 					'Module' => 'Admin',
-					'Activity' =>'Update'
+					'Activity' =>'Update record id: '.$AdminId
 
 				);
 				$log = $this->db->insert('tblactivitylog',$log_data);
@@ -810,7 +801,7 @@ class Adminmaster_model extends CI_Model
 				$log_data = array(
 					'AdminId' => $AdminIdlogin,
 					'Module' => 'Admin Profile',
-					'Activity' =>'Update'
+					'Activity' =>'Update record id: '.$this->session->userdata('AdminId')
 				);
 				$log = $this->db->insert('tblactivitylog',$log_data);
 				return 1;
@@ -842,7 +833,7 @@ class Adminmaster_model extends CI_Model
 				$log_data = array(
 					'AdminId' => $AdminIdlogin,
 					'Module' => 'Admin',
-					'Activity' =>'Change Password'
+					'Activity' =>'Change Password self record id: '.$AdminId
 				);
 				$log = $this->db->insert('tblactivitylog',$log_data);
 			//	return 1;

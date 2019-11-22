@@ -6,11 +6,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Company extends CI_Controller 
 {
-
 	public function __construct() {
         parent::__construct();
 		$this->load->model('Company_model');
-
+		$this->load->model('Dashboard_model');
 	}
 
 	public function Companynotificationid(){
@@ -28,7 +27,24 @@ class Company extends CI_Controller
 
 	}
 
+	public function company_dashboard($companyid)
+	{
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
 
+		$data['invoiceTotal']=$this->Company_model->list_companyinvoicetotal($companyid);
+		$data['hrData']=$this->Company_model->list_hr($companyid);
+		$data['empData']=$this->Company_model->list_employee($companyid);
+		$data['invoiceData']=$this->Company_model->list_companyinvoice($companyid);
+		$data['hrDataDetail']=$this->Company_model->list_hr_detail($companyid);
+		$data['empDataDetail']=$this->Company_model->list_emp_detail($companyid);
+		$data['companyDetail']=$this->Company_model->get_companyprofile($companyid);
+	
+		$data['cominvoiceDataCount']=$this->Company_model->list_cominvoice_count($companyid);
+		//echo "<pre>";print_r($data['hrData']);die;
+		$this->load->view('Company/company_dashboard',$data);		
+	}
 
 	public function profile($companyid)
 	{	
@@ -65,17 +81,12 @@ class Company extends CI_Controller
 		$data['Notificationdescription']=$result['Notificationdescription'];
 		$data['Documentfile']=$result['Documentfile'];
 
-		
-
 		$data['stateData']=$this->Company_model->list_state();
 		$data['complianceData']=$this->Company_model->list_compliance();
 		$data['companytypeData']=$this->Company_model->list_companytype();
 		$data['documentData']=$this->Company_model->list_companydocument($companyid);
 		//	echo "<pre>";print_r($data['complianceData']);die;
 		$this->load->view('Company/profile',$data);	
-
-
-
 	}
 
 	public function notification_detail($Companynotificationid)
@@ -254,7 +265,7 @@ class Company extends CI_Controller
 				$log_data = array(
 					'AdminId' => $AdminIdlogin,
 					'Module' => 'Company Notification',
-					'Activity' =>'Delete'
+					'Activity' =>'Delete record id: '.$Companynotificationid
 
 				);
 				$log = $this->db->insert('tblactivitylog',$log_data);
@@ -552,7 +563,7 @@ class Company extends CI_Controller
 				$log_data = array(
 					'AdminId' => $AdminIdlogin,
 					'Module' => 'Company',
-					'Activity' =>'Delete'
+					'Activity' =>'Delete record id: '.$companyid
 
 				);
 				$log = $this->db->insert('tblactivitylog',$log_data);
@@ -756,7 +767,7 @@ class Company extends CI_Controller
 			$log_data = array(
 				'AdminId' => $AdminIdlogin,
 				'Module' => 'Compliance',
-				'Activity' =>'delete'
+				'Activity' =>'Delete record id: '.$complianceid
 
 			);
 			$log = $this->db->insert('tblactivitylog',$log_data);
@@ -803,7 +814,7 @@ class Company extends CI_Controller
 			$log_data = array(
 				'AdminId' => $AdminIdlogin,
 				'Module' => 'Company Type',
-				'Activity' =>'Delete'
+				'Activity' =>'Delete record id: '.$companytypeid
 
 			);
 			$log = $this->db->insert('tblactivitylog',$log_data);

@@ -3,44 +3,32 @@
 
 
 class Invoice_model extends CI_Model
-
- {
+{
 
 	function list_companyinvoice()
-
 	{
-
-		$this->db->select('t1.*,t2.*,t3.*');
-
-		$this->db->from('tblcompanyinvoice as t1');
-
-		$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
-
-		$this->db->join('tblhr as t3', 't1.hr_id = t3.hr_id', 'LEFT');
-
-		$this->db->where('t1.isdelete','0');
-
-	//	$this->db->order_by('t3.hr_type','1');
-
+		$this->db->select('cominvoice.*,comp.*,hr.*');
+		$this->db->from('tblcompanyinvoice as cominvoice');
+		$this->db->join('tblcompany as comp', 'cominvoice.companyid = comp.companyid', 'LEFT');
+		$this->db->join('tblhr as hr', 'cominvoice.hr_id = hr.hr_id', 'LEFT');
+		$this->db->where('cominvoice.isdelete','0');
+		$this->db->order_by('cominvoice.Companyinvoiceid','desc');
 		$query=$this->db->get();
-
 		$res=$query->result();
-
 		return $res;
-
 	}
 
 
 
 	function list_company()
 	{
-		    $where = array('isdelete' =>'0');
-			$this->db->select('*');
-			$this->db->from('tblcompany as t1');
-			$this->db->where($where);
-			$r=$this->db->get();
-			$res = $r->result();
-			return $res;
+		$where = array('isdelete' =>'0');
+		$this->db->select('*');
+		$this->db->from('tblcompany as t1');
+		$this->db->where($where);
+		$r=$this->db->get();
+		$res = $r->result();
+		return $res;
 	}
 
 
@@ -124,8 +112,8 @@ class Invoice_model extends CI_Model
 						'cgstamount'=>$cgstamount,
 						'netamount'=>$netamount,
 						'Otherinformation'=>$Otherinformation,
-						'status'=>'Pending',
-						'Isactive'=>'Aactive'
+						'paystatus'=>'Unpaid',
+						'isactive'=>'Active'
 						);
 						// print_r($data);
 						// echo "aaa";
@@ -191,8 +179,8 @@ class Invoice_model extends CI_Model
 						'cgstamount'=>$cgstamount,
 						'netamount'=>$netamount,
 						'Otherinformation'=>$Otherinformation,
-						'status'=>'Pending',
-						'Isactive'=>'Aactive'
+						'paystatus'=>'Unpaid',
+						'isactive'=>'Active'
 						);
 						// print_r($data);
 						// echo "bbb";
@@ -446,7 +434,7 @@ class Invoice_model extends CI_Model
 				$log_data = array(
 					'AdminId' =>$AdminIdlogin,
 					'Module' => 'Company Quotation',
-					'Activity' =>'Update'
+					'Activity' =>'Update record id: '.$quotationid
 				);
 				$log = $this->db->insert('tblactivitylog',$log_data);
 			}
@@ -537,7 +525,7 @@ class Invoice_model extends CI_Model
 				$log_data = array(
 					'AdminId' => $AdminIdlogin,
 					'Module' => 'Company Invoice',
-					'Activity' =>'Update'
+					'Activity' =>'Update record id: '.$Companyinvoiceid
 				);
 				$log = $this->db->insert('tblactivitylog',$log_data);
 				return 1;	
@@ -628,9 +616,9 @@ class Invoice_model extends CI_Model
 			$this->db->join('tblhr as t3', 't1.hr_id = t3.hr_id', 'LEFT');
 			$this->db->where($where);
 			
-				if($option == 'status')
+				if($option == 'paystatus')
 				{
-				$this->db->like('status',$keyword2);
+				$this->db->like('paystatus',$keyword2);
 				}
 				
 			    $query = $this->db->get();

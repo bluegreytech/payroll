@@ -1,30 +1,11 @@
 <?php
-
-
 defined('BASEPATH') OR exit('No direct script access allowed');
-
-
-
-
-
-class Login extends CI_Controller {
-
-
-
-
-
+class Login extends CI_Controller
+{
 	public function __construct()
-
-
 	{
-
-
       	parent::__construct();
-
-
-		$this->load->model('Login_model'); 
-
-
+		$this->load->model('Login_model');
     }
 
 
@@ -36,7 +17,7 @@ class Login extends CI_Controller {
 			if($this->input->post('logins'))
 			{  
 
-				$_SESSION['EmailAddress'] = (isset($_POST['EmailAddress'])!='')?$_POST['EmailAddress']:"";
+					$_SESSION['EmailAddress'] = (isset($_POST['EmailAddress'])!='')?$_POST['EmailAddress']:"";
 					$EmailAddress = $this->input->post('EmailAddress');
 					$Password = md5($this->input->post('Password'));
 					$IsActive = 1;
@@ -44,7 +25,16 @@ class Login extends CI_Controller {
 					"EmailAddress"=>$EmailAddress,
 					"Password"=>$Password,
 					);
-					$log = $this->Login_model->login_where('tbladmin',$where);         
+					$log = $this->Login_model->login_where('tbladmin',$where);
+					if($log)
+					{
+						$log_data = array(
+							'AdminId' => $log->AdminId,
+							'Module' => 'Login',
+							'Activity' =>'Admin login with record id: '.$log->AdminId
+						);
+						$this->db->insert('tblactivitylog',$log_data);
+					}         
 					$cnt = count($log);
 						if($cnt>0)
 						{
@@ -89,8 +79,15 @@ class Login extends CI_Controller {
 
 	public function logout()
 	{
-		$this->session->sess_destroy();
-		redirect('Login');
+		$AdminIdlogin=$this->session->userdata('AdminId');
+		$log_data = array(
+			'AdminId' => $AdminIdlogin,
+			'Module' => 'Logout',
+			'Activity' =>'Admin logout with record id: '.$AdminIdlogin
+		);
+		$this->db->insert('tblactivitylog',$log_data);
+		$this->session->sess_destroy();		
+		redirect('Login');	
 	}
 
 
