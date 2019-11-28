@@ -33,7 +33,7 @@
 								<a href="<?php echo base_url();?>Dashboard"><i class="fa fa-building-o" aria-hidden="true"></i><span>Company</span> <span class="menu-arrow"></span></a>
 								<ul style="display: none;">
 									<li><a href="<?php echo base_url();?>company/companytype"><span>Type Company </span></a></li>
-									<li><a href="<?php echo base_url();?>company/compliance"><span>Compliance </span></a></li>
+									<li><a href="<?php echo base_url();?>company/compliance_list"><span>Compliance </span></a></li>
 									<li><a href="<?php echo base_url();?>company"><span>Company</span></a></li>
 									<!-- <li><a href="<?php //echo base_url();?>company/Sendnotification"><span>Send Notification</span></a></li> -->
 									<li><a href="<?php echo base_url();?>company/companynotification_list"><span>Notification</span></a></li>

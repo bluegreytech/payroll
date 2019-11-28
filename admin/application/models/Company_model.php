@@ -564,12 +564,13 @@ class Company_model extends CI_Model
 
 
 
-	function list_compliance()
+	function list_compliance($id)
 	{
 		$this->db->select('*');
 		$this->db->from('tblcompliances');
 		$this->db->where('isactive!=','0');
-		$this->db->or_where('isdelete','0');
+		$this->db->where('isdelete','0');
+		$this->db->where('companyid',$id);
 		$this->db->order_by('complianceid','desc');
 		$r=$this->db->get();
 		$res = $r->result();
@@ -1700,7 +1701,38 @@ class Company_model extends CI_Model
 			$compliancename=$this->input->post('compliancename');
 			$compliancepercentage=$this->input->post('compliancepercentage');
 			$isactive=$this->input->post('isactive');
-			$data=array( 
+            $companyid = $this->input->post('companyid');
+			$companyids = count($this->input->post('companyid'));
+            $is_editable=$this->input->post('is_editable');
+			for($i=0; $i<$companyids; $i++)
+			 {
+					
+					$data=array( 
+					'compliancetypeid'=>$compliancetypeid,
+			        'compliancename'=>$compliancename,
+			        'compliancepercentage'=>$compliancepercentage,
+			        'isactive'=>$isactive,
+			        'is_editable'=>$is_editable,
+			        'createdby'=>$AdminIdlogin,
+			         'companyid'=>isset($companyid[$i]) ? $companyid[$i] : '0',
+					 'createdon'=>date("Y-m-d h:i:s")
+					);
+					 //echo "<pre>";print_r($data3);
+					$res=$this->db->insert('tblcompliances',$data);	
+					
+
+				}
+					if($res)
+			      {
+				$log_data = array(
+					'AdminId' => $AdminIdlogin,
+					'Module' => 'Compliance',
+					'Activity' =>'Add'
+				);
+				$log = $this->db->insert('tblactivitylog',$log_data);
+				return $res;
+			   }
+			/*$data=array( 
 			'compliancetypeid'=>$compliancetypeid,
 			'compliancename'=>$compliancename,
 			'compliancepercentage'=>$compliancepercentage,
@@ -1720,7 +1752,7 @@ class Company_model extends CI_Model
 				);
 				$log = $this->db->insert('tblactivitylog',$log_data);
 				return $res;
-			}	
+			}	*/
 	}
 
 
@@ -1997,10 +2029,12 @@ class Company_model extends CI_Model
 		$complianceid=$this->input->post('complianceid');
 		$data=array(
 			'complianceid'=>$this->input->post('complianceid'),
+			'companyid'=>$this->input->post('companyid'),
 			'compliancetypeid'=>$this->input->post('compliancetypeid'),
 			'compliancename'=>$this->input->post('compliancename'),
 			'compliancepercentage'=>$this->input->post('compliancepercentage'),
 			'isactive'=>$this->input->post('isactive'),
+			'is_editable'=>$this->input->post('is_editable'),
 			'updatedby'=>$AdminIdlogin
 				);
 			//print_r($data);die;
@@ -2019,7 +2053,14 @@ class Company_model extends CI_Model
 				      
 
 	}
-
+   function getcompany(){
+   	$this->db->select('*');
+   	$this->db->from('tblcompany');
+   	$this->db->where('isdelete','0');
+   	$this->db->where('isactive','Active');
+   	$query=$this->db->get();
+   	return $query->result();
+   }
 
 
 

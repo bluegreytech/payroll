@@ -1,4 +1,4 @@
-﻿<?php 
+<?php 
 	 $this->load->view('common/header.php');
 	 $this->load->view('common/sidebar.php');
 ?>
@@ -21,7 +21,7 @@
 
 
 
-							<h4 class="page-title">List of Compliance</h4>
+							<h4 class="page-title">List of Company</h4>
 
 
 
@@ -33,8 +33,8 @@
 
 
 
-							<a href="<?php echo base_url()?>/Company/compliance_list" class="btn add-btn"><i class="fa fa-plus"></i> Back to company list</a>
- 
+							<a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_policy"><i class="fa fa-plus"></i> Add Compliance</a> 
+
 
 
 						</div>
@@ -145,19 +145,9 @@
 
 
 
-											<th>Compliance Name</th>
+											<th>Company Name</th>
 
-
-
-											<th>Percentage </th>
-
-											<th>Compliance Type</th>
-
-											<th>Status </th>
-
-
-
-											<th class="text-right">Action</th>
+                                           <th class="text-right">Action</th>
 
 
 
@@ -181,7 +171,7 @@
 
 
 
-										foreach($complianceData as $comp)
+										foreach($company as $comp)
 
 
 
@@ -199,69 +189,11 @@
 
 											<td><?php echo $i;?></td>
 
-											<td><?php echo $comp->compliancename;?></td>
+											<td><?php echo $comp->companyname;?></td>
+                                              <td class="text-center">
 
-											<td><?php echo $comp->compliancepercentage;?>%</td>
-											<td>		
-
-											<?php if($comp->compliancetypeid=='1'){ 
-
-												echo "<span class='badge badge-success-border'>Earnings</span>";
-
-												}?>
-
-											<?php if($comp->compliancetypeid=='2'){
-
-													echo "<span class='badge badge-danger-border'>Deduction</span>";
-
-													}?>
-
-										</td>
-											<td>	
-
-													<div class="action-label">
-
-							<a class="btn btn-white btn-sm btn-rounded" href="javascript:void(0);"  onclick="statusdata('<?php echo $comp->complianceid; ?>','<?php echo $comp->isactive ;?>')">
-
-								<?php if($comp->isactive=='1')
-
-								{
-
-									?>
-
-                   <i class="fa fa-dot-circle-o text-success"></i>Active
-
-									<?php
-
-								}else
-
-								{
-
-									?>
-
-									<i class="fa fa-dot-circle-o text-danger"></i>Inactive
-
-									<?php
-
-								}
-
-								?>
-
-								
-
-							</a>
-
-						</div>
-
-											</td>
-
-
-
-											<td class="text-center">
-
-														<a onClick="editcompliance(<?php echo $comp->complianceid;?>)" data-toggle="modal" data-target="#edit_policy"><i class="fa fa-pencil m-r-5"></i> </a>
-
-														<a  onclick="deletedata(<?php echo $comp->complianceid; ?>)" data-toggle="modal" data-target="#delete_policy"><i class="fa fa-trash-o m-r-5"></i> </a>			
+														<a href="<?php echo base_url()?>/Company/compliance/<?php echo $comp->companyid?>"><i class="fa fa-list m-r-5"></i> Compliance list</a>
+			
 
 											</td>
 
@@ -375,7 +307,7 @@
 
 
 
-								<form method="post" id="form_valid">
+								<form method="post" id="form_valid" action="<?php echo base_url()?>Company/compliance">
 
                                  <div class="form-group">
 											<label>Select company</label>
@@ -485,9 +417,7 @@
 
 										</div>
 
-
-
-								  	<div class="col-md-6">
+                                    	<div class="col-md-6">
 											<div class="form-group">
 											<label class="col-form-label">Is editable ?<span class="text-danger">*</span></label><br>
 											<label class="radio-inline">
@@ -496,6 +426,8 @@
 											</label>
 											</div>
 									</div>
+
+								
 
 
 
@@ -536,239 +468,6 @@
 
 
 				
-
-
-
-				<!-- Edit Policy Modal -->
-
-
-
-				<div id="edit_policy" class="modal custom-modal fade" role="dialog">
-
-
-
-					<div class="modal-dialog modal-dialog-centered" role="document">
-
-
-
-						<div class="modal-content">
-
-
-
-							<div class="modal-header">
-
-
-
-								<h5 class="modal-title">Edit Compliance</h5>
-
-
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-
-
-
-							</div>
-
-
-
-							<div class="modal-body">
-
-
-
-								<form method="post" action="<?php echo base_url();?>Company/compliance" id="form_edit">
-								<input type="hidden" class="form-control" id="complianceid"  name="complianceid" value="<?php echo $complianceid;?>">
-                                     
-                                         <div class="form-group">
-											<label>Select company</label>
-											<select class="form-control" id="companyid" name="companyid"> 
-												<option>Select company</option>
-												<?php
-												foreach($company as $val){
-
-													?>
-												<option  value="<?php echo $val->companyid?>"><?php echo $val->companyname?></option>
-												<?php
-											}
-											?>
-											</select>
-									</div>
-
-									<div class="form-group">
-												<label>Type of Compliances</label>
-												<select class="form-control" name="compliancetypeid" id="compliancetypeid"> 
-													<option desabled>Please select type</option>
-													<option value="1">Ernnings Compliance</option>
-													<option value="2">Deduction Compliance</option>
-												</select>
-									</div>
-
-
-									<div class="form-group">
-											<label>Compliance Name <span class="text-danger">*</span></label>
-											<input class="form-control" type="text" name="compliancename" id="compliancename" placeholder="Enter a compliance" minlength="2" maxlength="30">
-
-									</div>
-
-
-
-							
-
-									<div class="form-group">
-										<label>Compliance Percentage <span class="text-danger">*</span></label>
-										<input class="form-control" type="text" name="compliancepercentage" id="compliancepercentage" placeholder="Enter a compliance percentage : 12" minlength="2" maxlength="20">
-									</div>
-
-									<div class="col-md-6">
-											<div class="form-group">
-											<label class="col-form-label">Isactive<span class="text-danger">*</span></label><br>
-											<label class="radio-inline">
-													<input type="radio" name="isactive"  value="1">Active
-													<input type="radio" name="isactive" checked value="0">Inactive 
-											</label>
-											</div>
-									</div>
-
-									<div class="col-md-6">
-											<div class="form-group">
-											<label class="col-form-label">Is editable ?<span class="text-danger">*</span></label><br>
-											<label class="radio-inline">
-													<input type="radio" name="is_editable"    value="0">Yes
-													<input type="radio" name="is_editable"  value="1">No 
-											</label>
-											</div>
-									</div>
-
-									<div class="submit-section">
-										<button class="btn btn-primary submit-btn">Update</button>
-
-									</div>
-
-								</form>
-
-
-
-							</div>
-
-
-
-						</div>
-
-
-
-					</div>
-
-
-
-				</div>
-
-
-
-				<!-- /Edit Policy Modal -->
-
-
-
-				
-
-
-
-				<!-- Delete Policy Modal -->
-
-
-
-				<div class="modal custom-modal fade" id="delete_policy" role="dialog">
-
-
-
-					<div class="modal-dialog modal-dialog-centered">
-
-
-
-						<div class="modal-content">
-
-
-
-							<div class="modal-body">
-
-
-
-								<div class="form-header">
-
-
-
-									<h3>Delete Compliance</h3>
-
-
-
-									<p>Are you sure want to delete?</p>
-
-
-
-								</div>
-
-
-
-								<div class="modal-btn delete-action">
-
-
-
-									<div class="row">
-
-
-
-										<div class="col-6">
-
-
-
-										<button type="button" class="btn btn-primary continue-btn" id="yes_btn" ><a href="" id="deleteYes" value="Yes">Delete</a></button>
-
-
-
-										</div>
-
-
-
-										<div class="col-6">
-
-
-
-											<a href="javascript:void(0);" data-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
-
-
-
-										</div>
-
-
-
-									</div>
-
-
-
-								</div>
-
-
-
-							</div>
-
-
-
-						</div>
-
-
-
-					</div>
-
-
-
-				</div>
-
-
-
-				<!-- /Delete Policy Modal -->
-
-
-
-			
 
 
 
@@ -886,8 +585,8 @@
 
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
 
+<script src="http://localhost/payroll/admin/default/js/bootstrap-select.min.js"></script>
 
-<!-- <script src="http://localhost/payroll/admin/default/js/bootstrap-select.min.js"></script> -->
     </body>
 
 
@@ -896,67 +595,10 @@
 
 
 
-<div class="modal custom-modal fade" id="status_approve" role="dialog">
-
-		<div class="modal-dialog modal-dialog-centered">
-
-			<div class="modal-content">
-
-				<div class="modal-body">
-
-					<div class="form-header">
-
-						<h3>Status</h3>
-
-						<p>Are you sure, you want to <span id="statustxt"></span> selected record?</p>
-
-					</div>
-
-					<div class="modal-btn delete-action">
-
-						<div class="row">
-
-							<div class="col-6">
-
-								<a href="javascript:void(0);" id="ok_btn" class="btn btn-primary continue-btn">Ok</a>
-
-							</div>
-
-							<div class="col-6">
-
-								<a href="javascript:void(0);" data-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
-
-							</div>
-
-						</div>
-
-					</div>
-
-				</div>
-
-			</div>
-
-		</div>
-
-	</div>
-
-
-
-
 
 <script>
 
 
-
-	$('#edit_policy').on('hidden.bs.modal', function () {
-
-
-
-			$(this).find('form').trigger('reset');
-
-
-
-		})
 
 
 
@@ -1234,7 +876,7 @@
 				data:{complianceid:complianceid},
 				success:function(response){
 					var response = JSON.parse(response);
-					    console.log(response.is_editable);
+					    console.log(response.companyid);
 					$('#complianceid').val(response.complianceid);
 					//$('#companyid').val(response.companyid);
 					$('#compliancetypeid').val(response.compliancetypeid);
@@ -1249,7 +891,6 @@
 					$('#compliancepercentage').val(response.compliancepercentage);
 					//$('#isactive').val(response.isactive);
 					$("input[name=isactive][value=" + response.isactive + "]").attr('checked', 'checked');
-					$("input[name=is_editable][value=" + response.is_editable + "]").attr('checked', 'checked');
 				}
 			});	
 		}
