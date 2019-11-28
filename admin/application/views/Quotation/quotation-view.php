@@ -125,7 +125,7 @@ function m1()
 										?>
 											<tr>
 												<td><?php echo $i;?></td>
-												<td><?php echo $companytype ;?></td>
+												<td><?php echo $companyname ;?></td>
 												<td class="d-none d-sm-table-cell"><?php echo $quot->quotationdetail;?></td>
 												<td>
 													<?php echo $quot->quotationrate; ?>

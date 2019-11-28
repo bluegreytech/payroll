@@ -68,7 +68,7 @@
 
 											<select class="select floating" name="option" id="purpose"> 
 												<option value=""> -- Select -- </option>
-												<option value="companytype" <?php if($option=='companytype'){echo 'selected';} ?>>Company type</option>
+												<!-- <option value="companytype" <?php //if($option=='companytype'){echo 'selected';} ?>>Company type</option> -->
 												<option value="companyname" <?php if($option=='companyname'){echo 'selected';} ?>>Company Name</option>
 												<option value="companyemail" <?php if($option=='companyemail'){echo 'selected';} ?>>Email Address</option>
 												<option value="comcontactnumber" <?php if($option=='comcontactnumber'){echo 'selected';} ?>>Contact Number</option>
@@ -159,7 +159,6 @@
 									<thead>
 										<tr>
 											<th>No</th>
-											<th>Company Type</th>
 											<th>Company Name</th>
 											<th>Email Address</th>
 											<th> Contact Number </th>
@@ -176,7 +175,6 @@
 									?>
 										<tr>
 											<td><?php echo $i;?></td>
-											<td><?php echo $quota->companytype ;?></td>
 											<td><?php echo $quota->companyname ;?></td>
 											<td><?php echo $quota->companyemail ;?></td>
 											<td><?php echo $quota->comcontactnumber ;?></td>
@@ -352,20 +350,11 @@
 
 $(document).ready(function(){
 $('#purpose').on('change', function() {
-  if(this.value == 'companytype')
+  if(this.value == 'companyname')
   {
 	$("#business1").show();
 	$("#business2").hide();
-	$("#business3").hide();
-
-  }
-  else if(this.value == 'companyname')
-  {
-	$("#business1").show();
-	$("#business2").hide();
-	$("#business3").hide();
-	
-	
+	$("#business3").hide();	
   }
   else if(this.value == 'companyemail')
   {

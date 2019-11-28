@@ -192,7 +192,7 @@
 											<td><?php echo $comp->companyname;?></td>
                                               <td class="text-center">
 
-														<a href="<?php echo base_url()?>/Company/compliance/<?php echo $comp->companyid?>"><i class="fa fa-list m-r-5"></i> Compliance list</a>
+														<a href="<?php echo base_url()?>Company/compliance/<?php echo $comp->companyid?>"><i class="fa fa-list m-r-5"></i> Compliance list</a>
 			
 
 											</td>
