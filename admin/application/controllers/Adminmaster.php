@@ -47,8 +47,7 @@ class Adminmaster extends CI_Controller
 				{
 					$this->session->set_flashdata('error', 'Your data was not Update!');
 					redirect('Adminmaster/site_setting');
-				}
-			
+				}		
 
 	} 
 
@@ -69,7 +68,6 @@ class Adminmaster extends CI_Controller
 		}
 
 		if($_POST!='')
-
 		{
 
 			$option=$this->input->post('option');
@@ -93,22 +91,6 @@ class Adminmaster extends CI_Controller
 
 
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

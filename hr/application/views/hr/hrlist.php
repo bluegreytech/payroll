@@ -267,7 +267,7 @@
 				<div class="modal-body">
 					<div class="form-header">
 						<h3>Delete HR</h3>
-						<p>Are you sure want to hr?</p>
+						<p>Are you sure you want to delete this record?</p>
 					</div>
 					<div class="modal-btn delete-action">
 						<div class="row">
@@ -616,8 +616,7 @@ function editdata(hr_id)
 			if(response.ProfileImage!=''){
 				
 			 $('#blah').attr('src', url+'upload/hr/'+response.ProfileImage);
-			}else{
-			
+			}else{			
 			  $('#blah').attr('src', url+'upload/no_image/user_no_image.png');
 			}
 			//$("option[name=companyid][value=" + response.companyid + "]").attr('selected', 'selected');

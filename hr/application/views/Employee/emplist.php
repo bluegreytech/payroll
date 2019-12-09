@@ -1,6 +1,6 @@
-﻿<?php 
-	 $this->load->view('common/header.php');
-	 $this->load->view('common/sidebar.php');
+<?php 
+	 $this->load->view('common/header');
+	 $this->load->view('common/sidebar');
 ?>
 
 <!-- Page Wrapper -->
@@ -246,7 +246,7 @@ $(document).ready(function() {
 	 },
 	 {
 		extend: 'pdfHtml5',
-	//	download: 'open',
+		//	download: 'open',
 		text:'<i class="fa fa-file-pdf-o"></i> PDF',
 		title: "List of Employee",
 		filename:"List_of_Employee",
@@ -441,7 +441,8 @@ function statusdata(id,status){
                 type: "post",
                 data: {id:id,status:status} ,
                 success: function (response) {  
-                //console.log(response);           
+                //console.log(response); 
+               // return false;          
                 document.location.href = url+'employee/emplist';                  
 
             },

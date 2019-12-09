@@ -10,6 +10,7 @@ class Employee_model extends CI_Model
 		$this->db->from('tblemp');
 		$this->db->where('Is_deleted','0');
 		$this->db->where('companyid',$this->session->userdata('companyid'));
+		$this->db->order_by('emp_id','Desc');
 		$query=$this->db->get();
 		$res=$query->result();
 		return $res;
@@ -62,8 +63,6 @@ class Employee_model extends CI_Model
 		$query=$this->db->get();	
 		return $query->row_array();
 	}
-
-	
 
     function emp_insert()
 	{		
@@ -155,8 +154,7 @@ class Employee_model extends CI_Model
 				$error =  $this->upload->display_errors();
 				echo "<pre>";print_r($error);
 			  } 
-           	  $picture = $this->upload->data();	   
-             
+           	  $picture = $this->upload->data();            
 			
 			$bankdetail_image=$picture['file_name'];		
 			if($this->input->post('pre_bank_detail')!='')
@@ -165,8 +163,7 @@ class Employee_model extends CI_Model
 					{
 						$link=base_path().'upload/empdetail/'.$this->input->post('pre_bank_detail');
 						unlink($link);
-					}
-					
+					}					
 				}
 		} else {
 			if($this->input->post('pre_bank_detail')!='')
@@ -381,17 +378,17 @@ class Employee_model extends CI_Model
    		$rnd=substr(str_shuffle("23456789abcdefghjkmnpqrstvwxyzABCDEFGHJKMNPQRSTVWXYZ"), 0, $x);
         //echo $rnd ;die;
 
-		$DateofBirth = $this->input->post('DateofBirth');
+		$DateofBirth = $this->input->post('dob');
 		$boddate = str_replace('/', '-', $DateofBirth );
 		$dob = date("Y-m-d", strtotime($boddate));
 
 		$joiningdate = $this->input->post('jod');
 		$jdate = str_replace('/', '-', $joiningdate );
 		$jod = date("Y-m-d", strtotime($jdate));
-
-		$probation_preriod_day = $this->input->post('probation_preriod_day');
+        
+        $probation_preriod_day = $this->input->post('probation_period_day');
 		$pddate = str_replace('/', '-', $probation_preriod_day );
-		$probation_preriod_day = date("Y-m-d", strtotime($pddate));
+		$probation_preriod_day = date("Y-m-d", strtotime($pddate)); 
         $data = array(
 	    'employee_code' => trim($this->input->post('employee_code')),	
 		'first_name' => trim($this->input->post('FirstName')),
@@ -406,6 +403,12 @@ class Employee_model extends CI_Model
 		'religion' =>trim($this->input->post('religion')),
 		'nationality' =>trim($this->input->post('nationality')),
 		'qualification_emp' =>trim($this->input->post('qualificationemp')),
+		'otherqulification' =>trim($this->input->post('otherqulification')),
+		'uan_status' =>trim($this->input->post('uanstatus')),
+		'uanno' =>trim($this->input->post('uanno')),
+		'esic_status' =>trim($this->input->post('esicstatus')),
+		'esicno' =>trim($this->input->post('esicno')),
+		'taxstatus' =>trim($this->input->post('taxstatus')),
 		'bloodgroup' =>trim($this->input->post('bloodgroup')),
 		'salary' =>trim($this->input->post('salary')),
 		'salaryamt' =>trim($this->input->post('salary_amount')),
@@ -430,7 +433,29 @@ class Employee_model extends CI_Model
 		//echo "<pre>";print_r($data);die;	
                 
         $res=$this->db->insert('tblemp',$data);	
-		return $res;
+		//return $res;
+       $id=$this->db->insert_id();
+       if(!empty($id))
+       { 
+
+       	  	for($i=0;$i<count($this->input->post('leavename'));$i++){
+         	    $this->input->post('leavename')[$i].'='.$this->input->post('leaveno')[$i];
+         	    $leavedata=array(
+         	     	'companyid'=>$this->session->userdata('companyid'),
+         	     	'emp_id'=>$id,
+         	     	'leave_id'=>$this->input->post('leavename')[$i],
+         	     	'no_leave'=>$this->input->post('leaveno')[$i],
+         	     	'created_date'=>date('Y-m-d H:i:s'),
+         	    );
+         	   // echo "<pre>";print_r($leavedata); 
+         	    $res=$this->db->insert('tblempassignleave',$leavedata);
+
+	        }
+	      //  die;
+
+       }
+       return $res;
+
 			
 	}
 
@@ -787,6 +812,12 @@ class Employee_model extends CI_Model
 		'religion' =>trim($this->input->post('religion')),
 		'nationality' =>trim($this->input->post('nationality')),
 		'qualification_emp' =>trim($this->input->post('qualificationemp')),
+		'otherqulification' =>trim($this->input->post('otherqulification')),
+		'uan_status' =>trim($this->input->post('uanstatus')),
+		'uanno' =>trim($this->input->post('uanno')),
+		'esic_status' =>trim($this->input->post('esicstatus')),
+		'esicno' =>trim($this->input->post('esicno')),
+		'taxstatus' =>trim($this->input->post('taxstatus')),
 		'bloodgroup' =>trim($this->input->post('bloodgroup')),
 		'salary' =>trim($this->input->post('salary')),
 		'salaryamt' =>trim($this->input->post('salary_amount')),
@@ -808,11 +839,114 @@ class Employee_model extends CI_Model
 		'companyid' =>$this->session->userdata('companyid'),
 		'upated_date'=>date('Y-m-d')		
 		);
-		//echo "<pre>";print_r($data);die;	
+		//echo "<pre>";print_r($_POST);die;	
          $this->db->where('emp_id',$id);       
-        $res=$this->db->update('tblemp',$data);	
-		return $res;
-			
-	}
+         $res=$this->db->update('tblemp',$data);
+         $leavename=$this->input->post('leavename');
+       
+         // echo count($this->input->post('leavename'));
+         $this->db->select('*');
+         $this->db->from('tblempassignleave');
+         $query=$this->db->where('emp_id',$id);    
+         $query=$this->db->get();		
+         $res=$query->num_rows();
+      	 // echo $this->db->last_query();die;
+        // echo $res;die;
+       
+    	if($res>0){
+    		//echo "dgfgfdgf";die;
+		
+    	    for($i=0;$i<count($this->input->post('leavename'));$i++){
+    	    
+         	   // $this->input->post('leavename')[$i].'='.$this->input->post('leaveno')[$i];
+         	    $leavedata=array(
+         	     	'companyid'=>$this->session->userdata('companyid'),         	     
+         	     	'leave_id'=>$this->input->post('leavename')[$i],
+         	     	'no_leave'=>$this->input->post('leaveno')[$i],
+         	     	'created_date'=>date('Y-m-d H:i:s'),
+         	    ); 
+         	    $this->db->where('empassignleave_id',$this->input->post('empassignleave_id')[$i]);
+         	    $res=$this->db->update('tblempassignleave',$leavedata);
 
+	         }
+	 
+          // die;
+			//return $res;
+   	 	}else{ 
+   	 		//echo "Kjkjh";die;
+           for($i=0;$i<count($this->input->post('leavename'));$i++){
+         	    //$this->input->post('leavename')[$i].'='.$this->input->post('leaveno')[$i];
+         	    $leavedata=array(
+         	     	'companyid'=>$this->session->userdata('companyid'),
+         	     	'emp_id'=>$id,
+         	     	'leave_id'=>$this->input->post('leavename')[$i],
+         	     	'no_leave'=>$this->input->post('leaveno')[$i],
+         	     	'created_date'=>date('Y-m-d H:i:s'),
+         	    ); 
+         	    $res=$this->db->insert('tblempassignleave',$leavedata);
+
+	         }
+   	 	}	
+	}
+   function empcodelist(){
+   		$data=array();
+   		$companydata=get_one_record('tblcompany','companyid',$this->session->userdata('companyid'));
+		$this->db->select('*');
+		$this->db->from('tblemp');
+		$this->db->where('Is_deleted','0');
+		$this->db->where('companyid',$this->session->userdata('companyid'));
+		$this->db->order_by('emp_id', 'DESC');
+		$this->db->limit('1');
+     	$query=$this->db->get();
+      	$empcode=$query->row()->employee_code;
+      	$split = explode("_",$empcode);		
+		$val=$split[1]+1;		
+      		if($val<=9){      			
+                 $data= $companydata->companycode.'_0'.$val; 
+      		}else{
+			    $data= $companydata->companycode.'_'.$val;
+      		}
+			return $data;    	
+   }
+
+   function getempassginleave($id){
+	    $this->db->select('*');
+	    $this->db->from('tblempassignleave');
+	    $this->db->where('emp_id',$id);
+	    $query=$this->db->get();
+	    $res=$query->result();
+	    return $res;
+   }
+   function getempattendancedata($id,$salarymonth){
+   	$this->db->select('count(*) as totalworkingdays');
+   	$this->db->from('tblattendance');
+   	$this->db->where('emp_id',$id);
+   	$this->db->like('attendance_month',date($salarymonth));
+    $query=$this->db->get();
+	$res=$query->row();
+	//echo "<pre>";print_r($res->totalworkingdays);die;
+	 return $res->totalworkingdays;
+
+   }
+    function getempleavedata($id,$salarymonth){
+   // echo $salarymonth;die;
+         
+	$firstdate=date($salarymonth.'-01');
+	$lastdate=date($salarymonth.'-t'); 
+   	$this->db->select('count(*) as totalworkingdays');
+   	$this->db->from('tblempleave');
+   	$this->db->where('emp_id',$id);
+   	$this->db->where('Is_deleted','0');
+    $this->db->where('leavestatus','Approve');
+    $this->db->where('typeofleave','4');
+    
+   	$this->db->where('leavefrom >=',$firstdate);
+   	$this->db->where('leaveto <=', $lastdate);
+    $query=$this->db->get();
+    
+	$res=$query->row();
+	    return $res->totalworkingdays;
+
+   }
+   
 }

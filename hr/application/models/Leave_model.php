@@ -140,7 +140,7 @@ class Leave_model extends CI_Model
 					'leavereason'=>trim($this->input->post('leavereason')),
 					'leaveslot'=>trim($leaveslot ? $leaveslot :''),
 					'company_id' =>$this->session->userdata('companyid'),
-					'leavestatus' =>'Approve',
+					'leavestatus' =>'Pending',
 					'created_date'=>date('Y-m-d')		
 				);
 				//echo "<pre>";print_r($data); die;

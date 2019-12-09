@@ -201,13 +201,13 @@
 														<i class="fa fa-dot-circle-o <?php 
 														if($row->leavestatus=='Approve'){ echo 'text-success'; 
 														}else if($row->leavestatus=='Pending'){ 
-														echo 'text-info'; }else{ echo 'text-danger'; }?>"></i>	<?php echo ucfirst($row->leavestatus); ?>
+														echo 'text-info'; }else{ echo 'text-danger'; }?>"></i> <?php echo ucfirst($row->leavestatus); ?>
 													</a>
 													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item" href="javascript:void(0);" onclick="statusdata('<?php echo $row->empleave_id; ?>','<?php echo $row->leavestatus ;?>','Pending')">
+														<a class="dropdown-item" href="javascript:void(0);" onclick="statusdata('<?php echo $row->empleave_id; ?>','<?php echo $row->leavestatus ;?>','Pending','<?php echo $row->emp_id; ?>','<?php echo $row->noofdays;?>','')">
 														<i class="fa fa-dot-circle-o text-info"></i>Pending</a>
-														<a class="dropdown-item" href="javascript:void(0);" onclick="statusdata('<?php echo $row->empleave_id; ?>','<?php echo $row->leavestatus ;?>','Approve')" data-id="approve"><i class="fa fa-dot-circle-o text-success"></i>Approved</a>												
-														<a class="dropdown-item" href="javascript:void(0);" onclick="statusdata('<?php echo $row->empleave_id; ?>','<?php echo $row->leavestatus ;?>','Rejected')" id="rejected">
+														<a class="dropdown-item" href="javascript:void(0);" onclick="statusdata('<?php echo $row->empleave_id; ?>','<?php echo $row->leavestatus ;?>','Approve','<?php echo $row->emp_id; ?>')" data-id="approve"><i class="fa fa-dot-circle-o text-success"></i>Approved</a>												
+														<a class="dropdown-item" href="javascript:void(0);" onclick="statusdata('<?php echo $row->empleave_id; ?>','<?php echo $row->leavestatus ;?>','Rejected','<?php echo $row->emp_id; ?>')" id="rejected">
 															<i class="fa fa-dot-circle-o text-danger"></i> Rejected</a>
 													</div>
 												</div>
@@ -289,9 +289,8 @@
 <?php $this->load->view('common/footer');?>
 
 <script type="text/javascript">
-	function statusdata(id,status,value){  
-		//alert(status);		
-  
+	function statusdata(id,status,value,emp_id){  
+	
     $('#approve_leave').modal('show');
     if(value=="Pending"){
     	$('#statustxt').text('pending');
@@ -306,8 +305,9 @@
                 $.ajax({
                 url: url+"/leave/statusdata/",
                 type: "post",
-                data: {id:id,status:status,changestatus:value} ,
-                success: function (response) {                  
+                data: {id:id,status:status,changestatus:value,emp_id:emp_id} ,
+                success: function (response) {   
+               // return false;               
                 document.location.href = url+'leave/empleavelist';
             },
             error: function(jqXHR, textStatus, errorThrown) {

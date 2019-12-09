@@ -2,7 +2,7 @@
 	 $this->load->view('common/header');
 	 $this->load->view('common/sidebar');
 ?>
-			<!-- Page Wrapper -->
+<!-- Page Wrapper -->
  <div class="page-wrapper">			
    <div class="content container-fluid">
 		<div class="row">

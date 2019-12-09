@@ -8,12 +8,9 @@
         <title>Payroll System</title>
 		
 		<!-- Favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url(); ?>default/assets/img/favicon.png">
-      
-		
+        <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url(); ?>default/img/favicon.png">
 		<!-- Bootstrap CSS -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>default/css/bootstrap.min.css">
-		
 		<!-- Fontawesome CSS -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>default/css/font-awesome.min.css">
 		
@@ -54,11 +51,10 @@
 </head>
 
 <?php
-           if(check_admin_authentication())
-           {
-			
-			$ProfileImage=$this->session->userdata('ProfileImage');
-  ?>
+if(check_admin_authentication())
+{
+$ProfileImage=$this->session->userdata('ProfileImage');
+?>
     <body>
 		<!-- Main Wrapper -->
         <div class="main-wrapper">
@@ -78,12 +74,30 @@
 		
 			<!-- Header -->
             <div class="header">
-			
+			   <?php $cmpdetail= getOneCompany($this->session->userdata('companyid'));
+			  
+			    ?>
+
 				<!-- Logo -->
                 <div class="header-left">
-                    <a href="<?php echo base_url(); ?>home/dashboard" class="logo">
-						<img src="<?php echo base_url(); ?>default/img/logo.png" width="40" height="40" alt="Payroll System">
-					</a>
+                	<?php //echo adminfront_base_url().'upload/company/'.$cmpdetail->companyimage; ?>
+                	<?php  //echo adminfront_base_url();
+                		if(!empty($cmpdetail)){  
+                			   if(($cmpdetail->companyimage!='' && file_exists(adminbase_path().'/upload/company/'.$cmpdetail->companyimage))){
+                			?>
+                      
+                       		<a href="<?php echo base_url(); ?>home/dashboard" class="logo">
+                         		<img src="<?php echo adminfront_base_url().'upload/company/'.$cmpdetail->companyimage; ?>"  alt="" width="50" height="50">
+                     		</a>
+                	<?php }else{ ?> 
+                		<a href="<?php echo base_url(); ?>home/dashboard" class="logo">
+							<img src="<?php echo base_url(); ?>default/img/logo.png" width="40" height="40" alt="Payroll System">
+						</a>
+                	 <?php } 	 
+            			}else{ ?>
+                		
+                	<?php }  ?>
+                   
                 </div>
 				<!-- /Logo -->
 				
@@ -98,7 +112,7 @@
 				<!-- Header Title -->
                 <div class="page-title-box">
                 	<?php // echo  $this->session->userdata('companyid');
-                	$cmpdetail= getOneCompany($this->session->userdata('companyid'));
+                	
                 	// echo "<pre>";print_r($cmpdetail);
                 	if(!empty($cmpdetail)){ ?>
                        <h3><?php echo strtoupper($cmpdetail->companyname); ?></h3>

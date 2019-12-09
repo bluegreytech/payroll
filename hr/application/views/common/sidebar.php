@@ -41,7 +41,7 @@
 								<a href="<?php echo base_url();?>Dashboard"><i class="la la-user"></i> <span>Employees</span> <span class="menu-arrow"></span></a>
 								<ul style="display: none;">
 								<li><a href="<?php echo base_url();?>employee/emplist">List of Employees</a></li>
-								<li><a href="<?php echo base_url();?>employee/setsalary">Employee Set Salary </a></li>
+								<li><a href="<?php echo base_url();?>salarysetting/setsalary">Employee Set Salary </a></li>
 								</ul>
 							</li>
 							<li class="submenu">
@@ -60,7 +60,11 @@
 								</ul>
 							</li>
 							<li class="active">
-								<a href="<?php echo base_url();?>home/company_setting"><i class="la la-cog"></i> <span>Company setting</span> </a>
+								<a href="<?php echo base_url();?>company/company_setting"><i class="la la-cog"></i> <span>Company setting</span> </a>
+								
+							</li>
+							<li class="">
+								<a href="<?php echo base_url();?>company/setsalarymonth"><i class="la la-cog"></i> <span>Set Salary Month</span> </a>
 								
 							</li>
 						</ul>
