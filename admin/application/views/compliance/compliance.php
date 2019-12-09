@@ -33,7 +33,7 @@
 
 
 
-							<a href="<?php echo base_url()?>/Company/compliance_list" class="btn add-btn"><i class="fa fa-plus"></i> Back to company list</a>
+							<a href="<?php echo base_url()?>Company/compliance_list" class="btn add-btn"><i class="fa fa-plus"></i> Back to company list</a>
  
 
 

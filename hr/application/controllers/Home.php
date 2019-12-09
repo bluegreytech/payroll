@@ -7,7 +7,7 @@ class Home extends CI_Controller {
 	{
       	parent::__construct();
 		$this->load->model('Login_model');
-		//$this->load->model('user_model');
+		$this->load->model('company_model');
       
     }
 
@@ -271,72 +271,7 @@ class Home extends CI_Controller {
 	}
    
 
-   public function company_setting($msg='')
-    {  //echo "fdsf";die;
-            
-		if(!check_admin_authentication())
-		{
-		redirect('login');
-		}
-                
-		$data = array();
-		$data['activeTab']="add_pages";	
-        $this->load->library('form_validation');
-	
-		$this->form_validation->set_rules('PageTitle', 'Page Title', 'required');
-		$this->form_validation->set_rules('IsActive', 'IsActive', 'required');		
-		
-		if($this->form_validation->run() == FALSE){	
-		
-			if(validation_errors())
-			{
-				$data["error"] = validation_errors();
-				//echo "<pre>";print_r($data);die;
-			}else{
-				$data["error"] = "";
-			}
-			if($_POST){			
-				$data["PageTitle"] = $this->input->post('PageTitle');
-				$data["PageDescription"]   = $this->input->post('PageDescription');
-				
-              
-			
-			}else{
-			$oneCompany=get_one_record('tblcompany','companyid',$this->session->userdata('companyid'));
-			//print_r($oneCompany);die;
-			$data["companyid"] 	= $oneCompany->companyid;
-			$data["companyname"] 		= $oneCompany->companyname;				
-			$data["comemailaddress"]   = $oneCompany->comemailaddress;			
-			$data['comcontactnumber']=$oneCompany->comcontactnumber;
-			$data['gstnumber']=$oneCompany->gstnumber;
-			$data['digitalsignaturedate']=$oneCompany->digitalsignaturedate;
-			$data['companytypeid']=$oneCompany->companytypeid;
-		    $compliancedetail=get_one_record('tblcompanycompliances','companyid',$this->session->userdata('companyid'));
-		   
-				$complianceid = explode(',',$compliancedetail->complianceid);
-              	$com_compliances= array();
-				foreach ($complianceid as $row){					
-					$data['companycompliances']=$this->Login_model->getcompliance($row);				
-					$com_compliances[]=$data['companycompliances'];
-				}
-				$data['com_compliances']=$com_compliances;
-				$compliancedeductionid = explode(',',$compliancedetail->compliancedeductionid);
-				$com_compliancesdeduction= array();
-				foreach ($compliancedeductionid as $row){					
-					$data['companydeduction']=$this->Login_model->getcompliance($row);				
-					$com_compliancesdeduction[]=$data['companydeduction'];
-				}
-					$data['com_compliancesdeduction']=$com_compliancesdeduction;
-			  	// echo "<pre>";print_r($compliancedetail);die;
-				}
-		}else{
-			//echo "else fdf";die;
-            $this->session->set_flashdata('successmsg', 'Company has been updated successfully');				
-			$res=$this->Login_model->updatePages();
-			redirect('home/add_pages/');
-		}
+   
 
-        $this->load->view('common/company_setting',$data);    
-            
-    }
+ 
 }

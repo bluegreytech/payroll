@@ -124,32 +124,38 @@ class Leave extends CI_Controller
 		{ 
 			redirect(base_url());
 		}
+		$id=$this->input->post('id'); 
 		$action=$this->input->post('status');
 	    $changestatus=$this->input->post('changestatus');
-		$id=$this->input->post('id'); 
+        $getonerecord=get_one_record('tblempleave','empleave_id',$id);
+         //echo "<pre>up==";print_r($getonerecord->noofdays);
+	     $empid=$this->input->post('emp_id'); 	
+		$this->db->select('*');
+		$this->db->from('tblempassignleave');
+		$this->db->where('emp_id',$empid);
+		$this->db->where('leave_id',$getonerecord->typeofleave);
+
+      	$query=$this->db->get();
+		$result=$query->row();
+		//echo $result->empassignleave_id;die;
+		if($changestatus=='Approve'){
+			//echo "lklkjl"; 
+			 if($getonerecord->typeofleave==$result->leave_id){
+				$total=($result->no_leave - $getonerecord->noofdays);
+                $totaldata=array('no_leave' =>$total);
+				$this->db->where('empassignleave_id',$result->empassignleave_id);       
+				$resupdate=$this->db->update('tblempassignleave',$totaldata);	
+			}
+		}
+       
+		
 
 			$data = array("leavestatus" => $changestatus);
 			update_record('tblempleave', $data, 'empleave_id', $id);			
 		    $res = array('status' => 'done');
 			echo json_encode($res);
 			die ;
-		// if($action == "Active") {
-
-		// 	$data = array("status" => "Inactive");
-		// 	update_record('tblcmpleave', $data, 'leave_id', $id);
-
-		// 	$res = array('status' => 'done', 'msg' => ACTIVE);
-		// 	echo json_encode($res);
-		// 	die ;
-		// }else if($action == "Inactive") {
-			
-		// 		$data = array("status" => "Active");
-		// 		update_record('tblcmpleave', $data, 'leave_id', $id);
-			
-		// 	$res = array('status' => 'done', 'msg' => ACTIVE);
-		// 	echo json_encode($res);
-		// 	die ;
-		// }
+		
 	
 	}
 

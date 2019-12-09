@@ -290,8 +290,9 @@ function statusdata(id,status){
                 type: "post",
                 data: {id:id,status:status} ,
                 success: function (response) {  
-                //console.log(response);           
-                document.location.href = url+'leave/leavelist';                  
+                //console.log(response);      
+                return false;     
+               // document.location.href = url+'leave/leavelist';                  
 
             },
             error: function(jqXHR, textStatus, errorThrown) {

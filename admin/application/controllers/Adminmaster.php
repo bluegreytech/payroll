@@ -46,8 +46,7 @@ class Adminmaster extends CI_Controller
 				{
 					$this->session->set_flashdata('error', 'Your data was not Update!');
 					redirect('Adminmaster/site_setting');
-				}
-			
+				}		
 
 	} 
 
@@ -68,6 +67,20 @@ class Adminmaster extends CI_Controller
 		$data['adminmasterData']=$this->Adminmaster_model->getuser();
 		$this->load->view('dashboard/adminlist',$data);
 	}
+
+
+		if($_POST!='')
+		{
+
+			$option=$this->input->post('option');
+
+			$keyword=$this->input->post('keyword2');	
+
+			$data['adminmasterData'] = $this->Adminmaster_model->search($option,$keyword);
+
+		}	
+
+		else
 
 
 	function searchadmin(){
@@ -94,6 +107,7 @@ class Adminmaster extends CI_Controller
 		//echo "<pre>";print_r($data['result']);die;
 		$this->load->view('dashboard/adminlist',$data);
 	}
+
 
 
 	public function addadmin()
@@ -179,11 +193,6 @@ class Adminmaster extends CI_Controller
 
 
 	}
-
-
-
-
-
 
 
 	function deleteadmin(){
@@ -273,16 +282,6 @@ class Adminmaster extends CI_Controller
 
 	}
 
-
-
-
-
-
-
-
-
-
-
 	public function admin_master_profile()
 	{
 		if(!check_admin_authentication()){ 
@@ -310,12 +309,6 @@ class Adminmaster extends CI_Controller
 		$this->load->view('dashboard/profile',$data);
 
 	}
-
-
-
-	
-
-
 
 	public function admin_master_profile_update()     
 	{     
@@ -354,15 +347,6 @@ class Adminmaster extends CI_Controller
 	}
 
 
-
-
-
-
-
-
-
-
-
 	public function change_password()
 	{	
 		if(!check_admin_authentication()){ 
@@ -392,29 +376,11 @@ class Adminmaster extends CI_Controller
 					$this->session->set_flashdata('warning','Your email function not working!');  
 					redirect('Adminmaster/change_password');
 				}
-
-				
-			
-
 			}
 
-
-
-		
-
-
-
 		}
-
-
-
 			$this->load->view('common/changepassword');
-
-
-
 	}
-
-
 
 function statusdata(){
 
@@ -471,20 +437,4 @@ function statusdata(){
 }
 
 
-
-	
-
-
-
-
-
-
-
 }
-
-
-
-
-
-
-

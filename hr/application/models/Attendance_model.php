@@ -50,7 +50,7 @@ class Attendance_model extends CI_Model
 			$empname=$this->input->post('empname');
 			$attmonth=$this->input->post('attmonth'); 
 			if($this->input->post('attmonth')!=''){
-              $attmonth=$this->input->post('attmonth');	
+            $attmonth=$this->input->post('attmonth');	
 
 				//$att
 				//echo $attmonth=date('Y-m',strtotime('last month'));

@@ -499,8 +499,8 @@ class Invoice extends CI_Controller
 	{	
 		$data=array();
 		$data['quotationid']=$this->input->post('quotationid');
-		$data['companytypeid']=$this->input->post('companytypeid');
-		$data['companytype']=$this->input->post('companytype');
+	//	$data['companytypeid']=$this->input->post('companytypeid');
+	//	$data['companytype']=$this->input->post('companytype');
 		$data['companyname']=$this->input->post('companyname');
 		$data['companyemail']=$this->input->post('companyemail');
 		$data['comcontactnumber']=$this->input->post('comcontactnumber');
@@ -553,8 +553,8 @@ class Invoice extends CI_Controller
 		$result=$this->Invoice_model->get_quotation($quotationid);	
 		//echo "<br>";print_r($result);die;
 		$data['quotationid']=$result['quotationid'];
-		$data['companytypeid']=$result['companytypeid'];
-		$data['companytype']=$result['companytype'];
+		//$data['companytypeid']=$result['companytypeid'];
+		//$data['companytype']=$result['companytype'];
 		$data['companyname']=$result['companyname'];
 		$data['companyemail']=$result['companyemail'];
 		$data['comcontactnumber']=$result['comcontactnumber'];
@@ -636,9 +636,7 @@ class Invoice extends CI_Controller
 		//echo "<br>";print_r($result);die;
 		$data['quotationid']=$result['quotationid'];
 		$data['billid']=$result['billid'];
-		
-		$data['companytypeid']=$result['companytypeid'];
-		$data['companytype']=$result['companytype'];
+	
 		$data['companyname']=$result['companyname'];
 		$data['companyemail']=$result['companyemail'];
 		$data['comcontactnumber']=$result['comcontactnumber'];

@@ -28,7 +28,7 @@
 											<label>Employee Name<span class="text-danger">*</span>
 											</label>
 											
-											<select  class=" form-control selectpicker" multiple data-live-search="true" data-actions-box="true" multiple name="employename[]" id="employename">
+											<select  class=" form-control selectpicker" multiple data-live-search="true" data-actions-box="true" name="employename[]" id="employename">
 												<!-- <option disabled="" value="">Please select</option> -->	
 												<?php if(!empty($emplist)){
 													foreach($emplist as $row) { 
@@ -197,14 +197,12 @@ $(document).ready(function()
 					error.insertAfter(element)
 					}
 					}
-
 												
-			}
-				
-		});
+		}				
+	});
 });	
 
-  function readURL(input) {
+  function readURL(input){
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function (e) {

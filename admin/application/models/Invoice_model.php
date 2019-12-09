@@ -241,7 +241,7 @@ class Invoice_model extends CI_Model
 						}
 
 						$AdminIdlogin=$this->session->userdata('AdminId');
-						$companytypeid=$this->input->post('companytypeid');
+						//$companytypeid=$this->input->post('companytypeid');
 						$companyname=$this->input->post('companyname');	
 						$companyemail=$this->input->post('companyemail');
 						$comcontactnumber=$this->input->post('comcontactnumber');
@@ -254,7 +254,7 @@ class Invoice_model extends CI_Model
 				
 						$data=array( 
 						'billid'=>$mm,
-						'companytypeid'=>$companytypeid,
+						//'companytypeid'=>$companytypeid,
 						'companyname'=>$companyname,
 						'companyemail'=>$companyemail,
 						'comcontactnumber'=>$comcontactnumber,
@@ -312,7 +312,7 @@ class Invoice_model extends CI_Model
 						$mm=date('Ym'.'-'.$k);
 						
 						$AdminIdlogin=$this->session->userdata('AdminId');
-						$companytypeid=$this->input->post('companytypeid');
+						//$companytypeid=$this->input->post('companytypeid');
 						$companyname=$this->input->post('companyname');	
 						$companyemail=$this->input->post('companyemail');
 						$comcontactnumber=$this->input->post('comcontactnumber');
@@ -325,7 +325,7 @@ class Invoice_model extends CI_Model
 				
 						$data=array( 
 						'billid'=>$mm,
-						'companytypeid'=>$companytypeid,
+						//'companytypeid'=>$companytypeid,
 						'companyname'=>$companyname,
 						'companyemail'=>$companyemail,
 						'comcontactnumber'=>$comcontactnumber,
@@ -383,11 +383,10 @@ class Invoice_model extends CI_Model
 	
 	function get_quotation($quotationid)
 	{
-		$this->db->select('t1.*,t2.*,t3.*');
-		$this->db->from('tblquotation as t1');
-		$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
-		$this->db->join('tblquotationdetail as t3', $quotationid.'= t3.quotationid', 'LEFT');
-		$this->db->where('t1.quotationid',$quotationid);
+		$this->db->select('quot.*,quotdetail.*');
+		$this->db->from('tblquotation as quot');
+		$this->db->join('tblquotationdetail as quotdetail', $quotationid.'= quotdetail.quotationid', 'LEFT');
+		$this->db->where('quot.quotationid',$quotationid);
 		$query=$this->db->get();
 		return $query->row_array();
 	}
@@ -416,7 +415,6 @@ class Invoice_model extends CI_Model
 		$invdate = date("Y-m-d", strtotime($indate));
 		$data=array(
 			'quotationid'=>$this->input->post('quotationid'),
-			'companytypeid'=>$this->input->post('companytypeid'),
 			'companyname'=>$this->input->post('companyname'),
 			'companyemail'=>$this->input->post('companyemail'),
 			'comcontactnumber'=>$this->input->post('comcontactnumber'),
@@ -464,10 +462,9 @@ class Invoice_model extends CI_Model
 
 	public function get_companyquotation($quotationid)
 	{
-		$this->db->select('quotation.*,comptype.*,adminbank.*');
+		$this->db->select('quotation.*,adminbank.*');
 		$this->db->from('tblquotation as quotation');
 		//$this->db->join('tblquotationdetail as t2', 't1.quotationid = t2.quotationid', 'LEFT');
-		$this->db->join('tblcompanytype as comptype', 'quotation.companytypeid = comptype.companytypeid', 'LEFT');
 		$this->db->join('tblsitesetting as adminbank','RoleId= adminbank.RoleId', 'LEFT');
 		$this->db->where('quotation.quotationid',$quotationid);
 		$query=$this->db->get();
@@ -655,15 +652,10 @@ class Invoice_model extends CI_Model
 	{
 			$where=array('t1.isdelete'=>'0');
 			$keyword = str_replace('-', ' ', $keyword1);
-			$this->db->select('t1.*,t2.*');
+			$this->db->select('t1.*');
 			$this->db->from('tblquotation as t1');
-			$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
 			$this->db->where($where);
-			if($option == 'companytype')
-			{
-				$this->db->like('companytype',$keyword);
-			}
-			else if($option == 'companyname')
+			if($option == 'companyname')
 			{
 				$this->db->like('companyname',$keyword);
 			}
@@ -693,9 +685,8 @@ class Invoice_model extends CI_Model
 		{
 			$keywordinvone = str_replace('/', '-', $keyword2);
 			$keywordinvtwo = str_replace('/', '-', $keyword3);
-			$this->db->select('t1.*,t2.*');
+			$this->db->select('t1.*');
 			$this->db->from('tblquotation as t1');
-			$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
 			$this->db->where('quotationdate BETWEEN "'. date('Y-m-d', strtotime($keywordinvone)). '" and "'. date('Y-m-d', strtotime($keywordinvtwo)).'"');	
 			$query = $this->db->get();
 			// echo $this->db->last_query();
@@ -721,9 +712,8 @@ class Invoice_model extends CI_Model
 
 	function list_quotation()
 	{
-		$this->db->select('t1.*,t2.*');
+		$this->db->select('t1.*');
 		$this->db->from('tblquotation as t1');
-		$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
 		$this->db->where('t1.isdelete','0');
 		$this->db->order_by('t1.quotationid','desc');
 		$r=$this->db->get();
