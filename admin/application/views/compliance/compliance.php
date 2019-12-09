@@ -1,50 +1,17 @@
 ﻿<?php 
-
-
-
 	 $this->load->view('common/header.php');
-
-
-
 	 $this->load->view('common/sidebar.php');
-
-
-
 ?>
 
 
 
-
-
-
-
 			<!-- Page Wrapper -->
-
-
-
             <div class="page-wrapper">
 
-
-
-			
-
-
-
 				<!-- Page Content -->
-
-
-
                 <div class="content container-fluid">
 
-
-
-				
-
-
-
 					<!-- Page Title -->
-
-
 
 					<div class="row">
 
@@ -66,8 +33,8 @@
 
 
 
-							<a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_policy"><i class="fa fa-plus"></i> Add Compliance</a>
-
+							<a href="<?php echo base_url()?>Company/compliance_list" class="btn add-btn"><i class="fa fa-plus"></i> Back to company list</a>
+ 
 
 
 						</div>
@@ -184,7 +151,7 @@
 
 											<th>Percentage </th>
 
-
+											<th>Compliance Type</th>
 
 											<th>Status </th>
 
@@ -235,7 +202,21 @@
 											<td><?php echo $comp->compliancename;?></td>
 
 											<td><?php echo $comp->compliancepercentage;?>%</td>
+											<td>		
 
+											<?php if($comp->compliancetypeid=='1'){ 
+
+												echo "<span class='badge badge-success-border'>Earnings</span>";
+
+												}?>
+
+											<?php if($comp->compliancetypeid=='2'){
+
+													echo "<span class='badge badge-danger-border'>Deduction</span>";
+
+													}?>
+
+										</td>
 											<td>	
 
 													<div class="action-label">
@@ -396,6 +377,20 @@
 
 								<form method="post" id="form_valid">
 
+                                 <div class="form-group">
+											<label>Select company</label>
+											<select class="form-control selectpicker" multiple   data-live-search="true" data-actions-box="true" name="companyid[]"> 
+												<?php
+												foreach($company as $val){
+
+													?>
+												<option  value="<?php echo $val->companyid?>"><?php echo $val->companyname?></option>
+												<?php
+											}
+											?>
+											</select>
+									</div>
+
 
 									<div class="form-group">
 											<label>Type of Compliances</label>
@@ -492,7 +487,15 @@
 
 
 
-								
+								  	<div class="col-md-6">
+											<div class="form-group">
+											<label class="col-form-label">Is editable ?<span class="text-danger">*</span></label><br>
+											<label class="radio-inline">
+													<input type="radio" name="is_editable"   checked value="0">Yes
+													<input type="radio" name="isactive"  value="1">No 
+											</label>
+											</div>
+									</div>
 
 
 
@@ -575,6 +578,21 @@
 
 								<form method="post" action="<?php echo base_url();?>Company/compliance" id="form_edit">
 								<input type="hidden" class="form-control" id="complianceid"  name="complianceid" value="<?php echo $complianceid;?>">
+                                     
+                                         <div class="form-group">
+											<label>Select company</label>
+											<select class="form-control" id="companyid" name="companyid"> 
+												<option>Select company</option>
+												<?php
+												foreach($company as $val){
+
+													?>
+												<option  value="<?php echo $val->companyid?>"><?php echo $val->companyname?></option>
+												<?php
+											}
+											?>
+											</select>
+									</div>
 
 									<div class="form-group">
 												<label>Type of Compliances</label>
@@ -607,6 +625,16 @@
 											<label class="radio-inline">
 													<input type="radio" name="isactive"  value="1">Active
 													<input type="radio" name="isactive" checked value="0">Inactive 
+											</label>
+											</div>
+									</div>
+
+									<div class="col-md-6">
+											<div class="form-group">
+											<label class="col-form-label">Is editable ?<span class="text-danger">*</span></label><br>
+											<label class="radio-inline">
+													<input type="radio" name="is_editable"    value="0">Yes
+													<input type="radio" name="is_editable"  value="1">No 
 											</label>
 											</div>
 									</div>
@@ -859,7 +887,7 @@
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
 
 
-
+<!-- <script src="http://localhost/payroll/admin/default/js/bootstrap-select.min.js"></script> -->
     </body>
 
 
@@ -1108,6 +1136,9 @@
 
 		$(document).ready(function()
 		{
+			$('select').selectpicker({
+		noneSelectedText : 'Please Select',
+	});
 				$("#form_valid").validate(
 				{
 						rules: {
@@ -1203,9 +1234,14 @@
 				data:{complianceid:complianceid},
 				success:function(response){
 					var response = JSON.parse(response);
-					    console.log(response.complianceid);
+					    console.log(response.is_editable);
 					$('#complianceid').val(response.complianceid);
+					//$('#companyid').val(response.companyid);
 					$('#compliancetypeid').val(response.compliancetypeid);
+				
+                   $("#companyid [value=" + response.companyid + "]").attr('selected', 'true');
+
+
 					$("option[id=compliancetypeid][value=" + response.compliancetypeid=='1' + "]").attr('selected', 'selected');
 					$("option[id=compliancetypeid][value=" + response.compliancetypeid=='2' + "]").attr('selected', 'selected');
 
@@ -1213,6 +1249,7 @@
 					$('#compliancepercentage').val(response.compliancepercentage);
 					//$('#isactive').val(response.isactive);
 					$("input[name=isactive][value=" + response.isactive + "]").attr('checked', 'checked');
+					$("input[name=is_editable][value=" + response.is_editable + "]").attr('checked', 'checked');
 				}
 			});	
 		}

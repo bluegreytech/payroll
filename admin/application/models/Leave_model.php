@@ -55,32 +55,19 @@ class Leave_model extends CI_Model
 
 
 	function search($keyword)
-
 	{  
+		$where=array('t1.companyid'=>$keyword,'t2.Is_deleted'=>'0');
+		$this->db->select('t1.*,t2.*');
+		$this->db->from('tblcompany as t1');
+		$this->db->join('tblcmpleave as t2','t1.companyid = t2.companyid', 'LEFT');
+		$this->db->where($where);	
+		$query = $this->db->get();	
+		if($query->num_rows() > 0)
+		{
+			return $query->result();
+		} 
 
-			$where=array('t1.companyid'=>$keyword,'t2.Is_deleted'=>'0');
-
-			$this->db->select('t1.*,t2.*');
-
-			$this->db->from('tblcompany as t1');
-
-			$this->db->join('tblcmpleave as t2','t1.companyid = t2.companyid', 'LEFT');
-
-			$this->db->where($where);	
-
-			$query = $this->db->get();	
-
-			if($query->num_rows() > 0)
-
-			{
-
-				return $query->result();
-
-			} 
-
-		
-
-		}
+	}
 
 
 

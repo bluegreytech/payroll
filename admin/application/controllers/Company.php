@@ -4,11 +4,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Company extends CI_Controller 
 {
-
 	public function __construct() {
         parent::__construct();
 		$this->load->model('Company_model');
-
+		$this->load->model('Dashboard_model');
 	}
 
 	public function Companynotificationid(){
@@ -26,7 +25,24 @@ class Company extends CI_Controller
 
 	}
 
+	public function company_dashboard($companyid)
+	{
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
 
+		$data['invoiceTotal']=$this->Company_model->list_companyinvoicetotal($companyid);
+		$data['hrData']=$this->Company_model->list_hr($companyid);
+		$data['empData']=$this->Company_model->list_employee($companyid);
+		$data['invoiceData']=$this->Company_model->list_companyinvoice($companyid);
+		$data['hrDataDetail']=$this->Company_model->list_hr_detail($companyid);
+		$data['empDataDetail']=$this->Company_model->list_emp_detail($companyid);
+		$data['companyDetail']=$this->Company_model->get_companyprofile($companyid);
+	
+		$data['cominvoiceDataCount']=$this->Company_model->list_cominvoice_count($companyid);
+		//echo "<pre>";print_r($data['hrData']);die;
+		$this->load->view('Company/company_dashboard',$data);		
+	}
 
 	public function profile($companyid)
 	{	
@@ -63,17 +79,12 @@ class Company extends CI_Controller
 		$data['Notificationdescription']=$result['Notificationdescription'];
 		$data['Documentfile']=$result['Documentfile'];
 
-		
-
 		$data['stateData']=$this->Company_model->list_state();
 		$data['complianceData']=$this->Company_model->list_compliance();
 		$data['companytypeData']=$this->Company_model->list_companytype();
 		$data['documentData']=$this->Company_model->list_companydocument($companyid);
 		//	echo "<pre>";print_r($data['complianceData']);die;
 		$this->load->view('Company/profile',$data);	
-
-
-
 	}
 
 	public function notification_detail($Companynotificationid)
@@ -82,7 +93,7 @@ class Company extends CI_Controller
 			redirect(base_url('Login'));
 		}
 		$data['notificationData']=$this->Company_model->list_companynotification_detail($Companynotificationid);
-	 	//echo "<pre>";print_r($data['notificationData']);die;
+		 //echo "<pre>";print_r($data['notificationData']);die;
 		 $this->load->view('Company/notificationdetail',$data);	
 	}
 
@@ -141,46 +152,97 @@ class Company extends CI_Controller
 	}
 
 
+
+
+
 	function companynotification_list()
-	{	
+	{
 		if(!check_admin_authentication()){ 
 			redirect(base_url('Login'));
 		}
-
-		if($_POST!='')
-		{
-			$option=$this->input->post('option');
-			$keyword=$this->input->post('keyword');
-			$keyword2=$this->input->post('keyword2');
-			$keyword3=$this->input->post('keyword3');
-			$keyword4=$this->input->post('keyword4');
-			$keyword5=$this->input->post('keyword5');	
-			if($option!='' && $keyword!='')
-			{	$option=$this->input->post('option');
-				$data['notificationData'] = $this->Company_model->search_company_notification($option,$keyword);
-			}
-			else if($option!='' && $keyword2!='')
-			{	$option=$this->input->post('option');
-				$data['notificationData'] = $this->Company_model->search_title_notification($option,$keyword2);
-			}
-			else if($option!='' && $keyword3!='')
-			{	$option=$this->input->post('option');
-				$data['notificationData'] = $this->Company_model->search_status_notification($option,$keyword3);
-			}
-			else if($option!='' && $keyword4!='' && $keyword5!='')
-			{	$option=$this->input->post('option');
-				$data['notificationData'] = $this->Company_model->search_createdate_notification($option,$keyword4,$keyword5);
-			}		
-			else
-			{
-				$data['notificationData']=$this->Company_model->list_companynotification();
-			}
-			$data['companyData']=$this->Company_model->list_company();
-		 	//echo "<pre>";print_r($data['notificationData']);die;
-		    $this->load->view('Company/notificationlist',$data);
-
+		$data=array();
+		$data['option']='';
+		$data['keyword1']='';
+		$data['keyword2']='';
+		$data['keyword3']='';
+		$data['keyword4']='';
+	
+		$data['redirect_page']='Company/companynotification_list';
+		$data['companyData']=$this->Company_model->list_company();
+		$data['notificationData']=$this->Company_model->list_companynotification();
+		$this->load->view('Company/notificationlist',$data);
 	}
 
+
+	
+	public function searchnotification()
+	{   
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
+		$data=array();
+		$data['activeTab']="searchnotification";	
+		if($_POST!='')
+		{
+				$option=$this->input->post('option');
+				$keyword1=$this->input->post('keyword1');
+				$keyword2=$this->input->post('keyword2');
+				$keyword3=$this->input->post('keyword3');
+				$keyword4=$this->input->post('keyword4');
+				if($option!='' && $keyword1!='')
+				{
+					$data['option']=$this->input->post('option');
+					$data['keyword1']=$this->input->post('keyword1');
+					$data['keyword2']=$this->input->post('keyword2');
+					$data['keyword3']=$this->input->post('keyword3');
+					$data['keyword4']=$this->input->post('keyword4');
+					$option=$data['option'];
+					$keyword1=$data['keyword1'];
+					$keyword2=$data['keyword2'];
+					$keyword3=$data['keyword3'];
+					$keyword4=$data['keyword4'];
+					$data['notificationData'] = $this->Company_model->search_notification($option,$keyword1);
+				}
+				else if($option!='' && $keyword2!='')
+				{
+					$data['option']=$this->input->post('option');
+					$data['keyword1']=$this->input->post('keyword1');
+					$data['keyword2']=$this->input->post('keyword2');
+					$data['keyword3']=$this->input->post('keyword3');
+					$data['keyword4']=$this->input->post('keyword4');
+					$option=$data['option'];
+					$keyword1=$data['keyword1'];
+					$keyword2=$data['keyword2'];
+					$keyword3=$data['keyword3'];
+					$keyword4=$data['keyword4'];
+					$data['notificationData'] = $this->Company_model->search_company_notification($option,$keyword2);
+				}
+				else if($option!='' && $keyword3!='' && $keyword4!='')
+				{
+					$data['option']=$this->input->post('option');
+					$data['keyword1']=$this->input->post('keyword1');
+					$data['keyword2']=$this->input->post('keyword2');
+					$data['keyword3']=$this->input->post('keyword3');
+					$data['keyword4']=$this->input->post('keyword4');
+					$option=$data['option'];
+					$keyword1=$data['keyword1'];
+					$keyword2=$data['keyword2'];
+					$keyword3=$data['keyword3'];
+					$keyword4=$data['keyword4'];
+					$data['notificationData'] = $this->Company_model->search_createdate_notification($option,$keyword3,$keyword4);
+				}
+				else
+				{
+					$data['option']='';
+					$data['keyword1']='';
+					$data['keyword2']='';
+					$data['keyword3']='';
+					$data['keyword4']='';
+					$data['notificationData']=$this->Company_model->list_companynotification();
+				}	
+				$data['redirect_page']='Company/companynotification_list';
+				$this->load->view('Company/notificationlist',$data);
+		}		
 	}
 
 
@@ -188,6 +250,7 @@ class Company extends CI_Controller
 		if(!check_admin_authentication()){ 
 			redirect(base_url('Login'));
 		}
+			$AdminIdlogin=$this->session->userdata('AdminId');
 			$Companynotificationid=$this->input->post('Companynotificationid');
 			$data=array(
 				'Isdelete'=>'1',
@@ -197,6 +260,13 @@ class Company extends CI_Controller
 			$result=$this->db->update('tblcompanynotification',$data);
 			if($result)
 			{
+				$log_data = array(
+					'AdminId' => $AdminIdlogin,
+					'Module' => 'Company Notification',
+					'Activity' =>'Delete record id: '.$Companynotificationid
+
+				);
+				$log = $this->db->insert('tblactivitylog',$log_data);
 				$this->session->set_flashdata('success', 'Company notification was delete successfully!');
 				redirect('Company/companynotification_list');
 			}
@@ -305,22 +375,67 @@ class Company extends CI_Controller
 
 
 
-	public function index()
+
+
+	function index()
+	{
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
+		$data=array();
+		$data['option']='';
+		$data['keyword1']='';
+		$data['keyword2']='';
+	
+		$data['redirect_page']='Company';
+		$data['companyData']=$this->Company_model->list_company();
+		$this->load->view('Company/companylist',$data);	
+	}
+
+	public function searchcompany()
 	{   
 		if(!check_admin_authentication()){ 
 			redirect(base_url('Login'));
 		}
+		$data=array();
+		$data['activeTab']="searchcompany";	
 		if($_POST!='')
 		{
-			$option=$this->input->post('option');
-			$keyword=$this->input->post('keyword2');	
-			$data['companyData'] = $this->Company_model->search($option,$keyword);
-		}	
-		else
-		{
-			$data['companyData']=$this->Company_model->list_company();
-		} 
-		$this->load->view('Company/companylist',$data);			
+				$option=$this->input->post('option');
+				$keyword1=$this->input->post('keyword1');
+				$keyword2=$this->input->post('keyword2');
+			if($option!='' && $keyword2!='')
+			{	
+				$data['option']=$this->input->post('option');
+				$data['keyword1']=$this->input->post('keyword1');
+				$data['keyword2']=$this->input->post('keyword2');
+				
+					$option=$data['option'];
+					$keyword1=$data['keyword1'];
+					$keyword2=$data['keyword2'];
+				
+				$data['companyData'] = $this->Company_model->search_companytype($option,$keyword2);
+			}
+			else if($option!='' && $keyword1!='')
+			{	
+				$data['option']=$this->input->post('option');
+				$data['keyword1']=$this->input->post('keyword1');
+				$data['keyword2']=$this->input->post('keyword2');
+					$option=$data['option'];
+					$keyword1=$data['keyword1'];
+					$keyword2=$data['keyword2'];
+				$data['companyData'] = $this->Company_model->search($option,$keyword1);
+			}		
+			else
+			{
+				$data['option']='';
+				$data['keyword1']='';
+				$data['keyword2']='';
+				$data['companyData']=$this->Company_model->list_company();
+			} 
+			$data['redirect_page']="Company";
+			$this->load->view('Company/companylist',$data);	
+		}		
 	}
 
 
@@ -433,6 +548,7 @@ class Company extends CI_Controller
 		if(!check_admin_authentication()){ 
 			redirect(base_url('Login'));
 		}
+			$AdminIdlogin=$this->session->userdata('AdminId');
 			$companyid=$this->input->post('companyid');
 			$data=array(
 				'isdelete'=>'1',
@@ -442,6 +558,13 @@ class Company extends CI_Controller
 			$result=$this->db->update('tblcompany',$data);
 			if($result)
 			{
+				$log_data = array(
+					'AdminId' => $AdminIdlogin,
+					'Module' => 'Company',
+					'Activity' =>'Delete record id: '.$companyid
+
+				);
+				$log = $this->db->insert('tblactivitylog',$log_data);
 				$this->session->set_flashdata('success', 'Company was delete successfully!');
 				redirect('Company');
 			}
@@ -533,25 +656,14 @@ class Company extends CI_Controller
 			if($_POST){
 
 				if($this->input->post('companytypeid')==''){			
-
 					$result=$this->Company_model->add_companytype();	
-
 					if($result)
-
 					{
-
 						$this->session->set_flashdata('success', 'Record has been Inserted Succesfully!');
-
 						redirect('Company/companytype');
-
 					}
-
-
-
 				}
-
 				else
-
 				{
 
 					$result=$this->Company_model->update_companytype();
@@ -582,14 +694,21 @@ class Company extends CI_Controller
 
 
 
+public function compliance_list(){
+	if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
+
+		$data['company']=$this->Company_model->getcompany();
+		$this->load->view('compliance/compliance_list',$data);	
+}
 
 
 
 
 
 
-
-	public function compliance()
+	public function compliance($id='')
 	{
 		if(!check_admin_authentication()){ 
 			redirect(base_url('Login'));
@@ -602,14 +721,15 @@ class Company extends CI_Controller
 			$data['compliancename']=$this->input->post('compliancename');
 			$data['compliancepercentage']=$this->input->post('compliancepercentage');	
 			$data['isactive']=$this->input->post('isactive');
-
+			$data['companyid']=$this->input->post('companyid');
+            $data['is_editable']=$this->input->post('is_editable');
 			if($_POST){
 				if($this->input->post('complianceid')==''){
 					$result=$this->Company_model->add_compliance();	
 					if($result)
 					{
 						$this->session->set_flashdata('success', 'Record has been Inserted Succesfully!');
-						redirect('Company/compliance');
+						redirect('Company/compliance_list');
 					}
 
 				}
@@ -619,12 +739,12 @@ class Company extends CI_Controller
 					if($result)
 					{
 						$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
-						redirect('Company/compliance');
+						redirect('Company/compliance_list');
 					} 
 				}
 		} 
-
-		$data['complianceData']=$this->Company_model->list_compliance();
+        $data['company']=$this->Company_model->getcompany();
+		$data['complianceData']=$this->Company_model->list_compliance($id);
 		$this->load->view('compliance/compliance',$data);	
 
 	}
@@ -636,45 +756,34 @@ class Company extends CI_Controller
 
 
 	function delete_compliance(){
-
 		if(!check_admin_authentication()){ 
-
 			redirect(base_url('Login'));
-
 		}
-
+		$AdminIdlogin=$this->session->userdata('AdminId');
 		$complianceid=$this->input->post('complianceid');
-
 		$data=array(
-
 			'IsDelete'=>1,
-
 			'IsActive'=>0
-
 				);
 
 		$this->db->where("complianceid",$complianceid);
-
 		$result=$this->db->update('tblcompliances',$data);
-
 		if($result)
-
 		{
+			$log_data = array(
+				'AdminId' => $AdminIdlogin,
+				'Module' => 'Compliance',
+				'Activity' =>'Delete record id: '.$complianceid
 
+			);
+			$log = $this->db->insert('tblactivitylog',$log_data);
 			$this->session->set_flashdata('success', 'Compliance was delete successfully!');
-
 			redirect('compliance');
-
 		}
-
 		else
-
 		{
-
 			$this->session->set_flashdata('error', 'Compliance was not delete!');
-
 			redirect('compliance');
-
 		}
 
 
@@ -692,49 +801,38 @@ class Company extends CI_Controller
 
 
 	function delete_companytype(){
-
 		if(!check_admin_authentication()){ 
-
 			redirect(base_url('Login'));
-
 		}
 
+		$AdminIdlogin=$this->session->userdata('AdminId');
 		$companytypeid=$this->input->post('companytypeid');
-
 		$data=array(
-
 			'Is_deleted'=>'1',
-
 			'IsActive'=>'Inactive'
-
 				);
 
 		$this->db->where("companytypeid",$companytypeid);
-
 		$result=$this->db->update('tblcompanytype',$data);
-
 		if($result)
-
 		{
+			
+			$log_data = array(
+				'AdminId' => $AdminIdlogin,
+				'Module' => 'Company Type',
+				'Activity' =>'Delete record id: '.$companytypeid
 
+			);
+			$log = $this->db->insert('tblactivitylog',$log_data);
 			$this->session->set_flashdata('success', 'Company type was delete successfully!');
-
 			redirect('Company/companytype');
-
+			
 		}
-
 		else
-
 		{
-
 			$this->session->set_flashdata('error', 'Company type was not delete!');
-
 			redirect('Company/companytype');
-
 		}
-
-
-
 
 
 	}
@@ -791,10 +889,12 @@ class Company extends CI_Controller
 		$result=$this->Company_model->get_compliance($this->input->post('complianceid'));	
 		//echo "<br>";print_r($result);die;
 		$data['complianceid']=$result['complianceid'];
+		$data['companyid']=$result['companyid'];
 		$data['compliancetypeid']=$result['compliancetypeid'];
 		$data['compliancename']=$result['compliancename'];
 		$data['compliancepercentage']=$result['compliancepercentage'];
 		$data['isactive']=$result['isactive'];
+		$data['is_editable']=$result['is_editable'];
 		echo json_encode($data);
 
 		//$this->load->view('Company/companytypelist',$data);		

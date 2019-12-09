@@ -7,21 +7,7 @@
 ?>
 
 
-		<!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
-		<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.0/css/buttons.dataTables.min.css"> -->
-
 	
-  <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
-
-		<!-- External -->
-
-		<!-- <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.5/css/fixedHeader.bootstrap.min.css">
-
-		<link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.5/css/fixedHeader.bootstrap.min.css">
-
-		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
-
-		<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css"> -->
 
 
 			<!-- Page Wrapper -->
@@ -82,14 +68,14 @@
 
 
 
-								<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+								<div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12">  
 
 										<div class="form-group form-focus select-focus">
 
 											<select class="select floating" name="option" id="purpose"> 
 												<option value=""> -- Select -- </option>
 												<option value="companyname">Company Name</option>
-												<option value="status">Paymeny Status</option>
+												<option value="paystatus">Paymeny Status</option>
 												<option value="invoicedate">Created Date From to To</option>
 											</select>
 
@@ -99,7 +85,7 @@
 
 
 
-								<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+								<div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12">  
 
 										<div class="form-group form-focus box" id='business'>
 
@@ -273,24 +259,21 @@
 
 										<td>		
 
-											<?php if($compInvoice->status=='Paid'){ 
+											<?php if($compInvoice->paystatus=='Paid'){ 
 
-												echo "<span class='badge badge-success-border'>$compInvoice->status</span>";
+												echo "<span class='badge badge-success-border'>$compInvoice->paystatus</span>";
 
 												}?>
 
-											<?php if($compInvoice->status=='Pending'){
+											<?php if($compInvoice->paystatus=='Unpaid'){
 
-													echo "<span class='badge badge-danger-border'>$compInvoice->status</span>";
+													echo "<span class='badge badge-danger-border'>$compInvoice->paystatus</span>";
 
 													}?>
 
 										</td>
 
-										<!-- <td>		
-											<?php echo $compInvoice->status;?>
-
-										</td> -->
+									
 
 										<td class="text-right">
 
@@ -648,7 +631,7 @@
 		$("#business3").hide();
 		$("#business4").hide();
       }
-      else if(this.value == 'status')
+      else if(this.value == 'paystatus')
       {
         $("#business").show();
 		$("#business2").hide();

@@ -1,15 +1,6 @@
 ﻿<?php 
-
-
-
 	 $this->load->view('common/header.php');
-
-
-
 	 $this->load->view('common/sidebar.php');
-
-
-
 ?>
 
 
@@ -166,61 +157,14 @@
 
 
 
-							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+							
 
 
 
-									<div class="form-group form-focus select-focus">
+							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12" >  
+									
 
-
-
-										<select class="select floating" name="option" id="purpose"> 
-
-
-
-											<option value=""> -- Select -- </option>
-
-
-
-											<option value="companyname">Company Name</option>
-
-
-
-											<option value="FullName">Hr Name</option>
-
-
-
-											<option value="EmailAddress">Email Address</option>
-
-
-
-											<option value="Contact">Contact Number</option>
-
-
-
-										</select>
-
-
-
-										<!-- <label class="focus-label">Role</label> -->
-
-
-
-									</div>
-
-
-
-							</div>
-
-
-
-							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12" >  
-									<div class="form-group form-focus box" id='business'>
-										<input type="text" name="keyword3" class="form-control floating">
-										<label class="focus-label">Search</label>
-									</div>
-
-									<div class="form-group form-focus box2" id='business2' style="display: none;">
+									<div class="form-group form-focus box2">
 										<div class="form-group">
 											<select class="form-control" name="keyword2"> 
 												<option desabled value="">Please select company</option>
@@ -229,7 +173,7 @@
 													foreach($companyData as $comp)
 													{
 												?>
-													<option value="<?php echo $comp->companyname; ?>"><?php echo $comp->companyname;?></option>
+													<option value="<?php echo $comp->companyid; ?>"><?php echo $comp->companyname;?></option>
 												<?php
 												}}
 												?>
@@ -1521,7 +1465,7 @@
 	            doc.styles.tableHeader.fontSize = 12; //2, 3, 4, etc
 				doc.defaultStyle.alignment = 'center';
 				doc.styles.tableHeader.alignment = 'center';
-				doc.content[1].table.widths = [ '5%',  '35%', '30%', '14%','14%', '14%'];
+				doc.content[1].table.widths = [ '5%',  '25%', '25%', '20%','14%', '14%'];
 	         
 	       },
 	 },
@@ -1641,22 +1585,7 @@ $('#DateofBirth2').datetimepicker({
 
 
 
-$(document).ready(function(){
-    $('#purpose').on('change', function() {
-      if(this.value == 'companyname')
-      {
-        $("#business2").show();
-		$("#business").hide();
-	
-      }
-      else
-      {
-        $("#business2").hide();
-		$("#business").show();
-	
-      }
-    });
-});
+
 
 
 
@@ -2553,7 +2482,7 @@ function edithrs(hr_id)
 
 	Url="<?php echo base_url() ?>";
 
-
+	HRUrl="<?php echo base_url_hr() ?>upload/hr/";
 
 	//alert(hr_id);
 
@@ -2621,7 +2550,7 @@ function edithrs(hr_id)
 
 			if(response.ProfileImage!=''){
               
-$('#blah1').attr('src', '/home/et635dt5xqj1/public_html/payroll.bluegreytech.co.in/hr/upload/hr'+response.ProfileImage);
+			$('#blah1').attr('src', HRUrl+response.ProfileImage);
 				$('#pre_profile_image').val(response.ProfileImage);
 				
 

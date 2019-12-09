@@ -31,6 +31,8 @@
 		<!-- Chart CSS -->
 		<link rel="stylesheet" href="<?php echo base_url(); ?>default/plugins/morris/morris.css">
 
+		<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
+
 		<!-- Main CSS -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>default/css/style.css">
 
@@ -158,7 +160,7 @@
 
                     <a href="<?php echo base_url();?>Dashboard" class="logo">
 
-						<img src="<?php echo base_url(); ?>default/img/logo.png" width="40" height="40" alt="Payroll System">
+						<img src="<?php echo base_url(); ?>default/img/Company/companylogo/favicon.png" width="50px" height="50px" alt="Payroll System">
 
 					</a>
 

@@ -58,19 +58,40 @@
 
 
 
+					
 					<div class="row">
 
 
 
-						<div class="col-sm-12">
+						<div class="col-sm-4 col-5">
 
 
 
-							<h4 class="page-title">My Profile</h4>	
+							<h4 class="page-title">My Profile</h4>
 
 
 
 						</div>
+
+
+
+						<div class="col-sm-8 col-7 text-right m-b-30">
+
+
+
+							<a href="<?php echo base_url();?>Adminmaster/adminlist" class="btn add-btn"></i> Back to List of Admin
+
+
+
+							</a>
+
+
+
+						</div>
+
+
+
+					
 
 
 
@@ -419,25 +440,10 @@
 
 
 							<div class="modal-header">
-
-
-
 								<h5 class="modal-title">Profile Information</h5>
-
-
-
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-
-
-
 									<span aria-hidden="true">&times;</span>
-
-
-
 								</button>
-
-
-
 							</div>
 
 
@@ -447,44 +453,17 @@
 
 
 								<form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>Adminmaster/admin_master_profile_update" id="form_valid">
-
-
-
 									<div class="row">
-
-
-
 										<div class="col-md-12">
-
-
-
 										<input type="hidden" name="AdminId" value="<?php echo $AdminId ?>">
-
-
-
-
-
 
 
 											<div class="profile-img-wrap edit-img">
 
-
-
 												<?php  
-
-
-
 												if(($ProfileImage!='' && file_exists(base_path().'/upload/admin/'.$ProfileImage))){ ?>
-
-
-
 													<img class="inline-block" src="<?php echo base_url(); ?>upload/admin/<?php echo $ProfileImage; ?>" alt="">
-
-
-
 												<?php
-
-
 
 												}
 

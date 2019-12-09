@@ -57,22 +57,22 @@
 
 					<!-- Search Filter -->
 
-				<form method="post" action="<?php echo base_url();?>Invoice/quotation_list">
+				<form method="post" action="<?php echo base_url();?>Invoice/searchquotation">
 							<div class="row filter-row">
 
 
 
-								<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+								<div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12">  
 
 										<div class="form-group form-focus select-focus">
 
 											<select class="select floating" name="option" id="purpose"> 
 												<option value=""> -- Select -- </option>
-												<option value="companytype">Company type</option>
-												<option value="companyname">Company Name</option>
-												<option value="companyemail">Email Address</option>
-												<option value="comcontactnumber">Contact Number</option>
-												<option value="quotationdate">Created Date From to To</option>
+												<!-- <option value="companytype" <?php //if($option=='companytype'){echo 'selected';} ?>>Company type</option> -->
+												<option value="companyname" <?php if($option=='companyname'){echo 'selected';} ?>>Company Name</option>
+												<option value="companyemail" <?php if($option=='companyemail'){echo 'selected';} ?>>Email Address</option>
+												<option value="comcontactnumber" <?php if($option=='comcontactnumber'){echo 'selected';} ?>>Contact Number</option>
+												<option value="quotationdate" <?php if($option=='quotationdate'){echo 'selected';} ?>>Created Date From to To</option>
 											</select>
 
 										</div>
@@ -81,14 +81,14 @@
 
 
 
-								<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+								<div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12">  
 
-										<div class="form-group form-focus box" id='business'>
-											<input type="text" name="keyword2" class="form-control floating">
+										<div class="form-group form-focus box" id='business1'>
+											<input type="text" name="keyword1" value="<?php echo $keyword1;?>" class="form-control floating">
 											<label class="focus-label">Search</label>
 										</div>
 
-										 <div class="form-group form-focus box" id='business5' style="display: none;">
+										 <!-- <div class="form-group form-focus box" id='business5' style="display: none;">
 											<input type="text" name="keyword3" class="form-control floating">
 											<label class="focus-label">Search</label>
 										</div>
@@ -96,37 +96,37 @@
 										<div class="form-group form-focus box" id='business6' style="display: none;">
 											<input type="text" name="keyword4" class="form-control floating">
 											<label class="focus-label">Search</label>
-										</div>
+										</div> -->
 
-										<div class="form-group form-focus box2" id='business2' style="display: none;">
+										<!-- <div class="form-group form-focus box2" id='business2' style="display: none;">
 											<div class="form-group">
 												<select class="form-control" name="keyword"> 
 													<option desabled value="">Please select company type</option>
 													<?php
-													if($companytypeData){
-														foreach($companytypeData as $comp)
-														{
+													// if($companytypeData){
+													// 	foreach($companytypeData as $comp)
+													// 	{
 													?>
-														<option value="<?php echo $comp->companytype; ?>"><?php echo $comp->companytype;?></option>
+														<option value="<?php //echo $comp->companytype; ?>"><?php //echo $comp->companytype;?></option>
 													<?php
-													}}
+												//	}}
 													?>
 												</select>
 											</div>
-										</div>
+										</div> -->
 
 
-										<div class="form-group form-focus" id='business3' style="display: none;">
+										<div class="form-group form-focus" id='business2' style="display: none;">
 											<div class="cal-icon">
-												<input class="form-control floating datetimepicker" type="text" name="keyword5" id="keyword5" readonly>
+												<input class="form-control floating datetimepicker" type="text" name="keyword2" value="<?php echo $keyword2;?>" id="keyword5" readonly>
 											</div>
 											<label class="focus-label">From</label>
 										</div>
  
 								
-										<div class="form-group form-focus" id='business4' style="display: none;">
+										<div class="form-group form-focus" id='business3' style="display: none;">
 											<div class="cal-icon">
-												<input class="form-control floating datetimepicker" type="text" name="keyword6" id="keyword6" readonly>
+												<input class="form-control floating datetimepicker" type="text" name="keyword3" value="<?php echo $keyword3;?>" id="keyword6" readonly>
 											</div>
 											<label class="focus-label">To</label>
 										</div>
@@ -159,7 +159,6 @@
 									<thead>
 										<tr>
 											<th>No</th>
-											<th>Company Type</th>
 											<th>Company Name</th>
 											<th>Email Address</th>
 											<th> Contact Number </th>
@@ -176,7 +175,6 @@
 									?>
 										<tr>
 											<td><?php echo $i;?></td>
-											<td><?php echo $quota->companytype ;?></td>
 											<td><?php echo $quota->companyname ;?></td>
 											<td><?php echo $quota->companyemail ;?></td>
 											<td><?php echo $quota->comcontactnumber ;?></td>
@@ -316,7 +314,7 @@
 	            doc.styles.tableHeader.fontSize = 12; //2, 3, 4, etc
 				doc.defaultStyle.alignment = 'center';
 				doc.styles.tableHeader.alignment = 'center';
-				doc.content[1].table.widths = [ '5%',  '35%', '30%', '14%','14%', '14%'];
+				doc.content[1].table.widths = [ '5%',  '20%', '25%', '25%','14%', '14%'];
 	         
 	       },
 	 },
@@ -352,50 +350,32 @@
 
 $(document).ready(function(){
 $('#purpose').on('change', function() {
-  if(this.value == 'companytype')
+  if(this.value == 'companyname')
   {
-	$("#business2").show();
-	$("#business").hide();
-	$("#business3").hide();
-	$("#business4").hide();
-	$("#business5").hide();
-	$("#business6").hide();
-  }
-  else if(this.value == 'companyname')
-  {
-	$("#business").show();
+	$("#business1").show();
 	$("#business2").hide();
-	$("#business3").hide();
-	$("#business4").hide();
-	$("#business5").hide();
-	$("#business6").hide();
+	$("#business3").hide();	
   }
   else if(this.value == 'companyemail')
   {
-	$("#business").hide();
+	$("#business1").show();
 	$("#business2").hide();
 	$("#business3").hide();
-	$("#business4").hide();
-	$("#business5").show();
-	$("#business6").hide();
+
   }
   else if(this.value == 'comcontactnumber')
   {
-	$("#business").hide();
+	$("#business1").show();
 	$("#business2").hide();
 	$("#business3").hide();
-	$("#business4").hide();
-	$("#business5").hide();
-	$("#business6").show();
+
   }
   else if(this.value == 'quotationdate')
   {
-	$("#business").hide();
-	$("#business2").hide();
+	$("#business1").hide();
+	$("#business2").show();
 	$("#business3").show();
-	$("#business4").show();
-	$("#business5").hide();
-	$("#business6").hide();
+
   }
 });
 });

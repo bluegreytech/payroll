@@ -124,8 +124,8 @@
 
 												</div>
 
-											</div>
-
+									</div>
+									<center><h6>Uplopad only jpeg,jpg,png,bmp image file</h6></center>
 
 
 									<div class="row">
@@ -952,7 +952,7 @@
 											<tr>
 
 												<td><?php echo $compdata->compliancename;?></td>
-												<td><?php echo $compdata->compliancepercentage;?></td>
+												<td><?php echo $compdata->compliancepercentage;?>%</td>
 												<td class="text-center">
 													<input type="checkbox" name="complianceid[]"   value="<?php echo $compdata->complianceid; ?>" 
 														<?php 	if($companyid!='')
@@ -1013,11 +1013,11 @@
 											<tr>
 
 												<td><?php echo $deducdata->compliancename;?></td>
-												<td><?php echo $deducdata->compliancepercentage;?></td>
+												<td><?php echo $deducdata->compliancepercentage;?>%</td>
 												<td class="text-center">
 													<input type="checkbox" name="compliancedeductionid[]"   value="<?php echo $deducdata->complianceid; ?>" 
 														<?php 	if($companyid!='')
-															{	if(in_array($comiddeduc,$compliance_iddedu)) { echo "checked"; }}?> >
+															{	if(in_array($comiddeduc,$compliance_iddedu)) { echo "checked"; }}?>>
 												</td>
 
 												<!-- <td class="text-center">

@@ -35,7 +35,7 @@
 																			<table border="0" cellspacing="0" cellpadding="0" style="width:100%">
 																				<tr>
 																					<td align="left" width="50%">
-																						<img src="<?php echo base_path();?>default/img/Company/companylogo/logo.jpg" style="width:100%;height:200px;width:200px;>
+																						<img src="<?php echo base_path();?>default/img/Company/companylogo/logo.jpg" style="width:100%;height:200px;width:200px;margin:20px 0 10px 0;">
 																					</td>
 																					<td align="right" width="50%" valign="top">
 																						<h3 style="text-transform: uppercase;color:#000;font-size: 1.5rem;margin:10px 0px;">Ref.No-<?php echo $billid;?></h3>

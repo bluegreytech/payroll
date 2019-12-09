@@ -2,6 +2,92 @@
 class Company_model extends CI_Model
 {
 
+	function list_employee($companyid)
+	{
+		$where=array('Is_deleted'=>'0','companyid'=>$companyid);
+		$this->db->select('*');
+		$this->db->from('tblemp');
+		$this->db->where($where);
+		$r = $this->db->get();
+		return $query= $r->num_rows();
+	}
+
+	function list_hr($companyid)
+	{
+		$where=array('Is_deleted'=>'0','companyid'=>$companyid);
+		$this->db->select('*');
+		$this->db->from('tblhr');
+		$this->db->where($where);
+		$r = $this->db->get();
+		return $query= $r->num_rows();
+	}
+
+	function list_emp_detail($companyid)
+	{
+		$where=array('emp.Is_deleted'=>'0','emp.companyid'=>$companyid);
+		$this->db->select('emp.*,comp.companyname');
+		$this->db->from('tblemp as emp');
+		$this->db->join('tblcompany as comp', 'emp.companyid = comp.companyid', 'LEFT');
+		$this->db->where($where);
+		$this->db->order_by('emp.emp_id','DESC');
+		$this->db->limit(5);
+		$query=$this->db->get();
+		$res=$query->result();
+		return $res;
+	}
+
+	function list_hr_detail($companyid)
+	{
+		$where=array('hr.Is_deleted'=>'0','hr.companyid'=>$companyid);
+		$this->db->select('hr.*,comp.*');
+		$this->db->from('tblhr as hr');
+		$this->db->join('tblcompany as comp', 'hr.companyid = comp.companyid', 'LEFT');
+		$this->db->where($where);
+		$this->db->order_by('hr_id','DESC');
+		$this->db->limit(5);
+		$query=$this->db->get();
+		$res=$query->result();
+		return $res;
+	}
+
+	function list_companyinvoice($companyid)
+	{
+		$where=array('compinvoice.isdelete'=>'0','compinvoice.companyid'=>$companyid);
+		$this->db->select('compinvoice.*,comp.*,hr.*');
+		$this->db->from('tblcompanyinvoice as compinvoice');
+		$this->db->join('tblcompany as comp', 'compinvoice.companyid = comp.companyid', 'LEFT');
+		$this->db->join('tblhr as hr', 'compinvoice.hr_id = hr.hr_id', 'LEFT');
+		$this->db->where($where);
+		$this->db->order_by('compinvoice.Companyinvoiceid','DESC');
+		$this->db->limit(5);
+		$query=$this->db->get();
+		$res=$query->result();
+		return $res;
+	}
+
+	function list_companyinvoicetotal($companyid)
+	{
+		$where=array('compinvoice.isdelete'=>'0','compinvoice.companyid'=>$companyid);
+		$this->db->select('compinvoice.*,comp.*,hr.*');
+		$this->db->from('tblcompanyinvoice as compinvoice');
+		$this->db->join('tblcompany as comp', 'compinvoice.companyid = comp.companyid', 'LEFT');
+		$this->db->join('tblhr as hr', 'compinvoice.hr_id = hr.hr_id', 'LEFT');
+		$this->db->where($where);
+		$r = $this->db->get();
+		return $query= $r->num_rows();
+	}
+
+
+	function list_cominvoice_count($companyid)
+	{
+		$query =  $this->db->query("SELECT COUNT(companyid) as count,MONTHNAME(createdon) as month_name FROM tblcompanyinvoice WHERE YEAR(createdon) = '" . date('Y') . "'
+		and companyid=$companyid GROUP BY YEAR(createdon),MONTH(createdon)"); 
+		$record = $query->result();
+		return $record;
+		
+		
+	}
+
 	function get_id()
 	{	
 
@@ -156,6 +242,7 @@ class Company_model extends CI_Model
 
 	public function send_company_notification()
 	{
+		$AdminIdlogin=$this->session->userdata('AdminId');
 		$companyid=implode(',',$this->input->post('companyid'));
 		$Documenttitle=$this->input->post('Documenttitle');
 		$Notificationdescription=$this->input->post('Notificationdescription');	
@@ -173,14 +260,23 @@ class Company_model extends CI_Model
 		'Createdby'=>1,
 		'Createdon'=>date("Y-m-d h:i:s")
 		);
-
+		//print_r($data);die;
 		$this->db->insert('tblcompanynotification',$data);
 		$insert_id = $this->db->insert_id();
+		if($insert_id)
+		{
+			$log_data = array(
+				'AdminId' => $AdminIdlogin,
+				'Module' => 'Send Company Notification',
+				'Activity' =>'Add'
+
+			);
+			$log = $this->db->insert('tblactivitylog',$log_data);
+
+		}
+
 		$data = array();
 		$user_image='';
-
-
-
 		$cpt = count($_FILES['Documentfile']['name']);
 		for($i=0; $i<$cpt; $i++)
 		{ 
@@ -239,12 +335,12 @@ class Company_model extends CI_Model
 			$Documentfile[$i]='';
 		}
 
-
+		$AdminIdlogin=$this->session->userdata('AdminId');
 		$data2=array( 
 			'Companynotificationid'=>$insert_id,
 			'Documentfile'=>$Documentfile[$i],
 			'Isactive'=>'Active',
-			'Createdby'=>1,
+			'Createdby'=>$AdminIdlogin,
 			'Createdon'=>date("Y-m-d h:i:s")
 			);
 			//print_r($data2); die;
@@ -309,10 +405,20 @@ class Company_model extends CI_Model
 						'charset'=>'utf-8',
 						'header'=> 'MIME-Version: 1.0',
 						'header'=> 'Content-type:text/html;charset=UTF-8',
-						);
-
-	
+					);
 					$this->load->library('email', $email_config);
+	
+				    // $config['protocol']='smtp';
+					// $config['smtp_host']='ssl://smtp.googlemail.com';
+					// $config['smtp_port']='465';
+					// $config['smtp_user']='bluegreyindia@gmail.com';
+					// $config['smtp_pass']='Test@123';
+					// $config['charset']='utf-8';
+					// $config['newline']="\r\n";
+					// $config['mailtype'] = 'html';								
+					// $this->email->initialize($config);
+
+					
 					$body =$str;
 					$this->email->from('binny@bluegreytech.co.in'); 
 					$this->email->to($emailto);		
@@ -323,7 +429,6 @@ class Company_model extends CI_Model
 						$this->email->attach($atch);
 					
 					}
-					//print_r($this->email->message($body));die;
 					if($this->email->send())
 					{
 						return 1;
@@ -409,14 +514,13 @@ class Company_model extends CI_Model
 
 	function list_companytype()
 	{
-
 		$this->db->select('*');
 		$this->db->from('tblcompanytype');
 		$this->db->where('Is_deleted','0');
+		$this->db->order_by('companytypeid','desc');
 		$r=$this->db->get();
 		$res = $r->result();
 		return $res;
-
 	}
 
 
@@ -460,12 +564,13 @@ class Company_model extends CI_Model
 
 
 
-	function list_compliance()
+	function list_compliance($id)
 	{
 		$this->db->select('*');
 		$this->db->from('tblcompliances');
 		$this->db->where('isactive!=','0');
-		$this->db->or_where('isdelete','0');
+		$this->db->where('isdelete','0');
+		$this->db->where('companyid',$id);
 		$this->db->order_by('complianceid','desc');
 		$r=$this->db->get();
 		$res = $r->result();
@@ -494,22 +599,22 @@ class Company_model extends CI_Model
 			{
 				$companyid= $rows->companyid;
 				$userid=explode(",",$rows->companyid);
+				$res = array();
 				foreach($userid as $usid)
 				{
+					//echo $usid;
 					$this->db->select('t1.*');
 					$this->db->from('tblcompany as t1');
 					$this->db->where_in('t1.companyid',$usid);
 					$query = $this->db->get();
-					$result = array();
-					foreach ($query->result() as $rows)
-					{
-					   $result[] = $rows;
-					}
-					return $result; 
+					$res[]=$query->result();
+					
 				}
-				
+				//print_r();die;
+				return $res;
 		
 			}
+			
 			
 			
 	}
@@ -531,10 +636,10 @@ class Company_model extends CI_Model
 	}
 
 
-	function search_company_notification($option,$keyword)
+	function search_company_notification($option,$keyword2)
 	{
 		$where = array('t1.Isdelete' =>'0');
-		$keyword2 = str_replace('-', ' ', $keyword);
+		$keyword2 = str_replace('-', ' ', $keyword2);
 		$this->db->select('t1.*,t2.companyname');
 		$this->db->from('tblcompanynotification as t1');
 		$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
@@ -551,10 +656,10 @@ class Company_model extends CI_Model
 	}
 
 	
-	function search_title_notification($option,$keyword2)
+	function search_notification($option,$keyword1)
 	{
 		$where = array('t1.Isdelete' =>'0');
-		$keyword = str_replace('-', ' ', $keyword2);
+		$keyword = str_replace('-', ' ', $keyword1);
 		$this->db->select('t1.*,t2.companyname');
 		$this->db->from('tblcompanynotification as t1');
 		$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
@@ -563,23 +668,7 @@ class Company_model extends CI_Model
 		{
 			$this->db->like('Documenttitle',$keyword);
 		}
-		$query = $this->db->get();
-		if($query->num_rows() > 0)
-		{
-		return $query->result();
-		}        
-	}
-
-	
-	function search_status_notification($option,$keyword3)
-	{
-		$where = array('t1.Isdelete' =>'0');
-		$keyword = str_replace('-', ' ', $keyword3);
-		$this->db->select('t1.*,t2.companyname');
-		$this->db->from('tblcompanynotification as t1');
-		$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
-		$this->db->where($where);
-		if($option == 'Status')
+		else if($option == 'Status')
 		{
 			$this->db->like('Status',$keyword);
 		}
@@ -591,10 +680,13 @@ class Company_model extends CI_Model
 	}
 
 	
-	function search_createdate_notification($option,$keyword4,$keyword5)
+	
+
+	
+	function search_createdate_notification($option,$keyword3,$keyword4)
 	{
-		$keywordstaone = str_replace('/', '-', $keyword4);
-		$keywordstatwo = str_replace('/', '-', $keyword5);
+		$keywordstaone = str_replace('/', '-', $keyword3);
+		$keywordstatwo = str_replace('/', '-', $keyword4);
 		$this->db->select('t1.*,t2.companyname');
 		$this->db->from('tblcompanynotification as t1');
 		$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
@@ -613,91 +705,141 @@ class Company_model extends CI_Model
 			$this->db->from('tblcompany as t1');
 			$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
 			$this->db->where($where);
+			$this->db->order_by('companyid','desc');
 			$r=$this->db->get();
 			$res = $r->result();
 			return $res;
 	}
 
-
-	function search($option,$keyword)
+	
+	function search_companytype($option,$keyword2)
 	{
 			$where = array('t1.isdelete' =>'0');
-			$keyword = str_replace('-', ' ', $keyword);
-
+			$keyword = str_replace('-', ' ', $keyword2);
 			$this->db->select('t1.*,t2.companytype');
-
 			$this->db->from('tblcompany as t1');
-
 			$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
-
 			$this->db->or_where('t1.isdelete','0');
-
-			// $this->db->where('t1.isactive','Active');
-
-			// $this->db->or_where('t1.isdelete','0');
-
 			$this->db->where($where);
-
-			if($option == 'companytype')
-
+			if($option == 'companyname')
 			{
-
-				$this->db->like('companytype',$keyword);
-
-			}
-
-			else if($option == 'companyname')
-
-			{
-
 				$this->db->like('companyname',$keyword);
-
 			}
-
-			else if($option == 'comemailaddress')
-
-			{
-
-				$this->db->like('comemailaddress',$keyword);
-
-			}
-
-			else if($option == 'comcontactnumber')
-
-			{
-
-				$this->db->like('comcontactnumber',$keyword);
-
-			} 
-
-			else if($option == 'emailverifystatus')
-
-			{
-
-				$this->db->like('emailverifystatus',$keyword);
-
-			} 
-
+			
 			$this->db->order_by('companyid','desc');	
-
 			$query = $this->db->get();	
-
 			if($query->num_rows() > 0)
-
 			{
-
 				return $query->result();
-
 			} 
-
-		
 
 		}
 
+		
+	function search($option,$keyword1)
+	{
+			$where = array('t1.isdelete' =>'0');
+			$keyword = str_replace('-', ' ', $keyword1);
+			$this->db->select('t1.*,t2.companytype');
+			$this->db->from('tblcompany as t1');
+			$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
+			$this->db->or_where('t1.isdelete','0');
+			$this->db->where($where);
+			if($option == 'companytype')
+			{
+				$this->db->like('companytype',$keyword);
+			}
+			else if($option == 'comemailaddress')
+			{
+				$this->db->like('comemailaddress',$keyword);
+			}
+			else if($option == 'comcontactnumber')
+			{
+				$this->db->like('comcontactnumber',$keyword);
+			}
+			else if($option == 'emailverifystatus')
+			{
+				$this->db->where('emailverifystatus',$keyword);
+			}  
+			
+			$this->db->order_by('companyid','desc');	
+			$query = $this->db->get();	
+			if($query->num_rows() > 0)
+			{
+				return $query->result();
+			} 
+
+	}
 
 
+	function search_companyemail($option,$keyword3)
+	{
+			$where = array('t1.isdelete' =>'0');
+			$keyword = str_replace('-', ' ', $keyword3);
+			$this->db->select('t1.*,t2.companytype');
+			$this->db->from('tblcompany as t1');
+			$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
+			$this->db->or_where('t1.isdelete','0');
+			$this->db->where($where);
+			if($option == 'comemailaddress')
+			{
+				$this->db->like('comemailaddress',$keyword);
+			}
+			
+			$this->db->order_by('companyid','desc');	
+			$query = $this->db->get();	
+			if($query->num_rows() > 0)
+			{
+				return $query->result();
+			} 
 
+	}
 
+	function search_companycontact($option,$keyword4)
+	{
+			$where = array('t1.isdelete' =>'0');
+			$keyword = str_replace('-', ' ', $keyword4);
+			$this->db->select('t1.*,t2.companytype');
+			$this->db->from('tblcompany as t1');
+			$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
+			$this->db->or_where('t1.isdelete','0');
+			$this->db->where($where);
+			if($option == 'comcontactnumber')
+			{
+				$this->db->like('comcontactnumber',$keyword);
+			}
+			
+			$this->db->order_by('companyid','desc');	
+			$query = $this->db->get();	
+			if($query->num_rows() > 0)
+			{
+				return $query->result();
+			} 
+
+	}
+
+	function search_companystatus($option,$keyword5)
+	{
+			$where = array('t1.isdelete' =>'0');
+			$keyword = str_replace('-', ' ', $keyword5);
+			$this->db->select('t1.*,t2.companytype');
+			$this->db->from('tblcompany as t1');
+			$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
+			$this->db->or_where('t1.isdelete','0');
+			$this->db->where($where);
+			if($option == 'emailverifystatus')
+			{
+				$this->db->like('emailverifystatus',$keyword);
+			}
+			
+			$this->db->order_by('companyid','desc');	
+			$query = $this->db->get();	
+			if($query->num_rows() > 0)
+			{
+				return $query->result();
+			} 
+
+	}
 
 
 		function list_licence_company(){
@@ -988,76 +1130,43 @@ class Company_model extends CI_Model
 
 
 		$this->db->select('*');
-
 		$this->db->where('gstnumber',$this->input->post('gstnumber'));
-
 		$query=$this->db->get('tblcompany');
-
 		if($query->num_rows() > 0)
-
 		{
-
 				return 4;
-
 		}
 
 
 
 		$user_image='';
-
 	//$image_settings=image_setting();
-
-	 if(isset($_FILES['companyimage']) &&  $_FILES['companyimage']['name']!='')
-
+	if(isset($_FILES['companyimage']) &&  $_FILES['companyimage']['name']!='')
 	{
-
-		$this->load->library('upload');
-
-		$rand=rand(0,100000); 
-
-		 
-
-	   $_FILES['userfile']['name']     =   $_FILES['companyimage']['name'];
-
-	   $_FILES['userfile']['type']     =   $_FILES['companyimage']['type'];
-
-	   $_FILES['userfile']['tmp_name'] =   $_FILES['companyimage']['tmp_name'];
-
-	   $_FILES['userfile']['error']    =   $_FILES['companyimage']['error'];
-
-	   $_FILES['userfile']['size']     =   $_FILES['companyimage']['size'];
-
-
-
-	   $config['file_name'] = $rand.'Company';			
-
-	   $config['upload_path'] = base_path().'upload/company_orig/';		
-
-	   $config['allowed_types'] = 'jpg|jpeg|gif|png|bmp';  
-
-
-
+	    $this->load->library('upload');
+	    $rand=rand(0,100000); 
+	    $_FILES['userfile']['name']     =   $_FILES['companyimage']['name'];
+	    $_FILES['userfile']['type']     =   $_FILES['companyimage']['type'];
+	    $_FILES['userfile']['tmp_name'] =   $_FILES['companyimage']['tmp_name'];
+	    $_FILES['userfile']['error']    =   $_FILES['companyimage']['error'];
+	    $_FILES['userfile']['size']     =   $_FILES['companyimage']['size'];
+	    $config['file_name'] = $rand.'Company';			
+	    $config['upload_path'] = base_path().'upload/company_orig/';		
+	    $config['allowed_types'] = 'jpg|jpeg|gif|png|bmp';  
 		$this->upload->initialize($config);
 
 
 
-		 if (!$this->upload->do_upload())
-
-		 {
-
+		if (!$this->upload->do_upload())
+		{
 		   $error =  $this->upload->display_errors();
-
 		   echo "<pre>";print_r($error);die;
-
-		 } 
+		} 
 
 		$picture = $this->upload->data();	   
-
-		 $this->load->library('image_lib');		   
-
-		 $this->image_lib->clear();
-
-		 $gd_var='gd2';
+		$this->load->library('image_lib');		   
+		$this->image_lib->clear();
+		$gd_var='gd2';
 
 
 
@@ -1150,7 +1259,7 @@ class Company_model extends CI_Model
 	   }
 
 
-
+	   		$AdminIdlogin=$this->session->userdata('AdminId');
 			$code=rand(12,123456789);
 
 			$companytypeid=$this->input->post('companytypeid');
@@ -1194,14 +1303,23 @@ class Company_model extends CI_Model
 			'pincode'=>$pincode,
 			'verificationcode'=>$code,
 			'isactive'=>$isactive,
-			'createdby'=>1,
+			'createdby'=>$AdminIdlogin,
 			'createdon'=>date("Y-m-d h:i:s")
 			);
-
 			//print_r($data); die;
-
 			$this->db->insert('tblcompany',$data);
 			$insert_id = $this->db->insert_id();
+			if($insert_id)
+			{
+				$log_data = array(
+					'AdminId' => $AdminIdlogin,
+					'Module' => 'Company',
+					'Activity' =>'Add'
+				);
+				$log = $this->db->insert('tblactivitylog',$log_data);
+			}
+			
+
 			$Shifthours=$this->input->post('Shifthours');
 			$Shiftname=$this->input->post('Shiftname');
 			$Shiftintime=$this->input->post('Shiftintime');
@@ -1255,7 +1373,7 @@ class Company_model extends CI_Model
 					'Ifsccode'=>$Ifsccode
 					);
 				$this->db->insert('tblcompanybankdetail',$data4);	
-				return 1;
+				//return 1;
 
 	
 
@@ -1470,38 +1588,35 @@ class Company_model extends CI_Model
 
 
 	function add_companytype()
-
 	{	
-
+			$AdminIdlogin=$this->session->userdata('AdminId');
 			$companytype=$this->input->post('companytype');
-
 			$isactive=$this->input->post('isactive');
-
 			$comcontactnumber=$this->input->post('comcontactnumber');
-
 			$gstnumber=$this->input->post('gstnumber');	
-
 			$isactive=$this->input->post('isactive');
 
 			$data=array( 
-
 			'companytype'=>$companytype,
-
 			'isactive'=>$isactive,
-
-			'createdby'=>1,
-
+			'createdby'=>$AdminIdlogin,
 			'createdon'=>date("Y-m-d h:i:s")
-
 			);
 
-			// print_r($data);
-
-			// die;
-
+			// print_r($data); die;
 			$res=$this->db->insert('tblcompanytype',$data);	
-
-			return $res;
+			if($res)
+				{
+					$log_data = array(
+						'AdminId' =>$AdminIdlogin,
+						'Module' => 'Company Type',
+						'Activity' =>'Add'
+					);
+					$log = $this->db->insert('tblactivitylog',$log_data);
+					return $res;
+				}
+				
+			
 
 	}
 
@@ -1581,22 +1696,63 @@ class Company_model extends CI_Model
 
 	function add_compliance()
 	{	
+			$AdminIdlogin=$this->session->userdata('AdminId');
 			$compliancetypeid=$this->input->post('compliancetypeid');
 			$compliancename=$this->input->post('compliancename');
 			$compliancepercentage=$this->input->post('compliancepercentage');
 			$isactive=$this->input->post('isactive');
-			$data=array( 
+            $companyid = $this->input->post('companyid');
+			$companyids = count($this->input->post('companyid'));
+            $is_editable=$this->input->post('is_editable');
+			for($i=0; $i<$companyids; $i++)
+			 {
+					
+					$data=array( 
+					'compliancetypeid'=>$compliancetypeid,
+			        'compliancename'=>$compliancename,
+			        'compliancepercentage'=>$compliancepercentage,
+			        'isactive'=>$isactive,
+			        'is_editable'=>$is_editable,
+			        'createdby'=>$AdminIdlogin,
+			         'companyid'=>isset($companyid[$i]) ? $companyid[$i] : '0',
+					 'createdon'=>date("Y-m-d h:i:s")
+					);
+					 //echo "<pre>";print_r($data3);
+					$res=$this->db->insert('tblcompliances',$data);	
+					
+
+				}
+					if($res)
+			      {
+				$log_data = array(
+					'AdminId' => $AdminIdlogin,
+					'Module' => 'Compliance',
+					'Activity' =>'Add'
+				);
+				$log = $this->db->insert('tblactivitylog',$log_data);
+				return $res;
+			   }
+			/*$data=array( 
 			'compliancetypeid'=>$compliancetypeid,
 			'compliancename'=>$compliancename,
 			'compliancepercentage'=>$compliancepercentage,
 			'isactive'=>$isactive,
-			'createdby'=>1,
+			'createdby'=>$AdminIdlogin,
 			'createdon'=>date("Y-m-d h:i:s")
 			);
 			// print_r($data);
 			// die;
 			$res=$this->db->insert('tblcompliances',$data);	
-			return $res;
+			if($res)
+			{
+				$log_data = array(
+					'AdminId' => $AdminIdlogin,
+					'Module' => 'Compliance',
+					'Activity' =>'Add'
+				);
+				$log = $this->db->insert('tblactivitylog',$log_data);
+				return $res;
+			}	*/
 	}
 
 
@@ -1615,6 +1771,7 @@ class Company_model extends CI_Model
 
 	function update_company()
 	{	
+		$AdminIdlogin=$this->session->userdata('AdminId');
 		$companyid=$this->input->post('companyid');
 		$companycomplianceid=$this->input->post('companycomplianceid');
 		$Companyshiftid=$this->input->post('Companyshiftid');
@@ -1727,13 +1884,24 @@ class Company_model extends CI_Model
 			'companycity'=>$this->input->post('companycity'),
 			'pincode'=>$this->input->post('pincode'),
 			'isactive'=>$this->input->post('isactive'),
-			'updatedby'=>1,
+			'updatedby'=>$AdminIdlogin,
 			'updatedon'=>date("Y-m-d h:i:s")
 				);
 
 			//print_r($data);die;
 			$this->db->where("companyid",$companyid);
-			$this->db->update('tblcompany',$data);	
+			$res=$this->db->update('tblcompany',$data);	
+			if($res)
+			{
+				$log_data = array(
+					'AdminId' => $AdminIdlogin,
+					'Module' => 'Company',
+					'Activity' =>'Update record id: '.$companyid
+				);
+				$log = $this->db->insert('tblactivitylog',$log_data);
+			}
+			
+
 			if($companycomplianceid!='')
 			{
 				$complianceid=implode(',',$this->input->post('complianceid'));
@@ -1829,37 +1997,70 @@ class Company_model extends CI_Model
 
 	function update_companytype()
 	{
-
+		$AdminIdlogin=$this->session->userdata('AdminId');
 		$companytypeid=$this->input->post('companytypeid');
 		$data=array(
 			'companytypeid'=>$this->input->post('companytypeid'),
 			'companytype'=>$this->input->post('companytype'),
-			'IsActive'=>$this->input->post('IsActive')
+			'IsActive'=>$this->input->post('IsActive'),
+			'updatedby'=>$AdminIdlogin
 				);
 			//print_r($data);die;
 			$this->db->where("companytypeid",$companytypeid);
-			$this->db->update('tblcompanytype',$data);	
-			return 1;
+			$res=$this->db->update('tblcompanytype',$data);	
+			if($res)
+			{
+				$log_data = array(
+					'AdminId' => $AdminIdlogin,
+					'Module' => 'Company Type',
+					'Activity' =>'Update record id: '.$companytypeid
+				);
+				$log = $this->db->insert('tblactivitylog',$log_data);
+				return 1;
+			}
+		
+			
 	}
 
 
 	function update_compliance()
 	{	
+		$AdminIdlogin=$this->session->userdata('AdminId');
 		$complianceid=$this->input->post('complianceid');
 		$data=array(
 			'complianceid'=>$this->input->post('complianceid'),
+			'companyid'=>$this->input->post('companyid'),
 			'compliancetypeid'=>$this->input->post('compliancetypeid'),
 			'compliancename'=>$this->input->post('compliancename'),
 			'compliancepercentage'=>$this->input->post('compliancepercentage'),
-			'isactive'=>$this->input->post('isactive')
+			'isactive'=>$this->input->post('isactive'),
+			'is_editable'=>$this->input->post('is_editable'),
+			'updatedby'=>$AdminIdlogin
 				);
 			//print_r($data);die;
 			$this->db->where("complianceid",$complianceid);
-			$this->db->update('tblcompliances',$data);	
-			return 1;	      
+			$res=$this->db->update('tblcompliances',$data);	
+			if($res)
+			{
+				$log_data = array(
+					'AdminId' => $AdminIdlogin,
+					'Module' => 'Compliance',
+					'Activity' =>'Update record id: '.$complianceid
+				);
+				$log = $this->db->insert('tblactivitylog',$log_data);
+				return 1;
+			}	
+				      
 
 	}
-
+   function getcompany(){
+   	$this->db->select('*');
+   	$this->db->from('tblcompany');
+   	$this->db->where('isdelete','0');
+   	$this->db->where('isactive','Active');
+   	$query=$this->db->get();
+   	return $query->result();
+   }
 
 
 

@@ -1,18 +1,15 @@
 <?php
-
-
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 
-
-
-class Login extends CI_Controller {
-
+class Login extends CI_Controller
+{
 	public function __construct()
 	{
       	parent::__construct();
-		$this->load->model('Login_model'); 
+		$this->load->model('Login_model');
+
     }
 
 	function index()
@@ -20,7 +17,7 @@ class Login extends CI_Controller {
 			if($this->input->post('logins'))
 			{  
 
-				$_SESSION['EmailAddress'] = (isset($_POST['EmailAddress'])!='')?$_POST['EmailAddress']:"";
+					$_SESSION['EmailAddress'] = (isset($_POST['EmailAddress'])!='')?$_POST['EmailAddress']:"";
 					$EmailAddress = $this->input->post('EmailAddress');
 					$Password = md5($this->input->post('Password'));
 					$IsActive = 1;
@@ -28,7 +25,16 @@ class Login extends CI_Controller {
 					"EmailAddress"=>$EmailAddress,
 					"Password"=>$Password,
 					);
-					$log = $this->Login_model->login_where('tbladmin',$where);         
+					$log = $this->Login_model->login_where('tbladmin',$where);
+					if($log)
+					{
+						$log_data = array(
+							'AdminId' => $log->AdminId,
+							'Module' => 'Login',
+							'Activity' =>'Admin login with record id: '.$log->AdminId
+						);
+						$this->db->insert('tblactivitylog',$log_data);
+					}         
 					$cnt = count($log);
 						if($cnt>0)
 						{
@@ -51,77 +57,37 @@ class Login extends CI_Controller {
 							else
 							{
 									$this->session->set_userdata($session);
-
-
 									$this->session->set_flashdata('warning','You are not activate please contact to admin!');
-
-
 									redirect('Login');	
-
-
 							}
 
-
 						}
-
-
 						else
-
-
 						{
-
-
 							$this->session->set_userdata($session);
-
-
 							$this->session->set_flashdata('error', 'Invalid Username or Password!');
-
-
 							redirect('Login');	
-
 
 						} 
 
-
-					
-
-
-					
-
-
-					
-
-
 				}
-
-
 				$this->load->view('common/login');
-
-
-			
-
 
     }
 
 
 
-
-
-	
-
-
 	public function logout()
-
-
 	{
-
-
-		$this->session->sess_destroy();
-
-
-		redirect('Login');
-
-
+		$AdminIdlogin=$this->session->userdata('AdminId');
+		$log_data = array(
+			'AdminId' => $AdminIdlogin,
+			'Module' => 'Logout',
+			'Activity' =>'Admin logout with record id: '.$AdminIdlogin
+		);
+		$this->db->insert('tblactivitylog',$log_data);
+		$this->session->sess_destroy();		
+		redirect('Login');	
 	}
 
 
@@ -133,136 +99,40 @@ class Login extends CI_Controller {
 
 	function resetpassword($ResetPasswordCode='')
 	{
-
-
 			$AdminId=$this->Login_model->checkResetCode($ResetPasswordCode);
-
-
 			$data = array();
-
-
 			$data['AdminId']=$AdminId;
-
-
 			$data['ResetPasswordCode']=$ResetPasswordCode;
-
-
-			
-
-
 			if($AdminId!='')
-
-
 			{	
-
-
 				if($_POST)
-
-
 				{
-
-
 					if($this->input->post('AdminId')!='')
-
-
 					{
-
-
 							$up=$this->Login_model->updatePassword($AdminId);
-
-
 							if($up==1)
-
-
 							{
-
-
 								$this->session->set_flashdata('success','Your password change successfully!'); 
-
-
 								redirect('Login');
-
-
 							}
-
-
 							elseif($up==2)
-
-
 							{
-
-
 								$this->session->set_flashdata('error','Your link has been expired!'); 
-
-
 								redirect('Login/forgotpassword');
-
-
 							}
-
-
 					}
-
-
 					else
-
-
 					{
-
-
 						$this->session->set_flashdata('success','User login successfully'); 
-
-
 					}
-
-
-					
-
-
 				}
-
-
 				else
-
-
 				{
-
-
 					//$this->load->view('common/reset_password',$data);
-
-
 		    	}
-
-
-
-
-
 			}
-
-
 			$this->load->view('common/reset_password',$data);
-
-
 	}
-
-
-
-
-
-
-
-
-
-
-
-	
-
-
-
-
-
-
-
 
 
 

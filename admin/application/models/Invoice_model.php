@@ -3,44 +3,32 @@
 
 
 class Invoice_model extends CI_Model
-
- {
+{
 
 	function list_companyinvoice()
-
 	{
-
-		$this->db->select('t1.*,t2.*,t3.*');
-
-		$this->db->from('tblcompanyinvoice as t1');
-
-		$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
-
-		$this->db->join('tblhr as t3', 't1.hr_id = t3.hr_id', 'LEFT');
-
-		$this->db->where('t1.isdelete','0');
-
-	//	$this->db->order_by('t3.hr_type','1');
-
+		$this->db->select('cominvoice.*,comp.*,hr.*');
+		$this->db->from('tblcompanyinvoice as cominvoice');
+		$this->db->join('tblcompany as comp', 'cominvoice.companyid = comp.companyid', 'LEFT');
+		$this->db->join('tblhr as hr', 'cominvoice.hr_id = hr.hr_id', 'LEFT');
+		$this->db->where('cominvoice.isdelete','0');
+		$this->db->order_by('cominvoice.Companyinvoiceid','desc');
 		$query=$this->db->get();
-
 		$res=$query->result();
-
 		return $res;
-
 	}
 
 
 
 	function list_company()
 	{
-		    $where = array('isdelete' =>'0');
-			$this->db->select('*');
-			$this->db->from('tblcompany as t1');
-			$this->db->where($where);
-			$r=$this->db->get();
-			$res = $r->result();
-			return $res;
+		$where = array('isdelete' =>'0');
+		$this->db->select('*');
+		$this->db->from('tblcompany as t1');
+		$this->db->where($where);
+		$r=$this->db->get();
+		$res = $r->result();
+		return $res;
 	}
 
 
@@ -88,6 +76,7 @@ class Invoice_model extends CI_Model
 						}
 
 					   
+						$AdminIdlogin=$this->session->userdata('AdminId');
 
 						$companyid=$this->input->post('companyid');
 						$hr_id=$this->input->post('hr_id');
@@ -123,18 +112,27 @@ class Invoice_model extends CI_Model
 						'cgstamount'=>$cgstamount,
 						'netamount'=>$netamount,
 						'Otherinformation'=>$Otherinformation,
-						'status'=>'Pending',
-						'Isactive'=>'Aactive'
+						'paystatus'=>'Unpaid',
+						'isactive'=>'Active'
 						);
 						// print_r($data);
 						// echo "aaa";
 						// die;
-						$this->db->insert('tblcompanyinvoice',$data);
-						return 1;
-
+						$res=$this->db->insert('tblcompanyinvoice',$data);
+						if($res)
+						{
+							$log_data = array(
+								'AdminId' =>$AdminIdlogin,
+								'Module' => 'Company Invoice',
+								'Activity' =>'Add'
+							);
+							$log = $this->db->insert('tblactivitylog',$log_data);
+							return 1;
+						}else
+						{
+							return 2;
+						}
 						
-						
-							
 					}die;
 							
 				}
@@ -146,6 +144,7 @@ class Invoice_model extends CI_Model
 						$k=$j[1]+1;
 						$mm=date('Ym'.'-'.$k);
 
+						$AdminIdlogin=$this->session->userdata('AdminId');
 						$companyid=$this->input->post('companyid');
 						$hr_id=$this->input->post('hr_id');
 						$paymentopt=$this->input->post('paymentopt');
@@ -180,14 +179,26 @@ class Invoice_model extends CI_Model
 						'cgstamount'=>$cgstamount,
 						'netamount'=>$netamount,
 						'Otherinformation'=>$Otherinformation,
-						'status'=>'Pending',
-						'Isactive'=>'Aactive'
+						'paystatus'=>'Unpaid',
+						'isactive'=>'Active'
 						);
 						// print_r($data);
 						// echo "bbb";
 						// die;
-						$this->db->insert('tblcompanyinvoice',$data);
-						return 1;
+						$res=$this->db->insert('tblcompanyinvoice',$data);
+						if($res)
+						{
+							$log_data = array(
+								'AdminId' =>$AdminIdlogin,
+								'Module' => 'Company Invoice',
+								'Activity' =>'Add'
+							);
+							$log = $this->db->insert('tblactivitylog',$log_data);
+							return 1;
+						}else
+						{
+							return 2;
+						}
 
 					
 					
@@ -228,8 +239,9 @@ class Invoice_model extends CI_Model
 							$k=$j[1]+1;
 							$mm=date('Ym'.'-'.$k);
 						}
-							
-						$companytypeid=$this->input->post('companytypeid');
+
+						$AdminIdlogin=$this->session->userdata('AdminId');
+						//$companytypeid=$this->input->post('companytypeid');
 						$companyname=$this->input->post('companyname');	
 						$companyemail=$this->input->post('companyemail');
 						$comcontactnumber=$this->input->post('comcontactnumber');
@@ -242,7 +254,7 @@ class Invoice_model extends CI_Model
 				
 						$data=array( 
 						'billid'=>$mm,
-						'companytypeid'=>$companytypeid,
+						//'companytypeid'=>$companytypeid,
 						'companyname'=>$companyname,
 						'companyemail'=>$companyemail,
 						'comcontactnumber'=>$comcontactnumber,
@@ -258,6 +270,17 @@ class Invoice_model extends CI_Model
 						$this->db->insert('tblquotation',$data);
 						//return 1;	
 						$insert_id = $this->db->insert_id();
+						if($insert_id)
+						{
+							$log_data = array(
+								'AdminId' => $AdminIdlogin,
+								'Module' => 'Company Quotation',
+								'Activity' =>'Add'
+			
+							);
+							$log = $this->db->insert('tblactivitylog',$log_data);
+						}
+
 						$quotationdetail=$this->input->post('quotationdetail');
 						$quotationrate=$this->input->post('quotationrate');
 						$data2 = array();
@@ -288,7 +311,8 @@ class Invoice_model extends CI_Model
 						$k=$j[1]+1;
 						$mm=date('Ym'.'-'.$k);
 						
-						$companytypeid=$this->input->post('companytypeid');
+						$AdminIdlogin=$this->session->userdata('AdminId');
+						//$companytypeid=$this->input->post('companytypeid');
 						$companyname=$this->input->post('companyname');	
 						$companyemail=$this->input->post('companyemail');
 						$comcontactnumber=$this->input->post('comcontactnumber');
@@ -301,7 +325,7 @@ class Invoice_model extends CI_Model
 				
 						$data=array( 
 						'billid'=>$mm,
-						'companytypeid'=>$companytypeid,
+						//'companytypeid'=>$companytypeid,
 						'companyname'=>$companyname,
 						'companyemail'=>$companyemail,
 						'comcontactnumber'=>$comcontactnumber,
@@ -317,6 +341,17 @@ class Invoice_model extends CI_Model
 						$this->db->insert('tblquotation',$data);
 						//return 1;	
 						$insert_id = $this->db->insert_id();
+						if($insert_id)
+						{
+							$log_data = array(
+								'AdminId' => $AdminIdlogin,
+								'Module' => 'Company Quotation',
+								'Activity' =>'Add'
+			
+							);
+							$log = $this->db->insert('tblactivitylog',$log_data);
+						}
+
 						$quotationdetail=$this->input->post('quotationdetail');
 						$quotationrate=$this->input->post('quotationrate');
 						$data2 = array();
@@ -348,11 +383,10 @@ class Invoice_model extends CI_Model
 	
 	function get_quotation($quotationid)
 	{
-		$this->db->select('t1.*,t2.*,t3.*');
-		$this->db->from('tblquotation as t1');
-		$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
-		$this->db->join('tblquotationdetail as t3', $quotationid.'= t3.quotationid', 'LEFT');
-		$this->db->where('t1.quotationid',$quotationid);
+		$this->db->select('quot.*,quotdetail.*');
+		$this->db->from('tblquotation as quot');
+		$this->db->join('tblquotationdetail as quotdetail', $quotationid.'= quotdetail.quotationid', 'LEFT');
+		$this->db->where('quot.quotationid',$quotationid);
 		$query=$this->db->get();
 		return $query->row_array();
 	}
@@ -372,6 +406,7 @@ class Invoice_model extends CI_Model
 
 	function update_quotation()
 	{
+		$AdminIdlogin=$this->session->userdata('AdminId');
 		$quotationid=$this->input->post('quotationid');
 		$quotationdetailid=$this->input->post('quotationdetailid');
 
@@ -380,7 +415,6 @@ class Invoice_model extends CI_Model
 		$invdate = date("Y-m-d", strtotime($indate));
 		$data=array(
 			'quotationid'=>$this->input->post('quotationid'),
-			'companytypeid'=>$this->input->post('companytypeid'),
 			'companyname'=>$this->input->post('companyname'),
 			'companyemail'=>$this->input->post('companyemail'),
 			'comcontactnumber'=>$this->input->post('comcontactnumber'),
@@ -392,7 +426,16 @@ class Invoice_model extends CI_Model
 				);
 			//print_r($data);die;
 			$this->db->where("quotationid",$quotationid);
-			$this->db->update('tblquotation',$data);	
+			$res=$this->db->update('tblquotation',$data);	
+			if($res)
+			{
+				$log_data = array(
+					'AdminId' =>$AdminIdlogin,
+					'Module' => 'Company Quotation',
+					'Activity' =>'Update record id: '.$quotationid
+				);
+				$log = $this->db->insert('tblactivitylog',$log_data);
+			}
 			//return 1;
 
 		
@@ -419,10 +462,9 @@ class Invoice_model extends CI_Model
 
 	public function get_companyquotation($quotationid)
 	{
-		$this->db->select('quotation.*,comptype.*,adminbank.*');
+		$this->db->select('quotation.*,adminbank.*');
 		$this->db->from('tblquotation as quotation');
 		//$this->db->join('tblquotationdetail as t2', 't1.quotationid = t2.quotationid', 'LEFT');
-		$this->db->join('tblcompanytype as comptype', 'quotation.companytypeid = comptype.companytypeid', 'LEFT');
 		$this->db->join('tblsitesetting as adminbank','RoleId= adminbank.RoleId', 'LEFT');
 		$this->db->where('quotation.quotationid',$quotationid);
 		$query=$this->db->get();
@@ -447,6 +489,7 @@ class Invoice_model extends CI_Model
 
 	public function update_invoice()
 	{
+		$AdminIdlogin=$this->session->userdata('AdminId');
 		$Companyinvoiceid=$this->input->post('Companyinvoiceid');
 		$invoicedate=$this->input->post('invoicedate');
 
@@ -473,8 +516,22 @@ class Invoice_model extends CI_Model
 
 			//print_r($data);die;
 			$this->db->where("Companyinvoiceid",$Companyinvoiceid);
-			$this->db->update('tblcompanyinvoice',$data);	
-			return 1;	 	
+			$res=$this->db->update('tblcompanyinvoice',$data);	
+			if($res)
+			{
+				$log_data = array(
+					'AdminId' => $AdminIdlogin,
+					'Module' => 'Company Invoice',
+					'Activity' =>'Update record id: '.$Companyinvoiceid
+				);
+				$log = $this->db->insert('tblactivitylog',$log_data);
+				return 1;	
+			}
+			else
+			{
+				return 3;	
+			}
+		 	
 
 		
 
@@ -556,9 +613,9 @@ class Invoice_model extends CI_Model
 			$this->db->join('tblhr as t3', 't1.hr_id = t3.hr_id', 'LEFT');
 			$this->db->where($where);
 			
-				if($option == 'status')
+				if($option == 'paystatus')
 				{
-				$this->db->like('status',$keyword2);
+				$this->db->like('paystatus',$keyword2);
 				}
 				
 			    $query = $this->db->get();
@@ -591,66 +648,28 @@ class Invoice_model extends CI_Model
 		}
 
 
-	function searchquot_com_type($option,$keyword)
+	function searchquot_com($option,$keyword1)
 	{
 			$where=array('t1.isdelete'=>'0');
-			$keyword = str_replace('-', ' ', $keyword);
-			$this->db->select('t1.*,t2.*');
+			$keyword = str_replace('-', ' ', $keyword1);
+			$this->db->select('t1.*');
 			$this->db->from('tblquotation as t1');
-			$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
-
-			$this->db->where($where);
-				if($option == 'companytype')
-				{
-					$this->db->like('companytype',$keyword);
-				}
-			    $query = $this->db->get();
-				// echo $this->db->last_query();
-				// echo "<pre>";print_r($query->result());die;
-				if($query->num_rows() > 0)
-				{
-					return $query->result();
-				}        
-
-	}
-
-	function searchby_quo_comp($option,$keyword2)
-	{
-			$where=array('t1.isdelete'=>'0');
-			$keyword = str_replace('-', ' ', $keyword2);
-			$this->db->select('t1.*,t2.*');
-			$this->db->from('tblquotation as t1');
-			$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
 			$this->db->where($where);
 			if($option == 'companyname')
 			{
-			$this->db->like('companyname',$keyword);
+				$this->db->like('companyname',$keyword);
 			}
+			else if($option == 'companyemail')
+			{
+				$this->db->like('companyemail',$keyword);
+			}
+			else if($option == 'comcontactnumber')
+			{
+				$this->db->like('comcontactnumber',$keyword);
+			} 
 			
 			$query = $this->db->get();
-			// echo $this->db->last_query();
-			// echo "<pre>";print_r($query->result());die;
-			if($query->num_rows() > 0)
-			{
-				return $query->result();
-			}        
 
-	}
-
-	function searchby_quo_email($option,$keyword3)
-	{
-			$where=array('t1.isdelete'=>'0');
-			$keyword = str_replace('-', ' ', $keyword3);
-			$this->db->select('t1.*,t2.*');
-			$this->db->from('tblquotation as t1');
-			$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
-			$this->db->where($where);
-			if($option == 'companyemail')
-			{
-			$this->db->like('companyemail',$keyword);
-			}
-			
-			$query = $this->db->get();
 			// echo $this->db->last_query();
 			// echo "<pre>";print_r($query->result());die;
 			if($query->num_rows() > 0)
@@ -661,37 +680,13 @@ class Invoice_model extends CI_Model
 	}
 
 	
-	function searchby_quo_cont($option,$keyword4)
-	{
-			
-			$where=array('t1.isdelete'=>'0');
-			$keyword = str_replace('-', ' ', $keyword4);
-			$this->db->select('t1.*,t2.*');
-			$this->db->from('tblquotation as t1');
-			$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
-			$this->db->where($where);
-			if($option == 'comcontactnumber')
-			{
-			$this->db->like('comcontactnumber',$keyword);
-			}
-			
-			$query = $this->db->get();
-			// echo $this->db->last_query();
-			// echo "<pre>";print_r($query->result());die;
-			if($query->num_rows() > 0)
-			{
-				return $query->result();
-			}        
 
-	}
-
-	function searchby_quo_date($option,$keyword5,$keyword6)
+	function searchby_quo_date($option,$keyword2,$keyword3)
 		{
-			$keywordinvone = str_replace('/', '-', $keyword5);
-			$keywordinvtwo = str_replace('/', '-', $keyword6);
-			$this->db->select('t1.*,t2.*');
+			$keywordinvone = str_replace('/', '-', $keyword2);
+			$keywordinvtwo = str_replace('/', '-', $keyword3);
+			$this->db->select('t1.*');
 			$this->db->from('tblquotation as t1');
-			$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
 			$this->db->where('quotationdate BETWEEN "'. date('Y-m-d', strtotime($keywordinvone)). '" and "'. date('Y-m-d', strtotime($keywordinvtwo)).'"');	
 			$query = $this->db->get();
 			// echo $this->db->last_query();
@@ -717,11 +712,10 @@ class Invoice_model extends CI_Model
 
 	function list_quotation()
 	{
-		$this->db->select('t1.*,t2.*');
+		$this->db->select('t1.*');
 		$this->db->from('tblquotation as t1');
-		$this->db->join('tblcompanytype as t2', 't1.companytypeid = t2.companytypeid', 'LEFT');
-		$this->db->where('isdelete','0');
-		$this->db->order_by('quotationid','desc');
+		$this->db->where('t1.isdelete','0');
+		$this->db->order_by('t1.quotationid','desc');
 		$r=$this->db->get();
 		$res = $r->result();
 		return $res;

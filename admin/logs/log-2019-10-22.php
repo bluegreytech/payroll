@@ -132,3 +132,49 @@ ERROR - 2019-10-22 15:52:21 --> Severity: Notice --> Undefined variable: invoice
 ERROR - 2019-10-22 15:52:21 --> Severity: Notice --> Undefined offset: 1 C:\xampp\htdocs\payroll\admin\application\models\Invoice_model.php 287
 ERROR - 2019-10-22 15:54:21 --> Severity: Notice --> Undefined variable: invoicebillid C:\xampp\htdocs\payroll\admin\application\models\Invoice_model.php 287
 ERROR - 2019-10-22 15:54:21 --> Severity: Notice --> Undefined offset: 1 C:\xampp\htdocs\payroll\admin\application\models\Invoice_model.php 288
+ERROR - 2019-10-22 12:48:54 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-22 12:48:56 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\payroll\admin\application\controllers\Login.php 48
+ERROR - 2019-10-22 12:48:56 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-22 12:48:56 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-22 12:48:56 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-22 12:48:56 --> 404 Page Not Found: Assets/img
+ERROR - 2019-10-22 13:43:16 --> Severity: error --> Exception: Call to undefined method CI_DB_mysqli_result::array_rows() C:\xampp\htdocs\payroll\admin\application\models\Company_model.php 493
+ERROR - 2019-10-22 13:43:55 --> Severity: error --> Exception: Call to undefined method CI_DB_mysqli_result::array_rows() C:\xampp\htdocs\payroll\admin\application\models\Company_model.php 493
+ERROR - 2019-10-22 13:44:49 --> Severity: Notice --> Undefined variable: result C:\xampp\htdocs\payroll\admin\application\models\Company_model.php 513
+ERROR - 2019-10-22 13:49:19 --> Severity: Notice --> Trying to get property 'companyid' of non-object C:\xampp\htdocs\payroll\admin\application\models\Company_model.php 497
+ERROR - 2019-10-22 13:49:19 --> Severity: Notice --> Trying to get property 'companyid' of non-object C:\xampp\htdocs\payroll\admin\application\models\Company_model.php 498
+ERROR - 2019-10-22 13:50:34 --> Severity: Notice --> Trying to get property 'companyid' of non-object C:\xampp\htdocs\payroll\admin\application\models\Company_model.php 498
+ERROR - 2019-10-22 13:51:12 --> Severity: Notice --> Trying to get property 'companyid' of non-object C:\xampp\htdocs\payroll\admin\application\models\Company_model.php 497
+ERROR - 2019-10-22 13:51:12 --> Severity: Notice --> Trying to get property 'companyid' of non-object C:\xampp\htdocs\payroll\admin\application\models\Company_model.php 497
+ERROR - 2019-10-22 14:02:00 --> Severity: error --> Exception: Function name must be a string C:\xampp\htdocs\payroll\admin\application\models\Company_model.php 510
+ERROR - 2019-10-22 14:02:54 --> Severity: error --> Exception: First array member is not a valid class name or object C:\xampp\htdocs\payroll\admin\application\models\Company_model.php 510
+ERROR - 2019-10-22 14:03:35 --> Severity: Notice --> Trying to get property 'companyname' of non-object C:\xampp\htdocs\payroll\admin\application\views\Company\notificationdetail.php 129
+ERROR - 2019-10-22 14:03:35 --> Severity: Notice --> Trying to get property 'comemailaddress' of non-object C:\xampp\htdocs\payroll\admin\application\views\Company\notificationdetail.php 130
+ERROR - 2019-10-22 14:03:35 --> Severity: Notice --> Trying to get property 'comcontactnumber' of non-object C:\xampp\htdocs\payroll\admin\application\views\Company\notificationdetail.php 131
+ERROR - 2019-10-22 14:03:35 --> Severity: Notice --> Trying to get property 'companyname' of non-object C:\xampp\htdocs\payroll\admin\application\views\Company\notificationdetail.php 129
+ERROR - 2019-10-22 14:03:35 --> Severity: Notice --> Trying to get property 'comemailaddress' of non-object C:\xampp\htdocs\payroll\admin\application\views\Company\notificationdetail.php 130
+ERROR - 2019-10-22 14:03:35 --> Severity: Notice --> Trying to get property 'comcontactnumber' of non-object C:\xampp\htdocs\payroll\admin\application\views\Company\notificationdetail.php 131
+ERROR - 2019-10-22 14:04:35 --> Severity: Notice --> Undefined index: companyname C:\xampp\htdocs\payroll\admin\application\views\Company\notificationdetail.php 129
+ERROR - 2019-10-22 14:04:35 --> Severity: Notice --> Trying to get property 'comemailaddress' of non-object C:\xampp\htdocs\payroll\admin\application\views\Company\notificationdetail.php 130
+ERROR - 2019-10-22 14:04:35 --> Severity: Notice --> Trying to get property 'comcontactnumber' of non-object C:\xampp\htdocs\payroll\admin\application\views\Company\notificationdetail.php 131
+ERROR - 2019-10-22 14:04:35 --> Severity: Notice --> Undefined index: companyname C:\xampp\htdocs\payroll\admin\application\views\Company\notificationdetail.php 129
+ERROR - 2019-10-22 14:04:35 --> Severity: Notice --> Trying to get property 'comemailaddress' of non-object C:\xampp\htdocs\payroll\admin\application\views\Company\notificationdetail.php 130
+ERROR - 2019-10-22 14:04:35 --> Severity: Notice --> Trying to get property 'comcontactnumber' of non-object C:\xampp\htdocs\payroll\admin\application\views\Company\notificationdetail.php 131
+ERROR - 2019-10-22 14:05:14 --> Severity: Notice --> Undefined variable: notificationData C:\xampp\htdocs\payroll\admin\application\views\Company\notificationdetail.php 120
+ERROR - 2019-10-22 14:05:55 --> Severity: Notice --> Trying to get property 'companyname' of non-object C:\xampp\htdocs\payroll\admin\application\views\Company\notificationdetail.php 129
+ERROR - 2019-10-22 14:05:55 --> Severity: Notice --> Trying to get property 'comemailaddress' of non-object C:\xampp\htdocs\payroll\admin\application\views\Company\notificationdetail.php 130
+ERROR - 2019-10-22 14:05:55 --> Severity: Notice --> Trying to get property 'comcontactnumber' of non-object C:\xampp\htdocs\payroll\admin\application\views\Company\notificationdetail.php 131
+ERROR - 2019-10-22 14:05:55 --> Severity: Notice --> Trying to get property 'companyname' of non-object C:\xampp\htdocs\payroll\admin\application\views\Company\notificationdetail.php 129
+ERROR - 2019-10-22 14:05:55 --> Severity: Notice --> Trying to get property 'comemailaddress' of non-object C:\xampp\htdocs\payroll\admin\application\views\Company\notificationdetail.php 130
+ERROR - 2019-10-22 14:05:55 --> Severity: Notice --> Trying to get property 'comcontactnumber' of non-object C:\xampp\htdocs\payroll\admin\application\views\Company\notificationdetail.php 131
+ERROR - 2019-10-22 14:08:47 --> Severity: Notice --> Undefined index: companyname C:\xampp\htdocs\payroll\admin\application\views\Company\notificationdetail.php 129
+ERROR - 2019-10-22 14:08:47 --> Severity: Notice --> Undefined index: companyname C:\xampp\htdocs\payroll\admin\application\views\Company\notificationdetail.php 129
+ERROR - 2019-10-22 14:09:12 --> Severity: Notice --> Undefined index: companyname C:\xampp\htdocs\payroll\admin\application\views\Company\notificationdetail.php 129
+ERROR - 2019-10-22 14:09:12 --> Severity: Notice --> Undefined index: companyname C:\xampp\htdocs\payroll\admin\application\views\Company\notificationdetail.php 129
+ERROR - 2019-10-22 14:10:05 --> Severity: Notice --> Trying to get property 'companyid' of non-object C:\xampp\htdocs\payroll\admin\application\controllers\Company.php 88
+ERROR - 2019-10-22 14:11:50 --> Severity: Notice --> Undefined index: companyname C:\xampp\htdocs\payroll\admin\application\views\Company\notificationdetail.php 129
+ERROR - 2019-10-22 14:11:50 --> Severity: Notice --> Undefined index: companyname C:\xampp\htdocs\payroll\admin\application\views\Company\notificationdetail.php 129
+ERROR - 2019-10-22 14:12:21 --> Severity: Notice --> Trying to get property 'companyname' of non-object C:\xampp\htdocs\payroll\admin\application\views\Company\notificationdetail.php 129
+ERROR - 2019-10-22 14:12:21 --> Severity: Notice --> Trying to get property 'companyname' of non-object C:\xampp\htdocs\payroll\admin\application\views\Company\notificationdetail.php 129
+ERROR - 2019-10-22 14:14:00 --> Severity: Notice --> Trying to get property 'companyname' of non-object C:\xampp\htdocs\payroll\admin\application\views\Company\notificationdetail.php 129
+ERROR - 2019-10-22 14:14:00 --> Severity: Notice --> Trying to get property 'companyname' of non-object C:\xampp\htdocs\payroll\admin\application\views\Company\notificationdetail.php 129

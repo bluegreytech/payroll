@@ -1,15 +1,6 @@
 ﻿<?php 
-
-
-
 	 $this->load->view('common/header.php');
-
-
-
 	 $this->load->view('common/sidebar.php');
-
-
-
 ?>			<!-- Page Wrapper -->
 
 
@@ -538,7 +529,7 @@
 
 
 
-								<form method="post" id="form_edit" >
+								<form method="post" id="form_edit">
 
 
 

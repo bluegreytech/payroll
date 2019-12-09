@@ -68,42 +68,45 @@
 						<div class="col-md-12">
 						<form method="post" id="form_valid" action="<?php echo base_url();?>Invoice/add_quotation">
 								<div class="row">
+									<!-- <div class="col-sm-6 col-md-3"> -->
+										
+										<!-- <div class="form-group">
+											<label>Company Type <span class="text-danger">*</span></label>
+											<select class="form-control" name="companytypeid"> 
+												<option disabled value="">Please select company type</option>
+												<?php
+												// if($companytypeData){
+												// 	foreach($companytypeData as $comptype)
+												// 	{
+												?>
+														<option value="<?php //echo $comptype->companytypeid; ?>" <?php// if($companytypeid==$comptype->companytypeid){echo "selected" ;}?>><?php// echo $comptype->companytype;?></option>
+												<?php
+											//	}}
+												?>
+											</select>
+										</div> -->
+									<!-- </div> -->
 									<div class="col-sm-6 col-md-3">
+										<div class="form-group">
 										<input type="hidden" name="quotationid" value="<?php echo $quotationid;?>">
 										<input type="hidden" name="quotationdetailid" value="<?php echo $quotationdetailid;?>">
-										<div class="form-group">
-										<label>Company Type <span class="text-danger">*</span></label>
-										<select class="form-control" name="companytypeid"> 
-											<option disabled value="">Please select company type</option>
-											<?php
-											if($companytypeData){
-												foreach($companytypeData as $comptype)
-												{
-											?>
-													<option value="<?php echo $comptype->companytypeid; ?>" <?php if($companytypeid==$comptype->companytypeid){echo "selected" ;}?>><?php echo $comptype->companytype;?></option>
-											<?php
-											}}
-											?>
-										</select>
-										</div>
-									</div>
-									<div class="col-sm-6 col-md-3">
-										<div class="form-group">
 											<label>Company Name<span class="text-danger">*</span></label>
 												<input class="form-control" type="text" name="companyname" value="<?php echo $companyname;?>" placeholder="Enter company name">
 										</div>
 									</div>
 									<div class="col-sm-6 col-md-3">
 										<div class="form-group">
-											<label>Company Email<span class="text-danger">*</span></label>
+											<label>Company Email</label>
 												<input class="form-control" type="email" name="companyemail"  value="<?php echo $companyemail;?>" placeholder="Enter company email address">
 										</div>
 									</div>
 									<div class="col-sm-6 col-md-3">
 										<div class="form-group">
-											<label>Contact Number <span class="text-danger">*</span></label>
+											<label>Contact Number </label>
 												<input class="form-control" type="text" name="comcontactnumber" id="comcontactnumber" value="<?php echo $comcontactnumber;?>" placeholder="Enter contact number">
 										</div>
+									</div>
+									<div class="col-sm-6 col-md-3">
 									</div>
 									<div class="col-sm-6 col-md-3">
 										<div class="form-group">
@@ -468,17 +471,14 @@ function calculateGrandTotal() {
 			$("#form_valid").validate(
 			{
 				rules: {
-					companytypeid: {
-						required: true,
-							},
 					companyname: {
 						required: true,
 							},
 					companyemail: {
-						required: true,
+						//required: true,
 							},
 					comcontactnumber: {
-						required: true,
+						//required: true,
 							},		
 					quotationdate: {
 						required: true,
@@ -494,9 +494,7 @@ function calculateGrandTotal() {
 							},
 					},
 				messages:{
-					companytypeid: {
-						required: "Please select type of company",
-						},	
+						
 					companyname: {
 						required: "Please enter a company name",
 						},	
