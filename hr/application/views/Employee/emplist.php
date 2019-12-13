@@ -27,8 +27,18 @@
 		<div class="row">
 			<div class="col-sm-4 col-5">
 				<h4 class="page-title">List of Employee </h4>
+				
 			</div>
 			<div class="col-sm-8 col-7 text-right m-b-30">
+<form class="form-inline"method="post" id="import_form" enctype="multipart/form-data">
+  <div class="form-group">
+    <label for="file">Select Excel File:</label>
+   <input type="file" name="file" id="file" required accept=".xls, .xlsx" /></p>
+  </div>
+  
+  <input type="submit" name="import" value="Import" class="btn add-btn" />
+</form>
+
 				<a href="<?php echo base_url()?>employee/addemp" class="btn add-btn" ><i class="fa fa-plus"></i> Add Employee
 				</a>
 			</div>
@@ -532,4 +542,39 @@ function readURL(input) {
             }
         }
 
+</script>
+<script>
+$(document).ready(function(){
+
+// load_data();
+
+
+ $('#import_form').on('submit', function(event){
+  event.preventDefault();
+  $.ajax({
+   url:"<?php echo base_url(); ?>Employee/import_emp",
+   method:"POST",
+   data:new FormData(this),
+   contentType:false,
+   cache:false,
+   processData:false,
+   success:function(data){
+   	exit;
+if(data==1){
+	alert('Data imported successfully');
+		$('#file').val('');
+		window.location.href="<?php echo base_url(); ?>Employee/emplist";
+
+}else{
+alert(data);
+   	$('#file').val('');
+window.location.href="<?php echo base_url(); ?>Employee/emplist";
+    }
+    
+   
+   }
+  })
+ });
+
+});
 </script>

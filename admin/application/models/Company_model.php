@@ -539,7 +539,7 @@ class Company_model extends CI_Model
 
 	function list_complianceto()
 	{
-		$where = array('isdelete' =>'0','compliancetypeid'=>'1');
+		$where = array('Is_deleted' =>'0','compliancetypeid'=>'1');
 		$this->db->select('*');
 		$this->db->from('tblcompliances');
 		$this->db->where($where);
@@ -550,7 +550,7 @@ class Company_model extends CI_Model
 
 	function list_compliancededuction()
 	{
-		$where = array('isdelete' =>'0','compliancetypeid'=>'2');
+		$where = array('Is_deleted' =>'0','compliancetypeid'=>'2');
 		$this->db->select('*');
 		$this->db->from('tblcompliances');
 		$this->db->where($where);
@@ -568,8 +568,8 @@ class Company_model extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('tblcompliances');
-		$this->db->where('isactive!=','0');
-		$this->db->where('isdelete','0');
+		$this->db->where('IsActive!=','0');
+		$this->db->where('Is_deleted','0');
 		$this->db->where('companyid',$id);
 		$this->db->order_by('complianceid','desc');
 		$r=$this->db->get();
@@ -1698,7 +1698,7 @@ class Company_model extends CI_Model
 	{	
 			$AdminIdlogin=$this->session->userdata('AdminId');
 			$compliancetypeid=$this->input->post('compliancetypeid');
-			$compliancename=$this->input->post('compliancename');
+			$compliancename=ucfirst($this->input->post('compliancename'));
 			$compliancepercentage=$this->input->post('compliancepercentage');
 			$isactive=$this->input->post('isactive');
             $companyid = $this->input->post('companyid');
@@ -1711,7 +1711,7 @@ class Company_model extends CI_Model
 					'compliancetypeid'=>$compliancetypeid,
 			        'compliancename'=>$compliancename,
 			        'compliancepercentage'=>$compliancepercentage,
-			        'isactive'=>$isactive,
+			        'IsActive'=>$isactive,
 			        'is_editable'=>$is_editable,
 			        'createdby'=>$AdminIdlogin,
 			         'companyid'=>isset($companyid[$i]) ? $companyid[$i] : '0',
@@ -1883,7 +1883,7 @@ class Company_model extends CI_Model
 			'stateid'=>$this->input->post('stateid'),
 			'companycity'=>$this->input->post('companycity'),
 			'pincode'=>$this->input->post('pincode'),
-			'isactive'=>$this->input->post('isactive'),
+			'IsActive'=>$this->input->post('isactive'),
 			'updatedby'=>$AdminIdlogin,
 			'updatedon'=>date("Y-m-d h:i:s")
 				);
@@ -2031,7 +2031,8 @@ class Company_model extends CI_Model
 			'complianceid'=>$this->input->post('complianceid'),
 			'companyid'=>$this->input->post('companyid'),
 			'compliancetypeid'=>$this->input->post('compliancetypeid'),
-			'compliancename'=>$this->input->post('compliancename'),
+			'compliancename'=>ucfirst($this->input->post('compliancename')),
+			
 			'compliancepercentage'=>$this->input->post('compliancepercentage'),
 			'isactive'=>$this->input->post('isactive'),
 			'is_editable'=>$this->input->post('is_editable'),

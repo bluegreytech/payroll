@@ -900,6 +900,7 @@ class Employee_model extends CI_Model
 		$this->db->limit('1');
      	$query=$this->db->get();
       	$empcode=$query->row()->employee_code;
+      	
       	$split = explode("_",$empcode);		
 		$val=$split[1]+1;		
       		if($val<=9){      			
@@ -948,6 +949,9 @@ class Employee_model extends CI_Model
 	$res=$query->row();
 	    return $res->totalworkingdays;
 
+   }
+   function insert_excel($data){
+   	$this->db->insert_batch('tblemp', $data);
    }
    
 }

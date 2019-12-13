@@ -343,7 +343,7 @@
 
 
 
-										<input class="form-control" type="text" name="compliancename" placeholder="Enter a compliance " minlength="2" maxlength="30">
+										<input class="form-control" type="text" name="compliancename" placeholder="Enter a compliance " minlength="2" maxlength="30" style="text-transform: capitalize;">
 
 
 
