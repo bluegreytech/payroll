@@ -15,14 +15,6 @@ class Salary_model extends CI_Model
         $res=$query->result();
 
 
-        // foreach ($res as $row) {
-        //   	echo "<pre>";print_r($row);
-          	
-          
-		//for($i=0;$i<count($this->input->post('complianceid'));$i++){
-    	    
-         	 // echo   $this->input->post('complianceid')[$i].'='.$this->input->post('compliancevalue')[$i]."<br>";
-
          	  $complianceid =implode(",", $this->input->post('complianceid'));         	
          	  $compliancevalue =implode(",", $this->input->post('compliancevalue')); 
               if($this->input->post('otherdeductionname')){
@@ -36,8 +28,6 @@ class Salary_model extends CI_Model
                 $otherdeductionvalue='';
              }
          	 
-         	 // $otherdeductionvalue=implode(",", $this->input->post('otherdeductionvalue')); 
-
 
          	    $data=array(
          	     	'company_id'=>$this->session->userdata('companyid'),         	     
@@ -81,6 +71,16 @@ class Salary_model extends CI_Model
         $this->db->order_by('empsetsalary_id','Desc');
         $query=$this->db->get();
         $res=$query->row_array();
+        return $res;
+    }
+
+    function getsetsalarybyemp($id){
+        $this->db->select('*');
+        $this->db->from('tblempsetsalary');
+        $this->db->where('empsetsalary_id',$id);
+        $query=$this->db->get();        
+        $res=$query->row();
+    //echo $this->db->last_query();
         return $res;
     }
 	

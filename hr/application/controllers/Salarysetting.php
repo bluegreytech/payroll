@@ -28,7 +28,6 @@ class Salarysetting extends CI_Controller
 	
 	}
 
-
 	function add_setsalary(){    	
     	if(!check_admin_authentication())
 		{
@@ -49,7 +48,7 @@ class Salarysetting extends CI_Controller
 			}else{
 				$data["error"] = "";
 			}
-           	$data['redirect_page']="emplist";
+           	$data['redirect_page']="setsalary";
 			$data['emp_id']=$this->input->post('emp_id');
 			$data['employee_code']=$this->input->post('employee_code');
 			$data['first_name']=$this->input->post('FirstName');
@@ -61,7 +60,6 @@ class Salarysetting extends CI_Controller
 		}
 		else
 		{	
-
 			if($this->input->post("empsetsalary_id")!="")
 			{	
 				//echo "<pre>";print_r($_POST);die;
@@ -76,11 +74,11 @@ class Salarysetting extends CI_Controller
 				redirect('salarysetting/setsalary');
 			}
 		}
-
 		$salarymonthresult=$this->company_model->getsetsalarymonth();		
-	    $data['salarymonth']=$salarymonthresult['salary_month'];     	
+	    $data['salarymonth']=$salarymonthresult['salary_month']; 
 		$data['result']=$this->company_model->compliancelist();
-		$data['emplist']=$this->attendance_model->emplist();
+		$data['emplist']=$this->attendance_model->emppersentmonthlist($data['salarymonth']);
+		$data['empid']='';		
 		$this->load->view('salarysetting/add_setsalary',$data);
 	
     }
@@ -151,7 +149,7 @@ class Salarysetting extends CI_Controller
 				$this->load->view('salarysetting/salaryslip',$data);
 				$html = $this->output->get_output();
 
-				echo "<pre>";print_r($html);die;
+				//echo "<pre>";print_r($html);die;
 				$this->load->library('dompdf_gen');
 				$this->dompdf->load_html($html);
 				$this->dompdf->render();
@@ -216,6 +214,29 @@ class Salarysetting extends CI_Controller
 				}
 
     }
+    function edit_setsalary($id){   
+    	if(!check_admin_authentication()){ 
+			redirect(base_url());
+		} 
+    	
+		$data=array();
+	    $data['redirect_page']="setsalary";
+	 
+	    $result=$this->company_model->getsetsalarymonth();		
+		$data['salarymonth']=$result['salary_month'];
+		
+		$data['result']=$this->company_model->compliancelist();
+		$empsalarylist=$this->salary_model->getsetsalarybyemp($id); 
+	  
+		
+        $data['empid']=$empsalarylist->emp_id;
+        $data['otherdeductionname']=$empsalarylist->otherdeductionname;
+        $data['otherdeductionvalue']=$empsalarylist->otherdeductionvalue;
+
+		$this->load->view('salarysetting/add_setsalary',$data);	
+    }
+
+
      
 
 

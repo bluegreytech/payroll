@@ -3,10 +3,10 @@
 	 $this->load->view('common/sidebar');
 ?>
 <style type="text/css">
-	table.table td .add {
+	/*table.table td .add {
 		display: none;
-	}
-	table.table td .comadd {
+	}*/
+	table.table td .hiddenInput {
 		display: none;
 	}
 </style>
@@ -242,60 +242,15 @@
 													<label class="col-form-label">Adharcard No.<span class="text-danger">*</span></label>
 													<input type="text" class="form-control" name="aadharcard" id="aadharcard" value="<?php echo $aadharcard;?>"  minlength="14">
 												</div>
-											  
 												<div class="form-group">
-													<label class="col-form-label">UAN Status<span class="text-danger">*</span></label>
-													<select name="uanstatus" id="uanstatus" class="form-control">
-														<option selected="" disabled="">Please Select</option>
-														<option value="applicable" <?php if($uanstatus=="applicable"){ echo "selected";}?>>Applicable</option>
-														<option value="notapplicable" <?php if($uanstatus=="notapplicable"){ echo "selected";}?>>Not Applicable</option>
-													</select>
+													<label class="col-form-label">Pancard No.<span class="text-danger">*</span></label>
+													<input type="text" class="form-control" name="pancard" id="pancard" value="<?php echo $pancard;?>">
 												</div>
-												<div class="form-group" id='uannumber'>
-													<label class="col-form-label">UAN Number<span class="text-danger">*</span></label>
-													<input type="text" class="form-control" id="uanno" name="uanno" value="<?php echo $uanno; ?>">
-												</div>
-                                                <div class="form-group">
-													<label class="col-form-label">Professional Tax Status<span class="text-danger">*</span></label>
-													<select name="taxstatus" id="taxstatus" class="form-control">
-														<option selected="" disabled="">Please Select</option>
-														<option value="applicable" <?php if($taxstatus=="applicable"){ echo "selected";}?>>Applicable</option>
-														<option value="notapplicable" <?php if($taxstatus=="notapplicable"){ echo "selected"; }?>>Not Applicable</option>
-													</select>
-												</div>
-
-												<!-- <div class='form-group'>
-													<select class="form-control selectpicker" multiple data-live-search="true" data-actions-box="true" name="complianceapply" id="complianceapply" >
-																									
-													<?php foreach ($compliancelist as $row){ ?>     
-														<option value="<?php echo $row->complianceid;?>"><?php echo $row->compliancename; ?></option>
-													<?php } ?>
-													</select>
-												</div> -->
-											
-
 											</div>	
 											<!-- <div class="col-md-6"> -->
 												
 											<!-- </div>		 -->									
 											<div class="col-md-6">
-												<div class="form-group">
-													<label class="col-form-label">Pancard No.<span class="text-danger">*</span></label>
-													<input type="text" class="form-control" name="pancard" id="pancard" value="<?php echo $pancard;?>">
-												</div>
-
-												<div class="form-group">
-													<label class="col-form-label">ESIC Status<span class="text-danger">*</span></label>
-													<select name="esicstatus" id="esicstatus" class="form-control">
-														<option selected="" disabled="">Please Select</option>
-														<option value="applicable" <?php if($esicstatus=="applicable"){ echo "selected";}?>>Applicable</option>
-														<option value="notapplicable" <?php if($esicstatus=="notapplicable"){ echo "selected";}?>>Not Applicable</option>
-													</select>
-												</div>
-												<div class="form-group" id='esicnumber'>
-													<label class="col-form-label">ESIC Number<span class="text-danger">*</span></label>
-													<input type="text" class="form-control" id="esicno" name="esicno" value="<?php echo $esicno;?>">
-												</div>
 												 <div class="form-group">
 													<label>Upload Document <span class="text-danger">*</span></label>
 													<input type="hidden" class="form-control" name="pre_bank_detail" id="pre_bank_detail" value="<?php echo $bankdetail;?>">
@@ -320,26 +275,61 @@
 												<?php } ?>
 											</div> 
 											</div>
-											<table class="table">
-													<th>Compliance Name</th>
-													<th>Compliance Detail</th>
-													<th>Able/Not able</th>
-													<tbody>
-														
-														<?php foreach ($compliancelist as $row){ ?> 
-														<tr>
-															<td><?php echo $row->compliancename; ?></td>
-															<td></td>		
-															
-															<td>
-																<input type="checkbox" name="compliancecheck[]" class='checkbtn'>
-															</td>
-														</tr>
-														<?php } ?>		 
-													</tbody>
-												</table>
+	                                         <div class="col-md-12">
+											<hr>
+										    <h3 class="card-title">Applicable compliances </h3>
+												<div class="row table-responsive">
+													<table class="table">
+															<th style="text-align: center">Compliance Name</th>
+															<th style="text-align: center">Compliance Detail</th>
+															<th style="text-align: center">Able/Not able</th>
+															<tbody>
+																
+																<?php 
+																$companytxtno='';
+																$companytxt_no='';
+																 $companytext_no=explode(',', $companytextno);
+																//echo "<pre>";print_r(count($companytext_no));
+																	if(count($companytext_no)>1){
+																		
+																		 $companytxt_no=explode(',', $companytextno);
+																	}else{
+																		
+																		  $companytxt_no=$companytextno;
+																	}
+																	
+																	
+																	// echo count( $companytext_no);
+																	 $complianceallow_id=explode(',', $complianceallowid);
+																	
+																	$i=0;
+																foreach ($compliancelist as $row){ 
+															    //  echo $companytxt_no[$i]."<br>";
+															      //echo $companytxtno;
+															        $cmptxtno=isset($companytxt_no) ? $companytxt_no : '0';
+															         //echo  $cmptxtno[$i];   
+																	?> 
+																
+																<tr>
+																	
+																	<td style="text-align: center"><?php echo $row->compliancename; ?></td>
+																	<td ><input type="text" name="compliancetxt[]" class="form-control hiddenInput" style="height: auto !important; display:<?php echo (!empty(in_array($row->complianceid, $complianceallow_id) ) ? "block" : "none");  ?>" placeholder="Enter Number" value="<?php  if(!empty(in_array($row->complianceid, $complianceallow_id))){ 
+																		if(count($companytext_no)>1){
+																			echo $companytext_no[$i];
+																		}else{
+																			echo $cmptxtno;
+																		} }  
+																		 ?>"></td>
+																	<td style="text-align: center">
+																		<input type="checkbox" name="compliancecheck[]" class='checkbtn' value="<?php echo $row->complianceid;  ?>" <?php echo in_array($row->complianceid, $complianceallow_id)?'checked="checked"':'' ?>>
+																	</td>
+																</tr>
+																<?php $i++; } //} ?>		 
+															</tbody>
+													</table>
+												</div>
+											</div>
 										</div>
-								
 											
 									</div>
 									<div class="col-md-12">
@@ -347,22 +337,13 @@
 									    <h3 class="card-title">Employee Leave Detail </h3>
 									     <div class="row">									   
                                                 <table class="table table-striped table-nowrap custom-table ">
-													<thead>
-														<!-- <tr>
-															<th>Invoice ID</th>
-															<th>Client</th>
-															<th>Due Date</th>
-															<th>Total</th>
-															<th>Status</th>
-														</tr> -->
-													</thead>
+													
 													<tbody>
-
 														<?php 
 														if(!empty($leavelist)){
-											    	 	foreach($leavelist as $leaverow){ //echo "<pre>";print_r($leaverow);
-															$empassgindata=getempassginleave($emp_id,$leaverow->leave_id);
-														
+											    	 	foreach($leavelist as $leaverow){
+											    	 	 //echo "<pre>";print_r($leaverow);
+															$empassgindata=getempassginleave($emp_id,$leaverow->leave_id);				
 											    	  ?>   
 														<tr>
 															<td width="20px"><?php echo $leaverow->leave_name; ?><input type="hidden" name="leavename[]" id="" class="form-control" value="<?php echo $leaverow->leave_id;?>">
@@ -798,47 +779,48 @@ $("#esicstatus").change(function () {
 
 
 
-$('[name="leaveno[]"]').blur(function() {
-    var dInput = this.value;
+// $('[name="leaveno[]"]').blur(function() {
+//     var dInput = this.value;
 
-    leavedays=$(this).attr("data-id");    
-    $(this).next("span").remove();   
-   // alert($('#errormsg').text());
-    $('input[type="submit"]').removeAttr('disabled');  
-    if(parseInt(leavedays)<parseInt(dInput)){
+//     leavedays=$(this).attr("data-id");    
+//     $(this).next("span").remove();   
+//    // alert($('#errormsg').text());
+//     $('input[type="submit"]').removeAttr('disabled');  
+//     if(parseInt(leavedays)<parseInt(dInput)){
 
-	    $(this).after('<span style="color:red;" id="errormsg">The value should be less then or equal to '+leavedays+'</span>');
-	    $('[name="Save"]').attr('disabled','disabled');
-	    return false; 
+// 	    $(this).after('<span style="color:red;" id="errormsg">The value should be less then or equal to '+leavedays+'</span>');
+// 	    $('[name="Save"]').attr('disabled','disabled');
+// 	    return false; 
 
-    }else{
-      //	alert($('#errormsg').text());
-      	if($('#errormsg').text()!=''){
-      		$('[name="Save"]').attr('disabled','disabled');
+//     }else{
+//       //	alert($('#errormsg').text());
+//       	if($('#errormsg').text()!=''){
+//       		$('[name="Save"]').attr('disabled','disabled');
 
-      	}else{
-      		$('[name="Save"]').removeAttr('disabled');    
-      	}
+//       	}else{
+//       		$('[name="Save"]').removeAttr('disabled');    
+//       	}
         	
-    	$(this).next("span").remove();
-    }
-});
+//     	$(this).next("span").remove();
+//     }
+// });
  	  
-$(document).on("click", ".checkbtn", function(){	
-        $(this).parents("tr").find("td:nth-child(2)").each(function(){
-			
-			if($('[name="compliancecheck[]"]').is(':checked')==true){
-			 $(this).html('<input type="text" name="compliancetxt[]"  id="compliancetxt" class="form-control" value="' + $.trim($(this).text()) + '">');
-		}else{
-			 alert(hii);
-			$('[name="compliancetxt[]"]').css('display','none');
-		}
-		});		
-		//$(this).parents("tr").find(".add, .checkbtn").toggle();		
-		//var checked= $('[name="compliancetxt[]"]').val($(this).is(':checked'));
-	
-		
-    });
+
+
+
+ $(document).on("click", ".checkbtn", function(){	
+   		
+	  if($(this).is(":checked")){
+
+	  	 $(this).parents("tr:eq(0)").find("input[name='compliancetxt[]']").show();
+	  }else{
+	  	 $(this).parents("tr:eq(0)").find("input[name='compliancetxt[]']").hide();
+	  }
+
+	   
+});
+
+
 
 </script>
     

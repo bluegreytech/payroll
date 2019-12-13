@@ -83,6 +83,7 @@
 									<tbody>
                                       	<?php  $compliance_value=explode(',', $compliancevalue);
                                       	   $compliance_id=explode(',', $complianceid);
+                                      	  //echo "<pre>";print_r($compliance_id);
                                       	?>
                                     	<?php 
                                     	 for($i=0;$i<count($compliance_id);$i++){

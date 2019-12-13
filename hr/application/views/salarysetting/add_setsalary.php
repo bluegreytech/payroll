@@ -6,7 +6,6 @@
 	.form-control {   
     height: auto !important;
 }
-
 </style>
 <!-- Page Wrapper -->
  <div class="page-wrapper">			
@@ -47,7 +46,10 @@
 										</div>
 										<div class="form-group">
 											<label>Employee Name <span class="text-danger">*</span>
-											</label>											
+											</label>	
+											<?php if(empty($empid)){ ?>
+
+																			
 											<select  class=" form-control selectpicker" data-live-search="true" data-actions-box="true"  name="employename" id="employename">
 												 <option selected="" value="">Please select</option> 
 												<?php if(!empty($emplist)){
@@ -55,6 +57,9 @@
 												<option value="<?php echo $row->emp_id; ?>" <?php if($row->emp_id==$emp_id){echo "selected";} ?> ><?php echo ucfirst($row->first_name." ".$row->last_name);?></option>
 												<?php } } ?>
 											</select>
+										<?php }else{?>
+											<input type="text" name="" id="empname" readonly="" value="" class="form-control">
+										 <?php } ?>		
 											<span id="emperror"></span>
 										</div>
 										
@@ -209,7 +214,7 @@
 									<div class="submit-section">
 									<hr>
 									<button class="btn btn-primary submit-btn" name="Save" type="submit" id="btnsave"><?php //echo ($empleave_id!='')?'Update':'Submit' ?>Submit</button>
-									<button type="button" name="cancel" class="btn btn-secondary submit-btn" onClick="location.href='<?php echo base_url(); ?>leave/<?php echo 
+									<button type="button" name="cancel" class="btn btn-secondary submit-btn" onClick="location.href='<?php echo base_url(); ?>salarysetting/<?php echo 
 									$redirect_page; ?>'">Cancel
 									</button>
 								</div>
@@ -229,10 +234,114 @@
 	<div class="sidebar-overlay" data-reff=""></div>
 
 	<!-- jQuery -->
-    <?php  $this->load->view('common/footer'); ?>
+ <?php  $this->load->view('common/footer'); ?>
 		
 <script>
-	$(function() { 
+$(document).ready(function(){
+	//$("#employename").change(function () {
+		
+	var end = this.value;
+	var id = '<?php echo $empid; ?>';
+	otherdeductionname= '<?php echo $otherdeductionname; ?>';
+	otherdeductionvalue= '<?php echo $otherdeductionvalue; ?>';
+	var salary_month = $('#salary_month').val();	
+	url="<?php echo base_url();?>";
+	if(id.length!=''){
+		$.ajax({
+         url: url+'employee/viewemp',
+         type: 'post',
+		 data:{id:id,salarymonth:salary_month},
+         success:function(response){
+			var response = JSON.parse(response);
+            console.log(response);
+
+            $('#empname').val(response.first_name);
+            $('#emp_id').val(response.emp_id);
+			$('#employee_code').val(response.employee_code);			
+			$('#jod').val(response.joiningdate);			
+            $('#pancard').val(response.pancard);
+            $('#Gender').val(response.gender);
+            $('#worked').val(response.workingdays);  
+           // $("#adddeduction").append("<div class='form-group'><div class='row'><div class='col-md-6'><input class='form-control' type='text' name='otherdeductionname[]' value='"+otherdeductionname +"'></div><div class='col-md-5'><input class='form-control' type='text' name='otherdeductionvalue[]'  value='"+otherdeductionvalue+"'></div><span style='margin-top:12px;color:red;' class='remove_field'><i class='fa fa-trash fa-lg'></i></span></div>");
+           //  $("#adddeduction").val(response.otherdeductionname);
+           // $("#adddeduction").val(response.otherdeductionvalue);
+           
+			var deductiontotal = 0;
+			var earningtotal = 0;
+			for (var j=0, m=response.complianceresult.length;j<m;j++) {			
+				compliancetypeid=response.complianceresult[j].compliancetypeid;
+				compliance_id=response.complianceresult[j].complianceid;
+				compliancepercentage=response.complianceresult[j].compliancepercentage;
+				compliance_name=response.complianceresult[j].compliancename;
+         	 
+         	  	if(response.salary=='monthly'){
+					monthlyamt=parseFloat(response.salaryamt)/12;
+				}else{
+					monthlyamt=parseFloat(response.salaryamt)*30;
+					//console.log(monthlyamt);
+				}
+				totalamount=monthlyamt.toFixed();				
+				compliance_percentage = parseFloat(compliancepercentage);
+				if(response.salary=='monthly'){
+				 	if(compliancetypeid=='1'){
+				 		if(response.complianceallowid.length>1){				 			
+            	          	complianceallow_id=response.complianceallowid[j];
+           				}else{           				
+           					complianceallow_id=response.complianceallowid;
+           				}
+				 		if(compliance_id==complianceallow_id){
+				 			
+				 			deductionamount=(totalamount * compliance_percentage)/100; 
+					 		deductiontotal += deductionamount; 
+				 		}else{			 				
+				 			 deductionamount=0.00; 
+				 			 deductiontotal += 0.00; 
+				 		}
+                        $('#totaldeduction').val(deductiontotal.toFixed(2));
+                        $('#othertotaldeduction').val(deductiontotal.toFixed(2));
+                        $('#compliance_'+compliance_id).val(deductionamount.toFixed(2));
+                       
+				 	}else{
+				 		earningamount=(totalamount * compliance_percentage)/100; 
+                        earningtotal += earningamount;
+                   	 	$('#gross_earning').val(earningtotal.toFixed(2));
+                    	$('#compliance_'+compliance_id).val(earningamount);
+				 	}
+				}else{
+					if(compliancetypeid=='2'){
+						if(compliance_name=='Basic'){
+							 
+	                   	 	$('#gross_earning').val(totalamount);
+	                    	$('#compliance_'+compliance_id).val(totalamount);	
+						}else{
+							earningamount=0.00; 
+	                        earningtotal += 0.00;
+	                   	 	//$('#gross_earning').val(earningtotal.toFixed(2));
+	                    	$('#compliance_'+compliance_id).val(earningtotal.toFixed(2));	
+						}
+            		}else{
+            			deductionamount=0.00; 
+			 			deductiontotal += 0.00; 
+				 		$('#totaldeduction').val(deductiontotal.toFixed(2));
+                        $('#othertotaldeduction').val(deductiontotal.toFixed(2));
+                        $('#compliance_'+compliance_id).val(deductionamount.toFixed(2));
+            		}
+				}			
+			}  
+			netpay=(parseFloat($('#gross_earning').val())-parseFloat($('#totaldeduction').val()));	
+			$('#netpay').val(netpay);
+			$('#payword').val(convertNumberToWords(netpay));
+        
+         }
+      });
+		
+
+
+	}
+		
+	//});
+});
+$(function() { 
     setTimeout(function() {
   $('#errorMessage').fadeOut('fast');
 }, 5000);  
@@ -251,11 +360,8 @@ $(function() {
 });
 $(document).ready(function()
 { 
-	
-//$.validator.setDefaults({ ignore: ":hidden:not(select#leavetime)" });
 	$("#frm_addleave").validate(
 	{
-		
 		ignore: "input[type='text']:hidden"	,
 		 //for all select
 			rules: {
@@ -289,7 +395,6 @@ $(document).ready(function()
 				}
 			}
 	});
-
 });
 function convertNumberToWords(amount) {
 
@@ -375,7 +480,7 @@ function convertNumberToWords(amount) {
 
     return words_string;
 }  
-//leaveday=$("select#leavedays option:selected").attr('value');
+
 	
 $("#employename").change(function () {
 	var end = this.value;
@@ -389,54 +494,79 @@ $("#employename").change(function () {
 		 data:{id:id,salarymonth:salary_month},
          success:function(response){
 			var response = JSON.parse(response);
-               // console.log(response);
-               // return false;
+           // console.log(response.complianceallowid.length);
+
+           
             $('#emp_id').val(response.emp_id);
 			$('#employee_code').val(response.employee_code);			
 			$('#jod').val(response.joiningdate);			
             $('#pancard').val(response.pancard);
             $('#Gender').val(response.gender);
-            $('#worked').val(response.workingdays);
-
-            //console.log(response.complianceresult.length);
+            $('#worked').val(response.workingdays);          
 			var deductiontotal = 0;
 			var earningtotal = 0;
 			for (var j=0, m=response.complianceresult.length;j<m;j++) {
-			console.log(response.complianceresult[j]);  
+			//console.log(response.complianceresult[j]);  
 			compliancetypeid=response.complianceresult[j].compliancetypeid;
 			compliance_id=response.complianceresult[j].complianceid;
 			compliancepercentage=response.complianceresult[j].compliancepercentage;
-         	  // console.log(compliancetypeid);
-				monthlyamt=parseInt(response.salaryamt)/12;
-				//monthlyamt=12500/12;
+			compliance_name=response.complianceresult[j].compliancename;
+         	  // console.log(compliance_id);
+         	  if(response.salary=='monthly'){
+					monthlyamt=parseFloat(response.salaryamt)/12;
+				}else{
+					monthlyamt=parseFloat(response.salaryamt)*30;
+					//console.log(monthlyamt);
+				}
+			
 				totalamount=monthlyamt.toFixed();
 				//console.log(totalamount);
 				compliance_percentage = parseFloat(compliancepercentage);
-				  
+				if(response.salary=='monthly'){
 				 	if(compliancetypeid=='1'){
-				 		  deductionamount=(totalamount * compliance_percentage)/100; 
+				 		if(response.complianceallowid.length>1){				 			
+            	          	complianceallow_id=response.complianceallowid[j];
+           				}else{           				
+           					complianceallow_id=response.complianceallowid;
+           				}
+				 		if(compliance_id==complianceallow_id){
+				 			
+				 			deductionamount=(totalamount * compliance_percentage)/100; 
 					 		deductiontotal += deductionamount; 
-	                        $('#totaldeduction').val(deductiontotal.toFixed(2));
-	                        $('#othertotaldeduction').val(deductiontotal.toFixed(2));
-	                        $('#compliance_'+compliance_id).val(deductionamount);
-                      
-                        // if(response.esic_status=='applicable'){
-                        // 	if(response.complianceresult[j].compliance_slug=='pf'){
-
-                        // 	}
-
-	                      
-                        //  }else{
-
-                        //  }
-
+				 		}else{			 				
+				 			 deductionamount=0.00; 
+				 			 deductiontotal += 0.00; 
+				 		}
+                        $('#totaldeduction').val(deductiontotal.toFixed(2));
+                        $('#othertotaldeduction').val(deductiontotal.toFixed(2));
+                        $('#compliance_'+compliance_id).val(deductionamount.toFixed(2));
+                       
 				 	}else{
 				 		earningamount=(totalamount * compliance_percentage)/100; 
                         earningtotal += earningamount;
                    	 	$('#gross_earning').val(earningtotal.toFixed(2));
                     	$('#compliance_'+compliance_id).val(earningamount);
 				 	}
-			
+				}else{
+					if(compliancetypeid=='2'){
+						if(compliance_name=='Basic'){
+							 
+	                   	 	$('#gross_earning').val(totalamount);
+	                    	$('#compliance_'+compliance_id).val(totalamount);	
+						}else{
+							earningamount=0.00; 
+	                        earningtotal += 0.00;
+	                   	 	//$('#gross_earning').val(earningtotal.toFixed(2));
+	                    	$('#compliance_'+compliance_id).val(earningtotal.toFixed(2));	
+						}
+            		}else{
+            			deductionamount=0.00; 
+			 			deductiontotal += 0.00; 
+				 		$('#totaldeduction').val(deductiontotal.toFixed(2));
+                        $('#othertotaldeduction').val(deductiontotal.toFixed(2));
+                        $('#compliance_'+compliance_id).val(deductionamount.toFixed(2));
+            		}
+				}			
 			}  
 			netpay=(parseFloat($('#gross_earning').val())-parseFloat($('#totaldeduction').val()));
 			
@@ -445,7 +575,7 @@ $("#employename").change(function () {
         
          }
       });	
-	});
+});
 $(document).ready(function() {
 	var max_fields      = 2; //maximum input boxes allowed
 	var wrapper   		= $("#adddeduction"); //Fields wrapper
@@ -456,7 +586,7 @@ $(document).ready(function() {
 		e.preventDefault();
 		if(x < max_fields){ //max input box allowed
 			x++; //text box increment
-			$(wrapper).append("<div class='form-group'><div class='row'><div class='col-md-6'><input class='form-control' type='text' name='otherdeductionname[]'></div><div class='col-md-5'><input class='form-control' type='text' name='otherdeductionvalue[]' onkeyup='deductioncalculate(this.value)'></div><span style='margin-top:12px;color:red;' class='remove_field'><i class='fa fa-trash fa-lg'></i></span></div>"); //add input 
+			$(wrapper).append("<div class='form-group'><div class='row'><div class='col-md-6'><input class='form-control' type='text' name='otherdeductionname[]'></div><div class='col-md-5'><input class='form-control' type='text' name='otherdeductionvalue[]' onkeyup='deductioncalculate(this.value)'></div><span style='margin-top:12px;color:red;' class='remove_field'><i class='fa fa-trash fa-lg'></i></span></div>"); 
 		}
 	});
 	
@@ -467,10 +597,11 @@ $(document).ready(function() {
 });
 	
 	function deductioncalculate(){
+        
 		var othertotaldeduction=$('#othertotaldeduction').val();
 		var otherdeductionvalue=$('input[name="otherdeductionvalue[]"]').val();
 		deductionvaluecount=$('input[name="otherdeductionvalue[]"]').length;
-		console.log(deductionvaluecount);
+		
 		var totaldeduction = 0;
 		var subtotal=0 ;
     	for(var i = 0; i < deductionvaluecount; i++) {
