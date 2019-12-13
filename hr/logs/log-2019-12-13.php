@@ -786,3 +786,16 @@ ERROR - 2019-12-13 15:51:38 --> 404 Page Not Found: Default/js
 ERROR - 2019-12-13 15:52:33 --> 404 Page Not Found: Leave/setsalary
 ERROR - 2019-12-13 15:53:07 --> Severity: Notice --> Undefined variable: otherdeductionname C:\xampp\htdocs\payroll\hr\application\views\salarysetting\add_setsalary.php 245
 ERROR - 2019-12-13 15:53:07 --> Severity: Notice --> Undefined variable: otherdeductionvalue C:\xampp\htdocs\payroll\hr\application\views\salarysetting\add_setsalary.php 246
+ERROR - 2019-12-13 13:13:23 --> 404 Page Not Found: Assets/img
+ERROR - 2019-12-13 13:16:08 --> 404 Page Not Found: Home/assets
+ERROR - 2019-12-13 13:16:08 --> 404 Page Not Found: Home/assets
+ERROR - 2019-12-13 13:16:08 --> 404 Page Not Found: Home/assets
+ERROR - 2019-12-13 13:16:08 --> 404 Page Not Found: Home/assets
+ERROR - 2019-12-13 13:16:15 --> 404 Page Not Found: Assets/img
+ERROR - 2019-12-13 13:16:15 --> 404 Page Not Found: Assets/img
+ERROR - 2019-12-13 13:16:15 --> 404 Page Not Found: Assets/img
+ERROR - 2019-12-13 13:16:15 --> 404 Page Not Found: Assets/img
+ERROR - 2019-12-13 13:16:33 --> Severity: Notice --> Trying to get property 'compliancetypeid' of non-object C:\xampp\htdocs\payroll\hr\application\views\Salarysetting\salary_view.php 103
+ERROR - 2019-12-13 13:16:33 --> Severity: Notice --> Trying to get property 'compliancetypeid' of non-object C:\xampp\htdocs\payroll\hr\application\views\Salarysetting\salary_view.php 142
+ERROR - 2019-12-13 13:17:48 --> Severity: Notice --> Trying to get property 'compliancetypeid' of non-object C:\xampp\htdocs\payroll\hr\application\views\Salarysetting\salary_view.php 103
+ERROR - 2019-12-13 13:17:48 --> Severity: Notice --> Trying to get property 'compliancetypeid' of non-object C:\xampp\htdocs\payroll\hr\application\views\Salarysetting\salary_view.php 142
