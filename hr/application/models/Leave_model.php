@@ -81,15 +81,14 @@ class Leave_model extends CI_Model
 	}
 
 	function empleave_insert(){
-         // echo "<pre>";print_r($_POST);die;
-      $query = $this->db->get_where('tblcompany',array('companyid'=>$this->session->userdata('companyid')));
-     // echo $this->db->last_query(); die;
-    if($query->num_rows()>0)
-    {
-      $row = $query->row();
-      //echo "<pre>";print_r($row->companyname);die;
-      
-    }  
+        	
+      		$query = $this->db->get_where('tblcompany',array('companyid'=>$this->session->userdata('companyid')));
+    		
+		    if($query->num_rows()>0)
+		    {
+		      $row = $query->row();
+		     
+		    }  
  			$typeofleavedata=get_one_record('tblcmpleave','leave_id',$this->input->post('typeofleave')); 
  			//echo "<pre>";print_r($typeofleavedata->leave_name);die;
 		    $leaveslot='';
@@ -399,16 +398,28 @@ class Leave_model extends CI_Model
               	$this->db->like('el.leavestatus',$leave_status);
 				$this->db->like('el.leavefrom',$fdate);		
 			}
-
-			
 			$query = $this->db->get();
-			//echo $this->db->last_query();die;
+			
 			if($query->num_rows() > 0)
 			{ 
-				//echo $this->db->last_query();die;
-				//echo "<pre>";print_r($query->result());die;
-			
 				return $query->result();
 			}  
+	}
+
+	function getemplevdata($id){
+      	$this->db->select('asl.leave_id,asl.no_leave,cl.leave_name');
+		$this->db->from('tblempassignleave as asl');
+		$this->db->join('tblcmpleave as cl','cl.leave_id=asl.leave_id');		
+		$this->db->where('asl.Is_deleted','0');		
+		$this->db->where('asl.no_leave!=','0');			
+		$this->db->where('asl.companyid',$this->session->userdata('companyid'));
+		$this->db->where('asl.emp_id',$id);
+		$this->db->order_by('asl.empassignleave_id','Desc');
+		$query=$this->db->get();		
+		$res=$query->result();
+		
+		//echo $this->db->last_query();
+		return $res;
+		
 	}
 }

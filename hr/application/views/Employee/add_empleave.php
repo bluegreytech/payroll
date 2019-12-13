@@ -26,8 +26,8 @@
 									<input type="hidden" name="empleave_id" value="<?php echo $empleave_id;?>">
 											<label>Employee Name <span class="text-danger">*</span>
 											</label>											
-											<select  class=" form-control selectpicker" multiple data-live-search="true" data-actions-box="true" multiple name="employename[]" id="employename">
-												<!-- <option disabled="" value="">Please select</option> -->	
+											<select  class=" form-control selectpicker"  data-live-search="true" data-actions-box="true" name="employename" id="employename">
+											 <option selected="" value="">Please select</option> 
 												<?php if(!empty($emplist)){
 													foreach($emplist as $row) { ?>
 													<option value="<?php echo $row->emp_id; ?>" <?php if($row->emp_id==$emp_id){echo "selected";} ?> ><?php echo ucfirst($row->first_name." ".$row->last_name);?></option>
@@ -38,11 +38,7 @@
 								<div class="form-group">
 									<label>Leave Type <span class="text-danger">*</span></label>
 									<select class="form-control" name='typeofleave' id='typeofleave'>
-										<option selected="" value="" disabled="">Please select</option>
-										<?php if(!empty($leavelist)){ 
-											foreach($leavelist as $row) { //echo "<pre>";print_r($row);   ?>
-                                             <option value="<?php echo $row->leave_id; ?>" <?php if($row->leave_id==$typeofleave){ echo "selected"; } ?>><?php echo ucfirst($row->leave_name);?></option>
-										<?php } } ?>									
+										<option selected="" value="" disabled="">Please select</option>	
 									</select>
 								</div>
 								<div class="form-group">
@@ -188,7 +184,7 @@ $(document).ready(function()
 		ignore: "input[type='text']:hidden"	,
 		 //for all select
 			rules: {
-				'employename[]':{
+				'employename':{
 					required:true,						
 			    },
 				typeofleave:{
@@ -214,7 +210,7 @@ $(document).ready(function()
 		
 			errorPlacement: function (error, element) {
 				console.log('dd', element.attr("name"));
-				if(element.attr("name") == "employename[]") {
+				if(element.attr("name") == "employename") {
 					error.appendTo("#emperror");
 				} else{
 				error.insertAfter(element)
@@ -224,7 +220,7 @@ $(document).ready(function()
 			
 	});
 
-	$("#leavedays").change(function () {
+$("#leavedays").change(function () {
 	var end = this.value;
 	var leavedays = $('#leavedays').val();
 	if(leavedays=='halfday'){		
@@ -354,7 +350,8 @@ function myDateFormatter (dobdate) {
 //console.log(dArr);
   return dArr[1]+ "/" +dArr[0]+ "/" +dArr[2]; //ex out: "18/01/10"       
 };
-   	function calculate() {
+
+function calculate() {
    		//alert($("#leavetimeout").val());
    		var timeout = $("#leavetimeout").val();
    		var timein = $("#leavetimein").val();
@@ -382,6 +379,29 @@ function secondsTohhmmss(secs) {
     return hours+ "." +minutes + " hours";
   }
 	
-	       
+	
+$("#employename").change(function () {
+	var end = this.value;
+	var id = $('#employename').val();
+	alert(id);
+	url="<?php echo base_url();?>";
+	
+	$.ajax({
+		url: url+'leave/viwempleavelist',
+		type: 'post',
+		data:{id:id},
+        success:function(response){
+			var response = JSON.parse(response);
+			console.log(response.result);
+			$('#typeofleave').empty();
+			$('#typeofleave').append($('<option value="" disabled="" selected="">Please Select</option>'));
+			$.each(response.result, function(key, value) {
+				console.log(value.leave_id);			 
+			   $('#typeofleave').append(
+              $('<option></option>').val(value.leave_id).html(value.leave_name));
+			});
+        }
+		});  
+	});       
 </script>
     

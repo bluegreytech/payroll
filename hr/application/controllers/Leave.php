@@ -311,4 +311,57 @@ class Leave extends CI_Controller
 		die;
 	}
 
+	function viwempleavelist(){
+
+		 // if(!check_admin_authentication()){ 
+			// 	redirect(base_url());
+			// } 
+		$id=$this->input->post('id'); 
+       
+		$data=array();	
+		
+		$data['result']=$this->leave_model->getemplevdata($id);
+		//echo "<pre>";print_r($data['result']);die;
+		 // foreach ($data['result'] as $row) {
+		 	
+		 // 	echo $data['leave_id']=$row->leave_id;
+		 // 	getleavelist($row->leave_id);
+		 // }
+        
+	    	//echo "<pre>";print_r($result);die;
+			// $data['emp_id']=$result['emp_id'];
+			// $data['employee_code']=$result['employee_code'];
+			// $data['department']=$result['department'];
+			// $data['desgination']=$result['desgination'];
+			// $data['first_name']=$result['first_name'];
+			// $data['last_name']=$result['last_name'];	
+			// $data['email']=$result['email'];
+			// $data['phone']=$result['phone'];	
+			// $data['Address']=$result['Address'];
+			// $data['gender']=$result['gender'];
+			// $data['Dateofbirth']=$result['Dateofbirth'];				
+			// $data['ProfileImage']=$result['ProfileImage'];	
+			// $data['Placeofbirth']=$result['Placeofbirth'];
+			// $data['marital_status']=$result['marital_status'];
+			// $data['religion']=$result['religion'];
+			// $data['nationality']=$result['nationality'];
+			// $data['status']=$result['status'];
+			// $data['qualification_emp']=$result['qualification_emp'];
+			// $data['bloodgroup']=$result['bloodgroup'];
+			// $data['probation_period_day']=$result['probation_preriod_day'];
+			// $data['physically_challenged']=$result['physically_challenged'];
+			// $data['joiningdate']=$result['joiningdate'];
+			// $data['salaryamt']=$result['salaryamt'];
+			// $data['salary']=$result['salary'];
+			// $data['aadharcard']=$result['aadharcard'];
+			// $data['pancard']=$result['pancard'];
+			// $data['bankdetail']=$result['bankdetail'];
+		 //    $data['complianceallowid']=$cmpallow_id;
+		    
+		 //    $data['companytextno']=$result['companytextno'];
+			
+			echo json_encode($data);
+			die;
+	}
+
 }

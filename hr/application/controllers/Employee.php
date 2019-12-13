@@ -26,6 +26,7 @@ class Employee extends CI_Controller
 		$this->load->view('Employee/emplist',$data);
 	}
 	function addemp(){
+
 		if(!check_admin_authentication()){ 
 			redirect(base_url());
 		}   
@@ -94,11 +95,8 @@ class Employee extends CI_Controller
 			$data['aadharcard']=$this->input->post('aadharcard');
 			$data['addressesproof']=$this->input->post('address_proof');
 			$data["pre_profile_image"] = $this->input->post('ProfileImage');
-			$data['uanstatus']=$this->input->post('uanstatus');
-			$data['esicstatus']=$this->input->post('esicstatus');
-			$data['esicno']=$this->input->post('esicno');
-			$data['uanno']=$this->input->post('uanno');
-			$data['taxstatus']=$this->input->post('taxstatus');
+			$data['complianceallowid']=$this->input->post('complianceallowid');
+			$data['companytextno']=$this->input->post('companytextno');
 			$data['option']='';
 			$data['keyword']='';	
 		}
@@ -121,13 +119,12 @@ class Employee extends CI_Controller
 			}
 		}
 		
-		 $data['compliancelist']=$this->company_model->compliancelist_deduction();	
-		 //echo "<pre>";print_r($data['compliancelist']);die;
-		 $data['employee_code']=$this->employee_model->empcodelist();			
-		 $data['leavelist']=$this->leave_model->showempleavelist();
-		 $this->load->view('Employee/addemp',$data);
-		
+		$data['compliancelist']=$this->company_model->compliancelist_deduction();			 
+		$data['employee_code']=$this->employee_model->empcodelist();			
+		$data['leavelist']=$this->leave_model->showempleavelist();
+		$this->load->view('Employee/addemp',$data);		
 	}
+	
 
 	function edit_emp($emp_id){
 		if(!check_admin_authentication()){ 
@@ -170,11 +167,10 @@ class Employee extends CI_Controller
 			$data['passport']=$result['passport'];
 			$data['drivinglicense']=$result['drivinglicense'];
 			$data['addressesproof']=$result['addressesproof'];
-			$data['uanstatus']=$result['uan_status'];
-			$data['esicstatus']=$result['esic_status'];
-			$data['esicno']=$result['esicno'];
-			$data['uanno']=$result['uanno'];
-			$data['taxstatus']=$result['taxstatus'];			
+			$data['complianceallowid']=$result['complianceallowid'];
+			$data['companytextno']=$result['companytextno'];
+			$data['compliancelist']=$this->company_model->compliancelist_deduction();	
+					
 			$data['redirect_page']="emplist";
 			$data['leavelist']=$this->leave_model->showempleavelist();		
 			$this->load->view('Employee/addemp',$data);	
@@ -188,19 +184,18 @@ class Employee extends CI_Controller
 		}
 		if($this->input->post('emp_image')!='')
 		{
-				if(file_exists(base_path().'upload/emp/'.$this->input->post('emp_image')))
-				{
-					$link=base_path().'upload/emp/'.$this->input->post('emp_image');
-					unlink($link);
-				}
-				if(file_exists(base_path().'upload/emp_orig/'.$this->input->post('emp_image')))
-				{
-					$link=base_path().'upload/emp_orig/'.$this->input->post('emp_image');
-					unlink($link);
-				}
+			if(file_exists(base_path().'upload/emp/'.$this->input->post('emp_image')))
+			{
+				$link=base_path().'upload/emp/'.$this->input->post('emp_image');
+				unlink($link);
+			}
+			if(file_exists(base_path().'upload/emp_orig/'.$this->input->post('emp_image')))
+			{
+				$link=base_path().'upload/emp_orig/'.$this->input->post('emp_image');
+				unlink($link);
+			}
 		}
-		$data= array('Is_deleted' =>'1','status'=>'Inactive','ProfileImage'=>'');
-		
+		$data= array('Is_deleted' =>'1','status'=>'Inactive','ProfileImage'=>'');		
 		$id=$this->input->post('id');
 		$this->db->where("emp_id",$id);
 		$res=$this->db->update('tblemp',$data);
@@ -399,21 +394,20 @@ class Employee extends CI_Controller
 		$data['leavelist']=$this->leave_model->showempleavelist();
 		$result=$this->company_model->getsetsalarymonth();		
 		$data['salarymonth']=$result['salary_month'];
-
 		$this->load->view('Employee/add_setsalary',$data);
 		//echo "<pre>";print_r($data['result']);die;	
 
 	}
 	function viewemp(){
+		if(!check_admin_authentication()){ 
+				redirect(base_url());
+			} 
 		$id=$this->input->post('id');
 		$salarymonth=$this->input->post('salarymonth');
 		$data=array();
-		$data['complianceresult']=$this->company_model->compliancelist();
-		
-		$result=$this->employee_model->getdata($id);
-		//echo "<pre>";print_r($result);die;
-		$empleave=$this->employee_model->getempleavedata($id,$salarymonth);
-		
+		$data['complianceresult']=$this->company_model->compliancelist();		
+		$result=$this->employee_model->getdata($id);		
+		$empleave=$this->employee_model->getempleavedata($id,$salarymonth);		
 		  if($result['salary']!='monthly'){		  
             $empattendance=$this->employee_model->getempattendancedata($id,$salarymonth);
         	if(!empty($empleave)){
@@ -428,11 +422,21 @@ class Employee extends CI_Controller
 		      	 $totalattendance=(30 - $empleave);
 		      }	 else{
 		      	$totalattendance='30';
-		      } 	
+		      } 
 		  	
 		  	$data['workingdays']=$totalattendance;
 		  }
-			$data['compliancepercentage']=
+		   
+			$data['cmpallowid']=explode(',',$result['complianceallowid']);
+			//echo "<pre>";print_r(count($data['cmpallowid']));die;
+			if(count($data['cmpallowid'])>1){
+
+                $cmpallow_id=explode(',',$result['complianceallowid']);
+			}else{				
+                $cmpallow_id=$result['complianceallowid'];
+			}
+
+			//echo "<pre>";print_r($cmpallowid);die;
 			$data['emp_id']=$result['emp_id'];
 			$data['employee_code']=$result['employee_code'];
 			$data['department']=$result['department'];
@@ -460,26 +464,9 @@ class Employee extends CI_Controller
 			$data['aadharcard']=$result['aadharcard'];
 			$data['pancard']=$result['pancard'];
 			$data['bankdetail']=$result['bankdetail'];
-			$data['passport']=$result['passport'];
-			$data['drivinglicense']=$result['drivinglicense'];
-			$data['addressesproof']=$result['addressesproof'];
-			$data['esic_status']=$result['esic_status'];
-			$data['uan_status']=$result['uan_status'];
-			$data['taxstatus']=$result['taxstatus'];
-			
-
-
-			// foreach($data['complianceresult'] as $row){
-				
-			// 	if($row->compliancetypeid=='1'){
-   //                 echo "<pre>";print_r($row->compliancepercentage); 
-   //                  echo $pf=$row->compliancepercentage;
-
-			// 	}else{
-
-			// 	}
-			// }
-          
+		    $data['complianceallowid']=$cmpallow_id;		    
+		    $data['companytextno']=$result['companytextno'];
+		    //echo "<pre>";print_r($data);die;			
 			echo json_encode($data);
 			die;
 

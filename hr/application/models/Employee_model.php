@@ -1,5 +1,4 @@
 <?php
-
 class Employee_model extends CI_Model
  {
 	
@@ -52,9 +51,6 @@ class Employee_model extends CI_Model
 			 }        
 	}
 
-		
-
-
 	function getdata($emp_id){
 	    $this->db->select("*");
 		$this->db->from("tblemp");
@@ -66,9 +62,9 @@ class Employee_model extends CI_Model
 
     function emp_insert()
 	{		
-		//echo "<pre>";print_r($_FILES);die;
+		
 		$emp_image='';
-         //$image_settings=image_setting();
+       
 		if(isset($_FILES['ProfileImage']) &&  $_FILES['ProfileImage']['name']!='')
         {
 			$this->load->library('upload');
@@ -377,7 +373,17 @@ class Employee_model extends CI_Model
         $x=8;
    		$rnd=substr(str_shuffle("23456789abcdefghjkmnpqrstvwxyzABCDEFGHJKMNPQRSTVWXYZ"), 0, $x);
         //echo $rnd ;die;
+ 		
+ 		$complianceid =implode(",", $this->input->post('compliancecheck'));
+		if(!empty($complianceid)){
+           $compliancetxt =implode(",", $this->input->post('compliancetxt'));
+		}else{
+			$compliancetxt ='';
+		}
+		
 
+        //echo $compliancetxt;die;
+ 
 		$DateofBirth = $this->input->post('dob');
 		$boddate = str_replace('/', '-', $DateofBirth );
 		$dob = date("Y-m-d", strtotime($boddate));
@@ -403,12 +409,7 @@ class Employee_model extends CI_Model
 		'religion' =>trim($this->input->post('religion')),
 		'nationality' =>trim($this->input->post('nationality')),
 		'qualification_emp' =>trim($this->input->post('qualificationemp')),
-		'otherqulification' =>trim($this->input->post('otherqulification')),
-		'uan_status' =>trim($this->input->post('uanstatus')),
-		'uanno' =>trim($this->input->post('uanno')),
-		'esic_status' =>trim($this->input->post('esicstatus')),
-		'esicno' =>trim($this->input->post('esicno')),
-		'taxstatus' =>trim($this->input->post('taxstatus')),
+		'otherqulification' =>trim($this->input->post('otherqulification')),		
 		'bloodgroup' =>trim($this->input->post('bloodgroup')),
 		'salary' =>trim($this->input->post('salary')),
 		'salaryamt' =>trim($this->input->post('salary_amount')),
@@ -421,10 +422,10 @@ class Employee_model extends CI_Model
 		'status' =>$this->input->post('status'),
 		'bankdetail' =>$bankdetail_image,
 		//'passport' =>$passport_image,
-		'pancard' =>trim($this->input->post('pancard')),
-		//'drivinglicense' =>$driveinglicence_image,
+		'pancard' =>trim($this->input->post('pancard')),		
 		'aadharcard	' =>trim($this->input->post('aadharcard')),
-		//'addressesproof' =>$addressproof_image,
+		'complianceallowid' =>$complianceid,
+		'companytextno' =>$compliancetxt,
 		'employee_code' =>$this->input->post('employee_code'),	
 		'companyid' =>$this->session->userdata('companyid'),
 		'Password' =>md5($rnd),			
@@ -439,24 +440,20 @@ class Employee_model extends CI_Model
        { 
 
        	  	for($i=0;$i<count($this->input->post('leavename'));$i++){
-         	    $this->input->post('leavename')[$i].'='.$this->input->post('leaveno')[$i];
+         	  //  $this->input->post('leavename')[$i].'='.$this->input->post('leaveno')[$i];
          	    $leavedata=array(
          	     	'companyid'=>$this->session->userdata('companyid'),
          	     	'emp_id'=>$id,
          	     	'leave_id'=>$this->input->post('leavename')[$i],
-         	     	'no_leave'=>$this->input->post('leaveno')[$i],
+         	     	'no_leave'=>$this->input->post('leaveno')[$i]?$this->input->post('leaveno')[$i]:'0',
          	     	'created_date'=>date('Y-m-d H:i:s'),
-         	    );
-         	   // echo "<pre>";print_r($leavedata); 
+         	    );         	  
          	    $res=$this->db->insert('tblempassignleave',$leavedata);
 
 	        }
-	      //  die;
-
+	     
        }
-       return $res;
-
-			
+       return $res;			
 	}
 
 	function gethrdata($hrid){
@@ -783,6 +780,14 @@ class Employee_model extends CI_Model
 		// 		$addressproof_image=$this->input->post('pre_addressproof');
 		// 	}
 		// }
+		$complianceid =implode(",", $this->input->post('compliancecheck'));
+		if(!empty($complianceid)){
+           $compliancetxt =implode(",", $this->input->post('compliancetxt'));
+		}else{
+			$compliancetxt ='';
+		}
+ 		
+
         $x=8;
    		$rnd=substr(str_shuffle("23456789abcdefghjkmnpqrstvwxyzABCDEFGHJKMNPQRSTVWXYZ"), 0, $x);
         //echo $rnd ;die;
@@ -813,11 +818,7 @@ class Employee_model extends CI_Model
 		'nationality' =>trim($this->input->post('nationality')),
 		'qualification_emp' =>trim($this->input->post('qualificationemp')),
 		'otherqulification' =>trim($this->input->post('otherqulification')),
-		'uan_status' =>trim($this->input->post('uanstatus')),
-		'uanno' =>trim($this->input->post('uanno')),
-		'esic_status' =>trim($this->input->post('esicstatus')),
-		'esicno' =>trim($this->input->post('esicno')),
-		'taxstatus' =>trim($this->input->post('taxstatus')),
+		
 		'bloodgroup' =>trim($this->input->post('bloodgroup')),
 		'salary' =>trim($this->input->post('salary')),
 		'salaryamt' =>trim($this->input->post('salary_amount')),
@@ -825,16 +826,16 @@ class Employee_model extends CI_Model
 		'Placeofbirth' => $this->input->post('pob'),
 		'Dateofbirth' =>$dob,
 		'joiningdate' => $jod,	
+		'complianceallowid' =>$complianceid,
+		'companytextno' =>$compliancetxt,
 		'probation_preriod_day' =>$probation_preriod_day,	
 		'physically_challenged' =>$this->input->post('physically_challenged'),
 		'status' =>$this->input->post('status'),
 		'bankdetail' =>$bankdetail_image,
-
 		//'passport' =>$passport_image,
 		'pancard' =>trim($this->input->post('pancard')),	
 		//'drivinglicense' =>$driveinglicence_image,
-		'aadharcard' =>trim($this->input->post('aadharcard')),
-		//'addressesproof' =>$addressproof_image,
+		'aadharcard' =>trim($this->input->post('aadharcard')),	
 		'employee_code' =>$this->input->post('employee_code'),	
 		'companyid' =>$this->session->userdata('companyid'),
 		'upated_date'=>date('Y-m-d')		
@@ -854,7 +855,7 @@ class Employee_model extends CI_Model
         // echo $res;die;
        
     	if($res>0){
-    		//echo "dgfgfdgf";die;
+    		
 		
     	    for($i=0;$i<count($this->input->post('leavename'));$i++){
     	    
@@ -862,7 +863,7 @@ class Employee_model extends CI_Model
          	    $leavedata=array(
          	     	'companyid'=>$this->session->userdata('companyid'),         	     
          	     	'leave_id'=>$this->input->post('leavename')[$i],
-         	     	'no_leave'=>$this->input->post('leaveno')[$i],
+         	     	'no_leave'=>$this->input->post('leaveno')[$i]?$this->input->post('leaveno')[$i]:'0',
          	     	'created_date'=>date('Y-m-d H:i:s'),
          	    ); 
          	    $this->db->where('empassignleave_id',$this->input->post('empassignleave_id')[$i]);

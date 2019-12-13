@@ -174,19 +174,4 @@ class Login extends CI_Controller
 			$this->load->view('common/forgot_password');
 	}
 
-
-
-
-
-
-
-
-	
-
-
-	
-
-
 }
-
-

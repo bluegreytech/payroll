@@ -244,5 +244,19 @@ class Attendance_model extends CI_Model
 		return $res;
 			
 	}
+	function emppersentmonthlist($month){
+	    $this->db->select("*");
+		$this->db->from("tblemp as em");
+		$this->db->join('tblattendance as ae','ae.emp_id=em.emp_id');
+		$this->db->where("em.Is_deleted",'0');
+		$this->db->where('em.status','Active');
+		$this->db->where('ae.attendance_month',$month);
+		$this->db->where("em.companyid",$this->session->userdata('companyid'));
+		$this->db->group_by("em.emp_id");
+		$query=$this->db->get();	
+		//echo $this->db->last_query();die;
+		return $query->result();
+	}
 
+	
 }
