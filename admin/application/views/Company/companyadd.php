@@ -21,7 +21,7 @@
 							<div class="col-sm-5 col-5">
 							<h4 class="page-title">
 							<?php 
-							if($companyid)
+							if($companyid!='')
 							{
 								?>
 								Edit Company

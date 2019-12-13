@@ -122,8 +122,10 @@ class Salarysetting extends CI_Controller
 		} 
 
 			    $result=$this->salary_model->get_salarydata($empsetsalary_id);
+			 
 		        $data['empsetsalary_id']=$result['empsetsalary_id'];
 				$data['emp_id']=$result['emp_id'];
+				$data['email']=$result['email'];
 				$data['employee_code']=$result['employee_code'];
 				$data['department']=$result['department'];
 				$data['desgination']=$result['desgination'];
@@ -144,11 +146,13 @@ class Salarysetting extends CI_Controller
 				$data['otherearningvalue']=$result['otherearningvalue'];  
 				$data['created_date']=$result['createddate']; 
 				$data['result']=$this->company_model->compliancelist();   
-
+               $cmpdetail= getOneCompany($this->session->userdata('companyid')); 
 
 				$file_name=$data['salary_month'].'.pdf';
 				//$result['quotationtData']=$this->Invoice_model->list_companyquotation($quotationid);
-				$this->load->view('salarysetting/salaryslip',$data);
+				//$this->load->view('salarysetting/salaryslip',$data);
+
+				$this->load->view('salarysetting/salarypdf',$data);
 				$html = $this->output->get_output();
 
 				echo "<pre>";print_r($html);die;
@@ -166,29 +170,35 @@ class Salarysetting extends CI_Controller
 				$email_message=$email_temp->message;	
 
 				$base_url=base_url();
+				$image_url=base_url().'default/img/logo2.png';
+				$username=$data['first_name'].$data['last_name'];
+				$companyname= $cmpdetail->companyname;
 				$currentyear=date('Y');
 				$email_message=str_replace('{break}','<br/>',$email_message);
 				$email_message=str_replace('{base_url}',$base_url,$email_message);
 				$email_message=str_replace('{year}',$currentyear,$email_message);
 				$email_message=str_replace('{companyname}',$companyname,$email_message);
-				$email_message=str_replace('{otherinformation}',$otherinformation,$email_message);
+				$email_message=str_replace('{image_url}',$image_url,$email_message);
+				$email_message=str_replace('{username}',$username,$email_message);
+				//$email_message=str_replace('{companyname}',$companyname,$email_message);
+				//$email_message=str_replace('{otherinformation}',$otherinformation,$email_message);
 				$str=$email_message; 
 				
+
 				$email_config = Array(
 					'protocol'  => 'smtp',
-					'smtp_host' => 'relay-hosting.secureserver.net',
+					'smtp_host' => 'ssl://smtp.googlemail.com',
 					'smtp_port' => '465',
-					'smtp_user' => 'binny@bluegreytech.co.in',
-					'smtp_pass' => 'Binny@123',
+					'smtp_user' => 'bluegreyindia@gmail.com',
+					'smtp_pass' => 'Test@123',
 					'mailtype'  => 'html',
 					'starttls'  => true,
 					'newline'   => "\r\n",
 					'charset'=>'utf-8',
-					'header'=> 'MIME-Version: 1.0',
-					'header'=> 'Content-type:text/html;charset=UTF-8',
+					
 					);
-				$this->load->library('email', $email_config);
-
+				//$this->load->library('email', $email_config);
+                   $this->email->initialize($email_config);
 				// $config['protocol']='smtp';
 				// $config['smtp_host']='ssl://smtp.googlemail.com';
 				// $config['smtp_port']='465';
@@ -201,18 +211,21 @@ class Salarysetting extends CI_Controller
 				
 				$body =$str;
 				$this->email->from('binny@bluegreytech.co.in'); 
-				$this->email->to($companyemail);		
-				$this->email->subject('Quotation send to company');
+				//$this->email->to($companyemail);	
+				$this->email->to($data['email']);		
+				$this->email->subject('Payslip Send');
 				$this->email->message($body);
 				$this->email->attach($file_name);
 				if($this->email->send())
 				{
+				
 					$this->session->set_flashdata('success','Email send Successfully!');	
-					redirect('Invoice/quotation_view/'.$quotationid);
+					redirect('Salarysetting/salary_view/'.$empsetsalary_id);
 				}else
 				{
+					
 					$this->session->set_flashdata('error', 'Email funaction was not working!');	
-					redirect('Invoice/quotation_view/'.$quotationid);
+					redirect('Salarysetting/salary_view/'.$empsetsalary_id);
 				}
 
     }

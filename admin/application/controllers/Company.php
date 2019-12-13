@@ -761,9 +761,10 @@ public function compliance_list(){
 		}
 		$AdminIdlogin=$this->session->userdata('AdminId');
 		$complianceid=$this->input->post('complianceid');
+		
 		$data=array(
-			'IsDelete'=>1,
-			'IsActive'=>0
+			'Is_deleted'=>'1',
+			'IsActive'=>Inactive
 				);
 
 		$this->db->where("complianceid",$complianceid);
@@ -825,13 +826,13 @@ public function compliance_list(){
 			);
 			$log = $this->db->insert('tblactivitylog',$log_data);
 			$this->session->set_flashdata('success', 'Company type was delete successfully!');
-			redirect('Company/companytype');
+			redirect('company/companytype');
 			
 		}
 		else
 		{
 			$this->session->set_flashdata('error', 'Company type was not delete!');
-			redirect('Company/companytype');
+			redirect('company/companytype');
 		}
 
 
@@ -893,7 +894,7 @@ public function compliance_list(){
 		$data['compliancetypeid']=$result['compliancetypeid'];
 		$data['compliancename']=$result['compliancename'];
 		$data['compliancepercentage']=$result['compliancepercentage'];
-		$data['isactive']=$result['isactive'];
+		$data['IsActive']=$result['IsActive'];
 		$data['is_editable']=$result['is_editable'];
 		echo json_encode($data);
 
@@ -925,11 +926,11 @@ function statusdata(){
 
 	
 
-		if ($action == "1") {
+		if ($action == "Active") {
 
 
 
-			$data = array("IsActive" => "0");
+			$data = array("IsActive" => "Inactive");
 
 			update_record('tblcompliances', $data, 'complianceid', $id);
 
@@ -941,11 +942,11 @@ function statusdata(){
 
 			die ;
 
-		}else if ($action == "0") {
+		}else if ($action == "Inactive") {
 
 			
 
-				$data = array("IsActive" => "1");
+				$data = array("IsActive" => "Active");
 
 				update_record('tblcompliances', $data, 'complianceid', $id);
 

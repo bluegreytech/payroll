@@ -5,7 +5,16 @@
 
 <!-- Page Wrapper -->
 <div class="page-wrapper">
-
+<?php if(($this->session->flashdata('error'))){ ?>
+				<div class="alert alert-danger" id="errorMessage">
+				<strong><?php echo $this->session->flashdata('error'); ?></strong> 
+				</div>
+				<?php } ?>
+				<?php if(($this->session->flashdata('success'))){ ?>
+				<div class="alert alert-success" id="successMessage">
+				<strong> <?php echo $this->session->flashdata('success'); ?></strong> 
+				</div>
+				<?php } ?>
 	<!-- Page Content -->
     <div class="content container-fluid">
 	
@@ -17,7 +26,7 @@
 			<div class="col-sm-7 col-8 text-right m-b-30">
 				<div class="btn-group btn-group-sm">
 					<!-- <button class="btn btn-white"><i class="fa fa-envelope-o fa-lg"></i> Send Mail</button> -->
-					<!-- <a href="<?php echo base_url().'salarysetting/salaryslip_mail/'. $empsetsalary_id;?>" class="btn btn-white" ><i class="fa fa-envelope-o fa-lg"></i> Send Email</a> -->
+					 <a href="<?php echo base_url().'salarysetting/salaryslip_mail/'. $empsetsalary_id;?>" class="btn btn-white" ><i class="fa fa-envelope-o fa-lg"></i> Send Email</a> 
 					<button class="btn btn-white" onclick="salaryslip()"><i class="fa fa-print fa-lg"></i> Print</button>
 				</div>
 			</div>

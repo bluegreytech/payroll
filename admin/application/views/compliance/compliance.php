@@ -221,9 +221,9 @@
 
 													<div class="action-label">
 
-							<a class="btn btn-white btn-sm btn-rounded" href="javascript:void(0);"  onclick="statusdata('<?php echo $comp->complianceid; ?>','<?php echo $comp->isactive ;?>')">
+							<a class="btn btn-white btn-sm btn-rounded" href="javascript:void(0);"  onclick="statusdata('<?php echo $comp->complianceid; ?>','<?php echo $comp->IsActive ;?>')">
 
-								<?php if($comp->isactive=='1')
+								<?php if($comp->IsActive=='Active')
 
 								{
 
@@ -1298,7 +1298,7 @@
 
 						success: function (response) {             
 
-
+           
 
 					// document.location.href = url+'adminmaster/adminlist/';          
 
@@ -1326,7 +1326,7 @@ function statusdata(id,status){
 
 
 
-    if(status=="0"){
+    if(status=="Active"){
 
     	 $('#statustxt').text('Active');
 
@@ -1358,7 +1358,7 @@ function statusdata(id,status){
 
                 //console.log(response);           
 
-                document.location.href = url+'Company/compliance';                  
+                document.location.href = url+'Company/compliance_list';                  
 
 
 

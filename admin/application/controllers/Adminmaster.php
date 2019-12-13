@@ -69,18 +69,18 @@ class Adminmaster extends CI_Controller
 	}
 
 
-		if($_POST!='')
-		{
+		// if($_POST!='')
+		// {
 
-			$option=$this->input->post('option');
+		// 	$option=$this->input->post('option');
 
-			$keyword=$this->input->post('keyword2');	
+		// 	$keyword=$this->input->post('keyword2');	
 
-			$data['adminmasterData'] = $this->Adminmaster_model->search($option,$keyword);
+		// 	$data['adminmasterData'] = $this->Adminmaster_model->search($option,$keyword);
 
-		}	
+		// }	
 
-		else
+		// else
 
 
 	function searchadmin(){
