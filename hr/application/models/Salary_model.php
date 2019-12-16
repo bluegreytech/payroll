@@ -83,5 +83,33 @@ class Salary_model extends CI_Model
     //echo $this->db->last_query();
         return $res;
     }
+    function emptotearn(){
+         
+        $this->db->select_sum('gross_earning');
+        $this->db->from('tblempsetsalary');
+         $this->db->where('Is_deleted','0');
+        $this->db->where('company_id',$this->session->userdata('companyid'));
+         $query=$this->db->get();
+        $res=$query->result();
+         return $res;
+    }
+    function emptotdeduction(){
+         $this->db->select_sum('totaldeduction');
+        $this->db->from('tblempsetsalary');
+         $this->db->where('Is_deleted','0');
+        $this->db->where('company_id',$this->session->userdata('companyid'));
+         $query=$this->db->get();
+        $res=$query->result();
+         return $res;
+    }
+    function emptotpay(){
+         $this->db->select_sum('netpay');
+        $this->db->from('tblempsetsalary');
+         $this->db->where('Is_deleted','0');
+        $this->db->where('company_id',$this->session->userdata('companyid'));
+         $query=$this->db->get();
+        $res=$query->result();
+         return $res;
+    }
 	
 }

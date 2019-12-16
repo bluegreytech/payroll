@@ -28,5 +28,7 @@
         <script src="<?php echo base_url(); ?>default/js/buttons.colVis.min.js"></script>
         <script src="<?php echo base_url(); ?>default/js/buttons.print.min.js"></script>		
 		<script src="<?php echo base_url(); ?>default/js/bootstrap-select.min.js"></script>
+
+		
 	</body>
 </html>
