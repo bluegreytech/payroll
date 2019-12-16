@@ -30,14 +30,14 @@
 				
 			</div>
 			<div class="col-sm-8 col-7 text-right m-b-30">
-<form class="form-inline"method="post" id="import_form" enctype="multipart/form-data">
-  <div class="form-group">
-    <label for="file">Select Excel File:</label>
-   <input type="file" name="file" id="file" required accept=".xls, .xlsx" /></p>
-  </div>
-  
-  <input type="submit" name="import" value="Import" class="btn add-btn" />
-</form>
+				<form class="form-inline"method="post" id="import_form" enctype="multipart/form-data">
+				  <div class="form-group">
+				    <label for="file">Select Excel File:</label>
+				   <input type="file" name="file" id="file" required accept=".xls, .xlsx" /></p>
+				  </div>
+				  
+				  <input type="submit" name="import" value="Import" class="btn add-btn" />
+				</form>
 
 				<a href="<?php echo base_url()?>employee/addemp" class="btn add-btn" ><i class="fa fa-plus"></i> Add Employee
 				</a>
@@ -200,6 +200,29 @@
 						<div class="row">
 							<div class="col-6">
 								<a href="javascript:void(0);" id="ok_btn" class="btn btn-primary continue-btn">Ok</a>
+							</div>
+							<div class="col-6">
+								<a href="javascript:void(0);" data-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal custom-modal fade" id="emp_import" role="dialog">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="form-header">
+						<h3>Delete Employee</h3>
+						<p>Are you sure want to delete this employee?</p>
+					</div>
+					<div class="modal-btn delete-action">
+						<div class="row">
+							<div class="col-6">
+								<a href="javascript:void(0);"  id="yes_btn" class="btn btn-primary continue-btn">Ok</a>
 							</div>
 							<div class="col-6">
 								<a href="javascript:void(0);" data-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
@@ -546,33 +569,29 @@ function readURL(input) {
 <script>
 $(document).ready(function(){
 
-// load_data();
-
-
  $('#import_form').on('submit', function(event){
   event.preventDefault();
   $.ajax({
-   url:"<?php echo base_url(); ?>Employee/import_emp",
-   method:"POST",
-   data:new FormData(this),
-   contentType:false,
-   cache:false,
-   processData:false,
-   success:function(data){
-   	exit;
-if(data==1){
-	alert('Data imported successfully');
+	url:"<?php echo base_url(); ?>employee/import_emp",
+	method:"POST",
+	data:new FormData(this),
+	contentType:false,
+	cache:false,
+	processData:false,
+	success:function(data){  
+		console.log(data);
+		
+		if(data==1){
+		alert('Data imported successfully');
 		$('#file').val('');
-		window.location.href="<?php echo base_url(); ?>Employee/emplist";
+			window.location.href="<?php echo base_url(); ?>employee/emplist";
 
-}else{
-alert(data);
-   	$('#file').val('');
-window.location.href="<?php echo base_url(); ?>Employee/emplist";
-    }
-    
-   
-   }
+		}else{
+		alert(data);
+		$('#file').val('');
+			window.location.href="<?php echo base_url(); ?>employee/emplist";
+		}
+	}
   })
  });
 

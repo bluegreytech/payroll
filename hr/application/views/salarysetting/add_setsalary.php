@@ -242,8 +242,8 @@ $(document).ready(function(){
 		
 	var end = this.value;
 	var id = '<?php echo $empid; ?>';
-	otherdeductionname= '<?php echo $otherdeductionname; ?>';
-	otherdeductionvalue= '<?php echo $otherdeductionvalue; ?>';
+	// otherdeductionname= '<?php //echo $otherdeductionname; ?>';
+	// otherdeductionvalue= '<?php //echo $otherdeductionvalue; ?>';
 	var salary_month = $('#salary_month').val();	
 	url="<?php echo base_url();?>";
 	if(id.length!=''){
