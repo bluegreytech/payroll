@@ -254,7 +254,7 @@ class Employee extends CI_Controller
 		//echo "<pre>";print_r($data['result']);die;
 		$this->load->view('Employee/emplist',$data);
 	}
-	function email_check() {
+	function email_check(){
 		$query = $this->db->query("select email from " . $this->db->dbprefix('tblemp') . " where email= '".$this->input->post('email')."'");
 		//echo $this->db->last_query();die;
 		if ($query->num_rows() > 0) {
@@ -482,140 +482,106 @@ class Employee extends CI_Controller
 	}
 	/*--- start himani ---*/
 
-	function import_emp(){
-		
-
-              
-  if(isset($_FILES["file"]["name"]))
-  {
-  	
-   $path = $_FILES["file"]["tmp_name"];
-   $object = PHPExcel_IOFactory::load($path);
-   $i=0;
-   foreach($object->getWorksheetIterator() as $worksheet)
-   {
-   
-   
-//$employee_code=$this->employee_model->empcodelist();	
-//echo $employee_code;
-    $highestRow = $worksheet->getHighestRow();
-
-    $highestColumn = $worksheet->getHighestColumn();
-    for($row=2; $row<=$highestRow; $row++)
-    {
-
-//$code=$ecode[1];
-//print_r($code);
-
-//echo $code;
-
-     //echo $row;
-     $department = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
-     $desgination = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
-     $first_name = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
-     $last_name = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
-     $gender = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
-     $Father_name = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
-      $Dateofbirth = $worksheet->getCellByColumnAndRow(6, $row)->getValue();
-      $Placeofbirth= $worksheet->getCellByColumnAndRow(7, $row)->getValue();
-      $marital_status= $worksheet->getCellByColumnAndRow(8, $row)->getValue();
-      $Address= $worksheet->getCellByColumnAndRow(9, $row)->getValue();
-      $phone= $worksheet->getCellByColumnAndRow(10, $row)->getValue();
-      $email= $worksheet->getCellByColumnAndRow(11, $row)->getValue();
-       $religion= $worksheet->getCellByColumnAndRow(12, $row)->getValue();
-       $nationality= $worksheet->getCellByColumnAndRow(13, $row)->getValue();
-       $bloodgroup= $worksheet->getCellByColumnAndRow(14, $row)->getValue();
-       
-         $probation_preriod_day= $worksheet->getCellByColumnAndRow(15, $row)->getValue();
-         $physically_challenged= $worksheet->getCellByColumnAndRow(16, $row)->getValue();
-          $joiningdate= $worksheet->getCellByColumnAndRow(17, $row)->getValue();
-          $salaryamt= $worksheet->getCellByColumnAndRow(18, $row)->getValue();
-          $salary= $worksheet->getCellByColumnAndRow(19, $row)->getValue();
-          $aadharcard= $worksheet->getCellByColumnAndRow(20, $row)->getValue();
-          $pancard= $worksheet->getCellByColumnAndRow(21, $row)->getValue();
-         // $data['employee_code']=$this->employee_model->empcodelist();
-         //echo $employee_code[$row];
-
-          $date = str_replace('/', '-', $Dateofbirth);
- $employee_code=$this->employee_model->empcodelist();
- 
-          $join= str_replace('/', '-', $joiningdate);
-     $data[] = array(
-      'companyid' =>$this->session->userdata('companyid'),
-      'employee_code'=> $employee_code,
-       'status' => 'Active',
-      'department'  => $department,
-      'desgination'   => $desgination,
-      'first_name'    => $first_name,
-      'last_name'  => $last_name,
-      'gender'   => $gender,
-      'Father_name'   => $Father_name,
-      'Dateofbirth'   =>  date('Y-m-d', strtotime($date)),
-      'Placeofbirth'   => $Placeofbirth,
-      'marital_status'   => $marital_status,
-       'Address'   => $Address,
-       'phone'   => $phone,
-        'email'   => $email,
-        'religion'   => $religion,
-        'nationality'   => $nationality,
+function import_emp(){
+  	if(isset($_FILES["file"]["name"]))
+  	{
+		$path = $_FILES["file"]["tmp_name"];
+		$object = PHPExcel_IOFactory::load($path);		
+		$data=array();	
+	   	
+       $data['employee_code']=$this->employee_model->empcodelist();	
       
-        'bloodgroup' =>$bloodgroup,
-        'probation_preriod_day' =>$probation_preriod_day,
-        'physically_challenged' =>$physically_challenged,
-         'joiningdate' =>date('Y-m-d', strtotime($join)),
-         'salaryamt' =>$salaryamt,
-         'salary' =>$salary,
-          'aadharcard' =>$aadharcard,
-          'pancard' =>$pancard,
-         'created_date' =>date('Y-m-d')
-     );
-  
-   //echo   $counts = array_count_values($data);
-    }
+     
+	   foreach($object->getWorksheetIterator() as $worksheet)
+	   {
+            $j=0;
+		    $highestRow = $worksheet->getHighestRow();
+		    $highestColumn = $worksheet->getHighestColumn();	
 
-$i++;
-       
-   }
-	print_r($data);
-   	exit;
-   foreach($data as $val){
-   	$email_id=$val['email'];
+		    for($row=2; $row<=$highestRow; $row++)
+		    { 	
+           		 // echo "fgfg==". $j;
+		    		$split = explode("_",$data['employee_code']);	
+				    $val=$split[1]+$j;
 
+	    			$empcode=$split[0].'_'. $val;		   
+					
+		    	
+              
+				$department = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
+				$desgination = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+				$first_name = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+				$last_name = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+				$gender = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+				$Father_name = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+				$Dateofbirth = $worksheet->getCellByColumnAndRow(6, $row)->getValue();
+				$Placeofbirth= $worksheet->getCellByColumnAndRow(7, $row)->getValue();
+				$marital_status= $worksheet->getCellByColumnAndRow(8, $row)->getValue();
+				$Address= $worksheet->getCellByColumnAndRow(9, $row)->getValue();
+				$phone= $worksheet->getCellByColumnAndRow(10, $row)->getValue();
+				$email= $worksheet->getCellByColumnAndRow(11, $row)->getValue();
+				$religion= $worksheet->getCellByColumnAndRow(12, $row)->getValue();
+				$nationality= $worksheet->getCellByColumnAndRow(13, $row)->getValue();
+				$bloodgroup= $worksheet->getCellByColumnAndRow(14, $row)->getValue();       
+				$probation_preriod_day= $worksheet->getCellByColumnAndRow(15, $row)->getValue();
+				$physically_challenged= $worksheet->getCellByColumnAndRow(16, $row)->getValue();
+				$joiningdate= $worksheet->getCellByColumnAndRow(17, $row)->getValue();
+				$salaryamt= $worksheet->getCellByColumnAndRow(18, $row)->getValue();
+				$salary= $worksheet->getCellByColumnAndRow(19, $row)->getValue();
+				$aadharcard= $worksheet->getCellByColumnAndRow(20, $row)->getValue();
+				$pancard= $worksheet->getCellByColumnAndRow(21, $row)->getValue();       
+				$date = str_replace('/', '-', $Dateofbirth);
+				$employee_code=$this->employee_model->empcodelist(); 
+			    $join= str_replace('/', '-', $joiningdate);
+			    $data = array(
+					'companyid' =>$this->session->userdata('companyid'),
+					'employee_code'=>$empcode,
+					'status' => 'Active',
+					'department'  => $department,
+					'desgination'   => $desgination,
+					'first_name'    => $first_name,
+					'last_name'  => $last_name,
+					'gender'   => $gender,
+					'Father_name'   => $Father_name,
+					'Dateofbirth'   =>  date('Y-m-d', strtotime($date)),
+					'Placeofbirth'   => $Placeofbirth,
+					'marital_status'   => $marital_status,
+					'Address'   => $Address,
+					'phone'   => $phone,
+					'email'   => $email,
+					'religion'   => $religion,
+					'nationality'   => $nationality,
+					'bloodgroup' =>$bloodgroup,
+					'probation_preriod_day' =>$probation_preriod_day,
+					'physically_challenged' =>$physically_challenged,
+					'joiningdate' =>date('Y-m-d', strtotime($join)),
+					'salaryamt' =>$salaryamt,
+					'salary' =>$salary,
+					'aadharcard' =>$aadharcard,
+					'pancard' =>$pancard,
+					'created_date' =>date('Y-m-d')
+			     );
+			  		
+					$email_id=$data['email'];
+					$select = "SELECT email FROM tblemp WHERE email = '$email_id'" ;
+					$query = $this->db->query($select);
+					$count = $query->num_rows();
+					if($count!=0){
+					 $msg= 'The email address '. $email_id.' is already registered'; 
+                      echo  json_encode($msg);
+					}else if($count==0){
+						
+						//echo "<pre>";print_r($data);				 
+					   $res=$this->employee_model->insert_excel($data);
+                    	
+					} 
+  			$j++;	
+		    }
+           return $res;
 
-   	 $select = "SELECT email FROM  tblemp WHERE email = '$email_id'" ;
-	    $query = $this->db->query($select);
-             $count = $query->num_rows();
-if ($count!=0){
-   	echo 'The email address '. $email.' is already registered';
-   
-   }else if($count==0){
-
-
-    	 
-//print_r($employee_code);
-
-// $split = explode("_",$employee_code);		
-// 		$val=$split[1]+1;	
-	 
-//  			if($val<=9){      			
-//                  $cde=$split[0].'_0'.$val; 
-//       		}else{
-// 			    $cde= $split[0].'_'.$val;
-//       		}
-			//echo  $data;
-	
-   	echo '1';
-   
-   	 $this->employee_model->insert_excel($data);
-   exit;
-   }
-
+		}
+   	}
 }
-   
-  
-
-  } 
- }
 
 
 	

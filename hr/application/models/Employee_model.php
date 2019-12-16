@@ -951,7 +951,8 @@ class Employee_model extends CI_Model
 
    }
    function insert_excel($data){
-   	$this->db->insert_batch('tblemp', $data);
+   	$result=$this->db->insert('tblemp', $data);
+   	return  $result;
    }
    
 }
