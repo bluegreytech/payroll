@@ -263,6 +263,7 @@ class Salarysetting extends CI_Controller
 
 		$this->load->view('salarysetting/add_setsalary',$data);	
     }
+
     
     function empsalarmonth(){
     	
@@ -271,6 +272,22 @@ class Salarysetting extends CI_Controller
         echo json_encode($emplist);
         die;
     }
+
+   function reportsalary(){
+   		if(!check_admin_authentication()){ 
+			redirect(base_url());
+		} 
+    	
+		$data=array();
+
+		$data['result']=$this->salary_model->empsetsalary_list();
+	$data['tot_earn']=$this->salary_model->emptotearn();
+	$data['tot_deduction']=$this->salary_model->emptotdeduction();
+	$data['tot_netpay']=$this->salary_model->emptotpay();
+		//print_r($data['tot_earn']) ; die;
+		$this->load->view('salarysetting/report_salary',$data);
+   }
+
 
      
 

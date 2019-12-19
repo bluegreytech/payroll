@@ -67,6 +67,11 @@
 								<a href="<?php echo base_url();?>company/setsalarymonth"><i class="la la-cog"></i> <span>Set Salary Month</span> </a>
 								
 							</li>
+
+							<li class="">
+								<a href="<?php echo base_url();?>salarysetting/reportsalary"><i class="la la-cog"></i> <span>Reports</span> </a>
+								
+							</li>
 						</ul>
 					</div>
                 </div>

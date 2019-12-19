@@ -25,37 +25,37 @@
 					<div class="row">
 						<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
 							<div class="dash-widget clearfix card-box">
-								<span class="dash-widget-icon"><i class="fa fa-cubes"></i></span>
-								<div class="dash-widget-info">
-									<h3><?php //echo $companyData;?> 0</h3>
-									<span>Total Companies</span>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-							<div class="dash-widget clearfix card-box">
-								<span class="dash-widget-icon"><i class="fa fa-usd"></i></span>
-								<div class="dash-widget-info">
-									<h3><?php //echo $hrData;?> 0</h3>
-									<span> Total HR</span>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-							<div class="dash-widget clearfix card-box">
-								<span class="dash-widget-icon"><i class="fa fa-diamond"></i></span>
-								<div class="dash-widget-info">
-									<h3>37</h3>
-									<span>Tasks</span>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-							<div class="dash-widget clearfix card-box">
 								<span class="dash-widget-icon"><i class="fa fa-user"></i></span>
 								<div class="dash-widget-info">
-									<h3>218</h3>
-									<span>Employees</span>
+									<h3><?php  echo count($empdata);?></h3>
+									<a href="<?php echo base_url()?>employee/emplist"><span>Total Employees</span></a>
+								</div>
+							</div>
+						</div>
+					<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+								<div class="dash-widget clearfix card-box">
+								<span class="dash-widget-icon"><i class="fa fa-user"></i></span>
+								<div class="dash-widget-info">
+									<h3><?php echo count($hrData);?></h3>
+									<a href="<?php echo base_url()?>hr/hrlist"><span> Total HR</span></a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+							<div class="dash-widget clearfix card-box">
+								<span class="dash-widget-icon"><i class="fa fa-calendar-check-o"></i></span>
+								<div class="dash-widget-info">
+									<h3><?php echo count($leave);?></h3>
+									<a href="<?php echo base_url()?>leave/leavelist"><span> Total Leave Types</span></a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+							<div class="dash-widget clearfix card-box">
+								<span class="dash-widget-icon"><i class="fa fa-calendar-check-o"></i></span>
+								<div class="dash-widget-info">
+									<h3><?php echo count($holiday);?></h3>
+									<a href="<?php echo base_url()?>holiday/holidaylist"><span>Holidays</span></a>
 								</div>
 							</div>
 						</div>
@@ -617,3 +617,27 @@ $(function() {
   });
 	        
 </script>
+<script type="text/javascript">
+	
+	 Morris.Bar({
+	 	element: 'bar-charts',
+	 	data: [
+	 		{ y: '2006', a: 100, b: 90 },
+			{ y: '2007', a: 75,  b: 65 },
+	 		{ y: '2008', a: 50,  b: 40 },
+	 		{ y: '2009', a: 75,  b: 65 },
+	 		{ y: '2010', a: 50,  b: 40 },
+	 		{ y: '2011', a: 75,  b: 65 },
+	 		{ y: '2012', a: 100, b: 90 }
+	 	],
+	 	xkey: 'y',
+	 	ykeys: ['a', 'b'],
+	 	labels: ['Total Income', 'Total Outcome'],
+	 	lineColors: ['#3ae1f2','#0093a2'],
+	 	lineWidth: '3px',
+		barColors: ['#3ae1f2','#0093a2'],
+	 	resize: true,
+	 	redraw: true
+	 });
+</script>
+		
