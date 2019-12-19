@@ -305,12 +305,7 @@ $(function() {
 				}).val( 
 
 				'<?php echo ($selectdatedata->selecteddate!='0000-00-00')&&(empty($selectdatedata->selecteddate))  ? date('Y-m', strtotime($selectdatedata->selecteddate)) : ''; ?>');
-// function selectdate(select_date){ 
-//   // alert(select_date);
-//          console.log(select_date);
-//          <?php // insert_record('tblselectdate',array('companyid'=>$this->session->userdata('companyid'),)); ?>
- 
-//   }
+
   $("#alldate").on("dp.change", function() {
         selecteddate=$("#alldate").val();
        // alert($("#alldate").val());
