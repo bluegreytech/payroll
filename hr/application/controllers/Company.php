@@ -153,8 +153,8 @@ class Company extends CI_Controller
 		//echo "<pre>";print_r($result);die;
 		$this->load->view('salarysetting/addsalarysetting',$data);
 
-
     }
+
 	
 	
 }

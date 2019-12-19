@@ -27,18 +27,8 @@
 						<div class="col-md-12">
 							<form method="POST" action="<?php echo base_url();?>salarysetting/add_setsalary" id="frm_empsalary">
 								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group" style="margin-top: 30px;">
-											<input type="hidden" name="empleave_id" value="<?php //echo $empleave_id;?>">
-												<label>Salary Month <span class="text-danger">*</span>
-												</label>
-												<span style="font-size:20px;">	
-												<?php 
-												 echo $salary_month = date("F-Y", strtotime($salarymonth));
-												?>	
-												</span>									
-											   <input type="hidden" class="form-control" name="salary_month" id="salary_month" value="<?php echo $salarymonth;?>">
-										</div>
+									<div class="col-md-6">					
+											   <input type="hidden" class="form-control" name="salary_month" id="salary_month" value="<?php echo $selectdatedata->selecteddate;?>">									
 										<div class="form-group">
 												<label>Employee Code<span class="text-danger">*</span></label>
 												<input class=" form-control" type="hidden" name="emp_id" id="emp_id" Placeholder="Employee Code" value="">
@@ -51,11 +41,8 @@
 
 																			
 											<select  class=" form-control selectpicker" data-live-search="true" data-actions-box="true"  name="employename" id="employename">
-												 <option selected="" value="">Please select</option> 
-												<?php if(!empty($emplist)){
-												foreach($emplist as $row) { ?>
-												<option value="<?php echo $row->emp_id; ?>" <?php if($row->emp_id==$emp_id){echo "selected";} ?> ><?php echo ucfirst($row->first_name." ".$row->last_name);?></option>
-												<?php } } ?>
+												 <option selected="" value="" disabled="" >Please Select</option> 
+											
 											</select>
 										<?php }else{?>
 											<input type="text" name="" id="empname" readonly="" value="" class="form-control">
@@ -237,6 +224,7 @@
  <?php  $this->load->view('common/footer'); ?>
 		
 <script>
+	
 $(document).ready(function(){
 	//$("#employename").change(function () {
 		
@@ -334,9 +322,6 @@ $(document).ready(function(){
         
          }
       });
-		
-
-
 	}
 		
 	//});
@@ -481,7 +466,6 @@ function convertNumberToWords(amount) {
     return words_string;
 }  
 
-	
 $("#employename").change(function () {
 	var end = this.value;
 	var id = $('#employename').val();
@@ -576,6 +560,7 @@ $("#employename").change(function () {
          }
       });	
 });
+
 $(document).ready(function() {
 	var max_fields      = 2; //maximum input boxes allowed
 	var wrapper   		= $("#adddeduction"); //Fields wrapper
@@ -596,37 +581,86 @@ $(document).ready(function() {
 	});
 });
 	
-	function deductioncalculate(){
-        
-		var othertotaldeduction=$('#othertotaldeduction').val();
-		var otherdeductionvalue=$('input[name="otherdeductionvalue[]"]').val();
-		deductionvaluecount=$('input[name="otherdeductionvalue[]"]').length;
-		
-		var totaldeduction = 0;
-		var subtotal=0 ;
-    	for(var i = 0; i < deductionvaluecount; i++) {
-	     toralcharcter=$('input[name="otherdeductionvalue[]"]').val().length;
-	   
-	     	if(toralcharcter!='0'){
-		     	totaldeduction+=parseFloat(otherdeductionvalue); 		
-		     	subtotal=(parseFloat(othertotaldeduction)+totaldeduction);
-		     	$('#totaldeduction').val(subtotal); 
+function deductioncalculate(){
+    
+	var othertotaldeduction=$('#othertotaldeduction').val();
+	var otherdeductionvalue=$('input[name="otherdeductionvalue[]"]').val();
+	deductionvaluecount=$('input[name="otherdeductionvalue[]"]').length;
+	
+	var totaldeduction = 0;
+	var subtotal=0 ;
+	for(var i = 0; i < deductionvaluecount; i++) {
+     toralcharcter=$('input[name="otherdeductionvalue[]"]').val().length;
+   
+     	if(toralcharcter!='0'){
+	     	totaldeduction+=parseFloat(otherdeductionvalue); 		
+	     	subtotal=(parseFloat(othertotaldeduction)+totaldeduction);
+	     	$('#totaldeduction').val(subtotal); 
 
-				grossearning=$('#gross_earning').val();	 	
-			 	totalnetpay=(parseFloat(grossearning)-parseFloat(subtotal));
-		        $('#netpay').val(totalnetpay);
-		        $('#payword').val(convertNumberToWords(totalnetpay));
-	     	}else{
-		       	 $('#totaldeduction').val(othertotaldeduction); 
-		         grossearning=$('#gross_earning').val();	 	
-			 	 totalnetpay=(parseFloat(grossearning)-parseFloat(othertotaldeduction));
-		        $('#netpay').val(totalnetpay);
-		        $('#payword').val(convertNumberToWords(totalnetpay));
-		        return false;
-	     	}     	
-    	}
-     	
+			grossearning=$('#gross_earning').val();	 	
+		 	totalnetpay=(parseFloat(grossearning)-parseFloat(subtotal));
+	        $('#netpay').val(totalnetpay);
+	        $('#payword').val(convertNumberToWords(totalnetpay));
+     	}else{
+	       	 $('#totaldeduction').val(othertotaldeduction); 
+	         grossearning=$('#gross_earning').val();	 	
+		 	 totalnetpay=(parseFloat(grossearning)-parseFloat(othertotaldeduction));
+	        $('#netpay').val(totalnetpay);
+	        $('#payword').val(convertNumberToWords(totalnetpay));
+	        return false;
+     	}     	
 	}
+ 	
+}
 
+$("#alldate").on("dp.change", function() {
+	selecteddate=$("#alldate").val();
+	$('#salary_month').val(selecteddate);
+   	url="<?php echo base_url(); ?>";
+   
+	$.ajax({
+		url: url+'salarysetting/empsalarmonth',
+		type:'post',
+		data:{selecteddate:selecteddate},
+		success:function(response){
+		 $('#employename').empty();	
+		 //$('#employename').selectpicker();
+		 
+		var response = JSON.parse(response);
+		console.log(response);
+			$('#employename').append($('<option value="" disabled="" selected="">Please Select</option>')).selectpicker('refresh');
+		$.each(response, function (index, el) {
+			console.log(el.emp_id);
+			
+        	$('#employename').append(
+        	 	$('<option></option>').val(el.emp_id).html(el.first_name+' '+el.last_name)).selectpicker('refresh');
+        	 //$('#employename').selectpicker('val', '249');
+        	
+    	});
+    	
+    	 $('#employename').selectpicker('render');
+		}
+	});		
+});
+
+	selecteddate=$("#alldate").val();
+	$('#salary_month').val(selecteddate);
+	url="<?php echo base_url(); ?>";
+
+	$.ajax({
+		url: url+'salarysetting/empsalarmonth',
+		type:'post',
+		data:{selecteddate:selecteddate},
+		success:function(response){
+			$('#employename').empty();			
+			var response = JSON.parse(response);
+			$('#employename').append($('<option value="" disabled="" selected="">Please Select</option>')).selectpicker('refresh');
+		$.each(response, function (index, el) {			
+        	$('#employename').append(
+        	 	$('<option></option>').val(el.emp_id).html(el.first_name+' '+el.last_name)).selectpicker('refresh');        	
+    	});    	
+    	 $('#employename').selectpicker('render');
+		}
+	});		
 </script>
     

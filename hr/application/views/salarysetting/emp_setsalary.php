@@ -267,4 +267,34 @@
 	  $("div#example_wrapper").find($(".dt-buttons")).css(styles);
 
 } );
+	$("#alldate").on("dp.change", function() {
+	selecteddate=$("#alldate").val();
+	$('#salary_month').val(selecteddate);
+	url="<?php echo base_url(); ?>";
+
+	$.ajax({
+		url: url+'salarysetting/viewsetsalary',
+		type:'post',
+		data:{selecteddate:selecteddate},
+		success:function(response){
+		var response = JSON.parse(response);
+		console.log(response);
+			 var trHTML = '';
+        $.each(response, function (key, value) {
+        	console.log(capitalize(value.first_name+''+value.last_name));
+            trHTML += '<tr><td>' + capitalize(value.first_name+''+value.last_name) + '</td><td>' + value.employee_code + '</td><td>' + value.employee_code + '</td></tr>';
+        });
+        $('#example').append(trHTML);
+    	}
+	});
+});
+function capitalize(str) {
+  strVal = '';
+  str = str.split(' ');
+  for (var chr = 0; chr < str.length; chr++) {
+    strVal += str[chr].substring(0, 1).toUpperCase() + str[chr].substring(1, str[chr].length) + ' '
+  }
+  return strVal
+}
+
 </script>

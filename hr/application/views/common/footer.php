@@ -1,3 +1,5 @@
+<?php   $selectdatedata= getSelectdate($this->session->userdata('companyid')); ?>
+<?php ?>
 <!-- jQuery -->
       <!--   <script data-cfasync="false" src="<?php //echo base_url(); ?>default/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script> -->
         <script src="<?php echo base_url(); ?>default/js/jquery-3.2.1.min.js"></script>
@@ -29,6 +31,39 @@
         <script src="<?php echo base_url(); ?>default/js/buttons.print.min.js"></script>		
 		<script src="<?php echo base_url(); ?>default/js/bootstrap-select.min.js"></script>
 
+		<script type="text/javascript">
 		
+				$('#alldate').datetimepicker({
+				   	format: 'YYYY-MM',
+					maxDate: new Date(),
+					ignoreReadonly: true,
+					icons: {
+					    time:'fa fa-clock-o',
+					    date:'fa fa-calendar',
+					    up:'fa fa-chevron-up',
+					    down:'fa fa-chevron-down',
+					    previous:'fa fa-chevron-left',
+					    next:'fa fa-chevron-right',
+					    today:'fa fa-calendar-check-o',
+					    clear:'fa fa-delete',
+					    close:'fa fa-times'
+ 	 					},									
+				}).val('<?php echo ($selectdatedata->selecteddate!='0000-00')&&($selectdatedata->selecteddate!='')  ? date('Y-m', strtotime($selectdatedata->selecteddate)) : ''; ?>');
+			$("#alldate").on("dp.change", function() {
+				selecteddate=$("#alldate").val();			
+				url="<?php echo base_url();?>";
+				$.ajax({
+				url: url+'dashboard/selecteddate',
+				type: 'post',
+				data:{selecteddate:selecteddate},
+				success:function(response){
+				//var response = JSON.parse(response);
+				console.log(response);
+				}
+				});
+			});
+
+		</script>
+
 	</body>
 </html>

@@ -448,7 +448,7 @@ function secondsTohhmmss(secs) {
 $("#employename").change(function () {
 	var end = this.value;
 	var id = $('#employename').val();
-	
+
 	url="<?php echo base_url();?>";
 	
 	$.ajax({

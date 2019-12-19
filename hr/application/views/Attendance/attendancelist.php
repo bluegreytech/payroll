@@ -22,7 +22,7 @@
 	<?php } ?>
 <div class="row">
 	<div class="col-sm-8 col-5">
-	<h4 class="page-title">List of Attendance : <?php if($attmonth==''){echo $cmonth = date('F',strtotime('last month')); }else{echo $cmonth=date('F',strtotime($attmonth));} ?></h4>
+	<h4 class="page-title" id="crtattndmonth">List of Attendance : <?php if($attmonth==''){echo $cmonth = date('F',strtotime('last month')); }else{echo $cmonth=date('F',strtotime($attmonth));} ?></h4>
 	</div>
 	<div class="col-sm-4 col-7 text-right m-b-30">
 	<a href="<?php echo base_url()?>attendance/addattendance" class="btn add-btn" ><i class="fa fa-plus"></i> Add Attendance
@@ -166,9 +166,7 @@
 								?>
 							
 						</a></td>
-						<?php } ?>	
-						
-					
+						<?php } ?>
 						</tr>
 					<?php }  } ?>
 				</tbody>
@@ -328,7 +326,6 @@ $("#attendancemonth").datetimepicker({
        		  viewMode: 'months',       		 
               format: 'YYYY-MM',
           	  maxDate: today,
-
 				icons: {
 				time:'fa fa-clock-o',
 				date:'fa fa-calendar',
@@ -401,7 +398,7 @@ $("#attmonth").datetimepicker({
 				clear:'fa fa-delete',
 				close:'fa fa-times'
 				},
-    	}).val('<?php echo ($attmonth!='0000-00')&&($attmonth!='')  ? date('Y-m', strtotime($attmonth)) : date('Y-m'); ?>');
+    	}).val('<?php echo ($attmonth!='0000-00')&&($attmonth!='')  ? date('Y-m', strtotime($attmonth)) :$selectdatedata->selecteddate; ?>');
 
 $(document).ready(function() {
 	 $('#example').DataTable( {
@@ -497,5 +494,31 @@ $(document).ready(function() {
 	  $("div#example_wrapper").find($(".dt-buttons")).css(styles);
 
 } );
+
+$("#alldate").on("dp.change", function() {
+	selecteddate=$("#alldate").val();
+	$('#attmonth').val(selecteddate);
+   	url="<?php echo base_url(); ?>";
+   
+  var month = new Array();
+  month[0] = "January";
+  month[1] = "February";
+  month[2] = "March";
+  month[3] = "April";
+  month[4] = "May";
+  month[5] = "June";
+  month[6] = "July";
+  month[7] = "August";
+  month[8] = "September";
+  month[9] = "October";
+  month[10] = "November";
+  month[11] = "December";
+  var pieces = selecteddate.split("-");
+  var d = new Date(pieces[1]); 
+  var n = month[d.getMonth()];
+  
+   $('#crtattndmonth').text("List of Attendance :"+ n);
+	
+});
 
 </script>
