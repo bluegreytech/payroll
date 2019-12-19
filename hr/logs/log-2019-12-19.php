@@ -19,3 +19,8 @@ ERROR - 2019-12-19 08:52:32 --> 404 Page Not Found: Default/js
 ERROR - 2019-12-19 08:52:32 --> 404 Page Not Found: Default/plugins
 ERROR - 2019-12-19 08:52:33 --> 404 Page Not Found: Default/js
 ERROR - 2019-12-19 08:52:33 --> 404 Page Not Found: Default/js
+ERROR - 2019-12-19 09:19:42 --> 404 Page Not Found: Default/js
+ERROR - 2019-12-19 09:19:42 --> 404 Page Not Found: Default/js
+ERROR - 2019-12-19 09:19:42 --> 404 Page Not Found: Default/css
+ERROR - 2019-12-19 09:19:42 --> 404 Page Not Found: Default/css
+ERROR - 2019-12-19 09:20:40 --> 404 Page Not Found: Assets/img

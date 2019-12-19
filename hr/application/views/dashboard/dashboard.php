@@ -268,7 +268,7 @@
 
 
 <script>
-<?php   //echo $selectdatedata->selecteddate; ?>
+<?php // echo $selectdatedata->selecteddate; ?>
 $(function() { 
     setTimeout(function() {
   $('#errorMessage').fadeOut('fast');
@@ -302,9 +302,7 @@ $(function() {
 					    clear:'fa fa-delete',
 					    close:'fa fa-times'
  	 					},									
-				}).val( 
-
-				'<?php echo ($selectdatedata->selecteddate!='0000-00-00')&&(empty($selectdatedata->selecteddate))  ? date('Y-m', strtotime($selectdatedata->selecteddate)) : ''; ?>');
+				}).val('<?php echo ($selectdatedata->selecteddate!='0000-00')&&($selectdatedata->selecteddate!='')  ? date('Y-m', strtotime($selectdatedata->selecteddate)) : ''; ?>');
 
   $("#alldate").on("dp.change", function() {
         selecteddate=$("#alldate").val();
