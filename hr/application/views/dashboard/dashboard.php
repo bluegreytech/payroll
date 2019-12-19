@@ -244,7 +244,7 @@
 		<div class="sidebar-overlay" data-reff=""></div>
 		
 		<!-- jQuery -->
-        <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+        <!-- <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script> -->
         <script src="<?php echo base_url(); ?>default/js/jquery-3.2.1.min.js"></script>
 		
 		<!-- Bootstrap Core JS -->
