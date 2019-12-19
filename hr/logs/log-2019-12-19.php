@@ -19,3 +19,7 @@ ERROR - 2019-12-19 08:52:32 --> 404 Page Not Found: Default/js
 ERROR - 2019-12-19 08:52:32 --> 404 Page Not Found: Default/plugins
 ERROR - 2019-12-19 08:52:33 --> 404 Page Not Found: Default/js
 ERROR - 2019-12-19 08:52:33 --> 404 Page Not Found: Default/js
+ERROR - 2019-12-19 06:10:35 --> 404 Page Not Found: Assets/img
+ERROR - 2019-12-19 06:10:45 --> Query error: Table 'payrolldb.tblselectdate' doesn't exist - Invalid query: SELECT *
+FROM `tblselectdate`
+WHERE `companyid` = '1'
