@@ -33,14 +33,14 @@ class Login extends CI_Controller {
 		{
 			 //echo site_url();
          	$this->session->set_flashdata('success','Admin Login successfully');
-			redirect('home/dashboard');
+			redirect('dashboard');
              
 		}
 		elseif($login == '2')
 		{
                    
           $this->session->set_flashdata('success','Admin Login successfully');
-			redirect('home/dashboard');
+			redirect('dashboard');
 			
 		}
         elseif($login == '3')

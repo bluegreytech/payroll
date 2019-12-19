@@ -135,14 +135,14 @@ class Company extends CI_Controller
 				//echo "<pre>";print_r($_POST);die;
 				$this->company_model->setsalarymonth_update();
 				$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
-				redirect('setsalarymonth');
+				redirect('company/setsalarymonth');
 			
 			}
 			else
 			{ 	
 				$this->company_model->setsalarymonth_insert();
 				$this->session->set_flashdata('success', 'Record has been Inserted Succesfully!');
-				redirect('setsalarymonth');
+				redirect('company/setsalarymonth');
 			}
 		}
 		

@@ -8,7 +8,7 @@
 							<li class="active"> 
 								<a href="<?php echo base_url();?>Dashboard"><i class="la la-dashboard"></i> <span>Dashboard</span></a>
 							</li>
-							<?php
+							<!-- <?php
 							if($this->session->userdata('RoleId')==1 || $this->session->userdata('RoleId')==2){
 							?>	
 							<li class="submenu">
@@ -28,7 +28,7 @@
 							</li>
 							<?php
 							}
-							?>
+							?> -->
 							<li class="submenu">
 								<a href="<?php echo base_url();?>Dashboard"><i class="la la-user"></i> <span>Hr</span> <span class="menu-arrow"></span></a>
 								<ul style="display: none;">
@@ -67,11 +67,21 @@
 								<a href="<?php echo base_url();?>company/setsalarymonth"><i class="la la-cog"></i> <span>Set Salary Month</span> </a>
 								
 							</li>
-
-							<li class="">
+                               <li class="submenu">
+								<a href="#"><i class="la la-list"></i> <span>Reports</span> <span class="menu-arrow"></span></a>
+								<ul style="display: none;">
+								<li><a href="<?php echo base_url()?>Reports/reportsalary"><span>Total gross salary report</span></a>
+								</li>
+								<li><a href="<?php echo base_url()?>Reports/reportnetpaysalary"><span>Netpay salary report</span></a>
+								</li>
+								<li><a href="<?php echo base_url()?>Reports/empsalaryreport"><span>Employee wise  salary report</span></a>
+								</li>
+								</ul>
+							</li>
+							<!-- <li class="">
 								<a href="<?php echo base_url();?>salarysetting/reportsalary"><i class="la la-cog"></i> <span>Reports</span> </a>
 								
-							</li>
+							</li> -->
 						</ul>
 					</div>
                 </div>

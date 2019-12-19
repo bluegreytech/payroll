@@ -363,5 +363,14 @@ class Leave extends CI_Controller
 			echo json_encode($data);
 			die;
 	}
+	function viwempleave(){
+	$id=$this->input->post('id'); 
+       
+		$data=array();	
+		
+		$data['result']=$this->leave_model->getempleavedataupper($id);	
+		 echo json_encode($data);
+		die;
+	}
 
 }

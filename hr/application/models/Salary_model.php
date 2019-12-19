@@ -111,5 +111,119 @@ class Salary_model extends CI_Model
         $res=$query->result();
          return $res;
     }
-	
+	function search(){
+        $companyid=$this->session->userdata('companyid');
+            $empname=trim($this->input->post('empname'));
+            $attmonth=$this->input->post('attmonth'); 
+            if($this->input->post('attmonth')!=''){
+            $attmonth=$this->input->post('attmonth');   
+
+                //$att
+                //echo $attmonth=date('Y-m',strtotime('last month'));
+            }else{
+                 $attmonth=date('Y-m',strtotime('last month'));
+            }
+             $this->db->select('*');
+        $this->db->from('tblempsetsalary as st');
+        $this->db->join('tblemp as emp','emp.emp_id=st.emp_id','left');
+        $this->db->where('st.Is_deleted','0');
+        $this->db->where('companyid',$this->session->userdata('companyid'));
+        $this->db->like('salary_month',$attmonth);
+        // $this->db->like(CONCAT(emp.first_name, '.', emp.last_name),'%$empname%');
+
+        $this->db->like('CONCAT(emp.first_name," ",emp.last_name)',$empname);
+
+         $this->db->order_by('empsetsalary_id','Desc');
+        $query=$this->db->get();
+        //echo $this->db->last_query();
+        
+        $res=$query->result();
+        return $res;
+
+
+    }
+     function emptotearnsearch(){
+         $companyid=$this->session->userdata('companyid');
+            $empname=trim($this->input->post('empname'));
+            $attmonth=$this->input->post('attmonth'); 
+            if($this->input->post('attmonth')!=''){
+            $attmonth=$this->input->post('attmonth');   
+
+                //$att
+                //echo $attmonth=date('Y-m',strtotime('last month'));
+            }else{
+                 $attmonth=date('Y-m',strtotime('last month'));
+            }
+        $this->db->select_sum('st.gross_earning');
+         $this->db->from('tblempsetsalary as st');
+        $this->db->join('tblemp as emp','emp.emp_id=st.emp_id','left');
+        $this->db->where('st.Is_deleted','0');
+        $this->db->where('companyid',$this->session->userdata('companyid'));
+        $this->db->like('salary_month',$attmonth);
+        // $this->db->like(CONCAT(emp.first_name, '.', emp.last_name),'%$empname%');
+
+        $this->db->like('CONCAT(emp.first_name," ",emp.last_name)',$empname);
+
+         $this->db->order_by('empsetsalary_id','Desc');
+        $query=$this->db->get();
+       
+        $res=$query->result();
+        return $res;
+    }
+    function emptotpaysearch(){
+           $empname=trim($this->input->post('empname'));
+            $attmonth=$this->input->post('attmonth'); 
+            if($this->input->post('attmonth')!=''){
+            $attmonth=$this->input->post('attmonth');   
+
+                //$att
+                //echo $attmonth=date('Y-m',strtotime('last month'));
+            }else{
+                 $attmonth=date('Y-m',strtotime('last month'));
+            }
+        $this->db->select_sum('st.netpay');
+         $this->db->from('tblempsetsalary as st');
+        $this->db->join('tblemp as emp','emp.emp_id=st.emp_id','left');
+        $this->db->where('st.Is_deleted','0');
+        $this->db->where('companyid',$this->session->userdata('companyid'));
+        $this->db->like('salary_month',$attmonth);
+        // $this->db->like(CONCAT(emp.first_name, '.', emp.last_name),'%$empname%');
+
+        $this->db->like('CONCAT(emp.first_name," ",emp.last_name)',$empname);
+
+         $this->db->order_by('empsetsalary_id','Desc');
+        $query=$this->db->get();
+       
+        $res=$query->result();
+        return $res;
+    }
+    function emptotdeductionsearch(){
+         $companyid=$this->session->userdata('companyid');
+            $empname=trim($this->input->post('empname'));
+            $attmonth=$this->input->post('attmonth'); 
+            if($this->input->post('attmonth')!=''){
+            $attmonth=$this->input->post('attmonth');   
+
+                //$att
+                //echo $attmonth=date('Y-m',strtotime('last month'));
+            }else{
+                 $attmonth=date('Y-m',strtotime('last month'));
+            }
+        $this->db->select_sum('st.totaldeduction');
+         $this->db->from('tblempsetsalary as st');
+        $this->db->join('tblemp as emp','emp.emp_id=st.emp_id','left');
+        $this->db->where('st.Is_deleted','0');
+        $this->db->where('companyid',$this->session->userdata('companyid'));
+        $this->db->like('salary_month',$attmonth);
+        // $this->db->like(CONCAT(emp.first_name, '.', emp.last_name),'%$empname%');
+
+        $this->db->like('CONCAT(emp.first_name," ",emp.last_name)',$empname);
+
+         $this->db->order_by('empsetsalary_id','Desc');
+        $query=$this->db->get();
+       
+        $res=$query->result();
+        return $res;
+    }
+  
 }

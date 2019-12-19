@@ -15,7 +15,9 @@ class Dashboard extends CI_Controller {
 		$data['leave']=$this->Dashboard_model->list_leave();
 		$data['holiday']=$this->Dashboard_model->list_holiday();
 		$data['revenue']=$this->Dashboard_model->getcountrevenue();
-		echo "<pre>";print_r($data['revenue']);die;
+		$data['employee']=$this->Dashboard_model->getrecentemployee();
+		$data['result']=$this->Dashboard_model->getrecentleave();
+		//echo "<pre>";print_r($data['leave']);die;
 		$this->load->view('dashboard/dashboard',$data);		
     }
 	

@@ -76,7 +76,7 @@
 										<div id="line-charts"></div>
 									</div>
 								</div>
-								<div class="col-md-6 text-center">
+								<!-- <div class="col-md-6 text-center">
 									<div class="card-box">
 										<h3 class="card-title">Invoice Status</h3>
 										<div id="area-charts"></div>
@@ -87,131 +87,16 @@
 										<h3 class="card-title">Overall Status</h3>
 										<div id="pie-charts"></div>
 									</div>
-								</div>
+								</div> -->
 							</div>
 						</div>
 					</div>
-					<div class="row">
+					
+					<div class="row" style="margin-top:30px">
 						<div class="col-md-6">
 							<div class="card card-table">
 								<div class="card-header">
-									<h3 class="card-title mb-0">Invoices</h3>
-								</div>
-								<div class="card-body">
-									<div class="table-responsive">
-										<table class="table table-striped table-nowrap custom-table mb-0">
-											<thead>
-												<tr>
-													<th>Invoice ID</th>
-													<th>Client</th>
-													<th>Due Date</th>
-													<th>Total</th>
-													<th>Status</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td><a href="invoice-view.php">#INV-0001</a></td>
-													<td>
-														<h2><a href="#">Global Technologies</a></h2>
-													</td>
-													<td>11 Mar 2019</td>
-													<td>$380</td>
-													<td>
-														<span class="badge badge-warning-border">Partially Paid</span>
-													</td>
-												</tr>
-												<tr>
-													<td><a href="invoice-view.php">#INV-0002</a></td>
-													<td>
-														<h2><a href="#">Delta Infotech</a></h2>
-													</td>
-													<td>8 Feb 2019</td>
-													<td>$500</td>
-													<td>
-														<span class="badge badge-success-border">Paid</span>
-													</td>
-												</tr>
-												<tr>
-													<td><a href="invoice-view.php">#INV-0003</a></td>
-													<td>
-														<h2><a href="#">Cream Inc</a></h2>
-													</td>
-													<td>23 Jan 2019</td>
-													<td>$60</td>
-													<td>
-														<span class="badge badge-danger-border">Unpaid</span>
-													</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-								<div class="card-footer">
-									<a href="#">View all invoices</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="card card-table">
-								<div class="card-header">
-									<h3 class="card-title mb-0">Payments</h3>
-								</div>
-								<div class="card-body">
-									<div class="table-responsive">	
-										<table class="table table-striped custom-table table-nowrap mb-0">
-											<thead>
-												<tr>
-													<th>Invoice ID</th>
-													<th>Client</th>
-													<th>Payment Type</th>
-													<th>Paid Date</th>
-													<th>Paid Amount</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td><a href="invoice-view.php">#INV-0001</a></td>
-													<td>
-														<h2><a href="#">Global Technologies</a></h2>
-													</td>
-													<td>Paypal</td>
-													<td>11 Mar 2019</td>
-													<td>$380</td>
-												</tr>
-												<tr>
-													<td><a href="invoice-view.php">#INV-0002</a></td>
-													<td>
-														<h2><a href="#">Delta Infotech</a></h2>
-													</td>
-													<td>Paypal</td>
-													<td>8 Feb 2019</td>
-													<td>$500</td>
-												</tr>
-												<tr>
-													<td><a href="invoice-view.php">#INV-0003</a></td>
-													<td>
-														<h2><a href="#">Cream Inc</a></h2>
-													</td>
-													<td>Paypal</td>
-													<td>23 Jan 2019</td>
-													<td>$60</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-								<div class="card-footer">
-									<a href="payments.php">#</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6">
-							<div class="card card-table">
-								<div class="card-header">
-									<h3 class="card-title mb-0">Clients</h3>
+									<h3 class="card-title mb-0">Recent Employee</h3>
 								</div>
 								<div class="card-body">
 									<div class="table-responsive">
@@ -220,302 +105,128 @@
 												<tr>
 													<th>Name</th>
 													<th>Email</th>
-													<th>Status</th>
-													<th class="text-right">Action</th>
+													<th>Contact Number</th>
+													<th>Joining Date</th>
 												</tr>
 											</thead>
 											<tbody>
+												<?php
+						
+						if($employee){  
+						foreach($employee as $row)
+						{ 
+						 //echo "<pre>";print_r($row);          
+						?>
 												<tr>
 													<td>
-														<h2 class="table-avatar">
-															<a href="#" class="avatar"><img alt="" src="assets\img\profiles\avatar-19.jpg"></a>
-															<a href="client-profile.php">Barry Cuda <span>CEO</span></a>
-														</h2>
+														<?php 	
+							 if(($row->ProfileImage!='' && file_exists(base_path().'/upload/emp/'.$row->ProfileImage))){  ?>
+								<h2 class="table-avatar">
+								
+								<img src="<?php echo base_url();?>upload/emp/<?php echo $row->ProfileImage;?>" alt="" class="avatar">
+								<?php echo ucfirst($row->first_name.' '.$row->last_name);?> 
+								</h2>
+							<?php
+							}
+							else
+							{ 
+							?>
+								<h2 class="table-avatar">
+								
+								<img src="<?php echo base_url();?>upload/no_image/user_no_image.png" alt="" class="avatar">
+								<?php echo ucfirst($row->first_name.' '.$row->last_name);?> 
+							</h2>
+							<?php
+							}
+							?>
 													</td>
-													<td><a href="#" class="__cf_email__" data-cfemail="ed8f8c9f9f948e98898cad88958c809d8188c38e8280">[email&#160;protected]</a></td>
-													<td>
-														<div class="dropdown action-label">
-															<a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
-																<i class="fa fa-dot-circle-o text-success"></i> Active
-															</a>
-															<div class="dropdown-menu dropdown-menu-right">
-																<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-success"></i> Active</a>
-																<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-danger"></i> Inactive</a>
-															</div>
-														</div>
-													</td>
-													<td class="text-right">
-														<div class="dropdown dropdown-action">
-															<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-															<div class="dropdown-menu dropdown-menu-right">
-																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-															</div>
-														</div>
-													</td>
+													<td><?php echo $row->email;?></td>
+												<td><?php echo $row->phone;?></td>
+												<td><?php echo date("d M Y",strtotime($row->joiningdate));?></td>
 												</tr>
-												<tr>
-													<td>
-														<h2 class="table-avatar">
-															<a href="#" class="avatar"><img alt="" src="assets\img\profiles\avatar-19.jpg"></a>
-															<a href="client-profile.php">Tressa Wexler <span>Manager</span></a>
-														</h2>
-													</td>
-													<td><a href="#" class="__cf_email__" data-cfemail="582c2a3d2b2b392f3d20343d2a183d20393528343d763b3735">[email&#160;protected]</a></td>
-													<td>
-														<div class="dropdown action-label">
-															<a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
-																<i class="fa fa-dot-circle-o text-danger"></i> Inactive
-															</a>
-															<div class="dropdown-menu dropdown-menu-right">
-																<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-success"></i> Active</a>
-																<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-danger"></i> Inactive</a>
-															</div>
-														</div>
-													</td>
-													<td class="text-right">
-														<div class="dropdown dropdown-action">
-															<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-															<div class="dropdown-menu dropdown-menu-right">
-																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<h2 class="table-avatar">
-															<a href="client-profile.php" class="avatar"><img alt="" src="assets\img\profiles\avatar-07.jpg"></a>
-															<a href="client-profile.php">Ruby Bartlett <span>CEO</span></a>
-														</h2>
-													</td>
-													<td><a href="#" class="__cf_email__" data-cfemail="a4d6d1c6ddc6c5d6d0c8c1d0d0e4c1dcc5c9d4c8c18ac7cbc9">[email&#160;protected]</a></td>
-													<td>
-														<div class="dropdown action-label">
-															<a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
-																<i class="fa fa-dot-circle-o text-danger"></i> Inactive
-															</a>
-															<div class="dropdown-menu dropdown-menu-right">
-																<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-success"></i> Active</a>
-																<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-danger"></i> Inactive</a>
-															</div>
-														</div>
-													</td>
-													<td class="text-right">
-														<div class="dropdown dropdown-action">
-															<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-															<div class="dropdown-menu dropdown-menu-right">
-																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<h2 class="table-avatar">
-															<a href="client-profile.php" class="avatar"><img alt="" src="assets\img\profiles\avatar-06.jpg"></a>
-															<a href="client-profile.php"> Misty Tison <span>CEO</span></a>
-														</h2>
-													</td>
-													<td><a href="#" class="__cf_email__" data-cfemail="bdd0d4cec9c4c9d4ced2d3fdd8c5dcd0cdd1d893ded2d0">[email&#160;protected]</a></td>
-													<td>
-														<div class="dropdown action-label">
-															<a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
-																<i class="fa fa-dot-circle-o text-success"></i> Active
-															</a>
-															<div class="dropdown-menu dropdown-menu-right">
-																<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-success"></i> Active</a>
-																<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-danger"></i> Inactive</a>
-															</div>
-														</div>
-													</td>
-													<td class="text-right">
-														<div class="dropdown dropdown-action">
-															<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-															<div class="dropdown-menu dropdown-menu-right">
-																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<h2 class="table-avatar">
-															<a href="client-profile.php" class="avatar"><img alt="" src="assets\img\profiles\avatar-14.jpg"></a>
-															<a href="client-profile.php"> Daniel Deacon <span>CEO</span></a>
-														</h2>
-													</td>
-													<td><a href="#" class="__cf_email__" data-cfemail="dabebbb4b3bfb6bebfbbb9b5b49abfa2bbb7aab6bff4b9b5b7">[email&#160;protected]</a></td>
-													<td>
-														<div class="dropdown action-label">
-															<a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
-																<i class="fa fa-dot-circle-o text-danger"></i> Inactive
-															</a>
-															<div class="dropdown-menu dropdown-menu-right">
-																<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-success"></i> Active</a>
-																<a class="dropdown-item" href="#"><i class="fa fa-dot-circle-o text-danger"></i> Inactive</a>
-															</div>
-														</div>
-													</td>
-													<td class="text-right">
-														<div class="dropdown dropdown-action">
-															<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-															<div class="dropdown-menu dropdown-menu-right">
-																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-															</div>
-														</div>
-													</td>
-												</tr>
+											<?php
+										}
+									}
+										?>
+											
+												
 											</tbody>
 										</table>
 									</div>
 								</div>
 								<div class="card-footer">
-									<a href="clients.php">View all clients</a>
+									<a href="<?php echo base_url()?>employee/emplist">View all Employees</a>
 								</div>
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="card card-table">
 								<div class="card-header">
-									<h3 class="card-title mb-0">Recent Projects</h3>
+									<h3 class="card-title mb-0">Recent Leaves</h3>
 								</div>
 								<div class="card-body">
 									<div class="table-responsive">
 										<table class="table table-striped custom-table mb-0">
 											<thead>
 												<tr>
-													<th>Project Name </th>
-													<th>Progress</th>
-													<th class="text-right">Action</th>
+											<th>Employee</th>
+											<th>Leave Type</th>
+											<th>From</th>
+											<th>To</th>
 												</tr>
 											</thead>
 											<tbody>
+												<?php 
+
+									// if($attmonth!=''){
+									//                  $at_month=date('m',strtotime($attmonth)); 
+									//   $at_year=date('Y',strtotime($attmonth));
+									//    }
+									if(!empty($result)){					
+
+
+									foreach($result as $row){ 
+									//echo "<pre>";print_r($row);
+									?>
 												<tr>
 													<td>
-														<h2><a href="#">Office Management</a></h2>
-														<small class="block text-ellipsis">
-															<span class="text-xs">1</span> <span class="text-muted">open tasks, </span>
-															<span class="text-xs">9</span> <span class="text-muted">tasks completed</span>
-														</small>
+														<h2 class="table-avatar">
+												<?php 
+												if(($row->ProfileImage!='' && file_exists(base_path().'/upload/emp/'.$row->ProfileImage))){  ?>
+
+												<img src="<?php echo base_url();?>upload/emp/<?php echo $row->ProfileImage;?>" alt="" class="avatar avatar-xs">
+												<a href="#"><?php echo ucfirst($row->first_name.' '.$row->last_name); ?> <span><?php echo ucfirst($row->desgination);?></span></a>
+												<?php
+												}
+												else
+												{ 
+												?>
+												<img src="<?php echo base_url();?>upload/no_image/user_no_image.png" alt="" class="avatar avatar-xs">
+												<a href="<?php echo base_url() ?>/"><?php echo ucfirst($row->first_name.' '.$row->last_name); ?> <span><?php echo ucfirst($row->desgination);?></span></a>
+												<?php
+												}
+												?>													
+												</h2>
+														
 													</td>
 													<td>
-														<div class="progress progress-xs progress-striped">
-															<div class="progress-bar bg-success" role="progressbar" data-toggle="tooltip" title="65%" style="width: 65%"></div>
-														</div>
+														<?php echo get_leavetype_name(ucfirst($row->typeofleave));?>
 													</td>
 													<td class="text-right">
-														<div class="dropdown dropdown-action">
-															<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-															<div class="dropdown-menu dropdown-menu-right">
-																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-															</div>
-														</div>
+														<?php echo date("d M Y",strtotime($row->leavefrom)); ?>
 													</td>
-												</tr>
-												<tr>
-													<td>
-														<h2><a href="#">Project Management</a></h2>
-														<small class="block text-ellipsis">
-															<span class="text-xs">2</span> <span class="text-muted">open tasks, </span>
-															<span class="text-xs">5</span> <span class="text-muted">tasks completed</span>
-														</small>
-													</td>
-													<td>
-														<div class="progress progress-xs progress-striped">
-															<div class="progress-bar bg-success" role="progressbar" data-toggle="tooltip" title="15%" style="width: 15%"></div>
-														</div>
-													</td>
+
 													<td class="text-right">
-														<div class="dropdown dropdown-action">
-															<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-															<div class="dropdown-menu dropdown-menu-right">
-																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-															</div>
-														</div>
+														<?php echo date("d M Y",strtotime($row->leaveto)); ?>
 													</td>
 												</tr>
-												<tr>
-													<td>
-														<h2><a href="#">Video Calling App</a></h2>
-														<small class="block text-ellipsis">
-															<span class="text-xs">3</span> <span class="text-muted">open tasks, </span>
-															<span class="text-xs">3</span> <span class="text-muted">tasks completed</span>
-														</small>
-													</td>
-													<td>
-														<div class="progress progress-xs progress-striped">
-															<div class="progress-bar bg-success" role="progressbar" data-toggle="tooltip" title="49%" style="width: 49%"></div>
-														</div>
-													</td>
-													<td class="text-right">
-														<div class="dropdown dropdown-action">
-															<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-															<div class="dropdown-menu dropdown-menu-right">
-																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<h2><a href="#">Hospital Administration</a></h2>
-														<small class="block text-ellipsis">
-															<span class="text-xs">12</span> <span class="text-muted">open tasks, </span>
-															<span class="text-xs">4</span> <span class="text-muted">tasks completed</span>
-														</small>
-													</td>
-													<td>
-														<div class="progress progress-xs progress-striped">
-															<div class="progress-bar bg-success" role="progressbar" data-toggle="tooltip" title="88%" style="width: 88%"></div>
-														</div>
-													</td>
-													<td class="text-right">
-														<div class="dropdown dropdown-action">
-															<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-															<div class="dropdown-menu dropdown-menu-right">
-																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<h2><a href="#">Digital Marketplace</a></h2>
-														<small class="block text-ellipsis">
-															<span class="text-xs">7</span> <span class="text-muted">open tasks, </span>
-															<span class="text-xs">14</span> <span class="text-muted">tasks completed</span>
-														</small>
-													</td>
-													<td>
-														<div class="progress progress-xs progress-striped">
-															<div class="progress-bar bg-success" role="progressbar" data-toggle="tooltip" title="100%" style="width: 100%"></div>
-														</div>
-													</td>
-													<td class="text-right">
-														<div class="dropdown dropdown-action">
-															<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-															<div class="dropdown-menu dropdown-menu-right">
-																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-																<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-															</div>
-														</div>
-													</td>
-												</tr>
+											<?php }  } ?>
 											</tbody>
 										</table>
 									</div>
 								</div>
 								<div class="card-footer">
-									<a href="#">View all projects</a>
+									<a href="<?php echo base_url()?>leave/empleavelist">View all Leaves</a>
 								</div>
 							</div>
 						</div>
@@ -578,17 +289,21 @@ $(function() {
 	 Morris.Bar({
 	 	element: 'bar-charts',
 	 	data: [
-	 		{ y: '2006', a: 100, b: 90 },
-			{ y: '2007', a: 75,  b: 65 },
-	 		{ y: '2008', a: 50,  b: 40 },
-	 		{ y: '2009', a: 75,  b: 65 },
-	 		{ y: '2010', a: 50,  b: 40 },
-	 		{ y: '2011', a: 75,  b: 65 },
-	 		{ y: '2012', a: 100, b: 90 }
+	 	<?php
+	 	foreach($revenue as $val){
+	 		$month= $val->salary_month;
+	 		$m=explode('-',$month);
+	 		
+	 		?>
+	 	{ y: '<?php echo $m[1]?>', a: <?php echo $val->earn?>, b: <?php echo $val->deduction?> },
+	 	
+			<?php
+		}
+		?>
 	 	],
 	 	xkey: 'y',
 	 	ykeys: ['a', 'b'],
-	 	labels: ['Total Income', 'Total Outcome'],
+	 	labels: ['Total Earning', 'Total Deduction'],
 	 	lineColors: ['#3ae1f2','#0093a2'],
 	 	lineWidth: '3px',
 		barColors: ['#3ae1f2','#0093a2'],

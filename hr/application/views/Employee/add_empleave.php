@@ -17,7 +17,72 @@
 				<strong> <?php echo $this->session->flashdata('success'); ?></strong> 
 				</div>
 				<?php } ?>
-				<h4 class="page-title">Add Leave</h4>
+
+				<!-- Page Title -->
+<?php
+if(!empty($leavelist)){
+?>
+
+ 
+<div class="row">
+
+ 
+<div class="col-sm-8 col-6">
+
+ 
+<h4 class="page-title">Leaves</h4>
+
+ 
+</div>
+
+ 
+<div class="col-sm-4 col-6 text-right m-b-30">
+
+ 
+
+
+ 
+</div>
+
+ 
+</div>
+
+ 
+<!-- /Page Title -->
+
+ 
+<!-- Leave Statistics -->
+
+ 
+<div class="row" id="listing_leave">
+<?php
+foreach($leavelist as $val){
+	?>
+ 
+<div class="col-md-3">
+
+ 
+<div class="stats-info" >
+
+ 
+<h6 id="leave_name"><?php echo $val->leave_name?></h6>
+
+ 
+<h4 id="leave_day">0</h4>
+
+ 
+</div>
+
+ </div>
+
+<?php
+}
+?>
+ </div>
+ <?php
+}
+?>
+<h4 class="page-title">Add Leave</h4>
 				<div class="card-box mb-0">
 					<div class="row">
 						<div class="offset-md-1 col-md-10 offset-md-1">
@@ -383,7 +448,7 @@ function secondsTohhmmss(secs) {
 $("#employename").change(function () {
 	var end = this.value;
 	var id = $('#employename').val();
-	alert(id);
+	
 	url="<?php echo base_url();?>";
 	
 	$.ajax({
@@ -392,7 +457,7 @@ $("#employename").change(function () {
 		data:{id:id},
         success:function(response){
 			var response = JSON.parse(response);
-			console.log(response.result);
+			//console.log(response.result);
 			$('#typeofleave').empty();
 			$('#typeofleave').append($('<option value="" disabled="" selected="">Please Select</option>'));
 			$.each(response.result, function(key, value) {
@@ -402,6 +467,30 @@ $("#employename").change(function () {
 			});
         }
 		});  
-	});       
+	});    
+
+	$("#employename").change(function () {
+	var end = this.value;
+	var id = $('#employename').val();
+	
+	url="<?php echo base_url();?>";
+	
+	$.ajax({
+		url: url+'leave/viwempleave',
+		type: 'post',
+		data:{id:id},
+        success:function(result){
+
+			 var res1 = JSON.parse(result);
+          
+			$('#listing_leave').empty();
+	
+			$.each(res1.result, function(key, value) {
+  $('#listing_leave').append('<div class="col-md-3"><div class="stats-info" ><h6 id="leave_name">'+ value.leave_name +'</h6><h4 id="leave_day">'+ value.no_leave +'</h4></div></div>');
+});
+			
+        }
+		});  
+	});        
 </script>
     
