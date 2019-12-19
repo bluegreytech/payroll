@@ -41,7 +41,7 @@
 											<label>Attedance Month<span class="text-danger">*</span>
 											</label>
 											<div class="cal-icon">
-									  			<input type="text" class="form-control" name="attendancemonth" id="attendancemonth">
+									  			<input type="text" class="form-control" name="attendancemonth" id="attendancemonth" value="<?php echo $selectdatedata->selecteddate;?>" readonly>
 											</div>
 												<!-- <select class="form-control" name="attendancemonth">
 													<option selected="" disabled="">Please Select</option>
@@ -153,24 +153,7 @@ $(function() {
     });
   });
  var today = new Date();
- //   var past = today.setMonth(today.getMonth() -1);
- // alert(past);
-$("#attendancemonth").datetimepicker({
-       		  viewMode: 'months',       		 
-              format: 'YYYY-MM',
-          	  maxDate: today,
-				icons: {
-				time:'fa fa-clock-o',
-				date:'fa fa-calendar',
-				up:'fa fa-chevron-up',
-				down:'fa fa-chevron-down',
-				previous:'fa fa-chevron-left',
-				next:'fa fa-chevron-right',
-				today:'fa fa-calendar-check-o',
-				clear:'fa fa-delete',
-				close:'fa fa-times'
-				},
-    	});
+
 $(document).ready(function()
 { 
 	$('select').selectpicker({
@@ -180,25 +163,25 @@ $(document).ready(function()
 
 		
 	
-		$("#frm_emp").validate(
-		{
-					rules: {
-						'employename[]':{
-							required: true,
-						},
-					},
+	$("#frm_emp").validate(
+	{
+			rules: {
+				'employename[]':{
+					required: true,
+				},
+			},
 
-				messages:{
-					errorPlacement: function (error, element) {
-					console.log('dd', element.attr("name"))
-					if (element.attr("name") == "employename[]") {
-					error.appendTo("#employenameerror");
-					} else{
-					error.insertAfter(element)
-					}
-					}
-												
-		}				
+			messages:{
+				errorPlacement: function (error, element) {
+				console.log('dd', element.attr("name"))
+				if (element.attr("name") == "employename[]") {
+				error.appendTo("#employenameerror");
+				} else{
+				error.insertAfter(element)
+				}
+				}
+											
+	}				
 	});
 });	
 
@@ -211,6 +194,11 @@ $(document).ready(function()
                 };
              reader.readAsDataURL(input.files[0]);
             }
-        }				        
+        }	
+$("#alldate").on("dp.change", function() {
+	selecteddate=$("#alldate").val();
+	$('#attendancemonth').val(selecteddate);
+   
+});			        
 </script>
     

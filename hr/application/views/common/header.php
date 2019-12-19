@@ -12,23 +12,17 @@
 		<!-- Bootstrap CSS -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>default/css/bootstrap.min.css">
 		<!-- Fontawesome CSS -->
-        <link rel="stylesheet" href="<?php echo base_url(); ?>default/css/font-awesome.min.css">
-		
+        <link rel="stylesheet" href="<?php echo base_url(); ?>default/css/font-awesome.min.css">	
 		<!-- Lineawesome CSS -->
-        <link rel="stylesheet" href="<?php echo base_url(); ?>default/css/line-awesome.min.css">
-		
+        <link rel="stylesheet" href="<?php echo base_url(); ?>default/css/line-awesome.min.css">	
 		<!-- Chart CSS -->
-		<link rel="stylesheet" href="<?php echo base_url(); ?>default/plugins/morris/morris.css">
-		
+		<link rel="stylesheet" href="<?php echo base_url(); ?>default/plugins/morris/morris.css">	
 		<!-- Main CSS -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>default/css/style.css">
-
         <!-- Select2 CSS -->
-		<link rel="stylesheet" href="<?php echo base_url(); ?>default/css/select2.min.css">
-		
+		<link rel="stylesheet" href="<?php echo base_url(); ?>default/css/select2.min.css">		
 		<!-- Datetimepicker CSS -->
 		<link rel="stylesheet" href="<?php echo base_url(); ?>default/css/bootstrap-datetimepicker.min.css">
-
 		<!-- Datatable CSS -->
 		<link rel="stylesheet" href="<?php echo base_url(); ?>default/css/dataTables.bootstrap4.min.css"> 
      <!--   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"> -->
@@ -74,8 +68,10 @@ $ProfileImage=$this->session->userdata('ProfileImage');
 		
 			<!-- Header -->
             <div class="header">
-			   <?php $cmpdetail= getOneCompany($this->session->userdata('companyid'));
-			  
+			   <?php 
+			   	$cmpdetail= getOneCompany($this->session->userdata('companyid'));			   
+			    $selectdatedata= getSelectdate($this->session->userdata('companyid'));
+			    
 			    ?>
 
 				<!-- Logo -->
@@ -135,15 +131,12 @@ $ProfileImage=$this->session->userdata('ProfileImage');
 							<a href="javascript:void(0);" class="responsive-search">
 								<i class="fa fa-search"></i>
 						   </a>
-							<form action="search.html">
-								<input class="form-control" type="text" placeholder="Search here">
-								<button class="btn" type="submit"><i class="fa fa-search"></i></button>
-							</form>
+							<div class="form-group" style="margin-top:10px;">
+							<input class="form-control" type="text" name="alldate"  id="alldate" Placeholder="Date" value="<?php //echo $Dateofbirth?$Dateofbirth:''; ?>" readonly >
+							</div>
 						</div>
 					</li>
 					<!-- /Search -->
-					
-					
 					<!-- Notifications -->
 					<li class="nav-item dropdown">
 						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">

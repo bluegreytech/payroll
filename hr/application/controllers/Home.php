@@ -19,8 +19,9 @@ class Home extends CI_Controller {
 		}		
 	  
 		$data['activeTab']="dashboard";
-
-		//echo count($data['result']); die;
+      	$data['selectdatedata']= getSelectdate($this->session->userdata('companyid'));
+      //	echo "<pre>";print_r($data['selectdatedata']);
+	
 		$this->load->view('dashboard/dashboard',$data);
 	}
 

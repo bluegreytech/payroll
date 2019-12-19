@@ -533,7 +533,8 @@
 		<div class="sidebar-overlay" data-reff=""></div>
 		
 		<!-- jQuery -->
-        <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="<?php echo base_url(); ?>default/js/jquery-3.2.1.min.js"></script>
+        <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+        <script src="<?php echo base_url(); ?>default/js/jquery-3.2.1.min.js"></script>
 		
 		<!-- Bootstrap Core JS -->
         <script src="<?php echo base_url(); ?>default/js/popper.min.js"></script>
@@ -549,11 +550,14 @@
 		
 		<!-- Custom JS -->
 		<script src="<?php echo base_url(); ?>default/js/app.js"></script>
-		
+		<script src="<?php echo base_url(); ?>default/js/moment.min.js"></script>
+		<script src="<?php echo base_url(); ?>default/js/bootstrap-datetimepicker.min.js"></script>	
     </body>
 </html>
 
+
 <script>
+<?php   //echo $selectdatedata->selecteddate; ?>
 $(function() { 
     setTimeout(function() {
   $('#errorMessage').fadeOut('fast');
@@ -571,5 +575,45 @@ $(function() {
   $('#warningMessage').fadeOut('fast');
 }, 5000);  
 });
+
+	$('#alldate').datetimepicker({
+				   	format: 'YYYY-MM',
+					maxDate: new Date(),
+					ignoreReadonly: true,
+					icons: {
+					    time:'fa fa-clock-o',
+					    date:'fa fa-calendar',
+					    up:'fa fa-chevron-up',
+					    down:'fa fa-chevron-down',
+					    previous:'fa fa-chevron-left',
+					    next:'fa fa-chevron-right',
+					    today:'fa fa-calendar-check-o',
+					    clear:'fa fa-delete',
+					    close:'fa fa-times'
+ 	 					},									
+				}).val( 
+
+				'<?php echo ($selectdatedata->selecteddate!='0000-00-00')&&(empty($selectdatedata->selecteddate))  ? date('Y-m', strtotime($selectdatedata->selecteddate)) : ''; ?>');
+// function selectdate(select_date){ 
+//   // alert(select_date);
+//          console.log(select_date);
+//          <?php // insert_record('tblselectdate',array('companyid'=>$this->session->userdata('companyid'),)); ?>
+ 
+//   }
+  $("#alldate").on("dp.change", function() {
+        selecteddate=$("#alldate").val();
+       // alert($("#alldate").val());
+       	url="<?php echo base_url();?>";
+
+       	$.ajax({
+		url: url+'dashboard/selecteddate',
+		type: 'post',
+		data:{selecteddate:selecteddate},
+        success:function(response){
+			var response = JSON.parse(response);
+			
+        }
+		});
+  });
 	        
 </script>

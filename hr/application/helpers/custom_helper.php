@@ -776,6 +776,7 @@
 	  // Insert into table
 	function insert_record($table,$data)
 	{
+		//echo "<pre>";print_r($data);die;
 	    $CI =& get_instance();
 	    return $CI->db->insert($table, $data);
 	}
@@ -1408,4 +1409,16 @@
 			
 		
 	}
+  function getSelectdate($companyid=0)
+	{
+		$CI =& get_instance();
+		$query=$CI->db->get_where('tblselectdate',array('companyid'=>$companyid));
+		if($query->num_rows() > 0)
+		{
+			return $query->row();
+		}else{
+			return '';
+		}
+	}
+	
 ?>

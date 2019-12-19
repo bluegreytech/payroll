@@ -13,22 +13,35 @@ class Salarysetting extends CI_Controller
 		   
 	}
 	
-	function setsalary(){	
-		//echo "hggh";die;
+	function setsalary(){			
 		if(!check_admin_authentication()){ 
 			redirect(base_url());
 		}   
-			$data=array();
-			$data['activeTab']="addhr";	
-			$this->load->library("form_validation");
-			
-		$data['result']=$this->salary_model->empsetsalary_list();
-		//echo "<pre>";print_r($data['result']);die;
+		$data=array();
+		$data['activeTab']="addhr";	
+		$this->load->library("form_validation");
+		$salarymonthresult=$this->company_model->getsetsalarymonth();
+		$data['selectdatedata']=getSelectdate($this->session->userdata('companyid'));
+		$salarymonth=$data['selectdatedata']->selecteddate;			
+		$data['result']=$this->salary_model->empsetsalary_list($salarymonth);
+      // echo "<pre>";print_r($data['result']);die;
 		$this->load->view('salarysetting/emp_setsalary',$data);
 	
 	}
+	function viewsetsalary(){			
+		if(!check_admin_authentication()){ 
+			redirect(base_url());
+		}   
+		$data=array();
+		//echo "<pre>";print_r($_POST);die;
+		
+		$salarymonth=$this->input->post('selecteddate')	;
+		$data['result']=$this->salary_model->empsetsalary_list($salarymonth);       
+		echo json_encode($data['result']);
+	
+	}
 
-	function add_setsalary(){    	
+	function add_setsalary(){ 
     	if(!check_admin_authentication())
 		{
 			redirect('login');
@@ -74,20 +87,22 @@ class Salarysetting extends CI_Controller
 				redirect('salarysetting/setsalary');
 			}
 		}
-		$salarymonthresult=$this->company_model->getsetsalarymonth();		
+		$salarymonthresult=$this->company_model->getsetsalarymonth();
+		$data['selectdatedata']=getSelectdate($this->session->userdata('companyid'));	
+		//echo "<pre>";print_r($data['selectdateresult']->selecteddate); die;
+	   	$salarymonth=$data['selectdatedata']->selecteddate;
 	    $data['salarymonth']=$salarymonthresult['salary_month']; 
 		$data['result']=$this->company_model->compliancelist();
-		$data['emplist']=$this->attendance_model->emppersentmonthlist($data['salarymonth']);
+		$data['emplist']=$this->attendance_model->emppersentmonthlist($salarymonth);
+		
 		$data['empid']='';		
-		$this->load->view('salarysetting/add_setsalary',$data);
-	
+		$this->load->view('salarysetting/add_setsalary',$data);	
     }
 
     function salary_view($empsetsalary_id){
     	if(!check_admin_authentication()){ 
 			redirect(base_url());
 		} 
-
 		$result=$this->salary_model->get_salarydata($empsetsalary_id);
         $data['empsetsalary_id']=$result['empsetsalary_id'];
 		$data['emp_id']=$result['emp_id'];
@@ -248,7 +263,14 @@ class Salarysetting extends CI_Controller
 
 		$this->load->view('salarysetting/add_setsalary',$data);	
     }
-
+    
+    function empsalarmonth(){
+    	
+    	$salarymonth=$this->input->post('selecteddate');
+    	$emplist=$this->attendance_model->emppersentmonthlist($salarymonth);    
+        echo json_encode($emplist);
+        die;
+    }
 
      
 

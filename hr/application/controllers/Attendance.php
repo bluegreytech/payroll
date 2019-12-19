@@ -18,8 +18,8 @@ class Attendance extends CI_Controller
         $data['empname']='';
 		$data['attmonth']='';
 		$data['redirect_page']="attendancelist";
-        $data['result']=$this->attendance_model->attendancelist();
-      
+        $data['result']=$this->attendance_model->attendancelist();  
+        $data['selectdatedata']= getSelectdate($this->session->userdata('companyid'));    
 		$this->load->view('Attendance/attendancelist',$data);
 	}
 
@@ -51,23 +51,22 @@ class Attendance extends CI_Controller
 		}
 		else
 		{
-				if($this->input->post("attendance_id")!="")
-				{
-					//echo "fgff";die;
-					$this->attendance_model->attendance_update();
-					$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
-					redirect('Attendance/attendancelist');
-				}
-				else
-				{ 	
-					$this->attendance_model->attendance_insert();
-					$this->session->set_flashdata('success', 'Record has been Inserted Succesfully!');
-					redirect('Attendance/attendancelist');
-				}
+			if($this->input->post("attendance_id")!="")
+			{
+				//echo "fgff";die;
+				$this->attendance_model->attendance_update();
+				$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
+				redirect('Attendance/attendancelist');
+			}
+			else
+			{ 	
+				$this->attendance_model->attendance_insert();
+				$this->session->set_flashdata('success', 'Record has been Inserted Succesfully!');
+				redirect('Attendance/attendancelist');
+			}
 		}
 	    $data['emplist']=$this->attendance_model->emplist();
-		
-		//echo "<pre>";print_r($data['emplist']);die;
+	    $data['selectdatedata']= getSelectdate($this->session->userdata('companyid'));
 		$this->load->view('Attendance/addattendance',$data);
 	}
 	
@@ -107,6 +106,7 @@ class Attendance extends CI_Controller
 		    $data['empname']='';
 			$data['attmonth']='';
           	$data['result']=$this->attendance_model->attendancelist();
+          	$data['selectdatedata']= getSelectdate($this->session->userdata('companyid'));
 		}
 		 	
 		$data['redirect_page']="attendancelist";

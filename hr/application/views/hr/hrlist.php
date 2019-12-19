@@ -1,4 +1,4 @@
-﻿<?php 
+<?php 
 	 $this->load->view('common/header.php');
 	 $this->load->view('common/sidebar.php');
 ?>
@@ -560,7 +560,6 @@ function statusdata(id,status){
     	}
    
         $('#ok_btn').click(function(){
-           
                 url="<?php echo base_url();?>"
                 $.ajax({
                 url: url+"/hr/statusdata/",
@@ -613,9 +612,8 @@ function editdata(hr_id)
 			$("#Gender [value=" + response.Gender + "]").attr('selected', 'true');
 			$("input[name=IsActive][value=" + response.IsActive + "]").attr('checked', 'checked');
 
-			if(response.ProfileImage!=''){
-				
-			 $('#blah').attr('src', url+'upload/hr/'+response.ProfileImage);
+			if(response.ProfileImage!=''){				
+			  $('#blah').attr('src', url+'upload/hr/'+response.ProfileImage);
 			}else{			
 			  $('#blah').attr('src', url+'upload/no_image/user_no_image.png');
 			}
