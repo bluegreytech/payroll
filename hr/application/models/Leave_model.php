@@ -114,12 +114,9 @@ class Leave_model extends CI_Model
 				$leavetodt = date("Y-m-d", strtotime($date));
 				# code...
 			}
-			//echo $leavetimein=$this->input->post('leavetimein');
-			//echo $leavetimeout=$this->input->post('leavetimeout');
-
-		  //echo  $leaveslot;
-        	for($j=0;$j<count($empcount);$j++){
-                $empid=$this->input->post('employename')[$j] ?$this->input->post('employename')[$j]:'';
+			
+        	//for($j=0;$j<count($empcount);$j++){
+                $empid=$this->input->post('employename')?$this->input->post('employename'):'';
                 $emp_id=get_one_record('tblemp','emp_id',$empid); 
                 //echo "<pre>";print_r($emp_id->first_name.''.$emp_id->last_name);die;              
                 $noofdays=$this->input->post('noofdays');
@@ -128,7 +125,7 @@ class Leave_model extends CI_Model
                 $this->db->where('emp_id',$empid);
                 $this->db->update('tblemp',$updata);
 				$data = array(
-					'emp_id' =>$this->input->post('employename')[$j]?$this->input->post('employename')[$j]:'',        
+					'emp_id' =>$this->input->post('employename')?$this->input->post('employename'):'',        
 					'leaveto' =>$leavetodt,
 					'leavefrom' =>$leavefromdt,
 					'noofdays' =>trim($this->input->post('noofdays')),	
@@ -142,79 +139,101 @@ class Leave_model extends CI_Model
 					'leavestatus' =>'Pending',
 					'created_date'=>date('Y-m-d')		
 				);
-				//echo "<pre>";print_r($data); die;
-        	   $res=$this->db->insert('tblempleave',$data);	
-        		if($res){
-     				$email_template=$this->db->query("select * from ".$this->db->dbprefix('tblemail_template')." where task='Leave assign by employee'");
-					$email_temp=$email_template->row();
-					$email_address_from=$email_temp->from_address;
-					$email_address_reply=$email_temp->reply_address;
-					$email_subject=$email_temp->subject;        
-					$email_message=$email_temp->message;
-					$username =$emp_id->first_name.' '.$emp_id->last_name;					
-					$email = $emp_id->email;
-					$email_to=$email;
-					$reason=trim($this->input->post('leavereason'));
-                   
-                   	if($this->input->post('leavedays')=='fullday' ){
-                   		$noofdays=trim($this->input->post('noofdays')).' '."Day";
-                   	}elseif($this->input->post('leavedays')=='halfday'){
-						$noofdays=trim($this->input->post('noofdays')).' '."Day";
-                   	}else{
-						$noofdays=trim($this->input->post('noofdays'));
-                   	}
-                   	$typeofleave=$typeofleavedata->leave_name;	
-                   	$leavedays=trim($this->input->post('leavedays'));
-                   	$leavefrom=$leavefromdt;
-                    $leaveto=$leavetodt;
-                    $leavestatus='Approve';
-                    $companyname=$row->companyname;
-                    $base_url=base_url();
-                    $currentyear=date('Y');
-                   
-                    $email_message=str_replace('{break}','<br/>',$email_message);                 
-                    $email_message=str_replace('{base_url}',$base_url,$email_message);
-                    $email_message=str_replace('{year}',$currentyear,$email_message);
-                    $email_message=str_replace('{username}',$username,$email_message);
-					$email_message=str_replace('{reason}',$reason,$email_message);
-					$email_message=str_replace('{noofdays}',$noofdays,$email_message);
-					$email_message=str_replace('{typeofleave}',$typeofleave,$email_message);
-					$email_message=str_replace('{leavedays}',$leavedays,$email_message);
-					$email_message=str_replace('{leavefrom}',$leavefrom,$email_message);
-					$email_message=str_replace('{leaveto}',$leaveto,$email_message);
-					$email_message=str_replace('{leavestatus}',$leavestatus,$email_message);
-					$email_message=str_replace('{companyname}',$companyname,$email_message);
-                    
-                    $str=$email_message; //die;
-                    echo "<pre>";print_r($str);die;
-                    $email_config = Array(
-	                    'protocol'  => 'smtp',
-	                    'smtp_host' => 'relay-hosting.secureserver.net',
-	                    'smtp_port' => '465',
-	                    'smtp_user' => 'binny@bluegreytech.co.in',
-	                    'smtp_pass' => 'Binny@123',
-	                    'mailtype'  => 'html',
-	                    'starttls'  => true,
-	                    'newline'   => "\r\n",
-	                    'charset'=>'utf-8',
-	                    'header'=> 'MIME-Version: 1.0',
-	                    'header'=> 'Content-type:text/html;charset=UTF-8',
-                    );                        
-                     $this->load->library('email', $email_config);                   
-                     $this->email->from("siya@yopmail.com", "siya");
-                     $this->email->to('binny@bluegreytech.co.in');
-                     $this->email->subject($email_subject);
-                     $this->email->message($str);
 
+      //          $this->db->select('*');
+      //          $this->db->from('tblattendance');
+      //          $this->db->where('emp_id',$this->input->post('employename'));              
+			   // $this->db->where('attendance_date >=',$leavefromdt);
+			   // $this->db->where('attendance_date <=', $leavetodt);
+			   // $query=$this->db->get(); 			 
+      //  		   $res=$query->result();
+      //           foreach($res as $rowdata) {
+                  	
+      //             	$updatedata=array(
+      //             	 	'attendance_status'=>'Absent',
+      //             	);
+      //             	$this->db->where('attendance_id',$rowdata->attendance_id);       
+      //    			$res=$this->db->update('tblattendance',$updatedata);                  
+
+      //           }
+
+				//echo "<pre>";print_r($res); die;
+        	   	$res=$this->db->insert('tblempleave',$data);	
+     //    		if($res){
+
+     // 				$email_template=$this->db->query("select * from ".$this->db->dbprefix('tblemail_template')." where task='Leave assign by employee'");
+					// $email_temp=$email_template->row();
+					// $email_address_from=$email_temp->from_address;
+					// $email_address_reply=$email_temp->reply_address;
+					// $email_subject=$email_temp->subject;        
+					// $email_message=$email_temp->message;
+					// $username =$emp_id->first_name.' '.$emp_id->last_name;					
+					// $email = $emp_id->email;
+					// $email_to=$email;
+					// $reason=trim($this->input->post('leavereason'));
+                   
+     //               	if($this->input->post('leavedays')=='fullday' ){
+     //               		$noofdays=trim($this->input->post('noofdays')).' '."Day";
+     //               	}elseif($this->input->post('leavedays')=='halfday'){
+					// 	$noofdays=trim($this->input->post('noofdays')).' '."Day";
+     //               	}else{
+					// 	$noofdays=trim($this->input->post('noofdays'));
+     //               	}
+     //               	$typeofleave=$typeofleavedata->leave_name;	
+     //               	$leavedays=trim($this->input->post('leavedays'));
+     //               	$leavefrom=$leavefromdt;
+     //                $leaveto=$leavetodt;
+     //                $leavestatus='Approve';
+     //                $companyname=$row->companyname;
+     //                $base_url=base_url();
+     //                $currentyear=date('Y');                   
+     //                $email_message=str_replace('{break}','<br/>',$email_message);                 
+     //                $email_message=str_replace('{base_url}',$base_url,$email_message);
+     //                $email_message=str_replace('{year}',$currentyear,$email_message);
+     //                $email_message=str_replace('{username}',$username,$email_message);
+					// $email_message=str_replace('{reason}',$reason,$email_message);
+					// $email_message=str_replace('{noofdays}',$noofdays,$email_message);
+					// $email_message=str_replace('{typeofleave}',$typeofleave,$email_message);
+					// $email_message=str_replace('{leavedays}',$leavedays,$email_message);
+					// $email_message=str_replace('{leavefrom}',$leavefrom,$email_message);
+					// $email_message=str_replace('{leaveto}',$leaveto,$email_message);
+					// $email_message=str_replace('{leavestatus}',$leavestatus,$email_message);
+					// $email_message=str_replace('{companyname}',$companyname,$email_message);
                     
-	                    if($this->email->send()){ 	                   
-	                       echo "send"; die;
-	                       return '1';
-	                    }else{
-	                    echo $this->email->print_debugger();die;
-	                    }
-        		}
-			}
+     //                $str=$email_message; //die;
+     //             //   echo "<pre>";print_r($str);die;
+                   
+     //                $email_config = Array(
+	    //                 'protocol'  => 'smtp',
+	    //                 // 'smtp_host' => 'relay-hosting.secureserver.net',
+	    //                 // 'smtp_port' => '465',
+	    //                 // 'smtp_user' => 'binny@bluegreytech.co.in',
+	    //                 // 'smtp_pass' => 'Binny@123',
+	    //                 'smtp_host' => 'ssl://smtp.googlemail.com',
+	    //                 'smtp_port' => '465',
+	    //                 'smtp_user' => 'bluegreyindia@gmail.com',
+	    //                 'smtp_pass' => 'Test@123',
+	    //                 'mailtype'  => 'html',
+	    //                 'starttls'  => true,
+	    //                 'newline'   => "\r\n",
+	    //                 'charset'=>'utf-8',
+	    //                 'header'=> 'MIME-Version: 1.0',
+	    //                 'header'=> 'Content-type:text/html;charset=UTF-8',
+     //                ); 
+     //               	 $this->email->initialize($email_config);                       
+     //                // $this->load->library('email', $email_config);                   
+     //                 $this->email->from("siya@yopmail.com", "siya");
+     //                 $this->email->to('siya@yopmail.com');
+     //                 $this->email->subject($email_subject);
+     //                 $this->email->message($str);                    
+	    //                 if($this->email->send()){ 	                   
+	    //                   // echo "send"; die;
+	    //                    return '1';
+	    //                 }else{
+	    //                 echo $this->email->print_debugger();die;
+	    //                 }
+     //    		}
+			//}
 		//die;
 		return $res;
 	}
@@ -280,10 +299,25 @@ class Leave_model extends CI_Model
 					'leavereason'=>trim($this->input->post('leavereason')),
 					'leaveslot'=>trim($leaveslot ? $leaveslot :''),
 					'company_id' =>$this->session->userdata('companyid'),
-					'leavestatus' =>'Approve',
+					'leavestatus' =>'Pending',
 					'created_date'=>date('Y-m-d')		
 				);
-				//echo "<pre>";print_r($data); die;
+				// $this->db->select('*');
+				// $this->db->from('tblattendance');
+				// $this->db->where('emp_id',$this->input->post('employename'));              
+				// $this->db->where('attendance_date >=',$leavefromdt);
+				// $this->db->where('attendance_date <=', $leavetodt);
+				// $query=$this->db->get(); 			 
+				// $res=$query->result();
+
+    //             foreach($res as $rowdata){                  	
+    //               	$updatedata=array(
+    //               	 	'attendance_status'=>'Absent',
+    //               	);
+    //               	$this->db->where('attendance_id',$rowdata->attendance_id);       
+    //      			$res=$this->db->update('tblattendance',$updatedata); 
+    //             }
+
 				$this->db->where('empleave_id',$this->input->post('empleave_id'));
         		$res=$this->db->update('tblempleave',$data);	
 			}
@@ -410,7 +444,7 @@ class Leave_model extends CI_Model
       	$this->db->select('asl.leave_id,asl.no_leave,cl.leave_name');
 		$this->db->from('tblempassignleave as asl');
 		$this->db->join('tblcmpleave as cl','cl.leave_id=asl.leave_id');		
-		$this->db->where('asl.Is_deleted','1');		
+		$this->db->where('asl.Is_deleted','0');		
 		$this->db->where('asl.no_leave!=','0');			
 		$this->db->where('asl.companyid',$this->session->userdata('companyid'));
 		$this->db->where('asl.emp_id',$id);
@@ -418,7 +452,7 @@ class Leave_model extends CI_Model
 		$query=$this->db->get();		
 		$res=$query->result();
 		
-		//echo $this->db->last_query();
+	//	echo $this->db->last_query();
 		return $res;
 		
 	}
@@ -426,7 +460,7 @@ class Leave_model extends CI_Model
 		$this->db->select('asl.leave_id,asl.no_leave,cl.leave_name');
 		$this->db->from('tblempassignleave as asl');
 		$this->db->join('tblcmpleave as cl','cl.leave_id=asl.leave_id');		
-		$this->db->where('asl.Is_deleted','1');		
+		$this->db->where('asl.Is_deleted','0');
 			
 		$this->db->where('asl.companyid',$this->session->userdata('companyid'));
 		$this->db->where('asl.emp_id',$id);

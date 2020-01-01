@@ -21,67 +21,31 @@
 				<!-- Page Title -->
 <?php
 if(!empty($leavelist)){
-?>
-
- 
-<div class="row">
-
- 
+?> 
+<div class="row"> 
 <div class="col-sm-8 col-6">
-
- 
 <h4 class="page-title">Leaves</h4>
-
- 
 </div>
-
- 
 <div class="col-sm-4 col-6 text-right m-b-30">
-
- 
-
-
- 
 </div>
-
- 
 </div>
-
- 
 <!-- /Page Title -->
-
- 
 <!-- Leave Statistics -->
-
- 
 <div class="row" id="listing_leave">
 <?php
 foreach($leavelist as $val){
-	?>
- 
-<div class="col-md-3">
-
- 
-<div class="stats-info" >
-
- 
-<h6 id="leave_name"><?php echo $val->leave_name?></h6>
-
- 
-<h4 id="leave_day">0</h4>
-
- 
+	//echo "<pre>";print_r($val);
+?> 
+<div class="col-md-3"> 
+	<div class="stats-info" >
+	    <span id='leaveid_<?php echo $val->leave_id; ?>' style="display:none;"><?php echo $val->leave_id; ?></span> 
+		<h6 id="leave_name_<?php echo $val->leave_id; ?>"><?php echo $val->leave_name; ?></h6> 
+		<h4 id="leave_day_<?php echo $val->leave_id; ?>"><?php  echo '0'; ?></h4> 
+	</div>
 </div>
-
- </div>
-
-<?php
-}
-?>
- </div>
- <?php
-}
-?>
+<?php } ?>
+</div>
+<?php } ?>
 <h4 class="page-title">Add Leave</h4>
 				<div class="card-box mb-0">
 					<div class="row">
@@ -105,6 +69,10 @@ foreach($leavelist as $val){
 									<select class="form-control" name='typeofleave' id='typeofleave'>
 										<option selected="" value="" disabled="">Please select</option>	
 									</select>
+
+									<input type="hidden" id="noleave">
+									<input type="hidden" id="leavename">
+									
 								</div>
 								<div class="form-group">
 									<label>Leave<span class="text-danger">*</span></label>
@@ -212,7 +180,8 @@ $(function() {
 });
 $(document).ready(function()
 {
-   
+  // var leavedata= '<?php //echo $salarymonth; ?>';
+  // alert(leavedata);
   	$('#leavefrom').datetimepicker({
             "allowInputToggle": true,
             "showClose": true,
@@ -220,7 +189,7 @@ $(document).ready(function()
             "showTodayButton": true,
             ignoreReadonly: true,		
             "format": "DD/MM/YYYY",
-        }).val('<?php echo ($leavefrom!='0000-00-00') && ($leavefrom!='')  ? date('d/m/Y', strtotime($leavefrom)) : ''; ?>');  
+        }).val('<?php echo ($leavefrom!='0000-00-00') && ($leavefrom!='')  ? date('d/m/Y', strtotime($leavefrom)) : date('d/m/Y', strtotime($salarymonth)); ?>'); 
   
 	$('#leaveto').datetimepicker({					
 				  	format: 'DD/MM/YYYY',					
@@ -229,7 +198,7 @@ $(document).ready(function()
 		            "showClose": true,
 		            "showClear": true,
 		            "showTodayButton": true,
-	}).val('<?php echo ($leaveto!='0000-00-00')&&($leaveto!='')  ? date('d/m/Y', strtotime($leaveto)) : ''; ?>');	
+	}).val('<?php echo ($leaveto!='0000-00-00')&&($leaveto!='')  ? date('d/m/Y', strtotime($leaveto)) : date('d/m/Y', strtotime($salarymonth)); ?>');	
 	
 		
     $('#leavetimein').datetimepicker({					
@@ -317,8 +286,6 @@ $("#leavedays").change(function () {
 		$('#totaldays').show();
 		$('#dateto').css('display','block');
 	    var leavefrom = $('#leavefrom').val();
-		
-		
 	   	if(leavefrom!=''){
 	   	 var leaveto = $('#leaveto').val('');		
 		 	$('#noofdays').val('');
@@ -329,7 +296,7 @@ $("#leavedays").change(function () {
 		$('#leavetime').css('display','none');
 		$('#leavehours').css('display','none');
 		$('#errorleave').css('display','none');
-			$('#timein').css('display','none');
+		$('#timein').css('display','none');
 		$('#timeout').css('display','none');
 		 //$('#btnsave').prop('disabled','false');
 	}  
@@ -382,8 +349,27 @@ $(document).ready(function() {
 		}else{			
 			$('#errorleave').css('display','none');			
 			total=diffDays+1;
-		}	
-		$('#noofdays').val(total);		
+		}
+
+       	var noleave=$('#noleave').val();
+       	var leavename=$('#leavename').val();
+   
+       	if(noleave<total){   
+       		$.alert({ title: 'Alert !', content: 'you can not select more then '+noleave+' '+leavename, type: 'red', typeAnimated: true, });
+
+       		//alert('you can not select more then '+noleave+' '+leavename);       	 
+       	    $('#btnsave').attr('disabled','disabled');
+       	    $('#leaveto').val('');
+       	    $('#noofdays').val('');	
+       	    return false; 
+       	      
+       	}else{
+     	 $('#noofdays').val(total);	       
+         $('#btnsave').removeAttr('disabled');
+          return false; 
+       	}
+       
+			
     });  
    
         // leaveday=$("select#leavedays option:selected").attr('value');
@@ -398,6 +384,9 @@ $(document).ready(function() {
 			$('#errorleave').css('display','none');			
 			//total=diffDays+1;
 		}	
+
+		
+
 		$('#noofdays').val(total);		
     });  
     $('#leavetimeout').focusout(function(){  
@@ -416,7 +405,7 @@ function myDateFormatter (dobdate) {
   return dArr[1]+ "/" +dArr[0]+ "/" +dArr[2]; //ex out: "18/01/10"       
 };
 
-function calculate() {
+function calculate(){
    		//alert($("#leavetimeout").val());
    		var timeout = $("#leavetimeout").val();
    		var timein = $("#leavetimein").val();
@@ -448,7 +437,6 @@ function secondsTohhmmss(secs) {
 $("#employename").change(function () {
 	var end = this.value;
 	var id = $('#employename').val();
-
 	url="<?php echo base_url();?>";
 	
 	$.ajax({
@@ -460,37 +448,118 @@ $("#employename").change(function () {
 			//console.log(response.result);
 			$('#typeofleave').empty();
 			$('#typeofleave').append($('<option value="" disabled="" selected="">Please Select</option>'));
-			$.each(response.result, function(key, value) {
-				console.log(value.leave_id);			 
+			$.each(response.result, function(key, value) {					 
 			   $('#typeofleave').append(
               $('<option></option>').val(value.leave_id).html(value.leave_name));
 			});
         }
 		});  
-	});    
-
-	$("#employename").change(function () {
-	var end = this.value;
-	var id = $('#employename').val();
-	
-	url="<?php echo base_url();?>";
-	
 	$.ajax({
 		url: url+'leave/viwempleave',
 		type: 'post',
 		data:{id:id},
         success:function(result){
-
-			 var res1 = JSON.parse(result);
-          
+			var res1 = JSON.parse(result);          
 			$('#listing_leave').empty();
-	
 			$.each(res1.result, function(key, value) {
-  $('#listing_leave').append('<div class="col-md-3"><div class="stats-info" ><h6 id="leave_name">'+ value.leave_name +'</h6><h4 id="leave_day">'+ value.no_leave +'</h4></div></div>');
-});
+				if(value.no_leave=='-1'){
+					leaveno='0';
+				}else{
+					leaveno=value.no_leave;
+				}
+			  $('#listing_leave').append('<div class="col-md-3"><div class="stats-info"><span id="leaveid_'+value.leave_id+'" style="display:none;">'+value.leave_id+'</span><h6 id="leave_name_'+value.leave_id+'">'+ value.leave_name +'</h6><h4 id="leave_day_'+value.leave_id+'">'+ leaveno  +'</h4></div></div>');
+			});
 			
         }
-		});  
-	});        
+		});
+	});    
+
+$("#typeofleave").change(function () {
+	var id = this.value;	
+	var leaveid=$('#leaveid_'+id).text();
+		//alert(leaveid);
+	 if(id==leaveid){
+
+ 		var noleavedays=$('#leave_day_'+id).text();
+ 		var leavename=$('#leave_name_'+id).text();
+      	$('#noleave').val(noleavedays);
+        $('#leavename').val(leavename);
+         
+	 }
+});
+
+// $("#typeofleave").load(function () {
+
+// 	var id = this.value;	
+// 	var leaveid=$('#leaveid_'+id).text();
+// 	 if(id==leaveid){
+//  		var noleavedays=$('#leave_day_'+id).text();
+//  		var leavename=$('#leave_name_'+id).text();
+//       	$('#noleave').val(noleavedays);
+//         $('#leavename').val(leavename);
+         
+// 	 }
+// });
+///onload event call in edit data
+
+
+emp_id="<?php echo $emp_id;?>";
+typeofleave="<?php echo $typeofleave;?>";
+
+url="<?php echo base_url();?>";	
+	$.ajax({
+		url: url+'leave/viwempleavelist',
+		type: 'post',
+		data:{id:emp_id},
+        success:function(response){
+			var response = JSON.parse(response);
+			console.log(response.result);
+			$('#typeofleave').empty();
+			$('#typeofleave').append($('<option value="" disabled="" selected="">Please Select</option>'));
+			$.each(response.result, function(key, value) {
+				if(value.leave_id == typeofleave){
+					$('#typeofleave').append('<option value="' + value.leave_id + '" selected="selected">' + value.leave_name + '</option>');
+				}else{
+				 	$('#typeofleave').append(
+      			   	$('<option></option>').val(value.leave_id).html(value.leave_name));
+				}  
+			
+			});
+        }
+	}); 
+if(emp_id){
+	$.ajax({
+		url: url+'leave/viwempleave',
+		type:'post',
+		data:{id:emp_id},
+        success:function(result){
+			var res1 = JSON.parse(result);   
+			console.log(res1);       
+			$('#listing_leave').empty();
+			$.each(res1.result, function(key, value) {
+				if(value.no_leave=='-1'){
+					leaveno='0';
+				}else{
+					leaveno=value.no_leave;
+				}
+			  	$('#listing_leave').append('<div class="col-md-3"><div class="stats-info"><span id="leaveid_'+value.leave_id+'" style="display:none;">'+value.leave_id+'</span><h6 id="leave_name_'+value.leave_id+'">'+ value.leave_name +'</h6><h4 id="leave_day_'+value.leave_id+'">'+ leaveno  +'</h4></div></div>');
+				var id = typeofleave;	
+				var leaveid=$('#leaveid_'+id).text();	
+				//alert(leaveid);
+				if(id==leaveid){
+				var noleavedays=$('#leave_day_'+id).text();
+				console.log(noleavedays);
+				var leavename=$('#leave_name_'+id).text();
+				$('#noleave').val(noleavedays);
+				$('#leavename').val(leavename);
+
+				}
+			});
+        }
+	});
+}
+
+	
+
 </script>
     

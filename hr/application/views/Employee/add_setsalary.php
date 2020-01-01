@@ -62,13 +62,12 @@
 											</div>
 										</div>
 										<div class="form-group">
-												<label>Gender</label>
-												<input type="text" name="Gender" id="Gender" readonly="" class="form-control">
+											<label>Gender</label>
+											<input type="text" name="Gender" id="Gender" readonly="" class="form-control">
 										</div>
 										<div class="form-group">
 											<label>Pancard No.</label>
 											<input class="form-control" type="text" name="pancard" id="pancard" Placeholder="pancard no"  value="" readonly>
-											
 										</div>
 										<div class="form-group">
 											<label>Days worked</label>
@@ -83,11 +82,10 @@
  
 										<div class="col-sm-6"> 
 											<h4 class="text-primary">Earnings</h4>
-												<?php 
-											  //  echo "<pre>";print_r($result);die;            
+												<?php 											            
 												foreach($result as $row)
 												{
-												if($row->compliancetypeid=='2'){
+													if($row->compliancetypeid=='2'){
 											?>
 											<div class="form-group">
 												<label><?php  if($row->compliancename=='PT'){

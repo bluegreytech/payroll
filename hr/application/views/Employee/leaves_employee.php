@@ -307,7 +307,7 @@
                 type: "post",
                 data: {id:id,status:status,changestatus:value,emp_id:emp_id} ,
                 success: function (response) {   
-               // return false;               
+                //return false;               
                 document.location.href = url+'leave/empleavelist';
             },
             error: function(jqXHR, textStatus, errorThrown) {

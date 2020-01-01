@@ -440,12 +440,17 @@ class Employee_model extends CI_Model
        { 
 
        	  	for($i=0;$i<count($this->input->post('leavename'));$i++){
-         	  //  $this->input->post('leavename')[$i].'='.$this->input->post('leaveno')[$i];
+         	    // $this->input->post('leavename')[$i].'='.$this->input->post('leaveno')[$i];
+         	    if($this->input->post('leaveno')[$i]=='N/A'){
+         	       	 $leavenumber='-1';
+         	    }else{
+         	    	$leavenumber=$this->input->post('leaveno')[$i];
+         	    }
          	    $leavedata=array(
          	     	'companyid'=>$this->session->userdata('companyid'),
          	     	'emp_id'=>$id,
          	     	'leave_id'=>$this->input->post('leavename')[$i],
-         	     	'no_leave'=>$this->input->post('leaveno')[$i]?$this->input->post('leaveno')[$i]:'0',
+         	     	'no_leave'=>$this->input->post('leaveno')[$i] ? $leavenumber:'0',
          	     	'created_date'=>date('Y-m-d H:i:s'),
          	    );         	  
          	    $res=$this->db->insert('tblempassignleave',$leavedata);
@@ -859,13 +864,19 @@ class Employee_model extends CI_Model
 		
     	    for($i=0;$i<count($this->input->post('leavename'));$i++){
     	    
-         	   // $this->input->post('leavename')[$i].'='.$this->input->post('leaveno')[$i];
+         	    if($this->input->post('leaveno')[$i]=='N/A'){
+         	       	 $leavenumber='-1';
+         	    }else{
+         	    	$leavenumber=$this->input->post('leaveno')[$i];
+         	    }
          	    $leavedata=array(
-         	     	'companyid'=>$this->session->userdata('companyid'),         	     
+         	     	'companyid'=>$this->session->userdata('companyid'),
+         	     	'emp_id'=>$id,
          	     	'leave_id'=>$this->input->post('leavename')[$i],
-         	     	'no_leave'=>$this->input->post('leaveno')[$i]?$this->input->post('leaveno')[$i]:'0',
+         	     	'no_leave'=>$this->input->post('leaveno')[$i] ? $leavenumber:'0',
          	     	'created_date'=>date('Y-m-d H:i:s'),
-         	    ); 
+         	    );    
+         	   
          	    $this->db->where('empassignleave_id',$this->input->post('empassignleave_id')[$i]);
          	    $res=$this->db->update('tblempassignleave',$leavedata);
 
@@ -876,12 +887,16 @@ class Employee_model extends CI_Model
    	 	}else{ 
    	 		//echo "Kjkjh";die;
            for($i=0;$i<count($this->input->post('leavename'));$i++){
-         	    //$this->input->post('leavename')[$i].'='.$this->input->post('leaveno')[$i];
+         	     if($this->input->post('leaveno')[$i]=='N/A'){
+         	       	 $leavenumber='-1';
+         	    }else{
+         	    	$leavenumber=$this->input->post('leaveno')[$i];
+         	    }
          	    $leavedata=array(
          	     	'companyid'=>$this->session->userdata('companyid'),
          	     	'emp_id'=>$id,
          	     	'leave_id'=>$this->input->post('leavename')[$i],
-         	     	'no_leave'=>$this->input->post('leaveno')[$i],
+         	     	'no_leave'=>$this->input->post('leaveno')[$i] ? $leavenumber:'0',
          	     	'created_date'=>date('Y-m-d H:i:s'),
          	    ); 
          	    $res=$this->db->insert('tblempassignleave',$leavedata);
@@ -920,39 +935,82 @@ class Employee_model extends CI_Model
 	    return $res;
    }
    function getempattendancedata($id,$salarymonth){
-   	$this->db->select('count(*) as totalworkingdays');
-   	$this->db->from('tblattendance');
-   	$this->db->where('emp_id',$id);
-   	$this->db->like('attendance_month',date($salarymonth));
-    $query=$this->db->get();
-	$res=$query->row();
-	//echo "<pre>";print_r($res->totalworkingdays);die;
-	 return $res->totalworkingdays;
-
+	   	$this->db->select('count(*) as totalworkingdays');
+	   	$this->db->from('tblattendance');
+	   	$this->db->where('emp_id',$id);
+	   	$this->db->like('attendance_month',date($salarymonth));
+	    $query=$this->db->get();
+		$res=$query->row();	
+		return $res->totalworkingdays;
    }
-    function getempleavedata($id,$salarymonth){
-   // echo $salarymonth;die;
-         
-	$firstdate=date($salarymonth.'-01');
-	$lastdate=date($salarymonth.'-t'); 
-   	$this->db->select('count(*) as totalworkingdays');
-   	$this->db->from('tblempleave');
-   	$this->db->where('emp_id',$id);
-   	$this->db->where('Is_deleted','0');
-    $this->db->where('leavestatus','Approve');
-    $this->db->where('typeofleave','4');
-    
-   	$this->db->where('leavefrom >=',$firstdate);
-   	$this->db->where('leaveto <=', $lastdate);
-    $query=$this->db->get();
-    
-	$res=$query->row();
+    function getempleavedata($id,$salarymonth){         
+		$firstdate=date($salarymonth.'-01');
+		$lastdate=date($salarymonth.'-t'); 
+	   	$this->db->select('count(*) as totalworkingdays');
+	   	$this->db->from('tblempleave');
+	   	$this->db->where('emp_id',$id);
+	   	$this->db->where('Is_deleted','0');
+	    $this->db->where('leavestatus','Approve');
+	    $this->db->where('typeofleave','4');    
+	   	$this->db->where('leavefrom >=',$firstdate);
+	   	$this->db->where('leaveto <=', $lastdate);
+	    $query=$this->db->get();    
+		$res=$query->row();
 	    return $res->totalworkingdays;
 
    }
    function insert_excel($data){
    	$result=$this->db->insert('tblemp', $data);
    	return  $result;
+   }
+
+    function empbankdetail_insert(){
+    	
+      	$emp_id=$this->input->post('emp_id');
+       	$query=$this->db->get_where('tblbankdetail',array('emp_id'=>$emp_id));      
+       	$res=$query->row();
+        if($query->num_rows()>0)
+        {
+    	 
+        	$data=array(
+       			'emp_id' =>$this->input->post('emp_id'),
+       			'bank_name' =>$this->input->post('bank_name'),
+       			'bank_branch'=>$this->input->post('bank_branch'),
+       			'dd_payable_at'=>$this->input->post('ddpayable'),
+       			'paymenttype'=>trim($this->input->post('emppaymenttype')),
+       			'account_no'=>$this->input->post('account_no'), 
+       			'companyid'=>$this->session->userdata('companyid'),
+       		 );
+			
+			$this->db->update('tblbankdetail', $data);
+			$result= $this->db->where('empbankid',$res->empbankid);
+		    return  $result;
+          
+        }else{
+        	
+       		$data=array(
+       			'emp_id' =>$this->input->post('emp_id'),
+       			'bank_name' =>$this->input->post('bank_name'),
+       			'bank_branch'=>$this->input->post('bank_branch'),
+       			'dd_payable_at'=>$this->input->post('ddpayable'),
+       			'paymenttype'=>trim($this->input->post('emppaymenttype')),
+       			'account_no'=>$this->input->post('account_no'), 
+       			'companyid'=>$this->session->userdata('companyid'),  
+       			'created_date'=>date('Y-m-d'),       			
+       		 );
+        
+			$result=$this->db->insert('tblbankdetail', $data);
+		   	return  $result;
+        
+        }
+   }
+   function getempbankdetail($id){
+   		$this->db->select('*');
+	    $this->db->from('tblbankdetail');
+	    $this->db->where('emp_id',$id);
+	    $query=$this->db->get();
+	 	return $query->row_array();
+	   
    }
    
 }

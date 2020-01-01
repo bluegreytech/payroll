@@ -64,7 +64,7 @@ class Employee extends CI_Controller
 			}
            	$data['redirect_page']="emplist";
 			$data['emp_id']=$this->input->post('emp_id');
-			$data['employee_code']=$this->input->post('employee_code');
+			$data['employee_code']=$this->input->post('employee_code');		
 			$data['first_name']=$this->input->post('FirstName');
 			$data['last_name']=$this->input->post('LastName');
 			$data['department']=$this->input->post('department');
@@ -105,7 +105,6 @@ class Employee extends CI_Controller
 
 			if($this->input->post("emp_id")!="")
 			{	
-				//echo "<pre>";print_r($_POST);die;
 				$this->employee_model->emp_update();
 				$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
 				redirect('employee/emplist');
@@ -132,10 +131,9 @@ class Employee extends CI_Controller
 		}else{
 			$data=array();
 			$data['empassginleave']=$this->employee_model->getempassginleave($emp_id);
-			//echo "<pre>";print_r($data['empassginleave']);die;	
+			$empbankdetail=$this->employee_model->getempbankdetail($emp_id);		  
 			$data['activeTab']="Editemp";	
-			$result=$this->employee_model->getdata($emp_id);	
-			//echo "<pre>";print_r($result);die;
+			$result=$this->employee_model->getdata($emp_id);				
 			$data['emp_id']=$result['emp_id'];
 			$data['employee_code']=$result['employee_code'];
 			$data['department']=$result['department'];
@@ -169,11 +167,17 @@ class Employee extends CI_Controller
 			$data['addressesproof']=$result['addressesproof'];
 			$data['complianceallowid']=$result['complianceallowid'];
 			$data['companytextno']=$result['companytextno'];
-			$data['compliancelist']=$this->company_model->compliancelist_deduction();	
+			$data['paymenttype']=$empbankdetail['paymenttype'];	
+			$data['bank_name']=$empbankdetail['bank_name'];	
+			$data['bank_branch']=$empbankdetail['bank_branch'];	
+			$data['account_no']=$empbankdetail['account_no'];	
+			$data['dd_payable_at']=$empbankdetail['dd_payable_at'];						
+			$data['compliancelist']=$this->company_model->compliancelist_deduction();
 					
 			$data['redirect_page']="emplist";
-			$data['leavelist']=$this->leave_model->showempleavelist();		
-			$this->load->view('Employee/addemp',$data);	
+			$data['leavelist']=$this->leave_model->showempleavelist();	
+
+			$this->load->view('Employee/editemp',$data);	
 		}
 	}
 
@@ -204,7 +208,6 @@ class Employee extends CI_Controller
 	}	
 	
 	function statusdata(){
-
 		if(!check_admin_authentication())
 		{ 
 			redirect(base_url());
@@ -277,32 +280,32 @@ class Employee extends CI_Controller
 	
 
 	function add_setsalary(){	
-			//echo "hggh";die;
-			if(!check_admin_authentication()){ 
-				redirect(base_url());
-			}   
-			$data=array();
-			$data['activeTab']="addhr";	
-			$this->load->library("form_validation");
-			$this->form_validation->set_rules('FirstName', 'FirstName', 'required');
-			$this->form_validation->set_rules('LastName', 'LastName', 'required');
-			$this->form_validation->set_rules('EmailAddress', 'EmailAddress', 'required');		
-			$this->form_validation->set_rules('marital_status', 'Marital Status', 'required');	
-			$this->form_validation->set_rules('department', 'Departmant', 'required');
-			$this->form_validation->set_rules('PhoneNumber', 'Mobileno', 'required');
-		    $this->form_validation->set_rules('dob', 'DateofBirth', 'required');
-		    $this->form_validation->set_rules('Gender', 'Gender', 'required');
-		    $this->form_validation->set_rules('pob', 'Place of Birth', 'required');
-		    $this->form_validation->set_rules('jod', 'Joining Date', 'required');
-		    $this->form_validation->set_rules('qualificationemp', 'Qualification Employee','required');
-		    $this->form_validation->set_rules('bloodgroup', 'Blood Group', 'required');
-		    $this->form_validation->set_rules('salary', 'salary', 'required');
-		    $this->form_validation->set_rules('salary_amount', 'salary amount', 'required');
-		    $this->form_validation->set_rules('probation_period_day', 'Probation Period Day', 'required');
-			$this->form_validation->set_rules('physically_challenged', 'Physically Challanged', 'required');
-			$this->form_validation->set_rules('probation_period_day', 'Probation Period Day', 'required');
-			$this->form_validation->set_rules('status', 'Status', 'required');
-			$this->form_validation->set_rules('probation_period_day', 'Probation Period Day', 'required');
+			
+		if(!check_admin_authentication()){ 
+			redirect(base_url());
+		}   
+		$data=array();
+		$data['activeTab']="addhr";	
+		$this->load->library("form_validation");
+		$this->form_validation->set_rules('FirstName', 'FirstName', 'required');
+		$this->form_validation->set_rules('LastName', 'LastName', 'required');
+		$this->form_validation->set_rules('EmailAddress', 'EmailAddress', 'required');		
+		$this->form_validation->set_rules('marital_status', 'Marital Status', 'required');	
+		$this->form_validation->set_rules('department', 'Departmant', 'required');
+		$this->form_validation->set_rules('PhoneNumber', 'Mobileno', 'required');
+	    $this->form_validation->set_rules('dob', 'DateofBirth', 'required');
+	    $this->form_validation->set_rules('Gender', 'Gender', 'required');
+	    $this->form_validation->set_rules('pob', 'Place of Birth', 'required');
+	    $this->form_validation->set_rules('jod', 'Joining Date', 'required');
+	    $this->form_validation->set_rules('qualificationemp', 'Qualification Employee','required');
+	    $this->form_validation->set_rules('bloodgroup', 'Blood Group', 'required');
+	    $this->form_validation->set_rules('salary', 'salary', 'required');
+	    $this->form_validation->set_rules('salary_amount', 'salary amount', 'required');
+	    $this->form_validation->set_rules('probation_period_day', 'Probation Period Day', 'required');
+		$this->form_validation->set_rules('physically_challenged', 'Physically Challanged', 'required');
+		$this->form_validation->set_rules('probation_period_day', 'Probation Period Day', 'required');
+		$this->form_validation->set_rules('status', 'Status', 'required');
+		$this->form_validation->set_rules('probation_period_day', 'Probation Period Day', 'required');
 		    
 		
 		if($this->form_validation->run() == FALSE){			
@@ -482,108 +485,157 @@ class Employee extends CI_Controller
 	}
 	/*--- start himani ---*/
 
-function import_emp(){
-  	if(isset($_FILES["file"]["name"]))
-  	{
-		$path = $_FILES["file"]["tmp_name"];
-		$object = PHPExcel_IOFactory::load($path);		
-		$data=array();	
-	   	
-       $data['employee_code']=$this->employee_model->empcodelist();	
-      
-     
-	   foreach($object->getWorksheetIterator() as $worksheet)
-	   {
-            $j=0;
-		    $highestRow = $worksheet->getHighestRow();
-		    $highestColumn = $worksheet->getHighestColumn();	
+	function import_emp(){
+	  	if(isset($_FILES["file"]["name"]))
+	  	{
+			$path = $_FILES["file"]["tmp_name"];
+			$object = PHPExcel_IOFactory::load($path);		
+			$data=array();	
+		   	
+	       $data['employee_code']=$this->employee_model->empcodelist();	
+	      
+	     
+		   foreach($object->getWorksheetIterator() as $worksheet)
+		   {
+	            $j=0;
+			    $highestRow = $worksheet->getHighestRow();
+			    $highestColumn = $worksheet->getHighestColumn();	
 
-		    for($row=2; $row<=$highestRow; $row++)
-		    { 	
-           		 // echo "fgfg==". $j;
-		    		$split = explode("_",$data['employee_code']);	
-				    $val=$split[1]+$j;
+			    for($row=2; $row<=$highestRow; $row++)
+			    { 	
+	           		 // echo "fgfg==". $j;
+			    		$split = explode("_",$data['employee_code']);	
+					    $val=$split[1]+$j;
 
-	    			$empcode=$split[0].'_'. $val;		   
-					
-		    	
-              
-				$department = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
-				$desgination = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
-				$first_name = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
-				$last_name = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
-				$gender = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
-				$Father_name = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
-				$Dateofbirth = $worksheet->getCellByColumnAndRow(6, $row)->getValue();
-				$Placeofbirth= $worksheet->getCellByColumnAndRow(7, $row)->getValue();
-				$marital_status= $worksheet->getCellByColumnAndRow(8, $row)->getValue();
-				$Address= $worksheet->getCellByColumnAndRow(9, $row)->getValue();
-				$phone= $worksheet->getCellByColumnAndRow(10, $row)->getValue();
-				$email= $worksheet->getCellByColumnAndRow(11, $row)->getValue();
-				$religion= $worksheet->getCellByColumnAndRow(12, $row)->getValue();
-				$nationality= $worksheet->getCellByColumnAndRow(13, $row)->getValue();
-				$bloodgroup= $worksheet->getCellByColumnAndRow(14, $row)->getValue();       
-				$probation_preriod_day= $worksheet->getCellByColumnAndRow(15, $row)->getValue();
-				$physically_challenged= $worksheet->getCellByColumnAndRow(16, $row)->getValue();
-				$joiningdate= $worksheet->getCellByColumnAndRow(17, $row)->getValue();
-				$salaryamt= $worksheet->getCellByColumnAndRow(18, $row)->getValue();
-				$salary= $worksheet->getCellByColumnAndRow(19, $row)->getValue();
-				$aadharcard= $worksheet->getCellByColumnAndRow(20, $row)->getValue();
-				$pancard= $worksheet->getCellByColumnAndRow(21, $row)->getValue();       
-				$date = str_replace('/', '-', $Dateofbirth);
-				$employee_code=$this->employee_model->empcodelist(); 
-			    $join= str_replace('/', '-', $joiningdate);
-			    $data = array(
-					'companyid' =>$this->session->userdata('companyid'),
-					'employee_code'=>$empcode,
-					'status' => 'Active',
-					'department'  => $department,
-					'desgination'   => $desgination,
-					'first_name'    => $first_name,
-					'last_name'  => $last_name,
-					'gender'   => $gender,
-					'Father_name'   => $Father_name,
-					'Dateofbirth'   =>  date('Y-m-d', strtotime($date)),
-					'Placeofbirth'   => $Placeofbirth,
-					'marital_status'   => $marital_status,
-					'Address'   => $Address,
-					'phone'   => $phone,
-					'email'   => $email,
-					'religion'   => $religion,
-					'nationality'   => $nationality,
-					'bloodgroup' =>$bloodgroup,
-					'probation_preriod_day' =>$probation_preriod_day,
-					'physically_challenged' =>$physically_challenged,
-					'joiningdate' =>date('Y-m-d', strtotime($join)),
-					'salaryamt' =>$salaryamt,
-					'salary' =>$salary,
-					'aadharcard' =>$aadharcard,
-					'pancard' =>$pancard,
-					'created_date' =>date('Y-m-d')
-			     );
-			  		
-					$email_id=$data['email'];
-					$select = "SELECT email FROM tblemp WHERE email = '$email_id'" ;
-					$query = $this->db->query($select);
-					$count = $query->num_rows();
-					if($count!=0){
-					 $msg= 'The email address '. $email_id.' is already registered'; 
-                      echo  json_encode($msg);
-					}else if($count==0){
+		    			$empcode=$split[0].'_'. $val;		   
 						
-						//echo "<pre>";print_r($data);				 
-					   $res=$this->employee_model->insert_excel($data);
-                    	
-					} 
-  			$j++;	
-		    }
-           return $res;
+			    	
+	              
+					$department = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
+					$desgination = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+					$first_name = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+					$last_name = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+					$gender = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+					$Father_name = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+					$Dateofbirth = $worksheet->getCellByColumnAndRow(6, $row)->getValue();
+					$Placeofbirth= $worksheet->getCellByColumnAndRow(7, $row)->getValue();
+					$marital_status= $worksheet->getCellByColumnAndRow(8, $row)->getValue();
+					$Address= $worksheet->getCellByColumnAndRow(9, $row)->getValue();
+					$phone= $worksheet->getCellByColumnAndRow(10, $row)->getValue();
+					$email= $worksheet->getCellByColumnAndRow(11, $row)->getValue();
+					$religion= $worksheet->getCellByColumnAndRow(12, $row)->getValue();
+					$nationality= $worksheet->getCellByColumnAndRow(13, $row)->getValue();
+					$bloodgroup= $worksheet->getCellByColumnAndRow(14, $row)->getValue();       
+					$probation_preriod_day= $worksheet->getCellByColumnAndRow(15, $row)->getValue();
+					$physically_challenged= $worksheet->getCellByColumnAndRow(16, $row)->getValue();
+					$joiningdate= $worksheet->getCellByColumnAndRow(17, $row)->getValue();
+					$salaryamt= $worksheet->getCellByColumnAndRow(18, $row)->getValue();
+					$salary= $worksheet->getCellByColumnAndRow(19, $row)->getValue();
+					$aadharcard= $worksheet->getCellByColumnAndRow(20, $row)->getValue();
+					$pancard= $worksheet->getCellByColumnAndRow(21, $row)->getValue();       
+					$date = str_replace('/', '-', $Dateofbirth);
+					$employee_code=$this->employee_model->empcodelist(); 
+				    $join= str_replace('/', '-', $joiningdate);
+				    $data = array(
+						'companyid' =>$this->session->userdata('companyid'),
+						'employee_code'=>$empcode,
+						'status' => 'Active',
+						'department'  => $department,
+						'desgination'   => $desgination,
+						'first_name'    => $first_name,
+						'last_name'  => $last_name,
+						'gender'   => $gender,
+						'Father_name'   => $Father_name,
+						'Dateofbirth'   =>  date('Y-m-d', strtotime($date)),
+						'Placeofbirth'   => $Placeofbirth,
+						'marital_status'   => $marital_status,
+						'Address'   => $Address,
+						'phone'   => $phone,
+						'email'   => $email,
+						'religion'   => $religion,
+						'nationality'   => $nationality,
+						'bloodgroup' =>$bloodgroup,
+						'probation_preriod_day' =>$probation_preriod_day,
+						'physically_challenged' =>$physically_challenged,
+						'joiningdate' =>date('Y-m-d', strtotime($join)),
+						'salaryamt' =>$salaryamt,
+						'salary' =>$salary,
+						'aadharcard' =>$aadharcard,
+						'pancard' =>$pancard,
+						'created_date' =>date('Y-m-d')
+				     );
+				  		
+						$email_id=$data['email'];
+						$select = "SELECT email FROM tblemp WHERE email = '$email_id'" ;
+						$query = $this->db->query($select);
+						$count = $query->num_rows();
+						if($count!=0){
+						 $msg= 'The email address '. $email_id.' is already registered'; 
+	                      echo  json_encode($msg);
+						}else if($count==0){
+							
+							//echo "<pre>";print_r($data);				 
+						   $res=$this->employee_model->insert_excel($data);
+	                    	
+						} 
+	  			$j++;	
+			    }
+	           return $res;
 
+			}
+	   	}
+	}
+  function addempbankdetial(){
+  //	echo "<pre>";print_r($_POST);die;
+  	
+		if(!check_admin_authentication()){ 
+			redirect(base_url());
+		}   
+			$data=array();
+			$data['activeTab']="addempbankdetial";	
+			$this->load->library("form_validation");
+			$this->form_validation->set_rules('emppaymenttype', 'BankName', 'required');
+			
+		
+		if($this->form_validation->run() == FALSE){			
+			if(validation_errors())
+			{
+				$data["error"] = validation_errors();
+				echo "<pre>";print_r($data["error"]);die;
+			}else{
+				$data["error"] = "";
+			}
+           	$data['redirect_page']="emplist";
+           	$data['bankid']=$this->input->post('bankid');
+           	$data['emp_id']=$this->input->post('emp_id');
+			$data['bank_name']=$this->input->post('bank_name');
+			$data['bank_branch']=$this->input->post('bank_branch');
+			$data['ddpayable']=$this->input->post('ddpayable');
+			$data['account_no']=$this->input->post('account_no');
+			$data['option']='';
+			$data['keyword']='';	
 		}
-   	}
-}
+		else
+		{	
 
-
-	
+			if($this->input->post("bank_id")!="")
+			{	
+				$this->employee_model->empbankdetail_update();
+				$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
+				redirect('employee/emplist');			
+			}
+			else
+			{ 	
+				$this->employee_model->empbankdetail_insert();
+				$this->session->set_flashdata('success', 'Record has been Inserted Succesfully!');
+				redirect('employee/emplist');
+			}
+		}
+		
+		$data['compliancelist']=$this->company_model->compliancelist_deduction();			 
+		$data['employee_code']=$this->employee_model->empcodelist();			
+		$data['leavelist']=$this->leave_model->showempleavelist();
+		$this->load->view('Employee/addemp',$data);		
+  }
 
 }

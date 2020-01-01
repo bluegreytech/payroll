@@ -137,9 +137,6 @@ class Attendance_model extends CI_Model
 		$query=$this->db->get();	
 		return $query->row_array();
 	}
-
-	
-
     function attendance_insert()
 	{	
 		$attendancemonth = $this->input->post('attendancemonth'); 	
@@ -213,7 +210,6 @@ class Attendance_model extends CI_Model
         }       
 		return $res;		
 	}
-
 	function getattendancedata($attid){
 		$this->db->select("*");
 		$this->db->from("tblattendance");		
@@ -256,6 +252,22 @@ class Attendance_model extends CI_Model
 		$query=$this->db->get();	
 		//echo $this->db->last_query();die;
 		return $query->result();
+	}
+
+	function getempleavedata($id,$attendancedate){
+		$this->db->select('*');
+		$this->db->from('tblempleave');
+		$this->db->where('emp_id',$id);              
+		$this->db->where('leavefrom <=',$attendancedate);
+		$this->db->where('leaveto >=', $attendancedate);
+
+		$query1=$this->db->get(); 	
+		//echo $this->db->last_query();die;
+		//echo "<pre>";print_r($query1);die;		 
+		$res1=$query1->row();
+		return  $res1;
+		// echo "<pre>";print_r($res1->typeofleave);die;	
+
 	}
 
 	

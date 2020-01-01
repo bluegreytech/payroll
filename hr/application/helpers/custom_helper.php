@@ -676,11 +676,6 @@
         	return '';
         }
     }
-	
-	
-
-	
-	 
         /* commom function for all module */
          //get all record count
     function get_total_count($table,$where='')
@@ -695,7 +690,7 @@
 		}else{ return 0; }
     }
         
-        //get all record
+     
     function get_result($limit,$offset,$table,$where='')
     { 
 		$CI =& get_instance();
@@ -712,9 +707,9 @@
     { 
 		$CI =& get_instance();
 		if($where != ''){ $CI->db->where($where);}
-		//  $CI->db->order_by('admin_id','desc');
+		
 		$query= $CI->db->get($table,$limit,$offset);
-		//echo $this->db->last_query();die;
+		
 		if($query->num_rows()>0)
 		{
 			return $query->result();

@@ -1,4 +1,4 @@
-<!-- Sidebar -->
+
 
 
 <div class="sidebar" id="sidebar">
@@ -42,6 +42,7 @@
 								<ul style="display: none;">
 								<li><a href="<?php echo base_url();?>employee/emplist">List of Employees</a></li>
 								<li><a href="<?php echo base_url();?>salarysetting/setsalary">Employee Set Salary </a></li>
+								<li><a href="<?php echo base_url();?>employee/emppaymentmode">Employee payment mode </a></li>
 								</ul>
 							</li>
 							<li class="submenu">
@@ -52,6 +53,65 @@
 									<li><a href="<?php echo base_url();?>leave/empleavelist">List of Leaves<span class="badge badge-pill bg-primary float-right">1</span></a></li>
 								</ul>
 							</li>
+
+							<li class="submenu">
+								<a href="<?php echo base_url();?>Dashboard"><i class="la la-money"></i><span>Payroll</span><span class="menu-arrow"></span></a>
+								<ul style="display: none;">
+								<li><a href="<?php echo base_url();?>salarysetting/setsalary">Payout <span class="menu-arrow"></span>
+									<ul> 
+									<li><a href="<?php echo base_url();?>leave/leavelist">Bank Transfer</a></li>
+									<li><a href="<?php echo base_url();?>leave/empleavelist">Cheque /Cash Statement<span class="badge badge-pill bg-primary float-right">1</span></a></li>
+									</ul>
+									</a>
+								</li>
+									<li><a href="<?php echo base_url();?>leave/leavelist">List of Leave Type</a></li>
+									<li><a href="<?php echo base_url();?>leave/empleavelist">List of Leaves<span class="badge badge-pill bg-primary float-right">1</span></a></li>
+								</ul>
+							</li>
+							<li class="submenu">
+                                <a href="javascript:void(0);"><i class="la la-money"></i> <span>Payroll</span> <span class="menu-arrow"></span></a>
+                                <ul style="display: none;">
+                                    <li class="submenu">
+                                        <a href="javascript:void(0);"> <span>Payroll Input</span> <span class="menu-arrow"></span></a>
+                                        <ul style="display: none;">
+                                            <li><a href="javascript:void(0);"><span>Salary</span></a></li>
+                                            <li><a href="javascript:void(0);"><span>loan</span></a></li>
+                                            <li><a href="javascript:void(0);"><span>Income Tax</span></a></li>
+                                           <!--  <li class="submenu">
+                                                <a href="javascript:void(0);"> <span>Bank Transfer</span> <span class="menu-arrow"></span></a>
+                                                <ul style="display: none;">
+                                                    <li><a href="javascript:void(0);">Level 3</a></li>
+                                                    <li><a href="javascript:void(0);">Level 3</a></li>
+                                                </ul>
+                                            </li> -->
+                                          <!--   <li><a href="javascript:void(0);"> <span>Level 2</span></a></li> -->
+                                        </ul>
+
+
+                                    </li>
+                                     <li class="submenu">
+                                        <a href="javascript:void(0);"> <span>Payout</span> <span class="menu-arrow"></span></a>
+                                        <ul style="display: none;">
+                                            <li><a href="<?php echo base_url();?>salarysetting/empchequelist"><span>Chaque / Cash Statement</span></a></li>
+                                            <li><a href="<?php echo base_url();?>salarysetting/empbanklist"><span>Bank Transfer</span></a></li>
+                                            <li><a href="javascript:void(0);"><span>Payslip</span></a></li>
+                                           <!--  <li class="submenu">
+                                                <a href="javascript:void(0);"> <span>Bank Transfer</span> <span class="menu-arrow"></span></a>
+                                                <ul style="display: none;">
+                                                    <li><a href="javascript:void(0);">Level 3</a></li>
+                                                    <li><a href="javascript:void(0);">Level 3</a></li>
+                                                </ul>
+                                            </li> -->
+                                          <!--   <li><a href="javascript:void(0);"> <span>Level 2</span></a></li> -->
+                                        </ul>
+                                        
+
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);"> <span>Level 1</span></a>
+                                    </li>
+                                </ul>
+                            </li>
 
 							<li class="submenu">
 								<a href="<?php echo base_url();?>Dashboard"><i class="la la-user"></i> <span>Attendance</span> <span class="menu-arrow"></span></a>
@@ -86,4 +146,4 @@
 					</div>
                 </div>
             </div>
-			<!-- /Sidebar -->
+				

@@ -77,7 +77,13 @@ class Attendance extends CI_Controller
 		$id=$this->input->post('id');
 		$data=array();
 		$result=$this->attendance_model->getattendancedata($id);
-		//echo "<pre>";print_r($result);die;
+		$leavedata=$this->attendance_model->getempleavedata($result['emp_id'],$result['attendance_date']);
+		if($leavedata){
+			$leavetypedata=get_one_record('tblcmpleave','leave_id',$leavedata->typeofleave);
+			$data['typeofleave']=$leavetypedata->leave_name;
+		}
+		
+		//echo "<pre>";print_r($leavetypedata->leave_name);die;
 		$data['attendance_id']=$result['attendance_id'];
 		$data['company_id']=$result['company_id'];			
 		$data['emp_id']=$result['emp_id'];
@@ -85,7 +91,11 @@ class Attendance extends CI_Controller
 		$data['attendance_month']=$result['attendance_month'];
 		$data['attendance_date']=$result['attendance_date'];
 		$data['time_in']=$result['time_in'];
-		$data['time_out']=$result['time_out'];	
+		$data['time_out']=$result['time_out'];
+		
+
+
+		
 		echo json_encode($data);
 	}
 

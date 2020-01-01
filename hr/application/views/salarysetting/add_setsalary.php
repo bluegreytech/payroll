@@ -478,7 +478,7 @@ $("#employename").change(function () {
 		 data:{id:id,salarymonth:salary_month},
          success:function(response){
 			var response = JSON.parse(response);
-           // console.log(response.complianceallowid.length);
+          //  console.log(response.complianceallowid.length);
 
            
             $('#emp_id').val(response.emp_id);
@@ -633,7 +633,7 @@ $("#alldate").on("dp.change", function() {
 			console.log(el.emp_id);
 			
         	$('#employename').append(
-        	 	$('<option></option>').val(el.emp_id).html(el.first_name+' '+el.last_name)).selectpicker('refresh');
+        	 	$('<option></option>').val(el.emp_id).html(el.first_name+' '+el.last_name+' '+'['+ el.employee_code +']')).selectpicker('refresh');     
         	 //$('#employename').selectpicker('val', '249');
         	
     	});
@@ -657,7 +657,7 @@ $("#alldate").on("dp.change", function() {
 			$('#employename').append($('<option value="" disabled="" selected="">Please Select</option>')).selectpicker('refresh');
 		$.each(response, function (index, el) {			
         	$('#employename').append(
-        	 	$('<option></option>').val(el.emp_id).html(el.first_name+' '+el.last_name)).selectpicker('refresh');        	
+        	 	$('<option></option>').val(el.emp_id).html(el.first_name+' '+el.last_name+' '+'['+ el.employee_code +']')).selectpicker('refresh');        	
     	});    	
     	 $('#employename').selectpicker('render');
 		}

@@ -19,7 +19,7 @@
 					</div>
 					<!-- /Page Title -->					
 					<!-- Search Filter -->
-					<div class="row filter-row">
+				<!-- 	<div class="row filter-row">
 					   <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
 							<div class="form-group form-focus">
 								<input type="text" class="form-control floating">
@@ -66,7 +66,7 @@
 						<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
 							<a href="#" class="btn btn-success btn-block"> Search </a>  
 						</div>     
-                    </div>
+                    </div> -->
 					<!-- /Search Filter -->
 					
 					<div class="row">
@@ -80,11 +80,11 @@
 							<th>Email</th>
 							<th>Join Date</th>							
 							<th>Salary</th>
-							<th>Payslip</th>
+							<!-- <th>Payslip</th> -->
 							<th class="text-right">Action</th>
 						</tr>
 						</thead>
-					<tbody>
+					<tbody id="tbldata">
 						<?php
 						$i=1;
 						if($result){  
@@ -98,10 +98,8 @@
 						<h2 class="table-avatar">
 							<?php 	
 							
-							 if(($row->ProfileImage!='' && file_exists(base_path().'/upload/emp/'.$row->ProfileImage))){  ?>
-								
+							 if(($row->ProfileImage!='' && file_exists(base_path().'/upload/emp/'.$row->ProfileImage))){  ?>								
 								<img src="<?php echo base_url();?>upload/emp/<?php echo $row->ProfileImage;?>" alt="" class="avatar">
-								 
 								<a href="javascript:void(0)"><?php echo ucfirst($row->first_name.' '.$row->last_name);?>  <span><?php echo $row->department.' '.$row->desgination;?></span></a>
 							<?php
 							}
@@ -109,7 +107,7 @@
 							{ 
 							?>
 							<img src="<?php echo base_url();?>upload/no_image/user_no_image.png" alt="" class="avatar">
-							<a href="javascript:void(0)"><?php echo ucfirst($row->first_name.' '.$row->last_name);?>  <span><?php echo $row->department.' '.$row->desgination;?></span></a>							
+							<a href="javascript:void(0)"><?php echo ucfirst($row->first_name.' '.$row->last_name);?> <span><?php echo $row->department.' '.$row->desgination;?></span></a>							
 							<?php
 							}
 							?>
@@ -122,11 +120,11 @@
 						<td>
 							<i class="fa fa-inr"></i> <?php echo $row->netpay;?>
 						</td>
-						<td>
-						  <a class="btn btn-sm btn-primary" href="<?php echo base_url().'salarysetting/salary_view/'. $row->empsetsalary_id; ?>">Generate Slip
+						<!-- <td>
+						  <a class="btn btn-sm btn-primary" href="<?php //echo base_url().'salarysetting/salary_view/'. $row->empsetsalary_id; ?>">Generate Slip
 						  </a>
 						
-						</td>
+						</td> -->
 						
 						<td class="text-center">
 							<?php echo anchor('salarysetting/edit_setsalary/'.$row->empsetsalary_id,'<i class="fa fa-pencil fa-lg" ></i>'); ?>
@@ -220,20 +218,16 @@
 		orientation: 'landscape', 
 		pageSize: 'A4',		
 		exportOptions: {
-		columns: [0,1,2,3,4,5],
-		
+		columns: [0,1,2,3,4,5],		
 		},
-		
 	        customize : function(doc){ 
 				doc.content[1].margin = [ 50, 0, 100, 0 ];
 				doc.defaultStyle.fontSize = 10; //2, 3, 4,etc
 	            doc.styles.tableHeader.fontSize = 12; //2, 3, 4, etc
 				doc.defaultStyle.alignment = 'center';
 				doc.styles.tableHeader.alignment = 'center';
-
-				 doc.content[1].table.widths = ['15%','15%','30%','14%', 
-	                                                           '14%', '14%'];
-	         
+				doc.content[1].table.widths = ['15%','15%','30%','14%', 
+	                                                           '14%', '14%'];	         
 	       },
 	 },
 	  {
@@ -242,8 +236,7 @@
 		pageSize: 'A4',
 		text:'<i class="fa fa-print"></i> Print',
 		exportOptions: {
-			columns: [0,1,2,3,4,5],
-			 		
+			columns: [0,1,2,3,4,5],			 		
 		},
 		 // customize: function (win) {
 		 // 		//	win.defaultStyle.font = 'Times New Roman';
@@ -267,27 +260,35 @@
 	  $("div#example_wrapper").find($(".dt-buttons")).css(styles);
 
 } );
-	$("#alldate").on("dp.change", function() {
-	selecteddate=$("#alldate").val();
-	$('#salary_month').val(selecteddate);
-	url="<?php echo base_url(); ?>";
-
-	$.ajax({
-		url: url+'salarysetting/viewsetsalary',
-		type:'post',
-		data:{selecteddate:selecteddate},
-		success:function(response){
-		var response = JSON.parse(response);
-		console.log(response);
-			 var trHTML = '';
-        $.each(response, function (key, value) {
-        	console.log(capitalize(value.first_name+''+value.last_name));
-            trHTML += '<tr><td>' + capitalize(value.first_name+''+value.last_name) + '</td><td>' + value.employee_code + '</td><td>' + value.employee_code + '</td></tr>';
-        });
-        $('#example').append(trHTML);
-    	}
-	});
-});
+// $("#alldate").on("dp.change", function() {
+// 	selecteddate=$("#alldate").val();
+// 	$('#salary_month').val(selecteddate);
+// 	url="<?php echo base_url(); ?>";
+// 	$.ajax({
+// 		url: url+'salarysetting/viewsetsalary',
+// 		type:'post',
+// 		data:{selecteddate:selecteddate},
+// 		success:function(response){
+// 		var response = JSON.parse(response);
+// 		console.log(response);
+// 			var trHTML = '';
+			
+//         $.each(response, function (key, value) {
+//              $('#tbldata').empty();
+//         		console.log(value.first_name);
+        		
+        	
+//         	if(ProfileImage){
+//         		images=url+'upload/emp/'+value.ProfileImage;
+//         	}else{
+//         		images=url+'upload/no_image/user_no_image.png';
+//         	}
+//             trHTML += '<tr><td><h2 class="table-avatar"><img src="'+images+'" alt="" class="avatar"><a href="javascript:void(0)">'+capitalize(value.first_name+''+value.last_name) +'<span>' + value.department+' '+value.desgination + '</span></a></h2></td><td>' + value.employee_code + '</td><td>' + value.email + '</td><td>' +value.joiningdate+ '</td><td width="10%"><i class="fa fa-inr"></i> ' + value.netpay +'</td><td><a class="btn btn-sm btn-primary" href="'+url+'salarysetting/salary_view/'+value.empsetsalary_id+'">Generate Slip </a></td><td></td></tr>';
+//          });
+//          $('#tbldata').append(trHTML);
+//     	}
+// 	});
+// });
 function capitalize(str) {
   strVal = '';
   str = str.split(' ');
