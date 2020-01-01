@@ -18,17 +18,16 @@ class Salarysetting extends CI_Controller
 			redirect(base_url());
 		}   
 		$data=array();
-		$data['activeTab']="addhr";	
+		$data['activeTab']="setsalary";	
 		$this->load->library("form_validation");
 		$salarymonthresult=$this->company_model->getsetsalarymonth();
 		$data['selectdatedata']=getSelectdate($this->session->userdata('companyid'));
 		$salarymonth=$data['selectdatedata']->selecteddate;			
-		$data['result']=$this->salary_model->empsetsalary_list($salarymonth);
-      // echo "<pre>";print_r($data['result']);die;
+		$data['result']=$this->salary_model->empsetsalary_list($salarymonth);     
 		$this->load->view('salarysetting/emp_setsalary',$data);
 	
 	}
-	function viewsetsalary(){			
+	function viewsetsalary(){
 		if(!check_admin_authentication()){ 
 			redirect(base_url());
 		}   
@@ -36,8 +35,8 @@ class Salarysetting extends CI_Controller
 		//echo "<pre>";print_r($_POST);die;
 		
 		$salarymonth=$this->input->post('selecteddate')	;
-		$data['result']=$this->salary_model->empsetsalary_list($salarymonth);       
-		echo json_encode($data['result']);
+		$result=$this->salary_model->empsetsalary_list($salarymonth);       
+		echo json_encode($result);
 	
 	}
 
@@ -159,7 +158,7 @@ class Salarysetting extends CI_Controller
 				$data['otherearningvalue']=$result['otherearningvalue'];  
 				$data['created_date']=$result['createddate']; 
 				$data['result']=$this->company_model->compliancelist();   
-               $cmpdetail= getOneCompany($this->session->userdata('companyid')); 
+               	$cmpdetail= getOneCompany($this->session->userdata('companyid')); 
 
 				$file_name=$data['salary_month'].'.pdf';
 				//$result['quotationtData']=$this->Invoice_model->list_companyquotation($quotationid);
@@ -250,8 +249,11 @@ class Salarysetting extends CI_Controller
 		$data=array();
 	    $data['redirect_page']="setsalary";
 	 
-	    $result=$this->company_model->getsetsalarymonth();		
-		$data['salarymonth']=$result['salary_month'];
+	    $salarymonthresult=$this->company_model->getsetsalarymonth();
+		$data['selectdatedata']=getSelectdate($this->session->userdata('companyid'));	
+		//echo "<pre>";print_r($data['selectdateresult']->selecteddate); die;
+	   	$salarymonth=$data['selectdatedata']->selecteddate;
+	    $data['salarymonth']=$salarymonthresult['salary_month']; 
 		
 		$data['result']=$this->company_model->compliancelist();
 		$empsalarylist=$this->salary_model->getsetsalarybyemp($id); 
@@ -265,31 +267,45 @@ class Salarysetting extends CI_Controller
     }
 
     
-    function empsalarmonth(){
-    	
+    function empsalarmonth(){    	
     	$salarymonth=$this->input->post('selecteddate');
-    	$emplist=$this->attendance_model->emppersentmonthlist($salarymonth);    
+    	$emplist=$this->employee_model->emplist();    
         echo json_encode($emplist);
         die;
     }
 
    function reportsalary(){
+	if(!check_admin_authentication()){ 
+	redirect(base_url());
+	}	
+	$data=array();
+	$data['result']=$this->salary_model->empsetsalary_list();
+	$data['tot_earn']=$this->salary_model->emptotearn();
+	$data['tot_deduction']=$this->salary_model->emptotdeduction();
+	$data['tot_netpay']=$this->salary_model->emptotpay();
+	
+	$this->load->view('salarysetting/report_salary',$data);
+   }
+   function empchequelist(){
    		if(!check_admin_authentication()){ 
 			redirect(base_url());
 		} 
     	
 		$data=array();
+		$data['result']=$this->salary_model->empchequelist();	
+	//	echo "<pre>";print_r($data);die;
+       	$this->load->view('salarysetting/emppaymenttype',$data);
 
-		$data['result']=$this->salary_model->empsetsalary_list();
-	$data['tot_earn']=$this->salary_model->emptotearn();
-	$data['tot_deduction']=$this->salary_model->emptotdeduction();
-	$data['tot_netpay']=$this->salary_model->emptotpay();
-		//print_r($data['tot_earn']) ; die;
-		$this->load->view('salarysetting/report_salary',$data);
    }
+    function empbanklist(){
+   		if(!check_admin_authentication()){ 
+			redirect(base_url());
+		} 
+    	
+		$data=array();
+		$data['result']=$this->salary_model->empbanklist();		
+       	$this->load->view('salarysetting/emppaymenttypebank',$data);
 
-
-     
-
+   }
 
 }

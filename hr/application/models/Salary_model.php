@@ -126,8 +126,7 @@ class Salary_model extends CI_Model
 
     }
 
-    function emptotearn(){
-         
+    function emptotearn(){         
         $this->db->select_sum('gross_earning');
         $this->db->from('tblempsetsalary');
          $this->db->where('Is_deleted','0');
@@ -137,13 +136,13 @@ class Salary_model extends CI_Model
          return $res;
     }
     function emptotdeduction(){
-         $this->db->select_sum('totaldeduction');
+        $this->db->select_sum('totaldeduction');
         $this->db->from('tblempsetsalary');
-         $this->db->where('Is_deleted','0');
+        $this->db->where('Is_deleted','0');
         $this->db->where('company_id',$this->session->userdata('companyid'));
-         $query=$this->db->get();
+        $query=$this->db->get();
         $res=$query->result();
-         return $res;
+        return $res;
     }
     function emptotpay(){
          $this->db->select_sum('netpay');
@@ -270,5 +269,37 @@ class Salary_model extends CI_Model
         return $res;
     }
   
+
+  function empchequelist(){
+        $this->db->select('*');
+        $this->db->from('tblemp as em');
+        $this->db->join('tblbankdetail as bk','em.emp_id=bk.emp_id');
+        $this->db->join('tblempsetsalary as ee','ee.emp_id=bk.emp_id');        
+        $this->db->where('em.Is_deleted','0');
+        $this->db->where('bk.paymenttype','cheque');
+        $this->db->or_where('bk.paymenttype','cash');
+        $this->db->where('em.companyid',$this->session->userdata('companyid'));        
+        $this->db->order_by('em.emp_id','Desc');
+        $query=$this->db->get();
+        //echo $this->db->last_query();die;
+        $res=$query->result();
+        return $res;
+    }
+    function empbanklist(){
+        $this->db->select('*');
+        $this->db->from('tblemp as em');
+        $this->db->join('tblbankdetail as bk','em.emp_id=bk.emp_id');
+        $this->db->join('tblempsetsalary as ee','ee.emp_id=bk.emp_id');        
+        $this->db->where('em.Is_deleted','0');
+        $this->db->where('bk.paymenttype','bank_transfer');
+     
+        $this->db->where('em.companyid',$this->session->userdata('companyid'));        
+        $this->db->order_by('em.emp_id','Desc');
+        $query=$this->db->get();
+        //echo $this->db->last_query();die;
+        $res=$query->result();
+        return $res;
+    }
+
 
 }

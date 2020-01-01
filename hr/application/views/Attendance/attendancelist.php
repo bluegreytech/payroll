@@ -58,8 +58,7 @@
 	</div>
 	<div class="col-md-1"> 
 		<a href="<?php echo base_url()?>attendance/<?php echo $redirect_page;?>" class="btn btn-info"><i class="fa fa-refresh"></i></a> 	
-		</div>     
-	   
+		</div>
 </div>
 </form>  	
 <!-- /Search Filter -->
@@ -162,6 +161,8 @@
 			                         	echo "<B class='text-primary'>EL</B>";
 									}else if($present=="Overtime"){                         
 			                         	echo "<B class='text-purple'>OT</B>";
+									}else if($present=="Leave"){                         
+			                         	echo "<B class='text-red'>L</B>";
 									}
 								?>
 							
@@ -191,14 +192,17 @@
 					<div class="col-md-12">
 						<div class="card punch-status">
 							<div class="card-body">
-								<h5 class="card-title">Timesheet Date <small class="text" id="attendancedate"></small></h5>
+								<div class="row">
+								<span class="col-md-6 card-title" >Timesheet Date <small class="text" id="attendancedate"></small></span>
+							    <span class="col-md-6 card-title" id='typeleave'></span>
+								</div>
 								<form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>attendance/addattendance" id="frm_emp">
 								<div class="row"> 
 									<div class="col-sm-6">
 										<div class="form-group">
 											<input type="hidden" class="form-control" name="attendance_id" id="attendance_id" >
 											<input type="hidden" class="form-control" name="attendance_date" id="attendance_date" >
-											<label>Employee Name<span class="text-danger">*</span>
+											<label>Attendance Status<span class="text-danger">*</span>
 											</label>										
 											<select  class=" form-control" data-live-search="true" data-actions-box="true" name="attendancestatus" id="attendancestatus">
 												<option disabled="" value="">Please select</option>
@@ -207,6 +211,7 @@
 												<option value="HalfDay">Half Day</option>
 												<option value="Earlyleave">Early Leave</option>
 												<option value="Overtime">Over Time</option>
+												<option value="Leave">Leave</option>
 											</select>
 										</div>
 										<div class="form-group">
@@ -237,7 +242,7 @@
 								<div class="submit-section">
 									<hr>
 									<button class="btn btn-primary submit-btn" name="Save" type="submit">Submit</button>
-									<button type="button" name="cancel" class="btn btn-secondary submit-btn" onClick="location.href='<?php echo base_url();?>attendance/attendancelist'">Cancel
+									<button type="button" name="cancel" class="btn btn-secondary submit-btn" data-dismiss="modal">Cancel
 									</button>
 								</div>
 							</form>								
@@ -350,13 +355,17 @@ function editatt(att_id)
 		 data:{id:att_id},
          success:function(response){
 			var response = JSON.parse(response);
-               console.log(response);
-			// var attendancedt = new Date(response.attendance_date.replace( /(\d{4})-(\d{2})-(\d{2})/, "$2/$1/$3"))
+              
+               if(response.attendance_status=='Leave'){
+                    $('#typeleave').append('Leave Type <small class="text" id="attendancedate">'+response.typeofleave+'</small>');
+               }
+		
 			attendancedt=new Date(myDateFormatter(response.attendance_date));			
 			 
 			dtArr=attendancedt.toDateString('ddd dd MMMM yyyy').split(' ');
 			//console.log(moment(attendancedt, 'MMMM D YYYY'));
             $('#attendance_id').val(response.attendance_id);
+
 			
 			//$('#attendancedate').text(dtArr[0]+ ", " +dtArr[2]+ " " +dtArr[1]+ ", " +dtArr[3]);
 			$('#attendancedate').text(myDateFormatter(response.attendance_date));
@@ -365,12 +374,6 @@ function editatt(att_id)
 			$('#time_in').val(response.time_in);
 			$('#time_out').val(response.time_out);
 			$("#attendancestatus [value=" + response.attendance_status + "]").attr('selected', 'true');
-		
-			
-			//$("option[name=companyid][value=" + response.companyid + "]").attr('selected', 'selected');
-			//$("option[name=companyname][value=" + response.companyname + "]").attr('selected', 'selected');
-			
-			//$('#companyname').val(response.companyname);
          }
       });	
 }

@@ -125,38 +125,127 @@ class Leave extends CI_Controller
 			redirect(base_url());
 		}
 		$id=$this->input->post('id'); 
+		$empid=$this->input->post('emp_id'); 
 		$action=$this->input->post('status');
 	    $changestatus=$this->input->post('changestatus');
         $getonerecord=get_one_record('tblempleave','empleave_id',$id);
-         //echo "<pre>up==";print_r($getonerecord->noofdays);
-	     $empid=$this->input->post('emp_id'); 	
-		$this->db->select('*');
-		$this->db->from('tblempassignleave');
-		$this->db->where('emp_id',$empid);
-		$this->db->where('leave_id',$getonerecord->typeofleave);
+        $getemprecord=get_one_record('tblemp','emp_id',$empid);
+        $typeofleavedata=get_one_record('tblcmpleave','leave_id',$getonerecord->typeofleave);      
+        $getcompanyrecord=get_one_record('tblcompany','companyid',$this->session->userdata('companyid')); 
+        // echo "<pre>up==";print_r($getonerecord->leavefrom); die;
+	     			
+				$this->db->select('*');
+				$this->db->from('tblempassignleave');
+				$this->db->where('emp_id',$empid);
+				$this->db->where('leave_id',$getonerecord->typeofleave);
+		      	$query=$this->db->get();
+				$result=$query->row();
 
-      	$query=$this->db->get();
-		$result=$query->row();
-		//echo $result->empassignleave_id;die;
-		if($changestatus=='Approve'){
-			//echo "lklkjl"; 
-			 if($getonerecord->typeofleave==$result->leave_id){
-				$total=($result->no_leave - $getonerecord->noofdays);
-                $totaldata=array('no_leave' =>$total);
-				$this->db->where('empassignleave_id',$result->empassignleave_id);       
-				$resupdate=$this->db->update('tblempassignleave',$totaldata);	
-			}
-		}
-       
+ 				$this->db->select('*');
+				$this->db->from('tblattendance');
+				$this->db->where('emp_id',$empid);              
+				$this->db->where('attendance_date >=',$getonerecord->leavefrom);
+				$this->db->where('attendance_date <=', $getonerecord->leaveto);
+				$query1=$this->db->get(); 			 
+				$res1=$query1->result();
+
+                foreach($res1 as $rowdata){                  	
+                  	$updatedata=array(
+                  	 	'attendance_status'=>'Leave',
+                  	);
+                  	$this->db->where('attendance_id',$rowdata->attendance_id);       
+         			$res=$this->db->update('tblattendance',$updatedata); 
+                }
+
+			//echo $result->empassignleave_id;die;
+			if($changestatus=='Approve'){
+				
+				if($getonerecord->typeofleave==$result->leave_id){
+					$total=($result->no_leave - $getonerecord->noofdays);
+	                $totaldata=array('no_leave' =>$total);
+					$this->db->where('empassignleave_id',$result->empassignleave_id);       
+					$resupdate=$this->db->update('tblempassignleave',$totaldata);	
 		
+
+				}
+			}
 
 			$data = array("leavestatus" => $changestatus);
-			update_record('tblempleave', $data, 'empleave_id', $id);			
+			//echo "<pre>";print_r($data); 
+			
+			$this->db->where('empleave_id',$id);  		
+		    $resupdate=$this->db->update('tblempleave',$data);	
+
+			// if($resupdate){
+			// 	$email_template=$this->db->query("select * from ".$this->db->dbprefix('tblemail_template')." where task='Leave assign by employee'");
+			// 	$email_temp=$email_template->row();
+			// 	$email_address_from=$email_temp->from_address;
+			// 	$email_address_reply=$email_temp->reply_address;
+			// 	$email_subject=$email_temp->subject;        
+			// 	$email_message=$email_temp->message;
+			// 	$username =$getemprecord->first_name.' '.$getemprecord->last_name;					
+			// 	$email = $getemprecord->email;
+			// 	$email_to=$email;
+			// 	$reason=trim($getonerecord->leavereason);
+
+			// 	$noofdays=$getonerecord->noofdays;
+			// 	$typeofleave=$typeofleavedata->leave_name;	
+			// 	$leavedays=$getonerecord->leavedays;
+			// 	$leavefrom=$getonerecord->leavefrom;
+			// 	$leaveto=$getonerecord->leaveto;
+			// 	$leavestatus='Approve';
+			// 	$companyname=$getcompanyrecord->companyname;
+			// 	$base_url=base_url();
+			// 	$currentyear=date('Y');                   
+			// 	$email_message=str_replace('{break}','<br/>',$email_message);                 
+			// 	$email_message=str_replace('{base_url}',$base_url,$email_message);
+			// 	$email_message=str_replace('{year}',$currentyear,$email_message);
+			// 	$email_message=str_replace('{username}',$username,$email_message);
+			// 	$email_message=str_replace('{reason}',$reason,$email_message);
+			// 	$email_message=str_replace('{noofdays}',$noofdays,$email_message);
+			// 	$email_message=str_replace('{typeofleave}',$typeofleave,$email_message);
+			// 	$email_message=str_replace('{leavedays}',$leavedays,$email_message);
+			// 	$email_message=str_replace('{leavefrom}',$leavefrom,$email_message);
+			// 	$email_message=str_replace('{leaveto}',$leaveto,$email_message);
+			// 	$email_message=str_replace('{leavestatus}',$leavestatus,$email_message);
+			// 	$email_message=str_replace('{companyname}',$companyname,$email_message);
+
+			// 	$str=$email_message; //die;
+			// 	//  echo "<pre>";print_r($str);die;
+
+			// 	$email_config = Array(
+			// 	'protocol'  => 'smtp',
+			// 	'smtp_host' => 'relay-hosting.secureserver.net',
+			// 	'smtp_port' => '465',
+			// 	'smtp_user' => 'himani@bluegreytech.co.in',
+			// 	'smtp_pass' => 'Himani@123',
+			// 	'smtp_host' => 'ssl://smtp.googlemail.com',
+			// 	'smtp_port' => '465',
+			// 	'smtp_user' => 'bluegreyindia@gmail.com',
+			// 	'smtp_pass' => 'Test@123',
+			// 	'mailtype'  => 'html',
+			// 	'starttls'  => true,
+			// 	'newline'   => "\r\n",
+			// 	'charset'=>'utf-8',
+			// 	'header'=> 'MIME-Version: 1.0',
+			// 	'header'=> 'Content-type:text/html;charset=UTF-8',
+			// 	); 
+			// 	 $this->email->initialize($email_config);                       
+			// 	// $this->load->library('email', $email_config);                   
+			// 	$this->email->from("bluegreyindia@gmail.com", "Payroll Leave");
+			// 	$this->email->to($email);
+			// 	$this->email->subject($email_subject);
+			// 	$this->email->message($str);                    
+			// 	if($this->email->send()){ 	                   
+			// 	  // echo "send"; die;
+			// 	   return '1';
+			// 	}else{
+			// 	echo $this->email->print_debugger();die;
+			// 	}
+			// }
 		    $res = array('status' => 'done');
 			echo json_encode($res);
-			die ;
-		
-	
+			die;
 	}
 
 	function empleavelist(){
@@ -215,24 +304,24 @@ class Leave extends CI_Controller
 			}
 			else
 			{
-
 				if($this->input->post("empleave_id")!="")
 				{	
-					//echo "dsfdf if";die;
+					
 					$this->leave_model->empleave_update();
 					$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
 					redirect('leave/empleavelist');
 				}
 				else
-				{   //echo "jh jhg";die;
+				{   
 					$this->leave_model->empleave_insert();
 					$this->session->set_flashdata('success', 'Record has been Inserted Succesfully!');
 					redirect('leave/empleavelist');
 				}				
-			}
-		
-		 $data['leavelist']=$this->leave_model->showempleavelist();
-		 $data['emplist']=$this->attendance_model->emplist();
+			}		
+		$data['leavelist']=$this->leave_model->showempleavelist();
+		$data['selectdatedata']=getSelectdate($this->session->userdata('companyid'));
+		$data['salarymonth']=$data['selectdatedata']->selecteddate;	
+		$data['emplist']=$this->attendance_model->emplist();
 		$this->load->view('Employee/add_empleave',$data);
 	}
     
@@ -256,14 +345,13 @@ class Leave extends CI_Controller
 			$data['leavereason']=$result['leavereason'];
 			$data['leavestatus']=$result['leavestatus'];
 			$data['leaveslot']=$result['leaveslot'];
-			
-			//$data['firstlast']=$result['first_name'].' '.$result['last_name'];
 			$data['leaveto']=$result['leaveto'];
 			$data['redirect_page']="empleavelist";		
 		//echo "<pre>";print_r($data);die;
 		}
 		$data['leavelist']=$this->leave_model->showempleavelist();
-		
+		$data['selectdatedata']=getSelectdate($this->session->userdata('companyid'));
+		$data['salarymonth']=$data['selectdatedata']->selecteddate;	
 		$data['emplist']=$this->attendance_model->emplist();
 		$this->load->view('Employee/add_empleave',$data);
 	}
@@ -321,6 +409,7 @@ class Leave extends CI_Controller
 		$data=array();	
 		
 		$data['result']=$this->leave_model->getemplevdata($id);
+
 		//echo "<pre>";print_r($data['result']);die;
 		 // foreach ($data['result'] as $row) {
 		 	

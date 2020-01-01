@@ -180,7 +180,7 @@
 											<option value="AB-" <?php if($bloodgroup=='AB-'){echo "selected";}?>>AB-</option>
 										</select>
 									</div>
-										<div class="form-group">
+									<div class="form-group">
 										<label class="col-form-label">Salary<span class="text-danger">*</span></label>
 									    <select class="form-control" name="salary" id="salary">
 											<option disabled="" selected="">Please Select</option>
@@ -188,7 +188,7 @@
 											<option value="per_day_wages" <?php if($salary=='per_day_wages'){echo "selected";}?>>Per Day Wages</option>
 										</select>
 									</div>
-										<div class="form-group">
+									<div class="form-group">
 										<label class="col-form-label">Annual Salary Amount<span class="text-danger">*</span></label>
 									    <input type="text" class="form-control" name="salary_amount" id="salary_amount" value="<?php echo $salaryamt;?>">
 									</div>
@@ -354,17 +354,12 @@
 															?>	
 															   <input type="hidden" name="empassignleave_id[]" class="form-control" value="<?php echo $empassgindata['empassignleave_id']?>">
 															   <?php if($leaverow->leave_id=='4'){ ?>					
-																<input type="text" name="leaveno[]" class="form-control" value="0" readonly="">
-																
-																	
+																<input type="text" name="leaveno[]" class="form-control" value="N/A" readonly="">
 															<?php } else{ ?> 
 															 <input type="text" name="leaveno[]" class="form-control" value="<?php  echo $empassgindata['no_leave'];?>">
-
-
 															<?php } ?>
 															<?php } }else{ if($leaverow->leave_id=='4'){ ?>
-
-																<input type="text" name="leaveno[]" class="form-control" value="0" readonly=""> 
+																<input type="text" name="leaveno[]" class="form-control" value="N/A" readonly=""> 
 															<?php }else{ ?>
 																<input type="text" name="leaveno[]" class="form-control" id="leaveno" 
 																 data-id="<?php echo $leaverow->leavedays;?>"> 
@@ -380,11 +375,11 @@
 									</div>
 									</div>
 									<div class="submit-section">
-								<hr>
-								<button class="btn btn-primary submit-btn" name="Save" type="submit"><?php echo ($emp_id!='')?'Update':'Submit' ?></button>
-								<button type="button" name="cancel" class="btn btn-secondary submit-btn" onClick="location.href='<?php echo base_url(); ?>employee/<?php echo $redirect_page; ?>'">Cancel
-								</button>
-							</div>
+										<hr>
+										<button class="btn btn-primary submit-btn" name="Save" type="submit"><?php echo ($emp_id!='')?'Update':'Submit' ?></button>
+										<button type="button" name="cancel" class="btn btn-secondary submit-btn" onClick="location.href='<?php echo base_url(); ?>employee/<?php echo $redirect_page; ?>'">Cancel
+										</button>
+									</div>
 							</div>
 						</form>
 						</div>
@@ -742,17 +737,12 @@ $("#qualificationemp").change(function () {
 	  	 $("#otherqulification").hide();
 	  }
 	 
-	 // $("#otherqulification").hide();
 });	
 
 $("#uannumber").hide();
-
-$("#uanstatus").change(function () {
-	
-	var value = $('#uanstatus').val();
-	  
-	if(value=='applicable'){
-	  	
+$("#uanstatus").change(function () {	
+	var value = $('#uanstatus').val();	  
+	if(value=='applicable'){	  	
 		$("#uannumber").show();
 	  }else{
 	  	 $("#uannumber").hide();
@@ -777,34 +767,6 @@ $("#esicstatus").change(function () {
 	 // $("#otherqulification").hide();
 });
 
-
-
-// $('[name="leaveno[]"]').blur(function() {
-//     var dInput = this.value;
-
-//     leavedays=$(this).attr("data-id");    
-//     $(this).next("span").remove();   
-//    // alert($('#errormsg').text());
-//     $('input[type="submit"]').removeAttr('disabled');  
-//     if(parseInt(leavedays)<parseInt(dInput)){
-
-// 	    $(this).after('<span style="color:red;" id="errormsg">The value should be less then or equal to '+leavedays+'</span>');
-// 	    $('[name="Save"]').attr('disabled','disabled');
-// 	    return false; 
-
-//     }else{
-//       //	alert($('#errormsg').text());
-//       	if($('#errormsg').text()!=''){
-//       		$('[name="Save"]').attr('disabled','disabled');
-
-//       	}else{
-//       		$('[name="Save"]').removeAttr('disabled');    
-//       	}
-        	
-//     	$(this).next("span").remove();
-//     }
-// });
- 	  
 
 
 
