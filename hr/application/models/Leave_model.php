@@ -410,7 +410,7 @@ class Leave_model extends CI_Model
       	$this->db->select('asl.leave_id,asl.no_leave,cl.leave_name');
 		$this->db->from('tblempassignleave as asl');
 		$this->db->join('tblcmpleave as cl','cl.leave_id=asl.leave_id');		
-		$this->db->where('asl.Is_deleted','1');		
+		$this->db->where('asl.Is_deleted','0');		
 		$this->db->where('asl.no_leave!=','0');			
 		$this->db->where('asl.companyid',$this->session->userdata('companyid'));
 		$this->db->where('asl.emp_id',$id);
@@ -426,7 +426,7 @@ class Leave_model extends CI_Model
 		$this->db->select('asl.leave_id,asl.no_leave,cl.leave_name');
 		$this->db->from('tblempassignleave as asl');
 		$this->db->join('tblcmpleave as cl','cl.leave_id=asl.leave_id');		
-		$this->db->where('asl.Is_deleted','1');		
+		$this->db->where('asl.Is_deleted','0');		
 			
 		$this->db->where('asl.companyid',$this->session->userdata('companyid'));
 		$this->db->where('asl.emp_id',$id);
