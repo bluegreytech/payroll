@@ -386,9 +386,8 @@ function convertNumberToWords(amount) {
 	
 $("#employename").change(function () {
 	var end = this.value;
-	
-	
 	var id = $('#employename').val();
+	
 	var salary_month = $('#salary_month').val();
 	
 	url="<?php echo base_url();?>"
@@ -399,7 +398,7 @@ $("#employename").change(function () {
 		 data:{id:id,salarymonth:salary_month},
          success:function(response){
 			var response = JSON.parse(response);
-                //console.log(response);
+            console.log(response);
                // return false;
             $('#emp_id').val(response.emp_id);
 			$('#employee_code').val(response.employee_code);			
@@ -411,7 +410,7 @@ $("#employename").change(function () {
 			var deductiontotal = 0;
 			var earningtotal = 0;
 			for (var j=0, m=response.complianceresult.length;j<m;j++) {
-			//console.log(response.complianceresult[j]);  
+			console.log(response.complianceresult[j]);  
 			compliancetypeid=response.complianceresult[j].compliancetypeid;
 			compliance_id=response.complianceresult[j].complianceid;
 			compliancepercentage=response.complianceresult[j].compliancepercentage;
@@ -419,11 +418,10 @@ $("#employename").change(function () {
 				monthlyamt=parseInt(response.salaryamt)/12;
 				//monthlyamt=12500/12;
 				totalamount=monthlyamt.toFixed();
-				//console.log(totalamount);
+				console.log(totalamount);
 				compliance_percentage = parseFloat(compliancepercentage);
 				  
 				 	if(compliancetypeid=='1'){
-
                         deductionamount=(totalamount * compliance_percentage)/100; 
 				 		deductiontotal += deductionamount; 
                         $('#totaldeduction').val(deductiontotal.toFixed(2));
@@ -432,7 +430,6 @@ $("#employename").change(function () {
 				 	}else{
 				 		earningamount=(totalamount * compliance_percentage)/100; 
                         earningtotal += earningamount;
-
                    	 	$('#gross_earning').val(earningtotal.toFixed(2));
                     	$('#compliance_'+compliance_id).val(earningamount);
 				 	}

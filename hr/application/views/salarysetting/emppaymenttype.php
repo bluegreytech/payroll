@@ -81,7 +81,7 @@
 							<th>Join Date</th>							
 							<th>Salary</th>
 							<!-- <th>Payslip</th> -->
-							<th class="text-right">Action</th>
+							<!-- <th class="text-right">Action</th> -->
 						</tr>
 						</thead>
 					<tbody id="tbldata">
@@ -126,10 +126,10 @@
 						
 						</td> -->
 						
-						<td class="text-center">
-							<?php echo anchor('salarysetting/edit_setsalary/'.$row->empsetsalary_id,'<i class="fa fa-pencil fa-lg" ></i>'); ?>
+						<!-- <td class="text-center"> -->
+							<?php //echo anchor('salarysetting/edit_setsalary/'.$row->empsetsalary_id,'<i class="fa fa-pencil fa-lg" ></i>'); ?>
 						 <!--    <a href="javascript:void(0)"  onclick="deletedata('<?php //echo $row->emp_id; ?>','<?php //echo $row->ProfileImage ;?>')" ><i class="fa fa-trash-o fa-lg"></i></a> -->
-						</td>
+						<!-- </td> -->
 						</tr>
 						<?php
 						$i++;

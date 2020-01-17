@@ -191,14 +191,14 @@ $(document).ready(function()
             "format": "DD/MM/YYYY",
         }).val('<?php echo ($leavefrom!='0000-00-00') && ($leavefrom!='')  ? date('d/m/Y', strtotime($leavefrom)) : date('d/m/Y', strtotime($salarymonth)); ?>'); 
   
-	$('#leaveto').datetimepicker({					
-				  	format: 'DD/MM/YYYY',					
-					ignoreReadonly: true,
-					"allowInputToggle": true,
-		            "showClose": true,
-		            "showClear": true,
-		            "showTodayButton": true,
-	}).val('<?php echo ($leaveto!='0000-00-00')&&($leaveto!='')  ? date('d/m/Y', strtotime($leaveto)) : date('d/m/Y', strtotime($salarymonth)); ?>');	
+	$('#leaveto').datetimepicker({	
+				"allowInputToggle": true,
+	            "showClose": true,
+	            "showClear": true,
+	            "showTodayButton": true,
+	             ignoreReadonly: true,		
+        		 "format": "DD/MM/YYYY",
+	}).val('<?php echo ($leaveto!='0000-00-00') && ($leaveto!='')  ? date('d/m/Y', strtotime($leaveto)) : date('d/m/Y', strtotime($salarymonth)); ?>');	
 	
 		
     $('#leavetimein').datetimepicker({					
@@ -283,11 +283,12 @@ $("#leavedays").change(function () {
        	$('#timein').css('display','block');
 		$('#timeout').css('display','block');
 	}else{
+		
 		$('#totaldays').show();
 		$('#dateto').css('display','block');
 	    var leavefrom = $('#leavefrom').val();
 	   	if(leavefrom!=''){
-	   	 var leaveto = $('#leaveto').val('');		
+	   	 var leaveto = $('#leaveto').val();		
 		 	$('#noofdays').val('');
 		}
 	    $("#labeltotaldays").empty();
@@ -298,7 +299,7 @@ $("#leavedays").change(function () {
 		$('#errorleave').css('display','none');
 		$('#timein').css('display','none');
 		$('#timeout').css('display','none');
-		 //$('#btnsave').prop('disabled','false');
+		
 	}  
 	});
 });	
@@ -333,7 +334,8 @@ $("#leavedays").change(function () {
 
 
 $(document).ready(function() {
-   	$('#leaveto').focusout(function(){  
+   	$('#leaveto').focusout(function(){
+
         total='';
 		var fromDate = $('#leavefrom').val(); 			
 		var toDate = $('#leaveto').val();

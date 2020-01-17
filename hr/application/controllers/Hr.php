@@ -9,7 +9,6 @@ class Hr extends CI_Controller
 	
 	function hrlist()
 	{	
-
 		if(!check_admin_authentication()){ 
 			redirect(base_url());
 		}   
@@ -70,7 +69,8 @@ class Hr extends CI_Controller
 		$this->load->view('hr/hrlist',$data);
 	}
 
-	function deletedata(){
+	function deletedata()
+	{
 		if(!check_admin_authentication())
 		{ 
 			redirect(base_url());
@@ -118,7 +118,8 @@ class Hr extends CI_Controller
 		echo json_encode($data);
 	}
 
-	function statusdata(){
+	function statusdata()
+	{
 		if(!check_admin_authentication())
 		{ 
 			redirect(base_url());
@@ -141,12 +142,11 @@ class Hr extends CI_Controller
 			$res = array('status' => 'done', 'msg' => ACTIVE);
 			echo json_encode($res);
 			die ;
-		}
-	
+		}	
 	}
 
 	public function admin_master_profile_update()     
-	{      	
+	{
 				$data=array();
 				$data['UserId']=$this->input->post('UserId');
 				$data['FirstName']=$this->input->post('FirstName');
@@ -170,9 +170,9 @@ class Hr extends CI_Controller
 				
 				}
 				$this->load->view('Adminmaster/admin_master_profile',$data);			
-
 	}
-	public function searchhr(){
+	public function searchhr()
+	{
 		if(!check_admin_authentication()){ 
 			redirect(base_url());
 		}   
@@ -196,6 +196,62 @@ class Hr extends CI_Controller
 		//echo "<pre>";print_r($data['result']);die;
 		$this->load->view('hr/hrlist',$data);
 	}
+
+	function assign_rights($hr_id='0')
+	{
+		
+		if(!check_admin_authentication()){ 
+			redirect(base_url());
+		} 
+                
+                 //check id exist
+                 //if(!check_IdExit('rights_assign','admin_id',$id)){ redirect('Admin/list_admin'); }
+		
+		$this->form_validation->set_rules('admin_id', 'Admin ID', 'required');		
+		
+		if($this->form_validation->run() == FALSE){			
+			if(validation_errors())
+			{
+				$data["error"] = validation_errors();
+			}else{
+				$data["error"] = "";
+			}
+			
+			$data["hr_id"] = ($this->input->post('hr_id')) ? $this->input->post('hr_id'):$hr_id;
+			
+			//$data['site_setting'] = site_setting();		
+			//$data['all_rights']=get_total_count('rights');
+                        
+            $data['all_rights']=$this->hr_model->get_all_rights();
+			$data['admin_right']=$this->hr_model->get_admin_rights($data['hr_id']);
+			//echo '<pre>';
+			//print_r($data['admin_right']);	die;
+			$ad_r=array();
+			$rid=array();
+			if($data['admin_right']!=''){
+			foreach($data['admin_right'] as $adr){
+				$ad_r[]=$adr->rights_assign_id;
+				$rid[$adr->rights_assign_id]=$adr;
+			}}
+			
+			$data['ad_r']=$ad_r;
+			$data['rid']=$rid;
+			// //print_r($data['ad_r']);
+			// //print_r($data['rid']);die;
+			// $data["limit"]=$limit;
+		 //    $data["offset"]=$offset;
+		 //    $data["option"]=$option;
+		 //    $data["keyword"]=$keyword;
+		 //    $data["search_option"]=$option;
+		 //    $data["search_keyword"]=$keyword;
+		    $data["redirect_page"]="hrlist";
+		
+			
+			$this->load->view('hr/assign_rights',$data);
+		}				
+	}
+
+
 
 }
 

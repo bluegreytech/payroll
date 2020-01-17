@@ -80,12 +80,13 @@
 					<tr>
 						<th>Employee</th>
 						<?php  
-							if($attmonth==''){
-							$cmonth= date('m',strtotime('last month')); 
-							$cyear=date('Y');
-							$totalmonth=cal_days_in_month(CAL_GREGORIAN, date('m',strtotime('last month')),date('Y'));
+							if($attmonth==''){								
+							$cmonth= date('m',strtotime($salarymonth)); 
+							$cyear=date('Y',strtotime($salarymonth));
+							$totalmonth=cal_days_in_month(CAL_GREGORIAN, date('m',strtotime($salarymonth)),date('Y',strtotime($salarymonth)));
 							}else{	
-								 $cmonth=  date('m',strtotime($attmonth));
+								
+								$cmonth=  date('m',strtotime($attmonth));
 								$cyear=date('Y',strtotime($attmonth));	   	
 								 $totalmonth=cal_days_in_month(CAL_GREGORIAN,date('m',strtotime($attmonth)),date('Y',strtotime($attmonth))); 
 							// cal_days_in_month(CAL_GREGORIAN, date('m',$at_month,$at_year));
@@ -96,22 +97,19 @@
 						 $monthdate= date($cyear.'-'.$cmonth.'-'.$i);
 		       			   $days = date("D", strtotime($monthdate));
 		       			  if($days=='Sun'){ ?>
-                           <th style="color: red;"><?php echo  $days.' '. $i;?></th>
+                           <th style="color: red;"><p style="writing-mode: vertical-lr;	text-orientation: upright;margin: 0;display: inline-grid;"><?php echo  $days.' ';?><span style="margin-top: 16px;writing-mode: horizontal-tb;"><?php echo $i; ?></span></p></th>
 						<?php }else{ ?>
-                          <th ><?php echo  $days.' '. $i;?></th>
-						<?php } } ?>						
+                          <th ><p style="writing-mode: vertical-lr; text-orientation: upright; margin: 0;display: inline-grid;"><?php echo  $days.' '?><span style="margin-top: 16px;writing-mode: horizontal-tb;"><?php echo $i; ?></span></p></th>
+						<?php } } ?>	
+						<th>Working days</th>
+						<th>Holidays</th>
+						<th>Week day</th>	
+						<th>Absent</th>
 					</tr>
 				</thead>
 				<tbody>
-
-				<?php 
-					
-					// if($attmonth!=''){
-     //                  $at_month=date('m',strtotime($attmonth)); 
-					//   $at_year=date('Y',strtotime($attmonth));
-				 //    }
-				if(!empty($result)){					
-                  
+				<?php 				
+				if(!empty($result)){
                     if($attmonth==''){
 				   	   $totalmonth=cal_days_in_month(CAL_GREGORIAN, date('m',strtotime('last month')),date('Y'));
 				   }else{
@@ -120,7 +118,7 @@
 				   	// cal_days_in_month(CAL_GREGORIAN, date('m',$at_month,$at_year));
 				   }
 				foreach($result as $row){ 
-                   // echo "<pre>";print_r($row);
+                   //echo "<pre>";print_r($row);
 				?>
 					<tr>
 						<td>
@@ -152,22 +150,32 @@
 							    else{ echo $present='-'; }
 								   
 									if($present=="Present"){
-										echo "<B class='text-success'>P</B>";
+										echo "<b class='text-success'>P</b>";
 									}else if($present=="Absent"){                          
-			                          	echo "<B class='text-red'>A</B>";
+			                          	echo "<b class='text-red'>A</b>";
+			                        }else if($present=="Weekoff"){                          
+			                          	echo "<b class='text-red'>WO</b>";
+			                        }else if($present=="Holiday"){                          
+			                          	echo "<b class='text-red'>H</b>";
 									}else if($present=="HalfDay"){
-			                          	echo "<B class='text-warning'>HD</B>";
+			                          	echo "<b class='text-warning'>HD</b>";
 									}else if($present=="Earlyleave"){                         	
-			                         	echo "<B class='text-primary'>EL</B>";
+			                         	echo "<b class='text-primary'>EL</b>";
 									}else if($present=="Overtime"){                         
-			                         	echo "<B class='text-purple'>OT</B>";
+			                         	echo "<b class='text-purple'>OT</b>";
 									}else if($present=="Leave"){                         
-			                         	echo "<B class='text-red'>L</B>";
+			                         	echo "<b class='text-red'>L</b>";
 									}
 								?>
 							
 						</a></td>
 						<?php } ?>
+						<td><?php echo $row->workingdays?$row->workingdays:'';?></td>
+						<td><?php echo $row->holiday?$row->holiday:'';?></td>
+						<td><?php echo $row->weekoffday?$row->weekoffday:'';?></td>
+						<td><?php  $HalfDay=$row->halfday/2;
+						  echo $row->leaveday+$HalfDay;	
+						 ?></td>						
 						</tr>
 					<?php }  } ?>
 				</tbody>
@@ -355,8 +363,8 @@ function editatt(att_id)
 		 data:{id:att_id},
          success:function(response){
 			var response = JSON.parse(response);
-              
-               if(response.attendance_status=='Leave'){
+              $('#typeleave').empty();
+               if(response.attendance_status=='Absent'){
                     $('#typeleave').append('Leave Type <small class="text" id="attendancedate">'+response.typeofleave+'</small>');
                }
 		

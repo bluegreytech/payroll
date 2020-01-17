@@ -49,7 +49,8 @@ select:disabled{
 	<div class="card-box mb-0">
 		<div class="row">
 			<div class="col-md-12">
-				<form action="#" method="post">
+			<form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>employee/edit_emp/<?php echo $emp_id; ?>" id="frm_emp">
+					<input  type="hidden" id="emp_id" class="form-control" value="<?php echo $emp_id;?>"name="emp_id">
 				<div class="profile-view">
 					<div class="profile-img-wrap editimg">
 									<?php 
@@ -80,35 +81,35 @@ select:disabled{
 									<!-- <div class="staff-msg"></div> -->
 								<!-- </div> -->
 							</div>
-							<div class="col-md-7">
-								
+							<div class="col-md-7">								
 								<ul class="personal-info basic-info">
 										<li>
+
 											<div class="title">Phone:</div>
-											<div class="text"><input class="form-control" id="input" type="text" value="<?php echo $phone; ?>" disabled=""></div>
+											<div class="text"><input class="form-control" id="PhoneNumber" type="text" value="<?php echo $phone; ?>" disabled="" name="PhoneNumber"></div>
 										</li>
 										<li>
 											<div class="title">Email:</div>
-											<div class="text"><input class="form-control" id="input" type="text" value="<?php echo $email; ?>" disabled=""></div>
+											<div class="text"><input class="form-control" id="EmailAddress" type="text" value="<?php echo $email; ?>" disabled="" name="EmailAddress"></div>
 										</li>
 										<li>
 											<div class="title">Birthday:</div>
-											<div class="text"><input class="form-control" id="input" type="text" value="<?php echo date('jS F',strtotime($Dateofbirth)); ?>" disabled=""></div>
+											<div class="text"><input class="form-control" id="dob" type="text" value="<?php //echo date('jS F',strtotime($Dateofbirth)); ?>" disabled="" name="dob"></div>
 										</li>
 										<li>
 											<div class="title">Address:</div>
-											<div class="text"><textarea name="address" class="form-control" id="input" disabled=""><?php echo $Address; ?></textarea></div>
+											<div class="text"><textarea name="Address" class="form-control" id="address" disabled=""><?php echo $Address; ?></textarea></div>
 										</li>
 										<li>
 											<div class="title">Gender:</div>
-											<div class="text"><input class="form-control" id="input" type="text" value="<?php echo ucfirst($gender); ?>" disabled=""></div>
+											<div class="text"><input class="form-control" id="Gender" type="text" value="<?php echo ucfirst($gender); ?>" disabled="" name="Gender"></div>
 										</li>
 										<li>
 											<div class="title">
-												<input class="btn btn-primary submit-btn" id="basicbtn" type="submit" name="btn" value="Submit" style="display: none;" /> 
+												<input class="btn btn-primary submit-btn" id="basicbtn" type="submit" name="submit" value="Submit" style="display: none;" /> 
 											</div>
 											<div class="text">
-												<input class="btn btn-primary submit-btn" id="basicbtn1" type="reset" name="btn" value="Reset" style="display: none;" onclick="resetform()" /> 
+												<input class="btn btn-primary submit-btn" id="basicbtn1" type="reset" name="btn" value="Cancel" style="display: none;" onclick="resetform()" /> 
 											</div>
 										</li>
 								</ul>
@@ -127,7 +128,7 @@ select:disabled{
 			<div class="col-lg-12 col-md-12 col-sm-12 line-tabs">
 				<ul class="nav nav-tabs nav-tabs-bottom">
 					<li class="nav-item"><a href="#emp_profile" data-toggle="tab" class="nav-link active">Profile</a></li>
-					<li class="nav-item"><a href="#emp_projects" data-toggle="tab" class="nav-link">Projects</a></li>
+					<li class="nav-item"><a href="#emp_projects" data-toggle="tab" class="nav-link">Leave</a></li>
 					<li class="nav-item"><a href="#bank_statutory" data-toggle="tab" class="nav-link">Bank & Statutory <small class="text-danger">(Admin Only)</small></a></li>
 				</ul>
 			</div>
@@ -142,50 +143,44 @@ select:disabled{
 								<div class="col-md-6">
 									<div class="card-box profile-box ">
 										<h3 class="card-title">Personal Informations <a class="edit-icon"  onclick="enable_disable()"><i class="fa fa-pencil"></i></a></h3>
+
 										<ul class="personal-info">
-										<form action="#" method="post" class="personal-data">
+											<form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>employee/persionalinfo_empedit" id="frm_emppersonalinfo" class="personal-data">
+									               	<input type="hidden" name="empid" value="<?php echo $emp_id;?>" id='empid'>
 											<li>
 												<div class="title">First name</div>
-												<div class="text"><input class="form-control" id ="input" type="text" name="input" value="<?php echo $first_name;?>" disabled required="" />  </div>
+												<div class="text"><input class="form-control" id ="input" type="text" name="first_name" value="<?php echo $first_name;?>" disabled required="" />  </div>
 											</li>
 											<li>
 												<div class="title">Last name</div>
-												<div class="text"><input class="form-control" id= "input" type="text" name="input" value="<?php echo $last_name;?>" disabled required="" /> </div>
+												<div class="text"><input class="form-control" id= "input" type="text" name="last_name" value="<?php echo $last_name;?>" disabled required="" /> </div>
 											</li>
 											<li>
 												<div class="title">Desgination</div>
-												<div class="text"><input class="form-control" id="input" type="text" name="input" value="<?php echo $desgination;?>" disabled required="" /></div>
+												<div class="text"><input class="form-control" id="input" type="text" name="desgination" value="<?php echo $desgination;?>" disabled required="" /></div>
 											</li>
 											<li>
 												<div class="title">Department</div>
-												<div class="text"><input class="form-control" id="input" type="text" name="input" value="<?php echo $department; ?>" disabled required="" /></div>
+												<div class="text"><input class="form-control" id="input" type="text" name="department" value="<?php echo $department; ?>" disabled required="" /></div>
 											</li>
 											<li>
 												<div class="title">Religion</div>
-												<div class="text"><input class="form-control" id ="input" type="text" name="input" value="<?php echo $religion; ?>" disabled required="" /></div>
+												<div class="text"><input class="form-control" id ="" type="text" name="religion" value="<?php echo $religion; ?>" disabled required="" /></div>
 											</li>
 											<li>
 												<div class="title">Marital status</div>
-												<div class="text"><select class="form-control" name="marital_status"  id="maritalstatus" disabled="">
+												<div class="text"><?php //echo $marital_status; ?><select class="form-control" name="marital_status"  id="maritalstatus" disabled="">
 												<option disabled="" selected="">Please Select</option>
 												<option value="single" <?php if($marital_status=='single'){ echo "selected";} ?>>Single</option>
 												<option value="married" <?php if($marital_status=='married'){ echo "selected"; }?>>Married</option>
 												</select></div>
-											</li>
-											<!-- <li>
-												<div class="title">Employment of spouse</div>
-												<div class="text"><input class="form-control" id="input" type="text" name="input" value="No" disabled required="" /></div>
-											</li>
-											<li>
-												<div class="title">No. of children</div>
-												<div class="text"><input class="form-control" id="input" type="text" name="input" value="2" disabled required="" /></div>
-											</li> -->
+											</li>											
 											<li>
 												<div class="title">
 													<input class="btn btn-primary submit-btn" id="btn" type="submit" name="btn" value="Submit" style="display: none;" /> 
 												</div>
 												<div class="text">
-													<input class="btn btn-primary submit-btn" id="btn1" type="reset" name="btn" value="Reset" style="display: none;" onclick="resetform()" /> 
+													<input class="btn btn-primary submit-btn" id="btn1" type="reset" name="btn" value="Cancel" style="display: none;" onclick="resetform()" /> 
 												</div>
 											</li>
 										</form>
@@ -373,7 +368,7 @@ select:disabled{
 		<!-- Projects Tab -->
 		<div class="tab-pane fade" id="emp_projects">
 			<div class="row">
-				<div class="col-lg-4 col-sm-6 col-md-4 col-xl-3">
+				<div class="col-md-12">
 					<div class="card-box project-box">
 						<div class="dropdown profile-action">
 							<a aria-expanded="false" data-toggle="dropdown" class="action-icon dropdown-toggle" href="#"><i class="material-icons">more_vert</i></a>
@@ -382,235 +377,45 @@ select:disabled{
 								<a data-target="#delete_project" data-toggle="modal" href="#" class="dropdown-item"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
 							</div>
 						</div>
-						<h4 class="project-title"><a href="project-view.html">Office Management</a></h4>
-						<small class="block text-ellipsis m-b-15">
-							<span class="text-xs">1</span> <span class="text-muted">open tasks, </span>
-							<span class="text-xs">9</span> <span class="text-muted">tasks completed</span>
-						</small>
-						<p class="text-muted">Lorem Ipsum is simply dummy text of the printing and
-							typesetting industry. When an unknown printer took a galley of type and
-							scrambled it...
-						</p>
-						<div class="pro-deadline m-b-15">
-							<div class="sub-title">
-								Deadline:
+						<h4 class="project-title"><a href="project-view.html">Leave Management</a></h4>
+						<hr>
+						<form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>employee/addempleave" id="frm_emp">
+							<div class="row">
+								<?php
+								if(!empty($leavelist)){
+								foreach($leavelist as $leaverow){
+								$empassgindata=getempassginleave($emp_id,$leaverow->leave_id);
+								?>
+								<div class="col-md-3">
+									<div class="form-group">
+										<label><?php echo $leaverow->leave_name; ?></label>
+										<input type="hidden" name="leavename[]" id="" class="form-control" value="<?php echo $leaverow->leave_id;?>">
+										<input type="hidden" name="emp_id" id="emp_id" class="form-control" value="<?php echo $emp_id; ?>">
+		                               <?php if(!empty($empassgindata)){
+										   if($leaverow->leave_id==$empassgindata['leave_id']){
+										?>	
+										<input type="hidden" name="empassignleave_id[]" class="form-control" value="<?php echo $empassgindata['empassignleave_id']?>">
+										<?php if($leaverow->leave_id=='4'){ ?>	
+
+											<input type="text" name="leaveno[]" class="form-control" value="N/A" readonly="">
+										<?php } else{ ?> 
+											<input type="text" name="leaveno[]" class="form-control" value="<?php  echo $empassgindata['no_leave'];?>">
+										<?php } ?>
+										<?php } }else{ if($leaverow->leave_id=='4'){ ?>
+											<input type="text" name="leaveno[]" class="form-control" value="N/A" readonly=""> 
+										<?php }else{ ?>
+											<input type="text" name="leaveno[]" class="form-control" id="leaveno" data-id="<?php echo $leaverow->leavedays;?>">			
+										<?php } } ?>
+									</div>
+								</div>
+								<?php } } ?>
+							</div>							
+							<hr>
+							<div class="form-group">
+								<input type="submit" value="Add" class="btn btn-primary" >
 							</div>
-							<div class="text-muted">
-								17 Apr 2019
-							</div>
-						</div>
-						<div class="project-members m-b-15">
-							<div>Project Leader :</div>
-							<ul class="team-members">
-								<li>
-									<a href="#" data-toggle="tooltip" title="Jeffery Lalor"><img alt="" src="assets\img\profiles\avatar-16.jpg"></a>
-								</li>
-							</ul>
-						</div>
-						<div class="project-members m-b-15">
-							<div>Team :</div>
-							<ul class="team-members">
-								<li>
-									<a href="#" data-toggle="tooltip" title="John Doe"><img alt="" src="assets\img\profiles\avatar-02.jpg"></a>
-								</li>
-								<li>
-									<a href="#" data-toggle="tooltip" title="Richard Miles"><img alt="" src="assets\img\profiles\avatar-09.jpg"></a>
-								</li>
-								<li>
-									<a href="#" data-toggle="tooltip" title="John Smith"><img alt="" src="assets\img\profiles\avatar-10.jpg"></a>
-								</li>
-								<li>
-									<a href="#" data-toggle="tooltip" title="Mike Litorus"><img alt="" src="assets\img\profiles\avatar-05.jpg"></a>
-								</li>
-								<li>
-									<a href="#" class="all-users">+15</a>
-								</li>
-							</ul>
-						</div>
-						<p class="m-b-5">Progress <span class="text-success float-right">40%</span></p>
-						<div class="progress progress-xs mb-0">
-							<div style="width: 40%" title="" data-toggle="tooltip" role="progressbar" class="progress-bar bg-success" data-original-title="40%"></div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-sm-6 col-md-4 col-xl-3">
-					<div class="card-box project-box">
-						<div class="dropdown profile-action">
-							<a aria-expanded="false" data-toggle="dropdown" class="action-icon dropdown-toggle" href="#"><i class="material-icons">more_vert</i></a>
-							<div class="dropdown-menu dropdown-menu-right">
-								<a data-target="#edit_project" data-toggle="modal" href="#" class="dropdown-item"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-								<a data-target="#delete_project" data-toggle="modal" href="#" class="dropdown-item"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-							</div>
-						</div>
-						<h4 class="project-title"><a href="project-view.html">Project Management</a></h4>
-						<small class="block text-ellipsis m-b-15">
-							<span class="text-xs">2</span> <span class="text-muted">open tasks, </span>
-							<span class="text-xs">5</span> <span class="text-muted">tasks completed</span>
-						</small>
-						<p class="text-muted">Lorem Ipsum is simply dummy text of the printing and
-							typesetting industry. When an unknown printer took a galley of type and
-							scrambled it...
-						</p>
-						<div class="pro-deadline m-b-15">
-							<div class="sub-title">
-								Deadline:
-							</div>
-							<div class="text-muted">
-								17 Apr 2019
-							</div>
-						</div>
-						<div class="project-members m-b-15">
-							<div>Project Leader :</div>
-							<ul class="team-members">
-								<li>
-									<a href="#" data-toggle="tooltip" title="Jeffery Lalor"><img alt="" src="assets\img\profiles\avatar-16.jpg"></a>
-								</li>
-							</ul>
-						</div>
-						<div class="project-members m-b-15">
-							<div>Team :</div>
-							<ul class="team-members">
-								<li>
-									<a href="#" data-toggle="tooltip" title="John Doe"><img alt="" src="assets\img\profiles\avatar-02.jpg"></a>
-								</li>
-								<li>
-									<a href="#" data-toggle="tooltip" title="Richard Miles"><img alt="" src="assets\img\profiles\avatar-09.jpg"></a>
-								</li>
-								<li>
-									<a href="#" data-toggle="tooltip" title="John Smith"><img alt="" src="assets\img\profiles\avatar-10.jpg"></a>
-								</li>
-								<li>
-									<a href="#" data-toggle="tooltip" title="Mike Litorus"><img alt="" src="assets\img\profiles\avatar-05.jpg"></a>
-								</li>
-								<li>
-									<a href="#" class="all-users">+15</a>
-								</li>
-							</ul>
-						</div>
-						<p class="m-b-5">Progress <span class="text-success float-right">40%</span></p>
-						<div class="progress progress-xs mb-0">
-							<div style="width: 40%" title="" data-toggle="tooltip" role="progressbar" class="progress-bar bg-success" data-original-title="40%"></div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-sm-6 col-md-4 col-xl-3">
-					<div class="card-box project-box">
-						<div class="dropdown profile-action">
-							<a aria-expanded="false" data-toggle="dropdown" class="action-icon dropdown-toggle" href="#"><i class="material-icons">more_vert</i></a>
-							<div class="dropdown-menu dropdown-menu-right">
-								<a data-target="#edit_project" data-toggle="modal" href="#" class="dropdown-item"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-								<a data-target="#delete_project" data-toggle="modal" href="#" class="dropdown-item"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-							</div>
-						</div>
-						<h4 class="project-title"><a href="project-view.html">Video Calling App</a></h4>
-						<small class="block text-ellipsis m-b-15">
-							<span class="text-xs">3</span> <span class="text-muted">open tasks, </span>
-							<span class="text-xs">3</span> <span class="text-muted">tasks completed</span>
-						</small>
-						<p class="text-muted">Lorem Ipsum is simply dummy text of the printing and
-							typesetting industry. When an unknown printer took a galley of type and
-							scrambled it...
-						</p>
-						<div class="pro-deadline m-b-15">
-							<div class="sub-title">
-								Deadline:
-							</div>
-							<div class="text-muted">
-								17 Apr 2019
-							</div>
-						</div>
-						<div class="project-members m-b-15">
-							<div>Project Leader :</div>
-							<ul class="team-members">
-								<li>
-									<a href="#" data-toggle="tooltip" title="Jeffery Lalor"><img alt="" src="assets\img\profiles\avatar-16.jpg"></a>
-								</li>
-							</ul>
-						</div>
-						<div class="project-members m-b-15">
-							<div>Team :</div>
-							<ul class="team-members">
-								<li>
-									<a href="#" data-toggle="tooltip" title="John Doe"><img alt="" src="assets\img\profiles\avatar-02.jpg"></a>
-								</li>
-								<li>
-									<a href="#" data-toggle="tooltip" title="Richard Miles"><img alt="" src="assets\img\profiles\avatar-09.jpg"></a>
-								</li>
-								<li>
-									<a href="#" data-toggle="tooltip" title="John Smith"><img alt="" src="assets\img\profiles\avatar-10.jpg"></a>
-								</li>
-								<li>
-									<a href="#" data-toggle="tooltip" title="Mike Litorus"><img alt="" src="assets\img\profiles\avatar-05.jpg"></a>
-								</li>
-								<li>
-									<a href="#" class="all-users">+15</a>
-								</li>
-							</ul>
-						</div>
-						<p class="m-b-5">Progress <span class="text-success float-right">40%</span></p>
-						<div class="progress progress-xs mb-0">
-							<div style="width: 40%" title="" data-toggle="tooltip" role="progressbar" class="progress-bar bg-success" data-original-title="40%"></div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-sm-6 col-md-4 col-xl-3">
-					<div class="card-box project-box">
-						<div class="dropdown profile-action">
-							<a aria-expanded="false" data-toggle="dropdown" class="action-icon dropdown-toggle" href="#"><i class="material-icons">more_vert</i></a>
-							<div class="dropdown-menu dropdown-menu-right">
-								<a data-target="#edit_project" data-toggle="modal" href="#" class="dropdown-item"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-								<a data-target="#delete_project" data-toggle="modal" href="#" class="dropdown-item"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-							</div>
-						</div>
-						<h4 class="project-title"><a href="project-view.html">Hospital Administration</a></h4>
-						<small class="block text-ellipsis m-b-15">
-							<span class="text-xs">12</span> <span class="text-muted">open tasks, </span>
-							<span class="text-xs">4</span> <span class="text-muted">tasks completed</span>
-						</small>
-						<p class="text-muted">Lorem Ipsum is simply dummy text of the printing and
-							typesetting industry. When an unknown printer took a galley of type and
-							scrambled it...
-						</p>
-						<div class="pro-deadline m-b-15">
-							<div class="sub-title">
-								Deadline:
-							</div>
-							<div class="text-muted">
-								17 Apr 2019
-							</div>
-						</div>
-						<div class="project-members m-b-15">
-							<div>Project Leader :</div>
-							<ul class="team-members">
-								<li>
-									<a href="#" data-toggle="tooltip" title="Jeffery Lalor"><img alt="" src="assets\img\profiles\avatar-16.jpg"></a>
-								</li>
-							</ul>
-						</div>
-						<div class="project-members m-b-15">
-							<div>Team :</div>
-							<ul class="team-members">
-								<li>
-									<a href="#" data-toggle="tooltip" title="John Doe"><img alt="" src="assets\img\profiles\avatar-02.jpg"></a>
-								</li>
-								<li>
-									<a href="#" data-toggle="tooltip" title="Richard Miles"><img alt="" src="assets\img\profiles\avatar-09.jpg"></a>
-								</li>
-								<li>
-									<a href="#" data-toggle="tooltip" title="John Smith"><img alt="" src="assets\img\profiles\avatar-10.jpg"></a>
-								</li>
-								<li>
-									<a href="#" data-toggle="tooltip" title="Mike Litorus"><img alt="" src="assets\img\profiles\avatar-05.jpg"></a>
-								</li>
-								<li>
-									<a href="#" class="all-users">+15</a>
-								</li>
-							</ul>
-						</div>
-						<p class="m-b-5">Progress <span class="text-success float-right">40%</span></p>
-						<div class="progress progress-xs mb-0">
-							<div style="width: 40%" title="" data-toggle="tooltip" role="progressbar" class="progress-bar bg-success" data-original-title="40%"></div>
-						</div>
+							</form>
+						
 					</div>
 				</div>
 			</div>
@@ -637,6 +442,10 @@ select:disabled{
 							   <div class="form-group" id='bankname' style="display:none;">
 							   	<label class="col-form-label">Bank Name <span class="text-danger">*</span></label>
 							   	<input type="text" name="bank_name" id="bank_name" class="form-control" value="<?php echo $bank_name; ?>">
+							   </div>
+							    <div class="form-group" id='pancardno' style="display:none;">
+							   	<label class="col-form-label">Pancard no.<span class="text-danger">*</span></label>
+							   	<input type="text" name="pancard_no" id="pancard_no" class="form-control" value="<?php echo $pancard; ?>">
 							   </div>
 							</div>
 							<div class="col-sm-4">
@@ -675,34 +484,43 @@ select:disabled{
 							   </div>
 							</div>
 						</div>
+						<?php 
+						 $complianceallow_id=explode(',', $complianceallowid);
+							foreach($compliancelist as $row){ 
+							//	echo "<pre>";print_r($row);
+								if($row->compliancename=="PF"){
+
+							?>
 						<hr>
-						<h3 class="card-title">PF Information</h3>
+						<h3 class="card-title">PF Information <input type="checkbox" name="compliancecheck[]" class='checkbtn' value="<?php echo $row->complianceid; ?>" <?php echo in_array($row->complianceid, $complianceallow_id)?'checked="checked"':'' ?>></h3>
 						<div class="row">
 							<div class="col-sm-4">
-								<div class="form-group">
-									<label class="col-form-label">Employee PF applicable / Not applicable </label>
-									<select class="select">
+								<div class="form-group" id="showpfsection">
+									<label class="col-form-label">Employee PF applicable / Not applicable </label>								
+									<select class="select" id='uanstatus' name="uanstatus">
 										<option>Select PF contribution</option>
-										<option value="applicable">Yes</option>
-										<option value="not_appicable">No</option>
+										<option value="applicable" <?php if($uanstatus=='applicable'){ echo "selected"; } ?>> Yes</option>
+										<option value="not_appicable" <?php if($uanstatus=='not_appicable'){ echo "selected"; } ?>>No</option>
 									</select>
 								</div>
 							</div>
+							
 							<div class="col-sm-4">
-								<div class="form-group">
+								<div class="form-group"  id="uannumber">
 									<label class="col-form-label">UAN Number<span class="text-danger">*</span></label>
-									<input type="text" class="form-control" name="uan_number">
+									<input type="text" class="form-control" name="uan_number" value="<?php echo $uannumber; ?>">
 								</div>
 							</div>
-
-						</div>
-						<div class="row">
-													
-					   </div>
-						<div class="row">
-							
+							<div class="col-sm-4">
+								<div class="form-group"  id="pfcelingprice">
+									<label class="col-form-label">PF ceiling price<span class="text-danger">*</span></label>
+									<input type="text" class="form-control" name="pfcelingprice" value="<?php echo $pfcelingprice; ?>">
+								</div>
+							</div>
+						</div>						
+						<div class="row">							
 							<div class="col-sm-12">
-								<div class="form-group">
+								<!-- <div class="form-group">
 									<label class="col-form-label">PF contribution</label>
 									<div class="radio">
 									<input type="radio" name="optradio" checked>Employee & Employer contribution - 12% with in wage ceiling (Max Rs.1800)
@@ -711,57 +529,83 @@ select:disabled{
 									<input type="radio" name="optradio" checked>Employee contribution - 12% over and above wage ceiling (In excess to Rs.1800)
 									</div>
 									
-								</div>
+								</div> -->
 							</div>
-						</div>						
-						<hr>
-						<h3 class="card-title"> ESI Information</h3>
-						<div class="row">
-							<div class="col-sm-4">
-								<div class="form-group">
+						</div>	
+						<?php 	
+							 } } 
+					    ?>					
+						
+							<?php 
+							 $complianceallow_id=explode(',', $complianceallowid);
+							foreach($compliancelist as $row){ 
+								
+							?>
+							<?php if($row->compliancename=="ESIC"){ ?>
+							<hr>
+							<h3 class="card-title"> ESI Information <input type="checkbox" name="compliancecheck[]" class='checkbtn1' value="<?php echo $row->complianceid; ?>" <?php echo in_array($row->complianceid, $complianceallow_id)?'checked="checked"':'' ?>></h3>
+							<div class="row">
+							<div class="col-sm-4">									
+								<div class="form-group" id='showesicsection'>
 									<label class="col-form-label">ESI Contribution</label>
-									<select class="select">
+									<select class="select" id='esicstatus' name="esicstatus">
 										<option>Select ESI contribution</option>
-										<option value="applicable">Yes</option>
-										<option value="not_appicable">No</option>
+										<option value="applicable" <?php if($esicstatus=='applicable'){ echo "selected"; } ?>>Yes</option>
+										<option value="not_appicable" <?php if($esicstatus=='not_appicable'){ echo "selected"; } ?>>No</option>
 									</select>
 								</div>
+								
 							</div>
+								<div class="col-sm-4">
+								<div class="form-group" id="esicnumber">
+									<label class="col-form-label">ESI No. <span class="text-danger">*</span></label>
+									<input type="text"name="esic_no" class="form-control" value="<?php echo $esicnumber; ?>">
+								</div>
+				   			 </div>
+				   			 <div class="col-sm-4">
+								<div class="form-group" id="esicceling_price">
+									<label class="col-form-label">ESIC Celing Price <span class="text-danger">*</span></label>
+									<input type="text" name="esiccelingprice" class="form-control" value="<?php echo $esiccelingprice;?> " id="esiccelingprice">
+								</div>
+				   			 </div>													
+						<?php } } ?>
+						</div>
+						<hr>
+                        <h3 class="card-title">Other deduction Information </h3>
+						<?php
+						 $complianceallow_id=explode(',', $complianceallowid); 
+							foreach($compliancelist as $row){ 
+							 if ($row->compliancename=="LWF") {
+						?>
+						<hr>
+						<div class="row">							
 							<div class="col-sm-4">
+								<input type="hidden" name="lwfcomplianceallowid" id="lwfcomplianceallowid" value="<?php echo $row->complianceid; ?>" <?php echo in_array($row->complianceid, $complianceallow_id)?'checked="checked"':'' ?>>
 								<div class="form-group">
 									<label class="col-form-label">LWF</label>
-									<select class="select">
+									<select class="select" name='lwfstatus'>
 										<option>Select LWF contribution</option>
 										<option value="applicable">Yes</option>
 										<option value="not_applicable">No</option>
 									</select>
 								</div>
-							</div>
-							<div class="col-sm-4">
-								<div class="form-group">
-									<label class="col-form-label">PT </label>
-									<select class="select">
-										<option>Select PT contribution</option>
-										<option value="applicable">Yes</option>
-										<option value="not_applicable">No</option>
-									</select>
+							</div>								
+							<?php }elseif($row->compliancename=="PT"){ ?>							
+							<div class="col-sm-4">	
+								<div class="form-group">								
+									<div class="checkbox" style="margin:10px;">
+									<label><input type="checkbox" name="compliancecheck[]" class='	' value="<?php echo $row->complianceid;  ?>" <?php echo in_array($row->complianceid, $complianceallow_id)?'checked="checked"':'' ?> > Professional Tax </label>
+									</div>
 								</div>
 							</div>
-						
-						</div>
-						<div class="row">
-								<div class="col-sm-4">
-								<div class="form-group">
-									<label class="col-form-label">ESI No. <span class="text-danger">*</span></label>
-									<input type="text"name="esic_no" value="" class="form-control">
-								</div>
-							</div>
-							
-						
 					   </div>
+					<?php } } ?>
+					<hr>
+					<div class="form-group">
 						<div class="submit-section">
 							<button class="btn btn-primary submit-btn" type="submit">Save</button>
 						</div>
+					</div>
 					</form>
 				</div>
 			</div>
@@ -772,601 +616,6 @@ select:disabled{
 </div>
 <!-- /Page Content -->
 
-<!-- Profile Modal -->
-<div id="profile_info" class="modal custom-modal fade" role="dialog">
-	<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title">Profile Information</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<form>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="profile-img-wrap edit-img">
-								<img class="inline-block" src="assets\img\profiles\avatar-02.jpg" alt="user">
-								<div class="fileupload btn">
-									<span class="btn-text">edit</span>
-									<input class="upload" type="file">
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-6">
-									<div class="form-group">
-										<label>First Name</label>
-										<input type="text" class="form-control" value="John">
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<label>Last Name</label>
-										<input type="text" class="form-control" value="Doe">
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<label>Birth Date</label>
-										<div class="cal-icon">
-											<input class="form-control datetimepicker" type="text" value="05/06/1985">
-										</div>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<label>Gender</label>
-										<select class="select form-control">
-											<option value="male selected">Male</option>
-											<option value="female">Female</option>
-										</select>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="form-group">
-								<label>Address</label>
-								<input type="text" class="form-control" value="4487 Snowbird Lane">
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label>State</label>
-								<input type="text" class="form-control" value="New York">
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label>Country</label>
-								<input type="text" class="form-control" value="United States">
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label>Pin Code</label>
-								<input type="text" class="form-control" value="10523">
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label>Phone Number</label>
-								<input type="text" class="form-control" value="631-889-3206">
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label>Department <span class="text-danger">*</span></label>
-								<select class="select">
-									<option>Select Department</option>
-									<option>Web Development</option>
-									<option>IT Management</option>
-									<option>Marketing</option>
-								</select>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label>Designation <span class="text-danger">*</span></label>
-								<select class="select">
-									<option>Select Designation</option>
-									<option>Web Designer</option>
-									<option>Web Developer</option>
-									<option>Android Developer</option>
-								</select>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label>Reports To <span class="text-danger">*</span></label>
-								<select class="select">
-									<option>-</option>
-									<option>Wilmer Deluna</option>
-									<option>Lesley Grauer</option>
-									<option>Jeffery Lalor</option>
-								</select>
-							</div>
-						</div>
-					</div>
-					<div class="submit-section">
-						<button class="btn btn-primary submit-btn">Submit</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- /Profile Modal -->
-
-<!-- Personal Info Modal -->
-<div id="personal_info_modal" class="modal custom-modal fade" role="dialog">
-	<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title">Personal Information</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<form>
-					<div class="row">
-						<div class="col-md-6">
-							<div class="form-group">
-								<label>Passport No</label>
-								<input type="text" class="form-control">
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label>Passport Expiry Date</label>
-								<div class="cal-icon">
-									<input class="form-control datetimepicker" type="text">
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label>Tel</label>
-								<input class="form-control" type="text">
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label>Nationality <span class="text-danger">*</span></label>
-								<input class="form-control" type="text">
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label>Religion</label>
-								<div class="cal-icon">
-									<input class="form-control" type="text">
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label>Marital status <span class="text-danger">*</span></label>
-								<select class="select form-control">
-									<option>-</option>
-									<option>Single</option>
-									<option>Married</option>
-								</select>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label>Employment of spouse</label>
-								<input class="form-control" type="text">
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label>No. of children </label>
-								<input class="form-control" type="text">
-							</div>
-						</div>
-					</div>
-					<div class="submit-section">
-						<button class="btn btn-primary submit-btn">Submit</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- /Personal Info Modal -->
-
-<!-- Family Info Modal -->
-<div id="family_info_modal" class="modal custom-modal fade" role="dialog">
-	<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title"> Family Informations</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<form>
-					<div class="form-scroll">
-						<div class="card-box">
-							<h3 class="card-title">Family Member <a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o"></i></a></h3>
-							<div class="row">
-								<div class="col-md-6">
-									<div class="form-group">
-										<label>Name <span class="text-danger">*</span></label>
-										<input class="form-control" type="text">
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<label>Relationship <span class="text-danger">*</span></label>
-										<input class="form-control" type="text">
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<label>Date of birth <span class="text-danger">*</span></label>
-										<input class="form-control" type="text">
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<label>Phone <span class="text-danger">*</span></label>
-										<input class="form-control" type="text">
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="card-box">
-							<h3 class="card-title">Education Informations <a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o"></i></a></h3>
-							<div class="row">
-								<div class="col-md-6">
-									<div class="form-group">
-										<label>Name <span class="text-danger">*</span></label>
-										<input class="form-control" type="text">
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<label>Relationship <span class="text-danger">*</span></label>
-										<input class="form-control" type="text">
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<label>Date of birth <span class="text-danger">*</span></label>
-										<input class="form-control" type="text">
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<label>Phone <span class="text-danger">*</span></label>
-										<input class="form-control" type="text">
-									</div>
-								</div>
-							</div>
-							<div class="add-more">
-								<a href="javascript:void(0);"><i class="fa fa-plus-circle"></i> Add More</a>
-							</div>
-						</div>
-					</div>
-					<div class="submit-section">
-						<button class="btn btn-primary submit-btn">Submit</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- /Family Info Modal -->
-
-<!-- Emergency Contact Modal -->
-<div id="emergency_contact_modal" class="modal custom-modal fade" role="dialog">
-	<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title">Personal Information</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<form>
-					<div class="card-box">
-						<h3 class="card-title">Primary Contact</h3>
-						<div class="row">
-							<div class="col-md-6">
-								<div class="form-group">
-									<label>Name <span class="text-danger">*</span></label>
-									<input type="text" class="form-control">
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label>Relationship <span class="text-danger">*</span></label>
-									<input class="form-control" type="text">
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label>Phone <span class="text-danger">*</span></label>
-									<input class="form-control" type="text">
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label>Phone 2</label>
-									<input class="form-control" type="text">
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="card-box">
-						<h3 class="card-title">Primary Contact</h3>
-						<div class="row">
-							<div class="col-md-6">
-								<div class="form-group">
-									<label>Name <span class="text-danger">*</span></label>
-									<input type="text" class="form-control">
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label>Relationship <span class="text-danger">*</span></label>
-									<input class="form-control" type="text">
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label>Phone <span class="text-danger">*</span></label>
-									<input class="form-control" type="text">
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label>Phone 2</label>
-									<input class="form-control" type="text">
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="submit-section">
-						<button class="btn btn-primary submit-btn">Submit</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- /Emergency Contact Modal -->
-
-<!-- Education Modal -->
-<div id="education_info" class="modal custom-modal fade" role="dialog">
-	<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title"> Education Informations</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<form>
-					<div class="form-scroll">
-						<div class="card-box">
-							<h3 class="card-title">Education Informations <a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o"></i></a></h3>
-							<div class="row">
-								<div class="col-md-6">
-									<div class="form-group form-focus focused">
-										<input type="text" value="Oxford University" class="form-control floating">
-										<label class="focus-label">Institution</label>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group form-focus focused">
-										<input type="text" value="Computer Science" class="form-control floating">
-										<label class="focus-label">Subject</label>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group form-focus focused">
-										<div class="cal-icon">
-											<input type="text" value="01/06/2002" class="form-control floating datetimepicker">
-										</div>
-										<label class="focus-label">Starting Date</label>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group form-focus focused">
-										<div class="cal-icon">
-											<input type="text" value="31/05/2006" class="form-control floating datetimepicker">
-										</div>
-										<label class="focus-label">Complete Date</label>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group form-focus focused">
-										<input type="text" value="BE Computer Science" class="form-control floating">
-										<label class="focus-label">Degree</label>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group form-focus focused">
-										<input type="text" value="Grade A" class="form-control floating">
-										<label class="focus-label">Grade</label>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="card-box">
-							<h3 class="card-title">Education Informations <a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o"></i></a></h3>
-							<div class="row">
-								<div class="col-md-6">
-									<div class="form-group form-focus focused">
-										<input type="text" value="Oxford University" class="form-control floating">
-										<label class="focus-label">Institution</label>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group form-focus focused">
-										<input type="text" value="Computer Science" class="form-control floating">
-										<label class="focus-label">Subject</label>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group form-focus focused">
-										<div class="cal-icon">
-											<input type="text" value="01/06/2002" class="form-control floating datetimepicker">
-										</div>
-										<label class="focus-label">Starting Date</label>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group form-focus focused">
-										<div class="cal-icon">
-											<input type="text" value="31/05/2006" class="form-control floating datetimepicker">
-										</div>
-										<label class="focus-label">Complete Date</label>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group form-focus focused">
-										<input type="text" value="BE Computer Science" class="form-control floating">
-										<label class="focus-label">Degree</label>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group form-focus focused">
-										<input type="text" value="Grade A" class="form-control floating">
-										<label class="focus-label">Grade</label>
-									</div>
-								</div>
-							</div>
-							<div class="add-more">
-								<a href="javascript:void(0);"><i class="fa fa-plus-circle"></i> Add More</a>
-							</div>
-						</div>
-					</div>
-					<div class="submit-section">
-						<button class="btn btn-primary submit-btn">Submit</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- /Education Modal -->
-
-<!-- Experience Modal -->
-<div id="experience_info" class="modal custom-modal fade" role="dialog">
-	<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title">Experience Informations</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<form>
-					<div class="form-scroll">
-						<div class="card-box">
-							<h3 class="card-title">Experience Informations <a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o"></i></a></h3>
-							<div class="row">
-								<div class="col-md-6">
-									<div class="form-group form-focus">
-										<input type="text" class="form-control floating" value="Digital Devlopment Inc">
-										<label class="focus-label">Company Name</label>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group form-focus">
-										<input type="text" class="form-control floating" value="United States">
-										<label class="focus-label">Location</label>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group form-focus">
-										<input type="text" class="form-control floating" value="Web Developer">
-										<label class="focus-label">Job Position</label>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group form-focus">
-										<div class="cal-icon">
-											<input type="text" class="form-control floating datetimepicker" value="01/07/2007">
-										</div>
-										<label class="focus-label">Period From</label>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group form-focus">
-										<div class="cal-icon">
-											<input type="text" class="form-control floating datetimepicker" value="08/06/2018">
-										</div>
-										<label class="focus-label">Period To</label>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="card-box">
-							<h3 class="card-title">Experience Informations <a href="javascript:void(0);" class="delete-icon"><i class="fa fa-trash-o"></i></a></h3>
-							<div class="row">
-								<div class="col-md-6">
-									<div class="form-group form-focus">
-										<input type="text" class="form-control floating" value="Digital Devlopment Inc">
-										<label class="focus-label">Company Name</label>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group form-focus">
-										<input type="text" class="form-control floating" value="United States">
-										<label class="focus-label">Location</label>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group form-focus">
-										<input type="text" class="form-control floating" value="Web Developer">
-										<label class="focus-label">Job Position</label>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group form-focus">
-										<div class="cal-icon">
-											<input type="text" class="form-control floating datetimepicker" value="01/07/2007">
-										</div>
-										<label class="focus-label">Period From</label>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group form-focus">
-										<div class="cal-icon">
-											<input type="text" class="form-control floating datetimepicker" value="08/06/2018">
-										</div>
-										<label class="focus-label">Period To</label>
-									</div>
-								</div>
-							</div>
-							<div class="add-more">
-								<a href="javascript:void(0);"><i class="fa fa-plus-circle"></i> Add More</a>
-							</div>
-						</div>
-					</div>
-					<div class="submit-section">
-						<button class="btn btn-primary submit-btn">Submit</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- /Experience Modal -->
 
 </div>
 <!-- /Page Wrapper -->
@@ -1382,31 +631,66 @@ select:disabled{
 <?php  $this->load->view('common/footer'); ?>
 
 <script type="text/javascript">
+	$('#dob').datetimepicker({
+	  	format: 'DD-MM-YYYY',
+		maxDate: new Date(),
+		ignoreReadonly: true,
+		icons: {
+		    time:'fa fa-clock-o',
+		    date:'fa fa-calendar',
+		    up:'fa fa-chevron-up',
+		    down:'fa fa-chevron-down',
+		    previous:'fa fa-chevron-left',
+		    next:'fa fa-chevron-right',
+		    today:'fa fa-calendar-check-o',
+		    clear:'fa fa-delete',
+		    close:'fa fa-times'
+			},									
+	}).val('<?php echo ($Dateofbirth!='0000-00-00')&&($Dateofbirth!='')  ? date('d-m-Y', strtotime($Dateofbirth)) : ''; ?>');
 $(document).ready(function()
 {
-	paymenttype="<?php echo $paymenttype ?>";
-	
+   
+    uanstatus='<?php echo $uanstatus; ?>';
+	if(uanstatus=='applicable'){
+		$("#uannumber").show();
+		$("#pfcelingprice").show();
+		$('#showpfsection').show();
+	} 
+	esicstatus='<?php echo $esicstatus; ?>';
+	if(esicstatus=='applicable'){
+		$("#esicnumber").show();
+		$("#esicceling_price").show();
+		$('#showesicsection').show();
+		
+	} 
+
+	paymenttype="<?php echo $paymenttype ?>";	
 	if(paymenttype=='bank_transfer'){	  	
 		$("#bankname").show();
 		$("#bankbranch").show();
 		$("#accountno").show();
 	    $("#dd_payable").hide();
+	    $("#pancardno").show();
+
+	    
 	}else if(paymenttype=='demand_draff'){	
 		$("#bankbranch").hide();
 		$("#accountno").hide(); 
 		$("#bankname").show();
 		$("#dd_payable").show();
+		$("#pancardno").hide();
 	}else if(paymenttype=='cash'){	
 		$("#bankbranch").hide();
 		$("#accountno").hide(); 
 		$("#bankname").hide();
 		$("#dd_payable").hide();
-	}else if(paymenttype=='check'){	
+		$("#pancardno").hide();
+	}else if(paymenttype=='cheque'){		
 		$("#bankbranch").hide();
 		$("#accountno").hide(); 
 		$("#bankname").hide();
 		$("#dd_payable").hide();
-
+		$("#pancardno").hide();
 	}
 
 });
@@ -1419,7 +703,7 @@ function readURL(input) {
             };
          reader.readAsDataURL(input.files[0]);
         }
-    }
+}
 
 $("#emppaymenttype").change(function () {	
 var value = $('#emppaymenttype').val();	  
@@ -1428,28 +712,33 @@ if(value=='bank_transfer'){
 	$("#bankbranch").show();
 	$("#accountno").show();
     $("#dd_payable").hide();
+    $("#pancardno").show();
   }else if(value=='demand_draff'){	
   	$("#bankbranch").hide();
 	$("#accountno").hide(); 
   	$("#bankname").show();
   	$("#dd_payable").show();
+  	$("#pancardno").hide();
  }else if(value=='cash'){	
  	$("#bankbranch").hide();
 	$("#accountno").hide(); 
   	$("#bankname").hide();
   	$("#dd_payable").hide();
+  	$("#pancardno").hide();
  }else if(value=='cheque'){	
  	$("#bankbranch").hide();
 	$("#accountno").hide(); 
   	$("#bankname").hide();
   	$("#dd_payable").hide();
+  	$("#pancardno").hide();
 }
 });
 
-
+ //$('#maritalstatus').hide();
 function enable_disable() { 
     $(".personal-data input").prop('disabled', false); 
     $(".personal-data select").prop('disabled', false); 
+  //  $('#maritalstatus').show();
     document.getElementById("btn").style.display  = "block";
     document.getElementById("btn1").style.display  = "block";
 }
@@ -1470,4 +759,73 @@ function resetform(){
      document.getElementById("btn").style.display  = "none";
     document.getElementById("btn1").style.display  = "none";
 } 
+$("#uannumber").hide();
+$("#pfcelingprice").hide();
+$("#esicceling_price").hide();
+ 
+$("#uanstatus").change(function () {	
+	var value = $('#uanstatus').val();	  
+	if(value=='applicable'){	  	
+		$("#uannumber").show();
+		$("#pfcelingprice").show();
+		pf=$("#pfcomplianceallowid").val();	
+		$("input[name='complianceallowid[]']").val(pf);
+		console.log($("input[name='complianceallowid[]']").val());
+	}else{
+	  	 $("#uannumber").hide();
+	  	 $("#pfcelingprice").hide();
+
+	}
+	 
+	 // $("#otherqulification").hide();
+});
+
+$("#esicnumber").hide();
+$("#esicstatus").change(function () {	
+	var value = $('#esicstatus').val();	
+	if(value=='applicable'){
+		$("#esicnumber").show();
+		$("#esicceling_price").show();
+		esic=$("#esiccomplianceallowid").val();
+		$("input[name='complianceallowid[]']").val(esic);
+		//console.log($("input[name='complianceallowid[]']").val());
+	
+	}else{
+	  	$("#esicnumber").hide();
+	  	$("#esicceling_price").hide();
+	}	
+});
+
+$("#ptstatus").change(function(){	
+	var value = $('#ptstatus').val();	
+	if(value=='applicable'){
+		pt=$("#ptcomplianceallowid").val();		
+		$("input[name='complianceallowid[]']").val(pt);
+		//console.log($("input[name='complianceallowid[]']").val());
+	} 
+	
+});
+
+ $('#showpfsection').hide();
+ $(document).on("click", ".checkbtn", function(){	   		
+	  if($(this).is(":checked")){
+	  	$('#showpfsection').show();
+	  }else{
+	  	$('#showpfsection').hide();
+	  	
+	  }	   
+});
+
+ $('#showesicsection').hide();
+$(document).on("click", ".checkbtn1", function(){	   		
+	if($(this).is(":checked")){
+		$('#showesicsection').show();
+	}else{
+		$('#showesicsection').hide();
+		
+	}
+
+	   
+});
+
 </script>
