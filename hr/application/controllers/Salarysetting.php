@@ -74,7 +74,7 @@ class Salarysetting extends CI_Controller
 		{	
 			if($this->input->post("empsetsalary_id")!="")
 			{	
-				//echo "<pre>";print_r($_POST);die;
+				//echo "fgfg";die;
 				$this->salary_model->empsetsalary_update();
 				$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
 				redirect('salarysetting/setsalary');			
@@ -88,12 +88,16 @@ class Salarysetting extends CI_Controller
 		}
 		$salarymonthresult=$this->company_model->getsetsalarymonth();
 		$data['selectdatedata']=getSelectdate($this->session->userdata('companyid'));	
-		//echo "<pre>";print_r($data['selectdateresult']->selecteddate); die;
+	
 	   	$salarymonth=$data['selectdatedata']->selecteddate;
 	    $data['salarymonth']=$salarymonthresult['salary_month']; 
 		$data['result']=$this->company_model->compliancelist();
-		$data['emplist']=$this->attendance_model->emppersentmonthlist($salarymonth);
-		
+		$data['otherdeductionname']="";
+        $data['otherdeductionvalue']='';
+        $data['totaldeduction']='';
+        $data['empsetsalary_id']='';
+        
+      
 		$data['empid']='';		
 		$this->load->view('salarysetting/add_setsalary',$data);	
     }
@@ -251,17 +255,20 @@ class Salarysetting extends CI_Controller
 	 
 	    $salarymonthresult=$this->company_model->getsetsalarymonth();
 		$data['selectdatedata']=getSelectdate($this->session->userdata('companyid'));	
-		//echo "<pre>";print_r($data['selectdateresult']->selecteddate); die;
+		
 	   	$salarymonth=$data['selectdatedata']->selecteddate;
 	    $data['salarymonth']=$salarymonthresult['salary_month']; 
 		
 		$data['result']=$this->company_model->compliancelist();
 		$empsalarylist=$this->salary_model->getsetsalarybyemp($id); 
-	  
+		//	echo "<pre>";print_r($salarymonthresult); die;
 		
         $data['empid']=$empsalarylist->emp_id;
         $data['otherdeductionname']=$empsalarylist->otherdeductionname;
         $data['otherdeductionvalue']=$empsalarylist->otherdeductionvalue;
+        $data['totaldeduction']=$empsalarylist->totaldeduction;
+        $data['empsetsalary_id']=$empsalarylist->empsetsalary_id;
+      
 
 		$this->load->view('salarysetting/add_setsalary',$data);	
     }

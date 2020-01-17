@@ -60,11 +60,11 @@
 										<input class=" form-control" type="text" name="employee_code" id="employee_code" Placeholder="Employee Code" value="<?php echo $employee_code;?>" <?php if($employee_code){ echo "readonly"; }?> >
 									</div>
 									<div class="form-group">
-										<label>Department<span class="text-danger">*</span></label>
+										<label>Department <!-- <span class="text-danger">*</span> --></label>
 										<input class=" form-control" type="text" name="department" id="department" Placeholder="Department" value="<?php echo $department ? $department :'';?>">
 									</div>
 									<div class="form-group">
-										<label>Designation<span class="text-danger">*</span></label>
+										<label>Designation<!-- <span class="text-danger">*</span> --></label>
 										<input class=" form-control" type="text" name="desgination" id="desgination" Placeholder="Designation" value="<?php echo $desgination;?>">
 									</div>
 									
@@ -136,7 +136,7 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label>Qualification Employee<span class="text-danger">*</span></label>
+										<label>Qualification Employee <!-- span class="text-danger">*</span> --></label>
 										<select class="form-control" name="qualificationemp"  id="qualificationemp">
 											<option disabled="" selected="">Please Select</option>
 											<option value="10th" <?php if($qualification_emp=='10th'){echo "selected";}?>>10th</option>
@@ -210,8 +210,7 @@
 
 								<?php  if($status!=''){ //echo $status; ?>
                                 
-									<div class="form-group">
-										
+									<div class="form-group">										
                                          <label class="col-form-label" style="margin-top: 11px;">Status<span class="text-danger">*</span></label> &nbsp;
 											<label class="radio-inline">
 												<input type="radio" name="status" <?php if($status=="Active") { echo "checked"; } ?>  value="Active" >Active
@@ -264,7 +263,7 @@
 														$ext = pathinfo($filename, PATHINFO_EXTENSION); 
 														if($ext=="pdf"){ ?>
 														<a target="_blank" href="<?php echo base_url()?>upload/empdetail/<?php echo $bankdetail;?>"><img id="blahbroch" src="<?php echo base_url()?>upload/no_image/pdfimage.png" class="img-thumbnail border-0" style="display: block;  width: 100px; height: 100px;"></a>
-														<?php  }else{  ?>
+														<?php }else{ ?>
 
 														<a target="_blank" href="<?php echo base_url()?>upload/empdetail/<?php echo $bankdetail;?>"><img id="blahdocx" src="<?php echo base_url()?>upload/empdetail/<?php echo $bankdetail;?>" class="img-thumbnail border-0" style="display: block;  width: 100px; height: 100px;"></a>
 													<?php } ?>
@@ -275,7 +274,7 @@
 												<?php } ?>
 											</div> 
 											</div>
-	                                         <div class="col-md-12">
+	                                        <!-- <div class="col-md-12">
 											<hr>
 										    <h3 class="card-title">Applicable compliances </h3>
 												<div class="row table-responsive">
@@ -303,7 +302,7 @@
 																	 $complianceallow_id=explode(',', $complianceallowid);
 																	
 																	$i=0;
-																foreach ($compliancelist as $row){ 
+																foreach($compliancelist as $row){ 
 															    //  echo $companytxt_no[$i]."<br>";
 															      //echo $companytxtno;
 															        $cmptxtno=isset($companytxt_no) ? $companytxt_no : '0';
@@ -321,14 +320,14 @@
 																		} }  
 																		 ?>"></td>
 																	<td style="text-align: center">
-																		<input type="checkbox" name="compliancecheck[]" class='checkbtn' value="<?php echo $row->complianceid;  ?>" <?php echo in_array($row->complianceid, $complianceallow_id)?'checked="checked"':'' ?>>
+																		<input type="checkbox" name="compliancecheck[]" class='checkbtn' value="<?php echo $row->complianceid;  ?>" <?php //echo in_array($row->complianceid, $complianceallow_id)?'checked="checked"':'' ?>>
 																	</td>
 																</tr>
 																<?php $i++; } //} ?>		 
 															</tbody>
 													</table>
 												</div>
-											</div>
+											</div> -->
 										</div>
 											
 									</div>
@@ -337,7 +336,6 @@
 									    <h3 class="card-title">Employee Leave Detail </h3>
 									     <div class="row">									   
                                                 <table class="table table-striped table-nowrap custom-table ">
-													
 													<tbody>
 														<?php 
 														if(!empty($leavelist)){
@@ -384,8 +382,7 @@
 						</form>
 						</div>
 					</div>
-				</div>
-				
+				</div>				
 				</div>
 			</div>
 		</div>
@@ -401,7 +398,7 @@
 <?php  $this->load->view('common/footer'); ?>
 
 <script>
-$(function() { 
+$(function(){ 
     setTimeout(function() {
 	  $('#errorMessage').fadeOut('fast');
 }, 5000);  
@@ -434,8 +431,7 @@ $(document).ready(function()
 	      }
 	    });
     if(response == 0) {
-    	return true;
-     
+    	return true;     
     } else if(response == 1) {
        return false;
     }
@@ -454,29 +450,28 @@ $(document).ready(function()
 	      }
 	    });
     if(response == 0) {
-    	return true;
-     
+    	return true;     
     } else if(response == 1) {
        return false;
     }
   }, "Aadharcard Number is already exist.");
 
 	$('#dob').datetimepicker({
-				  	format: 'DD/MM/YYYY',
-					maxDate: new Date(),
-					ignoreReadonly: true,
-					icons: {
-					    time:'fa fa-clock-o',
-					    date:'fa fa-calendar',
-					    up:'fa fa-chevron-up',
-					    down:'fa fa-chevron-down',
-					    previous:'fa fa-chevron-left',
-					    next:'fa fa-chevron-right',
-					    today:'fa fa-calendar-check-o',
-					    clear:'fa fa-delete',
-					    close:'fa fa-times'
- 	 					},									
-				}).val('<?php echo ($Dateofbirth!='0000-00-00')&&($Dateofbirth!='')  ? date('d/m/Y', strtotime($Dateofbirth)) : ''; ?>');
+	  	format: 'DD/MM/YYYY',
+		maxDate: new Date(),
+		ignoreReadonly: true,
+		icons: {
+		    time:'fa fa-clock-o',
+		    date:'fa fa-calendar',
+		    up:'fa fa-chevron-up',
+		    down:'fa fa-chevron-down',
+		    previous:'fa fa-chevron-left',
+		    next:'fa fa-chevron-right',
+		    today:'fa fa-calendar-check-o',
+		    clear:'fa fa-delete',
+		    close:'fa fa-times'
+			},									
+	}).val('<?php echo ($Dateofbirth!='0000-00-00')&&($Dateofbirth!='')  ? date('d/m/Y', strtotime($Dateofbirth)) : ''; ?>');
 	$('#jod').datetimepicker({					
 				  	format: 'DD/MM/YYYY',					
 					ignoreReadonly: true,
@@ -526,12 +521,12 @@ $(document).ready(function()
 						}, 
 						required:true,							
 				    },
-					department:{
-						required:true,
-					},		
-					desgination:{
-						required:true,
-					},
+					// department:{
+					// 	required:true,
+					// },		
+					// desgination:{
+					// 	required:true,
+					// },
 					FirstName:{
 						required: true,
 						maxlength:35,
@@ -574,9 +569,9 @@ $(document).ready(function()
 					jod:{
                         required:true
 					},
-					qualificationemp:{
-						required:true
-					},
+					// qualificationemp:{
+					// 	required:true
+					// },
 					bloodgroup:{
 						required:true
 					},

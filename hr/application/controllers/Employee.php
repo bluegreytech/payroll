@@ -37,13 +37,13 @@ class Employee extends CI_Controller
 			$this->form_validation->set_rules('LastName', 'LastName', 'required');
 			$this->form_validation->set_rules('EmailAddress', 'EmailAddress', 'required');		
 			$this->form_validation->set_rules('marital_status', 'Marital Status', 'required');	
-			$this->form_validation->set_rules('department', 'Departmant', 'required');
+			//$this->form_validation->set_rules('department', 'Departmant', 'required');
 			$this->form_validation->set_rules('PhoneNumber', 'Mobileno', 'required');
 		    $this->form_validation->set_rules('dob', 'DateofBirth', 'required');
 		    $this->form_validation->set_rules('Gender', 'Gender', 'required');
 		    $this->form_validation->set_rules('pob', 'Place of Birth', 'required');
 		    $this->form_validation->set_rules('jod', 'Joining Date', 'required');
-		    $this->form_validation->set_rules('qualificationemp', 'Qualification Employee','required');
+		   // $this->form_validation->set_rules('qualificationemp', 'Qualification Employee','required');
 		    $this->form_validation->set_rules('bloodgroup', 'Blood Group', 'required');
 		    $this->form_validation->set_rules('salary', 'salary', 'required');
 		    $this->form_validation->set_rules('salary_amount', 'salary amount', 'required');
@@ -105,6 +105,7 @@ class Employee extends CI_Controller
 
 			if($this->input->post("emp_id")!="")
 			{	
+				
 				$this->employee_model->emp_update();
 				$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
 				redirect('employee/emplist');
@@ -112,12 +113,12 @@ class Employee extends CI_Controller
 			}
 			else
 			{ 	
+
 				$this->employee_model->emp_insert();
 				$this->session->set_flashdata('success', 'Record has been Inserted Succesfully!');
 				redirect('employee/emplist');
 			}
-		}
-		
+		}		
 		$data['compliancelist']=$this->company_model->compliancelist_deduction();			 
 		$data['employee_code']=$this->employee_model->empcodelist();			
 		$data['leavelist']=$this->leave_model->showempleavelist();
@@ -126,9 +127,10 @@ class Employee extends CI_Controller
 	
 
 	function edit_emp($emp_id){
+	
 		if(!check_admin_authentication()){ 
 			redirect(base_url());
-		}else{
+		}
 			$data=array();
 			$data['empassginleave']=$this->employee_model->getempassginleave($emp_id);
 			$empbankdetail=$this->employee_model->getempbankdetail($emp_id);		  
@@ -171,14 +173,73 @@ class Employee extends CI_Controller
 			$data['bank_name']=$empbankdetail['bank_name'];	
 			$data['bank_branch']=$empbankdetail['bank_branch'];	
 			$data['account_no']=$empbankdetail['account_no'];	
-			$data['dd_payable_at']=$empbankdetail['dd_payable_at'];						
-			$data['compliancelist']=$this->company_model->compliancelist_deduction();
-					
+			$data['dd_payable_at']=$empbankdetail['dd_payable_at'];	
+			$data['uannumber']=$result['uannumber'];	
+			$data['uanstatus']=$result['uanstatus'];		
+			$data['esicnumber']=$result['esicnumber'];	
+			$data['esicstatus']=$result['esicstatus'];
+			$data['ptstatus']=$result['ptstatus'];
+			$data['pfcelingprice']=trim($result['pfcelingprice']);
+			$data['esiccelingprice']=trim($result['esiccelingprice']);						
+			$data['compliancelist']=$this->company_model->compliancelist_deduction();				
 			$data['redirect_page']="emplist";
-			$data['leavelist']=$this->leave_model->showempleavelist();	
+			$data['leavelist']=$this->leave_model->showempleavelist();
+				//echo "<pre>";print_r($data);die;
+			if($this->input->post("emp_id")!="")
+			{	
+				
+				$this->employee_model->emp_update();
+				$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
+				redirect('employee/emplist');
+			
+			}
+			$this->load->view('Employee/editemp',$data);
 
-			$this->load->view('Employee/editemp',$data);	
+	}
+
+	function persionalinfo_empedit(){
+      if(!check_admin_authentication()){ 
+			redirect(base_url());
+		}   
+			$data=array();			
+			$this->load->library("form_validation");
+			$this->form_validation->set_rules('first_name', 'FirstName', 'required');
+			$this->form_validation->set_rules('last_name', 'LastName', 'required');					
+			$this->form_validation->set_rules('marital_status', 'Marital Status', 'required');	
+			
+		if($this->form_validation->run() == FALSE){			
+			if(validation_errors())
+			{
+				$data["error"] = validation_errors();
+				echo "<pre>";print_r($data["error"]);die;
+			}else{
+				$data["error"] = "";
+			}
+           	$data['redirect_page']="emplist";
+			$data['emp_id']=$this->input->post('emp_id');				
+			$data['first_name']=$this->input->post('FirstName');
+			$data['last_name']=$this->input->post('LastName');			
+			$data['desgination']=$this->input->post('desgination');
+			$data['department']=$this->input->post('department');
+			$data['religion']=$this->input->post('religion');
+			$data['nationality']=$this->input->post('nationality');
+			$data['marital_status']=$this->input->post('marital_status');		
+		
 		}
+		else
+		{	
+        
+			if($this->input->post("empid")!="")
+			{	
+				//echo "JKkjh";die;
+				$this->employee_model->emppersonalinfo_update();
+				$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
+				redirect('employee/emplist');
+			
+			}
+			
+		}
+
 	}
 
 	function delete_emp(){
@@ -408,7 +469,15 @@ class Employee extends CI_Controller
 		$id=$this->input->post('id');
 		$salarymonth=$this->input->post('salarymonth');
 		$data=array();
-		$data['complianceresult']=$this->company_model->compliancelist();		
+		$data['complianceresult']=$this->company_model->compliancelist();
+		$hraadata=array();
+		foreach($data['complianceresult'] as $row) {					
+					if($row->compliancename=="HRA"){
+                       $hrapercentage=$row->compliancepercentage;
+                     	array_push($hraadata,$hrapercentage);
+					}
+	    }	
+	   	
 		$result=$this->employee_model->getdata($id);		
 		$empleave=$this->employee_model->getempleavedata($id,$salarymonth);		
 		  if($result['salary']!='monthly'){		  
@@ -440,6 +509,7 @@ class Employee extends CI_Controller
 			}
 
 			//echo "<pre>";print_r($cmpallowid);die;
+			$empbankdetail=$this->employee_model->getempbankdetail($id);	
 			$data['emp_id']=$result['emp_id'];
 			$data['employee_code']=$result['employee_code'];
 			$data['department']=$result['department'];
@@ -469,7 +539,21 @@ class Employee extends CI_Controller
 			$data['bankdetail']=$result['bankdetail'];
 		    $data['complianceallowid']=$cmpallow_id;		    
 		    $data['companytextno']=$result['companytextno'];
-		    //echo "<pre>";print_r($data);die;			
+		    $data['paymenttype']=$empbankdetail['paymenttype'];	
+			$data['bank_name']=$empbankdetail['bank_name'];	
+			$data['bank_branch']=$empbankdetail['bank_branch'];	
+			$data['account_no']=$empbankdetail['account_no'];	
+			$data['dd_payable_at']=$empbankdetail['dd_payable_at'];	
+			$data['uannumber']=$result['uannumber'];	
+			$data['uanstatus']=$result['uanstatus'];		
+			$data['esicnumber']=$result['esicnumber'];	
+			$data['esicstatus']=$result['esicstatus'];
+			$data['ptstatus']=$result['ptstatus'];
+			$data['pfcelingprice']=$result['pfcelingprice'];
+			$data['esiccelingprice']=trim($result['esiccelingprice']);
+			$data['hrapercentage']=$hraadata;
+		   	//$data['compliancestatus']=array_merge(array($data['uanstatus']),array($data['esicstatus']),array($data['ptstatus']));
+		 
 			echo json_encode($data);
 			die;
 
@@ -585,16 +669,14 @@ class Employee extends CI_Controller
 			}
 	   	}
 	}
-  function addempbankdetial(){
-  //	echo "<pre>";print_r($_POST);die;
-  	
+  	function addempbankdetial(){
 		if(!check_admin_authentication()){ 
 			redirect(base_url());
 		}   
-			$data=array();
-			$data['activeTab']="addempbankdetial";	
-			$this->load->library("form_validation");
-			$this->form_validation->set_rules('emppaymenttype', 'BankName', 'required');
+		$data=array();
+		$data['activeTab']="addempbankdetial";	
+		$this->load->library("form_validation");
+		$this->form_validation->set_rules('emppaymenttype', 'BankName', 'required');
 			
 		
 		if($this->form_validation->run() == FALSE){			
@@ -614,28 +696,55 @@ class Employee extends CI_Controller
 			$data['account_no']=$this->input->post('account_no');
 			$data['option']='';
 			$data['keyword']='';	
-		}
-		else
-		{	
 
-			if($this->input->post("bank_id")!="")
-			{	
-				$this->employee_model->empbankdetail_update();
-				$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
-				redirect('employee/emplist');			
-			}
-			else
-			{ 	
-				$this->employee_model->empbankdetail_insert();
-				$this->session->set_flashdata('success', 'Record has been Inserted Succesfully!');
-				redirect('employee/emplist');
-			}
-		}
-		
+		}else{	
+         // echo "Jhjhgj";die;
+			$this->employee_model->empbankdetail_insert();
+			$this->session->set_flashdata('success', 'Record has been Inserted Succesfully!');
+			redirect('employee/emplist');
+			
+		}		
 		$data['compliancelist']=$this->company_model->compliancelist_deduction();			 
 		$data['employee_code']=$this->employee_model->empcodelist();			
 		$data['leavelist']=$this->leave_model->showempleavelist();
 		$this->load->view('Employee/addemp',$data);		
-  }
+		
+  	}
+
+  	function addempleave(){
+  		if(!check_admin_authentication()){ 
+			redirect(base_url());
+		}   
+		$data=array();
+		$data['activeTab']="empleave";	
+		$this->load->library("form_validation");
+		$this->form_validation->set_rules('leaveno[]', 'Enter Leave Number', 'required');
+		
+		if($this->form_validation->run() == FALSE){			
+			if(validation_errors())
+			{
+				$data["error"] = validation_errors();
+				echo "<pre>";print_r($data["error"]);die;
+			}else{
+				$data["error"] = "";
+			}
+           	$data['redirect_page']="emplist";          
+           	$data['emp_id']=$this->input->post('emp_id');
+			$data['leaveno']=$this->input->post('leaveno');
+			$data['empassignleave_id']=$this->input->post('empassignleave_id');
+			$data['leavename']=$this->input->post('leavename');			
+				
+		}else{	          	
+			$this->employee_model->empleave_insert();
+			$this->session->set_flashdata('success', 'Record has been Inserted Succesfully!');
+			redirect('employee/emplist');
+			
+		}		
+		$data['compliancelist']=$this->company_model->compliancelist_deduction();			 
+		$data['employee_code']=$this->employee_model->empcodelist();			
+		$data['leavelist']=$this->leave_model->showempleavelist();
+		$this->load->view('Employee/addemp',$data);		
+
+  	}
 
 }

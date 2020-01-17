@@ -218,11 +218,7 @@
 							<label for="file">Select Excel File:</label>
 							<input type="file" name="file" id="file" required accept=".xls, .xlsx" /></p>
 							</div>
-
-							
-							
 					</div>
-
 					<div class="modal-btn delete-action">
 						<div class="row">
 							<div class="col-6">

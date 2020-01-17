@@ -151,28 +151,23 @@ class Leave extends CI_Controller
 
                 foreach($res1 as $rowdata){                  	
                   	$updatedata=array(
-                  	 	'attendance_status'=>'Leave',
-                  	);
+                  	 	'attendance_status'=>'Absent',
+                  	);	
                   	$this->db->where('attendance_id',$rowdata->attendance_id);       
          			$res=$this->db->update('tblattendance',$updatedata); 
                 }
 
 			//echo $result->empassignleave_id;die;
-			if($changestatus=='Approve'){
-				
+			if($changestatus=='Approve'){				
 				if($getonerecord->typeofleave==$result->leave_id){
 					$total=($result->no_leave - $getonerecord->noofdays);
 	                $totaldata=array('no_leave' =>$total);
 					$this->db->where('empassignleave_id',$result->empassignleave_id);       
-					$resupdate=$this->db->update('tblempassignleave',$totaldata);	
-		
-
+					$resupdate=$this->db->update('tblempassignleave',$totaldata);
 				}
 			}
 
-			$data = array("leavestatus" => $changestatus);
-			//echo "<pre>";print_r($data); 
-			
+			$data = array("leavestatus" => $changestatus);			
 			$this->db->where('empleave_id',$id);  		
 		    $resupdate=$this->db->update('tblempleave',$data);	
 

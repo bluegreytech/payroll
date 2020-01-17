@@ -86,6 +86,8 @@ class Salary_model extends CI_Model
 
 
     function empsetsalary_update(){
+        //echo "<pre>";print_r($_POST); die;
+        $empsetsalary_id=$this->input->post('empsetsalary_id');
             $selectdatedata= getSelectdate($this->session->userdata('companyid'));
             $this->db->select('*');
             $this->db->from('tblcompliances');
@@ -120,9 +122,9 @@ class Salary_model extends CI_Model
                     'complianceid'=> $complianceid,
                     'created_date'=>date('Y-m-d H:i:s'),
                 );
-                //echo "<pre>";print_r($data);die;
-             
-                $res=$this->db->insert('tblempsetsalary',$data);
+               
+                $this->db->where('empsetsalary_id',$empsetsalary_id);
+                $res=$this->db->update('tblempsetsalary',$data);
 
     }
 
@@ -281,7 +283,7 @@ class Salary_model extends CI_Model
         $this->db->where('em.companyid',$this->session->userdata('companyid'));        
         $this->db->order_by('em.emp_id','Desc');
         $query=$this->db->get();
-        //echo $this->db->last_query();die;
+      //  echo $this->db->last_query();die;
         $res=$query->result();
         return $res;
     }
@@ -291,8 +293,7 @@ class Salary_model extends CI_Model
         $this->db->join('tblbankdetail as bk','em.emp_id=bk.emp_id');
         $this->db->join('tblempsetsalary as ee','ee.emp_id=bk.emp_id');        
         $this->db->where('em.Is_deleted','0');
-        $this->db->where('bk.paymenttype','bank_transfer');
-     
+        $this->db->where('bk.paymenttype','bank_transfer');     
         $this->db->where('em.companyid',$this->session->userdata('companyid'));        
         $this->db->order_by('em.emp_id','Desc');
         $query=$this->db->get();

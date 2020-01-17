@@ -62,7 +62,7 @@
 		<input type="submit" value="Search" name="search" class="btn btn-success btn-block">
 		</div> 
 		<div class="col-md-3"> 
-		<a href="<?php echo base_url()?>/hr/<?php echo $redirect_page;?>" class="btn btn-info"><i class="fa fa-refresh"></i></a> 	
+		<a href="<?php echo base_url()?>hr/<?php echo $redirect_page;?>" class="btn btn-info"><i class="fa fa-refresh"></i></a> 	
 		</div>     
 		</div> 
 		</form>
@@ -87,48 +87,38 @@
 						$i=1;
 						if($result){  
 						foreach($result as $row)
-						{
-						//echo "<pre>";print_r($row);          
-						?>
+						{ ?>  						
 						<tr>
-							<td><?php echo $i;?></td>
+							<td><?php echo $i; ?></td>
 						<td>
 						<h2 class="table-avatar">
-							<?php 
-							
+							<?php 							
 							 if(($row->ProfileImage!='' && file_exists(base_path().'/upload/hr/'.$row->ProfileImage))){  ?>
-							
-								
 								<img src="<?php echo base_url();?>upload/hr/<?php echo $row->ProfileImage;?>" alt="" class="avatar">
 								<?php echo ucfirst($row->FullName);?> 
-							
-							<?php
-							}else{ ?>
+							<?php }else{ ?>
 								<img src="<?php echo base_url();?>upload/no_image/user_no_image.png" alt="" class="avatar">
 								<?php echo $row->FullName;?> 
 							
-							<?php
-							}
-							?>
+							<?php } ?>
 						</h2>
-
 						</td>
-						<td><?php echo $row->EmailAddress ;?></td>
+						<td><?php echo $row->EmailAddress; ?></td>
 						<td><?php echo $row->Contact ;?></td>
 						<td>
 							<div class="action-label">
 							<a class="btn btn-white btn-sm btn-rounded" href="javascript:void(0);"  onclick="statusdata('<?php echo $row->hr_id; ?>','<?php echo $row->IsActive ;?>')">
-								<i class="fa fa-dot-circle-o <?php if($row->IsActive=='Active'){echo "text-success";}else{ echo "text-danger";}?>"></i><?php echo $row->IsActive ;?>
+								<i class="fa fa-dot-circle-o <?php if($row->IsActive=='Active'){echo "text-success";} else { echo "text-danger"; } ?>"></i><?php echo $row->IsActive; ?>
 							</a>
-						</div>
-							</td>
-						
+							</div>
+							</td>						
 						<td class="text-center">
 						<a  onclick="editdata('<?php echo $row->hr_id; ?>')" data-toggle="modal" data-target="#add_salary" >
-								<i class="fa fa-pencil fa-lg"></i></a>
+						<i class="fa fa-pencil fa-lg"></i></a>
 						<a  onclick="deletedata('<?php echo $row->hr_id; ?>','<?php echo $row->ProfileImage ;?>')" data-toggle="modal" data-target="#delete_admin"><i class="fa fa-trash-o fa-lg"></i></a>
+					
+						<?php echo anchor('hr/assign_rights/'.$row->hr_id,'<i class="la la-key la-lg" style="color:green;"></i>'); ?>
 						</td>
-
 						</tr>
 						<?php
 						$i++;

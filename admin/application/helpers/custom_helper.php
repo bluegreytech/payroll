@@ -1207,21 +1207,13 @@
 	
 
 	function getadminRights()
-
 	{
-
 		$CI =& get_instance();
-
 		$CI->db->select('r.rights_name,ra.*');
-
 		$CI->db->from('rights_assign ra');
-
 		$CI->db->join('rights r','ra.rights_id=r.rights_id');
-
 		$CI->db->where('ra.admin_id',get_authenticateadminID());
-
 		$query=$CI->db->get();
-
 		$r=array();
 
 		if($query->num_rows() > 0)
@@ -1810,9 +1802,9 @@
 
 		$CI->db->select("*");
 
-		$CI->db->from("rights_assign");
+		$CI->db->from("tblrights_assign");
 
-		$CI->db->where("admin_id",$id);
+		$CI->db->where("hr_id",$id);
 
 		$query = $CI->db->get();	
 

@@ -24,7 +24,6 @@ class Company_model extends CI_Model
 
 	}
 	function setsalarymonth_insert(){
-
 	    $salary_month = $this->input->post('salary_month');
 		$salarymonth = str_replace('/', '-', $salary_month );
 		$salary_month = date("Y-m", strtotime($salarymonth)); 
@@ -35,7 +34,7 @@ class Company_model extends CI_Model
 			'company_id'=>$this->session->userdata('companyid'),	
 			'created_date'=>date('Y-m-d')		
 		);
-		//echo "<pre>";print_r($data);die;
+	
         $res=$this->db->insert('tblsetsalarymonth',$data);	
 		return $res;
 	}

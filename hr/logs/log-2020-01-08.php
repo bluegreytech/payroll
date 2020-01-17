@@ -1,0 +1,297 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+
+ERROR - 2020-01-08 00:14:43 --> 404 Page Not Found: Default/js
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+
+ERROR - 2020-01-08 00:14:43 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 00:14:43 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 00:14:43 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-08 00:14:43 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 00:14:43 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 00:14:43 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:10:13 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:10:13 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:10:13 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:10:13 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-08 01:10:13 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:10:13 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:10:13 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:11:22 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:11:22 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:11:22 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:11:22 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-08 01:11:22 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:11:23 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:11:23 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:11:56 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:11:57 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:11:57 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:11:57 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:11:57 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-08 01:11:57 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:11:58 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:12:44 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:12:44 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:12:44 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-08 01:12:44 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:12:44 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:12:44 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:12:44 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:13:24 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:13:24 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:13:24 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:13:24 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-08 01:13:24 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:13:24 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:13:24 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:14:05 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:14:05 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:14:05 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-08 01:14:05 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:14:05 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:14:06 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:14:06 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:14:25 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:14:25 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:14:25 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:14:25 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:14:25 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-08 01:14:26 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:14:26 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:15:29 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:15:29 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:15:29 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:15:29 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-08 01:15:29 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:15:30 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:15:30 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:19:45 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:19:45 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:19:45 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-08 01:19:45 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:19:45 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:19:46 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:19:46 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:25:50 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:25:50 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:25:50 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:25:50 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:25:50 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-08 01:25:51 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:25:51 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:26:21 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:26:21 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-08 01:26:21 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:26:21 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:26:21 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:26:21 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:26:21 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:26:33 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:26:33 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:26:33 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:26:33 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-08 01:26:33 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:26:34 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:26:34 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:27:23 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:27:23 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:27:24 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:27:24 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:27:24 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-08 01:27:24 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:27:24 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:27:27 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:27:27 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-08 01:27:27 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:27:27 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:27:27 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:27:28 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:27:28 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:27:57 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:27:57 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:27:57 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:27:57 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:27:57 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-08 01:27:57 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:27:58 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:27:58 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:27:58 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:27:58 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:27:58 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-08 01:27:58 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:27:59 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:27:59 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:28:18 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:28:18 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:28:18 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-08 01:28:18 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:28:18 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:28:18 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:28:18 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:28:41 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:28:41 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:28:41 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-08 01:28:41 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:28:41 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:28:42 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:28:42 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:29:50 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:29:50 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:29:50 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-08 01:29:50 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:29:50 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:29:51 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:29:51 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:37:38 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:37:38 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:37:38 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-08 01:37:38 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:37:38 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:37:38 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:37:38 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:39:26 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '(SELECT count(attendance_date) FROM tblattendance where DAYNAME(attendance_date)' at line 1 - Invalid query: SELECT att.attendance_id as attendanceid,(SELECT count(attendance_status) FROM tblattendance WHERE attendance_status = 'Present') as workingdays,(SELECT count(attendance_status) FROM tblattendance WHERE attendance_status = 'halfday')as halfday,(SELECT count(attendance_status) FROM tblattendance WHERE attendance_status = 'leave')as leaveday,,(SELECT count(attendance_date) FROM tblattendance where DAYNAME(attendance_date) = 'Sunday')as weekoffday,CONCAT(U.first_name, ' ', U.last_name) as firstlast,U.ProfileImage as ProfileImage,SUM(IF(DATE(att.attendance_date) ='2019-10-01',att.attendance_id,0)) AS 'abc1',SUM(IF(DATE(att.attendance_date) ='2019-10-02',att.attendance_id,0)) AS 'abc2',SUM(IF(DATE(att.attendance_date) ='2019-10-03',att.attendance_id,0)) AS 'abc3',SUM(IF(DATE(att.attendance_date) ='2019-10-04',att.attendance_id,0)) AS 'abc4',SUM(IF(DATE(att.attendance_date) ='2019-10-05',att.attendance_id,0)) AS 'abc5',SUM(IF(DATE(att.attendance_date) ='2019-10-06',att.attendance_id,0)) AS 'abc6',SUM(IF(DATE(att.attendance_date) ='2019-10-07',att.attendance_id,0)) AS 'abc7',SUM(IF(DATE(att.attendance_date) ='2019-10-08',att.attendance_id,0)) AS 'abc8',SUM(IF(DATE(att.attendance_date) ='2019-10-09',att.attendance_id,0)) AS 'abc9',SUM(IF(DATE(att.attendance_date) ='2019-10-10',att.attendance_id,0)) AS 'abc10',SUM(IF(DATE(att.attendance_date) ='2019-10-11',att.attendance_id,0)) AS 'abc11',SUM(IF(DATE(att.attendance_date) ='2019-10-12',att.attendance_id,0)) AS 'abc12',SUM(IF(DATE(att.attendance_date) ='2019-10-13',att.attendance_id,0)) AS 'abc13',SUM(IF(DATE(att.attendance_date) ='2019-10-14',att.attendance_id,0)) AS 'abc14',SUM(IF(DATE(att.attendance_date) ='2019-10-15',att.attendance_id,0)) AS 'abc15',SUM(IF(DATE(att.attendance_date) ='2019-10-16',att.attendance_id,0)) AS 'abc16',SUM(IF(DATE(att.attendance_date) ='2019-10-17',att.attendance_id,0)) AS 'abc17',SUM(IF(DATE(att.attendance_date) ='2019-10-18',att.attendance_id,0)) AS 'abc18',SUM(IF(DATE(att.attendance_date) ='2019-10-19',att.attendance_id,0)) AS 'abc19',SUM(IF(DATE(att.attendance_date) ='2019-10-20',att.attendance_id,0)) AS 'abc20',SUM(IF(DATE(att.attendance_date) ='2019-10-21',att.attendance_id,0)) AS 'abc21',SUM(IF(DATE(att.attendance_date) ='2019-10-22',att.attendance_id,0)) AS 'abc22',SUM(IF(DATE(att.attendance_date) ='2019-10-23',att.attendance_id,0)) AS 'abc23',SUM(IF(DATE(att.attendance_date) ='2019-10-24',att.attendance_id,0)) AS 'abc24',SUM(IF(DATE(att.attendance_date) ='2019-10-25',att.attendance_id,0)) AS 'abc25',SUM(IF(DATE(att.attendance_date) ='2019-10-26',att.attendance_id,0)) AS 'abc26',SUM(IF(DATE(att.attendance_date) ='2019-10-27',att.attendance_id,0)) AS 'abc27',SUM(IF(DATE(att.attendance_date) ='2019-10-28',att.attendance_id,0)) AS 'abc28',SUM(IF(DATE(att.attendance_date) ='2019-10-29',att.attendance_id,0)) AS 'abc29',SUM(IF(DATE(att.attendance_date) ='2019-10-30',att.attendance_id,0)) AS 'abc30',SUM(IF(DATE(att.attendance_date) ='2019-10-31',att.attendance_id,0)) AS 'abc31' FROM tblattendance att LEFT JOIN tblemp U ON U.emp_id = att.emp_id WHERE attendance_month LIKE '%2019-10%' GROUP BY U.first_name
+ERROR - 2020-01-08 01:39:44 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:39:44 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:39:44 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:39:44 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:39:44 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-08 01:39:45 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:39:45 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:40:02 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:40:02 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:40:02 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-08 01:40:02 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:40:02 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:40:03 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:40:03 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:40:12 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:40:12 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:40:12 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-08 01:40:12 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:40:12 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:40:13 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:40:13 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:40:23 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:40:23 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:40:23 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-08 01:40:23 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:40:23 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:40:24 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:40:24 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:40:33 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:40:33 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:40:33 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-08 01:40:33 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:40:33 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:40:34 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:40:34 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:41:06 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:41:06 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:41:06 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-08 01:41:06 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:41:06 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:41:07 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:41:07 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:41:14 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:41:14 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:41:14 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-08 01:41:14 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:41:14 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:41:15 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:41:15 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:42:36 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:42:36 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:42:36 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:42:36 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:42:36 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-08 01:42:39 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:42:39 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:42:52 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:42:52 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:42:52 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:42:52 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:42:52 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-08 01:42:53 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:42:53 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:43:11 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:43:11 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:43:11 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:43:11 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-08 01:43:11 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:43:11 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:43:11 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:43:25 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:43:25 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 01:43:26 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:43:26 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-08 01:43:26 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:43:26 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 01:43:26 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 18:00:46 --> 404 Page Not Found: Assets/img
+ERROR - 2020-01-08 18:03:26 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 18:03:26 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 18:03:26 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 18:03:26 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 18:03:26 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 18:03:26 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-08 18:03:26 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 18:11:30 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 18:11:30 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 18:11:30 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-08 18:11:30 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 18:11:30 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 18:11:31 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 18:11:31 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 20:30:13 --> 404 Page Not Found: Assets/img
+ERROR - 2020-01-08 20:52:20 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 20:52:20 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 20:52:20 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-08 20:52:20 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 20:52:20 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 20:52:20 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 20:52:20 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 20:54:00 --> Severity: Notice --> Undefined property: stdClass::$workingdays C:\xampp\htdocs\payroll\hr\application\views\Attendance\attendancelist.php 176
+ERROR - 2020-01-08 20:54:00 --> Severity: Notice --> Undefined property: stdClass::$weekoffday C:\xampp\htdocs\payroll\hr\application\views\Attendance\attendancelist.php 178
+ERROR - 2020-01-08 20:54:00 --> Severity: Notice --> Undefined property: stdClass::$halfday C:\xampp\htdocs\payroll\hr\application\views\Attendance\attendancelist.php 180
+ERROR - 2020-01-08 20:54:00 --> Severity: Notice --> Undefined property: stdClass::$leaveday C:\xampp\htdocs\payroll\hr\application\views\Attendance\attendancelist.php 181
+ERROR - 2020-01-08 20:54:08 --> Severity: Notice --> Undefined property: stdClass::$workingdays C:\xampp\htdocs\payroll\hr\application\views\Attendance\attendancelist.php 176
+ERROR - 2020-01-08 20:54:08 --> Severity: Notice --> Undefined property: stdClass::$weekoffday C:\xampp\htdocs\payroll\hr\application\views\Attendance\attendancelist.php 178
+ERROR - 2020-01-08 20:54:08 --> Severity: Notice --> Undefined property: stdClass::$halfday C:\xampp\htdocs\payroll\hr\application\views\Attendance\attendancelist.php 180
+ERROR - 2020-01-08 20:54:08 --> Severity: Notice --> Undefined property: stdClass::$leaveday C:\xampp\htdocs\payroll\hr\application\views\Attendance\attendancelist.php 181
+ERROR - 2020-01-08 20:54:10 --> Severity: Notice --> Undefined property: stdClass::$workingdays C:\xampp\htdocs\payroll\hr\application\views\Attendance\attendancelist.php 176
+ERROR - 2020-01-08 20:54:10 --> Severity: Notice --> Undefined property: stdClass::$weekoffday C:\xampp\htdocs\payroll\hr\application\views\Attendance\attendancelist.php 178
+ERROR - 2020-01-08 20:54:10 --> Severity: Notice --> Undefined property: stdClass::$halfday C:\xampp\htdocs\payroll\hr\application\views\Attendance\attendancelist.php 180
+ERROR - 2020-01-08 20:54:10 --> Severity: Notice --> Undefined property: stdClass::$leaveday C:\xampp\htdocs\payroll\hr\application\views\Attendance\attendancelist.php 181
+ERROR - 2020-01-08 20:54:29 --> Severity: error --> Exception: Too few arguments to function Attendance_model::attendancelist(), 0 passed in C:\xampp\htdocs\payroll\hr\application\controllers\Attendance.php on line 121 and exactly 1 expected C:\xampp\htdocs\payroll\hr\application\models\Attendance_model.php 7
+ERROR - 2020-01-08 20:54:38 --> Severity: error --> Exception: Too few arguments to function Attendance_model::attendancelist(), 0 passed in C:\xampp\htdocs\payroll\hr\application\controllers\Attendance.php on line 121 and exactly 1 expected C:\xampp\htdocs\payroll\hr\application\models\Attendance_model.php 7
+ERROR - 2020-01-08 20:54:56 --> Severity: error --> Exception: Too few arguments to function Attendance_model::attendancelist(), 0 passed in C:\xampp\htdocs\payroll\hr\application\controllers\Attendance.php on line 121 and exactly 1 expected C:\xampp\htdocs\payroll\hr\application\models\Attendance_model.php 7
+ERROR - 2020-01-08 20:54:58 --> Severity: error --> Exception: Too few arguments to function Attendance_model::attendancelist(), 0 passed in C:\xampp\htdocs\payroll\hr\application\controllers\Attendance.php on line 121 and exactly 1 expected C:\xampp\htdocs\payroll\hr\application\models\Attendance_model.php 7
+ERROR - 2020-01-08 20:55:03 --> Severity: error --> Exception: Too few arguments to function Attendance_model::attendancelist(), 0 passed in C:\xampp\htdocs\payroll\hr\application\controllers\Attendance.php on line 121 and exactly 1 expected C:\xampp\htdocs\payroll\hr\application\models\Attendance_model.php 7
+ERROR - 2020-01-08 20:55:07 --> Severity: error --> Exception: Too few arguments to function Attendance_model::attendancelist(), 0 passed in C:\xampp\htdocs\payroll\hr\application\controllers\Attendance.php on line 121 and exactly 1 expected C:\xampp\htdocs\payroll\hr\application\models\Attendance_model.php 7
+ERROR - 2020-01-08 20:55:08 --> Severity: error --> Exception: Too few arguments to function Attendance_model::attendancelist(), 0 passed in C:\xampp\htdocs\payroll\hr\application\controllers\Attendance.php on line 121 and exactly 1 expected C:\xampp\htdocs\payroll\hr\application\models\Attendance_model.php 7
+ERROR - 2020-01-08 21:04:13 --> Severity: Notice --> Undefined variable: HalfDay C:\xampp\htdocs\payroll\hr\application\views\Attendance\attendancelist.php 179
+ERROR - 2020-01-08 21:04:16 --> Severity: Notice --> Undefined variable: HalfDay C:\xampp\htdocs\payroll\hr\application\views\Attendance\attendancelist.php 179
+ERROR - 2020-01-08 22:16:37 --> 404 Page Not Found: Default/images
+ERROR - 2020-01-08 22:39:44 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 22:39:44 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 22:39:44 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 22:39:44 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-08 22:39:44 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 22:39:44 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 22:39:44 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 22:49:56 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 22:49:56 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 22:49:56 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 22:49:56 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 22:49:56 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-08 22:49:57 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 22:49:57 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 22:54:56 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 22:54:56 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 22:54:56 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-08 22:54:57 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 22:54:57 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-08 22:54:57 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 22:54:57 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-08 23:20:06 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\payroll\hr\application\models\Leave_model.php 281
+ERROR - 2020-01-08 23:20:06 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp\htdocs\payroll\hr\application\models\Leave_model.php 281

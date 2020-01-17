@@ -18,7 +18,10 @@ class Attendance extends CI_Controller
         $data['empname']='';
 		$data['attmonth']='';
 		$data['redirect_page']="attendancelist";
-        $data['result']=$this->attendance_model->attendancelist();  
+       	$data['selectdatedata']=getSelectdate($this->session->userdata('companyid'));
+        $salarymonth=$data['selectdatedata']->selecteddate;
+        $data['salarymonth']=$data['selectdatedata']->selecteddate;  
+	    $data['result']=$this->attendance_model->attendancelist($salarymonth); 
         $data['selectdatedata']= getSelectdate($this->session->userdata('companyid'));    
 		$this->load->view('Attendance/attendancelist',$data);
 	}
@@ -115,7 +118,10 @@ class Attendance extends CI_Controller
 		}else{
 		    $data['empname']='';
 			$data['attmonth']='';
-          	$data['result']=$this->attendance_model->attendancelist();
+			$data['selectdatedata']=getSelectdate($this->session->userdata('companyid'));
+	        $salarymonth=$data['selectdatedata']->selecteddate;
+	        $data['salarymonth']=$data['selectdatedata']->selecteddate;  
+		    $data['result']=$this->attendance_model->attendancelist($salarymonth);           	
           	$data['selectdatedata']= getSelectdate($this->session->userdata('companyid'));
 		}
 		 	

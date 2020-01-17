@@ -4,22 +4,25 @@ class Attendance_model extends CI_Model
  {
 	
 
-	function attendancelist()
+	function attendancelist($salarymonth)
 	{
-        
+		
      	$companyid=$this->session->userdata('companyid');
-	     $totalmonth=cal_days_in_month(CAL_GREGORIAN, date('m',strtotime('last month')),date('Y'));	
+	   // echo  $totalmonth=cal_days_in_month(CAL_GREGORIAN, date('m',strtotime('last month')),date('Y'));die;	
+	 	$totalmonth=cal_days_in_month(CAL_GREGORIAN, date('m',strtotime($salarymonth)),date('Y',strtotime($salarymonth)));
 		
 		     $str2='';
 		     $monthdate=array();
-		        $str1="SELECT att.attendance_id as attendanceid,CONCAT(U.first_name, ' ', U.last_name) as firstlast,U.ProfileImage as ProfileImage,";
+		        $str1="SELECT att.attendance_id as attendanceid,(SELECT count(attendance_status) FROM tblattendance as attd WHERE attendance_status = 'Present' AND attd.emp_id=att.emp_id AND attendance_month LIKE '%$salarymonth%') as workingdays,(SELECT count(attendance_status) FROM tblattendance  as attd WHERE attendance_status = 'halfday'AND attd.emp_id=att.emp_id AND attendance_month LIKE '%$salarymonth%')as halfday,(SELECT count(attendance_status) FROM tblattendance as attd WHERE attendance_status = 'Absent' AND attd.emp_id=att.emp_id AND attendance_month LIKE '%$salarymonth%')as leaveday,(SELECT count(attendance_date) FROM tblattendance as attd  where DAYNAME(attendance_date) = 'Sunday' AND attd.emp_id=att.emp_id AND attendance_month LIKE '%$salarymonth%')as weekoffday,(SELECT count(attendance_status) FROM tblattendance as attd WHERE attendance_status = 'Holiday' AND attd.emp_id=att.emp_id AND attendance_month LIKE '%$salarymonth%')as holiday,CONCAT(U.first_name, ' ', U.last_name) as firstlast,U.ProfileImage as ProfileImage,";
 	      	  for($i=1;$i<=$totalmonth;$i++){
 		       	if($i<=9){
 		       		
-		       		 $monthdate= date('Y-m-'.'0'.$i,strtotime('last month'));
+		       		// $monthdate= date('Y-m-'.'0'.$i,strtotime('last month'));
+		       		 $monthdate= date($salarymonth.'-'.'0'.$i);
 		       		 $str2.="SUM(IF(DATE(att.attendance_date) ='$monthdate',att.attendance_id,0)) AS 'abc$i'";
 		       	}else{
-		       		$monthdate= date('Y-m-'.$i,strtotime('last month'));
+		       		 $monthdate= date($salarymonth.'-'.$i);
+		       		//$monthdate= date('Y-m-'.$i,strtotime('last month'));
 		       		 $str2.="SUM(IF(DATE(att.attendance_date) ='$monthdate',att.attendance_id,0)) AS 'abc$i'";
 		       	} 
 		       	if($i<$totalmonth){
@@ -27,9 +30,10 @@ class Attendance_model extends CI_Model
 		       	}
 		        
 		       }
-		       $str3="FROM tblattendance att LEFT JOIN tblemp U ON U.emp_id = att.emp_id   WHERE YEAR(attendance_date) = YEAR(CURRENT_DATE - INTERVAL 1 MONTH)AND MONTH(attendance_date) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH) AND att.company_id=$companyid GROUP BY U.first_name ORDER BY  att.attendance_id DESC";
+		         $str3="FROM tblattendance att LEFT JOIN tblemp U ON U.emp_id = att.emp_id WHERE attendance_month LIKE '%$salarymonth%' GROUP BY U.first_name";
+		       // $str3="FROM tblattendance att LEFT JOIN tblemp U ON U.emp_id = att.emp_id   WHERE YEAR(attendance_date) = YEAR(CURRENT_DATE - INTERVAL 1 MONTH)AND MONTH(attendance_date) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH) AND att.company_id=$companyid GROUP BY U.first_name ORDER BY  att.attendance_id DESC";
 		        $query=$this->db->query($str1.''.$str2.''.$str3);
-			//echo $this->db->last_query();die;
+		 //  echo $this->db->last_query();die;
 			return $query->result();
     
 		
@@ -70,7 +74,7 @@ class Attendance_model extends CI_Model
 		  		$str2='';
 		     	$monthdate=array();
 		     
-		       $str1="SELECT att.attendance_id as attendanceid,CONCAT(U.first_name, ' ', U.last_name) as firstlast,U.ProfileImage as ProfileImage,";
+		       $str1="SELECT att.attendance_id as attendanceid,(SELECT count(attendance_status) FROM tblattendance as attd WHERE attendance_status = 'Present' AND attd.emp_id=att.emp_id AND attendance_month LIKE '%$attmonth%') as workingdays,(SELECT count(attendance_status) FROM tblattendance as attd WHERE attendance_status = 'halfday' AND attd.emp_id=att.emp_id AND attendance_month LIKE '%$attmonth%')as halfday,(SELECT count(attendance_status) FROM tblattendance as attd WHERE attendance_status = 'leave' AND attd.emp_id=att.emp_id AND attendance_month LIKE '%$attmonth%')as leaveday,(SELECT count(attendance_date) FROM tblattendance as attd where DAYNAME(attendance_date) = 'Sunday' AND attd.emp_id=att.emp_id AND attendance_month LIKE '%$attmonth%')as weekoffday,(SELECT count(attendance_status) FROM tblattendance as attd WHERE attendance_status = 'Holiday' AND attd.emp_id=att.emp_id AND attendance_month LIKE '%$attmonth%' )as holiday,CONCAT(U.first_name, ' ', U.last_name) as firstlast,U.ProfileImage as ProfileImage,";
 	      	  for($i=1;$i<=$totalmonth;$i++){
 		       	if($i<=9){
 		       		
@@ -97,7 +101,7 @@ class Attendance_model extends CI_Model
 		
 		  		 $str2='';
 		     	$monthdate=array();		     
-		       $str1="SELECT att.attendance_id as attendanceid,CONCAT(U.first_name, ' ', U.last_name) as firstlast,U.ProfileImage as ProfileImage,";
+		       $str1="SELECT att.attendance_id as attendanceid,(SELECT count(attendance_status) FROM tblattendance as attd WHERE attendance_status = 'Present' AND attd.emp_id=att.emp_id AND attendance_month LIKE '%$attmonth%') as workingdays,(SELECT count(attendance_status) FROM tblattendance as attd WHERE attendance_status = 'halfday' AND attd.emp_id=att.emp_id AND attendance_month LIKE '%$attmonth%')as halfday,(SELECT count(attendance_status) FROM tblattendance as attd WHERE attendance_status = 'leave' AND attd.emp_id=att.emp_id AND attendance_month LIKE '%$attmonth%')as leaveday,(SELECT count(attendance_date) FROM tblattendance as attd where DAYNAME(attendance_date) = 'Sunday' AND attd.emp_id=att.emp_id AND attendance_month LIKE '%$attmonth%')as weekoffday ,(SELECT count(attendance_status) FROM tblattendance as attd WHERE attendance_status = 'Holiday' AND attd.emp_id=att.emp_id AND attendance_month LIKE '%$attmonth%')as holiday,CONCAT(U.first_name, ' ', U.last_name) as firstlast,U.ProfileImage as ProfileImage,";
 		      	  for($i=1;$i<=$totalmonth;$i++){
 			       	if($i<=9){
 			       		
@@ -113,7 +117,7 @@ class Attendance_model extends CI_Model
 			        
 			       }
 		     
-		       $str3=" FROM tblattendance att LEFT JOIN tblemp U ON U.emp_id = att.emp_id WHERE  att.company_id=$companyid AND attendance_month LIKE '%$attmonth%' GROUP BY U.first_name";
+		       $str3=" FROM tblattendance att LEFT JOIN tblemp U ON U.emp_id = att.emp_id WHERE U.Is_deleted='0' AND  att.company_id=$companyid AND attendance_month LIKE '%$attmonth%' GROUP BY U.first_name";
 		      //  echo $str1.''.$str2.''.$str3; die;
 		    $query=$this->db->query($str1.''.$str2.''.$str3);	
 			}
@@ -139,7 +143,7 @@ class Attendance_model extends CI_Model
 	}
     function attendance_insert()
 	{	
-		$attendancemonth = $this->input->post('attendancemonth'); 	
+	    $attendancemonth = $this->input->post('attendancemonth'); 	
 		$allholiday=getallholiday($attendancemonth);
 		//echo "<pre>";print_r($allholiday);die;
 		$allholidayarry= array();
@@ -150,7 +154,6 @@ class Attendance_model extends CI_Model
            
        	}		
 		}
-      
 		
 		$time_in=date('H:i',strtotime($this->input->post('time_in')));
 		$time_out=date('H:i',strtotime($this->input->post('time_out')));
@@ -176,7 +179,13 @@ class Attendance_model extends CI_Model
 		       	  for($k=0;$k<count($allholiday);$k++){
 		       	  	
 		       	  	  	if($result == "Sunday"||strtotime($allholiday[$k]['holidaydate'])==strtotime($monthdate)){
-								 $attendance_status="Absent";
+		       	  	  		if(strtotime($allholiday[$k]['holidaydate'])==strtotime($monthdate)){
+		       	  	  				$attendance_status="Holiday";
+		       	  	  			}else{
+		       	  	  				$attendance_status="Weekoff";
+		       	  	  			}
+		       	  	  		//echo "hjhg";die;
+								 
 								//echo date("Y-m-d", strtotime($monthdate)). " ".$result."<br>";;
 							    break;
 							}else{
@@ -184,10 +193,9 @@ class Attendance_model extends CI_Model
 							}
 		       	  }
 		       	}else{
-		       		 if($result == "Sunday"){
-								 $attendance_status="Absent";
-								//echo date("Y-m-d", strtotime($monthdate)). " ".$result."<br>";;
-							    
+		       		 if($result == "Sunday"){		       		 	
+								 $attendance_status="Weekoff";
+								
 							}else{
                                   $attendance_status="Present";   
 					}
@@ -200,13 +208,13 @@ class Attendance_model extends CI_Model
 				'attendance_month' =>$this->input->post('attendancemonth'),
 				'time_in' =>$time_in,
 				'time_out' =>$time_out,
-				'attendance_status'=>$attendance_status,
+				'attendance_status'=>trim($attendance_status),
 				'created_date'=>date('Y-m-d')		
 				);
 				//echo "<pre>";print_r($data);
 				$res=$this->db->insert('tblattendance',$data);
 	       	}
-	       	//die;	     
+	       // die;    
         }       
 		return $res;		
 	}

@@ -28,7 +28,8 @@
 							<form method="POST" action="<?php echo base_url();?>salarysetting/add_setsalary" id="frm_empsalary">
 								<div class="row">
 									<div class="col-md-6">					
-											   <input type="hidden" class="form-control" name="salary_month" id="salary_month" value="<?php echo $selectdatedata->selecteddate;?>">									
+											   <input type="hidden" class="form-control" name="salary_month" id="salary_month" value="<?php echo $selectdatedata->selecteddate;?>">	
+											    <input type="hidden" class="form-control" name="empsetsalary_id" id="empsetsalary_id" value="<?php echo $empsetsalary_id;?>">							
 										<div class="form-group">
 												<label>Employee Code<span class="text-danger">*</span></label>
 												<input class=" form-control" type="hidden" name="emp_id" id="emp_id" Placeholder="Employee Code" value="">
@@ -37,9 +38,7 @@
 										<div class="form-group">
 											<label>Employee Name <span class="text-danger">*</span>
 											</label>	
-											<?php if(empty($empid)){ ?>
-
-																			
+											<?php if(empty($empid)){ ?>																			
 											<select  class=" form-control selectpicker" data-live-search="true" data-actions-box="true"  name="employename" id="employename">
 												 <option selected="" value="" disabled="" >Please Select</option> 
 											
@@ -49,6 +48,11 @@
 										 <?php } ?>		
 											<span id="emperror"></span>
 										</div>
+										<div class="form-group" id='paymentmode'>
+												<label>Payment Mode</label>										
+												<input class=" form-control" type="text" name="paymenttype" id="paymenttype" Placeholder="" value=""  readonly="">
+										</div>
+										
 										
 									</div>
 								
@@ -157,6 +161,8 @@
 											<label>Net Pay</label>
 											<!-- <input class="form-control" type="text" name="netpay" id="netpay" onkeyup="payword.value=convertNumberToWords(this.value)" style=""> -->
 											<input class="form-control" type="text" name="netpay" id="netpay" style="" readonly>
+											<input class="form-control" type="hidden" name="finaltotalamt" id="finaltotalamt" style="" readonly>
+											
 											
 										</div>
 										<div class="form-group">
@@ -226,12 +232,9 @@
 <script>
 	
 $(document).ready(function(){
-	//$("#employename").change(function () {
-		
+
 	var end = this.value;
 	var id = '<?php echo $empid; ?>';
-	// otherdeductionname= '<?php //echo $otherdeductionname; ?>';
-	// otherdeductionvalue= '<?php //echo $otherdeductionvalue; ?>';
 	var salary_month = $('#salary_month').val();	
 	url="<?php echo base_url();?>";
 	if(id.length!=''){
@@ -241,55 +244,119 @@ $(document).ready(function(){
 		 data:{id:id,salarymonth:salary_month},
          success:function(response){
 			var response = JSON.parse(response);
-            console.log(response);
-
-            $('#empname').val(response.first_name);
+          	  console.log(response.paymenttype);
+            $('#empname').val(response.first_name+' '+response.last_name);
             $('#emp_id').val(response.emp_id);
 			$('#employee_code').val(response.employee_code);			
 			$('#jod').val(response.joiningdate);			
             $('#pancard').val(response.pancard);
             $('#Gender').val(response.gender);
-            $('#worked').val(response.workingdays);  
-           // $("#adddeduction").append("<div class='form-group'><div class='row'><div class='col-md-6'><input class='form-control' type='text' name='otherdeductionname[]' value='"+otherdeductionname +"'></div><div class='col-md-5'><input class='form-control' type='text' name='otherdeductionvalue[]'  value='"+otherdeductionvalue+"'></div><span style='margin-top:12px;color:red;' class='remove_field'><i class='fa fa-trash fa-lg'></i></span></div>");
-           //  $("#adddeduction").val(response.otherdeductionname);
-           // $("#adddeduction").val(response.otherdeductionvalue);
-           
+            $('#worked').val(response.workingdays);
+            $('#paymenttype').val(response.paymenttype);    
+                  
 			var deductiontotal = 0;
 			var earningtotal = 0;
-			for (var j=0, m=response.complianceresult.length;j<m;j++) {			
-				compliancetypeid=response.complianceresult[j].compliancetypeid;
-				compliance_id=response.complianceresult[j].complianceid;
-				compliancepercentage=response.complianceresult[j].compliancepercentage;
-				compliance_name=response.complianceresult[j].compliancename;
-         	 
-         	  	if(response.salary=='monthly'){
+			var deductionamount=0;
+			var m =response.complianceresult.length;
+          	n1=response.complianceallowid.length;
+          	console.log(response.complianceresult);
+			var myarray = [];
+			for (var j=0; j< m;j++) {
+			//console.log(response);  
+			compliancetypeid=response.complianceresult[j].compliancetypeid;
+			compliance_id=response.complianceresult[j].complianceid;
+			compliancepercentage=response.complianceresult[j].compliancepercentage;
+			compliance_name=response.complianceresult[j].compliancename;
+         	 // console.log(compliance_id);
+         	  if(response.salary=='monthly'){
 					monthlyamt=parseFloat(response.salaryamt)/12;
 				}else{
-					monthlyamt=parseFloat(response.salaryamt)*30;
-					//console.log(monthlyamt);
+					monthlyamt=parseFloat(response.salaryamt)*30;				
 				}
-				totalamount=monthlyamt.toFixed();				
+				
+				totalamount=monthlyamt.toFixed();
+				//console.log(totalamount);
 				compliance_percentage = parseFloat(compliancepercentage);
-				if(response.salary=='monthly'){
+				if(response.salary=='monthly'){					
 				 	if(compliancetypeid=='1'){
-				 		if(response.complianceallowid.length>1){				 			
-            	          	complianceallow_id=response.complianceallowid[j];
-           				}else{           				
-           					complianceallow_id=response.complianceallowid;
-           				}
-				 		if(compliance_id==complianceallow_id){
-				 			
-				 			deductionamount=(totalamount * compliance_percentage)/100; 
-					 		deductiontotal += deductionamount; 
-				 		}else{			 				
-				 			 deductionamount=0.00; 
-				 			 deductiontotal += 0.00; 
-				 		}
-                        $('#totaldeduction').val(deductiontotal.toFixed(2));
+           				
+						for(var k=0; k<n1;k++ ){
+						if(response.complianceallowid[k]==compliance_id){
+							if(compliance_name=="PF"){
+								deducthraamount=(totalamount * response.hrapercentage[j])/100;
+								finaltotalamt=parseFloat(monthlyamt-deducthraamount);
+							
+                                if(response.pfcelingprice!=''){								
+									if(finaltotalamt > response.pfcelingprice){
+										 deductionamount=parseFloat('1800.00');
+										 deductiontotal += deductionamount; 
+										console.log("fdfd"+deductionamount); 
+										
+									}else{
+										deductionamount=(finaltotalamt * compliance_percentage)/100; 
+										deductiontotal += deductionamount;
+										console.log("gfg"+deductionamount);
+
+									}
+                                  
+								}
+								
+							}else if(compliance_name=="ESIC"){
+                                   if(parseInt(totalamount)<parseInt(21000)){
+										deductionamount=(totalamount * compliance_percentage)/100; 
+										deductiontotal += deductionamount; 
+										
+                                   }else{
+                                   		deductionamount=parseFloat('0.00'); 
+										deductiontotal += deductionamount; 
+										
+                                   }
+							}else if(compliance_name=="PT"){
+								console.log(totalamount);
+                               	if(parseInt(totalamount)<parseInt(6000)){
+                               		deductionamount=parseInt('00');
+								    deductiontotal += deductionamount; 
+								
+                               	}else if(parseInt(totalamount)>=parseInt(6000) && parseInt(totalamount)<parseInt(9000)){ 
+                               		deductionamount=parseInt('80');
+								    deductiontotal += deductionamount;
+
+                               	}else if(parseInt(totalamount)>=parseInt(9000) && parseInt(totalamount)<parseInt(12000) ){
+                               		 deductionamount=parseInt('150');
+								    deductiontotal += deductionamount; 
+									
+
+                               	}else{
+                               		deductionamount=parseInt('200');
+								    deductiontotal += deductionamount; 
+									
+                               	}
+                              
+							}else{
+								deductionamount=(totalamount * compliance_percentage)/100; 
+								deductiontotal += deductionamount;
+								
+							}
+							break;
+						}else{		
+				 			 deductionamount=parseFloat('0.00'); 
+				 			 deductiontotal +=deductionamount; 
+				 			 	
+						}
+							  
+						}
+					  	var othertotaldeduction="<?php echo $totaldeduction?>";
+					  	if(othertotaldeduction){
+								$('#totaldeduction').val(othertotaldeduction); 
+							}else{
+								$('#totaldeduction').val(deductiontotal.toFixed(2));
+							}
+						//$('#totaldeduction').val(deductiontotal.toFixed(2));
                         $('#othertotaldeduction').val(deductiontotal.toFixed(2));
                         $('#compliance_'+compliance_id).val(deductionamount.toFixed(2));
                        
 				 	}else{
+				 		//console.log("gfgfg"+finaltamt);
 				 		earningamount=(totalamount * compliance_percentage)/100; 
                         earningtotal += earningamount;
                    	 	$('#gross_earning').val(earningtotal.toFixed(2));
@@ -297,27 +364,32 @@ $(document).ready(function(){
 				 	}
 				}else{
 					if(compliancetypeid=='2'){
-						if(compliance_name=='Basic'){
-							 
+						if(compliance_name=='Basic'){							 
 	                   	 	$('#gross_earning').val(totalamount);
 	                    	$('#compliance_'+compliance_id).val(totalamount);	
 						}else{
 							earningamount=0.00; 
-	                        earningtotal += 0.00;
-	                   	 	//$('#gross_earning').val(earningtotal.toFixed(2));
+	                        earningtotal += 0.00;	                   	 	
 	                    	$('#compliance_'+compliance_id).val(earningtotal.toFixed(2));	
 						}
             		}else{
             			deductionamount=0.00; 
 			 			deductiontotal += 0.00; 
-				 		$('#totaldeduction').val(deductiontotal.toFixed(2));
+
+			 			if(othertotaldeduction){
+								$('#totaldeduction').val(othertotaldeduction); 
+							}else{
+								$('#totaldeduction').val(deductiontotal.toFixed(2));
+							}
+				 		//$('#totaldeduction').val(deductiontotal.toFixed(2));
                         $('#othertotaldeduction').val(deductiontotal.toFixed(2));
                         $('#compliance_'+compliance_id).val(deductionamount.toFixed(2));
             		}
 				}			
 			}  
-			netpay=(parseFloat($('#gross_earning').val())-parseFloat($('#totaldeduction').val()));	
-			$('#netpay').val(netpay);
+			netpay=(parseFloat($('#gross_earning').val())-parseFloat($('#totaldeduction').val()));
+			
+			$('#netpay').val(netpay.toFixed(2));
 			$('#payword').val(convertNumberToWords(netpay));
         
          }
@@ -347,8 +419,7 @@ $(document).ready(function()
 { 
 	$("#frm_addleave").validate(
 	{
-		ignore: "input[type='text']:hidden"	,
-		 //for all select
+		ignore: "input[type='text']:hidden"	,		 
 			rules: {
 				'employename[]':{
 					required:true,						
@@ -478,54 +549,120 @@ $("#employename").change(function () {
 		 data:{id:id,salarymonth:salary_month},
          success:function(response){
 			var response = JSON.parse(response);
-          //  console.log(response.complianceallowid.length);
-
-           
+            console.log(response);
             $('#emp_id').val(response.emp_id);
 			$('#employee_code').val(response.employee_code);			
 			$('#jod').val(response.joiningdate);			
             $('#pancard').val(response.pancard);
             $('#Gender').val(response.gender);
-            $('#worked').val(response.workingdays);          
+            $('#worked').val(response.workingdays);  
+            if(response.paymenttype=="bank_transfer"){
+            	 $('#paymenttype').val("Bank Transfer"); 
+            }else if(response.paymenttype=="cheque"){
+                 $('#paymenttype').val("Cheque");  
+            }else if(response.paymenttype=="cash"){
+                 $('#paymenttype').val("Cash");  
+            }else if(response.paymenttype=="demand_draff"){
+                 $('#paymenttype').val("Demand Draff");  
+            }
+                      
 			var deductiontotal = 0;
 			var earningtotal = 0;
-			for (var j=0, m=response.complianceresult.length;j<m;j++) {
-			//console.log(response.complianceresult[j]);  
+			var deductionamount=0;
+			var m =response.complianceresult.length;
+          	n1=response.complianceallowid.length;
+          	console.log(response.complianceresult);
+			var myarray = [];
+			for (var j=0; j< m;j++) {
+			//console.log(response);  
 			compliancetypeid=response.complianceresult[j].compliancetypeid;
 			compliance_id=response.complianceresult[j].complianceid;
 			compliancepercentage=response.complianceresult[j].compliancepercentage;
 			compliance_name=response.complianceresult[j].compliancename;
-         	  // console.log(compliance_id);
+         	 // console.log(compliance_id);
          	  if(response.salary=='monthly'){
 					monthlyamt=parseFloat(response.salaryamt)/12;
 				}else{
-					monthlyamt=parseFloat(response.salaryamt)*30;
-					//console.log(monthlyamt);
+					monthlyamt=parseFloat(response.salaryamt)*30;				
 				}
-			
+				
 				totalamount=monthlyamt.toFixed();
 				//console.log(totalamount);
 				compliance_percentage = parseFloat(compliancepercentage);
-				if(response.salary=='monthly'){
+				if(response.salary=='monthly'){					
 				 	if(compliancetypeid=='1'){
-				 		if(response.complianceallowid.length>1){				 			
-            	          	complianceallow_id=response.complianceallowid[j];
-           				}else{           				
-           					complianceallow_id=response.complianceallowid;
-           				}
-				 		if(compliance_id==complianceallow_id){
-				 			
-				 			deductionamount=(totalamount * compliance_percentage)/100; 
-					 		deductiontotal += deductionamount; 
-				 		}else{			 				
-				 			 deductionamount=0.00; 
-				 			 deductiontotal += 0.00; 
-				 		}
-                        $('#totaldeduction').val(deductiontotal.toFixed(2));
+           				
+						for(var k=0; k<n1;k++ ){
+						if(response.complianceallowid[k]==compliance_id){
+							if(compliance_name=="PF"){
+								deducthraamount=(totalamount * response.hrapercentage[j])/100;
+								finaltotalamt=parseFloat(monthlyamt-deducthraamount);
+							
+                                if(response.pfcelingprice!=''){								
+									if(finaltotalamt > response.pfcelingprice){
+										 deductionamount=parseFloat('1800.00');
+										 deductiontotal += deductionamount; 
+										
+										
+									}else{
+										deductionamount=(finaltotalamt * compliance_percentage)/100; 
+										deductiontotal += deductionamount;
+										
+									}
+                                  
+								}
+								
+							}else if(compliance_name=="ESIC"){
+                                   if(parseInt(totalamount)<parseInt(21000)){
+										deductionamount=(totalamount * compliance_percentage)/100; 
+										deductiontotal += deductionamount; 
+										
+                                   }else{
+                                   		deductionamount=parseFloat('0.00'); 
+										deductiontotal += deductionamount; 
+										
+                                   }
+							}else if(compliance_name=="PT"){
+							
+                               	if(parseInt(totalamount)<parseInt(6000)){
+                               		deductionamount=parseInt('00');
+								    deductiontotal += deductionamount; 
+								
+                               	}else if(parseInt(totalamount)>=parseInt(6000) && parseInt(totalamount)<parseInt(9000)){ 
+                               		deductionamount=parseInt('80');
+								    deductiontotal += deductionamount;
+
+                               	}else if(parseInt(totalamount)>=parseInt(9000) && parseInt(totalamount)<parseInt(12000) ){
+                               		 deductionamount=parseInt('150');
+								    deductiontotal += deductionamount; 
+									
+
+                               	}else{
+                               		deductionamount=parseInt('200');
+								    deductiontotal += deductionamount; 
+									
+                               	}
+                              
+							}else{
+								deductionamount=(totalamount * compliance_percentage)/100; 
+								deductiontotal += deductionamount;
+								
+							}
+							break;
+						}else{		
+				 			 deductionamount=parseFloat('0.00'); 
+				 			 deductiontotal +=deductionamount; 
+				 			 	
+						}
+							  
+						}
+					  	
+						$('#totaldeduction').val(deductiontotal.toFixed(2));
                         $('#othertotaldeduction').val(deductiontotal.toFixed(2));
                         $('#compliance_'+compliance_id).val(deductionamount.toFixed(2));
                        
 				 	}else{
+				 		
 				 		earningamount=(totalamount * compliance_percentage)/100; 
                         earningtotal += earningamount;
                    	 	$('#gross_earning').val(earningtotal.toFixed(2));
@@ -533,14 +670,12 @@ $("#employename").change(function () {
 				 	}
 				}else{
 					if(compliancetypeid=='2'){
-						if(compliance_name=='Basic'){
-							 
+						if(compliance_name=='Basic'){							 
 	                   	 	$('#gross_earning').val(totalamount);
 	                    	$('#compliance_'+compliance_id).val(totalamount);	
 						}else{
 							earningamount=0.00; 
-	                        earningtotal += 0.00;
-	                   	 	//$('#gross_earning').val(earningtotal.toFixed(2));
+	                        earningtotal += 0.00;	                   	 	
 	                    	$('#compliance_'+compliance_id).val(earningtotal.toFixed(2));	
 						}
             		}else{
@@ -554,7 +689,7 @@ $("#employename").change(function () {
 			}  
 			netpay=(parseFloat($('#gross_earning').val())-parseFloat($('#totaldeduction').val()));
 			
-			$('#netpay').val(netpay);
+			$('#netpay').val(netpay.toFixed(2));
 			$('#payword').val(convertNumberToWords(netpay));
         
          }
@@ -579,6 +714,23 @@ $(document).ready(function() {
 		e.preventDefault(); $(this).parent('div').remove(); x--;
 		 $('#totaldeduction').val($('#othertotaldeduction').val());
 	});
+
+    var otherdeductionname="<?php echo $otherdeductionname ?>";
+    var otherdeductionvalue="<?php echo $otherdeductionvalue ?>";
+
+  if(otherdeductionname!='' && otherdeductionvalue!='' ){
+
+
+   
+		
+		 //max input box allowed
+			x++; //text box increment
+			$(wrapper).append("<div class='form-group'><div class='row'><div class='col-md-6'><input class='form-control' type='text' name='otherdeductionname[]' value='"+otherdeductionname+"'></div><div class='col-md-5'><input class='form-control' type='text' name='otherdeductionvalue[]' onkeyup='deductioncalculate(this.value)' value='"+otherdeductionvalue+"'></div><span style='margin-top:12px;color:red;' class='remove_field'><i class='fa fa-trash fa-lg'></i></span></div>"); 
+		
+	
+ 	}
+    
+
 });
 	
 function deductioncalculate(){

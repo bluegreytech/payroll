@@ -267,3 +267,49 @@ ERROR - 2020-01-01 14:05:13 --> 404 Page Not Found: Default/css
 ERROR - 2020-01-01 14:05:13 --> 404 Page Not Found: Default/css
 ERROR - 2020-01-01 14:05:13 --> 404 Page Not Found: Default/js
 ERROR - 2020-01-01 14:05:13 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-01 14:46:26 --> Severity: error --> Exception: syntax error, unexpected '}', expecting end of file C:\xampp\htdocs\payroll\hr\application\views\Employee\editemp.php 769
+ERROR - 2020-01-01 14:49:27 --> Severity: error --> Exception: syntax error, unexpected end of file C:\xampp\htdocs\payroll\hr\application\views\Employee\editemp.php 892
+ERROR - 2020-01-01 14:49:44 --> Severity: error --> Exception: syntax error, unexpected end of file C:\xampp\htdocs\payroll\hr\application\views\Employee\editemp.php 892
+ERROR - 2020-01-01 14:50:02 --> Severity: error --> Exception: syntax error, unexpected end of file C:\xampp\htdocs\payroll\hr\application\views\Employee\editemp.php 892
+ERROR - 2020-01-01 14:50:32 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-01 14:50:32 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-01 14:50:32 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-01 14:50:32 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-01 14:50:32 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-01 14:50:32 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-01 14:50:32 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-01 14:50:44 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-01 14:50:44 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-01 14:50:44 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-01 14:50:44 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-01 14:50:44 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-01 14:50:44 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-01 14:50:44 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-01 14:51:17 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-01 14:51:17 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-01 14:51:17 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-01 14:51:17 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-01 14:51:17 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-01 14:51:18 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-01 14:51:18 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-01 14:51:48 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-01 14:51:48 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-01 14:51:48 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-01 14:51:48 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-01 14:51:48 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-01 14:51:49 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-01 14:51:49 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-01 14:51:57 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-01 14:51:57 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-01 14:51:57 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-01 14:51:57 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-01 14:51:57 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-01 14:51:57 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-01 14:51:57 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-01 14:52:28 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-01 14:52:28 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-01 14:52:28 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-01 14:52:28 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-01 14:52:28 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-01 14:52:29 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-01 14:52:29 --> 404 Page Not Found: Default/js

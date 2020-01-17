@@ -499,7 +499,8 @@
 		$CI->db->from('tblcmpholiday');
 		$CI->db->like('holidaydate',date($attendancemonth));
 		$CI->db->where('is_deleted',"0");	
-		$query = $CI->db->get();		
+		$query = $CI->db->get();
+		//echo $CI->db->last_query();	die;	
 		if($query->num_rows() > 0)
 		{
 			return $query->result_array();
@@ -809,7 +810,7 @@
 		$CI->db->from('tblattendance');		
 		$CI->db->where('attendance_id',$id);
 		$query = $CI->db->get();
-		//echo $CI->db->last_query();die;
+		//echo $CI->db->last_query();
 		//echo "<pre>";print_r($query);die;
 		return $query->row()->attendance_status;
 	}
@@ -884,8 +885,8 @@
 		$CI =& get_instance();
 
 		$CI->db->select("*");
-		$CI->db->from("rights_assign");
-		$CI->db->where("admin_id",$id);
+		$CI->db->from("tblrights_assign");
+		$CI->db->where("hr_id",$id);
 		$query = $CI->db->get();	
 		$num = $query->num_rows();
 		
