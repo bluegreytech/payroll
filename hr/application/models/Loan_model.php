@@ -19,7 +19,7 @@ class Loan_model extends CI_Model
  	function getloandet($emp_id){
       $this->db->select('*');
 		$this->db->from('tblloan');
-		$this->db->where('loan_completed','No');
+		//$this->db->where('loan_completed','No');
 		$this->db->where('company_id',$this->session->userdata('companyid'));
 		$this->db->where('emp_id',$emp_id);
 		$this->db->where('Is_deleted','0');
