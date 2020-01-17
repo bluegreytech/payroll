@@ -267,3 +267,14 @@ ERROR - 2020-01-01 14:05:13 --> 404 Page Not Found: Default/css
 ERROR - 2020-01-01 14:05:13 --> 404 Page Not Found: Default/css
 ERROR - 2020-01-01 14:05:13 --> 404 Page Not Found: Default/js
 ERROR - 2020-01-01 14:05:13 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-01 11:11:27 --> 404 Page Not Found: Assets/img
+ERROR - 2020-01-01 11:41:37 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-01 11:41:37 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-01 11:41:37 --> 404 Page Not Found: Default/plugins
+ERROR - 2020-01-01 11:41:37 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-01 11:41:37 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-01 11:41:37 --> 404 Page Not Found: Default/css
+ERROR - 2020-01-01 11:41:37 --> 404 Page Not Found: Default/js
+ERROR - 2020-01-01 11:42:57 --> 404 Page Not Found: Loan/loanlist
+ERROR - 2020-01-01 11:43:43 --> 404 Page Not Found: Loan/loanlist
+ERROR - 2020-01-01 11:46:05 --> 404 Page Not Found: Loan/loanlist

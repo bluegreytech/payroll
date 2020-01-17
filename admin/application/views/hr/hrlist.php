@@ -1572,13 +1572,13 @@ $('#DateofBirth2').datetimepicker({
 
 				$('#DateofBirth').datetimepicker({
 
-					 format: 'DD/MM/YYYY',
+				 	 format: 'DD/MM/YYYY',
 
-					 maxDate: moment(),
+				 	 maxDate: moment(),
 
-					 ignoreReadonly: true,
+				 	 ignoreReadonly: true,
 
-				}).val('#DateofBirth');	
+				 }).val('#DateofBirth');	
 
 
 
@@ -2512,7 +2512,7 @@ function edithrs(hr_id)
 
                 console.log(response.hr_id);
 
-				console.log(response.ProfileImage);
+				console.log(response.DateofBirth);
 
 			$('#hr_id').val(response.hr_id);
 
@@ -2523,7 +2523,7 @@ function edithrs(hr_id)
 			$('#EmailAddress').val(response.EmailAddress);
 
 			//$('#DateofBirth').val(response.DateofBirth);
-
+        
 			$('#DateofBirth').val( myDateFormatter(response.DateofBirth));
 
 			$('#PhoneNumber').val(response.PhoneNumber);
