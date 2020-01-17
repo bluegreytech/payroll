@@ -60,8 +60,9 @@
                                         <a href="javascript:void(0);"> <span>Payroll Input</span> <span class="menu-arrow"></span></a>
                                         <ul style="display: none;">
                                             <li><a href="javascript:void(0);"><span>Salary</span></a></li>
-                                            <li><a href="javascript:void(0);"><span>loan</span></a></li>
+                                            <li><a href="<?php echo base_url();?>loan/loan_det"><span>loan</span></a></li>
                                             <li><a href="javascript:void(0);"><span>Income Tax</span></a></li>
+                                           <li><a href="<?php echo base_url();?>Claim/claim_det"><span>Reimbursement</span></a></li>
                                            <!--  <li class="submenu">
                                                 <a href="javascript:void(0);"> <span>Bank Transfer</span> <span class="menu-arrow"></span></a>
                                                 <ul style="display: none;">
