@@ -51,7 +51,7 @@ class Employee_model extends CI_Model
 			 }        
 	}
 
-	function getdata($emp_id){
+	function getdata($emp_id){	
 	    $this->db->select("*");
 		$this->db->from("tblemp");
 		$this->db->where("Is_deleted",'0');
@@ -63,8 +63,7 @@ class Employee_model extends CI_Model
     function emp_insert()
 	{		
 		
-		$emp_image='';
-       
+		$emp_image='';       
 		if(isset($_FILES['ProfileImage']) &&  $_FILES['ProfileImage']['name']!='')
         {
 			$this->load->library('upload');
@@ -73,14 +72,11 @@ class Employee_model extends CI_Model
 			$_FILES['userfile']['type']     =   $_FILES['ProfileImage']['type'];
 			$_FILES['userfile']['tmp_name'] =   $_FILES['ProfileImage']['tmp_name'];
 			$_FILES['userfile']['error']    =   $_FILES['ProfileImage']['error'];
-			$_FILES['userfile']['size']     =   $_FILES['ProfileImage']['size'];
-   
+			$_FILES['userfile']['size']     =   $_FILES['ProfileImage']['size'];   
 			$config['file_name'] = $rand.'emp';			
 			$config['upload_path'] = base_path().'upload/emp_orig/';		
-			$config['allowed_types'] = 'jpg|jpeg|gif|png|bmp';  
- 
-             $this->upload->initialize($config);
- 
+			$config['allowed_types'] = 'jpg|jpeg|gif|png|bmp'; 
+            $this->upload->initialize($config); 
               if (!$this->upload->do_upload())
 			  {
 				$error =  $this->upload->display_errors();
@@ -805,7 +801,8 @@ class Employee_model extends CI_Model
        			'esicnumber'=>$this->input->post('esic_no')?$this->input->post('esic_no'):'', 
        			'esiccelingprice' =>$this->input->post('esiccelingprice')?trim($this->input->post('esiccelingprice')):'',
        			'companyid'=>$this->session->userdata('companyid'),
-       			'complianceallowid'=>implode(",",$this->input->post('compliancecheck'))
+       			'complianceallowid'=>implode(",",$this->input->post('compliancecheck')),
+       			'earningallowid'=>implode(",",$this->input->post('earningcheck'))
        		);	
 
        		
@@ -820,6 +817,24 @@ class Employee_model extends CI_Model
 	    $this->db->from('tblbankdetail');
 	    $this->db->where('emp_id',$id);
 	    $query=$this->db->get();
+	 	return $query->row_array();
+   	}
+   	function getemploandetail($id){
+   		$this->db->select('*');
+	    $this->db->from('tblloan');
+	    $this->db->where('emp_id',$id);
+	    $this->db->where('Is_deleted','0');	    	
+	    $query=$this->db->get();
+	 	return $query->row_array();
+   	}
+   	function getempclaimdetail($id,$salarymonth){
+   		$this->db->select('*');
+	    $this->db->from('tblclaim');
+	    $this->db->where('emp_id',$id);
+	    $this->db->where('month_year',$salarymonth);
+	    $this->db->where('reimb_satus',"approved");	 
+	    $this->db->where('Is_deleted','0');	   	
+	    $query=$this->db->get();	  
 	 	return $query->row_array();
    	}
 

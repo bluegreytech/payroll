@@ -168,6 +168,7 @@ class Employee extends CI_Controller
 			$data['drivinglicense']=$result['drivinglicense'];
 			$data['addressesproof']=$result['addressesproof'];
 			$data['complianceallowid']=$result['complianceallowid'];
+			$data['earningallowid']=$result['earningallowid'];
 			$data['companytextno']=$result['companytextno'];
 			$data['paymenttype']=$empbankdetail['paymenttype'];	
 			$data['bank_name']=$empbankdetail['bank_name'];	
@@ -181,7 +182,8 @@ class Employee extends CI_Controller
 			$data['ptstatus']=$result['ptstatus'];
 			$data['pfcelingprice']=trim($result['pfcelingprice']);
 			$data['esiccelingprice']=trim($result['esiccelingprice']);						
-			$data['compliancelist']=$this->company_model->compliancelist_deduction();				
+			$data['compliancelist']=$this->company_model->compliancelist_deduction();
+			$data['earninglist']=$this->company_model->compliancelist_earning();				
 			$data['redirect_page']="emplist";
 			$data['leavelist']=$this->leave_model->showempleavelist();
 				//echo "<pre>";print_r($data);die;
@@ -465,51 +467,87 @@ class Employee extends CI_Controller
 	function viewemp(){
 		if(!check_admin_authentication()){ 
 				redirect(base_url());
-			} 
+		} 
 		$id=$this->input->post('id');
-		$salarymonth=$this->input->post('salarymonth');
+	    $salarymonth=$this->input->post('salarymonth'); 
 		$data=array();
 		$data['complianceresult']=$this->company_model->compliancelist();
 		$hraadata=array();
 		foreach($data['complianceresult'] as $row) {					
-					if($row->compliancename=="HRA"){
-                       $hrapercentage=$row->compliancepercentage;
-                     	array_push($hraadata,$hrapercentage);
-					}
+			if($row->compliancename=="HRA"){
+               $hrapercentage=$row->compliancepercentage;
+               array_push($hraadata,$hrapercentage);
+			}
 	    }	
 	   	
 		$result=$this->employee_model->getdata($id);		
 		$empleave=$this->employee_model->getempleavedata($id,$salarymonth);		
 		  if($result['salary']!='monthly'){		  
-            $empattendance=$this->employee_model->getempattendancedata($id,$salarymonth);
-        	if(!empty($empleave)){
-            $totalattendance=($empattendance - $empleave);
-        	}else{
-        		  $totalattendance=$empattendance;
-        	}
-			$data['workingdays']= $totalattendance;
-		  }else{	
-		  	
-		      if(!empty($empleave)){
-		      	 $totalattendance=(30 - $empleave);
-		      }	 else{
-		      	$totalattendance='30';
-		      } 
+	            $empattendance=$this->employee_model->getempattendancedata($id,$salarymonth);
+	        	if(!empty($empleave)){
+	            	$totalattendance=($empattendance - $empleave);
+	        	}else{
+	        		$totalattendance=$empattendance;
+	        	}
+				$data['workingdays']= $totalattendance;
+		  }else{
+				if(!empty($empleave)){
+					$totalattendance=(30 - $empleave);
+				}else{
+					$totalattendance='30';
+				}
 		  	
 		  	$data['workingdays']=$totalattendance;
 		  }
-		   
+
 			$data['cmpallowid']=explode(',',$result['complianceallowid']);
-			//echo "<pre>";print_r(count($data['cmpallowid']));die;
+		
 			if(count($data['cmpallowid'])>1){
 
                 $cmpallow_id=explode(',',$result['complianceallowid']);
 			}else{				
                 $cmpallow_id=$result['complianceallowid'];
 			}
+			$data['earningallowid']=explode(',',$result['earningallowid']);
+			
+			if(count($data['earningallowid'])>1){
+				//echo "nkjk";die;
+                $cmpearningallow_id=explode(',',$result['earningallowid']);
+			}else{
+                $cmpearningallow_id=$result['earningallowid'];
+			}
+	    	//echo count($data['earningallowid']);
+			if($result['salary']=='monthly'){
+                   $monthlyamt=($result['salaryamt']/12);
+                   $totalpfduductamt=0;
+                   if(!empty($result['earningallowid'])){
+					for($i=0;$i<count($data['earningallowid']);$i++){						
+						if(count($data['earningallowid'])>1){
+						$emppfearningdata=$this->company_model->emppfearningamt($cmpearningallow_id[$i]);
+					    $deducthraamount=($monthlyamt * $emppfearningdata->compliancepercentage)/100;
+					    $totalpfduductamt+=$deducthraamount;
+					    $data['pftotaldeduct']=$totalpfduductamt;
+						}else{
+						$emppfearningdata=$this->company_model->emppfearningamt($cmpearningallow_id);
+					    $deducthraamount=($monthlyamt * $emppfearningdata->compliancepercentage)/100;
+					    $totalpfduductamt+=$deducthraamount;
+					    $data['pftotaldeduct']=$totalpfduductamt;
+						}  
+					  	
+					}
+				   }
+				  
+				}else{
+					$monthlyamt=($result['salaryamt']*30);	
+					$emppfearningdata=$this->company_model->emppfearningamt($cmpearningallow_id);
+					$data['deducthraamount']=($monthlyamt * $emppfearningdata->compliancepercentage)/100;
+				}
 
-			//echo "<pre>";print_r($cmpallowid);die;
-			$empbankdetail=$this->employee_model->getempbankdetail($id);	
+
+			$empbankdetail=$this->employee_model->getempbankdetail($id);
+			$emploandetail=$this->employee_model->getemploandetail($id);
+			$empclaimdetail=$this->employee_model->getempclaimdetail($id,$salarymonth);
+			//echo "<pre>";print_r($empclaimdetail);die;
 			$data['emp_id']=$result['emp_id'];
 			$data['employee_code']=$result['employee_code'];
 			$data['department']=$result['department'];
@@ -537,7 +575,8 @@ class Employee extends CI_Controller
 			$data['aadharcard']=$result['aadharcard'];
 			$data['pancard']=$result['pancard'];
 			$data['bankdetail']=$result['bankdetail'];
-		    $data['complianceallowid']=$cmpallow_id;		    
+		    $data['complianceallowid']=$cmpallow_id;
+		    $data['earningallowid']=$cmpearningallow_id;		    
 		    $data['companytextno']=$result['companytextno'];
 		    $data['paymenttype']=$empbankdetail['paymenttype'];	
 			$data['bank_name']=$empbankdetail['bank_name'];	
@@ -552,6 +591,10 @@ class Employee extends CI_Controller
 			$data['pfcelingprice']=$result['pfcelingprice'];
 			$data['esiccelingprice']=trim($result['esiccelingprice']);
 			$data['hrapercentage']=$hraadata;
+			$data['loan_amnt']=$emploandetail['monthly_installment'];
+			$data['no_of_installment']=$emploandetail['no_of_installment'];
+			$data['claimamount']=$empclaimdetail['amount'];
+			
 		   	//$data['compliancestatus']=array_merge(array($data['uanstatus']),array($data['esicstatus']),array($data['ptstatus']));
 		 
 			echo json_encode($data);

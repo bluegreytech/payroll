@@ -101,20 +101,18 @@
 												<input class="form-control" type="text" id="<?php echo "compliance_".$row->complianceid; ?>" name="compliancevalue[]" readonly>
 												<input class="form-control" type="hidden" name="complianceid[]" value="<?php echo $row->complianceid; ?>">
 												
+											</div>												
+											<?php } } ?>
+											<div class='form-group' id="claimsection">
+												<label>Claim or Reimbursement</label>
+												<input class='form-control' type='text' name='empclaim' value="" id='empclaim' readonly>
 											</div>
-												
-											<?php
-												} } 
-											?>
-											
-											
 										</div>
 										<div class="col-sm-6">  
 											<h4 class="text-primary">Deductions</h4>
 										    <?php 
 											  foreach($result as $row)
-												{
-												
+												{												
 											?>
 											
 											<?php if($row->compliancetypeid=='1'){ ?>
@@ -132,12 +130,19 @@
 											<?php
 											} }
 											?>
+											<div class='form-group' id="loansection">
+												<label>Loan</label>
+												<input class='form-control' type='text' name='emploan' value="" id='emploan' readonly>
+											</div>
 											<div class="add-more">
 												<label><a href="javascript:void(0)" id='addmore'><i class="fa fa-plus-circle"></i> Add More</a></label>
 											</div>
 											<div id="adddeduction">
 												
 											</div>
+
+
+
 										</div>
                                          	
 										</div>
@@ -259,7 +264,7 @@ $(document).ready(function(){
 			var deductionamount=0;
 			var m =response.complianceresult.length;
           	n1=response.complianceallowid.length;
-          	console.log(response.complianceresult);
+          	//console.log(response.complianceresult);
 			var myarray = [];
 			for (var j=0; j< m;j++) {
 			//console.log(response);  
@@ -323,19 +328,14 @@ $(document).ready(function(){
 
                                	}else if(parseInt(totalamount)>=parseInt(9000) && parseInt(totalamount)<parseInt(12000) ){
                                		 deductionamount=parseInt('150');
-								    deductiontotal += deductionamount; 
-									
-
+								    deductiontotal += deductionamount;
                                	}else{
                                		deductionamount=parseInt('200');
-								    deductiontotal += deductionamount; 
-									
-                               	}
-                              
+								    deductiontotal += deductionamount;
+                               	}                              
 							}else{
 								deductionamount=(totalamount * compliance_percentage)/100; 
-								deductiontotal += deductionamount;
-								
+								deductiontotal += deductionamount;								
 							}
 							break;
 						}else{		
@@ -386,7 +386,18 @@ $(document).ready(function(){
                         $('#compliance_'+compliance_id).val(deductionamount.toFixed(2));
             		}
 				}			
-			}  
+			}
+			if(response.claimamount){
+                    $("#claimsection").show();
+					$("#empclaim").val(response.claimamount); 
+	                earningtotal +=parseFloat(response.claimamount);
+	               // alert(earningtotal);
+	                $('#gross_earning').val(earningtotal.toFixed(2));
+			                	
+				}else{
+				    $("#claimsection").hide();
+				}
+  
 			netpay=(parseFloat($('#gross_earning').val())-parseFloat($('#totaldeduction').val()));
 			
 			$('#netpay').val(netpay.toFixed(2));
@@ -536,6 +547,8 @@ function convertNumberToWords(amount) {
 
     return words_string;
 }  
+$("#loansection").hide();
+$("#claimsection").hide();
 
 $("#employename").change(function () {
 	var end = this.value;
@@ -549,13 +562,15 @@ $("#employename").change(function () {
 		 data:{id:id,salarymonth:salary_month},
          success:function(response){
 			var response = JSON.parse(response);
-            console.log(response);
+           
             $('#emp_id').val(response.emp_id);
 			$('#employee_code').val(response.employee_code);			
 			$('#jod').val(response.joiningdate);			
             $('#pancard').val(response.pancard);
             $('#Gender').val(response.gender);
-            $('#worked').val(response.workingdays);  
+            $('#worked').val(response.workingdays); 
+   
+          
             if(response.paymenttype=="bank_transfer"){
             	 $('#paymenttype').val("Bank Transfer"); 
             }else if(response.paymenttype=="cheque"){
@@ -565,7 +580,7 @@ $("#employename").change(function () {
             }else if(response.paymenttype=="demand_draff"){
                  $('#paymenttype').val("Demand Draff");  
             }
-                      
+
 			var deductiontotal = 0;
 			var earningtotal = 0;
 			var deductionamount=0;
@@ -573,45 +588,41 @@ $("#employename").change(function () {
           	n1=response.complianceallowid.length;
           	console.log(response.complianceresult);
 			var myarray = [];
-			for (var j=0; j< m;j++) {
-			//console.log(response);  
-			compliancetypeid=response.complianceresult[j].compliancetypeid;
-			compliance_id=response.complianceresult[j].complianceid;
-			compliancepercentage=response.complianceresult[j].compliancepercentage;
-			compliance_name=response.complianceresult[j].compliancename;
+			for (var j=0; j< m;j++){
+			
+				compliancetypeid=response.complianceresult[j].compliancetypeid;
+				compliance_id=response.complianceresult[j].complianceid;
+				compliancepercentage=response.complianceresult[j].compliancepercentage;
+				compliance_name=response.complianceresult[j].compliancename;
          	 // console.log(compliance_id);
          	  if(response.salary=='monthly'){
 					monthlyamt=parseFloat(response.salaryamt)/12;
 				}else{
 					monthlyamt=parseFloat(response.salaryamt)*30;				
 				}
-				
 				totalamount=monthlyamt.toFixed();
 				//console.log(totalamount);
 				compliance_percentage = parseFloat(compliancepercentage);
 				if(response.salary=='monthly'){					
 				 	if(compliancetypeid=='1'){
-           				
-						for(var k=0; k<n1;k++ ){
+						for(var k=0; k<n1;k++){
 						if(response.complianceallowid[k]==compliance_id){
 							if(compliance_name=="PF"){
-								deducthraamount=(totalamount * response.hrapercentage[j])/100;
-								finaltotalamt=parseFloat(monthlyamt-deducthraamount);
-							
+								//deducthraamount=(totalamount * response.hrapercentage[j])/100;
+								if(response.pftotaldeduct!=null){
+									finaltotalamt=parseFloat(monthlyamt-response.pftotaldeduct);
+								}else{
+                                    finaltotalamt=parseFloat(monthlyamt); 
+								}
                                 if(response.pfcelingprice!=''){								
 									if(finaltotalamt > response.pfcelingprice){
 										 deductionamount=parseFloat('1800.00');
-										 deductiontotal += deductionamount; 
-										
-										
+										 deductiontotal += deductionamount;
 									}else{
 										deductionamount=(finaltotalamt * compliance_percentage)/100; 
 										deductiontotal += deductionamount;
-										
 									}
-                                  
 								}
-								
 							}else if(compliance_name=="ESIC"){
                                    if(parseInt(totalamount)<parseInt(21000)){
 										deductionamount=(totalamount * compliance_percentage)/100; 
@@ -652,11 +663,16 @@ $("#employename").change(function () {
 						}else{		
 				 			 deductionamount=parseFloat('0.00'); 
 				 			 deductiontotal +=deductionamount; 
+				 			
 				 			 	
 						}
-							  
+						    
 						}
-					  	
+						   
+                            //deductiontotal +=parseFloat(response.loan_amnt); 
+                          //	alert("total=="+deductiontotal);
+                          
+
 						$('#totaldeduction').val(deductiontotal.toFixed(2));
                         $('#othertotaldeduction').val(deductiontotal.toFixed(2));
                         $('#compliance_'+compliance_id).val(deductionamount.toFixed(2));
@@ -668,6 +684,8 @@ $("#employename").change(function () {
                    	 	$('#gross_earning').val(earningtotal.toFixed(2));
                     	$('#compliance_'+compliance_id).val(earningamount);
 				 	}
+
+
 				}else{
 					if(compliancetypeid=='2'){
 						if(compliance_name=='Basic'){							 
@@ -681,12 +699,35 @@ $("#employename").change(function () {
             		}else{
             			deductionamount=0.00; 
 			 			deductiontotal += 0.00; 
+
 				 		$('#totaldeduction').val(deductiontotal.toFixed(2));
                         $('#othertotaldeduction').val(deductiontotal.toFixed(2));
                         $('#compliance_'+compliance_id).val(deductionamount.toFixed(2));
             		}
 				}			
-			}  
+			} 
+			   if(response.no_of_installment!=null && response.no_of_installment!='0'){
+					$("#loansection").show();
+					$("#emploan").val(response.loan_amnt); 
+	                 deductiontotal +=parseFloat(response.loan_amnt);
+					}else{
+						$("#loansection").hide();
+				}
+
+				if(response.claimamount){
+                    $("#claimsection").show();
+					$("#empclaim").val(response.claimamount); 
+	                earningtotal +=parseFloat(response.claimamount);
+	               // alert(earningtotal);
+	                $('#gross_earning').val(earningtotal.toFixed(2));
+			                	
+				}else{
+				    $("#claimsection").hide();
+				}
+
+
+			$('#totaldeduction').val(deductiontotal.toFixed(2));
+            $('#othertotaldeduction').val(deductiontotal.toFixed(2));
 			netpay=(parseFloat($('#gross_earning').val())-parseFloat($('#totaldeduction').val()));
 			
 			$('#netpay').val(netpay.toFixed(2));
