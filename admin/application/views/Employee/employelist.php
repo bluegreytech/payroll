@@ -117,7 +117,7 @@
 
 
 
-					<form method="post" action="<?php echo base_url();?>Employee">
+					<form method="post" action="<?php echo base_url();?>Employee/searchemp">
 
 
 
@@ -130,21 +130,13 @@
 									<div class="form-group form-focus select-focus">
 
 										<select class="select floating" name="option" id="purpose"> 
-
 											<option value=""> -- Select -- </option>
-
-											<option value="companyname">Company Name</option>
-
-											<option value="first_name">Employee Name</option>
-
-											<option value="email">Email Address</option>
-
-											<option value="phone">Contact Number</option>
-
-											<option value="department">Department</option>
-
-											<option value="desgination">Designation</option>
-
+											<option value="companyname" <?php if($option=='companyname'){echo 'selected';} ?>>Company Name</option>
+											<option value="first_name" <?php if($option=='first_name'){echo 'selected';} ?>>Employee Name</option>
+											<option value="email" <?php if($option=='email'){echo 'selected';} ?>>Email Address</option>
+											<option value="phone" <?php if($option=='phone'){echo 'selected';} ?>>Contact Number</option>
+											<option value="department" <?php if($option=='department'){echo 'selected';} ?>>Department</option>
+											<option value="desgination" <?php if($option=='desgination'){echo 'selected';} ?>>Designation</option>
 										</select>
 
 									</div>
@@ -153,46 +145,46 @@
 
 
 
-						<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12" >  
-
+						<div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12" >  
 									<div class="form-group form-focus box" id='business'>
-
-										<input type="text" name="keyword2" class="form-control floating">
-
+										<input type="text" name="keyword1" value="<?php echo $keyword1;?>" class="form-control floating">
 										<label class="focus-label">Search</label>
-
 									</div>
 
+									<!-- <div class="form-group form-focus box" id='business3' style="display: none;">
+										<input type="text" name="keyword3" class="form-control floating">
+										<label class="focus-label">Search</label>
+									</div>
 
+									<div class="form-group form-focus box" id='business4' style="display: none;">
+										<input type="text" name="keyword4" class="form-control floating">
+										<label class="focus-label">Search</label>
+									</div>
+
+									<div class="form-group form-focus box" id='business5' style="display: none;">
+										<input type="text" name="keyword5" class="form-control floating">
+										<label class="focus-label">Search</label>
+									</div>
+
+									<div class="form-group form-focus box" id='business6' style="display: none;">
+										<input type="text" name="keyword6" class="form-control floating">
+										<label class="focus-label">Search</label>
+									</div> -->
 
 									<div class="form-group form-focus box2" id='business2' style="display: none;">
-
 										<div class="form-group">
-
 											<select class="form-control" name="keyword2"> 
-
 												<option desabled value="">Please select company</option>
-
 												<?php
-
 												if($companyData){
-
 													foreach($companyData as $comp)
-
 													{
-
 												?>
-
 													<option value="<?php echo $comp->companyname; ?>"><?php echo $comp->companyname;?></option>
-
 												<?php
-
 												}}
-
 												?>
-
 											</select>
-
 										</div>
 
 									</div>
@@ -267,7 +259,7 @@
 													if($empData->ProfileImage!='')
 													{
 														?>
-														<a href="<?php echo base_url();?>Employee/profile/<?php echo $empData->emp_id;?>" title="show employee profile" class="avatar"><img src="http://payroll.bluegreytech.co.in/hr/upload/emp/<?php echo $empData->ProfileImage;?>"></a>
+														<a href="<?php echo base_url();?>Employee/profile/<?php echo $empData->emp_id;?>" title="show employee profile" class="avatar"><img src="<?php echo base_url_hr();?>upload/emp/<?php echo $empData->ProfileImage;?>"></a>
 														<a href="<?php echo base_url();?>Employee/profile/<?php echo $empData->emp_id;?>" title="show employee profile"><?php echo $empData->first_name;?></a>
 														<?php
 													}
@@ -551,46 +543,70 @@
 
 
 </html>
-
-
-
-
-
-
+										
 
 <script>
 
 
-
 $(document).ready(function(){
+$('#purpose').on('change', function() {
+  if(this.value == 'first_name')
+  {
+	$("#business").show();
+	$("#business2").hide();
+	// $("#business3").hide();
+	// $("#business4").hide();
+	// $("#business5").hide();
+	// $("#business6").hide();
+  }
+  else if(this.value == 'companyname')
+  {
+	$("#business").hide();
+	$("#business2").show();
+	// $("#business3").hide();
+	// $("#business4").hide();
+	// $("#business5").hide();
+	// $("#business6").hide();
+  }
+  else if(this.value == 'email')
+  {
+	$("#business").show();
+	$("#business2").hide();
+	// $("#business3").show();
+	// $("#business4").hide();
+	// $("#business5").hide();
+	// $("#business6").hide();
+  }
+  else if(this.value == 'phone')
+  {
+	$("#business").show();
+	$("#business2").hide();
+	// $("#business3").hide();
+	// $("#business4").show();
+	// $("#business5").hide();
+	// $("#business6").hide();
+  }
+  else if(this.value == 'department')
+  {
+	$("#business").show();
+	$("#business2").hide();
+	// $("#business3").hide();
+	// $("#business4").hide();
+	// $("#business5").show();
+	// $("#business6").hide();
+  }
+  else if(this.value == 'desgination')
+  {
+	$("#business").show();
+	$("#business2").hide();
+	// $("#business3").hide();
+	// $("#business4").hide();
+	// $("#business5").hide();
+	// $("#business6").show();
+  }
+  
 
-    $('#purpose').on('change', function() {
-
-      if(this.value == 'companyname')
-
-      {
-
-        $("#business2").show();
-
-		$("#business").hide();
-
-		$(".box").hide();
-
-      }
-
-      else
-
-      {
-
-        $("#business2").hide();
-
-		$("#business").show();
-
-		$(".box2").hide();
-
-      }
-
-    });
+});
 
 });
 

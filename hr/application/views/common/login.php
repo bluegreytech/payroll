@@ -58,7 +58,7 @@
 							</div>
 							<?php } ?>
 							<!-- Account Form -->
-						  <form class="form-horizontal form-simple" method="post"  href="<?php echo base_url()?>/home/login" id="frm_login">
+						  <form class="form-horizontal form-simple" method="post"  href="<?php echo base_url()?>/login" id="frm_login">
 								<div class="form-group">
 									<label>Email Address</label>
 									<input class="form-control" type="text" name="EmailAddress" Placeholder="Enter your email address">

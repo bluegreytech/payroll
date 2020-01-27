@@ -59,17 +59,16 @@
 						
 							<div class="col-sm-6 col-8 text-right m-b-30">
 							
-
 								<div class="btn-group btn-group-sm">
-										<a href="<?php echo base_url();?>Invoice/sendinvoice/<?php echo $Companyinvoiceid;?>"><button class="btn btn-white">Send Email</button></a>	
+									<a href="<?php echo base_url();?>Invoice/sendinvoice/<?php echo $Companyinvoiceid;?>" class="btn add-btn">Send Email</a>	
 								</div>
 							
 								<div class="btn-group btn-group-sm">
-									<button class="btn btn-white" id="btnExport">Generate PDF</button>	
+									<a class="btn add-btn" id="btnExport">Generate PDF</a>	
 								</div>
 
 								<div class="btn-group btn-group-sm">
-									<a href="<?php echo base_url();?>Invoice" class="btn add-btn"> Back to Invoice List</a>	
+									<a href="<?php echo base_url();?>Invoice" class="btn add-btn">Back to Invoice List</a>	
 								</div>
 
 							</div>
@@ -86,7 +85,7 @@
 
 					<?php
 
-						$AdminId=$this->session->userdata('AdminId');
+						//$RoleId=$this->session->userdata('RoleId');
 
 					?>
 
@@ -101,7 +100,7 @@
 									<div class="card">
 
 											<div class="card-body">
-												<center><h2>Payroll System</h2></center>
+												<!-- <center><h2>Payroll System</h2></center> -->
 												<div class="row">
 
 													<div class="col-sm-6 m-b-20">
@@ -112,9 +111,12 @@
 
 														<ul class="list-unstyled">
 
-															<li><?php echo $Address; ?></li>
+															<li><strong>Name:</strong>  <?php echo $Adminname; ?></li>
 
-															<li>GST No:  <?php echo $gstnumber;?></li>
+															<li><strong>Email: </strong> <?php echo $Emailaddress;?></li>
+															<li><strong>Mobile: </strong> <?php echo $Mobilenumber;?></li>
+															<li><strong>Address: </strong> <?php echo $Officeaddress;?></li>
+															<li><strong>GST Number: </strong> <?php echo $Gstnumber;?></li>
 
 														</ul>
 
@@ -162,7 +164,7 @@
 
 															<li> <?php echo $comcontactnumber; ?></li>
 
-														
+															<li><span><?php echo $comemailaddress; ?></span></li>
 
 														</ul>
 
@@ -174,14 +176,14 @@
 
 														<ul class="list-unstyled invoice-payment-details">
 
-															<li><h5>Total Due: <span class="text-right"><?php echo $netamount; ?></span></h5></li>
+															<li><h5><strong>Total Due:</strong> <span class="text-right"><?php echo $netamount; ?></span></h5></li>
 
-															<li>Bank name: <span><?php echo $Bankname; ?></span></li>
+															<li><strong>Bank name: </strong><span><?php echo $Bankname; ?></span></li>
 
-															<!-- <li>City: <span><?php //echo $Bankname; ?></span></li> -->
+															<li><strong>Account Number:</strong> <span><?php echo $Accountnumber; ?></span></li>
 
-															<!-- <li>Address: <span><?php //echo $Bankname; ?></span></li> -->
-															<li>IFSC code: <span><?php echo $Ifsccode; ?></span></li>
+															<li><strong>Branch: </strong><span><?php echo $Branch; ?></span></li>
+															<li><strong>IFSC code:</strong> <span><?php echo $Ifsccode; ?></span></li>
 
 														</ul>
 
@@ -250,6 +252,57 @@
 																			<th>Net Amount:</th>
 
 																			<td class="text-right text-primary"><h5><?php echo $netamount; ?></h5></td>
+
+																		</tr>
+
+																		<tr>
+
+																			<th>Net Amount in Words:</th>
+										<?php
+											$number = $netamount;
+											$no = floor($number);
+											$point = round($number - $no, 2) * 100;
+											$hundred = null;
+											$digits_1 = strlen($no);
+											$i = 0;
+											$str = array();
+											$words = array('0' => '', '1' => 'one', '2' => 'two',
+											'3' => 'three', '4' => 'four', '5' => 'five', '6' => 'six',
+											'7' => 'seven', '8' => 'eight', '9' => 'nine',
+											'10' => 'ten', '11' => 'eleven', '12' => 'twelve',
+											'13' => 'thirteen', '14' => 'fourteen',
+											'15' => 'fifteen', '16' => 'sixteen', '17' => 'seventeen',
+											'18' => 'eighteen', '19' =>'nineteen', '20' => 'twenty',
+											'30' => 'thirty', '40' => 'forty', '50' => 'fifty',
+											'60' => 'sixty', '70' => 'seventy',
+											'80' => 'eighty', '90' => 'ninety');
+											$digits = array('', 'hundred', 'thousand', 'lakh', 'crore');
+											while ($i < $digits_1) {
+											$divider = ($i == 2) ? 10 : 100;
+											$number = floor($no % $divider);
+											$no = floor($no / $divider);
+											$i += ($divider == 10) ? 1 : 2;
+											if ($number) {
+												$plural = (($counter = count($str)) && $number > 9) ? 's' : null;
+												$hundred = ($counter == 1 && $str[0]) ? ' and ' : null;
+												$str [] = ($number < 21) ? $words[$number] .
+													" " . $digits[$counter] . $plural . " " . $hundred
+													:
+													$words[floor($number / 10) * 10]
+													. " " . $words[$number % 10] . " "
+													. $digits[$counter] . $plural . " " . $hundred;
+											} else $str[] = null;
+											}
+											$str = array_reverse($str);
+											$result = implode('', $str);
+											$points = ($point) ?
+											"." . $words[$point / 10] . " " . 
+												$words[$point = $point % 10] : '';
+											
+										?> 
+
+									
+																			<td class="text-right text-primary"><h5><?php echo $result . "Rupees  " . $points . " Paise"; ?></h5></td>
 
 																		</tr>
 
@@ -421,7 +474,7 @@
 
                     };
 
-                    pdfMake.createPdf(docDefinition).download('invoice.pdf');
+                    pdfMake.createPdf(docDefinition).download('Company_invoice.pdf');
 
                 }
 

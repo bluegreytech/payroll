@@ -12,10 +12,9 @@ class Login_model extends CI_Model
         {
           $data=array('Password'=>md5(trim($this->input->post('Password'))),'PasswordResetCode'=>'');
             $this->db->where(array('hr_id'=>$this->input->post('hr_id'),'PasswordResetCode'=>trim($this->input->post('code'))));
-           // print_r($data);die;
+          // print_r($data);die;
             $d=$this->db->update('tblhr',$data);
-            return $d;
-          
+            return $d;          
         }else
         {
           return '';
@@ -180,36 +179,32 @@ class Login_model extends CI_Model
     $password = $this->input->post('Password');
             
     $query = $this->db->get_where('tblhr',array('EmailAddress'=>$EmailAddress,'password'=>md5($password)));
-   //  echo $this->db->last_query();
-   // die;
-                //,'status'=>'Active'
+
+   
     $hr = $query->row_array();
-    //xecho "<pre>";print_r($hr);die;
+   
+
+     
     if($query->num_rows()>0)
     {
-                         $hr_type=$hr['hr_type'];
-                        $hr_status=$hr['IsActive'];
-                        
-                        if($hr_status !='Active')
-                        {
-                           return "3"; 
-                        }
-                        
-                        
+      $hr_type=$hr['hr_type'];
+      $hr_status=$hr['IsActive'];
+
+      if($hr_status !='Active')
+      {
+      return "3"; 
+      }                
       if($hr_type == 1)
       {
-          $hr_id = $hr['hr_id'];
+          $hr_id = $hr['hr_id'];      
       
-        //$hr = $query->row_array();
-        //$hr_id = $hr['hr_id'];
         $data = array(
-           'hr_id' => $hr_id,
+            'hr_id' => $hr_id,
             'FullName' => $hr['FullName'],
             'companyid' => $hr['companyid'],
-            'EmailAddress' => $hr['EmailAddress'],
+            'EmailAddress' => $hr['EmailAddress'],            
             'Address' => $hr['Address'],
             'hr_type'=>$hr_type,
-
             );  
         // echo "<pre>";print_r($data);die;
         $this->session->set_userdata($data);

@@ -46,8 +46,7 @@
 
 
 
-        <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url(); ?>default/img/favicon.png">
-
+        <link rel="shortcut icon" type="default/image/x-icon" href="<?php echo base_url(); ?>default/img/Company/companylogo/favicon.png">
 
 
 		
@@ -123,108 +122,34 @@
 
 
 				<div class="container">
-
-
-
-				
-
-
-
-					
-
-
-
 					<div class="account-box">
-
-
-
 						<div class="account-wrapper">
-
-
+						<?php if(($this->session->flashdata('error'))){ ?>
+								<div class="alert alert-danger" id="errorMessage">
+									<strong> <?php echo $this->session->flashdata('error'); ?></strong> 
+								</div>
+							<?php } ?>
+							<?php if(($this->session->flashdata('warning'))){ ?>
+								<div class="alert alert-warning" id="warningMessage">
+									<strong> <?php echo $this->session->flashdata('warning'); ?></strong> 
+								</div>
+							<?php } ?>
+							<?php if(($this->session->flashdata('success'))){ ?>
+								<div class="alert alert-success" id="successMessage">
+									<strong> <?php echo $this->session->flashdata('success'); ?></strong> 
+								</div>
+							<?php } ?>
 
 							<!-- Account Logo -->
 
-
-
-							<!--div class="account-logo">
-
-
-
-								<a href="index.php"><img src="assets\img\logo2.png" alt="Payroll System"></a>
-
-
-
-							</div-->
-
-
+							<div class="account-logo">
+								<a href="<?php echo base_url();?>"><img src="<?php echo base_url();?>default/img/Company/companylogo/favicon.png" height="100px" width="100px" alt="Payroll System"></a>
+							</div>
 
 							<!-- /Account Logo -->
 
-
-
-							<?php if(($this->session->flashdata('error'))){ ?>
-
-
-
-									<div class="alert alert-danger" id="errorMessage">
-
-
-
-									<strong> <?php echo $this->session->flashdata('error'); ?></strong> 
-
-
-
-									</div>
-
-
-
-							<?php } ?>
-
-
-
-							<?php if(($this->session->flashdata('warning'))){ ?>
-
-
-
-									<div class="alert alert-warning" id="warningMessage">
-
-
-
-									<strong> <?php echo $this->session->flashdata('warning'); ?></strong> 
-
-
-
-									</div>
-
-
-
-							<?php } ?>
-
-
-
-							<?php if(($this->session->flashdata('success'))){ ?>
-
-
-
-									<div class="alert alert-success" id="successMessage">
-
-
-
-									<strong> <?php echo $this->session->flashdata('success'); ?></strong> 
-
-
-
-									</div>
-
-
-
-							<?php } ?>
-
-
-
 							<h3 class="account-title">Reset Password</h3>
-
-
+							<p class="account-subtitle">Access for your account</p>
 
 						
 

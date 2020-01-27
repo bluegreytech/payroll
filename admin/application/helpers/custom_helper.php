@@ -21,7 +21,6 @@
 	 */
 
 	function base_path()
-
 	{		
 
 		$CI =& get_instance();
@@ -31,7 +30,6 @@
 	}
 
 	
-
 
 	function base_path_hr()
 	{		
@@ -44,6 +42,9 @@
 
 	
 
+	
+
+	// --------------------------------------------------------------------
 
 
 
@@ -71,7 +72,6 @@
 
 	}
 
-
 	function base_url_hr()
 
 	{		
@@ -81,7 +81,6 @@
 		return $base_url_hr = $CI->config->slash_item('base_url_hr');		
 
 	}
-
 
 	
 
@@ -242,20 +241,6 @@
 	 */
 
 	 
-
-function checkattedancestatus($id)
-	{
-		$CI =& get_instance();
-		$CI->db->select('attendance_status');
-		$CI->db->from('tblattendance');		
-		$CI->db->where('attendance_id',$id);
-		$query = $CI->db->get();
-		//echo $CI->db->last_query();die;
-		//echo "<pre>";print_r($query);die;
-		return $query->row()->attendance_status;
-	}
-
-
 
 	function check_admin_authentication()
 
@@ -1222,21 +1207,13 @@ function checkattedancestatus($id)
 	
 
 	function getadminRights()
-
 	{
-
 		$CI =& get_instance();
-
 		$CI->db->select('r.rights_name,ra.*');
-
 		$CI->db->from('rights_assign ra');
-
 		$CI->db->join('rights r','ra.rights_id=r.rights_id');
-
 		$CI->db->where('ra.admin_id',get_authenticateadminID());
-
 		$query=$CI->db->get();
-
 		$r=array();
 
 		if($query->num_rows() > 0)
@@ -1550,21 +1527,21 @@ function checkattedancestatus($id)
         
 
     //get one record
-
     function get_one_record($table,$primaryfield,$id)
-
 	{	
-
 		$CI =& get_instance();
-
 		$query = $CI->db->get_where($table,array($primaryfield=>$id));
-
 		//echo $CI->db->last_query();die;
-
 		return $query->row();
-
 	}
 
+	// function get_one_record_bank($table,$primaryfield)
+	// {	
+	// 	$CI =& get_instance();
+	// 	$query = $CI->db->get_where($table,array($primaryfield=>$id));
+	// 	//echo $CI->db->last_query();die;
+	// 	return $query->row();
+	// }
 		
 
 		
@@ -1825,9 +1802,9 @@ function checkattedancestatus($id)
 
 		$CI->db->select("*");
 
-		$CI->db->from("rights_assign");
+		$CI->db->from("tblrights_assign");
 
-		$CI->db->where("admin_id",$id);
+		$CI->db->where("hr_id",$id);
 
 		$query = $CI->db->get();	
 

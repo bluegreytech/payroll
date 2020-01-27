@@ -157,29 +157,14 @@
 
 
 
-							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
-									<div class="form-group form-focus select-focus">
-										<select class="select floating" name="option" id="purpose"> 
-											<option value=""> -- Select -- </option>
-											<option value="companyname">Company Name</option>
-											<option value="FullName">Hr Name</option>
-											<option value="EmailAddress">Email Address</option>
-											<option value="Contact">Contact Number</option>
-
-										</select>
-
-									</div>
-							</div>
+							
 
 
 
-							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12" >  
-									<div class="form-group form-focus box" id='business'>
-										<input type="text" name="keyword3" class="form-control floating">
-										<label class="focus-label">Search</label>
-									</div>
+							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12" >  
+									
 
-									<div class="form-group form-focus box2" id='business2' style="display: none;">
+									<div class="form-group form-focus box2">
 										<div class="form-group">
 											<select class="form-control" name="keyword2"> 
 												<option desabled value="">Please select company</option>
@@ -188,7 +173,7 @@
 													foreach($companyData as $comp)
 													{
 												?>
-													<option value="<?php echo $comp->companyname; ?>"><?php echo $comp->companyname;?></option>
+													<option value="<?php echo $comp->companyid; ?>"><?php echo $comp->companyname;?></option>
 												<?php
 												}}
 												?>
@@ -229,70 +214,161 @@
 
 							<div class="table-responsive">
 
-								 <!-- <table class="table table-striped custom-table datatable" class="display" style="width:100%"> -->
+
+
+								<!-- <table class="display" style="width:100%" id="example"> -->
+
+
 
 								<table id="example" class="display table table-striped custom-table" style="width:100%">
 
+
+
 									<thead>
+
+
+
 										<tr>
+
+
+
 											<th>No</th>
+
+
+
 											<th>Name</th>
+
+
+
 											<th>Email Address</th>
+
+
+
 											<th>Contact Number</th>
+
+
+
 											<th>In Company</th>
+
                                             <th>Status</th>
+
 											<?php
+
+
+
 											if($this->session->userdata('RoleId')==1 || $this->session->userdata('RoleId')==2){
+
+
+
 											?>		
+
+
+
 												<th class="text-right">Action</th>
+
+
+
 											<?php
+
+
+
 											}
+
+
+
 											?>		
+
+
+
 										</tr>
 
 
 
 									</thead>
+
 									<tbody>
+
 									<?php
+
 										$i=1;
+
 										if($hrData){                             
+
 										foreach($hrData as $hr)
+
 										{
+
 									?>
+
 										<tr>
+
 										<td><?php echo $i;?></td>
+
 											<td>
+
 												<h2 class="table-avatar">
+
 												<?php 
+
 												if($hr->ProfileImage!='')
+
 												{
+
 													?>
+
 													<a href="<?php echo base_url();?>Hr/profile/<?php echo $hr->hr_id;?>" title="show hr profile" class="avatar"><img src="<?php echo base_url_hr();?>upload/hr/<?php echo $hr->ProfileImage;?>"></a>
+
 													<a href="<?php echo base_url();?>Hr/profile/<?php echo $hr->hr_id;?>" title="show hr profile"><?php echo $hr->FullName;?> 
+
 												<?php
+
 												}
+
 												else
+
 												{
+
 													?>
+
 												<a href="<?php echo base_url();?>Hr/profile/<?php echo $hr->hr_id;?>" title="show hr profile" class="avatar"><img src="<?php echo base_url();?>upload/default/avtar.jpg"></a>
+
 												<a href="<?php echo base_url();?>Hr/profile/<?php echo $hr->hr_id;?>" title="show hr profile"><?php echo $hr->FullName;?> 
+
 													<?php
+
 												}
+
 												?>
+
 												</h2>
+
 											</td>
+
 											<td><?php echo $hr->EmailAddress ;?></td>
+
+
+
 											<td><?php echo $hr->Contact ;?></td>
+
+
+
 											<td><?php echo $hr->companyname ;?></td>
+
+
+
 							                <td>
 
-							 					<div class="action-label">
-													<a class="btn btn-white btn-sm btn-rounded" href="javascript:void(0);"  onclick="statusdata('<?php echo $hr->hr_id; ?>','<?php echo $hr->IsActive ;?>')">
-														<i class="fa fa-dot-circle-o <?php if($hr->IsActive=='Active'){echo "text-success";}else{ echo "text-danger";}?>"></i><?php echo $hr->IsActive ;?>
-													</a>
-												</div>
-											</td>
+							<div class="action-label">
+
+							<a class="btn btn-white btn-sm btn-rounded" href="javascript:void(0);"  onclick="statusdata('<?php echo $hr->hr_id; ?>','<?php echo $hr->IsActive ;?>')">
+
+								<i class="fa fa-dot-circle-o <?php if($hr->IsActive=='Active'){echo "text-success";}else{ echo "text-danger";}?>"></i><?php echo $hr->IsActive ;?>
+
+							</a>
+
+						</div>
+
+							</td>
 
 
 
@@ -303,21 +379,47 @@
 											?>
 
 											<td class="text-center">
-														<a  onClick="edithrs(<?php echo $hr->hr_id;?>)" data-toggle="modal" data-target="#edit_salary" role="button"  title="Edit">
+
+														<a  onClick="edithrs(<?php echo $hr->hr_id;?>)" data-toggle="modal" data-target="#edit_salary" role="button">
+
 														<i class="fa fa-pencil m-r-5"></i></a>
-														<a  onclick="deletedata(<?php echo $hr->hr_id; ?>)"  data-toggle="modal" data-target="#delete_admin" title="Delete"><i class="fa fa-trash-o m-r-5"></i> </a>
+
+														<a  onclick="deletedata(<?php echo $hr->hr_id; ?>)"  data-toggle="modal" data-target="#delete_admin"><i class="fa fa-trash-o m-r-5"></i> </a>
+
 											</td>
+
 											<?php
+
 											}
+
 											?>
+
 										</tr>
+
 										<?php
+
 										$i++;
+
 											} }
+
+
+
 										?>     
+
+
+
 									</tbody>
+
+
+
 								</table>
+
+
+
 							</div>
+
+
+
 						</div>
 
 
@@ -1312,6 +1414,7 @@
 
 		<?php $this->load->view('common/footer');?>
 
+
 		<script>
 	$(document).ready(function() {
 	 $('#example').DataTable( {
@@ -1362,7 +1465,7 @@
 	            doc.styles.tableHeader.fontSize = 12; //2, 3, 4, etc
 				doc.defaultStyle.alignment = 'center';
 				doc.styles.tableHeader.alignment = 'center';
-				doc.content[1].table.widths = [ '5%',  '35%', '30%', '14%','14%', '14%'];
+				doc.content[1].table.widths = [ '5%',  '25%', '25%', '20%','14%', '14%'];
 	         
 	       },
 	 },
@@ -1391,7 +1494,6 @@
 } );
 
 </script>
-
 
 
 		
@@ -1470,34 +1572,20 @@ $('#DateofBirth2').datetimepicker({
 
 				$('#DateofBirth').datetimepicker({
 
-					 format: 'DD/MM/YYYY',
+				 	 format: 'DD/MM/YYYY',
 
-					 maxDate: moment(),
+				 	 maxDate: moment(),
 
-					 ignoreReadonly: true,
+				 	 ignoreReadonly: true,
 
-				}).val('#DateofBirth');	
-
-
+				 }).val('#DateofBirth');	
 
 
 
-$(document).ready(function(){
-    $('#purpose').on('change', function() {
-      if(this.value == 'companyname')
-      {
-        $("#business2").show();
-		$("#business").hide();
-	
-      }
-      else
-      {
-        $("#business2").hide();
-		$("#business").show();
-	
-      }
-    });
-});
+
+
+
+
 
 
 
@@ -1800,7 +1888,7 @@ $(document).ready(function()
 									},
 
 
-						FullName: {
+					FullName: {
 
 
 
@@ -1935,7 +2023,7 @@ $(document).ready(function()
 									
 									},
 
-						FullName: {
+					FullName: {
 
 
 
@@ -1948,7 +2036,6 @@ $(document).ready(function()
 
 
 						
-
 
 
 						EmailAddress: {
@@ -2118,7 +2205,7 @@ $(document).ready(function()
 
 
 
-				
+						
 
 
 
@@ -2241,29 +2328,13 @@ $(document).ready(function()
 
 
 
-								},
-
-
-
-						LastName: {
-
-
-
-							required: "Please enter a last name",
-
-
-
-								pattern : "Enter only characters and numbers and \"space , \" -",
-
-
-
-								minlength: "Please enter at least 2 and maximum 50 letters!",
-
-
+								
 
 								},
 
 
+
+					
 
 						EmailAddress: {
 
@@ -2411,7 +2482,7 @@ function edithrs(hr_id)
 
 	Url="<?php echo base_url() ?>";
 
-
+	HRUrl="<?php echo base_url_hr() ?>upload/hr/";
 
 	//alert(hr_id);
 
@@ -2441,7 +2512,7 @@ function edithrs(hr_id)
 
                 console.log(response.hr_id);
 
-				console.log(response.ProfileImage);
+				console.log(response.DateofBirth);
 
 			$('#hr_id').val(response.hr_id);
 
@@ -2452,7 +2523,7 @@ function edithrs(hr_id)
 			$('#EmailAddress').val(response.EmailAddress);
 
 			//$('#DateofBirth').val(response.DateofBirth);
-
+        
 			$('#DateofBirth').val( myDateFormatter(response.DateofBirth));
 
 			$('#PhoneNumber').val(response.PhoneNumber);
@@ -2479,7 +2550,7 @@ function edithrs(hr_id)
 
 			if(response.ProfileImage!=''){
               
-$('#blah1').attr('src', 'http://localhost/payroll/hr/upload/hr/'+response.ProfileImage);
+			$('#blah1').attr('src', HRUrl+response.ProfileImage);
 				$('#pre_profile_image').val(response.ProfileImage);
 				
 

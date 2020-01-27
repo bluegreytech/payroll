@@ -2,24 +2,20 @@
 	 $this->load->view('common/header.php');
 	 $this->load->view('common/sidebar.php');
 ?>
-
-			<!-- Page Wrapper -->
-            <div class="page-wrapper">
-			
+<!-- Page Wrapper -->
+<div class="page-wrapper">			
 				<!-- Page Content -->
-                <div class="content container-fluid">
-				
+                <div class="content container-fluid">				
 					<!-- Page Title -->
 					<div class="row">
 						<div class="col-sm-4 col-5">
 							<h4 class="page-title">Employee Salary</h4>
 						</div>
 						<div class="col-sm-8 col-7 text-right m-b-30">
-							<a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_salary"><i class="fa fa-plus"></i> Add Salary</a>
+							<a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_salary"><i class="fa fa-plus"></i>Add Salary</a>
 						</div>
 					</div>
-					<!-- /Page Title -->
-					
+					<!-- /Page Title -->					
 					<!-- Search Filter -->
 					<div class="row filter-row">
 					   <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  

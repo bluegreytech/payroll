@@ -7,6 +7,12 @@ class Invoice extends CI_Controller
 	    $this->load->model('Invoice_model');
 	}
 
+	public function test()
+	{
+		$date=new DateTime('21/10/2019');
+		echo $date->format('h:i a d/m/Y');
+	}
+
 
 	public function index()
 	{
@@ -36,7 +42,7 @@ class Invoice extends CI_Controller
 			{
 				$data['invoiceData']=$this->Invoice_model->list_companyinvoice();
 			}
-		$data['companyData'] = $this->Invoice_model->list_company();
+			$data['companyData'] = $this->Invoice_model->list_company();
 
 			//echo "<pre>";	print_r($data['invoiceData']);die;
 		$this->load->view('Invoice/invoice-reports',$data);
@@ -170,7 +176,7 @@ class Invoice extends CI_Controller
 		$data=array();
 				//$AdminId=$this->session->userdata('AdminId');
 				$result=$this->Invoice_model->get_companyinvoice($Companyinvoiceid);	
-			//	echo "<br>";print_r($result);die;
+				//echo "<br>";print_r($result);die;
 				$data['Companyinvoiceid']=$result['Companyinvoiceid'];
 				$data['invoicebillid']=$result['invoicebillid'];
 				$data['invoicedate']=$result['invoicedate'];
@@ -178,7 +184,7 @@ class Invoice extends CI_Controller
 				$data['totalamount']=$result['totalamount'];
 				$data['taxamount']=$result['taxamount'];
 				$data['netamount']=$result['netamount'];
-				$data['status']=$result['status'];
+				$data['paystatus']=$result['paystatus'];
 				$data['companyid']=$result['companyid'];
 				$data['companyname']=$result['companyname'];
 				$data['comemailaddress']=$result['comemailaddress'];
@@ -205,25 +211,15 @@ class Invoice extends CI_Controller
 				$data['netamount']=$result['netamount'];
 				$data['Otherinformation']=$result['Otherinformation'];
 				$data['Address']=$result['Address'];
+
+				$data['Adminname']=$result['Adminname'];
+				$data['Emailaddress']=$result['Emailaddress'];
+				$data['Mobilenumber']=$result['Mobilenumber'];
+				$data['Officeaddress']=$result['Officeaddress'];
+				$data['Gstnumber']=$result['Gstnumber'];
 		$this->load->view('Invoice/invoice-view',$data);
 	}
 
-	// public function sendinvoiceemail($companyid)
-	// {
-	// 	$result=$this->Invoice_model->add_email($companyid);
-	// 	//echo "<br>";print_r($result);die;
-	// 	if($result==1)
-	// 	{
-	// 		$this->session->set_flashdata('success', 'Email send Successfuly!');	
-	// 		redirect('Invoice');
-	// 	}
-	// 	else if($result==2)
-	// 	{
-	// 		$this->session->set_flashdata('error', 'Email funaction was not working!');
-	// 		redirect('Invoice');
-	// 	}
-	// //	$this->load->view('Invoice/invoice-view');
-	// }
 
 	public function sendinvoice($Companyinvoiceid)
 	{
@@ -248,36 +244,24 @@ class Invoice extends CI_Controller
 		if(!check_admin_authentication()){ 
 			redirect(base_url('Login'));
 			}
-			$data=array();
+			
 				$result=$this->Invoice_model->get_companyinvoice($Companyinvoiceid);
-				  $this->load->view('Invoice/invoice-view',$result); 
-				  die;
 				$Companyinvoiceid=$result['Companyinvoiceid'];
 				$comemailaddress=$result['comemailaddress'];
 				$companyname = str_replace(' ', '-', $result['companyname']);
 				$Otherinformation=$result['Otherinformation'];
 
-				//$this->dompdf->stream($companyname.".pdf");
                 $file_name=$companyname.'.pdf';
 			    $this->load->view('Invoice/invoice-view2',$result); 
 				$html = $this->output->get_output();
-		      echo "<pre>";print_r($html);die;
+				// die;
+				//print_r($result);die;
 				$this->load->library('dompdf_gen');
 				$this->dompdf->load_html($html);
 				$this->dompdf->render();
 				$file=$this->dompdf->output();
 				file_put_contents($file_name,$file);
 					
-
-				//$this->load->view('Invoice/invoice-view2',$result);
-				// $html = $this->output->get_output();
-				// $this->load->library('dompdf_gen'); 
-				// $this->dompdf->loadHtml($html);
-				// $this->dompdf->setPaper('A4', 'landscape');
-				// $this->dompdf->render();
-				// $atch=$this->dompdf->stream($companyname.".pdf", array("Attachment"=>0));
-
-
 				$email_template=$this->db->query("select * from ".$this->db->dbprefix('tblemail_template')." where task='Send Company Invoice'");
 				$email_temp=$email_template->row();
 				$email_address_from=$email_temp->from_address;
@@ -292,21 +276,35 @@ class Invoice extends CI_Controller
 				$email_message=str_replace('{year}',$currentyear,$email_message);
 				$email_message=str_replace('{companyname}',$companyname,$email_message);
 				$email_message=str_replace('{Otherinformation}',$Otherinformation,$email_message);
-
-				$str=$email_message; //die;
-				print_r($str);die;
-				$config['protocol']='smtp';
-				$config['smtp_host']='ssl://smtp.googlemail.com';
-				$config['smtp_port']='465';
-				$config['smtp_user']='bluegreyindia@gmail.com';
-				$config['smtp_pass']='Test@123';
-				$config['charset']='utf-8';
-				$config['newline']="\r\n";
-				$config['mailtype'] = 'html';								
-				$this->email->initialize($config);
+				$str=$email_message;
 			
-				$body =$str;	
-				$this->email->from('bluegreyindia@gmail.com');
+				$email_config = Array(
+					'protocol'  => 'smtp',
+					'smtp_host' => 'relay-hosting.secureserver.net',
+					'smtp_port' => '465',
+					'smtp_user' => 'binny@bluegreytech.co.in',
+					'smtp_pass' => 'Binny@123',
+					'mailtype'  => 'html',
+					'starttls'  => true,
+					'newline'   => "\r\n",
+					'charset'=>'utf-8',
+					'header'=> 'MIME-Version: 1.0',
+					'header'=> 'Content-type:text/html;charset=UTF-8',
+					);
+				$this->load->library('email', $email_config);
+
+				// $config['protocol']='smtp';
+				// $config['smtp_host']='ssl://smtp.googlemail.com';
+				// $config['smtp_port']='465';
+				// $config['smtp_user']='bluegreyindia@gmail.com';
+				// $config['smtp_pass']='Test@123';
+				// $config['charset']='utf-8';
+				// $config['newline']="\r\n";
+				// $config['mailtype'] = 'html';								
+				// $this->email->initialize($config);
+
+				$body =$str;
+				$this->email->from('binny@bluegreytech.co.in'); 
 				$this->email->to($comemailaddress);		
 				$this->email->subject('Invoice send to company');
 				$this->email->message($body);
@@ -340,6 +338,7 @@ class Invoice extends CI_Controller
 				{
 					redirect('Invoice/pdfquotation'.$quotationid);
 				}
+				$data['quotationtData']=$this->Invoice_model->list_companyquotation($quotationid);
 				$this->load->view('Quotation/quotation_view',$data);
 	}
 
@@ -354,7 +353,8 @@ class Invoice extends CI_Controller
 				$companyname = str_replace(' ', '-', $result['companyname']);
 				$otherinformation=$result['otherinformation'];
 
-                $file_name=$companyname.'.pdf';
+				$file_name=$companyname.'.pdf';
+				$result['quotationtData']=$this->Invoice_model->list_companyquotation($quotationid);
 				$this->load->view('Quotation/quotation-view2',$result);
 				$html = $this->output->get_output();
 				$this->load->library('dompdf_gen');
@@ -363,16 +363,6 @@ class Invoice extends CI_Controller
 				$file=$this->dompdf->output();
 				file_put_contents($file_name,$file);
 					
-
-				//$this->load->view('Invoice/invoice-view2',$result);
-				// $html = $this->output->get_output();
-				// $this->load->library('dompdf_gen'); 
-				// $this->dompdf->loadHtml($html);
-				// $this->dompdf->setPaper('A4', 'landscape');
-				// $this->dompdf->render();
-				// $atch=$this->dompdf->stream($companyname.".pdf", array("Attachment"=>0));
-		
-
 				$email_template=$this->db->query("select * from ".$this->db->dbprefix('tblemail_template')." where task='Send Company Quotation'");
 				$email_temp=$email_template->row();
 				$email_address_from=$email_temp->from_address;
@@ -387,20 +377,35 @@ class Invoice extends CI_Controller
 				$email_message=str_replace('{year}',$currentyear,$email_message);
 				$email_message=str_replace('{companyname}',$companyname,$email_message);
 				$email_message=str_replace('{otherinformation}',$otherinformation,$email_message);
-				$str=$email_message; //die;
-				print_r($str);die;
-				$config['protocol']='smtp';
-				$config['smtp_host']='ssl://smtp.googlemail.com';
-				$config['smtp_port']='465';
-				$config['smtp_user']='bluegreyindia@gmail.com';
-				$config['smtp_pass']='Test@123';
-				$config['charset']='utf-8';
-				$config['newline']="\r\n";
-				$config['mailtype'] = 'html';								
-				$this->email->initialize($config);
-			
-				$body =$str;	
-				$this->email->from('bluegreyindia@gmail.com');
+				$str=$email_message; 
+				
+				$email_config = Array(
+					'protocol'  => 'smtp',
+					'smtp_host' => 'relay-hosting.secureserver.net',
+					'smtp_port' => '465',
+					'smtp_user' => 'binny@bluegreytech.co.in',
+					'smtp_pass' => 'Binny@123',
+					'mailtype'  => 'html',
+					'starttls'  => true,
+					'newline'   => "\r\n",
+					'charset'=>'utf-8',
+					'header'=> 'MIME-Version: 1.0',
+					'header'=> 'Content-type:text/html;charset=UTF-8',
+					);
+				$this->load->library('email', $email_config);
+
+				// $config['protocol']='smtp';
+				// $config['smtp_host']='ssl://smtp.googlemail.com';
+				// $config['smtp_port']='465';
+				// $config['smtp_user']='bluegreyindia@gmail.com';
+				// $config['smtp_pass']='Test@123';
+				// $config['charset']='utf-8';
+				// $config['newline']="\r\n";
+				// $config['mailtype'] = 'html';								
+				// $this->email->initialize($config);
+				
+				$body =$str;
+				$this->email->from('binny@bluegreytech.co.in'); 
 				$this->email->to($companyemail);		
 				$this->email->subject('Quotation send to company');
 				$this->email->message($body);
@@ -416,92 +421,86 @@ class Invoice extends CI_Controller
 				}
 	}
 
-// 	public function index()
-// 	{
-// 		if(!check_admin_authentication()){ 
-// 			redirect(base_url('Login'));
-// 		}
-// 		if($_POST!='')
-// 		{	
-// 			$option=$this->input->post('option');
-// 			$keyword=$this->input->post('keyword');
-// 			$keyword2=$this->input->post('keyword2');
-// 			$keyword3=$this->input->post('keyword3');
-// 			$keyword4=$this->input->post('keyword4');
-// 			if($option!='' && $keyword!='')
-// 			{	$option=$this->input->post('option');
-// 				$data['invoiceData'] = $this->Invoice_model->search($option,$keyword);
-// 			}
-// 			else if($option!='' && $keyword2!='')
-// 			{	$option=$this->input->post('option');
-// 				$data['invoiceData'] = $this->Invoice_model->searchbystatus($option,$keyword2);
-// 			}	
-// 			else if($option!='' && $keyword3!='' && $keyword4!='')
-// 			{	$option=$this->input->post('option');
-// 				$data['invoiceData'] = $this->Invoice_model->searchbydate($option,$keyword3,$keyword4);
-// 			}	
-// 			else
-// 			{
-// 				$data['invoiceData']=$this->Invoice_model->list_companyinvoice();
-// 			}
-// 		$data['companyData'] = $this->Invoice_model->list_company();
 
-// 			//echo "<pre>";	print_r($data['invoiceData']);die;
-// 		$this->load->view('Invoice/invoice-reports',$data);
+	
 
-// 	}
 
-// }
-
-	public function quotation_list()
+	function quotation_list()
 	{
 		if(!check_admin_authentication()){ 
-				redirect(base_url('Login'));
+			redirect(base_url('Login'));
 		}
+		$data=array();
+		$data['option']='';
+		$data['keyword1']='';
+		$data['keyword2']='';
+		$data['keyword3']='';
+	
+		$data['redirect_page']='Invoice/quotation_list';
+		$data['qutationData']=$this->Invoice_model->list_quotation();
+		$data['companytypeData'] = $this->Invoice_model->list_companytype();
+		$this->load->view('Quotation/quotationlist',$data);
+	}
+
+
+	
+	public function searchquotation()
+	{   
+		if(!check_admin_authentication()){ 
+			redirect(base_url('Login'));
+		}
+		$data=array();
+		$data['activeTab']="searchquotation";	
 		if($_POST!='')
 		{
-			$option=$this->input->post('option');
-			$keyword=$this->input->post('keyword');
-			$keyword2=$this->input->post('keyword2');
-			$keyword3=$this->input->post('keyword3');
-			$keyword4=$this->input->post('keyword4');
-			$keyword5=$this->input->post('keyword5');
-			$keyword6=$this->input->post('keyword6');
-			if($option!='' && $keyword!='')
-			{	$option=$this->input->post('option');
-				$data['qutationData'] = $this->Invoice_model->searchquot_com_type($option,$keyword);
-			}
-			else if($option!='' && $keyword2!='')
-			{	$option=$this->input->post('option');
-				$data['qutationData'] = $this->Invoice_model->searchby_quo_comp($option,$keyword2);
-			}
-			else if($option!='' && $keyword3!='')
-			{	$option=$this->input->post('option');
-				$data['qutationData'] = $this->Invoice_model->searchby_quo_email($option,$keyword3);
-			}	
-			else if($option!='' && $keyword4!='')
-			{	$option=$this->input->post('option');
-				$data['qutationData'] = $this->Invoice_model->searchby_quo_cont($option,$keyword4);
-			}	
-			else if($option!='' && $keyword5!='' && $keyword6!='')
-			{	$option=$this->input->post('option');
-				$data['qutationData'] = $this->Invoice_model->searchby_quo_date($option,$keyword5,$keyword6);
-			}	
-			else
-			{
-				$data['qutationData']=$this->Invoice_model->list_quotation();
-			}	
+				$option=$this->input->post('option');
+				$keyword1=$this->input->post('keyword1');
+				$keyword2=$this->input->post('keyword2');
+				$keyword3=$this->input->post('keyword3');
+				if($option!='' && $keyword1!='')
+				{
+					$data['option']=$this->input->post('option');
+					$data['keyword1']=$this->input->post('keyword1');
+					$data['keyword2']=$this->input->post('keyword2');
+					$data['keyword3']=$this->input->post('keyword3');
+					$option=$data['option'];
+					$keyword1=$data['keyword1'];
+					$keyword2=$data['keyword2'];
+					$keyword3=$data['keyword3'];
+					$data['qutationData'] = $this->Invoice_model->searchquot_com($option,$keyword1);
+				}
+				else if($option!='' && $keyword2!='' && $keyword3!='')
+				{
+					$data['option']=$this->input->post('option');
+					$data['keyword1']=$this->input->post('keyword1');
+					$data['keyword2']=$this->input->post('keyword2');
+					$data['keyword3']=$this->input->post('keyword3');
+					$option=$data['option'];
+					$keyword1=$data['keyword1'];
+					$keyword2=$data['keyword2'];
+					$keyword3=$data['keyword3'];
+					$data['qutationData'] = $this->Invoice_model->searchby_quo_date($option,$keyword2,$keyword3);
+				}
+				else
+				{
+					$data['option']='';
+					$data['keyword1']='';
+					$data['keyword2']='';
+					$data['keyword3']='';
+					$data['qutationData']=$this->Invoice_model->list_quotation();
+				}	
+				$data['redirect_page']='Invoice/quotation_list';
 			$data['companytypeData'] = $this->Invoice_model->list_companytype();
 			$this->load->view('Quotation/quotationlist',$data);
-		}
+		}		
 	}
 
 	public function add_quotation()
 	{	
 		$data=array();
 		$data['quotationid']=$this->input->post('quotationid');
-		$data['companytypeid']=$this->input->post('companytypeid');
-		$data['companytype']=$this->input->post('companytype');
+	//	$data['companytypeid']=$this->input->post('companytypeid');
+	//	$data['companytype']=$this->input->post('companytype');
 		$data['companyname']=$this->input->post('companyname');
 		$data['companyemail']=$this->input->post('companyemail');
 		$data['comcontactnumber']=$this->input->post('comcontactnumber');
@@ -554,8 +553,8 @@ class Invoice extends CI_Controller
 		$result=$this->Invoice_model->get_quotation($quotationid);	
 		//echo "<br>";print_r($result);die;
 		$data['quotationid']=$result['quotationid'];
-		$data['companytypeid']=$result['companytypeid'];
-		$data['companytype']=$result['companytype'];
+		//$data['companytypeid']=$result['companytypeid'];
+		//$data['companytype']=$result['companytype'];
 		$data['companyname']=$result['companyname'];
 		$data['companyemail']=$result['companyemail'];
 		$data['comcontactnumber']=$result['comcontactnumber'];
@@ -576,6 +575,7 @@ class Invoice extends CI_Controller
 		if(!check_admin_authentication()){ 
 			redirect(base_url('Login'));
 		}
+		    $AdminIdlogin=$this->session->userdata('AdminId');
 			$quotationid=$this->input->post('quotationid');
 			$data=array(
 				'isdelete'=>'1',
@@ -585,6 +585,13 @@ class Invoice extends CI_Controller
 			$result=$this->db->update('tblquotation',$data);
 			if($result)
 			{
+				$log_data = array(
+					'AdminId' => $AdminIdlogin,
+					'Module' => 'Company Quotation',
+					'Activity' =>'Delete record id: '.$quotationid
+
+				);
+				$log = $this->db->insert('tblactivitylog',$log_data);
 				$this->session->set_flashdata('success', 'Qutation was delete successfully!');
 				redirect('Invoice/qutation_list');
 			}
@@ -629,9 +636,7 @@ class Invoice extends CI_Controller
 		//echo "<br>";print_r($result);die;
 		$data['quotationid']=$result['quotationid'];
 		$data['billid']=$result['billid'];
-		
-		$data['companytypeid']=$result['companytypeid'];
-		$data['companytype']=$result['companytype'];
+	
 		$data['companyname']=$result['companyname'];
 		$data['companyemail']=$result['companyemail'];
 		$data['comcontactnumber']=$result['comcontactnumber'];
@@ -639,6 +644,12 @@ class Invoice extends CI_Controller
 		$data['companyaddress']=$result['companyaddress'];
 		$data['otherinformation']=$result['otherinformation'];
 		$data['totalamount']=$result['totalamount'];
+
+		$data['Adminname']=$result['Adminname'];
+		$data['Emailaddress']=$result['Emailaddress'];
+		$data['Mobilenumber']=$result['Mobilenumber'];
+		$data['Officeaddress']=$result['Officeaddress'];
+		$data['Gstnumber']=$result['Gstnumber'];
 		
 		$data['quotationtData']=$this->Invoice_model->list_companyquotation($quotationid);
 		//echo "<br>";print_r($data['quotationtData']);die;
@@ -671,6 +682,7 @@ class Invoice extends CI_Controller
 		if(!check_admin_authentication()){ 
 			redirect(base_url('Login'));
 		}
+			$AdminIdlogin=$this->session->userdata('AdminId');
 			$Companyinvoiceid=$this->input->post('Companyinvoiceid');
 			$data=array(
 				'isdelete'=>'1',
@@ -680,6 +692,12 @@ class Invoice extends CI_Controller
 			$result=$this->db->update('tblcompanyinvoice',$data);
 			if($result)
 			{
+				$log_data = array(
+					'AdminId' =>$AdminIdlogin,
+					'Module' => 'Company Invoice',
+					'Activity' =>'Delete record id: '.$Companyinvoiceid
+				);
+				$log = $this->db->insert('tblactivitylog',$log_data);
 				$this->session->set_flashdata('success', 'Invoice has been deleted!');
 				redirect('Company');
 			}

@@ -5,301 +5,155 @@ class Company extends CI_Controller
 {
 	public function __construct() {
         parent::__construct();
-		$this->load->model('Company_model');
-		$this->load->model('Rights_model');
+		$this->load->model('company_model');
+		$this->load->model('Login_model');
+		
 	}
-
-	public function checkcode($code='')
-	{	
-		$result=$this->Company_model->checkResetCode($code);
-		if($result==1)
+    public function company_setting($msg='')
+    {  //echo "fdsf";die;
+            
+		if(!check_admin_authentication())
 		{
-			$this->session->set_flashdata('success', 'Your company verification has been Successfully!');
-			//redirect('Company');
+			redirect('login');
 		}
-		elseif($result==2)
+                
+		$data = array();
+		$oneCompany=get_one_record('tblcompany','companyid',$this->session->userdata('companyid'));
+			//print_r($oneCompany);die;
+			$data["companyid"] 	= $oneCompany->companyid;
+			$data["companyname"] 		= $oneCompany->companyname;				
+			$data["comemailaddress"]   = $oneCompany->comemailaddress;			
+			$data['comcontactnumber']=$oneCompany->comcontactnumber;
+			$data['gstnumber']=$oneCompany->gstnumber;
+			$data['digitalsignaturedate']=$oneCompany->digitalsignaturedate;
+			$data['companytypeid']=$oneCompany->companytypeid;
+			$data['result']=$this->company_model->compliancelist();
+
+        $this->load->view('common/company_setting',$data);    
+            
+    }
+	
+  	function addcompanycompliance(){
+    	//echo "<pre>";print_r($_POST);die;
+    	if(!check_admin_authentication())
 		{
-			//$this->session->set_flashdata('error', 'Your company verification link has been expired!');
-			echo "link expired";
+			redirect('login');
 		}
-	
-	
-	}
-
-	public function company_licence()
-	{	
-		$result=$this->Company_model->list_licence_company();
-		//echo "<pre>";print_r($result);die;
-		if($result)
-		{
-			echo "success";
-		}
-		else
-		{
-			echo "fail";
-		}
-	
-	
-	}
-
-	public function index()
-	{   
-		if($_POST!='')
-		{
-			$option=$this->input->post('option');
-			$keyword=$this->input->post('keyword2');	
-			$data['companyData'] = $this->Company_model->search($option,$keyword);
-		}	
-		else
-		{
-			$data['companyData']=$this->Company_model->list_company();
-		}    
-		$data['rightsData']=$this->Company_model->list_rights();
-		//echo "<pre>";print_r($data['rightsData']);die;
-		$this->load->view('Company/companylist',$data);			
-	}
-
-
-	function companyadd()
-	{
 		$data=array();
-			$data['companyid']=$this->input->post('companyid');
-			$data['companytypeid']=$this->input->post('companytypeid');
-			$data['companyname']=$this->input->post('companyname');
-			$data['comemailaddress']=$this->input->post('comemailaddress');
-			$data['comcontactnumber']=$this->input->post('comcontactnumber');
-			$data['gstnumber']=$this->input->post('gstnumber');
-			$data['digitalsignaturedate']=$this->input->post('digitalsignaturedate');
-			$data['companyaddress']=$this->input->post('companyaddress');
-			$data['stateid']=$this->input->post('stateid');
-			$data['companycity']=$this->input->post('companycity');	
-			$data['pincode']=$this->input->post('pincode');		
-			$data['isactive']=$this->input->post('isactive');
-			$data['companycomplianceid']=$this->input->post('companycomplianceid');
-			if($_POST){
-				
-				if($this->input->post('companyid')==''){
-							
-					$result=$this->Company_model->add_company();	
-					if($result==1)
-					{
-						$this->session->set_flashdata('success', 'Your data has been Inserted Successfully!');
-						redirect('Company');
-					}
-					else if($result==2)
-					{
-						$this->session->set_flashdata('warning', 'Your data has been Inserted Successfully and Your email function was not work!');
-						redirect('Company');
-					}
-					else if($result==3)
-					{
-						//$this->session->set_flashdata('error', 'Your data was not Insert!');
-						$this->session->set_flashdata('warning', 'This email address already registered!');
-						redirect('Company');
-					}
-				}
-				else
-				{
-					$result=$this->Company_model->update_company();
-					if($result==1)
-					{
-						$this->session->set_flashdata('success', 'Record has been Updated Successfully!');
-						redirect('Company');
-					}
-					else if($result==2)
-					{
-						$this->session->set_flashdata('warning', 'Your data has been Inserted Successfully and Your email function was not work!');
-						redirect('Company');
-					}
-					else if($result==3)
-					{
-						$this->session->set_flashdata('error', 'Your data was not Insert!');
-						redirect('Company');
-					}
-
-				}
-		} 
-		$data['stateData']=$this->Company_model->list_state();
-		$data['complianceData']=$this->Company_model->list_compliance();
-		$data['companytypeData']=$this->Company_model->list_companytype();
-		//print_r($data['stateData']);die;
-		$this->load->view('Company/companyadd',$data);	
-	}
-
-	function delete_company(){
-			$companyid=$this->input->post('companyid');
-			$this->db->where("companyid",$companyid);
-			$result=$this->db->delete('tblcompany');
-			if($result)
+		$data['activeTab']="addcompanycompliance";	
+		$this->load->library("form_validation");
+		$this->form_validation->set_rules('compliancename', 'compliancename', 'required');
+		$this->form_validation->set_rules('percentageofcompliance', 'percentageofcompliance', 'required');
+		$this->form_validation->set_rules('compliancetypeid', 'compliancetypeid', 'required');	
+		  		
+		if($this->form_validation->run() == FALSE){			
+			if(validation_errors())
 			{
-				$this->session->set_flashdata('success', 'Company was delete successfully!');
-				redirect('Company');
+				$data["error"] = validation_errors();
+				echo "<pre>";print_r($data["error"]);die;
+			}else{
+				$data["error"] = "";
+			}
+           	$data['redirect_page']="company_setting";
+			$data['attendance_id']=$this->input->post('attendance_id');		
+		}
+		else
+		{
+
+			$this->company_model->companycompliance_insert();
+			$this->session->set_flashdata('success', 'Record has been Inserted Succesfully!');
+			redirect('company/company_setting');
+		
+		}
+	
+		$this->load->view('common/company_setting',$data);  
+
+
+    }
+    function complianceedit(){
+       	if(!check_admin_authentication())
+		{ 
+			redirect(base_url());
+		}
+		//echo "<pre>";print_r($_POST);die;
+		
+		
+		$data= array('compliancepercentage'=>trim(str_replace("%","",$this->input->post('compliancevalue'))));
+		$id=$this->input->post('id');
+		$this->db->where("complianceid",$id);
+		$res=$this->db->update('tblcompliances',$data);
+		echo json_encode($res);
+		die;
+    }
+	function deletedata(){
+		if(!check_admin_authentication())
+		{ 
+			redirect(base_url());
+		}
+		$data= array('isdelete' =>'1','IsActive'=>'Inactive');
+		 $id=$this->input->post('id'); 
+		$this->db->where("complianceid",$id);
+		$res=$this->db->update('tblcompliances',$data);
+		echo json_encode($res);
+		die;
+
+    }
+    function setsalarymonth(){
+	    	if(!check_admin_authentication())
+			{ 
+				redirect(base_url());
+			}
+			$data=array();
+			$data['activeTab']="setsalarymonth";	
+			$this->load->library("form_validation");
+			$this->form_validation->set_rules('salary_month', 'Salary_Month', 'required');
+			
+			
+		    
+		
+		if($this->form_validation->run() == FALSE){			
+			if(validation_errors())
+			{
+				$data["error"] = validation_errors();
+				echo "<pre>";print_r($data["error"]);die;
+			}else{
+				$data["error"] = "";
+			}
+           	$data['redirect_page']="setsalarymonth";
+			$data['setsalarymonth_id']=$this->input->post('setsalarymonth_id');
+			$data['salary_month']=$this->input->post('salary_month');
+			
+			
+			$data['option']='';
+			$data['keyword']='';	
+		}
+		else
+		{	
+
+			if($this->input->post("setsalarymonth_id")!="")
+			{	
+				//echo "<pre>";print_r($_POST);die;
+				$this->company_model->setsalarymonth_update();
+				$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
+				redirect('company/setsalarymonth');
+			
 			}
 			else
-			{
-				$this->session->set_flashdata('error', 'Company was not delete!');
-				redirect('Company');
+			{ 	
+				$this->company_model->setsalarymonth_insert();
+				$this->session->set_flashdata('success', 'Record has been Inserted Succesfully!');
+				redirect('company/setsalarymonth');
 			}
-	
-	}
-
-
-	function editcompany($companyid)
-	{
-		$data=array();
+		}
 		
-		$result=$this->Company_model->get_company($companyid);	
-		//echo "<br>";print_r($result);die;
-		$data['companyid']=$result['companyid'];
-		$data['companytypeid']=$result['companytypeid'];
-		$data['companytype']=$result['companytype'];
-		$data['companyname']=$result['companyname'];
-		$data['comemailaddress']=$result['comemailaddress'];
-		$data['comcontactnumber']=$result['comcontactnumber'];
-		$data['gstnumber']=$result['gstnumber'];
-		$data['digitalsignaturedate']=$result['digitalsignaturedate'];
-		$data['companyaddress']=$result['companyaddress'];
-		$data['stateid']=$result['stateid'];
-		$data['statename']=$result['statename'];
+		$result=$this->company_model->getsetsalarymonth();
+		$data['setsalarymonth_id']=$result['setsalarymonth_id'];	
+      	$data['salary_month']=$result['salary_month'];
+        $data['salary_year']=$result['salary_year'];
+		//echo "<pre>";print_r($result);die;
+		$this->load->view('salarysetting/addsalarysetting',$data);
 
-		$data['companycity']=$result['companycity'];
-		$data['pincode']=$result['pincode'];
-		$data['isactive']=$result['isactive'];
-		$data['companycomplianceid']=$result['companycomplianceid'];
-		$data['complianceid']=$result['complianceid'];
-
-		$data['stateData']=$this->Company_model->list_state();
-		$data['complianceData']=$this->Company_model->list_compliance();
-		//echo "<pre>";print_r($data['complianceData']);die;
-		$data['companytypeData']=$this->Company_model->list_companytype();
-		$this->load->view('Company/companyadd',$data);	
-	}
-
-	
-
-	function companytype()
-	{	
-		$data=array();
-			$data['companytypeid']=$this->input->post('companytypeid');
-			$data['companytype']=$this->input->post('companytype');
-			$data['isactive']=$this->input->post('isactive');
-			if($_POST){
-				
-				if($this->input->post('companytypeid')==''){
-							
-					$result=$this->Company_model->add_companytype();	
-					if($result)
-					{
-						$this->session->set_flashdata('success', 'Record has been Inserted Succesfully!');
-						redirect('Company/companytype');
-					}
-				}
-				else
-				{
-					$result=$this->Company_model->update_companytype();
-					if($result)
-					{
-						$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
-						redirect('Company/companytype');
-					} 
-
-				}
-		} 
-		$data['companytypeData']=$this->Company_model->list_companytype();
-		$this->load->view('Company/companytypelist',$data);	
-	}
-
-
-	public function compliance()
-	{
-		$data=array();
-			$data['complianceid']=$this->input->post('complianceid');
-			$data['compliancename']=$this->input->post('compliancename');
-			$data['compliancepercentage']=$this->input->post('compliancepercentage');	
-			$data['isactive']=$this->input->post('isactive');
-			if($_POST){
-				if($this->input->post('complianceid')==''){
-							
-					$result=$this->Company_model->add_compliance();	
-					if($result)
-					{
-						$this->session->set_flashdata('success', 'Record has been Inserted Succesfully!');
-						redirect('Company/compliance');
-					}
-				}
-				else
-				{
-					$result=$this->Company_model->update_compliance();
-					if($result)
-					{
-						$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
-						redirect('Company/compliance');
-					} 
-
-				}
-		} 
-		$data['complianceData']=$this->Company_model->list_compliance();
-		$this->load->view('compliance/compliance',$data);	
-	}
-
-	function delete_compliance(){
-		$complianceid=$this->input->post('complianceid');
-		$this->db->where("complianceid",$complianceid);
-		$result=$this->db->delete('tblcompliances');
-		if($result)
-		{
-			$this->session->set_flashdata('success', 'Compliance was delete successfully!');
-			redirect('compliance');
-		}
-		else
-		{
-			$this->session->set_flashdata('error', 'Compliance was not delete!');
-			redirect('compliance');
-		}
-
-	}
-
-	function delete_companytype(){
-		$companytypeid=$this->input->post('companytypeid');
-		$this->db->where("companytypeid",$companytypeid);
-		$result=$this->db->delete('tblcompanytype');
-		if($result)
-		{
-			$this->session->set_flashdata('success', 'Company type was delete successfully!');
-			redirect('Company/companytype');
-		}
-		else
-		{
-			$this->session->set_flashdata('error', 'Company type was not delete!');
-			redirect('Company/companytype');
-		}
-
-	}
-
-	function editcompanytype()
-	{
-		$data=array();
-		$result=$this->Company_model->get_companytype($this->input->post('companytypeid'));	
-		//echo "<br>";print_r($result);die;
-		$data['companytypeid']=$result['companytypeid'];
-		$data['companytype']=$result['companytype'];
-		$data['isactive']=$result['isactive'];
-		echo json_encode($data);
-	    //$this->load->view('Company/companytypelist',$data);		
-	}
-
-	function editcompliance()
-	{
-		$data=array();
-		$result=$this->Company_model->get_compliance($this->input->post('complianceid'));	
-		//echo "<br>";print_r($result);die;
-		$data['complianceid']=$result['complianceid'];
-		$data['compliancename']=$result['compliancename'];
-		$data['compliancepercentage']=$result['compliancepercentage'];
-		$data['isactive']=$result['isactive'];
-		echo json_encode($data);
-		//$this->load->view('Company/companytypelist',$data);		
-	}
+    }
 
 	
 	

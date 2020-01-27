@@ -1,6 +1,6 @@
-﻿<?php 
-	 $this->load->view('common/header.php');
-	 $this->load->view('common/sidebar.php');
+<?php 
+	 $this->load->view('common/header');
+	 $this->load->view('common/sidebar');
 ?>
 
 <!-- Page Wrapper -->
@@ -27,9 +27,15 @@
 		<div class="row">
 			<div class="col-sm-4 col-5">
 				<h4 class="page-title">List of Employee </h4>
+				
 			</div>
 			<div class="col-sm-8 col-7 text-right m-b-30">
+			
+
 				<a href="<?php echo base_url()?>employee/addemp" class="btn add-btn" ><i class="fa fa-plus"></i> Add Employee
+				</a>
+
+				<a href="javascript:void(0)"  onclick="importdata()" class="btn add-btn" ><i class="fa fa-download" aria-hidden="true"></i>Import  
 				</a>
 			</div>
 
@@ -76,14 +82,8 @@
 			<div class="col-md-12">
                	
 				<div class="table-responsive">
-                     <!-- 	<div class="col-sm-12 col-md-12 text-right">
-               				<div class="btn-group btn-group-sm ">
-								<button class="btn btn-white"><i class="fa fa-file-pdf-o fa-lg"></i> PDF</button>
-								<button class="btn btn-white" onclick="salaryslip()"><i class="fa fa-print fa-lg"></i> Print</button>
-							</div>
-						</div> -->
-					<!-- <table  class="table table-striped custom-table datatable"> -->
-					   <table id="example" class=" display table table-striped  custom-table" style="width:100%">
+                   
+					   <table id="example" class="display table table-striped custom-table" style="width:100%">
 						<thead>
 						<tr>
 							<th>No</th>
@@ -207,6 +207,34 @@
 		</div>
 	</div>
 
+	<div class="modal custom-modal fade" id="emp_import" role="dialog">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="form-header">
+						<h3>Import</h3>	
+						<form class="form-inline"method="post" id="import_form" enctype="multipart/form-data">
+							<div class="form-group">
+							<label for="file">Select Excel File:</label>
+							<input type="file" name="file" id="file" required accept=".xls, .xlsx" /></p>
+							</div>
+					</div>
+					<div class="modal-btn delete-action">
+						<div class="row">
+							<div class="col-6">
+								<input type="submit" name="import" value="Import" class="btn add-btn" />
+							</div>
+							<div class="col-6">
+								<a href="javascript:void(0);" data-dismiss="modal" class="btn btn-primary cancel-btn" style="padding: .375rem .75rem;">Cancel</a>
+							</div>
+						</div>
+					</div>
+					</form> 	
+				</div>
+			</div>
+		</div>
+	</div>
+
 
 	</div>
 	<!-- End Delete model -->
@@ -220,7 +248,7 @@
 <?php $this->load->view('common/footer');?>
 <script>
 $(document).ready(function() {
-	 $('#example').DataTable( {
+	$('#example').DataTable( {
 		aaSorting: [[0, 'asc']],
 		searching: false,
 		dom: 'Blfrtip',
@@ -252,7 +280,7 @@ $(document).ready(function() {
 	 },
 	 {
 		extend: 'pdfHtml5',
-	//	download: 'open',
+		//	download: 'open',
 		text:'<i class="fa fa-file-pdf-o"></i> PDF',
 		title: "List of Employee",
 		filename:"List_of_Employee",
@@ -345,11 +373,9 @@ $(document).ready(function()
 		$("#frm_hr").validate(
 		{
 				rules: {
-
 					FullName: {
 						required: true,
-							},
-					
+							},					
 					EmailAddress: {
 						required: true,
 							},		
@@ -369,9 +395,9 @@ $(document).ready(function()
 						required: true,
 						digits: true,
 							},
-					City: {
+					City:{
 						required: true,
-							},
+					    },
 				
 				},
 
@@ -449,7 +475,8 @@ function statusdata(id,status){
                 type: "post",
                 data: {id:id,status:status} ,
                 success: function (response) {  
-                //console.log(response);           
+                //console.log(response); 
+               // return false;          
                 document.location.href = url+'employee/emplist';                  
 
             },
@@ -539,4 +566,39 @@ function readURL(input) {
             }
         }
 
+</script>
+<script>
+$(document).ready(function(){
+
+ $('#import_form').on('submit', function(event){
+  event.preventDefault();
+  $.ajax({
+	url:"<?php echo base_url(); ?>employee/import_emp",
+	method:"POST",
+	data:new FormData(this),
+	contentType:false,
+	cache:false,
+	processData:false,
+	success:function(data){  
+		console.log(data);
+		
+		if(data==1){
+		alert('Data imported successfully');
+		$('#file').val('');
+			window.location.href="<?php echo base_url(); ?>employee/emplist";
+
+		}else{
+		alert(data);
+		$('#file').val('');
+			window.location.href="<?php echo base_url(); ?>employee/emplist";
+		}
+	}
+  })
+ });
+
+});
+function importdata(){  
+  
+    $('#emp_import').modal('show');
+}
 </script>

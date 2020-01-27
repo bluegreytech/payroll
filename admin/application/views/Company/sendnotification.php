@@ -62,7 +62,7 @@
 
 							<div class="col-sm-7 col-7 text-right m-b-30">
 
-							<a href="<?php echo base_url();?>Company" class="btn add-btn">Back to Company List</a>
+							<a href="<?php echo base_url();?>Company/companynotification_list" class="btn add-btn">Back to List of Company Notification</a>
 
 							</div>
 
@@ -79,24 +79,25 @@
 								<div class="dash-widget clearfix card-box">						
 
 								<form method="post" enctype="multipart/form-data"  id="form_valid" action="<?php echo base_url();?>Company/Sendnotification">
-
+								<!-- <input type="hidden" class="form-control" name="Companynotificationid" value="<?php //echo $Companynotificationid;?>"> -->
 								<div class="row">
 
 										<div class="col-md-6">
-										
+					
 											<div class="form-group">
+											
 												<label>Type of Company<span class="text-danger">*</span>
 												</label>
 												
-												<select  class=" form-control selectpicker" multiple data-live-search="true" data-actions-box="true" multiple name="companyid[]">
-													<!-- <option disabled="" value="">Please select</option> -->	
-													<?php if(!empty($companyData)){
+												<select  class=" form-control selectpicker" multiple data-live-search="true" data-actions-box="true" multiple name="companyid[]" id="companyid">
+													<?php 
+													if(!empty($companyData)){
 														foreach($companyData as $company) { 
-														//echo "<pre>";print_r($row); ?>
-													
-														<option value="<?php echo $company->companyid; ?>"><?php echo ucfirst($company->companyname);?></option>
+														 ?>
+											<option value="<?php echo $company->companyid; ?>"><?php echo $company->companyname;?></option>
 														<?php  } } ?>
 												</select>
+
 											</div>
 
 										</div>
@@ -105,10 +106,6 @@
 
 										<div class="col-md-6">
 
-												
-
-
-
 												<div class="form-group">
 
 													<label>Notification End Date <span class="text-danger">*</span></label>
@@ -116,9 +113,7 @@
 													<div class="cal-icon">
 
 														<input  class="form-control datetimepicker" type="text" id="Enddate" name="Enddate"
-
 														 readonly>
-
 													</div>
 
 												</div>
@@ -168,16 +163,12 @@
 									<div class="row">	
 
 										<div class="col-md-6">
-
 											<div class="form-group">
-
-												<label class="col-form-label">Upload File<span class="text-danger">*</span></label>
-
-												<input class="form-control" type="file" name="Documentfile[]" placeholder="Upload document file" multiple="multiple">
-
+												<label class="col-form-label">Upload File</label>
+												<input class="upload" type="file" name="Documentfile[]"  id="Documentfile" placeholder="Upload document file" multiple="multiple">
 											</div>
-
-										</div>	
+											<h6>Uplopad only jpg,jpeg,png,pdf,doc,docx,ppt,pptx,xls,xlsx,bmp file</h6>
+										</div>		
 
 									</div>
 
@@ -239,25 +230,20 @@
 
 <script type="text/javascript">
 
-							
-
+						
 				$('#Enddate').datetimepicker({
-
 					 defaultDate: new Date(),
-
 				  	 format: 'DD/MM/YYYY',
-
 					 ignoreReadonly: true,					
-
 				});
 
+				$.validator.addMethod('filesize', function (value, element, param) {
+
+return this.optional(element) || (element.files[0].size <= param)
+
+} ,'File size must be equal to or less then 2MB');	
 
 
-</script>
-
-
-
-<script>
 
 $(function() { 
 
@@ -308,72 +294,49 @@ $(document).ready(function()
 		noneSelectedText : 'Please Select',
 	});
 				$("#form_valid").validate(
-
 				{
 
 						rules: {
-
-							'companyname[]':{
-							required: true,
-									},
-							companyid: {
-
+							'companyid[]':{
 									required: true,
-
-										},
-
+											},
 							Documenttitle: {
-
 									required: true,
-
 										},
-
-							Notificationdescription: {
-
+							'Notificationdescription': {
 									required: true,
-
 										},
-
-							Documentname: {
-
-									required: true,
-
-										}
-
+							'Documentfile[]': {
+									//required: true,
+									extension:'bmp|jpg|jpeg|png|pdf|doc|docx|ppt|pptx|xls|xlsx',
+									filesize : 2000000,	
+									},
 							},
 
 						messages:{
-
-							
-
-							companyid: {
-
-									required: "Please select company",
-
-										},
-
+						
 							Documenttitle: {
-
 									required: "Please enter a ducument title",
-
 										},	
+								errorPlacement: function (error, element) 
+								{
+									console.log('dd', element.attr("name"))
+									if (element.attr("name") == "companyid[]") {
+									error.appendTo("#companyiderror");
+									} else{
+									error.insertAfter(element)
+									}
+								},
+								'Notificationdescription': {
+								required: "Please enter a notification message",
+								},	
+								'Documentfile[]': {
+									extension: "Please upload a valid file",
+								},
 
-						    Notificationdescription: {
 
-									required: "Please enter a notification message",
-
-										},	
-
-							Documentname: {
-
-									required: "Please upload a file",
-
-										},	
-
-								
-
-					}					
-
+					},
+				
 				});		
 
 		});	

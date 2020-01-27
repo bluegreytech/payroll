@@ -7,21 +7,7 @@
 ?>
 
 
-		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
-		<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.0/css/buttons.dataTables.min.css">
-
 	
-  <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
-
-		<!-- External -->
-
-		<!-- <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.5/css/fixedHeader.bootstrap.min.css">
-
-		<link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.5/css/fixedHeader.bootstrap.min.css">
-
-		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
-
-		<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css"> -->
 
 
 			<!-- Page Wrapper -->
@@ -82,15 +68,15 @@
 
 
 
-								<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+								<div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12">  
 
 										<div class="form-group form-focus select-focus">
 
 											<select class="select floating" name="option" id="purpose"> 
 												<option value=""> -- Select -- </option>
 												<option value="companyname">Company Name</option>
-												<option value="status">Paymeny Status</option>
-												<option value="invoicedate">Date From to To</option>
+												<option value="paystatus">Paymeny Status</option>
+												<option value="invoicedate">Created Date From to To</option>
 											</select>
 
 										</div>
@@ -99,7 +85,7 @@
 
 
 
-								<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+								<div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12">  
 
 										<div class="form-group form-focus box" id='business'>
 
@@ -211,9 +197,11 @@
 						<div class="col-md-12">
 
 							<div class="table-responsive">
-								<table  id="example" class="display nowrap" style="width:100%">
+								<!-- <table  id="example" class="display nowrap" style="width:100%"> -->
 
 								<!-- <table class="table table-striped custom-table mb-0 datatable"> -->
+
+								<table id="example" class="display table table-striped custom-table" style="width:100%">
 
 									<thead>
 
@@ -271,38 +259,29 @@
 
 										<td>		
 
-											<?php if($compInvoice->status=='Paid'){ 
+											<?php if($compInvoice->paystatus=='Paid'){ 
 
-												echo "<span class='badge badge-success-border'>$compInvoice->status</span>";
+												echo "<span class='badge badge-success-border'>$compInvoice->paystatus</span>";
 
 												}?>
 
-											<?php if($compInvoice->status=='Pending'){
+											<?php if($compInvoice->paystatus=='Unpaid'){
 
-													echo "<span class='badge badge-danger-border'>$compInvoice->status</span>";
+													echo "<span class='badge badge-danger-border'>$compInvoice->paystatus</span>";
 
 													}?>
 
 										</td>
 
-										<!-- <td>		
-											<?php echo $compInvoice->status;?>
-
-										</td> -->
+									
 
 										<td class="text-right">
 
-										
+												<a  href="<?php echo base_url();?>Invoice/invoice_view/<?php echo $compInvoice->Companyinvoiceid;?>"  title="View"><i class="fa fa-eye m-r-5"></i></a>
 
 												<a  href="<?php echo base_url();?>Invoice/edit_invoice/<?php echo $compInvoice->Companyinvoiceid;?>" title="Edit"><i class="fa fa-pencil m-r-5"></i></a>
 
-												<a  href="<?php echo base_url();?>Invoice/invoice_view/<?php echo $compInvoice->Companyinvoiceid;?>"  title="View"><i class="fa fa-eye m-r-5"></i></a>
-
 												<a  onclick="deletedata(<?php echo $compInvoice->Companyinvoiceid; ?>)" data-toggle="modal" data-target="#delete_client"><i class="fa fa-trash-o m-r-5" title="Delete"></i> </a>
-
-												
-
-
 
 										</td>
 
@@ -490,95 +469,85 @@
 
 		<?php $this->load->view('common/footer');?>
 
-		
-		<!-- External -->
-
-
-
-		<!-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-
-		 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>	 -->
-
-		<!-- <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>	 -->
-
-		<!-- <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>		 -->
-
-		<!-- <script src="https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>		 -->
-
-		<!-- <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>		 -->
-
-		<!-- <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>		
-
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-
-		<script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
-
-		<script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script> -->
-
-
-		<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-		<script src="https://cdn.datatables.net/buttons/1.6.0/js/dataTables.buttons.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-		<script src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.html5.min.js"></script>
-		<script src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.colVis.min.js"></script>
-		
-    <script src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.print.min.js"></script>
-
-
-
-
-
-
-
-
-		<!-- Custom JS -->
-
-		
-
-
-
-<th>Due Date</th>
-
-<th>Amount</th>
-
-<th>Status</th>
-
 		<script>
-
-$(document).ready(function() {
-    $('#example').DataTable( {
-		bSort: false,
+	$(document).ready(function() {
+	 $('#example').DataTable( {
+		aaSorting: [[0, 'asc']],
 		searching: false,
-        dom: 'Bfrtip',
-        buttons: [
-            {
-                extend: 'excelHtml5',
-                exportOptions: {
-                    columns: [0,1,2,3,4,5]
-                }
-            },
-            {
-                extend: 'pdfHtml5',
-                exportOptions: {
-                    columns: [0,1,2,3,4,5]
-                }
-            },
-			{
-                extend: 'print',
-                exportOptions: {
-                    columns: [0,1,2,3,4,5]
-                }
-            },
-            'colvis'
-        ]
-    } );
+		dom: 'Blfrtip',
+		responsive: true,
+	 buttons: [
+	 {
+		extend: 'copyHtml5',
+		download: 'open',
+		text:'<i class="fa fa-files-o"></i> Copy',
+		exportOptions: {
+		columns: [0,1,2,3,4,5]
+		}
+	 },
+	 {
+		extend: 'excelHtml5',
+		text:'<i class="fa fa-file-excel-o"></i> Excel',
+		exportOptions: {
+		columns: [0,1,2,3,4,5]
+		}
+	 },
+	 {
+		extend: 'csvHtml5',
+		download: 'open',
+	    text:'<i class="fa fa-file-text-o"></i> CSV',
+		exportOptions: {
+		columns: [0,1,2,3,4,5]
+		},
+		
+	 },
+	 {
+		extend: 'pdfHtml5',
+		text:'<i class="fa fa-file-pdf-o"></i> PDF',
+		title: "List of Company Invoice",
+		filename:"List_of_Company_Invoice",
+		orientation: 'landscape', 
+		pageSize: 'A4',		
+		exportOptions: {
+		columns: [0,1,2,3,4,5],
+		
+		},
+		
+	        customize : function(doc){ 
+				doc.content[1].margin = [ 50, 0, 100, 0 ];
+				doc.defaultStyle.fontSize = 10; //2, 3, 4,etc
+	            doc.styles.tableHeader.fontSize = 12; //2, 3, 4, etc
+				doc.defaultStyle.alignment = 'center';
+				doc.styles.tableHeader.alignment = 'center';
+				doc.content[1].table.widths = [ '5%',  '35%', '30%', '14%','14%', '14%'];
+	         
+	       },
+	 },
+	  {
+		extend: 'print',
+		orientation: 'landscape', 
+		pageSize: 'A4',
+		text:'<i class="fa fa-print"></i> Print',
+		exportOptions: {
+			columns: [0,1,2,3,4,5],
+			 		
+		},
+		 
+		
+
+	 },
+	 ]
+
+ });
+  var styles ={
+	   "margin-bottom": '0.5em',
+       float: "right"	
+	 };
+	  $("div#example_wrapper").find($(".dt-buttons")).css(styles);
+
 } );
+
+
 
 		$(function() { 
 			setTimeout(function() {
@@ -618,8 +587,7 @@ $(document).ready(function() {
 
 
 
-</script>
-		<script>
+
 
 		function deletedata(Companyinvoiceid){  
 
@@ -663,7 +631,7 @@ $(document).ready(function() {
 		$("#business3").hide();
 		$("#business4").hide();
       }
-      else if(this.value == 'status')
+      else if(this.value == 'paystatus')
       {
         $("#business").show();
 		$("#business2").hide();

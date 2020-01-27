@@ -2,7 +2,21 @@
 	 $this->load->view('common/header.php');
 	 $this->load->view('common/sidebar.php');
 ?>
+<script>
 
+function m1()
+{
+		var a=document.getElementById("txt1").value;
+		//var b=document.getElementById("txt2").value;
+		//var c=document.getElementById("txt3").value;
+
+		var h=a;
+		//alert(h);
+		document.getElementById("total").value=h;
+	
+}
+
+</script>	
 
 				<!-- Page Wrapper -->
 				<div class="page-wrapper">
@@ -34,12 +48,15 @@
 					</div>
 					<div class="col-sm-7 col-8 text-right m-b-30">
 						
+						
 						<div class="btn-group btn-group-sm">
-							<a href="<?php echo base_url();?>Invoice/sendquotation/<?php echo $quotationid;?>"><button class="btn btn-white">Send Email</button></a>	
+							<a href="<?php echo base_url();?>Invoice/sendquotation/<?php echo $quotationid;?>" class="btn add-btn">Send Email</a>
 						</div>
+
 						<div class="btn-group btn-group-sm">
-							<button class="btn btn-white" id="btnExport">Generate PDF</button>
+									<a class="btn add-btn" id="btnExport"> Generate PDF</a>	
 						</div>
+
 						<div class="btn-group btn-group-sm">
 									<a href="<?php echo base_url();?>Invoice/quotation_list" class="btn add-btn"> Back to Quotation List</a>	
 						</div>
@@ -53,7 +70,7 @@
 					<div class="col-md-12">
 						<div class="card">
 							<div class="card-body">
-							<center><h2>Payroll System</h2></center>
+							<!-- <center><h2>Payroll System</h2></center> -->
 								<div class="row">
 									<div class="col-sm-6 m-b-20">
 										<img src="<?php echo base_url();?>default/img/Company/companylogo/logo.jpg" class="inv-logo" alt="Logo">
@@ -108,10 +125,11 @@
 										?>
 											<tr>
 												<td><?php echo $i;?></td>
-												<td><?php echo $companytype ;?></td>
+												<td><?php echo $companyname ;?></td>
 												<td class="d-none d-sm-table-cell"><?php echo $quot->quotationdetail;?></td>
-												<td><?php echo $quot->quotationrate;?></td>
-												
+												<td>
+													<?php echo $quot->quotationrate; ?>
+												</td>	
 											</tr>
 											
 										<?php
@@ -133,7 +151,7 @@
 															<td></td>
 															<td></td>
 															<td colspan="5" style="text-align: right; font-weight: bold">Total</td>
-															<td style="text-align: right; padding-right: 30px;width: 230px"><input class="form-control" name="totalamount" type="text" value="<?php //echo $totalamount;;?>"  id="total" onChange="m1()" readonly></td>
+															<td style="text-align: right; padding-right: 30px;width: 230px"><input class="form-control" type="text" id="total" onChange="m1()"></td>
 														</tr>
 													</tbody>
 												</table>                               
@@ -155,10 +173,10 @@
 																<td>Yours sincerely,</td>
 															</tr>
 															<tr>
-																<th>Prashant Parmar</th>
+																<th><?php echo $Adminname;?></th>
 															</tr>
 															<tr>
-																<th>M 9099912602</th>
+																<th>M <?php echo $Mobilenumber;?></th>
 															</tr>
 														</tbody>
 													</table>

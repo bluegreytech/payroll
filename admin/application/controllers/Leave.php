@@ -33,19 +33,13 @@ class Leave extends CI_Controller
 		}      
 
 		if($_POST!='')
-
 		{
-
 			$keyword=$this->input->post('keyword2');	
-
 			$data['result'] = $this->Leave_model->search($keyword);	
-
 		}	
 
 		$data['companyData'] = $this->Leave_model->list_company();
-
 		$this->load->view('Leave/leavelist',$data);
-
 	}
 
 

@@ -2,6 +2,14 @@
 	 $this->load->view('common/header');
 	 $this->load->view('common/sidebar');
 ?>
+<style type="text/css">
+	/*table.table td .add {
+		display: none;
+	}*/
+	table.table td .hiddenInput {
+		display: none;
+	}
+</style>
 			<!-- Page Wrapper -->
  <div class="page-wrapper">			
    <div class="content container-fluid">
@@ -22,7 +30,7 @@
 					<div class="row">
 						<div class="col-md-12">
 								<form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>employee/addemp" id="frm_emp">
-							<div class="profile-img-wrap edit-img">
+									<div class="profile-img-wrap edit-img">
 									<?php  
 
 									 if(($ProfileImage!='' && file_exists(base_path().'/upload/emp/'.$ProfileImage))){ ?>
@@ -52,11 +60,11 @@
 										<input class=" form-control" type="text" name="employee_code" id="employee_code" Placeholder="Employee Code" value="<?php echo $employee_code;?>" <?php if($employee_code){ echo "readonly"; }?> >
 									</div>
 									<div class="form-group">
-										<label>Department<span class="text-danger">*</span></label>
+										<label>Department <!-- <span class="text-danger">*</span> --></label>
 										<input class=" form-control" type="text" name="department" id="department" Placeholder="Department" value="<?php echo $department ? $department :'';?>">
 									</div>
 									<div class="form-group">
-										<label>Designation<span class="text-danger">*</span></label>
+										<label>Designation<!-- <span class="text-danger">*</span> --></label>
 										<input class=" form-control" type="text" name="desgination" id="desgination" Placeholder="Designation" value="<?php echo $desgination;?>">
 									</div>
 									
@@ -128,7 +136,7 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label>Qualification Employee<span class="text-danger">*</span></label>
+										<label>Qualification Employee <!-- span class="text-danger">*</span> --></label>
 										<select class="form-control" name="qualificationemp"  id="qualificationemp">
 											<option disabled="" selected="">Please Select</option>
 											<option value="10th" <?php if($qualification_emp=='10th'){echo "selected";}?>>10th</option>
@@ -148,6 +156,14 @@
 											<option value="Diploma" <?php if($qualification_emp=='Diploma'){echo "selected";}?>>Diploma</option>
 											<option value="Other" <?php if($qualification_emp=='Other'){echo "selected";}?>>Other</option>
 										</select>
+										
+									</div>
+									<div class="from-group">
+										<?php if($qualification_emp=='Other'){  ?>
+										<input type="text" name="otherqulification" id="otherqulification" class="form-control" value="<?php echo  $otherqulification; ?>">
+										<?php }else{ ?>
+                                        <input type="text" name="otherqulification" id="otherqulification" class="form-control" value="">
+										<?php } ?>
 									</div>
 									
 									<div class="form-group">
@@ -164,7 +180,7 @@
 											<option value="AB-" <?php if($bloodgroup=='AB-'){echo "selected";}?>>AB-</option>
 										</select>
 									</div>
-										<div class="form-group">
+									<div class="form-group">
 										<label class="col-form-label">Salary<span class="text-danger">*</span></label>
 									    <select class="form-control" name="salary" id="salary">
 											<option disabled="" selected="">Please Select</option>
@@ -172,8 +188,8 @@
 											<option value="per_day_wages" <?php if($salary=='per_day_wages'){echo "selected";}?>>Per Day Wages</option>
 										</select>
 									</div>
-										<div class="form-group">
-										<label class="col-form-label">Salary Amount<span class="text-danger">*</span></label>
+									<div class="form-group">
+										<label class="col-form-label">Annual Salary Amount<span class="text-danger">*</span></label>
 									    <input type="text" class="form-control" name="salary_amount" id="salary_amount" value="<?php echo $salaryamt;?>">
 									</div>
 									<div class="form-group">
@@ -194,8 +210,7 @@
 
 								<?php  if($status!=''){ //echo $status; ?>
                                 
-									<div class="form-group">
-										
+									<div class="form-group">										
                                          <label class="col-form-label" style="margin-top: 11px;">Status<span class="text-danger">*</span></label> &nbsp;
 											<label class="radio-inline">
 												<input type="radio" name="status" <?php if($status=="Active") { echo "checked"; } ?>  value="Active" >Active
@@ -214,7 +229,7 @@
 												<input type="radio" name="status" value="Inactive">Inactive
 											</label>
 										</div>
-							<?php } ?>
+								<?php } ?>
 								</div>
 
 									<div class="col-md-12">
@@ -226,17 +241,20 @@
 													<label class="col-form-label">Adharcard No.<span class="text-danger">*</span></label>
 													<input type="text" class="form-control" name="aadharcard" id="aadharcard" value="<?php echo $aadharcard;?>"  minlength="14">
 												</div>
-											    <div class="form-group">
+												<div class="form-group">
+													<label class="col-form-label">Pancard No.<span class="text-danger">*</span></label>
+													<input type="text" class="form-control" name="pancard" id="pancard" value="<?php echo $pancard;?>">
+												</div>
+											</div>	
+											<!-- <div class="col-md-6"> -->
+												
+											<!-- </div>		 -->									
+											<div class="col-md-6">
+												 <div class="form-group">
 													<label>Upload Document <span class="text-danger">*</span></label>
 													<input type="hidden" class="form-control" name="pre_bank_detail" id="pre_bank_detail" value="<?php echo $bankdetail;?>">
 													<input type="file" class="form-control" name="bank_detail" id="bank_detail" onchange="readURLdcox(this);">
 													<!-- <span class="form-text text-muted">Recommended image size is 40px x 40px</span> -->
-												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="form-group">
-													<label class="col-form-label">Pancard No.<span class="text-danger">*</span></label>
-													<input type="text" class="form-control" name="pancard" id="pancard" value="<?php echo $pancard;?>">
 												</div>
 												<div class="preview">
 												<?php if(($bankdetail!='' && file_exists(base_path().'/upload/empdetail/'.$bankdetail))){ ?>
@@ -245,7 +263,7 @@
 														$ext = pathinfo($filename, PATHINFO_EXTENSION); 
 														if($ext=="pdf"){ ?>
 														<a target="_blank" href="<?php echo base_url()?>upload/empdetail/<?php echo $bankdetail;?>"><img id="blahbroch" src="<?php echo base_url()?>upload/no_image/pdfimage.png" class="img-thumbnail border-0" style="display: block;  width: 100px; height: 100px;"></a>
-														<?php  }else{  ?>
+														<?php }else{ ?>
 
 														<a target="_blank" href="<?php echo base_url()?>upload/empdetail/<?php echo $bankdetail;?>"><img id="blahdocx" src="<?php echo base_url()?>upload/empdetail/<?php echo $bankdetail;?>" class="img-thumbnail border-0" style="display: block;  width: 100px; height: 100px;"></a>
 													<?php } ?>
@@ -256,123 +274,115 @@
 												<?php } ?>
 											</div> 
 											</div>
-										</div>
-									<!-- 	<div class="row">
-											<div class="col-md-6">
-										    <div class="form-group">
-													<label>Passport </label>
-													<input type="hidden" class="form-control" name="pre_passport" id="pre_passport" value="<?php echo $passport;?>">
-													<input type="file" class="form-control" name="passport" id="passport">
-													<span class="form-text text-muted">Recommended image size is 40px x 40px</span>
-											</div>
-											</div>
-											<div class="col-md-6">
-												<div class="preview">
-													<?php if(($passport!='' && file_exists(base_path().'/upload/empdetail/'.$passport))){ ?>
-													<img id="blah" src="<?php echo base_url()?>upload/empdetail/<?php echo $passport;?>" class="img-thumbnail border-0" style="display: block;  width: 100px; height: 100px;">
-
-													<?php } else { ?>
-													<img id="blah" src="" class="img-thumbnail border-0" style="display: none;  width: 100px; height: 100px;">
-													<?php } ?>
-												</div> 
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-md-6">
-												<div class="form-group">
-														<label>Driving Licence</label>
-														<input type="hidden" class="form-control" name="pre_driveinglicence" id="pre_driveinglicence" value="<?php echo $drivinglicense;?>">
-														<input type="file" class="form-control" name="driveinglicence" id="driveinglicence">
-														<span class="form-text text-muted">Recommended image size is 40px x 40px</span>
-												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="preview">
-													<?php if(($drivinglicense!='' && file_exists(base_path().'/upload/empdetail/'.$drivinglicense))){ ?>
-													<img id="blah" src="<?php echo base_url()?>upload/empdetail/<?php echo $drivinglicense;?>" class="img-thumbnail border-0" style="display: block;  width: 100px; height: 100px;">
-
-													<?php } else{ ?>
-													<img id="blah" src="" class="img-thumbnail border-0" style="display: none;  width: 100px; height: 100px;">
-													<?php } ?>
-												</div>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-md-6">
-												<div class="form-group">
-														<label>Aadhar Card<span class="text-danger">*</span></label>
-														<input type="hidden" class="form-control" name="pre_aadharcard" id="pre_aadharcard" value="<?php echo $aadharcard;?>">
-														<input type="file" class="form-control" name="aadharcard" id="aadharcard">
-														<span class="form-text text-muted">Recommended image size is 40px x 40px</span>
-												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="preview">
-													<?php if(($aadharcard!='' && file_exists(base_path().'/upload/empdetail/'.$aadharcard))){ ?>
-													<img id="blah" src="<?php echo base_url()?>upload/empdetail/<?php echo $aadharcard;?>" class="img-thumbnail border-0" style="display: block;  width: 100px; height: 100px;">
-
-													<?php } else{ ?>
-													<img id="blah" src="" class="img-thumbnail border-0" style="display: none;  width: 100px; height: 100px;">
-													<?php } ?>
-												</div>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-md-6">
-											<div class="form-group">
-													<label>Pan Card</label>
-													<input type="hidden" class="form-control" name="pre_pancard" id="pre_pancard" value="<?php echo $pancard;?>">
-													<input type="file" class="form-control" id="pancard" name="pancard">
-													<span class="form-text text-muted">Recommended image size is 40px x 40px</span>
-											</div>
-											</div>
-											<div class="col-md-6">
-												<div class="preview">
-													<?php if(($pancard!='' && file_exists(base_path().'/upload/empdetail/'.$pancard))){ ?>
-													<img id="blah" src="<?php echo base_url()?>upload/empdetail/<?php echo $pancard;?>" class="img-thumbnail border-0" style="display: block;  width: 100px; height: 100px;">
-
-													<?php } else{ ?>
-													<img id="blah" src="" class="img-thumbnail border-0" style="display: none;  width: 100px; height: 100px;">
-													<?php } ?>
-												</div>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-md-6">
-											<div class="form-group">
-													<label>Address Proof<span class="text-danger">*</span></label>
-													<input type="hidden" class="form-control" name="pre_addressproof" id="pre_addressproof" value="<?php echo $addressesproof;?>">
-													<input type="file" class="form-control" name="address_proof" id="address_proof">
-													<span class="form-text text-muted">Recommended image size is 40px x 40px</span>
-											</div>
-											</div>
-											<div class="col-md-6">
-												<div class="preview">
-													<?php if(($addressesproof!='' && file_exists(base_path().'/upload/empdetail/'.$addressesproof))){ ?>
-													<img id="blah" src="<?php echo base_url()?>upload/empdetail/<?php echo $addressesproof;?>" class="img-thumbnail border-0" style="display: block;  width: 100px; height: 100px;">
-
-													<?php } else{ ?>
-													<img id="blah" src="" class="img-thumbnail border-0" style="display: none;  width: 100px; height: 100px;">
-													<?php } ?>
+	                                        <!-- <div class="col-md-12">
+											<hr>
+										    <h3 class="card-title">Applicable compliances </h3>
+												<div class="row table-responsive">
+													<table class="table">
+															<th style="text-align: center">Compliance Name</th>
+															<th style="text-align: center">Compliance Detail</th>
+															<th style="text-align: center">Able/Not able</th>
+															<tbody>
+																
+																<?php 
+																$companytxtno='';
+																$companytxt_no='';
+																 $companytext_no=explode(',', $companytextno);
+																//echo "<pre>";print_r(count($companytext_no));
+																	if(count($companytext_no)>1){
+																		
+																		 $companytxt_no=explode(',', $companytextno);
+																	}else{
+																		
+																		  $companytxt_no=$companytextno;
+																	}
+																	
+																	
+																	// echo count( $companytext_no);
+																	 $complianceallow_id=explode(',', $complianceallowid);
+																	
+																	$i=0;
+																foreach($compliancelist as $row){ 
+															    //  echo $companytxt_no[$i]."<br>";
+															      //echo $companytxtno;
+															        $cmptxtno=isset($companytxt_no) ? $companytxt_no : '0';
+															         //echo  $cmptxtno[$i];   
+																	?> 
+																
+																<tr>
+																	
+																	<td style="text-align: center"><?php echo $row->compliancename; ?></td>
+																	<td ><input type="text" name="compliancetxt[]" class="form-control hiddenInput" style="height: auto !important; display:<?php echo (!empty(in_array($row->complianceid, $complianceallow_id) ) ? "block" : "none");  ?>" placeholder="Enter Number" value="<?php  if(!empty(in_array($row->complianceid, $complianceallow_id))){ 
+																		if(count($companytext_no)>1){
+																			echo $companytext_no[$i];
+																		}else{
+																			echo $cmptxtno;
+																		} }  
+																		 ?>"></td>
+																	<td style="text-align: center">
+																		<input type="checkbox" name="compliancecheck[]" class='checkbtn' value="<?php echo $row->complianceid;  ?>" <?php //echo in_array($row->complianceid, $complianceallow_id)?'checked="checked"':'' ?>>
+																	</td>
+																</tr>
+																<?php $i++; } //} ?>		 
+															</tbody>
+													</table>
 												</div>
 											</div> -->
+										</div>
 											
+									</div>
+									<div class="col-md-12">
+										<hr>
+									    <h3 class="card-title">Employee Leave Detail </h3>
+									     <div class="row">									   
+                                                <table class="table table-striped table-nowrap custom-table ">
+													<tbody>
+														<?php 
+														if(!empty($leavelist)){
+											    	 	foreach($leavelist as $leaverow){
+											    	 	 //echo "<pre>";print_r($leaverow);
+															$empassgindata=getempassginleave($emp_id,$leaverow->leave_id);				
+											    	  ?>   
+														<tr>
+															<td width="20px"><?php echo $leaverow->leave_name; ?><input type="hidden" name="leavename[]" id="" class="form-control" value="<?php echo $leaverow->leave_id;?>">
+															</td>
+															<td width="20%">
+															<?php if(!empty($empassgindata)){
+															if($leaverow->leave_id==$empassgindata['leave_id']){
+															?>	
+															   <input type="hidden" name="empassignleave_id[]" class="form-control" value="<?php echo $empassgindata['empassignleave_id']?>">
+															   <?php if($leaverow->leave_id=='4'){ ?>					
+																<input type="text" name="leaveno[]" class="form-control" value="N/A" readonly="">
+															<?php } else{ ?> 
+															 <input type="text" name="leaveno[]" class="form-control" value="<?php  echo $empassgindata['no_leave'];?>">
+															<?php } ?>
+															<?php } }else{ if($leaverow->leave_id=='4'){ ?>
+																<input type="text" name="leaveno[]" class="form-control" value="N/A" readonly=""> 
+															<?php }else{ ?>
+																<input type="text" name="leaveno[]" class="form-control" id="leaveno" 
+																 data-id="<?php echo $leaverow->leavedays;?>"> 
+																
+															 <?php } ?>
+															<?php  } ?>
+															</td>
+														</tr>
+														 <?php } }  ?>
+													</tbody>
+												</table>
 										</div>
 									</div>
+									</div>
 									<div class="submit-section">
-								<hr>
-								<button class="btn btn-primary submit-btn" name="Save" type="submit"><?php echo ($emp_id!='')?'Update':'Submit' ?></button>
-								<button type="button" name="cancel" class="btn btn-secondary submit-btn" onClick="location.href='<?php echo base_url(); ?>employee/<?php echo $redirect_page; ?>'">Cancel
-								</button>
+										<hr>
+										<button class="btn btn-primary submit-btn" name="Save" type="submit"><?php echo ($emp_id!='')?'Update':'Submit' ?></button>
+										<button type="button" name="cancel" class="btn btn-secondary submit-btn" onClick="location.href='<?php echo base_url(); ?>employee/<?php echo $redirect_page; ?>'">Cancel
+										</button>
+									</div>
 							</div>
-							</div>
-							
-							
 						</form>
 						</div>
 					</div>
-				</div>
-				
+				</div>				
 				</div>
 			</div>
 		</div>
@@ -382,17 +392,15 @@
 		<!-- /Main Wrapper -->
 
 		<!-- Sidebar Overlay -->
-		<div class="sidebar-overlay" data-reff=""></div>
+<div class="sidebar-overlay" data-reff=""></div>
 
 		<!-- jQuery -->
-     <?php  $this->load->view('common/footer'); ?>
-		
-		
+<?php  $this->load->view('common/footer'); ?>
 
 <script>
-	$(function() { 
+$(function(){ 
     setTimeout(function() {
-  $('#errorMessage').fadeOut('fast');
+	  $('#errorMessage').fadeOut('fast');
 }, 5000);  
 });
 
@@ -423,54 +431,51 @@ $(document).ready(function()
 	      }
 	    });
     if(response == 0) {
-    	return true;
-     
+    	return true;     
     } else if(response == 1) {
        return false;
     }
   }, "Email address is already exist.");
-	   $.validator.addMethod("employeecode_check", function(value, element) {
+	   $.validator.addMethod("aadharcard_check", function(value, element) {
 	    var response;
-	    var employee_code=$("#employee_code").val();
+	    var aadharcard=$("#aadharcard").val();
 	    $.ajax({
 	      type: "POST",
-	      url: "<?php echo site_url('employee/empcode_check'); ?>",
-	      data:{employee_code:value},  
+	      url: "<?php echo site_url('employee/aadharcard_check'); ?>",
+	      data:{aadharcard:value},  
 	      async:false,
-	      success:function(data) {
-	      
+	      success:function(data) {	      
 	      	console.log(data);
 	        response = data;
 	      }
 	    });
     if(response == 0) {
-    	return true;
-     
+    	return true;     
     } else if(response == 1) {
        return false;
     }
-  }, "Employee code is already exist.");
-      
-		$('#dob').datetimepicker({
-				  	format: 'DD/MM/YYYY',
-					maxDate: new Date(),
+  }, "Aadharcard Number is already exist.");
+
+	$('#dob').datetimepicker({
+	  	format: 'DD/MM/YYYY',
+		maxDate: new Date(),
+		ignoreReadonly: true,
+		icons: {
+		    time:'fa fa-clock-o',
+		    date:'fa fa-calendar',
+		    up:'fa fa-chevron-up',
+		    down:'fa fa-chevron-down',
+		    previous:'fa fa-chevron-left',
+		    next:'fa fa-chevron-right',
+		    today:'fa fa-calendar-check-o',
+		    clear:'fa fa-delete',
+		    close:'fa fa-times'
+			},									
+	}).val('<?php echo ($Dateofbirth!='0000-00-00')&&($Dateofbirth!='')  ? date('d/m/Y', strtotime($Dateofbirth)) : ''; ?>');
+	$('#jod').datetimepicker({					
+				  	format: 'DD/MM/YYYY',					
 					ignoreReadonly: true,
 					icons: {
-					    time:'fa fa-clock-o',
-					    date:'fa fa-calendar',
-					    up:'fa fa-chevron-up',
-					    down:'fa fa-chevron-down',
-					    previous:'fa fa-chevron-left',
-					    next:'fa fa-chevron-right',
-					    today:'fa fa-calendar-check-o',
-					    clear:'fa fa-delete',
-					    close:'fa fa-times'
- 	 					},									
-				}).val('<?php echo ($Dateofbirth!='0000-00-00')&&($Dateofbirth!='')  ? date('d/m/Y', strtotime($Dateofbirth)) : ''; ?>');
-		$('#jod').datetimepicker({					
-				  	 format: 'DD/MM/YYYY',					
-					 ignoreReadonly: true,
-					 icons: {
 				    time:'fa fa-clock-o',
 				    date:'fa fa-calendar',
 				    up:'fa fa-chevron-up',
@@ -482,7 +487,7 @@ $(document).ready(function()
 				    close:'fa fa-times'
 	 	 			},					
 				}).val('<?php echo  ($joiningdate!='0000-00-00')&&($joiningdate!='')  ? date('d/m/Y', strtotime($joiningdate)) : ''; ?>');
-		$('#probation_period_day').datetimepicker({				     
+	$('#probation_period_day').datetimepicker({				     
 				  	format: 'DD/MM/YYYY',					
 					ignoreReadonly: true,	
 					icons: {
@@ -505,149 +510,146 @@ $(document).ready(function()
     {
         return this.optional(element) || /^[A-Z]{5}\d{4}[A-Z]{1}$/.test(value);
     }, "Please enter a valid PAN");  
-		$("#frm_emp").validate(
-		{
-					rules: {
-						employee_code:{
-							employeecode_check:function(){
-								employeecode_check='<?php echo $employee_code; ?>';
-								if(employeecode_check==''){
-									 return true;
-										//return false;
-                                  
-									}
-							}, 
-							required:true,
-							
-					    },
-						department:{
-							required:true,
-						},		
-						desgination:{
-							required:true,
-						},
-						FirstName:{
-							required: true,
-							maxlength:35,
-							minlength:5
-						},
-						LastName:{
-							required: true,
-							maxlength:35,
-							minlength:5
-						},
-						EmailAddress:{
-							required:true,
-							email:true,
-							email_check:function(){
-								emailcheck='<?php echo $email; ?>';
-								if(emailcheck==''){
-									return true;								
+	$("#frm_emp").validate({		
+				rules: {
+					employee_code:{
+						employeecode_check:function(){
+							employeecode_check='<?php echo $employee_code; ?>';
+							if(employeecode_check==''){
+								 return true;
 								}
-							}, 
-
-						},
-						PhoneNumber:{
-							required:true,
-							digits:true,
-							minlength:10,
-							maxlength:10,
-						},
-						dob:{
-						   required:true
-						},
-						Gender:{
-							required:true
-						},
-						marital_status:{
-                            required:true
-						},
-						pob:{
-                            required:true
-						},
-						jod:{
-                            required:true
-						},
-						qualificationemp:{
-							required:true
-						},
-						bloodgroup:{
-							required:true
-						},
-						salary:{
-							required:true
-						},
-						probation_period_day:{
-							required:true
-						},
-						status:{
-							required:true
-						},
-						physically_challenged:{
-							required:true
-						},
-						Address:{
-							required:true
-						},
-						bank_detail:{
-							required:function(){
-							bankdetail='<?php echo $bankdetail; ?>';
-								if(bankdetail){
-							    	return false;
-								}else{
-									return true;
-								}
-							},
-							extension: "JPG|jpeg|png|bmp|pdf",
-							filesize: 2097152,	
-						},
-						// address_proof:{
-						// 	required:function(){
-						// 	addressesproof='<?php //echo $addressesproof; ?>';
-						// 		if(addressesproof){
-						// 	    	return false;
-						// 		}else{
-						// 			return true;
-						// 		}
-						// 	},
-							
-						// 	extension: "JPG|jpeg|png|bmp",
-						// 	filesize: 2097152,	
-						// },
-						aadharcard:{
-							required:function(){
-							aadharcarddeatil='<?php echo $aadharcard; ?>';
-								if(aadharcarddeatil){
-							    	return false;
-								}else{
-									return true;
-								}
-							},
-							maxlength:14,
-							minlength:14										
-						
-						},
-							pancard:{
-							required:function(){
-							pancarddetail='<?php echo $pancard; ?>';
-								if(pancarddetail){
-							    	return false;
-								}else{
-									return true;
-								}
-							},
-							pan:true       
-							},
-						// 	extension: "JPG|jpeg|png|bmp",
-						// 	filesize: 2097152,	
-						// },
-						ProfileImage:{
-							extension: "JPG|jpeg|png|bmp",
-							filesize: 2097152,   
-						},
-
+						}, 
+						required:true,							
+				    },
+					// department:{
+					// 	required:true,
+					// },		
+					// desgination:{
+					// 	required:true,
+					// },
+					FirstName:{
+						required: true,
+						maxlength:35,
+						minlength:3
+					},
+					LastName:{
+						required: true,
+						maxlength:35,
+						minlength:3
+					},
+					EmailAddress:{
+						required:true,
+						email:true,
+						email_check:function(){
+							emailcheck='<?php echo $email; ?>';
+							if(emailcheck==''){
+								return true;								
+							}
+						}, 
 
 					},
+					PhoneNumber:{
+						required:true,
+						digits:true,
+						minlength:10,
+						maxlength:10,
+					},
+					dob:{
+					   required:true
+					},
+					Gender:{
+						required:true
+					},
+					marital_status:{
+                        required:true
+					},
+					pob:{
+                        required:true
+					},
+					jod:{
+                        required:true
+					},
+					// qualificationemp:{
+					// 	required:true
+					// },
+					bloodgroup:{
+						required:true
+					},
+					salary:{
+						required:true
+					},
+					probation_period_day:{
+						required:true
+					},
+					status:{
+						required:true
+					},
+					physically_challenged:{
+						required:true
+					},
+					Address:{
+						required:true
+					},
+					bank_detail:{
+						required:function(){
+						bankdetail='<?php echo $bankdetail; ?>';
+							if(bankdetail){
+						    	return false;
+							}else{
+								return true;
+							}
+						},
+						extension: "JPG|jpeg|png|bmp|pdf",
+						filesize: 2097152,	
+					},
+				
+					aadharcard:{
+						required:true,
+						aadharcard_check:function(){
+							aadharcardcheck='<?php echo $aadharcard; ?>';
+							if(aadharcardcheck==''){
+								return true;								
+							}
+						},
+						maxlength:14,
+						minlength:14										
+					
+					},
+					pancard:{
+					required:function(){
+					pancarddetail='<?php echo $pancard; ?>';
+						if(pancarddetail){
+					    	return false;
+						}else{
+							return true;
+						}
+					},						 	   
+					},					
+					ProfileImage:{
+						extension: "JPG|jpeg|png|bmp",
+						filesize: 2097152,   
+					},
+                    uanstatus:{
+                    	required:true,
+                    },
+                    uanno:{
+                    	required: function(element){
+                            return $("#uanstatus option:selected").val() == "applicable";
+                        }
+                    },
+                    esicstatus:{
+                    	required:true,
+                    },
+                    esicno:{
+                    	required: function(element){
+                            return $("#esicstatus option:selected").val() == "applicable";
+                        }
+                    },
+                    taxstatus:{
+                      required:true,
+                    }
+                   
+				},
 
 				messages:{
 					errorPlacement: function (error, element) {
@@ -657,10 +659,8 @@ $(document).ready(function()
 					} else{
 					error.insertAfter(element)
 					}
-					}
-
-												
-			}
+					}							
+				}
 				
 		});
 });	
@@ -696,10 +696,9 @@ function readURL(input) {
         }
 function readURLdcox(input) {
         var fileName = input.files[0].name;
-		URL="<?php echo base_url();?>";
-		
+		URL="<?php echo base_url();?>";		
             if(input.files && input.files[0]) {
-                var reader = new FileReader();
+              var reader = new FileReader();
                
                 reader.onload = function (e) {
                 	var ext = fileName.split('.')[1];
@@ -710,37 +709,75 @@ function readURLdcox(input) {
                     else{
  						 $('#blahdocx').attr('src', e.target.result);
                     }
-
-                  
                 };
              reader.readAsDataURL(input.files[0]);
-            }
+        }  
 }		
 $('[name="aadharcard"]').keypress(function(e) {
    var value = $(this).val();
    value = value.replace(/\D/g, "").split(/(?:([\d]{4}))/g).filter(s => s.length > 0).join("-");
    $(this).val(value);
+});
+<?php if($qualification_emp!='Other'){  ?>
+	$("#otherqulification").hide();
+<?php }else{  ?>
+ 	$("#otherqulification").show();
+<?php } ?>
 
-   	// if(e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
-    //   return false;
-    // }
-    // var curchr = this.value.length;
-    // var curval = $(this).val();
-    // //alert(curval)
-    // if (curchr == 3 && curval.indexOf("(") <= -1) {
-    //  // $(this).val("(" + curval + ")" + "-");
-    // } else
-    // //  if (curchr == 4 && curval.indexOf("(") > -1) {
-    // //   $(this).val(curval + ")-");
-    // // } else
-    //  if (curchr == 5 && curval.indexOf(")") > -1) {
-    //   $(this).val(curval + "-");
-    // } else if (curchr == 9) {
-    //   $(this).val(curval + "-");
-    //   $(this).attr('maxlength', '14');
-    // }
+$("#qualificationemp").change(function () {	
+	 var value = $('#qualificationemp').val();	  
+	  if(value=='Other'){
+		$("#otherqulification").show();
+	  }else{
+	  	 $("#otherqulification").hide();
+	  }
+	 
 });	
 
- 	        
+$("#uannumber").hide();
+$("#uanstatus").change(function () {	
+	var value = $('#uanstatus').val();	  
+	if(value=='applicable'){	  	
+		$("#uannumber").show();
+	  }else{
+	  	 $("#uannumber").hide();
+	}
+	 
+	 // $("#otherqulification").hide();
+});
+
+$("#esicnumber").hide();
+
+$("#esicstatus").change(function () {
+	
+	var value = $('#esicstatus').val();
+	
+	if(value=='applicable'){	
+	//alert(value);  	
+		$("#esicnumber").show();
+	  }else{
+	  	$("#esicnumber").hide();
+	}
+	 
+	 // $("#otherqulification").hide();
+});
+
+
+
+
+ $(document).on("click", ".checkbtn", function(){	
+   		
+	  if($(this).is(":checked")){
+
+	  	 $(this).parents("tr:eq(0)").find("input[name='compliancetxt[]']").show();
+	  }else{
+	  	 $(this).parents("tr:eq(0)").find("input[name='compliancetxt[]']").hide();
+	  }
+
+	   
+});
+
+
+
 </script>
     

@@ -26,7 +26,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $config['base_url'] = 'http://localhost/payroll/hr/';
 $config['base_url_site'] = 'http://localhost/payroll/hr/';
 $config['base_path']="C:/xampp/htdocs/payroll/hr";
-//echo base_url();
+$config['adminbase_url_site'] = 'http://localhost/payroll/admin/';
+$config['adminbase_path']="C:/xampp/htdocs/payroll/admin";
+//echo adminfront_base_url();
 
 
 /*

@@ -1,71 +1,27 @@
 <?php
-
-
-
 defined('BASEPATH') OR exit('No direct script access allowed');
-
-
-
 class Hr extends CI_Controller 
-
-
-
 { 
-
-
-
-	public function __construct() {
-
-
-
+	public function __construct() 
+	{
         parent::__construct();
-
-
-
 		$this->load->model('Hr_model');
-
-
-
 	}
 
 
-
-
-
-
-
-	function index()
+	public function index()
 	{	
 		if(!check_admin_authentication()){ 
-			redirect(base_url('Login'));
-		}
-
+			redirect(base_url());
+		}      
 		if($_POST!='')
 		{
-			$option=$this->input->post('option');
-			$keyword2=$this->input->post('keyword2');
-			$keyword3=$this->input->post('keyword3');
-			//$keyword4=$this->input->post('keyword4');	
-			if($option!='' && $keyword2!='')
-			{	$option=$this->input->post('option');
-				$data['hrData'] = $this->Hr_model->search($option,$keyword2);
-			}
-			else if($option!='' && $keyword3!='')
-			{	$option=$this->input->post('option');
-				$data['hrData'] = $this->Hr_model->searchbyname($option,$keyword3);
-			}		
-			else
-			{
-				$data['hrData']=$this->Hr_model->hr_list();
-			}
+			$keyword2=$this->input->post('keyword2');	
+			$data['hrData'] = $this->Hr_model->searchbyname($keyword2);	
+		}	
 		$data['companyData']=$this->Hr_model->list_company();
-		//echo "<pre>";print_r($data['companyData']);die;
 		$this->load->view('hr/hrlist',$data);
-
 	}
-
-	}
-
 
 
 
@@ -131,12 +87,17 @@ class Hr extends CI_Controller
 
 
 	public function addhr()
+
 	{
+
 		if(!check_admin_authentication()){ 
+
 			redirect(base_url('Login'));
+
 		}
 
 		$data['hr_id']=$this->input->post('companyid');
+
 		$data['companyid']=$this->input->post('companyid');
 
 		$data['FullName']=$this->input->post('FullName');
@@ -162,34 +123,58 @@ class Hr extends CI_Controller
 		$data['companyname']=$this->input->post('companyname');	
 
 		 if($_POST){
+
 			if($this->input->post('hr_id')!='')
+
 			{	
 
 				$result=$this->Hr_model->updatehr();	
 
 				if($result==1)
+
 				{
+
 					$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
+
 					redirect('Hr');
+
 				}
+
 				else
+
 				{
+
 					$this->session->set_flashdata('success', 'Record was not Updated!');
+
 					redirect('Hr');
+
 				}
+
 			}
+
 			else
+
 			{	
+
 				$result=$this->Hr_model->insertdata();
+
 				if($result==1)
+
 				{
+
 					$this->session->set_flashdata('success', 'Record has been Inserted Succesfully!');
+
 					redirect('Hr');
+
 				}
 				else if($result==3)
+
 				{
+
 					$this->session->set_flashdata('warning', 'This email address already registered!');
+
 					redirect('Hr');
+
 				}	
 
 
@@ -217,45 +202,33 @@ class Hr extends CI_Controller
 
 
 	function deletehr(){
-
 		if(!check_admin_authentication()){ 
-
 			redirect(base_url('Login'));
-
 		}
-
+		$AdminIdlogin=$this->session->userdata('AdminId');
 		$hr_id=$this->input->post('hr_id');
-
 		$data=array(
-
 			'Is_deleted'=>'1',
-
 			'IsActive'=>'Inactive'
-
 				);
 
 		$this->db->where("hr_id",$hr_id);
-
 		$result=$this->db->update('tblhr',$data);
-
 		if($result)
-
 		{
-
+			$log_data = array(
+				'AdminId' => $AdminIdlogin,
+				'Module' => 'Hr',
+				'Activity' =>'Delete record id: '.$hr_id
+			);
+			$log = $this->db->insert('tblactivitylog',$log_data);
 			$this->session->set_flashdata('success', 'Rocord has been deleted!');
-
 			redirect('hr');
-
 		}
-
 		else
-
 		{
-
 			$this->session->set_flashdata('error', 'Hr was not deleted!');
-
 			redirect('hr');
-
 		}
 
 

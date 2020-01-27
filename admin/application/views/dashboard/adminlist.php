@@ -1,9 +1,6 @@
 ﻿<?php 
-
 	 $this->load->view('common/header.php');
-
 	 $this->load->view('common/sidebar.php');
-
 ?>
 
 
@@ -148,7 +145,7 @@
 
 
 
-					<form method="post" action="<?php echo base_url();?>Adminmaster/adminlist">
+					<form method="post" action="<?php echo base_url();?>Adminmaster/searchadmin">
 
 					<?php $AdminId=$this->session->userdata('AdminId');?>
 
@@ -176,15 +173,15 @@
 
 
 
-											<option value="FirstName">Admin Name</option>
+											<option value="FirstName" <?php if($option=='FirstName'){echo 'selected';} ?>>Admin Name</option>
 
 
 
-											<option value="EmailAddress">Email Address</option>
+											<option value="EmailAddress" <?php if($option=='EmailAddress'){echo 'selected';} ?>>Email Address</option>
 
 
 
-											<option value="PhoneNumber">Contact Number</option>
+											<option value="PhoneNumber" <?php if($option=='PhoneNumber'){echo 'selected';} ?>>Contact Number</option>
 
 
 
@@ -192,7 +189,7 @@
 
 
 
-										<!-- <label class="focus-label">Role</label> -->
+								
 
 
 
@@ -204,7 +201,7 @@
 
 
 
-							<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+							<div class="col-sm-8 col-md-5 col-lg-4 col-xl-3 col-12">  
 
 
 
@@ -212,7 +209,7 @@
 
 
 
-										<input type="text" name="keyword2" class="form-control floating">
+										<input type="text" name="keyword2" value="<?php echo $keyword2;?>" class="form-control floating">
 
 
 
@@ -232,7 +229,7 @@
 
 
 
-								<input type="submit" value="Search" class="btn btn-success btn-block">
+								<input type="submit" value="Search" name="search" class="btn btn-success btn-block">
 
 
 
@@ -488,7 +485,7 @@
 
 								<form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>Adminmaster/addadmin" id="form_valid">
 
-								<div class="profile-img-wrap edit-img">
+									<div class="profile-img-wrap edit-img">
 
 											<img class="inline-block" src="<?php echo base_url(); ?>upload/default/avtar.jpg" alt="" id="blah">
 
@@ -500,7 +497,7 @@
 
 											</div>
 
-										</div>
+									</div>
 									<center><h6>Uplopad only jpeg,jpg,png,bmp image file</h6></center>
 									<div class="row"> 
 
@@ -757,7 +754,7 @@
 
 
 							<div class="modal-body">
-
+								
 								<form method="post" id="form_valid2" action="<?php echo base_url();?>Adminmaster/addadmin"  enctype="multipart/form-data">
 
 								<input type="hidden" class="form-control" name="AdminId" id="AdminId" value="<?php $AdminId?>">

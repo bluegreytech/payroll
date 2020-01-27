@@ -1,29 +1,22 @@
 <?php
-
-
-
-
-
-
-
 class Hr_model extends CI_Model
  {
+
 	function insertdata()
 	{		
+		$this->db->select('*');
+		$this->db->where('EmailAddress',$this->input->post('EmailAddress'));
+		$query=$this->db->get('tblhr');
+		if($query->num_rows() > 0)
+		{
+			return 3;
+		}
 
-			$this->db->select('*');
-			$this->db->where('EmailAddress',$this->input->post('EmailAddress'));
-			$query=$this->db->get('tblhr');
-			if($query->num_rows() > 0)
-			{
-					return 3;
-			}
 
-
-		$hr_image='';
+		 $hr_image='';
 
 		 if(isset($_FILES['ProfileImage']) &&  $_FILES['ProfileImage']['name']!='')
-		{
+		 {
 			$this->load->library('upload');
 			$rand=rand(0,100000); 		 
 
@@ -90,7 +83,7 @@ class Hr_model extends CI_Model
 		   }
 
 
-
+		    $AdminIdlogin=$this->session->userdata('AdminId');
 			$code=rand(12,123456789);
 			$companyid=$this->input->post('companyid');
 			$FullName=$this->input->post('FullName');
@@ -121,10 +114,21 @@ class Hr_model extends CI_Model
 			'IsActive'=>$IsActive,
 			'CreatedOn'=>date('Y-m-d')
 			);
-		//	echo "<pre>";print_r($data);die;
+			//print_r($data);die;
 			$this->db->insert('tblhr',$data);
 			//return 1;
 			$insert_id = $this->db->insert_id();
+			if($insert_id)
+			{
+				$log_data = array(
+					'AdminId' =>  $AdminIdlogin,
+					'Module' => 'Hr',
+					'Activity' =>'Add'
+
+				);
+				$log = $this->db->insert('tblactivitylog',$log_data);
+			}
+
 			if($insert_id!='')
 			{
 				$this->db->select('t1.*,t2.*,t3.*');
@@ -154,7 +158,7 @@ class Hr_model extends CI_Model
 					$companyname =$rows->companyname;
 					$comemailaddress = $rows->comemailaddress;
 					$base_url=base_url();
-				//	$login_link=  '<a href="'.base_url_hr('Login').'">Click Here</a>';
+					$login_link=  '<a href="'.base_url_hr('Login').'">Click Here</a>';
 					$currentyear=date('Y');
 					$email_message=str_replace('{break}','<br/>',$email_message);
 					$email_message=str_replace('{base_url}',$base_url,$email_message);
@@ -164,39 +168,23 @@ class Hr_model extends CI_Model
 					$email_message=str_replace('{Password}',$code,$email_message);
 					$email_message=str_replace('{companyname}',$companyname,$email_message);
 					$email_message=str_replace('{comemailaddress}',$comemailaddress,$email_message);
-				//	$email_message=str_replace('{login_link}',$login_link,$email_message);
+					$email_message=str_replace('{login_link}',$login_link,$email_message);
 					$str=$email_message; //die;
-					
+
 					$email_config = Array(
-
 						'protocol'  => 'smtp',
-
 						'smtp_host' => 'relay-hosting.secureserver.net',
-
 						'smtp_port' => '465',
-
 						'smtp_user' => 'binny@bluegreytech.co.in',
-
 						'smtp_pass' => 'Binny@123',
-
 						'mailtype'  => 'html',
-
 						'starttls'  => true,
-
 						'newline'   => "\r\n",
-
 						'charset'=>'utf-8',
-
 						'header'=> 'MIME-Version: 1.0',
-
 						'header'=> 'Content-type:text/html;charset=UTF-8',
-
 						);
-
-		
-
-						$this->load->library('email', $email_config);
-
+					$this->load->library('email', $email_config);
 					$body =$str;	
 					$this->email->from('binny@bluegreytech.co.in');
 					$this->email->to($EmailAddress);		
@@ -242,63 +230,25 @@ class Hr_model extends CI_Model
 
 
 	function hr_list()
-
 	{
-
-
-
 		$where = array('t1.Is_deleted' =>'0');
-
-
-
 		$this->db->select('t1.*,t2.companyname');
-
-
-
 		$this->db->from('tblhr as t1');
-
-
-
 		$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
-
-
-
 		// $this->db->where('t1.IsActive','Active');
-
-
-
 		// $this->db->or_where('t1.Is_deleted','0');
-
-
-
 		$this->db->where($where);
-
-
-
+		$this->db->order_by('hr_id','desc');
 		$r=$this->db->get();
-
-
-
 		$res = $r->result();
-
-
-
-		return $res;	
-
-
+		return $res;
 
 	}
 
-
-
-	
-
-
-
-	function search($option,$keyword)
+	function search($option,$keyword1)
 	{
 			$where = array('t1.Is_deleted' =>'0');
-			$keyword = str_replace('-', ' ', $keyword);
+			$keyword = str_replace('-', ' ', $keyword1);
 			$this->db->select('t1.*,t2.companyname');
 			$this->db->from('tblhr as t1');
 			$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
@@ -328,27 +278,13 @@ class Hr_model extends CI_Model
 
 	}
 
-	function searchbyname($option,$keyword3)
+	function searchbyname($keyword2)
 	{
-			$where = array('t1.Is_deleted' =>'0');
-			$keyword = str_replace('-', ' ', $keyword3);
+			$where=array('t2.companyid'=>$keyword2,'t1.Is_deleted'=>'0');
 			$this->db->select('t1.*,t2.companyname');
 			$this->db->from('tblhr as t1');
 			$this->db->join('tblcompany as t2', 't1.companyid = t2.companyid', 'LEFT');
 			$this->db->where($where);
-			if($option == 'FullName')
-			{
-				$this->db->like('FullName',$keyword);
-			}
-			else if($option == 'EmailAddress')
-			{
-				$this->db->like('EmailAddress',$keyword);
-			}
-			else if($option == 'Contact')
-			{
-				$this->db->like('Contact',$keyword);
-			}
-
 			$query = $this->db->get();
 			if($query->num_rows() > 0)
 			 {
@@ -357,6 +293,23 @@ class Hr_model extends CI_Model
 
 	}
 
+	// function search($keyword)
+	// {  
+	// 	$where=array('t1.companyid'=>$keyword,'t2.Is_deleted'=>'0');
+	// 	$this->db->select('t1.*,t2.*');
+	// 	$this->db->from('tblcompany as t1');
+	// 	$this->db->join('tblcmpleave as t2','t1.companyid = t2.companyid', 'LEFT');
+	// 	$this->db->where($where);	
+	// 	$query = $this->db->get();	
+	// 	if($query->num_rows() > 0)
+	// 	{
+	// 		return $query->result();
+	// 	} 
+
+	// }
+
+
+	
 
 		function list_company(){
 
@@ -431,7 +384,6 @@ class Hr_model extends CI_Model
 
 
 	function updatehr()
-
 	{		     
 
 		$hr_id=$this->input->post('hr_id');
@@ -508,52 +460,39 @@ class Hr_model extends CI_Model
 			   }
 		   }
 
-
-			$DateofBirth=$this->input->post('DateofBirth');
-
-			$bdate = str_replace('/', '-', $DateofBirth );
-
-			$birth = date("Y-m-d", strtotime($bdate));
-
-
+		$AdminIdlogin=$this->session->userdata('AdminId');
+		$DateofBirth=$this->input->post('DateofBirth');
+		$bdate = str_replace('/', '-', $DateofBirth );
+		$birth = date("Y-m-d", strtotime($bdate));
 
 		$data=array(
-
 			'hr_id'=>$this->input->post('hr_id'),
-
 			'companyid'=>$this->input->post('companyid'),
-
 			'FullName'=>$this->input->post('FullName'),
-
 			'EmailAddress'=>$this->input->post('EmailAddress'),
-
 			'DateofBirth'=>$birth, 
-
 			'Contact'=>$this->input->post('Contact'),
-
 			'ProfileImage'=>$hr_image,
-
 			'Gender'=>$this->input->post('Gender'),
-
 			'Address'=>$this->input->post('Address'),
-
 			'PinCode'=>$this->input->post('PinCode'),
-
 			'City'=>$this->input->post('City'),
-
 			'IsActive'=>$this->input->post('IsActive')
-
 				);
-
-
-
 			//print_r($data);die;
-
 			$this->db->where("hr_id",$hr_id);
-
-			$this->db->update('tblhr',$data);	
-
-			return 1;
+			$res=$this->db->update('tblhr',$data);	
+			if($res)
+				{
+					$log_data = array(
+						'AdminId' => $AdminIdlogin,
+						'Module' => 'Hr',
+						'Activity' =>'Update record id: '.$hr_id
+					);
+					$log = $this->db->insert('tblactivitylog',$log_data);
+					return 1;
+				}
+			
 
 		      
 

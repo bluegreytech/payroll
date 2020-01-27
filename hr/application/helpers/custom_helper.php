@@ -14,6 +14,11 @@
 		$CI =& get_instance();
 		return $base_path = $CI->config->slash_item('base_path');		
 	}
+	function adminbase_path()
+	{		
+		$CI =& get_instance();
+		return $base_path = $CI->config->slash_item('adminbase_path');		
+	}
 	
 	
 	// --------------------------------------------------------------------
@@ -29,6 +34,11 @@
 	{		
 		$CI =& get_instance();
 		return $base_path = $CI->config->slash_item('base_url_site');		
+	}
+	function adminfront_base_url()
+	{		
+		$CI =& get_instance();
+		return $base_path = $CI->config->slash_item('adminbase_url_site');		
 	}
 	
 	// --------------------------------------------------------------------
@@ -489,7 +499,8 @@
 		$CI->db->from('tblcmpholiday');
 		$CI->db->like('holidaydate',date($attendancemonth));
 		$CI->db->where('is_deleted',"0");	
-		$query = $CI->db->get();		
+		$query = $CI->db->get();
+		//echo $CI->db->last_query();	die;	
 		if($query->num_rows() > 0)
 		{
 			return $query->result_array();
@@ -666,11 +677,6 @@
         	return '';
         }
     }
-	
-	
-
-	
-	 
         /* commom function for all module */
          //get all record count
     function get_total_count($table,$where='')
@@ -685,7 +691,7 @@
 		}else{ return 0; }
     }
         
-        //get all record
+     
     function get_result($limit,$offset,$table,$where='')
     { 
 		$CI =& get_instance();
@@ -702,9 +708,9 @@
     { 
 		$CI =& get_instance();
 		if($where != ''){ $CI->db->where($where);}
-		//  $CI->db->order_by('admin_id','desc');
+		
 		$query= $CI->db->get($table,$limit,$offset);
-		//echo $this->db->last_query();die;
+		
 		if($query->num_rows()>0)
 		{
 			return $query->result();
@@ -766,6 +772,7 @@
 	  // Insert into table
 	function insert_record($table,$data)
 	{
+		//echo "<pre>";print_r($data);die;
 	    $CI =& get_instance();
 	    return $CI->db->insert($table, $data);
 	}
@@ -803,7 +810,7 @@
 		$CI->db->from('tblattendance');		
 		$CI->db->where('attendance_id',$id);
 		$query = $CI->db->get();
-		//echo $CI->db->last_query();die;
+		//echo $CI->db->last_query();
 		//echo "<pre>";print_r($query);die;
 		return $query->row()->attendance_status;
 	}
@@ -826,6 +833,7 @@
 		$CI->db->where('IsActive',"Active");
 		$CI->db->where('companytypeid',$id);
 		$query = $CI->db->get();
+		//echo "<pre>";print_r($query->result());die;
 		return $query->row()->companytype;
 	}
 	function get_leavetype_name($id)
@@ -877,8 +885,8 @@
 		$CI =& get_instance();
 
 		$CI->db->select("*");
-		$CI->db->from("rights_assign");
-		$CI->db->where("admin_id",$id);
+		$CI->db->from("tblrights_assign");
+		$CI->db->where("hr_id",$id);
 		$query = $CI->db->get();	
 		$num = $query->num_rows();
 		
@@ -1341,28 +1349,72 @@
 	 		return $days;
 	}
 
-function sumTime($timein, $timeout) {
-	 $start = date('H:i',strtotime($timein));
-	 $end   = date('H:i',strtotime($timeout));
- 
-    // calculate amount of hours per working day
-    $diff  = strtotime($end) - strtotime($start);
-  $hours = $diff / 3600; 
-     return $hours;
-    // $settings = array(
-    //     "start" => $start,
-    //     "end"   => $end,
-    //     "diff"  => $diff,
-    //     "hrs"   => $hours
-    // );
+	function sumTime($timein, $timeout) {
+		$start = date('H:i',strtotime($timein));
+		$end   = date('H:i',strtotime($timeout));
 
-    // return $settings;
-// $h = date('H', strtotime($timeout));
-// $m = date('i', strtotime($timeout));
-// $s = date('s', strtotime($timeout));
-// $tmp = $h." hour ".$m." min ".$s." second";
-// $sumHour = $timein." + ".$tmp;
-// echo $newTime = date('H:i:s', strtotime($sumHour));
-// return $newTime;
-}; 
+		// calculate amount of hours per working day
+		$diff  = strtotime($end) - strtotime($start);
+		$hours = $diff / 3600; 
+		return $hours;
+		// $settings = array(
+		//     "start" => $start,
+		//     "end"   => $end,
+		//     "diff"  => $diff,
+		//     "hrs"   => $hours
+		// );
+
+		// return $settings;
+		// $h = date('H', strtotime($timeout));
+		// $m = date('i', strtotime($timeout));
+		// $s = date('s', strtotime($timeout));
+		// $tmp = $h." hour ".$m." min ".$s." second";
+		// $sumHour = $timein." + ".$tmp;
+		// echo $newTime = date('H:i:s', strtotime($sumHour));
+		// return $newTime;
+	}
+  	function getempassginleave($id,$empassginleave_id){
+  		$CI =& get_instance();		
+	    $CI->db->select('*');
+	    $CI->db->from('tblempassignleave');
+	    $CI->db->where('emp_id',$id);
+	    $CI->db->where('leave_id',$empassginleave_id);
+	    //$CI->db->order_by('empassignleave_id','asc');
+	  
+		$query = $CI->db->get();	
+		if($query->num_rows() > 0)
+		{
+			return $query->row_array();
+		}
+		else
+		{
+			return '';
+		}
+   }
+   function getcompliancename($id){
+	
+			$CI =& get_instance();
+			$CI->db->select('*');
+			$CI->db->where('complianceid',$id);
+			$query=$CI->db->get('tblcompliances');
+			if($query->num_rows()>0){
+			return  $query->row();
+		}else{
+			return '';
+		}
+			
+		
+	}
+  function getSelectdate($companyid=0)
+	{
+		$CI =& get_instance();
+		$query=$CI->db->get_where('tblselectdate',array('companyid'=>$companyid));
+		if($query->num_rows() > 0)
+		{
+			return $query->row();
+		}else{
+			return '';
+		}
+	}
+	
 ?>

@@ -22,7 +22,7 @@
 	<?php } ?>
 <div class="row">
 	<div class="col-sm-8 col-5">
-	<h4 class="page-title">List of Attendance : <?php if($attmonth==''){echo $cmonth = date('F',strtotime('last month')); }else{echo $cmonth=date('F',strtotime($attmonth));} ?></h4>
+	<h4 class="page-title" id="crtattndmonth">List of Attendance : <?php if($attmonth==''){echo $cmonth = date('F',strtotime('last month')); }else{echo $cmonth=date('F',strtotime($attmonth));} ?></h4>
 	</div>
 	<div class="col-sm-4 col-7 text-right m-b-30">
 	<a href="<?php echo base_url()?>attendance/addattendance" class="btn add-btn" ><i class="fa fa-plus"></i> Add Attendance
@@ -58,8 +58,7 @@
 	</div>
 	<div class="col-md-1"> 
 		<a href="<?php echo base_url()?>attendance/<?php echo $redirect_page;?>" class="btn btn-info"><i class="fa fa-refresh"></i></a> 	
-		</div>     
-	   
+		</div>
 </div>
 </form>  	
 <!-- /Search Filter -->
@@ -81,12 +80,13 @@
 					<tr>
 						<th>Employee</th>
 						<?php  
-							if($attmonth==''){
-							$cmonth= date('m',strtotime('last month')); 
-							$cyear=date('Y');
-							$totalmonth=cal_days_in_month(CAL_GREGORIAN, date('m',strtotime('last month')),date('Y'));
+							if($attmonth==''){								
+							$cmonth= date('m',strtotime($salarymonth)); 
+							$cyear=date('Y',strtotime($salarymonth));
+							$totalmonth=cal_days_in_month(CAL_GREGORIAN, date('m',strtotime($salarymonth)),date('Y',strtotime($salarymonth)));
 							}else{	
-								 $cmonth=  date('m',strtotime($attmonth));
+								
+								$cmonth=  date('m',strtotime($attmonth));
 								$cyear=date('Y',strtotime($attmonth));	   	
 								 $totalmonth=cal_days_in_month(CAL_GREGORIAN,date('m',strtotime($attmonth)),date('Y',strtotime($attmonth))); 
 							// cal_days_in_month(CAL_GREGORIAN, date('m',$at_month,$at_year));
@@ -97,22 +97,19 @@
 						 $monthdate= date($cyear.'-'.$cmonth.'-'.$i);
 		       			   $days = date("D", strtotime($monthdate));
 		       			  if($days=='Sun'){ ?>
-                           <th style="color: red;"><?php echo  $days.' '. $i;?></th>
+                           <th style="color: red;"><p style="writing-mode: vertical-lr;	text-orientation: upright;margin: 0;display: inline-grid;"><?php echo  $days.' ';?><span style="margin-top: 16px;writing-mode: horizontal-tb;"><?php echo $i; ?></span></p></th>
 						<?php }else{ ?>
-                          <th ><?php echo  $days.' '. $i;?></th>
-						<?php } } ?>						
+                          <th ><p style="writing-mode: vertical-lr; text-orientation: upright; margin: 0;display: inline-grid;"><?php echo  $days.' '?><span style="margin-top: 16px;writing-mode: horizontal-tb;"><?php echo $i; ?></span></p></th>
+						<?php } } ?>	
+						<th>Working days</th>
+						<th>Holidays</th>
+						<th>Week day</th>	
+						<th>Absent</th>
 					</tr>
 				</thead>
 				<tbody>
-
-				<?php 
-					
-					// if($attmonth!=''){
-     //                  $at_month=date('m',strtotime($attmonth)); 
-					//   $at_year=date('Y',strtotime($attmonth));
-				 //    }
-				if(!empty($result)){					
-                  
+				<?php 				
+				if(!empty($result)){
                     if($attmonth==''){
 				   	   $totalmonth=cal_days_in_month(CAL_GREGORIAN, date('m',strtotime('last month')),date('Y'));
 				   }else{
@@ -121,7 +118,7 @@
 				   	// cal_days_in_month(CAL_GREGORIAN, date('m',$at_month,$at_year));
 				   }
 				foreach($result as $row){ 
-                   // echo "<pre>";print_r($row);
+                   //echo "<pre>";print_r($row);
 				?>
 					<tr>
 						<td>
@@ -153,22 +150,32 @@
 							    else{ echo $present='-'; }
 								   
 									if($present=="Present"){
-										echo "<B class='text-success'>P</B>";
+										echo "<b class='text-success'>P</b>";
 									}else if($present=="Absent"){                          
-			                          	echo "<B class='text-red'>A</B>";
+			                          	echo "<b class='text-red'>A</b>";
+			                        }else if($present=="Weekoff"){                          
+			                          	echo "<b class='text-red'>WO</b>";
+			                        }else if($present=="Holiday"){                          
+			                          	echo "<b class='text-red'>H</b>";
 									}else if($present=="HalfDay"){
-			                          	echo "<B class='text-warning'>HD</B>";
+			                          	echo "<b class='text-warning'>HD</b>";
 									}else if($present=="Earlyleave"){                         	
-			                         	echo "<B class='text-primary'>EL</B>";
+			                         	echo "<b class='text-primary'>EL</b>";
 									}else if($present=="Overtime"){                         
-			                         	echo "<B class='text-purple'>OT</B>";
+			                         	echo "<b class='text-purple'>OT</b>";
+									}else if($present=="Leave"){                         
+			                         	echo "<b class='text-red'>L</b>";
 									}
 								?>
 							
 						</a></td>
-						<?php } ?>	
-						
-					
+						<?php } ?>
+						<td><?php echo $row->workingdays?$row->workingdays:'';?></td>
+						<td><?php echo $row->holiday?$row->holiday:'';?></td>
+						<td><?php echo $row->weekoffday?$row->weekoffday:'';?></td>
+						<td><?php  $HalfDay=$row->halfday/2;
+						  echo $row->leaveday+$HalfDay;	
+						 ?></td>						
 						</tr>
 					<?php }  } ?>
 				</tbody>
@@ -193,14 +200,17 @@
 					<div class="col-md-12">
 						<div class="card punch-status">
 							<div class="card-body">
-								<h5 class="card-title">Timesheet Date <small class="text" id="attendancedate"></small></h5>
+								<div class="row">
+								<span class="col-md-6 card-title" >Timesheet Date <small class="text" id="attendancedate"></small></span>
+							    <span class="col-md-6 card-title" id='typeleave'></span>
+								</div>
 								<form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>attendance/addattendance" id="frm_emp">
 								<div class="row"> 
 									<div class="col-sm-6">
 										<div class="form-group">
 											<input type="hidden" class="form-control" name="attendance_id" id="attendance_id" >
 											<input type="hidden" class="form-control" name="attendance_date" id="attendance_date" >
-											<label>Employee Name<span class="text-danger">*</span>
+											<label>Attendance Status<span class="text-danger">*</span>
 											</label>										
 											<select  class=" form-control" data-live-search="true" data-actions-box="true" name="attendancestatus" id="attendancestatus">
 												<option disabled="" value="">Please select</option>
@@ -209,6 +219,7 @@
 												<option value="HalfDay">Half Day</option>
 												<option value="Earlyleave">Early Leave</option>
 												<option value="Overtime">Over Time</option>
+												<option value="Leave">Leave</option>
 											</select>
 										</div>
 										<div class="form-group">
@@ -239,7 +250,7 @@
 								<div class="submit-section">
 									<hr>
 									<button class="btn btn-primary submit-btn" name="Save" type="submit">Submit</button>
-									<button type="button" name="cancel" class="btn btn-secondary submit-btn" onClick="location.href='<?php echo base_url();?>attendance/attendancelist'">Cancel
+									<button type="button" name="cancel" class="btn btn-secondary submit-btn" data-dismiss="modal">Cancel
 									</button>
 								</div>
 							</form>								
@@ -328,7 +339,6 @@ $("#attendancemonth").datetimepicker({
        		  viewMode: 'months',       		 
               format: 'YYYY-MM',
           	  maxDate: today,
-
 				icons: {
 				time:'fa fa-clock-o',
 				date:'fa fa-calendar',
@@ -353,13 +363,17 @@ function editatt(att_id)
 		 data:{id:att_id},
          success:function(response){
 			var response = JSON.parse(response);
-               console.log(response);
-			// var attendancedt = new Date(response.attendance_date.replace( /(\d{4})-(\d{2})-(\d{2})/, "$2/$1/$3"))
+              $('#typeleave').empty();
+               if(response.attendance_status=='Absent'){
+                    $('#typeleave').append('Leave Type <small class="text" id="attendancedate">'+response.typeofleave+'</small>');
+               }
+		
 			attendancedt=new Date(myDateFormatter(response.attendance_date));			
 			 
 			dtArr=attendancedt.toDateString('ddd dd MMMM yyyy').split(' ');
 			//console.log(moment(attendancedt, 'MMMM D YYYY'));
             $('#attendance_id').val(response.attendance_id);
+
 			
 			//$('#attendancedate').text(dtArr[0]+ ", " +dtArr[2]+ " " +dtArr[1]+ ", " +dtArr[3]);
 			$('#attendancedate').text(myDateFormatter(response.attendance_date));
@@ -368,12 +382,6 @@ function editatt(att_id)
 			$('#time_in').val(response.time_in);
 			$('#time_out').val(response.time_out);
 			$("#attendancestatus [value=" + response.attendance_status + "]").attr('selected', 'true');
-		
-			
-			//$("option[name=companyid][value=" + response.companyid + "]").attr('selected', 'selected');
-			//$("option[name=companyname][value=" + response.companyname + "]").attr('selected', 'selected');
-			
-			//$('#companyname').val(response.companyname);
          }
       });	
 }
@@ -401,7 +409,7 @@ $("#attmonth").datetimepicker({
 				clear:'fa fa-delete',
 				close:'fa fa-times'
 				},
-    	}).val('<?php echo ($attmonth!='0000-00')&&($attmonth!='')  ? date('Y-m', strtotime($attmonth)) : date('Y-m'); ?>');
+    	}).val('<?php echo ($attmonth!='0000-00')&&($attmonth!='')  ? date('Y-m', strtotime($attmonth)) :$selectdatedata->selecteddate; ?>');
 
 $(document).ready(function() {
 	 $('#example').DataTable( {
@@ -497,5 +505,31 @@ $(document).ready(function() {
 	  $("div#example_wrapper").find($(".dt-buttons")).css(styles);
 
 } );
+
+$("#alldate").on("dp.change", function() {
+	selecteddate=$("#alldate").val();
+	$('#attmonth').val(selecteddate);
+   	url="<?php echo base_url(); ?>";
+   
+  var month = new Array();
+  month[0] = "January";
+  month[1] = "February";
+  month[2] = "March";
+  month[3] = "April";
+  month[4] = "May";
+  month[5] = "June";
+  month[6] = "July";
+  month[7] = "August";
+  month[8] = "September";
+  month[9] = "October";
+  month[10] = "November";
+  month[11] = "December";
+  var pieces = selecteddate.split("-");
+  var d = new Date(pieces[1]); 
+  var n = month[d.getMonth()];
+  
+   $('#crtattndmonth').text("List of Attendance :"+ n);
+	
+});
 
 </script>
