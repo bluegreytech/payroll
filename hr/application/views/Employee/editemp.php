@@ -129,7 +129,9 @@ select:disabled{
 				<ul class="nav nav-tabs nav-tabs-bottom">
 					<li class="nav-item"><a href="#emp_profile" data-toggle="tab" class="nav-link active">Profile</a></li>
 					<li class="nav-item"><a href="#emp_projects" data-toggle="tab" class="nav-link">Leave</a></li>
-					<li class="nav-item"><a href="#bank_statutory" data-toggle="tab" class="nav-link">Bank & Statutory <small class="text-danger">(Admin Only)</small></a></li>
+					<li class="nav-item"><a href="#bank_statutory" data-toggle="tab" class="nav-link ">Bank & Statutory <small class="text-danger">(Admin Only)</small></a></li>
+				
+
 				</ul>
 			</div>
 		</div>
@@ -362,7 +364,7 @@ select:disabled{
 									</div>
 								</div>
 							</div>
-						</div>
+		</div>
 		<!-- /Profile Info Tab -->
 		
 		<!-- Projects Tab -->
@@ -428,7 +430,7 @@ select:disabled{
 				<div class="card-body">
 					<h3 class="card-title"> Basic Salary Information</h3>
 					<form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>employee/addempbankdetial" id="frm_empbank">
-							<input class=" form-control" type="hidden" name="emp_id" id="emp_id" Placeholder="Employee Code" value="<?php echo $emp_id;?>">
+						<input class=" form-control" type="hidden" name="emp_id" id="emp_id" Placeholder="Employee Code" value="<?php echo $emp_id;?>">
 						<div class="row">
 							<div class="col-sm-4">
 								<div class="form-group">
@@ -484,6 +486,24 @@ select:disabled{
 							   </div>
 							</div>
 						</div>
+                        <hr>
+                        <h3 class="card-title">Eraning Compliance Information</h3>                       
+						<div class="row">
+							<?php 
+						 	$earningallow_id=explode(',', $earningallowid);
+							foreach($earninglist as $row){ 
+								//echo "<pre>";print_r($row);
+								if($row->compliancetypeid=='2'){
+									//echo "<pre>";print_r($row);
+
+							?>
+							<div class="col-sm-4">
+								<div class="form-group">
+									<label><input type="checkbox" name="earningcheck[]" class="	" value="<?php echo $row->complianceid; ?>"  <?php echo in_array($row->complianceid, $earningallow_id)?'checked="checked"':'' ?>> <?php echo $row->compliancename; ?></label>
+							   </div>							  
+							</div>
+						<?php } }  ?>
+						</div>
 						<?php 
 						 $complianceallow_id=explode(',', $complianceallowid);
 							foreach($compliancelist as $row){ 
@@ -532,20 +552,16 @@ select:disabled{
 								</div> -->
 							</div>
 						</div>	
-						<?php 	
-							 } } 
-					    ?>					
-						
-							<?php 
-							 $complianceallow_id=explode(',', $complianceallowid);
-							foreach($compliancelist as $row){ 
-								
+						<?php } }  ?>
+						<?php 
+							$complianceallow_id=explode(',', $complianceallowid);
+							foreach($compliancelist as $row){ 								
 							?>
 							<?php if($row->compliancename=="ESIC"){ ?>
 							<hr>
 							<h3 class="card-title"> ESI Information <input type="checkbox" name="compliancecheck[]" class='checkbtn1' value="<?php echo $row->complianceid; ?>" <?php echo in_array($row->complianceid, $complianceallow_id)?'checked="checked"':'' ?>></h3>
 							<div class="row">
-							<div class="col-sm-4">									
+							<div class="col-sm-4">
 								<div class="form-group" id='showesicsection'>
 									<label class="col-form-label">ESI Contribution</label>
 									<select class="select" id='esicstatus' name="esicstatus">
@@ -553,10 +569,9 @@ select:disabled{
 										<option value="applicable" <?php if($esicstatus=='applicable'){ echo "selected"; } ?>>Yes</option>
 										<option value="not_appicable" <?php if($esicstatus=='not_appicable'){ echo "selected"; } ?>>No</option>
 									</select>
-								</div>
-								
+								</div>								
 							</div>
-								<div class="col-sm-4">
+							<div class="col-sm-4">
 								<div class="form-group" id="esicnumber">
 									<label class="col-form-label">ESI No. <span class="text-danger">*</span></label>
 									<input type="text"name="esic_no" class="form-control" value="<?php echo $esicnumber; ?>">
@@ -598,9 +613,11 @@ select:disabled{
 									</div>
 								</div>
 							</div>
-					   </div>
-					<?php } } ?>
-					<hr>
+					  
+							<?php } } ?>
+					    </div>
+                       <hr>
+                        
 					<div class="form-group">
 						<div class="submit-section">
 							<button class="btn btn-primary submit-btn" type="submit">Save</button>

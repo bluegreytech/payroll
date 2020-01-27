@@ -2077,8 +2077,9 @@ table.dataTable thead > tr > td.sorting {
     border-radius: 50px;
     font-size: 18px;
     font-weight: 600;
-    min-width: 200px;
-    padding: 10px 20px;
+    min-width: 150px;
+  /*  padding: 10px 20px;*/
+
 }
 .form-scroll {
     max-height: 400px;
@@ -7158,3 +7159,18 @@ input.form-control.timing {
 /* .multiselect-container {
         width: 100% !important;
     }*/
+
+.btn-rights{
+	color: #059aaa;
+	
+	border-color: #059aaa;
+	border-radius: 50px;
+	font-size: 18px;
+	font-weight: 600;
+	min-width: 150px;
+}
+.btn-rights:hover, .btn-rights:focus, .btn-rights:active {
+    background-color: #059aaa;
+    border: 1px solid #059aaa;
+    color: #fff;
+}

@@ -1,6 +1,3 @@
-
-
-
 <div class="sidebar" id="sidebar">
                 <div class="sidebar-inner slimscroll">
 					<div id="sidebar-menu" class="sidebar-menu">
@@ -105,9 +102,12 @@
 								<li><a href="<?php echo base_url();?>attendance/attendancelist">List of Attendance</a></li>
 								</ul>
 							</li>
-							<li class="active">
-								<a href="<?php echo base_url();?>company/company_setting"><i class="la la-cog"></i> <span>Company setting</span> </a>
-								
+							<li class="submenu" >
+								   <a href="javascript:void(0);"><i class="la la-cog"></i> <span>Setting</span> <span class="menu-arrow"></span></a>								
+								<ul style="display: none;">
+                                            <li><a href="<?php echo base_url();?>company/company_setting"> <span>Company setting</span> </a></li>
+                                            <li><a href="<?php echo base_url();?>salarysetting/empbanklist"><span>Permisions</span></a></li>
+                                        </ul>
 							</li>
 							<li class="">
 								<a href="<?php echo base_url();?>company/setsalarymonth"><i class="la la-cog"></i> <span>Set Salary Month</span> </a>

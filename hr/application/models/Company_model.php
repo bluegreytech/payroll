@@ -39,7 +39,7 @@ class Company_model extends CI_Model
 		return $res;
 	}
 	function setsalarymonth_update(){
-		 $salary_month = $this->input->post('salary_month');
+		$salary_month = $this->input->post('salary_month');
 		$salarymonth = str_replace('/', '-', $salary_month );
 		$salary_month = date("Y-m", strtotime($salarymonth)); 
 		$salary_year = date("Y", strtotime($salarymonth)); 
@@ -77,5 +77,28 @@ class Company_model extends CI_Model
       $res=$query->result();
       return $res;
 
+	}
+	function compliancelist_earning(){
+      $this->db->select('*');
+      $this->db->from('tblcompliances');
+      $this->db->where('Is_deleted','0');
+      $this->db->where('compliancetypeid','2');
+      $this->db->where('companyid',$this->session->userdata('companyid'));
+      $query=$this->db->get();
+      $res=$query->result();
+      return $res;
+
+	}
+	function emppfearningamt($id){
+      $this->db->select('compliancepercentage');
+      $this->db->from('tblcompliances');
+      $this->db->where('Is_deleted','0');   
+      $this->db->where('complianceid',$id);    
+      $this->db->where('companyid',$this->session->userdata('companyid'));
+      $query=$this->db->get();
+      $res=$query->row();
+    //  echo $this->db->last_query();die;
+    // echo "<pre>";print_r($res);die;
+      return $res;
 	}
 }

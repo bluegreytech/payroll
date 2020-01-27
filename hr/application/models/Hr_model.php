@@ -256,14 +256,12 @@ class Hr_model extends CI_Model
 	      //rights
     function get_all_rights()
 	{
-		$this->db->select('*');
-		$this->db->from('tblrights');
-		//$this->db->where('order!=',0);
-		//$this->db->order_by('order','asc');
-		
+		$this->db->select('*, rr.rights_id as right_id');
+		$this->db->from('tblrights rr');
+		$this->db->join('tblrights_assign as rs','rr.rights_id=rs.rights_id','left');
 		$query= $this->db->get();
-		if ($query->num_rows() > 0) {
-			
+        //echo $this->db->last_query();die;
+		if ($query->num_rows() > 0) {			
 			return $query->result();
 		}
 		return '';
@@ -278,9 +276,9 @@ class Hr_model extends CI_Model
 		}
 		return '';
 	}
-	function assigin_rights(){
-		/*echo '<pre>';
-		print_r($this->config->item('office_staff_rights'));die;*/
+	function hr_rights_assigninsert(){
+		echo '<pre>';
+		print_r($_POST);die;
 		$rights_id=$this->input->post('right_name');
 		
 	  	$add=$this->input->post('add');		

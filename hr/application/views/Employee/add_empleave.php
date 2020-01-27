@@ -59,7 +59,7 @@ foreach($leavelist as $val){
 											 <option selected="" value="">Please select</option> 
 												<?php if(!empty($emplist)){
 													foreach($emplist as $row) { ?>
-													<option value="<?php echo $row->emp_id; ?>" <?php if($row->emp_id==$emp_id){echo "selected";} ?> ><?php echo ucfirst($row->first_name." ".$row->last_name);?></option>
+													<option value="<?php echo $row->emp_id; ?>" <?php if($row->emp_id==$emp_id){ echo "selected"; } ?> ><?php echo ucfirst($row->first_name." ".$row->last_name);?></option>
 													<?php  } } ?>
 											</select>
 											<span id="emperror"></span>
@@ -82,7 +82,7 @@ foreach($leavelist as $val){
 									  	<option value="fullday" <?php if($leavedays=='fullday'){ echo "selected"; }?>>Full Day</option>	
 									  	<option value="earlyleave" <?php if($leavedays=='earlyleave'){ echo "selected"; }?>>Early Leave</option>								
 									</select>
-									<p id="errorleave" style="display:none; color:red;">Chosse valid leave option</p>
+									<p id="errorleave" style="display:none; color:red;">Choose valid leave option</p>
 								</div>
 								<div class="form-group" id="leavetym" style="display:none;">
 									<label>Leave Time<span class="text-danger">*</span></label>

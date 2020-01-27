@@ -203,22 +203,19 @@ class Hr extends CI_Controller
 		if(!check_admin_authentication()){ 
 			redirect(base_url());
 		} 
-                
-                 //check id exist
-                 //if(!check_IdExit('rights_assign','admin_id',$id)){ redirect('Admin/list_admin'); }
-		
-		$this->form_validation->set_rules('admin_id', 'Admin ID', 'required');		
-		
-		if($this->form_validation->run() == FALSE){			
+          
+		$this->form_validation->set_rules('viewrightcheck[]', 'View Rights', 'required');		
+
+			if($this->form_validation->run() == FALSE){			
 			if(validation_errors())
 			{
 				$data["error"] = validation_errors();
+				echo "<pre>";print_r($data);die;
 			}else{
 				$data["error"] = "";
 			}
 			
-			$data["hr_id"] = ($this->input->post('hr_id')) ? $this->input->post('hr_id'):$hr_id;
-			
+			$data["hr_id"] = ($this->input->post('hr_id')) ? $this->input->post('hr_id'):$hr_id;		
 			//$data['site_setting'] = site_setting();		
 			//$data['all_rights']=get_total_count('rights');
                         
@@ -235,20 +232,27 @@ class Hr extends CI_Controller
 			}}
 			
 			$data['ad_r']=$ad_r;
-			$data['rid']=$rid;
-			// //print_r($data['ad_r']);
-			// //print_r($data['rid']);die;
-			// $data["limit"]=$limit;
-		 //    $data["offset"]=$offset;
-		 //    $data["option"]=$option;
-		 //    $data["keyword"]=$keyword;
-		 //    $data["search_option"]=$option;
-		 //    $data["search_keyword"]=$keyword;
+			$data['rid']=$rid;			
 		    $data["redirect_page"]="hrlist";
-		
-			
-			$this->load->view('hr/assign_rights',$data);
-		}				
+		}
+		else
+		{	
+
+			if($this->input->post("rights_assign_id")!="")
+			{
+				$this->hr_model->hr_rights_assignupdate();
+				$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
+				redirect('employee/emplist');			
+			}
+			else
+			{ 	
+				
+				$this->hr_model->hr_rights_assigninsert();
+				$this->session->set_flashdata('success', 'Record has been Inserted Succesfully!');
+				redirect('employee/emplist');
+			}
+		}
+		$this->load->view('hr/assign_rights',$data);					
 	}
 
 

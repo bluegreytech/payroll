@@ -11,7 +11,7 @@
 					<!-- Page Title -->
 					<div class="row">
 						<div class="col-sm-4 col-5">
-							<h4 class="page-title">Employee Salary</h4>
+							<h4 class="page-title">Employee Set Salary</h4>
 						</div>
 						<div class="col-sm-8 col-7 text-right m-b-30">
 							<a href="<?php echo base_url(); ?>salarysetting/add_setsalary" class="btn add-btn" ><i class="fa fa-plus"></i>Add Salary</a>
@@ -102,9 +102,7 @@
 								<img src="<?php echo base_url();?>upload/emp/<?php echo $row->ProfileImage;?>" alt="" class="avatar">
 								<a href="javascript:void(0)"><?php echo ucfirst($row->first_name.' '.$row->last_name);?>  <span><?php echo $row->department.' '.$row->desgination;?></span></a>
 							<?php
-							}
-								else
-							{ 
+							}else{ 
 							?>
 							<img src="<?php echo base_url();?>upload/no_image/user_no_image.png" alt="" class="avatar">
 							<a href="javascript:void(0)"><?php echo ucfirst($row->first_name.' '.$row->last_name);?> <span><?php echo $row->department.' '.$row->desgination;?></span></a>							
@@ -112,7 +110,6 @@
 							}
 							?>
 						</h2>
-
 						</td>
 						<td><?php echo $row->employee_code; ?></td>
 						<td><?php echo $row->email;?></td>						
