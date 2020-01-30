@@ -15,3 +15,25 @@ ERROR - 2020-01-30 06:43:15 --> 404 Page Not Found: Default/js
 ERROR - 2020-01-30 06:43:15 --> 404 Page Not Found: Default/css
 ERROR - 2020-01-30 06:46:07 --> 404 Page Not Found: Assets/img
 ERROR - 2020-01-30 06:46:08 --> 404 Page Not Found: Assets/img
+ERROR - 2020-01-30 06:51:53 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'GROUP BY salary_month' at line 2 - Invalid query: SELECT SUM(gross_earning) as earn ,SUM(totaldeduction) as deduction,salary_month  FROM tblempsetsalary  
+		 where company_id =  GROUP BY salary_month 
+ERROR - 2020-01-30 06:51:54 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'GROUP BY salary_month' at line 2 - Invalid query: SELECT SUM(gross_earning) as earn ,SUM(totaldeduction) as deduction,salary_month  FROM tblempsetsalary  
+		 where company_id =  GROUP BY salary_month 
+ERROR - 2020-01-30 06:51:54 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'GROUP BY salary_month' at line 2 - Invalid query: SELECT SUM(gross_earning) as earn ,SUM(totaldeduction) as deduction,salary_month  FROM tblempsetsalary  
+		 where company_id =  GROUP BY salary_month 
+ERROR - 2020-01-30 06:51:55 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'GROUP BY salary_month' at line 2 - Invalid query: SELECT SUM(gross_earning) as earn ,SUM(totaldeduction) as deduction,salary_month  FROM tblempsetsalary  
+		 where company_id =  GROUP BY salary_month 
+ERROR - 2020-01-30 06:51:55 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'GROUP BY salary_month' at line 2 - Invalid query: SELECT SUM(gross_earning) as earn ,SUM(totaldeduction) as deduction,salary_month  FROM tblempsetsalary  
+		 where company_id =  GROUP BY salary_month 
+ERROR - 2020-01-30 06:51:55 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'GROUP BY salary_month' at line 2 - Invalid query: SELECT SUM(gross_earning) as earn ,SUM(totaldeduction) as deduction,salary_month  FROM tblempsetsalary  
+		 where company_id =  GROUP BY salary_month 
+ERROR - 2020-01-30 06:51:55 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'GROUP BY salary_month' at line 2 - Invalid query: SELECT SUM(gross_earning) as earn ,SUM(totaldeduction) as deduction,salary_month  FROM tblempsetsalary  
+		 where company_id =  GROUP BY salary_month 
+ERROR - 2020-01-30 06:51:55 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'GROUP BY salary_month' at line 2 - Invalid query: SELECT SUM(gross_earning) as earn ,SUM(totaldeduction) as deduction,salary_month  FROM tblempsetsalary  
+		 where company_id =  GROUP BY salary_month 
+ERROR - 2020-01-30 06:51:56 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'GROUP BY salary_month' at line 2 - Invalid query: SELECT SUM(gross_earning) as earn ,SUM(totaldeduction) as deduction,salary_month  FROM tblempsetsalary  
+		 where company_id =  GROUP BY salary_month 
+ERROR - 2020-01-30 06:51:56 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'GROUP BY salary_month' at line 2 - Invalid query: SELECT SUM(gross_earning) as earn ,SUM(totaldeduction) as deduction,salary_month  FROM tblempsetsalary  
+		 where company_id =  GROUP BY salary_month 
+ERROR - 2020-01-30 06:51:56 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'GROUP BY salary_month' at line 2 - Invalid query: SELECT SUM(gross_earning) as earn ,SUM(totaldeduction) as deduction,salary_month  FROM tblempsetsalary  
+		 where company_id =  GROUP BY salary_month 
