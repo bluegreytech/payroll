@@ -1702,6 +1702,7 @@ class Company_model extends CI_Model
 			$compliancepercentage=$this->input->post('compliancepercentage');
 			$isactive=$this->input->post('isactive');
             $companyid = $this->input->post('companyid');
+            $er_percentage = $this->input->post('er_percentage');
 			$companyids = count($this->input->post('companyid'));
             $is_editable=$this->input->post('is_editable');
 			for($i=0; $i<$companyids; $i++)
@@ -1711,6 +1712,7 @@ class Company_model extends CI_Model
 					'compliancetypeid'=>$compliancetypeid,
 			        'compliancename'=>$compliancename,
 			        'compliancepercentage'=>$compliancepercentage,
+			        'er_percentage' =>$er_percentage,
 			        'IsActive'=>$isactive,
 			        'is_editable'=>$is_editable,
 			        'createdby'=>$AdminIdlogin,
@@ -2032,7 +2034,7 @@ class Company_model extends CI_Model
 			'companyid'=>$this->input->post('companyid'),
 			'compliancetypeid'=>$this->input->post('compliancetypeid'),
 			'compliancename'=>ucfirst($this->input->post('compliancename')),
-			
+			 'er_percentage'=>$this->input->post('er_percentage'),
 			'compliancepercentage'=>$this->input->post('compliancepercentage'),
 			'isactive'=>$this->input->post('isactive'),
 			'is_editable'=>$this->input->post('is_editable'),

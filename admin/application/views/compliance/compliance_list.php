@@ -370,7 +370,19 @@
 									</div>
 
 
+                                	<div class="form-group">
 
+
+
+										<label>ER Percentage <span class="text-danger">*</span></label>
+
+
+
+										<input class="form-control" type="text" name="er_percentage" placeholder="Enter a ER percentage : 12" minlength="1" maxlength="6" id="er_percentage">
+
+
+
+									</div>
 
 
 

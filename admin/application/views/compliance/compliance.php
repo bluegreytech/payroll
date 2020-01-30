@@ -618,7 +618,10 @@
 										<label>Compliance Percentage <span class="text-danger">*</span></label>
 										<input class="form-control" type="text" name="compliancepercentage" id="compliancepercentage" placeholder="Enter a compliance percentage : 12" minlength="2" maxlength="20">
 									</div>
-
+                                      <div class="form-group">
+										<label>ER Percentage <span class="text-danger">*</span></label>
+										<input class="form-control" type="text" name="er_percentage" id="er_percentage" placeholder="Enter a ER percentage : 12" minlength="1" maxlength="20">
+									</div>
 									<div class="col-md-6">
 											<div class="form-group">
 											<label class="col-form-label">Isactive<span class="text-danger">*</span></label><br>
@@ -1238,7 +1241,7 @@
 					$('#complianceid').val(response.complianceid);
 					//$('#companyid').val(response.companyid);
 					$('#compliancetypeid').val(response.compliancetypeid);
-				
+				$('#er_percentage').val(response.er_percentage);
                    $("#companyid [value=" + response.companyid + "]").attr('selected', 'true');
 
 

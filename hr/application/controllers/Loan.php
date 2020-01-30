@@ -27,7 +27,9 @@ class Loan extends CI_Controller
 	}
 	function insert_loan(){
 		$select_date=$this->input->post('select_date');
-		$sel_date=date('Y-m-d',strtotime($select_date));
+		$date = str_replace('/', '-', $select_date);
+//echo date('Y-m-d', strtotime($date));
+		$sel_date=date('Y-m-d', strtotime($date));
 		
 		$data['loan_select_date']=$sel_date;
 		$data['created_date']=$this->input->post('create_date');
