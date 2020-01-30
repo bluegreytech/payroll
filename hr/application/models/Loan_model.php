@@ -52,7 +52,7 @@ class Loan_model extends CI_Model
 		//$this->db->like('CONCAT(first_name," ",last_name)',$emp_nm);
 		$this->db->order_by('l.loan_id','Desc');
 		$query=$this->db->get();
-		//echo $this->db->last_query();
+		echo $this->db->last_query();
 
 		$res=$query->result();
 		return $res;

@@ -718,6 +718,7 @@ public function compliance_list(){
 
 			$data['complianceid']=$this->input->post('complianceid');
 			$data['compliancetypeid']=$this->input->post('compliancetypeid');
+			$data['er_percentage']=$this->input->post('er_percentage');
 			$data['compliancename']=$this->input->post('compliancename');
 			$data['compliancepercentage']=$this->input->post('compliancepercentage');	
 			$data['isactive']=$this->input->post('isactive');
@@ -894,6 +895,7 @@ public function compliance_list(){
 		$data['compliancetypeid']=$result['compliancetypeid'];
 		$data['compliancename']=$result['compliancename'];
 		$data['compliancepercentage']=$result['compliancepercentage'];
+		$data['er_percentage']=$result['er_percentage'];
 		$data['IsActive']=$result['IsActive'];
 		$data['is_editable']=$result['is_editable'];
 		echo json_encode($data);

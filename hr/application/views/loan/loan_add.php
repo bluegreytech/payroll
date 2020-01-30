@@ -309,12 +309,8 @@ $('#amount,#no_installment,#rate').keyup(delay(function (e) {
 	$('#principal_balance').val(amount);
 	$('#monthly_installment').val(pbal);
 var dte=$('#date_of_loan').val();
-	 var dt = new Date(dte);
-         dt.setMonth( dt.getMonth() + no_installment );
-	// var date=$('#date_of_loan').val();
-	//  var dt = new Date("01-01-2020");
- //         dt.setMonth( dt.getMonth() + no_installment );
- formatted_date = dt.getDate() + "-" + (dt.getMonth() + 1) + "-" + dt.getFullYear()
+	var ddss=explode('-',dte);
+	alert(ddss);
      $('#completed_date').val(formatted_date);
 	
 
@@ -327,12 +323,23 @@ var dte=$('#date_of_loan').val();
 	 $('#interest_bal').val(interst);
 	 $('#principal_balance').val(amount);
 	 var dte=$('#date_of_loan').val();
-	 var dt = new Date(dte);
-         dt.setMonth( dt.getMonth() + no_installment );
+	 var ddss=dte.split("-");
+	
+	var dt = new Date(dte);
+	//alert(dte);
+	
+	//alert(dt);
+	
+    var add_month = parseInt(ddss[1])  + parseInt(no_installment);
+   ddss[1] =add_month;
+   var x = ddss.join("-");
+  // alert(x);
+       dt.setMonth(dt.getMonth()+no_installment);
 	// var date=$('#date_of_loan').val();
 	//  var dt = new Date("01-01-2020");
  //         dt.setMonth( dt.getMonth() + no_installment );
-     formatted_date = dt.getDate() + "-" + (dt.getMonth() + 1) + "-" + dt.getFullYear()
+    formatted_date = dt.getDate() + "-" + (dt.getMonth() + 1) + "-" + dt.getFullYear();
+     //alert(formatted_date);
      $('#completed_date').val(formatted_date);
 }
 else if((no_installment=='') && (rate=='')){
