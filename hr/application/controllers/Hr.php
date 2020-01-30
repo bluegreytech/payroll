@@ -5,6 +5,12 @@ class Hr extends CI_Controller
 	public function __construct() {
         parent::__construct();
 		$this->load->model('hr_model');
+		$this->hrRights=getRights();
+		if(count($this->hrRights)==0 && !checkSuperHr())
+		{
+			$this->session->set_flashdata('msg', 'no_rights');
+			redirect('home/dashboard/noRights');
+		}
 	}
 	
 	function hrlist()
@@ -48,14 +54,14 @@ class Hr extends CI_Controller
 
 				if($this->input->post("hr_id")!="")
 				{	
-					//echo "dsfdf if";die;
+					
 					$this->hr_model->hr_update();
 					$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
 					redirect('hr/hrlist');
 					
 				}
 				else
-				{ 	//echo "dsfdf else";die;
+				{ 	
 					$this->hr_model->hr_insert();
 					$this->session->set_flashdata('success', 'Record has been Inserted Succesfully!');
 					redirect('hr/hrlist');
@@ -65,8 +71,13 @@ class Hr extends CI_Controller
 			}
 		
 		 $data['result']=$this->hr_model->hrlist();
-		//echo "<pre>";print_r($data['result']);die;
-		$this->load->view('hr/hrlist',$data);
+		
+		 if((isset($this->hrRights['Hr']) && $this->hrRights['Hr']->rights_view==1) || checkSuperHr()){
+          		$this->load->view('hr/hrlist',$data);
+				
+			}else{
+               	$this->load->view('common/noRights',$data);
+			}
 	}
 
 	function deletedata()
@@ -127,10 +138,8 @@ class Hr extends CI_Controller
 		$action=$this->input->post('status');
 		$id=$this->input->post('id');
 		if ($action == "Active") {
-
 			$data = array("IsActive" => "Inactive");
 			update_record('tblhr', $data, 'hr_id', $id);
-
 			$res = array('status' => 'done', 'msg' => ACTIVE);
 			echo json_encode($res);
 			die ;
@@ -203,52 +212,56 @@ class Hr extends CI_Controller
 		if(!check_admin_authentication()){ 
 			redirect(base_url());
 		} 
-                
-                 //check id exist
-                 //if(!check_IdExit('rights_assign','admin_id',$id)){ redirect('Admin/list_admin'); }
-		
-		$this->form_validation->set_rules('admin_id', 'Admin ID', 'required');		
-		
-		if($this->form_validation->run() == FALSE){			
+          
+		$this->form_validation->set_rules('viewrightcheck[]', 'View Rights', 'required');		
+
+			if($this->form_validation->run() == FALSE){			
 			if(validation_errors())
 			{
 				$data["error"] = validation_errors();
+				echo "<pre>";print_r($data);die;
 			}else{
 				$data["error"] = "";
 			}
 			
-			$data["hr_id"] = ($this->input->post('hr_id')) ? $this->input->post('hr_id'):$hr_id;
-			
+			$data["hr_id"] = ($this->input->post('hr_id')) ? $this->input->post('hr_id'):$hr_id;		
 			//$data['site_setting'] = site_setting();		
 			//$data['all_rights']=get_total_count('rights');
                         
             $data['all_rights']=$this->hr_model->get_all_rights();
-			$data['admin_right']=$this->hr_model->get_admin_rights($data['hr_id']);
-			//echo '<pre>';
-			//print_r($data['admin_right']);	die;
+			$admin_right=$this->hr_model->get_admin_rights($hr_id);
+			
 			$ad_r=array();
 			$rid=array();
-			if($data['admin_right']!=''){
-			foreach($data['admin_right'] as $adr){
+			if($admin_right!=''){
+			foreach($admin_right as $adr){
 				$ad_r[]=$adr->rights_assign_id;
-				$rid[$adr->rights_assign_id]=$adr;
+				$rid[]=$adr;
 			}}
-			
+			  // echo '<pre>';
+			  //   print_r($rid);  die;
 			$data['ad_r']=$ad_r;
-			$data['rid']=$rid;
-			// //print_r($data['ad_r']);
-			// //print_r($data['rid']);die;
-			// $data["limit"]=$limit;
-		 //    $data["offset"]=$offset;
-		 //    $data["option"]=$option;
-		 //    $data["keyword"]=$keyword;
-		 //    $data["search_option"]=$option;
-		 //    $data["search_keyword"]=$keyword;
+			$data['rid']=$rid;			
 		    $data["redirect_page"]="hrlist";
-		
-			
-			$this->load->view('hr/assign_rights',$data);
-		}				
+		}
+		else
+		{	
+
+			if($this->input->post("rights_assign_id")!="")
+			{
+				$this->hr_model->hr_rights_assignupdate();
+				$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
+				redirect('hr/hrlist');			
+			}
+			else
+			{ 	
+				
+				$this->hr_model->hr_rights_assigninsert($hr_id);
+				$this->session->set_flashdata('success', 'Record has been Inserted Succesfully!');
+				redirect('hr/hrlist');
+			}
+		}
+		$this->load->view('hr/assign_rights',$data);					
 	}
 
 

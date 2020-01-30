@@ -55,9 +55,12 @@
 									<label>Company Digital signature</label>
 									<input type="text" class="form-control" name="cpassword"   placeholder="Company Digital signature" value="<?php echo date('d/m/Y',strtotime($digitalsignaturedate)); ?>" readonly> 
 								</div>
+								<?php if((isset($this->hrRights['Setting'])) && $this->hrRights['Setting']->rights_view==1 && $this->hrRights['Setting']->rights_update==1 || checkSuperHr()){ ?>
 								<div class="submit-section">
 										<input type="button" value="Submit" class="btn btn-primary submit-btn" readonly>
+								
 								</div>
+									<?php } ?>
 							</form>
 						</div>
 					</div>
@@ -109,7 +112,9 @@
 						<div class="col-md-12">
 								<hr>
 								<h4 class="page-title">Earnings
+								<?php if((isset($this->hrRights['Setting'])) && $this->hrRights['Setting']->rights_add==1 || checkSuperHr()){ ?>
 								<button type="button" class="btn btn-primary add-new pull-right" data-toggle="modal" data-target="#add_earnings" ><i class="fa fa-plus"></i> Add Earning</button>
+								<?php } ?>
 								</h4>
 							  <div class="table-responsive m-t-15">
 										<table class="table table-striped custom-table" id="tablearning">
@@ -130,9 +135,15 @@
 													<td><?php echo $row->compliancename;?></td>
 													<td><?php echo $row->compliancepercentage.' '.'%';?></td>
 													<td>
+														<?php if((isset($this->hrRights['Setting'])) && $this->hrRights['Setting']->rights_delete==1 && $this->hrRights['Setting']->rights_update==1 || checkSuperHr()){ ?>
+
 													  <a  class="add" title="Add" data-toggle="tooltip" onclick="editdata('<?php echo $row->complianceid; ?>','<?php echo $row->compliancepercentage; ?>')"><i class="fa fa-plus" style="color: red;"></i></a>&nbsp;
-														<a class="edit" href="javascript:void(0)"   title="Edit" data-toggle="tooltip"><i class="fa fa-pencil "></i></a>&nbsp;			
+													   <?php if((isset($this->hrRights['Setting']) && ($this->hrRights['Setting']->rights_update==1 )) || checkSuperHr()){ ?>
+														<a class="edit" href="javascript:void(0)"   title="Edit" data-toggle="tooltip"><i class="fa fa-pencil "></i></a>&nbsp;		
+														<?php } ?>	
+														 <?php if((isset($this->hrRights['Setting']) && ($this->hrRights['Setting']->rights_delete==1 )) || checkSuperHr()){ ?>
 														<a class="delete" data-id="<?php echo $row->complianceid; ?>"  href="javascript:void(0)"  data-toggle="tooltip"><i class="fa fa-trash-o fa-lg"></i></a>
+                                                        <?php } } ?>
 													</td>
 
 												</tr>

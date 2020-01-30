@@ -16,41 +16,18 @@
 						<div class="col-sm-8 col-6">
 							<h4 class="page-title">Leaves</h4>
 						</div>
+
 						<div class="col-sm-4 col-6 text-right m-b-30">
-							<a href="<?php echo base_url()?>leave/addempleave" class="btn add-btn" ><i class="fa fa-plus"></i> Add Leave</a>						
+							 <?php if((isset($this->hrRights['Leave']) && $this->hrRights['Leave']->rights_add==1) || checkSuperHr()){ ?>                	
+								<a href="<?php echo base_url()?>leave/addempleave" class="btn add-btn" ><i class="fa fa-plus"></i> Add Leave</a>	
+							<?php } ?>
+													
 						</div>
 						
 					</div>
 					<!-- /Page Title -->
 					
-					<!-- Leave Statistics -->
-					<!-- <div class="row">
-						<div class="col-md-3">
-							<div class="stats-info">
-								<h6>Today Presents</h6>
-								<h4>12 / 60</h4>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="stats-info">
-								<h6>Planned Leaves</h6>
-								<h4>8 <span>Today</span></h4>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="stats-info">
-								<h6>Unplanned Leaves</h6>
-								<h4>0 <span>Today</span></h4>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="stats-info">
-								<h6>Pending Requests</h6>
-								<h4>12</h4>
-							</div>
-						</div>
-					</div> -->
-					<!-- /Leave Statistics -->
+					
 					
 					<!-- Search Filter -->
 				<form method="post" action="<?php echo base_url();?>leave/searchempleave" id="frm_search">
@@ -124,19 +101,17 @@
 											<th>No of Days</th>
 											<th>Reason</th>
 											<th class="text-center">Status</th>
-											<th class="text-right">Actions</th>
+											<?php if((isset($this->hrRights['Leave']) && ($this->hrRights['Leave']->rights_update==1 || $this->hrRights['Leave']->rights_delete==1)) || checkSuperHr()){?>
+											<th class="text-right">Action</th>
+											<?php } ?>	
+										
 										</tr>
 									</thead>
 									<tbody>
 									<?php 
 
-									// if($attmonth!=''){
-									//                  $at_month=date('m',strtotime($attmonth)); 
-									//   $at_year=date('Y',strtotime($attmonth));
-									//    }
-									if(!empty($result)){					
-
-
+									
+									if(!empty($result)){
 									foreach($result as $row){ 
 									//echo "<pre>";print_r($row);
 									?>
@@ -166,14 +141,11 @@
 											<td><?php  
 											     $timein=$row->leavetimein;
 											     $timeout=$row->leavetimeout;
-
 											     if($row->leavedays=='earlyleave'){
 													echo $row->noofdays; 
 											     }else{
 											     	 echo $row->noofdays.' '.'Days'; 
 											     }
-											    
-													
 											  //     if($timein=='' && $timeout==''){
              //                                        echo $row->noofdays.' '.'Days'; 
 											  //    }else{                                                  	
@@ -212,10 +184,15 @@
 													</div>
 												</div>
 											</td>
+											 <?php if((isset($this->hrRights['Leave']) && ($this->hrRights['Leave']->rights_update==1 || $this->hrRights['Leave']->rights_delete==1)) || checkSuperHr()){ ?>
 											<td class="text-center">
-														<?php echo anchor('leave/edit_empleave/'.$row->empleave_id,'<i class="fa fa-pencil fa-lg" ></i>'); ?>
-						   								<a href="javascript:void(0)"  onclick="deletedata('<?php echo $row->empleave_id; ?>')" ><i class="fa fa-trash-o fa-lg"></i></a>
+												 <?php if((isset($this->hrRights['Leave']) && ($this->hrRights['Leave']->rights_update==1 )) || checkSuperHr()){ ?>
+													<?php echo anchor('leave/edit_empleave/'.$row->empleave_id,'<i class="fa fa-pencil fa-lg" ></i>'); ?>
+												<?php } ?>
+												<?php if((isset($this->hrRights['Leave']) && ($this->hrRights['Leave']->rights_delete==1 )) || checkSuperHr()){ ?>
+						   							<a href="javascript:void(0)"  onclick="deletedata('<?php echo $row->empleave_id; ?>')" ><i class="fa fa-trash-o fa-lg"></i></a>
 											</td>
+										<?php } } ?>
 										</tr>
 										<?php }  } ?>
 									</tbody>

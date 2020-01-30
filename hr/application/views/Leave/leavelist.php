@@ -14,7 +14,9 @@
 							<h4 class="page-title">Leave Type</h4>
 						</div>
 						<div class="col-sm-4 col-7 text-right m-b-30">
-							<a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_leavetype"><i class="fa fa-plus"></i> Add Leave Type</a>
+							<?php if((isset($this->hrRights['LeaveType']) && $this->hrRights['LeaveType']->rights_add==1) || checkSuperHr()){ ?>
+          						<a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_leavetype"><i class="fa fa-plus"></i> Add Leave Type</a>
+							<?php } ?>							
 						</div>
 					</div>
 					<!-- /Page Title -->
@@ -29,7 +31,10 @@
 											<th>Leave Type</th>
 											<th>Leave Days</th>
 											<th>Status</th>
+											<?php if((isset($this->hrRights['Leavetype']) && ($this->hrRights['Leavetype']->rights_update==1 || $this->hrRights['Leavetype']->rights_delete==1)) || checkSuperHr()){ ?>
 											<th class="text-center">Action</th>
+											<?php } ?>
+											
 										</tr>
 									</thead>
 									<tbody>
@@ -51,10 +56,16 @@
 												</a>
 												</div>
 											</td>
+											<?php if((isset($this->hrRights['Leavetype']) && ($this->hrRights['Leavetype']->rights_update==1 || $this->hrRights['Leavetype']->rights_delete==1)) || checkSuperHr()){ ?>
 											<td class="text-center"> 
+												<?php if((isset($this->hrRights['Leavetype']) && ($this->hrRights['Leavetype']->rights_update==1 )) || checkSuperHr()){ ?>
 												<a  href="javascript:void(0)" onclick="editdata('<?php echo $row->leave_id; ?>')"><i class="fa fa-pencil fa-lg"></i></a>
-								
-												<a  href="javascript:void(0)" data-toggle="modal" data-target="#delete_holiday" onclick="deletedata('<?php echo $row->leave_id; ?>')"><i class="fa fa-trash-o fa-lg"></i></a></td>
+											<?php } ?>
+											<?php if((isset($this->hrRights['Leavetype']) && ($this->hrRights['Leavetype']->rights_delete==1 )) || checkSuperHr()){ ?>								
+												<a  href="javascript:void(0)" data-toggle="modal" data-target="#delete_holiday" onclick="deletedata('<?php echo $row->leave_id; ?>')"><i class="fa fa-trash-o fa-lg"></i></a>
+											<?php } ?>
+											</td>
+											<?php }   ?>
 										</tr>
 										<?php
 											$i++;

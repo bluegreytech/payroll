@@ -2,10 +2,8 @@
 	 $this->load->view('common/header.php');
 	 $this->load->view('common/sidebar.php');
 ?>
-
 <!-- Page Wrapper -->
 <div class="page-wrapper">
-
 	<!-- Page Content -->
 	<div class="content container-fluid">
 		<?php if(($this->session->flashdata('error'))){ ?>
@@ -32,40 +30,10 @@
 				<a href="<?php echo base_url()?>loan/loanlist" class="btn add-btn"><i class="fa fa-plus"></i> Add Loan
 				</a>
 			</div>
-
 		</div>
 		<!-- /Page Title -->
 
-		
-		<!-- <form method="post" action="<?php echo base_url();?>loan/searchloan" id="frm_search">
-		<div class="row filter-row">
-
-		<div class="col-md-3">  
-		<div class="form-group form-focus select-focus">
-		<select class="select floating" name="option" > 
-		<option value="" disabled="">Please Select</option>
-		<option value="FullName" <?php if($option=='FullName'){echo 'selected';} ?> >Hr Name</option>
-		<option value="EmailAddress" <?php if($option=='EmailAddress'){echo 'selected';} ?>>Email Address</option>
-		<option value="PhoneNumber" <?php if($option=='PhoneNumber'){echo 'selected';} ?>>Contact Number</option>
-		<option value="IsActive" <?php if($option=='IsActive'){echo 'selected';} ?>>Status</option>
-		</select>
 	
-		</div>
-		</div>
-		<div class="col-md-3">  
-		<div class="form-group form-focus">
-		<input type="text" name="keyword" class="form-control floating" value="<?php echo $keyword;?>">
-		<label class="focus-label">Loan Search</label>
-		</div>
-		</div>
-		<div class="col-md-3">  
-		<input type="submit" value="Search" name="search" class="btn btn-success btn-block">
-		</div> 
-		<div class="col-md-3"> 
-		<a href="<?php echo base_url()?>/hr/<?php echo $redirect_page;?>" class="btn btn-info"><i class="fa fa-refresh"></i></a> 	
-		</div>     
-		</div> 
-		</form> -->
 		<!-- /Search Filter -->
 
 		<div class="row">

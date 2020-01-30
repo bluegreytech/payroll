@@ -164,11 +164,11 @@
 	
 	
 	
-	function checkSuperAdmin()
+	function checkSuperHr()
 	{
 		$CI =& get_instance();
 		
-			if($CI->session->userdata('admin_type')=='1')
+			if($CI->session->userdata('hr_type')=='1')
 			{
 				return true;
 			}
@@ -607,13 +607,13 @@
 	}
 	
 	
-	function getadminRights()
+	function getRights()
 	{
 		$CI =& get_instance();
 		$CI->db->select('r.rights_name,ra.*');
-		$CI->db->from('rights_assign ra');
-		$CI->db->join('rights r','ra.rights_id=r.rights_id');
-		$CI->db->where('ra.admin_id',get_authenticateadminID());
+		$CI->db->from('tblrights_assign ra');
+		$CI->db->join('tblrights r','ra.rights_id=r.rights_id');
+		$CI->db->where('ra.hrid',get_authenticateadminID());
 		$query=$CI->db->get();
 		$r=array();
 		if($query->num_rows() > 0)
@@ -622,6 +622,7 @@
 			foreach ($query->result() as $value) {
 				$r[trim($value->rights_name)]=$value;
 			}
+			//echo"<pre>";print_r($r);die;
 			return $r;
 		}else{
 			return $r;
@@ -1415,6 +1416,25 @@
 		}else{
 			return '';
 		}
+	}
+	function gethrrights($rid,$hr_id){
+		$CI =& get_instance();
+		$CI->db->select('*');
+		$CI->db->where('rights_id',$rid);
+		$CI->db->where('hrid',$hr_id);
+		//$CI->db->group_by('rights_id');
+		$query=$CI->db->get('tblrights_assign');				
+	  	
+	  	
+	  	if($query->num_rows() > 0)
+		{
+			return $query->result();
+		}else{
+			return '';
+		}
+
+
+
 	}
 	
 ?>

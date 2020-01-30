@@ -2,7 +2,13 @@
      $this->load->view('common/header.php');
      $this->load->view('common/sidebar.php');
 ?>
-
+<style type="text/css">
+    .table td, .table th {
+  
+    border-top: 0px solid #dee2e6;
+    /* border: black; */
+}
+</style>
 <!-- Page Wrapper -->
 <div class="page-wrapper">
 
@@ -34,7 +40,7 @@
 
         </div>
        
-          <div class="col-md-12 form-group">
+          <!-- <div class="col-md-12 form-group">
             <div class="status-toggle">
                 <input type="checkbox" id="staff_module" class="check">
                 <label for="staff_module" class="checktoggle">checkbox</label>
@@ -53,128 +59,94 @@
 
             </div>
             </div>
-            </div>  
+            </div>  --> 
         <div class="row">
-            <div class="col-md-12">
-                <div class="table-responsive">
-                   <div class="table-responsive m-t-15">
-                                        <table class="table table-striped custom-table">
+            <div class="col-md-12 card-box mb-0">
+                <div class="table-responsive m-t-15">
+                            <form method="POST" action="<?php echo base_url();?>hr/assign_rights/<?php echo $hr_id ?>">
+                            <table class="table">
                                             <thead>
                                                 <tr>
                                                     <th>Module Permission</th>
                                                     <th class="text-center">Add</th>
                                                     <th class="text-center">Update</th>
-                                                    <th class="text-center">delete</th>
-                                                    <th class="text-center">View</th>
-                                                 
+                                                    <th class="text-center">Delete</th>
+                                                    <th class="text-center">View</th>                                                  
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>Projects</td>
-                                                    <td class="text-center">
-                                                        <input checked="" type="checkbox">
+                                                <?php 
+                                               // foreach($admin_right as $ar){
+
+                                               // }
+                                           //  echo "<pre>";print_r($rid->rights_add);
+                                               
+                                               
+                                                foreach($all_rights as $row){
+                                                  $rid=  $row->rights_id;
+                                                 $hr_id=$this->uri->segment(3);
+                                                 $rrr=gethrrights($rid,$hr_id);
+                                                    if(!empty($rrr)){
+                                                       foreach ($rrr as $val) {
+                                                           # code...
+                                                     // echo "<pre>njhg"; print_r($val);
+                                                ?>
+                                                <input type="hidden" name="rightid[]" value="<?php echo $row->right_id; ?>">
+                                                 <input type="hidden" name="assignrightid[]" value="<?php  if(!empty($rid[$row->rights_id])) { echo $rid[$row->rights_id]->rights_assign_id; } ?>">
+                                                
+                                                    <td><?php echo ucfirst($row->rights_name);?></td>
+                                                     <td class="text-center">
+                                                      <input type="checkbox" name="addrightcheck[<?php echo $row->rights_id;?>]" value="1" <?php if($val->rights_add=='1'){ echo "checked";} ?>>
+                                                    </td>
+                                                     <td class="text-center">
+                                                      <input  type="checkbox" name='updaterightcheck[<?php echo $row->rights_id;?>]' value="1" <?php if($val->rights_update=='1'){ echo "checked";}?>>
                                                     </td>
                                                     <td class="text-center">
-                                                        <input checked="" type="checkbox">
+                                                      <input  type="checkbox"   name="deleterightcheck[<?php echo $row->rights_id;?>]" value="1" <?php if($val->rights_delete=='1'){ echo "checked";} ?>>
                                                     </td>
-                                                    <td class="text-center">
-                                                        <input checked="" type="checkbox">
+                                                     <td class="text-center">
+                                                      <input  type="checkbox"   name="viewrightcheck[<?php echo $row->rights_id;?>]" value="1" <?php if($val->rights_view=='1'){ echo "checked";} ?>>
                                                     </td>
-                                                    <td class="text-center">
-                                                        <input checked="" type="checkbox">
-                                                    </td>
-                                                   
                                                 </tr>
-                                                <tr>
-                                                    <td>Tasks</td>
-                                                    <td class="text-center">
-                                                        <input checked="" type="checkbox">
+                                               <?php  } }else{ ?>
+                                                 <input type="hidden" name="rightid[]" value="<?php echo $row->right_id; ?>">
+                                                
+                                                 <input type="hidden" name="assignrightid[]" value="<?php if(!empty($rid[$row->rights_id])) { echo $rid[$row->rights_id]->rights_assign_id; } ?>">
+                                                
+                                                    <td><?php echo ucfirst($row->rights_name);?></td>
+                                                     <td class="text-center">
+                                                      <input  type="checkbox" name="addrightcheck[<?php echo $row->rights_id;?>]" value="1" >
+                                                    </td>
+                                                     <td class="text-center">
+                                                      <input  type="checkbox" name='updaterightcheck[<?php echo $row->rights_id;?>]' value="1" >
                                                     </td>
                                                     <td class="text-center">
-                                                        <input checked="" type="checkbox">
+                                                      <input  type="checkbox" name="deleterightcheck[<?php echo $row->rights_id;?>]" value="1" >
                                                     </td>
-                                                    <td class="text-center">
-                                                        <input checked="" type="checkbox">
+                                                     <td class="text-center">
+                                                      <input  type="checkbox" name="viewrightcheck[<?php echo $row->rights_id;?>]" value="1" >
                                                     </td>
-                                                    <td class="text-center">
-                                                        <input checked="" type="checkbox">
-                                                    </td>
-                                                   
                                                 </tr>
-                                                <tr>
-                                                    <td>Chat</td>
-                                                    <td class="text-center">
-                                                        <input checked="" type="checkbox">
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <input checked="" type="checkbox">
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <input checked="" type="checkbox">
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <input checked="" type="checkbox">
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                    <td>Estimates</td>
-                                                    <td class="text-center">
-                                                        <input checked="" type="checkbox">
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <input checked="" type="checkbox">
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <input checked="" type="checkbox">
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <input checked="" type="checkbox">
-                                                    </td>
-                                                  
-                                                </tr>
-                                                <tr>
-                                                    <td>Invoices</td>
-                                                    <td class="text-center">
-                                                        <input checked="" type="checkbox">
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <input checked="" type="checkbox">
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <input checked="" type="checkbox">
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <input checked="" type="checkbox">
-                                                    </td>
-                                                  
-                                                </tr>
-                                                <tr>
-                                                    <td>Timing Sheets</td>
-                                                    <td class="text-center">
-                                                        <input checked="" type="checkbox">
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <input checked="" type="checkbox">
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <input checked="" type="checkbox">
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <input checked="" type="checkbox">
-                                                    </td>
-                                                   
-                                                </tr>
+
+                                               <?php }  }?>
                                             </tbody>
                             </table>
-                    </div>
+                              <hr>                           
+                            <div class="submit-section" style="margin-top: 0px;">
+                                    <button class="btn btn-primary submit-btn" name="Save" type="submit" id="btnsave">Submit</button>
+                                    <button type="button" name="cancel" class="btn  btn-rights" onclick="location.href='http://localhost/payroll/hr/salarysetting/setsalary'"> Cancel </button>
+                            </div>  
+                                
+                            </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!-- /Main Wrapper -->
+<!-- /Page Wrapper -->
+
+
 
 <!-- Sidebar Overlay -->
 <div class="sidebar-overlay" data-reff=""></div>

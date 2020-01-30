@@ -16,7 +16,7 @@
     <?php
     foreach ($result as $val) {
     	?>
-<option value="<?php echo $val->emp_id ?>" <?php if($val->emp_id==$employename){ echo "selected"; } ?>><?php echo $val->first_name ?><?php echo $val->last_name ?></option>
+<option value="<?php echo $val->emp_id ?>" <?php if($val->emp_id==$employename){ echo "selected"; } ?>><?php echo ucfirst($val->first_name. " "  .$val->last_name); ?></option>
     	<?php
     }
     ?>
@@ -28,16 +28,14 @@
  
   <button type="submit" class="btn btn-info" style="margin-left: 20px;">Submit</button>
 </form>			
-				</div>
+</div>
 <?php
 $selectdatedata= getSelectdate($this->session->userdata('companyid'));
 //echo $selectdatedata->selecteddate;
-$selectdate=(isset($selectdatedata->selecteddate)!='')?$selectdatedata->selecteddate:"";
+$selectdate=(isset($selectdatedata->selecteddate)!='')? $selectdatedata->selecteddate:"";
 //print_r($selectdatedata);
 $selected_date= date('d/m/Y', strtotime($selectdate));
-
 $loan_select_date=(isset($loan_det['0']->loan_select_date)!='')?$loan_det['0']->loan_select_date:"";
-
 $date_of_loan=(isset($loan_det['0']->date_of_loan)!='')?$loan_det['0']->date_of_loan:"";
 $deduct_from=(isset($loan_det['0']->deduct_from)!='')?$loan_det['0']->deduct_from:"";
 $created_date=(isset($loan_det['0']->created_date)!='')?$loan_det['0']->created_date:"";
@@ -76,7 +74,7 @@ $loan_id=(isset($loan_det['0']->loan_id)!='')?$loan_det['0']->loan_id:"";
 							</div>
 							<div class="form-group">
 								<div class='col-md-4'>
-									<?php
+								<?php 
 									if(!empty($loan_id)){
 										?>
 									<button type="button" class="btn add-btn" disabled style="float:none;">Create</button>

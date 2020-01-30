@@ -20,8 +20,7 @@ class Hr_model extends CI_Model
 
 	function search($option,$keyword)
 	{
-			$keyword = str_replace('-', ' ', $keyword);
-			
+			$keyword = str_replace('-', ' ', $keyword);			
 			$this->db->select('*');
 			$this->db->from('tblhr');	
 			$this->db->where('Is_deleted','0');
@@ -30,7 +29,7 @@ class Hr_model extends CI_Model
 			
 			if($option == 'FullName')
 			{
-				// echo $keyword; 
+				
 				$this->db->like('FullName',$keyword);
 			}
 			
@@ -153,7 +152,6 @@ class Hr_model extends CI_Model
 	}
 
 	function gethrdata($hrid){
-
 		$this->db->select("*");
 		$this->db->from("tblhr");
 		$this->db->where("Is_deleted",'0');
@@ -256,80 +254,91 @@ class Hr_model extends CI_Model
 	      //rights
     function get_all_rights()
 	{
-		$this->db->select('*');
-		$this->db->from('tblrights');
-		//$this->db->where('order!=',0);
-		//$this->db->order_by('order','asc');
-		
+		$this->db->select('*, rr.rights_id as right_id');
+		$this->db->from('tblrights rr');
+	   // $this->db->join('tblrights_assign as rs','rr.rights_id=rs.rights_id','left');
+	  	$this->db->group_by('rr.rights_id');
 		$query= $this->db->get();
-		if ($query->num_rows() > 0) {
-			
+      // echo $this->db->last_query();
+		if($query->num_rows() > 0) {			
 			return $query->result();
 		}
 		return '';
 	}
 	function get_admin_rights($hr_id){
-       
-		$query=$this->db->get_where('tblrights_assign',array('hr_id'=>1));
-		//echo "<pre>";print_r($query->result());die;
+      
+		$this->db->select('*');
+		$this->db->from('tblrights_assign');
+		$this->db->where('hrid',$hr_id);		
+	  	$this->db->group_by('rights_id');
+		// $this->db->select('*,rr.rights_id as right_id');
+		// $this->db->from('tblrights rr');
+		// $this->db->join('tblrights_assign as rs','rr.rights_id=rs.rights_id','left');
+		// $this->db->where('hrid',$this->uri->segment(3));	
+	  	 //$this->db->group_by('rr.rights_id');
+		$query= $this->db->get();
+		//$query=$this->db->get_where('tblrights_assign',array('hr_id'=>$hr_id));
+		 //echo $this->db->last_query();die;
 		if($query->num_rows() > 0) {
-			
+			///echo "<pre>";print_r($query->result());
 			return $query->result();
+
 		}
 		return '';
 	}
-	function assigin_rights(){
-		/*echo '<pre>';
-		print_r($this->config->item('office_staff_rights'));die;*/
-		$rights_id=$this->input->post('right_name');
-		
-	  	$add=$this->input->post('add');		
-	    $update=$this->input->post('update');
-		$delete=$this->input->post('delete');
-	 	$view=$this->input->post('view');
-		$admin_id=$this->input->post('admin_id');
-		//echo '<pre>';
-		//print_r($rights_id);die;
+	function hr_rights_assigninsert($hr_id){
+		$hr_id=$this->uri->segment(3);
+		$rights_id=$this->input->post('rightid');
+		$assignright_id=$this->input->post('assignrightid');	
+			
+	  	$add=$this->input->post('addrightcheck');		
+	    $update=$this->input->post('updaterightcheck');
+		$delete=$this->input->post('deleterightcheck');
+	 	$view=$this->input->post('viewrightcheck');
+	    $createdby=$this->session->userdata('hr_id');
+		// echo "<pre>";print_r($add);
+		// echo "<pre>";print_r($view);
 			//$temp[][] =array();
 		if($rights_id!='' && is_array($rights_id)){
-		foreach($rights_id as $key => $val){
-			//echo $view[$val];
-			$chk=$this->db->get_where('rights_assign',array('rights_id'=>$val,'admin_id'=>$admin_id));
+		  foreach($rights_id as $key => $val){
+			//echo $update[$val];
+			$chk=$this->db->get_where('tblrights_assign',array('rights_id'=>$val,'hrid'=>$hr_id));
+
+			// $ra=array(
+			// 'rights_add'=>(isset($add[$val]) && $add[$val]!='')?$add[$val]:'0',			
+			// 'rights_update'=>(isset($update[$val]) && $update[$val]!='')?$update[$val]:'0',
+			// 'rights_delete'=>(isset($delete[$val]) && $delete[$val]!='')?$delete[$val]:'0',
+			// 'rights_view'=>(isset($view[$val]) && $view[$val]!='')?$view[$val]:'0',
+			// );
+			// $temp[$val ] = $ra;
+			//echo "<pre>gfgfg";print_r($chk->row());
 			$ra=array(
-			'add'=>(isset($add[$val]) && $add[$val]!='')?$add[$val]:'0',
-			'setRights'=> $this->input->post('setRights'),
-			'update'=>(isset($update[$val]) && $update[$val]!='')?$update[$val]:'0',
-			'delete'=>(isset($delete[$val]) && $delete[$val]!='')?$delete[$val]:'0',
-			'view'=>(isset($view[$val]) && $view[$val]!='')?$view[$val]:'0',
+			'rights_add'=>(isset($add[$val]) && $add[$val]!='')?$add[$val]:'0',			
+			'rights_update'=>(isset($update[$val]) && $update[$val]!='')?$update[$val]:'0',
+			'rights_delete'=>(isset($delete[$val]) && $delete[$val]!='')?$delete[$val]:'0',
+			'rights_view'=>(isset($view[$val]) && $view[$val]!='')?$view[$val]:'0',
+			'hrid'=>$hr_id,
 			);
-			$temp[$val ] = $ra;
-			//print_r($chk->row());
-			//echo '<pre>';
-			//print_r(array($val => $ra));die;
+			// echo '<pre>';
+			// print_r(array($val => $ra));
+
 			if($chk->num_rows()>0){
-			 //echo "hello";die;
-			$this->db->where('assign_id',$chk->row()->assign_id);
-			$this->db->update('rights_assign',$ra);
+			// echo "hello";die;
+			$this->db->where('rights_assign_id',$chk->row()->rights_assign_id);
+			$this->db->update('tblrights_assign',$ra);
 			//echo $this->db->last_query();die;
 			}else{
-				//echo "else";die;
-			$ra['admin_id']=$admin_id;
+				//echo "else";
+			$ra['createdby']=$createdby;
 			$ra['rights_id']=$val;
-			$ra['setRights'] = $this->input->post('setRights');
-			$this->db->insert('rights_assign',$ra);
-			/*$temp = $this->config->item('office_staff_rights')[$val];
-			$ra['admin_id']=$admin_id;
-			$ra['rights_id']=$val;
-			$ra['setRights'] = $this->input->post('setRights');*/
-			/*echo $this->db->insert('rights_assign',$temp);
-			die;*/
-			//echo $this->db->last_query();
+		//	$ra['setRights'] = $this->input->post('setRights');
+			$this->db->insert('tblrights_assign',$ra);
+			
 			}
 			
 		}
-		/*echo '<pre>';
-		print_r($temp);die;*/
-	}
+		//  die;
+		}
 	
 	}
 

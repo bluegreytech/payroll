@@ -6,6 +6,13 @@ class Holiday extends CI_Controller
 	public function __construct() {
         parent::__construct();
 		$this->load->model('holiday_model');
+		$this->hrRights=getRights();
+		
+		if(count($this->hrRights)==0 && !checkSuperHr())
+		{
+			$this->session->set_flashdata('msg', 'no_rights');
+			//redirect('home/dashboard/noRights');
+		}
 	}
 	
 	public function holidaylist()
@@ -20,8 +27,6 @@ class Holiday extends CI_Controller
 			$this->form_validation->set_rules('holidayname', 'Holiday Name', 'required');
 			$this->form_validation->set_rules('holidaydate', 'Holiday Date', 'required');
 			$this->form_validation->set_rules('holidayday', 'Holiday Day', 'required');
-		   
-		   
 		   
 		
 		if($this->form_validation->run() == FALSE){			
@@ -59,8 +64,13 @@ class Holiday extends CI_Controller
 			}
 		
 		 $data['result']=$this->holiday_model->holidaylist();
-		//echo "<pre>";print_r($data['result']);die;
-		$this->load->view('Holiday/holidaylist',$data);
+		
+		if((isset($this->hrRights['Holiday']) && $this->hrRights['Holiday']->rights_view==1) || checkSuperHr()){
+          		$this->load->view('Holiday/holidaylist',$data);
+				
+			}else{
+               	$this->load->view('common/noRights',$data);
+		}
        
 	}
 

@@ -26,17 +26,13 @@
 		<!-- Page Title -->
 		<div class="row">
 			<div class="col-sm-4 col-5">
-				<h4 class="page-title">List of Employee </h4>
-				
+				<h4 class="page-title">List of Employee </h4>				
 			</div>
-			<div class="col-sm-8 col-7 text-right m-b-30">
-			
-
-				<a href="<?php echo base_url()?>employee/addemp" class="btn add-btn" ><i class="fa fa-plus"></i> Add Employee
-				</a>
-
-				<a href="javascript:void(0)"  onclick="importdata()" class="btn add-btn" ><i class="fa fa-download" aria-hidden="true"></i>Import  
-				</a>
+			<div class="col-sm-8 col-7 text-right m-b-30">			
+                <?php if((isset($this->hrRights['Employee']) && $this->hrRights['Employee']->rights_add==1) || checkSuperHr()){ ?>                	
+				<a href="<?php echo base_url()?>employee/addemp" class="btn add-btn"><i class="fa fa-plus"></i> Add Employee </a>
+				<?php } ?>
+				<a href="javascript:void(0)" onclick="importdata()" class="btn add-btn"><i class="fa fa-download" aria-hidden="true"></i>Import</a>
 			</div>
 
 		</div>
@@ -75,14 +71,11 @@
 		</form>
 		<!-- /Search Filter -->
 
-		<div class="row">
-
-							
+		<div class="row">	
 					
 			<div class="col-md-12">
                	
-				<div class="table-responsive">
-                   
+				<div class="table-responsive">                   
 					   <table id="example" class="display table table-striped custom-table" style="width:100%">
 						<thead>
 						<tr>
@@ -91,8 +84,10 @@
 							<th>Email Address</th>
 							<th>Contact No.</th>
 							<th>Join Date</th>
-							<th>Status</th>		
-							<th class="text-right">Action</th>
+							<th>Status</th>	
+							<?php if((isset($this->hrRights['Employee']) && ($this->hrRights['Employee']->rights_update==1 || $this->hrRights['Employee']->rights_delete==1)) || checkSuperHr()){?>
+                                <th class="text-right">Action</th>
+                            <?php } ?>							
 						</tr>
 						</thead>
 					<tbody>
@@ -113,12 +108,8 @@
 								
 								<img src="<?php echo base_url();?>upload/emp/<?php echo $row->ProfileImage;?>" alt="" class="avatar">
 								<?php echo ucfirst($row->first_name.' '.$row->last_name);?> 
-							<?php
-							}
-							else
-							{ 
-							?>
-								<img src="<?php echo base_url();?>upload/no_image/user_no_image.png" alt="" class="avatar">
+							<?php }else{ ?>
+							<img src="<?php echo base_url();?>upload/no_image/user_no_image.png" alt="" class="avatar">
 								<?php echo ucfirst($row->first_name.' '.$row->last_name);?> 
 							
 							<?php
@@ -137,13 +128,16 @@
 							</a>
 						</div>
 							</td>
-						<?php
-
-						?>
+						 <?php if((isset($this->hrRights['Employee']) && ($this->hrRights['Employee']->rights_update==1 || $this->hrRights['Employee']->rights_delete==1)) || checkSuperHr()){ ?>
 						<td class="text-center">
+							 <?php if((isset($this->hrRights['Employee']) && ($this->hrRights['Employee']->rights_update==1 )) || checkSuperHr()){ ?>
 							<?php echo anchor('employee/edit_emp/'.$row->emp_id,'<i class="fa fa-pencil fa-lg" ></i>'); ?>
+						<?php  } ?>
+						  <?php if((isset($this->hrRights['Employee']) && ($this->hrRights['Employee']->rights_delete==1 )) || checkSuperHr()){?>
 						    <a href="javascript:void(0)"  onclick="deletedata('<?php echo $row->emp_id; ?>','<?php echo $row->ProfileImage ;?>')" ><i class="fa fa-trash-o fa-lg"></i></a>
+						<?php } ?>
 						</td>
+						<?php } ?>
 
 						</tr>
 						<?php
