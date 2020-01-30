@@ -92,3 +92,4 @@ define('RESET_SUCCESS','Your password has been successfully reset.');
 define('PASS_RESET_FAIL','Password reset failed.');
 define('EXPIRED_RESET_LINK','Reset password link has been expired.');
 define('ACCOUNT_INACTIVE','Your account is inactive.');
+define('NO_RIGHTS',"You don't have any rights to access this page.");

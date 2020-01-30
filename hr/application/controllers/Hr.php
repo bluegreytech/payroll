@@ -5,6 +5,12 @@ class Hr extends CI_Controller
 	public function __construct() {
         parent::__construct();
 		$this->load->model('hr_model');
+		$this->hrRights=getRights();
+		if(count($this->hrRights)==0 && !checkSuperHr())
+		{
+			$this->session->set_flashdata('msg', 'no_rights');
+			redirect('home/dashboard/noRights');
+		}
 	}
 	
 	function hrlist()
@@ -48,14 +54,14 @@ class Hr extends CI_Controller
 
 				if($this->input->post("hr_id")!="")
 				{	
-					//echo "dsfdf if";die;
+					
 					$this->hr_model->hr_update();
 					$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
 					redirect('hr/hrlist');
 					
 				}
 				else
-				{ 	//echo "dsfdf else";die;
+				{ 	
 					$this->hr_model->hr_insert();
 					$this->session->set_flashdata('success', 'Record has been Inserted Succesfully!');
 					redirect('hr/hrlist');
@@ -65,8 +71,13 @@ class Hr extends CI_Controller
 			}
 		
 		 $data['result']=$this->hr_model->hrlist();
-		//echo "<pre>";print_r($data['result']);die;
-		$this->load->view('hr/hrlist',$data);
+		
+		 if((isset($this->hrRights['Hr']) && $this->hrRights['Hr']->rights_view==1) || checkSuperHr()){
+          		$this->load->view('hr/hrlist',$data);
+				
+			}else{
+               	$this->load->view('common/noRights',$data);
+			}
 	}
 
 	function deletedata()
@@ -127,10 +138,8 @@ class Hr extends CI_Controller
 		$action=$this->input->post('status');
 		$id=$this->input->post('id');
 		if ($action == "Active") {
-
 			$data = array("IsActive" => "Inactive");
 			update_record('tblhr', $data, 'hr_id', $id);
-
 			$res = array('status' => 'done', 'msg' => ACTIVE);
 			echo json_encode($res);
 			die ;
@@ -220,17 +229,17 @@ class Hr extends CI_Controller
 			//$data['all_rights']=get_total_count('rights');
                         
             $data['all_rights']=$this->hr_model->get_all_rights();
-			$data['admin_right']=$this->hr_model->get_admin_rights($data['hr_id']);
-			//echo '<pre>';
-			//print_r($data['admin_right']);	die;
+			$admin_right=$this->hr_model->get_admin_rights($hr_id);
+			
 			$ad_r=array();
 			$rid=array();
-			if($data['admin_right']!=''){
-			foreach($data['admin_right'] as $adr){
+			if($admin_right!=''){
+			foreach($admin_right as $adr){
 				$ad_r[]=$adr->rights_assign_id;
-				$rid[$adr->rights_assign_id]=$adr;
+				$rid[]=$adr;
 			}}
-			
+			  // echo '<pre>';
+			  //   print_r($rid);  die;
 			$data['ad_r']=$ad_r;
 			$data['rid']=$rid;			
 		    $data["redirect_page"]="hrlist";
@@ -242,14 +251,14 @@ class Hr extends CI_Controller
 			{
 				$this->hr_model->hr_rights_assignupdate();
 				$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
-				redirect('employee/emplist');			
+				redirect('hr/hrlist');			
 			}
 			else
 			{ 	
 				
-				$this->hr_model->hr_rights_assigninsert();
+				$this->hr_model->hr_rights_assigninsert($hr_id);
 				$this->session->set_flashdata('success', 'Record has been Inserted Succesfully!');
-				redirect('employee/emplist');
+				redirect('hr/hrlist');
 			}
 		}
 		$this->load->view('hr/assign_rights',$data);					

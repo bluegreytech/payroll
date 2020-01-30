@@ -11,6 +11,13 @@ class Employee extends CI_Controller
 		$this->load->model('Login_model');
 		$this->load->model('company_model');
 		$this->load->library('excel');
+		$this->hrRights=getRights();
+		//echo "<pre>";print_r($this->hrRights['Employee']->rights_view);die;
+		if(count($this->hrRights)==0 && !checkSuperHr())
+		{
+			$this->session->set_flashdata('msg', 'no_rights');
+			//redirect('home/dashboard/noRights');
+		}
 	}
 	
 	public function emplist()
@@ -23,7 +30,13 @@ class Employee extends CI_Controller
 		$data['keyword']='';
 		$data['redirect_page']='emplist';
 		$data['result']=$this->employee_model->emplist();
-		$this->load->view('Employee/emplist',$data);
+		//echo "<pre>";print_r($this->hrRights->rights_name);die;
+		if((isset($this->hrRights['Employee']) && $this->hrRights['Employee']->rights_view==1) || checkSuperHr()){
+          		$this->load->view('Employee/emplist',$data);				
+			}else{
+               	$this->load->view('common/noRights',$data);
+		}
+		
 	}
 	function addemp(){
 
@@ -538,9 +551,15 @@ class Employee extends CI_Controller
 				   }
 				  
 				}else{
+                    
 					$monthlyamt=($result['salaryamt']*30);	
 					$emppfearningdata=$this->company_model->emppfearningamt($cmpearningallow_id);
-					$data['deducthraamount']=($monthlyamt * $emppfearningdata->compliancepercentage)/100;
+					if($emppfearningdata!=''){
+						$data['deducthraamount']=($monthlyamt * $emppfearningdata->compliancepercentage)/100;
+					}else{
+						$data['deducthraamount']=$monthlyamt;
+					}
+					
 				}
 
 

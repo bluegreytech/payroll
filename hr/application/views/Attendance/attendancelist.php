@@ -25,8 +25,10 @@
 	<h4 class="page-title" id="crtattndmonth">List of Attendance : <?php if($attmonth==''){echo $cmonth = date('F',strtotime('last month')); }else{echo $cmonth=date('F',strtotime($attmonth));} ?></h4>
 	</div>
 	<div class="col-sm-4 col-7 text-right m-b-30">
-	<a href="<?php echo base_url()?>attendance/addattendance" class="btn add-btn" ><i class="fa fa-plus"></i> Add Attendance
-	</a>
+		<?php if((isset($this->hrRights['Attendance']) && $this->hrRights['Attendance']->rights_add==1) || checkSuperHr()){ ?>                	
+				<a href="<?php echo base_url()?>attendance/addattendance" class="btn add-btn" ><i class="fa fa-plus"></i> Add Attendance
+				</a>
+	    <?php } ?>
 	</div>
 </div>
 
@@ -142,7 +144,7 @@
 						<?php for($i=1;$i<=$totalmonth;$i++){ 
 						    $attid=$row->{'abc'.$i};
 					    ?>
-						<td><a href="javascript:void(0);" <?php if($attid!='0'){ ?>  onclick='editatt(<?php echo $attid; ?>)'<?php } ?>>
+						<td><a href="javascript:void(0);" <?php if((isset($this->hrRights['Attendance']) && ($this->hrRights['Attendance']->rights_update==1 || $this->hrRights['Attendance']->rights_delete==1)) || checkSuperHr()){  if($attid!='0'){  ?>  onclick='editatt(<?php echo $attid; ?>)' <?php } } else { ?>  onclick="rightsdata()" <?php }?> >
 							<?php
 							   if($attid!='0'){
 							     $present=checkattedancestatus($attid); 
@@ -263,7 +265,30 @@
 	</div>
 </div>
 <!-- /Attendance Modal -->
-
+<!-- Start Delete model-->
+<div class="modal custom-modal fade" id="rights_approve" role="dialog">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="form-header">
+						<h3>No Rights</h3>
+						<p><?php echo NO_RIGHTS; ?></p>
+					</div>
+					<div class="modal-btn delete-action">
+						<div class="row">
+							<div class="col-6">
+								<a href="javascript:void(0);"  id="yes_btn" class="btn btn-primary continue-btn">Ok</a>
+							</div>
+							<div class="col-6">
+								<a href="javascript:void(0);" data-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- End Delete Model-->
 </div>
 <!-- Page Wrapper -->
 
@@ -354,7 +379,7 @@ $("#attendancemonth").datetimepicker({
 
 function editatt(att_id)
 {
-	 $('#attendance_info').modal('show');
+	$('#attendance_info').modal('show');
 	url="<?php echo base_url();?>"
 	//alert(hr_id);
 	$.ajax({
@@ -531,5 +556,11 @@ $("#alldate").on("dp.change", function() {
    $('#crtattndmonth').text("List of Attendance :"+ n);
 	
 });
+
+function rightsdata(){  
+  
+    $('#rights_approve').modal('show');
+   
+}
 
 </script>

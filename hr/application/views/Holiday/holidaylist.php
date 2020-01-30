@@ -27,7 +27,9 @@
 		<h4 class="page-title">Holidays <?php echo date('Y');?></h4>
 		</div>
 		<div class="col-sm-7 col-7 text-right m-b-30">
+		<?php if((isset($this->hrRights['Holiday']) && $this->hrRights['Holiday']->rights_add==1) || checkSuperHr()){ ?>   
 		<a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_holiday"><i class="fa fa-plus"></i> Add Holiday</a>
+		<?php } ?>
 		</div>
 	</div>
 	<!-- /Page Title -->
@@ -42,7 +44,9 @@
 							<th>Title </th>
 							<th>Holiday Date</th>
 							<th>Day</th>
+							<?php if((isset($this->hrRights['Holiday']) && ($this->hrRights['Holiday']->rights_update==1 || $this->hrRights['Holiday']->rights_delete==1)) || checkSuperHr()){ ?>
 							<th class="text-center">Action</th>
+							<?php } ?>
 						</tr>
 					</thead>
 					<tbody>
@@ -65,13 +69,19 @@
 							<td><?php echo ucfirst($row->holidayname);?></td>
 							<td><?php echo date("d M Y",strtotime($row->holidaydate));?></td>
 							<td><?php echo $row->holidayday;?></td>
+							<?php if((isset($this->hrRights['Holiday']) && ($this->hrRights['Holiday']->rights_update==1 || $this->hrRights['Holiday']->rights_delete==1)) || checkSuperHr()){ ?>
 							<td class="text-center">
 								<?php if($date < $now) { ?>
 								<?php }else{ ?>
+                                  <?php if((isset($this->hrRights['Holiday']) && ($this->hrRights['Holiday']->rights_update==1 )) || checkSuperHr()){ ?>
 								 <a  href="javascript:void(0)" onclick="editdata('<?php echo $row->holiday_id; ?>')" data-toggle="modal" data-target="#add_holiday"><i class="fa fa-pencil fa-lg"></i></a>
 								<?php } ?>
+								<?php } ?>
+                                <?php if((isset($this->hrRights['Holiday']) && ($this->hrRights['Holiday']->rights_delete==1 )) || checkSuperHr()){?>
 								<a  href="javascript:void(0)" data-toggle="modal" data-target="#delete_holiday" onclick="deletedata('<?php echo $row->holiday_id; ?>')"><i class="fa fa-trash-o fa-lg"></i></a>
+								<?php } ?>
 							</td>
+							<?php } ?>
 						</tr>
 						<?php
 						$i++;

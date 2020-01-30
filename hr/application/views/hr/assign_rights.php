@@ -76,25 +76,60 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                <?php echo "<pre>";print_r($all_rights);
-                                                foreach($all_rights as $row){                  
+                                                <?php 
+                                               // foreach($admin_right as $ar){
+
+                                               // }
+                                           //  echo "<pre>";print_r($rid->rights_add);
+                                               
+                                               
+                                                foreach($all_rights as $row){
+                                                  $rid=  $row->rights_id;
+                                                 $hr_id=$this->uri->segment(3);
+                                                 $rrr=gethrrights($rid,$hr_id);
+                                                    if(!empty($rrr)){
+                                                       foreach ($rrr as $val) {
+                                                           # code...
+                                                     // echo "<pre>njhg"; print_r($val);
                                                 ?>
-                                                <input type="hidden" name="rightid[]" value="<?php echo$row->right_id; ?>">
+                                                <input type="hidden" name="rightid[]" value="<?php echo $row->right_id; ?>">
+                                                 <input type="hidden" name="assignrightid[]" value="<?php  if(!empty($rid[$row->rights_id])) { echo $rid[$row->rights_id]->rights_assign_id; } ?>">
+                                                
                                                     <td><?php echo ucfirst($row->rights_name);?></td>
-                                                    <td class="text-center">
-                                                        <input  type="checkbox" value="<?php echo $row->rights_add?:'1' ;?>" <?php if($row->rights_add=='1'){ echo "checked"; }?> name="addrightcheck[]" > 
+                                                     <td class="text-center">
+                                                      <input type="checkbox" name="addrightcheck[<?php echo $row->rights_id;?>]" value="1" <?php if($val->rights_add=='1'){ echo "checked";} ?>>
+                                                    </td>
+                                                     <td class="text-center">
+                                                      <input  type="checkbox" name='updaterightcheck[<?php echo $row->rights_id;?>]' value="1" <?php if($val->rights_update=='1'){ echo "checked";}?>>
                                                     </td>
                                                     <td class="text-center">
-                                                        <input  type="checkbox" <?php if($row->rights_update=='1'){ echo "checked"; }?> name='updaterightcheck[]' value="<?php echo $row->rights_add?:'1' ;?>">
+                                                      <input  type="checkbox"   name="deleterightcheck[<?php echo $row->rights_id;?>]" value="1" <?php if($val->rights_delete=='1'){ echo "checked";} ?>>
                                                     </td>
-                                                    <td class="text-center">
-                                                        <input  type="checkbox" <?php if($row->rights_delete=='1'){ echo "checked"; }?> name="rightcheck[]" value="<?php echo $row->rights_add?:'1' ;?>">
+                                                     <td class="text-center">
+                                                      <input  type="checkbox"   name="viewrightcheck[<?php echo $row->rights_id;?>]" value="1" <?php if($val->rights_view=='1'){ echo "checked";} ?>>
                                                     </td>
-                                                    <td class="text-center">
-                                                        <input  type="checkbox" <?php if($row->rights_view=='1'){ echo "checked"; }?> name="viewrightcheck[]" value="<?php echo $row->rights_add?:'1' ;?>">
-                                                    </td> 
                                                 </tr>
-                                               <?php } ?>
+                                               <?php  } }else{ ?>
+                                                 <input type="hidden" name="rightid[]" value="<?php echo $row->right_id; ?>">
+                                                
+                                                 <input type="hidden" name="assignrightid[]" value="<?php if(!empty($rid[$row->rights_id])) { echo $rid[$row->rights_id]->rights_assign_id; } ?>">
+                                                
+                                                    <td><?php echo ucfirst($row->rights_name);?></td>
+                                                     <td class="text-center">
+                                                      <input  type="checkbox" name="addrightcheck[<?php echo $row->rights_id;?>]" value="1" >
+                                                    </td>
+                                                     <td class="text-center">
+                                                      <input  type="checkbox" name='updaterightcheck[<?php echo $row->rights_id;?>]' value="1" >
+                                                    </td>
+                                                    <td class="text-center">
+                                                      <input  type="checkbox" name="deleterightcheck[<?php echo $row->rights_id;?>]" value="1" >
+                                                    </td>
+                                                     <td class="text-center">
+                                                      <input  type="checkbox" name="viewrightcheck[<?php echo $row->rights_id;?>]" value="1" >
+                                                    </td>
+                                                </tr>
+
+                                               <?php }  }?>
                                             </tbody>
                             </table>
                               <hr>                           

@@ -6,7 +6,14 @@ class Attendance extends CI_Controller
 {
 	public function __construct() {
         parent::__construct();
-		 $this->load->model('attendance_model');
+		$this->load->model('attendance_model');
+		$this->hrRights=getRights();
+	
+		if(count($this->hrRights)==0 && !checkSuperHr())
+		{
+			$this->session->set_flashdata('msg', 'no_rights');
+			//redirect('home/dashboard/noRights');
+		}
 	}
 	
 	public function attendancelist()
@@ -22,8 +29,13 @@ class Attendance extends CI_Controller
         $salarymonth=$data['selectdatedata']->selecteddate;
         $data['salarymonth']=$data['selectdatedata']->selecteddate;  
 	    $data['result']=$this->attendance_model->attendancelist($salarymonth); 
-        $data['selectdatedata']= getSelectdate($this->session->userdata('companyid'));    
-		$this->load->view('Attendance/attendancelist',$data);
+        $data['selectdatedata']= getSelectdate($this->session->userdata('companyid'));  
+        if((isset($this->hrRights['Attendance']) && $this->hrRights['Attendance']->rights_view==1) || checkSuperHr()){
+          	    $this->load->view('Attendance/attendancelist',$data);				
+			}else{
+               	$this->load->view('common/noRights',$data);
+		}  
+	
 	}
 
 	public function addattendance()

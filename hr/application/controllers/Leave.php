@@ -7,6 +7,12 @@ class Leave extends CI_Controller
         parent::__construct();
 	    $this->load->model('leave_model');
 	    $this->load->model('attendance_model');
+	    	$this->hrRights=getRights();
+		if(count($this->hrRights)==0 && !checkSuperHr())
+		{
+			$this->session->set_flashdata('msg', 'no_rights');
+			redirect('home/dashboard/noRights');
+		}
 	}
 
 	public function leavelist()
@@ -58,8 +64,13 @@ class Leave extends CI_Controller
 			}
 		
 		 $data['result']=$this->leave_model->leavelist();
-		//echo "<pre>";print_r($data['result']);die;
-		$this->load->view('Leave/leavelist',$data);
+		if((isset($this->hrRights['LeaveType']) && $this->hrRights['LeaveType']->rights_view==1) || checkSuperHr()){
+          		$this->load->view('Leave/leavelist',$data);
+				
+			}else{
+               	$this->load->view('common/noRights',$data);
+		}
+		
       
 	}
 
@@ -257,8 +268,14 @@ class Leave extends CI_Controller
 		$data['leave_status']=$this->input->post('leave_status');
 			
 		$data['result']=$this->leave_model->empleavelist();
-	    $data['leavelist']=$this->leave_model->showempleavelist();	
-		$this->load->view('Employee/leaves_employee',$data);
+	    $data['leavelist']=$this->leave_model->showempleavelist();
+	 	// echo "<pre>";print_r($this->hrRights['Leave']);die;
+		  if((isset($this->hrRights['Leave']) && $this->hrRights['Leave']->rights_view==1) || checkSuperHr()){
+          		$this->load->view('Employee/leaves_employee',$data);				
+			}else{
+               	$this->load->view('common/noRights',$data);
+			}	
+
 	}
 
 	function addempleave(){
@@ -317,7 +334,12 @@ class Leave extends CI_Controller
 		$data['selectdatedata']=getSelectdate($this->session->userdata('companyid'));
 		$data['salarymonth']=$data['selectdatedata']->selecteddate;	
 		$data['emplist']=$this->attendance_model->emplist();
-		$this->load->view('Employee/add_empleave',$data);
+		 if((isset($this->hrRights['Leave']) && $this->hrRights['Leave']->rights_add==1 )  || checkSuperHr()){
+          		$this->load->view('Employee/add_empleave',$data);		
+			}else{
+               	$this->load->view('common/noRights',$data);
+			}	
+		//$this->load->view('Employee/add_empleave',$data);	
 	}
     
     function edit_empleave($empleave_id){
@@ -348,6 +370,11 @@ class Leave extends CI_Controller
 		$data['selectdatedata']=getSelectdate($this->session->userdata('companyid'));
 		$data['salarymonth']=$data['selectdatedata']->selecteddate;	
 		$data['emplist']=$this->attendance_model->emplist();
+		 if((isset($this->hrRights['Leave']) && $this->hrRights['Leave']->rights_update==1)  || checkSuperHr()){
+          		$this->load->view('Employee/add_empleave',$data);		
+			}else{
+               	$this->load->view('common/noRights',$data);
+			}	
 		$this->load->view('Employee/add_empleave',$data);
 	}
 	function searchempleave(){
