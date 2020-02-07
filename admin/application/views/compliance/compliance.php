@@ -258,10 +258,16 @@
 
 
 											<td class="text-center">
-
+                                                      <?php if((isset($this->adminRights['Compliance']) && $this->adminRights['Compliance']->rights_update==1) || checkSuperAdmin()){ ?> 
 														<a onClick="editcompliance(<?php echo $comp->complianceid;?>)" data-toggle="modal" data-target="#edit_policy"><i class="fa fa-pencil m-r-5"></i> </a>
-
-														<a  onclick="deletedata(<?php echo $comp->complianceid; ?>)" data-toggle="modal" data-target="#delete_policy"><i class="fa fa-trash-o m-r-5"></i> </a>			
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <?php if((isset($this->adminRights['Compliance']) && $this->adminRights['Compliance']->rights_delete==1) || checkSuperAdmin()){ ?> 
+														<a  onclick="deletedata(<?php echo $comp->complianceid; ?>)" data-toggle="modal" data-target="#delete_policy"><i class="fa fa-trash-o m-r-5"></i> </a>		
+														<?php
+                                                    }
+                                                    ?>	
 
 											</td>
 

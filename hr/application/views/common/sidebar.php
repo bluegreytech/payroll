@@ -114,8 +114,8 @@ if(count($this->hrRights)==0 && !checkSuperHr())
 							<li class="">
 								<a href="<?php echo base_url();?>company/setsalarymonth"><i class="la la-cog"></i> <span>Set Salary Month</span> </a> -->
 						<?php } if((isset($this->hrRights['Reports'])) || checkSuperHr()){  ?>
-							</li>
-                               <li class="submenu">
+							
+                         <!--       <li class="submenu">
 								<a href="#"><i class="la la-list"></i> <span>Reports</span> <span class="menu-arrow"></span></a>
 								<ul style="display: none;">
 								<li><a href="<?php echo base_url()?>Reports/reportsalary"><span>Total gross salary report</span></a>
@@ -125,7 +125,7 @@ if(count($this->hrRights)==0 && !checkSuperHr())
 								<li><a href="<?php echo base_url()?>Reports/empsalaryreport"><span>Employee wise  salary report</span></a>
 								</li>
 								</ul>
-							</li>
+							</li> -->
 						<?php } ?>
 							<!-- <li class="">
 								<a href="<?php echo base_url();?>salarysetting/reportsalary"><i class="la la-cog"></i> <span>Reports</span> </a>

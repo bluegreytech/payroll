@@ -49,8 +49,14 @@ class Adminmaster extends CI_Controller
 				}		
 
 	} 
-
-		$this->load->view('common/site_setting',$data);    
+           if((isset($this->adminRights['Site Setting']) && $this->adminRights['Site Setting']->rights_view==1) || checkSuperAdmin()){ 
+		$this->load->view('common/site_setting',$data);  
+	}
+	else{
+				//$this->session->set_flashdata('msg', 'no_rights');
+               	$this->load->view('common/noRights',$data);
+		} 
+		  
 	}
 	
 
@@ -435,6 +441,60 @@ function statusdata(){
 		}
 
 }
+function assign_admin_rights($admin_id='0'){
+if(!check_admin_authentication()){ 
+			redirect(base_url());
+		} 
+          
+		$this->form_validation->set_rules('viewrightcheck[]', 'View Rights', 'required');		
 
+			if($this->form_validation->run() == FALSE){			
+			if(validation_errors())
+			{
+				$data["error"] = validation_errors();
+				echo "<pre>";print_r($data);die;
+			}else{
+				$data["error"] = "";
+			}
+			
+			$data["admin_id"] = ($this->input->post('admin_id')) ? $this->input->post('admin_id'):$admin_id;		
+			//$data['site_setting'] = site_setting();		
+			//$data['all_rights']=get_total_count('rights');
+                        
+            $data['all_rights']=$this->Adminmaster_model->get_all_rights();
+			$admin_right=$this->Adminmaster_model->get_admin_rights($admin_id);
+			
+			$ad_r=array();
+			$rid=array();
+			if($admin_right!=''){
+			foreach($admin_right as $adr){
+				$ad_r[]=$adr->rights_assign_id;
+				$rid[]=$adr;
+			}}
+			  // echo '<pre>';
+			  //   print_r($rid);  die;
+			$data['ad_r']=$ad_r;
+			$data['rid']=$rid;			
+		    $data["redirect_page"]="adminlist";
+		}
+		else
+		{	
+
+			if($this->input->post("rights_assign_id")!="")
+			{
+				$this->Adminmaster_model->admin_rights_assignupdate();
+				$this->session->set_flashdata('success', 'Record has been Updated Succesfully!');
+				redirect('adminmaster/adminlist');			
+			}
+			else
+			{ 	
+				
+				$this->Adminmaster_model->admin_rights_assigninsert($admin_id);
+				$this->session->set_flashdata('success', 'Record has been Inserted Succesfully!');
+				redirect('adminmaster/adminlist');
+			}
+		}
+		$this->load->view('dashboard/assign_rights',$data);		
+}
 
 }

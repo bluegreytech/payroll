@@ -21,8 +21,10 @@ class Reports extends CI_Controller
 		$data=array();
         $data['empname']='';
 		$data['attmonth']='';
+		$data['selectdatedata']=getSelectdate($this->session->userdata('companyid'));
+    		$salarymonth=$data['selectdatedata']->selecteddate;
 		$data['redirect_page']="reportsalary";
-		$data['result']=$this->salary_model->empsetsalary_list();
+		$data['result']=$this->salary_model->empsetsalary_list($salarymonth);
 	    $data['tot_earn']=$this->salary_model->emptotearn();
 	//$data['tot_deduction']=$this->salary_model->emptotdeduction();
 	//$data['tot_netpay']=$this->salary_model->emptotpay();

@@ -49,9 +49,13 @@
 						</div>
 
 						<div class="col-sm-7 col-7 text-right m-b-30">
-
+                      <?php
+                      if((isset($this->adminRights['Invoice report']) && $this->adminRights['Invoice report']->rights_add==1) || checkSuperAdmin()){ 
+                      ?>
 						<a href="<?php echo base_url();?>Invoice/createinvoice" class="btn add-btn"><i class="fa fa-plus"></i>Add Invoice</a>
-
+                          <?php
+                      }
+                      ?>
 						</div>
 
 					</div>
@@ -278,11 +282,20 @@
 										<td class="text-right">
 
 												<a  href="<?php echo base_url();?>Invoice/invoice_view/<?php echo $compInvoice->Companyinvoiceid;?>"  title="View"><i class="fa fa-eye m-r-5"></i></a>
-
+                                              <?php
+                      if((isset($this->adminRights['Invoice report']) && $this->adminRights['Invoice report']->rights_update==1) || checkSuperAdmin()){ 
+                      ?>
 												<a  href="<?php echo base_url();?>Invoice/edit_invoice/<?php echo $compInvoice->Companyinvoiceid;?>" title="Edit"><i class="fa fa-pencil m-r-5"></i></a>
-
+                                             <?php
+                                         }
+                                         ?>
+                                          <?php
+                      if((isset($this->adminRights['Invoice report']) && $this->adminRights['Invoice report']->rights_delete==1) || checkSuperAdmin()){ 
+                      ?>
 												<a  onclick="deletedata(<?php echo $compInvoice->Companyinvoiceid; ?>)" data-toggle="modal" data-target="#delete_client"><i class="fa fa-trash-o m-r-5" title="Delete"></i> </a>
-
+                                               <?php
+                                         }
+                                         ?>
 										</td>
 
 

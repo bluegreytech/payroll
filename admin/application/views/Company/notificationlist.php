@@ -72,9 +72,14 @@
 							</div>
 
 							<div class="col-sm-7 col-7 text-right m-b-30">
-
+								<?php
+                              if((isset($this->adminRights['Company Notification']) && $this->adminRights['Company Notification']->rights_add==1) || checkSuperAdmin()){ 
+                              	?>
 							<a href="<?php echo base_url();?>Company/Sendnotification" class="btn add-btn"><i class="fa fa-plus">						
 									</i> Add Company Notification</a>
+									<?php
+								}
+								?>
 							</div>
 
 						</div>
@@ -242,19 +247,25 @@
 												echo $endates = date("d-m-Y", strtotime($endate));?>
 											</td>
 											<td>		
-												<?php if($notifi->Status=='Available'){ 
-													echo "<span class='badge badge-success-border'>$notifi->Status</span>";
+												<?php if($notifi->Isactive=='Active'){ 
+													echo "<span class='badge badge-success-border'>$notifi->Isactive</span>";
 													}?>
-												<?php if($notifi->Status=='Expired'){
-														echo "<span class='badge badge-danger-border'>$notifi->Status</span>";
+												<?php if($notifi->Isactive=='Inactive'){
+														echo "<span class='badge badge-danger-border'>$notifi->Isactive</span>";
 														}?>
 											</td>
 											<td class="text-center">
 
 												<!-- <a href="<?php //echo base_url();?>Company/editcompanynotification/<?php// echo $notifi->Companynotificationid;?>" role="button" title="Edit">
 														<i class="fa fa-pencil m-r-5"></i> </a> -->
+                                                    <?php
+														 if((isset($this->adminRights['Company Notification']) && $this->adminRights['Company Notification']->rights_delete==1) || checkSuperAdmin()){
+														 	?>
 												<a  onclick="deletedata(<?php echo $notifi->Companynotificationid; ?>)" data-toggle="modal" data-target="#delete_client" title="Delete"><i class="fa fa-trash-o m-r-5"></i> </a>
-												<?php 
+												<?php
+											}
+											?>
+											<!-- 	<?php 
 												if($notifi->Status=='Available')
 												{
 													?>
@@ -267,7 +278,7 @@
 														 <a href="<?php echo base_url();?>Company/company_notification_expired/<?php echo $notifi->Companynotificationid;?>" role="button"  title="Notification Expired"><i class="fa fa-bell-o text-danger" aria-hidden="true"></i></a>
 													<?php
 												}
-												?>
+												?> -->
 
 												<a  href="<?php echo base_url();?>Company/notification_detail/<?php echo $notifi->Companynotificationid;?>"  title="View"><i class="fa fa-eye m-r-5"></i></a>
 											</td>

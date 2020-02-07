@@ -20,7 +20,15 @@ class Hr extends CI_Controller
 			$data['hrData'] = $this->Hr_model->searchbyname($keyword2);	
 		}	
 		$data['companyData']=$this->Hr_model->list_company();
+
+		 if((isset($this->adminRights['Hr']) && $this->adminRights['Hr']->rights_view==1) || checkSuperAdmin()){ 
 		$this->load->view('hr/hrlist',$data);
+	}
+	else{
+				//$this->session->set_flashdata('msg', 'no_rights');
+               	$this->load->view('common/noRights',$data);
+		} 
+		
 	}
 
 

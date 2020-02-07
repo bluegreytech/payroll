@@ -377,6 +377,8 @@
 
 								<a  onclick="deletedata(<?php echo $adminlist->AdminId; ?>)"  data-toggle="modal" data-target="#delete_admin" title="Delete"><i class="fa fa-trash-o m-r-5"></i> </a>
 
+								<?php echo anchor('adminmaster/assign_admin_rights/'.$adminlist->AdminId,'<i class="la la-key la-lg" style="color:green;"></i>'); ?>
+
 
 
 							</td>

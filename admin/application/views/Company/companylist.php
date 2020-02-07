@@ -72,12 +72,11 @@
 							</div>
 
 							<div class="col-sm-7 col-7 text-right m-b-30">
-
-							<a href="<?php echo base_url();?>Company/companyadd" class="btn add-btn"><i class="fa fa-plus">
-
-
-
-</i> Add Company</a>
+                                     <?php if((isset($this->adminRights['Company']) && $this->adminRights['Company']->rights_add==1) || checkSuperAdmin()){ ?>
+							<a href="<?php echo base_url();?>Company/companyadd" class="btn add-btn"><i class="fa fa-plus"></i> Add Company</a>
+								<?php
+							}
+							?>
 
 							</div>
 
@@ -346,16 +345,25 @@
 
 
 										<td class="text-center">
-
+                                                 <?php if((isset($this->adminRights['Company']) && $this->adminRights['Company']->rights_update==1) || checkSuperAdmin()){ ?>
 											<a href="<?php echo base_url();?>Company/editcompany/<?php echo $comp->companyid;?>" role="button" title="Edit">
 
 													<i class="fa fa-pencil m-r-5"></i> </a>
-
+													<?php
+												}
+												?>
+                                                 <?php if((isset($this->adminRights['Company']) && $this->adminRights['Company']->rights_delete==1) || checkSuperAdmin()){ ?>
 											<a  onclick="deletedata(<?php echo $comp->companyid; ?>)" data-toggle="modal" data-target="#delete_client" title="Delete"><i class="fa fa-trash-o m-r-5"></i> </a>
-
+                                           <?php
+												}
+												?>
+												  <?php if((isset($this->adminRights['Company Notification']) && $this->adminRights['Company Notification']->rights_view==1) || checkSuperAdmin()){ ?>
 										    <a  href="<?php echo base_url();?>Company/companynotification_list" role="button"  title="Notification List">
 											<i class="fa fa-bell-o" aria-hidden="true"></i></a>
-
+											<?php
+										}
+										?>
+                                          
 											<a  href="<?php echo base_url();?>Leave/leavelist" role="button" title="Show Leaves Types">
 												<i class="fa fa-calendar-check-o" aria-hidden="true"></i></a>
 											<a  href="<?php echo base_url();?>Company/company_dashboard/<?php echo $comp->companyid;?>" role="button" title="Show Company Dashboard">

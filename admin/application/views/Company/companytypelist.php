@@ -48,9 +48,12 @@
 						<div class="col-sm-7 col-7 text-right m-b-30">
 
 
-
+                       
+	    <?php if((isset($this->adminRights['Company Type']) && $this->adminRights['Company Type']->rights_add==1) || checkSuperAdmin()){ ?>  
 							<a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_holiday"><i class="fa fa-plus"></i> Add Type of Company</a>
-
+                         <?php
+                     }
+                     ?>
 
 
 						</div>
@@ -254,10 +257,21 @@
 											</td>
 
 											<td class="text-center">
-
+                                               
+                                               <?php
+                                               if((isset($this->adminRights['Company Type']) && $this->adminRights['Company Type']->rights_update==1) || checkSuperAdmin()){
+                                               	?>
 												<a  onClick="editcompanytype(<?php echo $comp->companytypeid;?>)" data-toggle="modal" data-target="#edit_holiday"><i class="fa fa-pencil m-r-5"></i> </a>
-
-												<a   onclick="deletedata(<?php echo $comp->companytypeid; ?>)" data-toggle="modal" data-target="#delete_holiday"><i class="fa fa-trash-o m-r-5"></i> </a>			
+                                                <?php
+                                            }
+                                            ?>
+                                             <?php
+                                               if((isset($this->adminRights['Company Type']) && $this->adminRights['Company Type']->rights_delete==1) || checkSuperAdmin()){
+                                               	?>
+												<a   onclick="deletedata(<?php echo $comp->companytypeid; ?>)" data-toggle="modal" data-target="#delete_holiday"><i class="fa fa-trash-o m-r-5"></i> </a>
+												<?php
+												}
+												?>			
 
 											</td>
 

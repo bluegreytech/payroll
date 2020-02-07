@@ -44,8 +44,14 @@
 							<h4 class="page-title">List of Company Quotation</h4>
 							</div>
 							<div class="col-sm-7 col-7 text-right m-b-30">
+								<?php
+								 if((isset($this->adminRights['Company Quotation']) && $this->adminRights['Company Quotation']->rights_add==1) || checkSuperAdmin()){ 
+								 	?>
 								<a href="<?php echo base_url();?>Invoice/add_quotation" class="btn add-btn"><i class="fa fa-plus">
 								</i> Add Company Quotation</a>
+								<?php
+							}
+							?>
 							</div>
 					</div>
 
@@ -183,9 +189,21 @@
 
 											<td class="text-center">
 											<a  href="<?php echo base_url();?>Invoice/quotation_view/<?php echo $quota->quotationid;?>"  title="View"><i class="fa fa-eye m-r-5"></i></a>
+											<?php
+								 if((isset($this->adminRights['Company Quotation']) && $this->adminRights['Company Quotation']->rights_update==1) || checkSuperAdmin()){ 
+								 	?>
 												<a href="<?php echo base_url();?>Invoice/editquotation/<?php echo $quota->quotationid;?>" role="button" title="Edit">
 															<i class="fa fa-pencil m-r-5"></i> </a>
+															<?php
+														}
+														?>
+														<?php
+								 if((isset($this->adminRights['Company Quotation']) && $this->adminRights['Company Quotation']->rights_delete==1) || checkSuperAdmin()){ 
+								 	?>
 												<a  onclick="deletedata(<?php echo $quota->quotationid; ?>)" data-toggle="modal" data-target="#delete_client" title="Delete"><i class="fa fa-trash-o m-r-5"></i> </a>
+												<?php
+														}
+														?>
 											</td>
 										</tr>
 										<?php

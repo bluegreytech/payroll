@@ -367,6 +367,5 @@ class Adminmaster_model extends CI_Model
 			return 2;
 		}
  	}
-
-
+   
 }

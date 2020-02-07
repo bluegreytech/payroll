@@ -71,7 +71,25 @@
 		return $base_path = $CI->config->slash_item('base_url_site');		
 
 	}
+function getadminrights($rid,$admin_id){
+		$CI =& get_instance();
+		$CI->db->select('*');
+		$CI->db->where('rights_id',$rid);
+		$CI->db->where('admin_id',$admin_id);
+		//$CI->db->group_by('rights_id');
+		$query=$CI->db->get('tbladminrights_assign');				
+	  	
+	  	
+	  	if($query->num_rows() > 0)
+		{
+			return $query->result();
+		}else{
+			return '';
+		}
 
+
+
+	}
 	function base_url_hr()
 
 	{		
@@ -1206,37 +1224,37 @@
 
 	
 
-	function getadminRights()
-	{
-		$CI =& get_instance();
-		$CI->db->select('r.rights_name,ra.*');
-		$CI->db->from('rights_assign ra');
-		$CI->db->join('rights r','ra.rights_id=r.rights_id');
-		$CI->db->where('ra.admin_id',get_authenticateadminID());
-		$query=$CI->db->get();
-		$r=array();
+	// function getadminRights()
+	// {
+	// 	$CI =& get_instance();
+	// 	$CI->db->select('r.rights_name,ra.*');
+	// 	$CI->db->from('rights_assign ra');
+	// 	$CI->db->join('rights r','ra.rights_id=r.rights_id');
+	// 	$CI->db->where('ra.admin_id',get_authenticateadminID());
+	// 	$query=$CI->db->get();
+	// 	$r=array();
 
-		if($query->num_rows() > 0)
+	// 	if($query->num_rows() > 0)
 
-		{
+	// 	{
 
-			$r=array();
+	// 		$r=array();
 
-			foreach ($query->result() as $value) {
+	// 		foreach ($query->result() as $value) {
 
-				$r[trim($value->rights_name)]=$value;
+	// 			$r[trim($value->rights_name)]=$value;
 
-			}
+	// 		}
 
-			return $r;
+	// 		return $r;
 
-		}else{
+	// 	}else{
 
-			return $r;
+	// 		return $r;
 
-		}
+	// 	}
 
-	}
+	// }
 
 
 
@@ -2712,7 +2730,27 @@
 
 	}
 
-
+ function getRights()
+	{
+		$CI =& get_instance();
+		$CI->db->select('r.rights_name,ra.*');
+		$CI->db->from('tbladminrights_assign ra');
+		$CI->db->join('tbladminrights r','ra.rights_id=r.admin_rights_id');
+		$CI->db->where('ra.admin_id',get_authenticateadminID());
+		$query=$CI->db->get();
+		$r=array();
+		if($query->num_rows() > 0)
+		{
+			$r=array();
+			foreach ($query->result() as $value) {
+				$r[trim($value->rights_name)]=$value;
+			}
+			//echo"<pre>";print_r($r);die;
+			return $r;
+		}else{
+			return $r;
+		}
+	}
 
 
 

@@ -8,6 +8,12 @@ class Company extends CI_Controller
         parent::__construct();
 		$this->load->model('Company_model');
 		$this->load->model('Dashboard_model');
+		$this->adminRights=getRights();
+		if(count($this->adminRights)==0 && !checkSuperAdmin())
+		{
+			$this->session->set_flashdata('msg', 'no_rights');
+			//redirect('home/dashboard/noRights');
+		}
 	}
 
 	public function Companynotificationid(){
@@ -170,7 +176,15 @@ class Company extends CI_Controller
 		$data['redirect_page']='Company/companynotification_list';
 		$data['companyData']=$this->Company_model->list_company();
 		$data['notificationData']=$this->Company_model->list_companynotification();
+           //echo $this->adminRights['Company Notification']->rights_view;
+
+		 if((isset($this->adminRights['Company Notification']) && $this->adminRights['Company Notification']->rights_view==1) || checkSuperAdmin()){ 
 		$this->load->view('Company/notificationlist',$data);
+	}else{
+				//$this->session->set_flashdata('msg', 'no_rights');
+               	$this->load->view('common/noRights',$data);
+		} 
+	
 	}
 
 
@@ -389,7 +403,14 @@ class Company extends CI_Controller
 	
 		$data['redirect_page']='Company';
 		$data['companyData']=$this->Company_model->list_company();
+
+		  if((isset($this->adminRights['Company']) && $this->adminRights['Company']->rights_view==1) || checkSuperAdmin()){ 
 		$this->load->view('Company/companylist',$data);	
+	}
+	else{
+				//$this->session->set_flashdata('msg', 'no_rights');
+               	$this->load->view('common/noRights',$data);
+		} 
 	}
 
 	public function searchcompany()
@@ -683,9 +704,15 @@ class Company extends CI_Controller
 				}
 
 		} 
-
 		$data['companytypeData']=$this->Company_model->list_companytype();
-		$this->load->view('Company/companytypelist',$data);	
+  if((isset($this->adminRights['Company Type']) && $this->adminRights['Company Type']->rights_view==1) || checkSuperAdmin()){
+          	    $this->load->view('Company/companytypelist',$data);				
+			}else{
+				//$this->session->set_flashdata('msg', 'no_rights');
+               	$this->load->view('common/noRights',$data);
+		} 
+		
+		//$this->load->view('Company/companytypelist',$data);	
 
 
 
@@ -700,7 +727,14 @@ public function compliance_list(){
 		}
 
 		$data['company']=$this->Company_model->getcompany();
-		$this->load->view('compliance/compliance_list',$data);	
+
+		if((isset($this->adminRights['Compliance']) && $this->adminRights['Compliance']->rights_view==1) || checkSuperAdmin()){
+          	    $this->load->view('compliance/compliance_list',$data);				
+			}else{
+				//$this->session->set_flashdata('msg', 'no_rights');
+               	$this->load->view('common/noRights',$data);
+		}
+		
 }
 
 

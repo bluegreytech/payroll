@@ -331,21 +331,14 @@ class Adminmaster_model extends CI_Model
 	function getuser(){
 		$r=$this->db->select('*')
 					->from('tbladmin')
-					->where_in('RoleId="1" AND RoleId="2"')
-					->or_where('IsDelete!=',1)
+					->where('RoleId','2')
+					->where('IsDelete','0')
 					->order_by('AdminId','desc')
 					->get();
 		$res = $r->result();
 		return $res;
 	}
-
-
-
-	
-
-
-
-	function search($option,$keyword2)
+function search($option,$keyword2)
 	{
 			$keyword2 = str_replace('-', ' ', $keyword2);
 			$this->db->select('*');
@@ -909,6 +902,77 @@ class Adminmaster_model extends CI_Model
 
 
 
+ function get_all_rights(){
+    	$this->db->select('*');
+		$this->db->from('tbladminrights');
+	   
+	  	$this->db->group_by('admin_rights_id');
+		$query= $this->db->get();
+       if($query->num_rows() > 0) {			
+			return $query->result();
+		}
+		return '';
+    }
+    function get_admin_rights($admin_id){
+         $this->db->select('*');
+		$this->db->from('tbladminrights_assign');
+		$this->db->where('admin_id',$admin_id);		
+	  	$this->db->group_by('rights_assign_id');
+		
+		$query= $this->db->get();
+		
+		if($query->num_rows() > 0) {
+		
+			return $query->result();
+
+		}
+		return '';
+    }
+     function admin_rights_assigninsert($admin_id){
+		$admin_id=$this->uri->segment(3);
+		$rights_id=$this->input->post('rightid');
+		$assignright_id=$this->input->post('assignrightid');	
+			
+	  	$add=$this->input->post('addrightcheck');		
+	    $update=$this->input->post('updaterightcheck');
+		$delete=$this->input->post('deleterightcheck');
+	 	$view=$this->input->post('viewrightcheck');
+	    $createdby=$this->session->userdata('AdminId');
+		
+		if($rights_id!='' && is_array($rights_id)){
+		  foreach($rights_id as $key => $val){
+			//echo $update[$val];
+			$chk=$this->db->get_where('tbladminrights_assign',array('rights_id'=>$val,'admin_id'=>$admin_id));
+
+			
+			$ra=array(
+			'rights_add'=>(isset($add[$val]) && $add[$val]!='')?$add[$val]:'0',			
+			'rights_update'=>(isset($update[$val]) && $update[$val]!='')?$update[$val]:'0',
+			'rights_delete'=>(isset($delete[$val]) && $delete[$val]!='')?$delete[$val]:'0',
+			'rights_view'=>(isset($view[$val]) && $view[$val]!='')?$view[$val]:'0',
+			'admin_id'=>$admin_id,
+			);
+			
+
+			if($chk->num_rows()>0){
+			
+			$this->db->where('rights_assign_id',$chk->row()->rights_assign_id);
+			$this->db->update('tbladminrights_assign',$ra);
+			
+			}else{
+			
+			$ra['createdby']=$createdby;
+			$ra['rights_id']=$val;
+	
+			$this->db->insert('tbladminrights_assign',$ra);
+			
+			}
+			
+		}
+		
+		}
+	
+	}
 
 
 }

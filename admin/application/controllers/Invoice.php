@@ -5,6 +5,12 @@ class Invoice extends CI_Controller
 	public function __construct() {
         parent::__construct();
 	    $this->load->model('Invoice_model');
+	    $this->adminRights=getRights();
+		if(count($this->adminRights)==0 && !checkSuperAdmin())
+		{
+			$this->session->set_flashdata('msg', 'no_rights');
+			//redirect('home/dashboard/noRights');
+		}
 	}
 
 	public function test()
@@ -45,7 +51,14 @@ class Invoice extends CI_Controller
 			$data['companyData'] = $this->Invoice_model->list_company();
 
 			//echo "<pre>";	print_r($data['invoiceData']);die;
-		$this->load->view('Invoice/invoice-reports',$data);
+			if((isset($this->adminRights['Invoice report']) && $this->adminRights['Invoice report']->rights_view==1) || checkSuperAdmin()){ 
+		$this->load->view('Invoice/invoice-reports',$data);	
+	}
+	else{
+				//$this->session->set_flashdata('msg', 'no_rights');
+               	$this->load->view('common/noRights',$data);
+		} 
+		
 
 	}
 
@@ -439,7 +452,14 @@ class Invoice extends CI_Controller
 		$data['redirect_page']='Invoice/quotation_list';
 		$data['qutationData']=$this->Invoice_model->list_quotation();
 		$data['companytypeData'] = $this->Invoice_model->list_companytype();
+		  if((isset($this->adminRights['Company Quotation']) && $this->adminRights['Company Quotation']->rights_view==1) || checkSuperAdmin()){ 
 		$this->load->view('Quotation/quotationlist',$data);
+	}
+	else{
+				//$this->session->set_flashdata('msg', 'no_rights');
+               	$this->load->view('common/noRights',$data);
+		} 
+		//$this->load->view('Quotation/quotationlist',$data);
 	}
 
 

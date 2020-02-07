@@ -30,12 +30,14 @@
 
 
 						<div class="col-sm-7 col-7 text-right m-b-30">
-
-
+                            
+                         <?php if((isset($this->adminRights['Compliance']) && $this->adminRights['Compliance']->rights_add==1) || checkSuperAdmin()){ ?> 
 
 							<a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_policy"><i class="fa fa-plus"></i> Add Compliance</a> 
 
-
+                          <?php
+                     }
+                     ?>
 
 						</div>
 

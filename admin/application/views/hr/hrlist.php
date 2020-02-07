@@ -111,11 +111,14 @@
 
 						<div class="col-sm-8 col-7 text-right m-b-30">
 
-
-
+                             <?php
+                           if((isset($this->adminRights['Hr']) && $this->adminRights['Hr']->rights_add==1) || checkSuperAdmin()){
+                           	?>
 							<a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_salary"><i class="fa fa-plus"></i> Add Hr
 
-
+                          <?php
+                      }
+                      ?>
 
 							</a>
 
@@ -379,12 +382,22 @@
 											?>
 
 											<td class="text-center">
+                                                 <?php
+                           if((isset($this->adminRights['Hr']) && $this->adminRights['Hr']->rights_update==1) || checkSuperAdmin()){
+                           	?>
+														<a  onClick="edithrs(<?php echo $hr->hr_id;?>)" data-toggle="modal" data-target="#edit_salary" role="button">	<i class="fa fa-pencil m-r-5"></i></a>
 
-														<a  onClick="edithrs(<?php echo $hr->hr_id;?>)" data-toggle="modal" data-target="#edit_salary" role="button">
-
-														<i class="fa fa-pencil m-r-5"></i></a>
-
+                                                       <?php
+                                                   }
+                                                   ?>
+                                                     <?php
+                           if((isset($this->adminRights['Hr']) && $this->adminRights['Hr']->rights_delete==1) || checkSuperAdmin()){
+                           	?>
+													
 														<a  onclick="deletedata(<?php echo $hr->hr_id; ?>)"  data-toggle="modal" data-target="#delete_admin"><i class="fa fa-trash-o m-r-5"></i> </a>
+														<?php
+                                                   }
+                                                   ?>
 
 											</td>
 
